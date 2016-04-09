@@ -1,0 +1,764 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.useso.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Java,Spring," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="The Springframework is famous for IOC and DI features.  What exactly does a Spring based Java application look like? And how to produce a Spring based app without learning a lot of teches and apps lik">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring DI: At First Glance">
+<meta property="og:url" content="http://www.wbprime.me/2015/05/28/Spring-At-First-Glance/index.html">
+<meta property="og:site_name" content="wbprime">
+<meta property="og:description" content="The Springframework is famous for IOC and DI features.  What exactly does a Spring based Java application look like? And how to produce a Spring based app without learning a lot of teches and apps lik">
+<meta property="og:updated_time" content="2015-06-10T05:11:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring DI: At First Glance">
+<meta name="twitter:description" content="The Springframework is famous for IOC and DI features.  What exactly does a Spring based Java application look like? And how to produce a Spring based app without learning a lot of teches and apps lik">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> Spring DI: At First Glance | wbprime </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">wbprime</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Bloging for learning</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Spring DI: At First Glance
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-05-28T19:11:56+08:00" content="2015-05-28">
+              2015-05-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/spring-di/" itemprop="url" rel="index">
+                    <span itemprop="name">Spring DI</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="http://spring.io" target="_blank" rel="external">Spring</a> is a world famous Java developing framework.</p>
+<blockquote>
+<p>The Spring Framework is a lightweight solution and a potential one-stop-shop for building your enterprise-ready applications. However, Spring is modular, allowing you to use only those parts that you need, without having to bring in the rest. You can use the IoC container, with any web framework on top, but you can also use only the Hibernate integration code or the JDBC abstraction layer. The Spring Framework supports declarative transaction management, remote access to your logic through RMI or web services, and various options for persisting your data. It offers a full-featured MVC framework, and enables you to integrate AOP transparently into your software.</p>
+<p>Spring is designed to be non-intrusive, meaning that your domain logic code generally has no dependencies on the framework itself. In your integration layer (such as the data access layer), some dependencies on the data access technology and the Spring libraries will exist. However, it should be easy to isolate these dependencies from the rest of your code base.</p>
+</blockquote>
+<p>Now I would like to dive into Spring, starting from the most beginning.</p>
+<h1 id="Getting-start-with-Spring"><a href="#Getting-start-with-Spring" class="headerlink" title="Getting start with Spring"></a>Getting start with Spring</h1><p>Spring framework provides a tool to help start your application using <a href="http://projects.spring.io/spring-boot" target="_blank" rel="external">Spring Boot</a> as soon as possible. <a href="http://start.spring.io" target="_blank" rel="external">Spring Initializr</a> is a new feature in Spring framwork 4.x.</p>
+<blockquote>
+<p>You can use start.spring.io to generate a basic project or follow one of the “Getting Started” guides like the Getting Started Building a RESTful Web Service one. As well as being easier to digest, these guides are very task focused, and most of them are based on Spring Boot. They also cover other projects from the Spring portfolio that you might want to consider when solving a particular problem.</p>
+</blockquote>
+<h1 id="Installation-and-usage"><a href="#Installation-and-usage" class="headerlink" title="Installation and usage"></a>Installation and usage</h1><ol>
+<li><p>For <a href="http://maven.apache.org" target="_blank" rel="external">maven</a>, add Spring modules needed in your pom.xml.</p>
+<pre><code>&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+        &lt;version&gt;4.1.6.RELEASE&lt;/version&gt;
+        &lt;scope&gt;runtime&lt;/scope&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre></li>
+<li><p>For <a href="http://www.gradle.org" target="_blank" rel="external">Gradle</a>, include the appropriate URL in the repositories section.</p>
+<pre><code>repositories {
+    mavenCentral()
+    // and optionally...
+    maven { url &quot;http://repo.spring.io/release&quot; }
+}
+</code></pre></li>
+<li><p>For <a href="http://ant.apache.org/ivy" target="_blank" rel="external">Ivy</a>, the following resolver to your ivysettings.xml.</p>
+<pre><code>&lt;resolvers&gt;
+    &lt;ibiblio name=&quot;io.spring.repo.maven.release&quot;
+        m2compatible=&quot;true&quot;
+        root=&quot;http://repo.spring.io/release/&quot;/&gt;
+&lt;/resolvers&gt;
+</code></pre></li>
+<li><p>Last but most important, for regular use without each of the three, you can download Spring distribution zip file from <a href="http://repo.spring.io/release/org/springframework/spring" target="_blank" rel="external">http://repo.spring.io/release/org/springframework/spring</a>, and add separated jar files into you CLASSPATH.</p>
+</li>
+</ol>
+<h1 id="Make-it-run"><a href="#Make-it-run" class="headerlink" title="Make it run"></a>Make it run</h1><p>At the very first, I would like to direct into spring without any dependency handling apps.  Maven and its counterparts are useful and convienent for development, but may not be helpful for studying at the very beginning.</p>
+<p>To make it clear, I will start my Spring journey in a special directory <code>/home/wb/projects/</code>.  Now you can guess my user name is wb, hahaha.</p>
+<p>To handle dependency manually, I need to download <a href="http://repo.spring.io/release/org/springframework/spring" target="_blank" rel="external">Spring libraries</a>.</p>
+<p>Now let’s start by creating a project using Intellij Idea named <code>Spring</code>.</p>
+<p>Now the filesystem hierachy may look like (produced by <code>tree -F</code>):</p>
+<pre><code>/home/wb/projects/Spring/
+├── Spring.iml
+└── src/
+</code></pre><p>Add spring library dependencies for <code>Spring</code> project.</p>
+<ol>
+<li><p>Open <code>Project structure</code> setting dialog by clicking <code>File|Project Structure...</code>.  Then add library in <code>Library</code> tab.</p>
+<p> Following jar files need be added:</p>
+<pre><code>spring-core-4.1.6.RELEASE.jar
+spring-beans-4.1.6.RELEASE.jar
+spring-context-4.1.6.RELEASE.jar
+</code></pre></li>
+<li><p>Create a test class named <code>First</code></p>
+<p> Now the filesystem hierachy may look like (produced by <code>tree -F</code>):</p>
+<pre><code>/home/wb/projects/Spring/
+├── Spring.iml
+└── src/
+    └── First.java
+</code></pre></li>
+<li><p>Add a private field named <code>prop</code> in <code>First</code>, and add setter and getter.</p>
+<p> Here is what <code>First.java</code> contains:</p>
+<pre><code>public class First {
+
+    private String prop;
+
+    public First() {}
+
+    public String getProp() {
+        return prop;
+    }
+
+    public void setProp(String prop) {
+        this.prop = prop;
+    }
+
+    public void print() {
+        System.out.println(prop);
+    }
+
+    public static void main(String [] _args) {
+        First aFirst = new First();
+
+        aFirst.setProp(&quot;Hello world&quot;);
+        aFirst.print();
+    }
+}
+</code></pre><p> Run it.</p>
+<pre><code>Hello world
+</code></pre></li>
+<li><p>Now create a new file named <code>first.xml</code>.</p>
+<pre><code>/home/wb/projects/Spring/
+├── Spring.iml
+└── src/
+    ├── First.java
+    └── first.xml
+</code></pre><p> In <code>first.xml</code>:</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;
+
+    &lt;bean id=&quot;aFirst&quot; class=&quot;First&quot;&gt;
+        &lt;property name=&quot;prop&quot; value=&quot;I&apos;m first&quot; /&gt;
+    &lt;/bean&gt;
+
+&lt;/beans&gt;
+</code></pre></li>
+<li><p>Add Spring specific code in <code>First.java</code>.</p>
+<p> In <code>First.java</code>:</p>
+<pre><code>import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class First {
+
+    private String prop;
+
+    public First() {}
+
+    public String getProp() {
+        return prop;
+    }
+
+    public void setProp(String prop) {
+        this.prop = prop;
+    }
+
+    public void print() {
+        System.out.println(prop);
+    }
+
+    public static void main(String [] _args) {
+        ApplicationContext con = new ClassPathXmlApplicationContext(new String [] {&quot;first.xml&quot;});
+
+        First aFirst = con.getBean(&quot;aFirst&quot;, First.class);
+        aFirst.print();
+    }
+}
+</code></pre><p> Run it:</p>
+<pre><code>Exception in thread &quot;main&quot; java.lang.NoClassDefFoundError: org/apache/commons/logging/LogFactory
+    at org.springframework.context.support.AbstractApplicationContext.&lt;init&gt;(AbstractApplicationContext.java:154)
+    at org.springframework.context.support.AbstractApplicationContext.&lt;init&gt;(AbstractApplicationContext.java:215)
+    at org.springframework.context.support.AbstractRefreshableApplicationContext.&lt;init&gt;(AbstractRefreshableApplicationContext.java:88)
+    at org.springframework.context.support.AbstractRefreshableConfigApplicationContext.&lt;init&gt;(AbstractRefreshableConfigApplicationContext.java:58)
+    at org.springframework.context.support.AbstractXmlApplicationContext.&lt;init&gt;(AbstractXmlApplicationContext.java:61)
+    at org.springframework.context.support.ClassPathXmlApplicationContext.&lt;init&gt;(ClassPathXmlApplicationContext.java:136)
+    at org.springframework.context.support.ClassPathXmlApplicationContext.&lt;init&gt;(ClassPathXmlApplicationContext.java:93)
+    ...
+</code></pre><p> Oh, exceptions!</p>
+</li>
+<li><p>Add <code>common-logging</code> dependency.</p>
+<p> According to <a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/index.html#overview-logging" target="_blank" rel="external">Spring guide</a>, Spring (explicitly spring-core) depends on <a href="http://commons.apache.org/proper/commons-logging/" target="_blank" rel="external">Apache Commons Logging</a>.  So I need to download <a href="http://commons.apache.org/proper/commons-logging/download_logging.cgi" target="_blank" rel="external">it</a> and add it to project library path.</p>
+<p> Now run it:</p>
+<pre><code>Jun 01, 2015 7:27:19 PM org.springframework.context.support.ClassPathXmlApplicationContext prepareRefresh
+INFO: Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@71933d6c: startup date [Mon Jun 01 19:27:19 CST 2015]; root of context hierarchy
+Jun 01, 2015 7:27:19 PM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [first.xml]
+Exception in thread &quot;main&quot; java.lang.NoClassDefFoundError: org/springframework/expression/ParserContext
+    at org.springframework.context.support.AbstractApplicationContext.prepareBeanFactory(AbstractApplicationContext.java:553)
+    at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:455)
+    at org.springframework.context.support.ClassPathXmlApplicationContext.&lt;init&gt;(ClassPathXmlApplicationContext.java:139)
+    at org.springframework.context.support.ClassPathXmlApplicationContext.&lt;init&gt;(ClassPathXmlApplicationContext.java:93)
+    at First.main(First.java:23)
+    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+    at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+    at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+    at java.lang.reflect.Method.invoke(Method.java:606)
+    at com.intellij.rt.execution.application.AppMain.main(AppMain.java:140)
+    Caused by: java.lang.ClassNotFoundException: org.springframework.expression.ParserContext
+    at java.net.URLClassLoader$1.run(URLClassLoader.java:366)
+    at java.net.URLClassLoader$1.run(URLClassLoader.java:355)
+    at java.security.AccessController.doPrivileged(Native Method)
+    at java.net.URLClassLoader.findClass(URLClassLoader.java:354)
+    at java.lang.ClassLoader.loadClass(ClassLoader.java:425)
+    at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:308)
+    at java.lang.ClassLoader.loadClass(ClassLoader.java:358)
+    ... 10 more
+</code></pre><p> Wow, another exception!</p>
+</li>
+<li><p>Indeed, I surpress this exception by adding another dependency <code>spring-expression-4.1.6.RELEASE.jar</code>.  I dont know why, it just works.</p>
+<p> Run it:</p>
+<pre><code>Jun 01, 2015 7:30:16 PM org.springframework.context.support.ClassPathXmlApplicationContext prepareRefresh
+INFO: Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@6ebfc8d0: startup date [Mon Jun 01 19:30:16 CST 2015]; root of context hierarchy
+Jun 01, 2015 7:30:16 PM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [first.xml]
+I&apos;m first
+</code></pre></li>
+<li><p>Finally it works.</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag">#Java</a>
+          
+            <a href="/tags/spring/" rel="tag">#Spring</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/05/25/JDK-installation-on-Archlinux/" rel="next" title="JDK installation on Archlinux">
+                <i class="fa fa-chevron-left"></i> JDK installation on Archlinux
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/06/02/Spring-XML-based-configuration/" rel="prev" title="Spring: XML based configuration">
+                Spring: XML based configuration <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Elvis Wang" />
+          <p class="site-author-name" itemprop="name">Elvis Wang</p>
+          <p class="site-description motion-element" itemprop="description">Why bloging ?</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">46</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.github.com/wbprime" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/wbprime" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> 知乎
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Getting-start-with-Spring"><span class="nav-number">1.</span> <span class="nav-text">Getting start with Spring</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Installation-and-usage"><span class="nav-number">2.</span> <span class="nav-text">Installation and usage</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Make-it-run"><span class="nav-number">3.</span> <span class="nav-text">Make it run</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Elvis Wang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+<script type="text/javascript" src="/vendors/jquery-scrollintoview/jquery.scrollintoview.min.js?v=0.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=0.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
