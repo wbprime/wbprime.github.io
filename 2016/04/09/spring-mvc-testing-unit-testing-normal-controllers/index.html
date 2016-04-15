@@ -276,6 +276,13 @@
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/09/spring-mvc-testing-unit-testing-normal-controllers/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/04/09/spring-mvc-testing-unit-testing-normal-controllers/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -341,7 +348,7 @@
 <li>返回对应的view名称</li>
 </ol>
 <p><code>TodoController</code>类内的相关代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</span><br><span class="line"><span class="keyword">import</span> org.springframework.ui.Model;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.*;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"> </span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TodoController</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> TodoService service;</span><br><span class="line">     </span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/"</span>, method = RequestMethod.GET)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">findAll</span><span class="params">(Model model)</span> </span>&#123;</span><br><span class="line">        List&lt;Todo&gt; models = service.findAll();</span><br><span class="line">        model.addAttribute(<span class="string">"todos"</span>, models);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"todo/list"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</span><br><span class="line"><span class="keyword">import</span> org.springframework.ui.Model;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.*;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"> </span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TodoController</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> TodoService service;</span><br><span class="line">     </span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/"</span>, method = RequestMethod.GET)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">findAll</span><span class="params">(Model model)</span> </span>&#123;</span><br><span class="line">        List&lt;Todo&gt; models = service.findAll();</span><br><span class="line">        model.addAttribute(<span class="string">"todos"</span>, models);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"todo/list"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>接下来可以开始编写测试用例了。</p>
 <h3 id="测试用例：Todo列表页接口"><a href="#测试用例：Todo列表页接口" class="headerlink" title="测试用例：Todo列表页接口"></a>测试用例：<code>Todo</code>列表页接口</h3><p>该测试用例主要工作如下：</p>
 <ol>
@@ -367,7 +374,7 @@
 <li>返回对应的view名称</li>
 </ol>
 <p><code>TodoController</code>类内的相关代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"/todo/&#123;id&#125;"</span>, method = RequestMethod.GET)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">findById</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span> Long id, Model model) <span class="keyword">throws</span> TodoNotFoundException </span>&#123;</span><br><span class="line">trueTodo found = service.findById(id);</span><br><span class="line">truemodel.addAttribute(<span class="string">"todo"</span>, found);</span><br><span class="line">true<span class="keyword">return</span> <span class="string">"todo/view"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"/todo/&#123;id&#125;"</span>, method = RequestMethod.GET)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">findById</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span> Long id, Model model) <span class="keyword">throws</span> TodoNotFoundException </span>&#123;</span><br><span class="line">    Todo found = service.findById(id);</span><br><span class="line">    model.addAttribute(<span class="string">"todo"</span>, found);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"todo/view"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>如果抛出了<code>TodoNotFoundException</code>，Spring Mvc是怎么处理的呢？</p>
 </blockquote>
@@ -524,6 +531,13 @@
           
   <div class="comments" id="comments">
     
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -566,7 +580,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">56</span>
+              <span class="site-state-item-count">59</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -737,6 +751,27 @@
 
 
 
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'wbprime';
+      var disqus_identifier = '2016/04/09/spring-mvc-testing-unit-testing-normal-controllers/';
+      var disqus_title = 'Spring MVC Unit Testing - Normal Controllers';
+      var disqus_url = 'http://www.wbprime.me/2016/04/09/spring-mvc-testing-unit-testing-normal-controllers/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
   
 
 

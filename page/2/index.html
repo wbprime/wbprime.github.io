@@ -226,6 +226,365 @@
             
               
                 
+                <a class="post-title-link" href="/2016/04/06/learning-java-concurrency-wait-notify/" itemprop="url">
+                  Learning Java Concurrency - wait & notify
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-06T10:00:56+08:00" content="2016-04-06">
+              2016-04-06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/learning-java-concurrency/" itemprop="url" rel="index">
+                    <span itemprop="name">Learning Java Concurrency</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/06/learning-java-concurrency-wait-notify/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/04/06/learning-java-concurrency-wait-notify/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>在synchronized关键字之外，Java提供了另外的<code>wait</code>和<code>notify</code>函数族用于支援多线程通信，使用上类似于JUC的Condition类。</p>
+<p><code>wait()</code>、<code>notify()</code>和<code>notifyAll()</code>是Object类的方法，与synchronized配套使用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Object</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title">wait</span><span class="params">(<span class="keyword">long</span> timeout)</span> <span class="keyword">throws</span> InterruptedException</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">wait</span><span class="params">(<span class="keyword">long</span> timeout, <span class="keyword">int</span> nanos)</span> <span class="keyword">throws</span> InterruptedException</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">wait</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title">notify</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title">notifyAll</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>wait</code>一共有三个函数。调用<code>wait</code>的线程必须已经持有了同一个对象的同步器（使用synchronized）。调用<code>wait</code>的线程会进入等待状态，直到另外的线程调用了同一个对象的<code>notify</code>函数，或者指定的等待时间过期，或者被中断（引发InterruptedException）。调用<code>wait</code>函数之后，当前线程会放弃已经持有的同步器。</p>
+<p><code>notify</code>一共是有两个函数。<code>notify()</code>函数会唤醒当前的由于执行<code>wait</code>而进入等待的某个线程；注意，被唤醒的线程是不可预料的，也就是说不同的JVM实现可以用不同的规则算法来决定被唤醒的是哪一个线程。<code>notifyAll()</code>函数会唤醒所有的等待线程，但是只会有一个线程最终进入执行。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/06/learning-java-concurrency-wait-notify/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/04/01/java-concurrency-synchronized/" itemprop="url">
+                  Learning Java Concurrency - synchronized
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-01T16:39:24+08:00" content="2016-04-01">
+              2016-04-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/learning-java-concurrency/" itemprop="url" rel="index">
+                    <span itemprop="name">Learning Java Concurrency</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/01/java-concurrency-synchronized/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/04/01/java-concurrency-synchronized/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>synchronized，同步控制器，是Java原生提供的多线程同步控制的工具，是Java语法的一部分。</p>
+<p>synchronized在语义上等同于一个独占锁。synchronized可以用来修饰一个方法，标识该方法是可同步的；也可以用来修饰语句块，标识该语句块是同步的。在代码经过编译之后，JVM会在方法或者语句块的前后插入<code>monitorenter</code>和<code>monitorexit</code>的虚拟机指令，这两条指令又会隐式地调用<code>lock</code>原语。</p>
+<p>synchronized可以使用在普通方法里，也可以使用在静态方法里。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Synchronized</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">method1</span><span class="params">(<span class="keyword">final</span> String val)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"1: Begin add "</span> + val);</span><br><span class="line">        System.out.println(<span class="string">"1: Finish add "</span> + val);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method2</span><span class="params">(<span class="keyword">final</span> String val)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"2: Begin add "</span> + val);</span><br><span class="line">        System.out.println(<span class="string">"2: Finish add "</span> + val);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method3</span><span class="params">(<span class="keyword">final</span> String val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span>(<span class="keyword">this</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">"3: Begin add "</span> + val);</span><br><span class="line">            System.out.println(<span class="string">"3: Finish add "</span> + val);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method4</span><span class="params">(<span class="keyword">final</span> String val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span>(Synchronized.class) &#123;</span><br><span class="line">            System.out.println(<span class="string">"4: Begin add "</span> + val);</span><br><span class="line">            System.out.println(<span class="string">"4: Finish add "</span> + val);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/01/java-concurrency-synchronized/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/03/31/Java-concurrency-content/" itemprop="url">
+                  Learning Java Concurrency - Content
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-31T10:10:46+08:00" content="2016-03-31">
+              2016-03-31
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/learning-java-concurrency/" itemprop="url" rel="index">
+                    <span itemprop="name">Learning Java Concurrency</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/31/Java-concurrency-content/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/03/31/Java-concurrency-content/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>Java Concurrency是学习Java的过程中绕不过去的一道坎。既然绕不过去，只能一点一点去学习它，然后了解它。本系列是在学习Java Concurrency过程中的记录，鉴于网络上关于原理和实现代码的文章一大堆，所以本系列会尽量以实际应用为主。毕竟原理了解的再深，还是要落地为代码。</p>
+<p>本系列主要参考<a href="http://www.blogjava.net/xylz/archive/2010/07/08/325587.html">《深入浅出Java Concurrency》</a>系列。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/03/31/Java-concurrency-content/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/03/30/java-concurrency-cyclicbarrier/" itemprop="url">
                   Learning Java Concurrency - CyclicBarrier
                 </a>
@@ -267,6 +626,13 @@
           
 
           
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/30/java-concurrency-cyclicbarrier/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/03/30/java-concurrency-cyclicbarrier/" itemprop="commentsCount"></span>
+                </a>
+              </span>
             
           
 
@@ -379,6 +745,13 @@
           
 
           
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/30/java-concurrency-countdownlatch/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/03/30/java-concurrency-countdownlatch/" itemprop="commentsCount"></span>
+                </a>
+              </span>
             
           
 
@@ -495,6 +868,13 @@
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/30/java-concurrent-semaphore/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/03/30/java-concurrent-semaphore/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -607,6 +987,13 @@
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/06/08/Spring-Annotation-based-configuration/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/06/08/Spring-Annotation-based-configuration/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -716,6 +1103,13 @@
           
 
           
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/06/02/Spring-XML-based-configuration/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/06/02/Spring-XML-based-configuration/" itemprop="commentsCount"></span>
+                </a>
+              </span>
             
           
 
@@ -827,6 +1221,13 @@
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/05/28/Spring-At-First-Glance/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/05/28/Spring-At-First-Glance/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -936,6 +1337,13 @@
           
 
           
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/05/25/JDK-installation-on-Archlinux/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/05/25/JDK-installation-on-Archlinux/" itemprop="commentsCount"></span>
+                </a>
+              </span>
             
           
 
@@ -1047,6 +1455,13 @@
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/05/16/man-man-zou/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/05/16/man-man-zou/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -1156,6 +1571,13 @@
           
 
           
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/05/16/baiyun-yijiu-zai/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/05/16/baiyun-yijiu-zai/" itemprop="commentsCount"></span>
+                </a>
+              </span>
             
           
 
@@ -1267,6 +1689,13 @@
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/05/16/shuohaode-anjingde-meinanzi-ne/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/05/16/shuohaode-anjingde-meinanzi-ne/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -1376,6 +1805,13 @@
           
 
           
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/05/16/c-mantan/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/05/16/c-mantan/" itemprop="commentsCount"></span>
+                </a>
+              </span>
             
           
 
@@ -1487,6 +1923,13 @@
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/05/16/kan-dianying/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/05/16/kan-dianying/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -1509,336 +1952,6 @@
           人不知道为什么，总有点少年故事历久弥新的情怀。看到丰盛宴席，也许会想起老家时候外婆炒的的老咸菜；看到可爱小宠，也许会怀念看家赶狼还顺带抓老鼠的那匹老黄狗；走在路上，不自觉就回忆到那些个到中午就扑腾在竹林里打闹的夏天。 来北京也已经快八年了，少小离家也差不多吧，转眼间已经半半百了。在京师里面吃喝，租着房子，购物，聊天，交友，仿佛就像个家似的。
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/05/16/kan-dianying/">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/05/16/danan/" itemprop="url">
-                  大难
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-05-16T19:14:49+08:00" content="2015-05-16">
-              2015-05-16
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/life/" itemprop="url" rel="index">
-                    <span itemprop="name">Life</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          唐和尚去取经，历八十一难，首难是两界山遇虎，末难是通天河沉经，一山一水，一者天定，一者人为。
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/05/16/danan/">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/05/16/qiangjinjiu/" itemprop="url">
-                  将进酒
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-05-16T19:10:58+08:00" content="2015-05-16">
-              2015-05-16
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/life/" itemprop="url" rel="index">
-                    <span itemprop="name">Life</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          酒一曰天地。 酒二曰人伦。 酒三曰太一。 酒四曰律法。 酒五曰先生。 酒六曰后生。 酒七曰独独之我。 酒八曰爱恨。 酒九曰无。 九则老矣，过犹不及。
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/05/16/qiangjinjiu/">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/05/16/xiaowang-ersanshi/" itemprop="url">
-                  小王二三事
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-05-16T19:07:06+08:00" content="2015-05-16">
-              2015-05-16
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/life/" itemprop="url" rel="index">
-                    <span itemprop="name">Life</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          小王是我的一个朋友，很好的朋友。 小王最近有点迷茫。 我问他原因。
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/05/16/xiaowang-ersanshi/">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1909,7 +2022,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">56</span>
+              <span class="site-state-item-count">59</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -2064,6 +2177,25 @@
 
 
 
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'wbprime';
+      var disqus_identifier = 'page/2/index.html';
+      var disqus_title = '';
+      var disqus_url = '';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+    </script>
   
 
 
