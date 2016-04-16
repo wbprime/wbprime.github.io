@@ -57,16 +57,22 @@
 
 
 
-<meta name="description" content="本文是Spring MVC Testing集成测试系列的第1篇，原文链接：Integration Testing of Spring MVC Applications: Configuration。">
+<meta name="description" content="本文是Spring MVC Testing集成测试系列的第1篇，原文链接：Integration Testing of Spring MVC Applications: Configuration。
+没有人会否认集成测试的重要性，它是验证我们开发的组件能够正常协同工作的重要手段。不幸的是，对使用Spring MVC开发的web应用程序作集成测试有一点麻烦。
+过去我们一直用 Selenium 和 J">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring MVC Integration Testing - Configuration">
 <meta property="og:url" content="http://www.wbprime.me/2016/04/09/spring-mvc-testing-integration-testing-configuration/index.html">
 <meta property="og:site_name" content="wbprime">
-<meta property="og:description" content="本文是Spring MVC Testing集成测试系列的第1篇，原文链接：Integration Testing of Spring MVC Applications: Configuration。">
-<meta property="og:updated_time" content="2016-04-09T15:07:53.000Z">
+<meta property="og:description" content="本文是Spring MVC Testing集成测试系列的第1篇，原文链接：Integration Testing of Spring MVC Applications: Configuration。
+没有人会否认集成测试的重要性，它是验证我们开发的组件能够正常协同工作的重要手段。不幸的是，对使用Spring MVC开发的web应用程序作集成测试有一点麻烦。
+过去我们一直用 Selenium 和 J">
+<meta property="og:updated_time" content="2016-04-16T03:07:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring MVC Integration Testing - Configuration">
-<meta name="twitter:description" content="本文是Spring MVC Testing集成测试系列的第1篇，原文链接：Integration Testing of Spring MVC Applications: Configuration。">
+<meta name="twitter:description" content="本文是Spring MVC Testing集成测试系列的第1篇，原文链接：Integration Testing of Spring MVC Applications: Configuration。
+没有人会否认集成测试的重要性，它是验证我们开发的组件能够正常协同工作的重要手段。不幸的是，对使用Spring MVC开发的web应用程序作集成测试有一点麻烦。
+过去我们一直用 Selenium 和 J">
 
 
 
@@ -290,6 +296,54 @@
 
       
         <p>本文是<a href="/2016/04/09/spring-mvc-testing-content/">Spring MVC Testing</a>集成测试系列的第1篇，原文链接：<a href="http://www.petrikainulainen.net/programming/spring-framework/integration-testing-of-spring-mvc-applications-configuration/" target="_blank" rel="external">Integration Testing of Spring MVC Applications: Configuration</a>。</p>
+<p>没有人会否认集成测试的重要性，它是验证我们开发的组件能够正常协同工作的重要手段。不幸的是，对使用Spring MVC开发的web应用程序作集成测试有一点麻烦。</p>
+<p>过去我们一直用 <a href="http://docs.seleniumhq.org" target="_blank" rel="external">Selenium</a> 和 <a href="https://jwebunit.github.io/jwebunit/" target="_blank" rel="external">JWebUnit</a> 来对web应用接口作集成测试，然后效果不是很好。这种方法有以下三个缺点：</p>
+<ul>
+<li>对于开发中的web接口，编写和维护测试的工作量比较大</li>
+<li>对于使用Javascript，尤其是Ajax的web应用，可用性不高</li>
+<li>必须在web容器中启动运行，导致速度慢而且很没有效率</li>
+</ul>
+<p>经常就是开发者在后续开发过程中觉得维护之前的集成测试用例太过耗时而且效果不大，所以废弃了这种形式的集成测试。幸运的是，我们找到了一种新型的集成测试框架Spring MVC Test可以用来简化测试工作。</p>
+<p>本文主要介绍如何配置Spring MVC Test框架来进行web应用的测试。本系列使用的工具包括：</p>
+<ul>
+<li>Spring Framework 3.2</li>
+<li>JUnit 4.10</li>
+<li>Maven 3.0.3</li>
+</ul>
+<p>我们一起来开始进入Spring MVC Test的世界吧！</p>
+<a id="more"></a>
+<h1 id="通过Maven获取依赖"><a href="#通过Maven获取依赖" class="headerlink" title="通过Maven获取依赖"></a>通过Maven获取依赖</h1><p>译者注：原文写作的时候是基于Spring Framework 3.1.2，当时Spring-test-mvc还是作为一个独立的项目进行开发和发布。在Spring Framework 3.2以后，该项目被合并到Spring Framework中去了。现在Spring Framework已经发布了4.X系列，很少有人在使用3.2以下的版本，为了减少混淆，直接将原文的pom文件加以修改。特此说明。</p>
+<p>生成的pom.xml文件如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="MockMvc-配置"><a href="#MockMvc-配置" class="headerlink" title="MockMvc 配置"></a>MockMvc 配置</h1><p>Spring MVC Test框架提供了<code>MockMvc</code>类体系来辅助编写基于Spring MVC开发的web应用的测试代码。我们需要做的就是使用<code>MockMvcBuilder</code>接口的实际实现来生成<code>MockMvc</code>实例。<code>MockMvcBuilders</code>工厂类提供了两个工厂方法创建<code>MockMvcBuilder</code>实例：</p>
+<ul>
+<li><code>StandaloneMockMvcBuilder standaloneSetup(Object… controllers)</code> 主要用来对单个Controller进行测试，需要手动地配置各种Bean</li>
+<li><code>DefaultMockMvcBuilder webAppContextSetup(WebApplicationContext context)</code> 主要使用配置好的Spring上下文来配置Bean</li>
+</ul>
+<p>下面来详细看一下这两种方式分别如何使用。</p>
+<h2 id="standaloneSetup"><a href="#standaloneSetup" class="headerlink" title="standaloneSetup"></a>standaloneSetup</h2><p>如果要测试的类是<code>HomeController</code>，我们可以用如下的方式创建一个<code>MockMvc</code>实例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MockMvc mockMvc = MockMvcBuilders.standaloneSetup(<span class="keyword">new</span> HomeController()).build();</span><br></pre></td></tr></table></figure>
+<h2 id="webAppContextSetup"><a href="#webAppContextSetup" class="headerlink" title="webAppContextSetup"></a>webAppContextSetup</h2><p>这种方式我们要先初始化一个配置好的<code>WebApplicationContext</code>实例，然后通过如下代码创建一个<code>MockMvc</code>实例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">WebApplicationContext wac ;</span><br><span class="line">MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();</span><br></pre></td></tr></table></figure>
+<h1 id="测试用例类的配置"><a href="#测试用例类的配置" class="headerlink" title="测试用例类的配置"></a>测试用例类的配置</h1><p>在集成测试中我们应该使用webAppContextSetup方式的<code>MockMvc</code>配置方式，这样可以最大化地共用Spring配置代码。</p>
+<p>我们可以按照如下的步骤来配置集成测试用例类：</p>
+<ol>
+<li>对测试用例类加上<code>@RunWith(SpringJUnit4ClassRunner.class)</code>注解</li>
+<li>对测试用例类加上<code>@ContextConfiguration</code>注解，并指定Spring配置文件（XML）或者配置类（Java）</li>
+<li>对测试用例类加上<code>@WebAppConfiguration</code>注解，表明这是一个web应用的测试用例</li>
+<li>测试用例类中添加一个<code>MockMvc</code>类型的成员</li>
+<li>测试用例类中添加一个<code>setUp()</code>方法并用<code>@Before</code>注解，调用<code>MockMvcBuilders</code>的静态方法<code>webAppContextSetup()</code>创建并配置好<code>MockMvc</code>类型的成员</li>
+</ol>
+<p>完成后的测试用例类大概长成这个样子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith</span>(SpringJUnit4ClassRunner.class)</span><br><span class="line"><span class="meta">@ContextConfiguration</span>(locations = &#123;<span class="string">"classpath:testContext.xml"</span>, <span class="string">"classpath:webMvcContext.xml"</span>&#125;)</span><br><span class="line"><span class="comment">//@ContextConfiguration(classes = &#123;TestContext.class, WebMvcContext.class&#125;)</span></span><br><span class="line"><span class="meta">@WebAppConfiguration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TodoControllerTest_WebAppContext</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> MockMvc mockMvc;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> WebApplicationContext webApplicationContext;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Before</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Mockito.reset(mockedTodoService);</span><br><span class="line"></span><br><span class="line">        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Add tests here</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>本文使用的代码被放在了 <a href="https://github.com/pkainulainen/spring-mvc-test-examples/tree/master/configuration" target="_blank" rel="external">Github</a> 上。使用Maven进行集成测试的方法可以参见我的另外一篇文章 <a href="http://www.petrikainulainen.net/programming/maven/integration-testing-with-maven/" target="_blank" rel="external">Integration Testing with Maven</a>。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本文主要介绍了如何来配置基于Spring MVC Test的集成测试，主要内容有：</p>
+<ul>
+<li>如何使用不同的Spring配置方式（XML/Java）来配置测试用例</li>
+<li>应该使用<code>webAppContextSetup</code>的方式而不是<code>standaloneSetup</code>方式</li>
+<li>如何使用<code>WebApplicationContext</code>注入来完成Spring配置的加载</li>
+</ul>
+<p>下一篇是 <a href="/2016/04/09/spring-mvc-testing-integration-testing-controllers/">Spring MVC Integration Testing - Controllers</a>。</p>
 
       
     </div>
@@ -468,7 +522,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#通过Maven获取依赖"><span class="nav-number">1.</span> <span class="nav-text">通过Maven获取依赖</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MockMvc-配置"><span class="nav-number">2.</span> <span class="nav-text">MockMvc 配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#standaloneSetup"><span class="nav-number">2.1.</span> <span class="nav-text">standaloneSetup</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#webAppContextSetup"><span class="nav-number">2.2.</span> <span class="nav-text">webAppContextSetup</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#测试用例类的配置"><span class="nav-number">3.</span> <span class="nav-text">测试用例类的配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
           </div>
         </section>
