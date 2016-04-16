@@ -1121,10 +1121,14 @@
 
       
         
-          
-            <p>本文是<a href="/2016/04/09/spring-mvc-testing-content/">Spring MVC Testing</a>集成测试系列的第1篇，原文链接：<a href="http://www.petrikainulainen.net/programming/spring-framework/integration-testing-of-spring-mvc-applications-controllers/" target="_blank" rel="external">Integration Testing of Spring MVC Applications: Controllers</a>。</p>
-
-          
+          <p>本文是<a href="/2016/04/09/spring-mvc-testing-content/">Spring MVC Testing</a> 集成测试系列的第2篇，原文链接：<a href="http://www.petrikainulainen.net/programming/spring-framework/integration-testing-of-spring-mvc-applications-controllers/">Integration Testing of Spring MVC Applications: Controllers</a>。</p>
+<p>本文主要介绍如何为“标准”Controller编写集成测试。在这里“标准”的含义延续前一个序列 <a href="/2016/04/09/spring-mvc-testing-content/">Spring MVC Testing</a> 中的含义，表示不使用Ajax的请求或者处理Form结果的请求。</p>
+<p>同样地，本文还是一步一步地为我们的TodoApplication编写集成测试。该程序提供Todo项的增删改查（CRUD）接口，本文主要关注其中的3个接口：获取Todo项列表；查看单个Todo项的详情；以及删除某个Todo项。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/09/spring-mvc-testing-integration-testing-controllers/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1236,7 +1240,7 @@
 
       
         
-          <p>本文是<a href="/2016/04/09/spring-mvc-testing-content/">Spring MVC Testing</a>集成测试系列的第1篇，原文链接：<a href="http://www.petrikainulainen.net/programming/spring-framework/integration-testing-of-spring-mvc-applications-configuration/">Integration Testing of Spring MVC Applications: Configuration</a>。</p>
+          <p>本文是 <a href="/2016/04/09/spring-mvc-testing-content/">Spring MVC Testing</a> 集成测试系列的第1篇，原文链接：<a href="http://www.petrikainulainen.net/programming/spring-framework/integration-testing-of-spring-mvc-applications-configuration/">Integration Testing of Spring MVC Applications: Configuration</a>。</p>
 <p>没有人会否认集成测试的重要性，它是验证我们开发的组件能够正常协同工作的重要手段。不幸的是，对使用Spring MVC开发的web应用程序作集成测试有一点麻烦。</p>
 <p>过去我们一直用 <a href="http://docs.seleniumhq.org">Selenium</a> 和 <a href="https://jwebunit.github.io/jwebunit/">JWebUnit</a> 来对web应用接口作集成测试，然后效果不是很好。这种方法有以下三个缺点：</p>
 <ul>
@@ -1368,7 +1372,7 @@
 
       
         
-          <p>本文是<a href="/2016/04/09/spring-mvc-testing-content/">Spring MVC Testing</a>单元测试系列的第3篇，原文链接：<a href="http://www.petrikainulainen.net/programming/spring-framework/unit-testing-of-spring-mvc-controllers-rest-api/">Unit Testing of Spring MVC Controllers: REST API</a>。</p>
+          <p>本文是 <a href="/2016/04/09/spring-mvc-testing-content/">Spring MVC Testing</a> 单元测试系列的第3篇，原文链接：<a href="http://www.petrikainulainen.net/programming/spring-framework/unit-testing-of-spring-mvc-controllers-rest-api/">Unit Testing of Spring MVC Controllers: REST API</a>。</p>
 <p>使用Spring MVC可以很方便第创建REST风格的接口，但是编写REST风格接口的单元测试并不是那么方便。幸运的是，Spring MVC Test极大地简化了我们为REST风格controller编写单元测试的工作。</p>
 <p>本文将通过为<code>Todo</code>项的增删改查（CRUD）的REST风格接口操作编写单元测试的方式，一步一步地讲解如何使用Spring MVC Test来进行单元测试。OK，我们快点进入正文吧！</p>
           <div class="post-more-link text-center">
@@ -1487,7 +1491,7 @@
 
       
         
-          <p>本文是<a href="/2016/04/09/spring-mvc-testing-content/">Spring MVC Testing</a>单元测试系列的第2篇，原文链接：<a href="http://www.petrikainulainen.net/programming/spring-framework/unit-testing-of-spring-mvc-controllers-normal-controllers/">Unit Testing of Spring MVC Controllers: “Normal” Controllers</a>。</p>
+          <p>本文是 <a href="/2016/04/09/spring-mvc-testing-content/">Spring MVC Testing</a> 单元测试系列的第2篇，原文链接：<a href="http://www.petrikainulainen.net/programming/spring-framework/unit-testing-of-spring-mvc-controllers-normal-controllers/">Unit Testing of Spring MVC Controllers: “Normal” Controllers</a>。</p>
 <p>本系列的第1部分讲述了使用Spring MVC Test应如何进行单元测试的<a href="/2016/04/09/spring-mvc-testing-unit-testing-configuration/">配置</a>，现在可以开始实战一下如何对标准controller编写单元测试。</p>
 <p>首先需要明确一下。</p>
 <blockquote>
@@ -1612,7 +1616,7 @@
 
       
         
-          <p>本文是<a href="/2016/04/09/spring-mvc-testing-content/">Spring MVC Testing</a>单元测试系列的第1篇，原文链接：<a href="http://www.petrikainulainen.net/programming/spring-framework/unit-testing-of-spring-mvc-controllers-configuration/">Unit Testing of Spring MVC Controllers: Configuration</a>。</p>
+          <p>本文是 <a href="/2016/04/09/spring-mvc-testing-content/">Spring MVC Testing</a> 单元测试系列的第1篇，原文链接：<a href="http://www.petrikainulainen.net/programming/spring-framework/unit-testing-of-spring-mvc-controllers-configuration/">Unit Testing of Spring MVC Controllers: Configuration</a>。</p>
 <p>一直以来，为Spring MVC的Controller写单元测试的工作既简单又问题多多。简单体现在单元测试可以很简单地写个测试用例调用一下目标Controller的方法；问题在于这种单元测试完全没有用（不是HTTP的请求），比如说，这种单元测试的方法没办法测试请求映射、参数验证和异常映射等。</p>
 <p>幸运的是，从Spring 3.2开始，我们可以使用<a href="http://docs.spring.io/spring/docs/3.2.x/spring-framework-reference/htmlsingle/#new-in-3.2-spring-mvc-test">Spring MVC Test Framework</a>这一强大的工具通过DispatcherServlet来仿照HTTP请求的方式来单元测试Controller的方法。</p>
 <p>本文主要介绍如何配置Spring使得可以单元测试Spring MVC Controllers。</p>
