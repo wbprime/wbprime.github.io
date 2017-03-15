@@ -27,7 +27,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="Elvis Wang">
     <meta name="description" content="Why bloging ?">
-    <meta name="keywords" content="null,upset,C">
+    <meta name="keywords" content="wbprime,upset,C">
 
     <!--iOS -->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -133,12 +133,12 @@
 <!-- Theme Background Related-->
 
     <style>
-      body{
+      body {
         background-color: #F5F5F5;
       }
 
       /* blog_info bottom background */
-      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text {
         background-color: #fff;
       }
     </style>
@@ -183,6 +183,13 @@
     
 
     <!-- Bing Background -->
+    
+        <script type="text/javascript">
+            queue.offer(function(){
+                $('body').attr('data-original', 'https://api.i-meto.com/bing?new');
+                $('body.lazy').lazyload();
+            });
+        </script>
     
 
     <!-- Custom Head -->
@@ -284,7 +291,7 @@
 
     <!-- Author Avatar -->
     <div id="author-avatar">
-        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+        <img src="/img/logo.png" width="44px" height="44px" alt="Author Avatar"/>
     </div>
     <!-- Author Name & Date -->
     <div>
@@ -303,6 +310,15 @@
     -->
 
     <!-- Qrcode -->
+    
+        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+            <i class="material-icons" role="presentation">devices other</i>
+            <span class="visuallyhidden">devices other</span>
+        </button>
+        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
+            <li class="mdl-menu__item">在其它设备中阅读本文章</li>
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACYklEQVR42u3aQXLbMBAEQP3/08kDYtEzCxBU7ObJZVsiGgdga3Zff37088LDw8PDw8PDw/sw3it+/v3Uu2/44pVv/id5S702PDw8vCO8b47ay0XnC8rBK2vDw8PDO8lbeWVy6L/76/Vv8rXh4eHhfT6vLaCTwx0PDw/vN/DyTyWhxsra8PDw8M7z8oO7BbdxxmNZCx4eHl7My5tM538+2t/Dw8PDC3j1SFPZ3Eq+J78Gbp8pw8PDwwt4s4I4v0LWxwjyAh0PDw/vKV4eQ8xChHZr2usEDw8P725eW0AXceqoobVho/Hw8PBu5s1aViuvz0ON2Trx8PDw7ublhXUbvObx7koxjYeHh3eet3IltLHsLN5tC308PDy8u3nJK2fXxsqgQBJbFFkLHh4e3lberPBtg+BZ6Xz92Xp0AA8PD28rLx97SjaiLdkTTDKygIeHh3eGt9IGa4PgWZh7/Vk8PDy8p3jtgZ7HFivblG8fHh4e3rO8tu3Uhry7vmd4MeDh4eFt5a0Xu+tHf37BFP09PDw8vK28fFkJtR23ajci+g0eHh7eQd56+VtHrqPN/SbgwMPDwzvIa+PdvaX5rAGGh4eH9yyvbT7tWtYrfqLLAw8PD+9mXvsk1OTamLXfolADDw8P72be7FBug4zZ1uSDBXh4eHjnee1lMBsvaAOLdg14eHh453m72l35FqyPI+Dh4eH9X7xZq2yGz6NhPDw8vE/mJWNV1+VyG4VsGB3Aw8PDOzJ0dUdDK7882sIaDw8P7wyvPZrbi2QlpNgwU4aHh4e3lffzHjw8PDw8PDw8vA94/gLSvoaS9J0xgAAAAABJRU5ErkJggg==">
+        </ul>
     
 
     <!-- Tags (bookmark) -->
@@ -459,7 +475,7 @@
 <aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
     <div id="sidebar-main">
         <!-- Sidebar Header -->
-        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+        <div class="sidebar-header header-cover" style="background-image: url(/img/logo.png);">
     <!-- Top bar -->
     <div class="top-bar"></div>
 
@@ -474,12 +490,12 @@
 
     <!-- Sidebar Avatar -->
     <div class="sidebar-image">
-        <img src="/img/avatar.png" alt="Elvis Wang's avatar">
+        <img src="/img/logo.png" alt="Elvis Wang's avatar">
     </div>
 
     <!-- Sidebar Email -->
     <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
-        youremail@email.com
+        mail@wbprime.me
         <b class="caret"></b>
     </a>
 </div>
@@ -536,11 +552,54 @@
 
     <!-- Categories  -->
     
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                分类
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/c-c/">C/C++<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/learning-java-concurrency/">Learning Java Concurrency<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/life/">Life<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/mayday/">Mayday<span class="sidebar_archives-count">19</span></a></li><li><a class="sidebar_archives-link" href="/categories/spring-di/">Spring DI<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/spring-mvc-testing/">Spring MVC Testing<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/categories/tech/">Tech<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
 
     <!-- Pages  -->
     
+        <li>
+            <a href="/tags" title="Tags">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                Tags
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
+    
 
     <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                文章总数
+                <span class="sidebar-badge">59</span>
+            </a>
+        </li>
+        
     
 </ul>
 
@@ -562,13 +621,6 @@ It will not impact the appearance and can give developers a lot of support :)
 
 
 <!-- Theme Material -->
-
-    <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
-        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
-            主题 - Material
-            <span class="sidebar-badge badge-circle">i</span>
-        </div>
-    </a>
 
 
 <!-- Help & Support -->
@@ -612,29 +664,11 @@ It will not impact the appearance and can give developers a lot of support :)
         <div class="mdl-mini-footer--left-section sns-list">
     <!-- Twitter -->
     
-        <a href="https://twitter.com/twitter" target="_blank">
-            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-twitter.png);">
-                <span class="visuallyhidden">Twitter</span>
-            </button><!--
-     --></a>
-    
 
     <!-- Facebook -->
     
-        <a href="https://www.facebook.com/facebook" target="_blank">
-            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-facebook.png);">
-                <span class="visuallyhidden">Facebook</span>
-            </button><!--
-     --></a>
-    
 
     <!-- Google + -->
-    
-        <a href="https://www.google.com/" target="_blank">
-            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-gplus.png);">
-                <span class="visuallyhidden">Google Plus</span>
-            </button><!--
-     --></a>
     
 
     <!-- Weibo -->
@@ -647,6 +681,12 @@ It will not impact the appearance and can give developers a lot of support :)
     
 
     <!-- Github -->
+    
+        <a href="https://github.com/wbprime" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-github.png);">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
     
 
     <!-- LinkedIn -->

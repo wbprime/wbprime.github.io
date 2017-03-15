@@ -27,7 +27,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="Elvis Wang">
     <meta name="description" content="Why bloging ?">
-    <meta name="keywords" content="null,calm,Mayday">
+    <meta name="keywords" content="wbprime,calm,Mayday">
 
     <!--iOS -->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -133,12 +133,12 @@
 <!-- Theme Background Related-->
 
     <style>
-      body{
+      body {
         background-color: #F5F5F5;
       }
 
       /* blog_info bottom background */
-      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text {
         background-color: #fff;
       }
     </style>
@@ -183,6 +183,13 @@
     
 
     <!-- Bing Background -->
+    
+        <script type="text/javascript">
+            queue.offer(function(){
+                $('body').attr('data-original', 'https://api.i-meto.com/bing?new');
+                $('body.lazy').lazyload();
+            });
+        </script>
     
 
     <!-- Custom Head -->
@@ -284,7 +291,7 @@
 
     <!-- Author Avatar -->
     <div id="author-avatar">
-        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+        <img src="/img/logo.png" width="44px" height="44px" alt="Author Avatar"/>
     </div>
     <!-- Author Name & Date -->
     <div>
@@ -303,6 +310,15 @@
     -->
 
     <!-- Qrcode -->
+    
+        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+            <i class="material-icons" role="presentation">devices other</i>
+            <span class="visuallyhidden">devices other</span>
+        </button>
+        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
+            <li class="mdl-menu__item">在其它设备中阅读本文章</li>
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC4klEQVR42u3awU7DMBAE0P7/T8MVCUhn1gWl9ssJ0TT1cyWWnfXj48jrgY2NjY2NjY2NjX1L9iO+fnjQl99/v+f7e6+fnDxtZc3Y2NjYe7Of/Om/XMQK8lWfHr0LGxsb+wD2SmnJ70825fo57ZqxsbGxsduPTJqWvNnIn4aNjY2NPStg66HPSoCFjY2Njd0GNCvbcd3AzFqUf8rSsLGxsW/PbovNHX7+1/k2NjY29o3Z7dXGQ/kW50VxuHJsbGzsTdl5YbgGtG1GvpV5u/JkRIGNjY29KftJEBMfo5m1N/mQIA+Sfl0VNjY29qbslfFAvn2z1qKOjdosDRsbG3sLdtskzIKnpO3J70/Wg42NjX0OO/ngvIVoS1obLc2aHGxsbOxz2OtFIm8nkjvzr2c46MXGxsbegt0utA132u3L24+2oGJjY2PvzW4PweRD2dmgN29IXpalYWNjY785ux0S5EPWZOibF8ilxgkbGxv7AHZUBuLjOPWRmqAgXSOfFF1sbGzsrdmzkCiBtSPe/HOXBr3Y2NjYG7Fno9zZ2CBvftrxQB0qYWNjY2/EXo+K2kHvMNyPy1gRKmFjY2NvxG6DoWQpCbhoJOKVYGNjY5/Jbg/WzMYA+eGbfFT8h4cvsbGxsd+EPYuNZndel8w2hKoDLGxsbOyt2W2Jap+wPmzI4ypsbGxs7Lx4rMRMs/gp/zKwsbGxT2Pn//TPGoniYE0caeVhFjY2NvbJ7LbUzY7afCxcfzIewMbGxn5bdt42JO9dubM93JNsJTY2Nvau7JWC0Q5921dn24SNjY19GnulJLSxVP5qMnhI1o+NjY19DjspWu149QXNQ3wMKLoTGxsb+wB2e5imHQavjBBmFzY2Njb2+higjZza4zjFgR5sbGxs7DjEaZuNZBPbxgkbGxv7THY+AJj9ZoU9GwBjY2Njn8POA5pk6Js3DOvj4aQAY2NjY+/NPufCxsbGxsbGxsbGvs31CZBuKlzrIBSpAAAAAElFTkSuQmCC">
+        </ul>
     
 
     <!-- Tags (bookmark) -->
@@ -462,7 +478,7 @@
 <aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
     <div id="sidebar-main">
         <!-- Sidebar Header -->
-        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+        <div class="sidebar-header header-cover" style="background-image: url(/img/logo.png);">
     <!-- Top bar -->
     <div class="top-bar"></div>
 
@@ -477,12 +493,12 @@
 
     <!-- Sidebar Avatar -->
     <div class="sidebar-image">
-        <img src="/img/avatar.png" alt="Elvis Wang's avatar">
+        <img src="/img/logo.png" alt="Elvis Wang's avatar">
     </div>
 
     <!-- Sidebar Email -->
     <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
-        youremail@email.com
+        mail@wbprime.me
         <b class="caret"></b>
     </a>
 </div>
@@ -539,11 +555,54 @@
 
     <!-- Categories  -->
     
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                分类
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/c-c/">C/C++<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/learning-java-concurrency/">Learning Java Concurrency<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/life/">Life<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/mayday/">Mayday<span class="sidebar_archives-count">19</span></a></li><li><a class="sidebar_archives-link" href="/categories/spring-di/">Spring DI<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/spring-mvc-testing/">Spring MVC Testing<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/categories/tech/">Tech<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
 
     <!-- Pages  -->
     
+        <li>
+            <a href="/tags" title="Tags">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                Tags
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
+    
 
     <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                文章总数
+                <span class="sidebar-badge">59</span>
+            </a>
+        </li>
+        
     
 </ul>
 
@@ -565,13 +624,6 @@ It will not impact the appearance and can give developers a lot of support :)
 
 
 <!-- Theme Material -->
-
-    <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
-        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
-            主题 - Material
-            <span class="sidebar-badge badge-circle">i</span>
-        </div>
-    </a>
 
 
 <!-- Help & Support -->
@@ -615,29 +667,11 @@ It will not impact the appearance and can give developers a lot of support :)
         <div class="mdl-mini-footer--left-section sns-list">
     <!-- Twitter -->
     
-        <a href="https://twitter.com/twitter" target="_blank">
-            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-twitter.png);">
-                <span class="visuallyhidden">Twitter</span>
-            </button><!--
-     --></a>
-    
 
     <!-- Facebook -->
     
-        <a href="https://www.facebook.com/facebook" target="_blank">
-            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-facebook.png);">
-                <span class="visuallyhidden">Facebook</span>
-            </button><!--
-     --></a>
-    
 
     <!-- Google + -->
-    
-        <a href="https://www.google.com/" target="_blank">
-            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-gplus.png);">
-                <span class="visuallyhidden">Google Plus</span>
-            </button><!--
-     --></a>
     
 
     <!-- Weibo -->
@@ -650,6 +684,12 @@ It will not impact the appearance and can give developers a lot of support :)
     
 
     <!-- Github -->
+    
+        <a href="https://github.com/wbprime" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-github.png);">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
     
 
     <!-- LinkedIn -->
