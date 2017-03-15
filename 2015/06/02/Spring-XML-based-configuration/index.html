@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+    <!-- 
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.3.0 -->
+
+    <!-- Title -->
+    
+    <title>
+        
+            Spring: XML based configuration | 
+        
+        wbprime
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- Meta & Info -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="Elvis Wang">
+    <meta name="description" content="Why bloging ?">
+    <meta name="keywords" content="null,Java,Spring">
+
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="wbprime">
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://www.wbprime.me">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Spring: XML based configuration | wbprime">
+    <meta property="og:description" content="Why bloging ?">
+    <meta property="og:article:tag" content="Java"> <meta property="og:article:tag" content="Spring"> 
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
+    <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/queue.js"></script>
+
+    <!-- UC Browser Compatible -->
+    <script>
+        var agent = navigator.userAgent.toLowerCase();
+        if(agent.indexOf('ucbrowser')>0) {
+            document.write("<link rel=\"stylesheet\" href=\"/css/uc.css\">");
+            alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+        }
+    </script>
+
+    
+
+    
+
+    <!-- Bing Background -->
+    
+
+    <!-- Custom Head -->
+    
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Overview"><span class="post-toc-number">1.</span> <span class="post-toc-text">Overview</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Spring-Configuration"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Spring Configuration</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ApplicationContext"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">ApplicationContext</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#XML-file-format"><span class="post-toc-number">2.</span> <span class="post-toc-text">XML file format</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#beans"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">beans</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#bean"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">bean</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#alias"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">alias</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#import"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">import</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Bean-Configuration"><span class="post-toc-number">3.</span> <span class="post-toc-text">Bean Configuration</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Name"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">Name</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Class"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">Class</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Instantiating-a-Bean"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">Instantiating a Bean</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Scope"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">Scope</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#singleton"><span class="post-toc-number">3.4.1.</span> <span class="post-toc-text">singleton</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#prototype"><span class="post-toc-number">3.4.2.</span> <span class="post-toc-text">prototype</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#request-session-and-global-session"><span class="post-toc-number">3.4.3.</span> <span class="post-toc-text">request, session and global session</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#application"><span class="post-toc-number">3.4.4.</span> <span class="post-toc-text">application</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Custom-Scope"><span class="post-toc-number">3.4.5.</span> <span class="post-toc-text">Custom Scope</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Lazy-initializing"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">Lazy-initializing</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Lifecycle-Callbacks"><span class="post-toc-number">3.6.</span> <span class="post-toc-text">Lifecycle Callbacks</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#init-method"><span class="post-toc-number">3.6.1.</span> <span class="post-toc-text">init-method</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#destroy-method"><span class="post-toc-number">3.6.2.</span> <span class="post-toc-text">destroy-method</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Default-init-destroy-Method"><span class="post-toc-number">3.6.3.</span> <span class="post-toc-text">Default init/destroy Method</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Dependency-Injection"><span class="post-toc-number">3.7.</span> <span class="post-toc-text">Dependency Injection</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Constructor-based-DI"><span class="post-toc-number">3.7.1.</span> <span class="post-toc-text">Constructor-based DI</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Setter-based-DI"><span class="post-toc-number">3.7.2.</span> <span class="post-toc-text">Setter-based DI</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#DI-Values"><span class="post-toc-number">3.7.3.</span> <span class="post-toc-text">DI Values</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#p-namespace"><span class="post-toc-number">3.7.4.</span> <span class="post-toc-text">p-namespace</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#c-namespace"><span class="post-toc-number">3.7.5.</span> <span class="post-toc-text">c-namespace</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Compound-Property"><span class="post-toc-number">3.7.6.</span> <span class="post-toc-text">Compound Property</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Autowiring"><span class="post-toc-number">3.8.</span> <span class="post-toc-text">Autowiring</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Summary"><span class="post-toc-number">4.</span> <span class="post-toc-text">Summary</span></a></li></ol>
+
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script>
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                Spring: XML based configuration
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>Elvis Wang</strong>
+        <span>6月 02, 2015</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/java/">Java</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/spring/">Spring</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Spring: XML based configuration&url=http://www.wbprime.me//2015/06/02/Spring-XML-based-configuration/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Spring: XML based configuration&url=http://www.wbprime.me//2015/06/02/Spring-XML-based-configuration/index.html&via=Elvis Wang" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://www.wbprime.me//2015/06/02/Spring-XML-based-configuration/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://www.wbprime.me//2015/06/02/Spring-XML-based-configuration/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><h2 id="Spring-Configuration"><a href="#Spring-Configuration" class="headerlink" title="Spring Configuration"></a>Spring Configuration</h2><p>The Springframework supports 3 kinds of configuration methods, including XML-based configuration, annotation-based configuration and Java-based configuration.</p>
+<ul>
+<li>Xml-based configuration: traditionally supplied as a simple and intuitive XMl format metadata.</li>
+<li>Annotation-based configuration: introduced by Spring 2.5.</li>
+<li>Java-based configuration: introduced as the Spring JavaConfig project by Spring 3.0.</li>
+</ul>
+<p>XML-based configuration is widely used and best supported.</p>
+<p>Typical xml configuration file:</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;
+
+    &lt;bean id=&quot;aBean&quot; class=&quot;MyBean&quot;&gt;
+    &lt;!-- collaborators and configuration for this bean go here --&gt;
+    &lt;/bean&gt;
+
+    &lt;!-- more bean definitions go here --&gt;
+
+&lt;/beans&gt;
+</code></pre><h2 id="ApplicationContext"><a href="#ApplicationContext" class="headerlink" title="ApplicationContext"></a>ApplicationContext</h2><p>XML-based configuration provides bean metadata to Spring through a single or a set of XML file(s).  </p>
+<p>Generally Spring read configuration metadata via a <code>BeanFactory</code> interface.  Direct use of <code>BeanFactory</code> is not supported officially in dailly application development, though you can implement <code>BeanFactory</code> interface and provide your own class.  However Spring provide a more convinient interface <code>ApplicationContext</code> inheriting <code>BeanFactory</code>.</p>
+<p>The <code>org.springframework.context.ApplicationContext</code> interface provides more features over <code>BeanFactory</code> interface such as: integration with Spring AOP interfaces, message resource handling for internationalization, event publication, web application support and so on.</p>
+<p>Implementations of <code>ApplicationContext</code> interface differ in ways reading configuration metadata, among which are <code>ClassPathXmlApplicationContext</code> and <code>FileSystemXmlApplicationContext</code> that providing control of XML-based configuration metadata. </p>
+<p><code>ClassPathXmlApplicationContext</code> is a standalone XML application context, taking the context definition files from the class path, interpreting plain paths as class path resource names that include the package path (e.g. “mypackage/myresource.txt”).  <code>ClassPathXmlApplicationContext</code> accepts one or more String and intepretes them as files in CLASSPATH, then loads configuration metadata from those files.  The leading slash in parameters, if exists, will be ignored.</p>
+<p>Note: In case of multiple config locations, later bean definitions will override ones defined in earlier loaded files. This can be leveraged to deliberately override certain bean definitions via an extra XML file.</p>
+<p><code>FileSystemXmlApplicationContext</code> is a Standalone XML application context, taking the context definition files from the file system or from URLs, interpreting plain paths as relative file system locations (e.g. “mydir/myfile.txt”). Useful for test harnesses as well as for standalone environments.  Plain path(s) will always treated relative to the current VM working directory whether it has or has not leading slash.  To avoid this, add a “file:” prefix to declare an absolute file path.</p>
+<p>Note: In case of multiple config locations, later bean definitions will override ones defined in earlier loaded files. This can be leveraged to deliberately override certain bean definitions via an extra XML file.</p>
+<p>Typical usage of <code>ApplicationContext</code> to load xml configuration metadata:</p>
+<pre><code>// create and configure beans
+ApplicationContext context =
+    new ClassPathXmlApplicationContext(new String[] {&quot;mybean.xml&quot;, &quot;mybean2.xml&quot;});
+
+// retrieve configured instance
+MyBean my_bean = context.getBean(&quot;aBean&quot;, MyBean.class);
+
+// use configured instance
+boolean is_succeed = myBean.doSomething();
+</code></pre><h1 id="XML-file-format"><a href="#XML-file-format" class="headerlink" title="XML file format"></a>XML file format</h1><h2 id="beans"><a href="#beans" class="headerlink" title="beans"></a><code>beans</code></h2><p>An xml configuration file is, of cource, a regular xml file with a top-level <code>&lt;beans /&gt;</code> element and some springframework specific definitions.</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;
+&lt;/beans&gt;
+</code></pre><h2 id="bean"><a href="#bean" class="headerlink" title="bean"></a><code>bean</code></h2><p>An xml file consists of at least one bean definition through <code>&lt;bean /&gt;</code> element inside a top-level <code>&lt;beans /&gt;</code> element.  A <code>&lt;bean /&gt;</code> element represents a bean object; a bean object can be anything whatever you want it to be: a service layer object, a data access object (DAO), a presentation object and so forth, only if it is a standard BEAN object.</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;
+
+    &lt;bean id=&quot;aSerice&quot; class=&quot;me.wbprime.java.MySerice&quot; /&gt;
+    &lt;bean id=&quot;aDao&quot; class=&quot;me.wbprime.java.MyDAO&quot; /&gt;
+    &lt;bean id=&quot;aAction&quot; class=&quot;me.wbprime.java.MyAction&quot; /&gt;
+    &lt;bean id=&quot;aSession&quot; class=&quot;me.wbprime.java.MySession&quot; /&gt;
+
+    &lt;!-- more bean definitions go here --&gt;
+
+&lt;/beans&gt;
+</code></pre><h2 id="alias"><a href="#alias" class="headerlink" title="alias"></a><code>alias</code></h2><p>Spring supports alias for a bean which is valid in the <code>ApplicationContext</code> scope.</p>
+<p>In file <code>a.xml</code>:</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;
+
+    &lt;alias name=&quot;appService&quot; alias=&quot;b-serice&quot;/&gt;
+&lt;/beans&gt;
+</code></pre><p>In file <code>b.xml</code>:</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;
+
+    &lt;alias name=&quot;appService&quot; alias=&quot;b-serice&quot;/&gt;
+&lt;/beans&gt;
+</code></pre><p>In file <code>app.xml</code>:</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;
+
+    &lt;alias name=&quot;appService&quot; alias=&quot;app-serice&quot;/&gt;
+
+    &lt;bean id=&quot;appSerice&quot; class=&quot;me.wbprime.java.MySerice&quot; /&gt;
+    &lt;bean id=&quot;appDao&quot; class=&quot;me.wbprime.java.MyDAO&quot; /&gt;
+    &lt;bean id=&quot;appAction&quot; class=&quot;me.wbprime.java.MyAction&quot; /&gt;
+    &lt;bean id=&quot;appSession&quot; class=&quot;me.wbprime.java.MySession&quot; /&gt;
+&lt;/beans&gt;
+</code></pre><h2 id="import"><a href="#import" class="headerlink" title="import"></a><code>import</code></h2><p>It can be useful to have bean definitions span multiple XML files. Often each individual XML configuration file represents a logical layer or module in your architecture.  </p>
+<p>In file <code>app.xml</code>:</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;
+
+    &lt;import resource=&quot;a.xml&quot;/&gt;
+    &lt;import resource=&quot;resources/b.xml&quot;/&gt;
+    &lt;import resource=&quot;/resources/c.xml&quot;/&gt;
+&lt;/beans&gt;
+</code></pre><p>Thus loading <code>app.xml</code> means loading configuration data from three files: <code>a.xml</code>, <code>b.xml</code> and <code>c.xml</code>.  As a implicit constraint, pathes of all files being imported must be given relative to the file doing the import.  So <code>a.xml</code> must be in the same directory or classpath location as <code>app.xml</code>, while <code>b.xml</code> and <code>c.xml</code> must be in <code>resources</code> sub-directory of the importing file.  Also a leading slash is ignored.</p>
+<p>Note that the contents of the files being imported, including the top level <beans> element, must be valid XML bean definitions according to the Spring Schema.</beans></p>
+<h1 id="Bean-Configuration"><a href="#Bean-Configuration" class="headerlink" title="Bean Configuration"></a>Bean Configuration</h1><p>Spring container manages one or more beans by <code>&lt;bean /&gt;</code> definitions.  A <code>&lt;bean /&gt;</code> element can provide the following metadata for a target <code>Bean</code> object:</p>
+<ul>
+<li>a full-qualified class name</li>
+<li>object scope</li>
+<li>object lifecycle behavior</li>
+<li>properties being injected, including plain values and references, also called <em>collaborators</em> or <em>dependencies</em></li>
+<li>other configuration</li>
+</ul>
+<h2 id="Name"><a href="#Name" class="headerlink" title="Name"></a>Name</h2><p>In Spring, every bean should have one or more identifiers.  These identifiers must be unique within the container that hosts the bean.  </p>
+<p>In a <code>&lt;bean /&gt;</code> element, an identifier can be specified by an <code>id</code> attribute.  Note that <code>id</code> uniqueness is enforced by the container.</p>
+<pre><code>&lt;bean id=&quot;unique id&quot; ... /&gt;
+</code></pre><p>Also you can use a <code>name</code> attribute.  Interestingly, you can specify more than one identifiers in <code>name</code> attribute, treated as aliases, separated by a comma (<code>,</code>), a semicolon (<code>;</code>) or white space(s).</p>
+<pre><code>&lt;beans name=&quot;id1,id2,id3&quot; ... /&gt;
+&lt;beans name=&quot;id1;id2;id3&quot; ... /&gt;
+&lt;beans name=&quot;id1 id2 id3&quot; ... /&gt;
+</code></pre><p>If neither <code>id</code> nor <code>name</code> sttribute are explicitly given, Spring would generate a unique identifier for that bean.  However this bean can not be referenced by other beans.</p>
+<h2 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h2><p>The object type is specified by <code>class</code> attribute for a bean.  The <code>class</code> attribute can be used in 2 ways:</p>
+<ul>
+<li>when specifying a static factory method, <code>class</code> attribute must match the calss type containning the static factory method.</li>
+<li><p>when not specified, <code>class</code> attribute must match the return type of <code>new</code> operator.</p>
+<pre><code>&lt;bean class=&quot;ClassA&quot; ... /&gt;
+</code></pre></li>
+</ul>
+<h2 id="Instantiating-a-Bean"><a href="#Instantiating-a-Bean" class="headerlink" title="Instantiating a Bean"></a>Instantiating a Bean</h2><p>Spring provides 3 ways to instantiating a bean.</p>
+<ol>
+<li><p>using a constructor.</p>
+<p> If you got a class with default constructor which has no parameters, you can simply specify the <code>class</code> attribute.</p>
+<p> If you got a class without a default constructor, you can add a <code>class</code> attribute and then provide additional <code>constructor-arg</code> sub-elements.</p>
+<pre><code>&lt;bean id=&quot;exampleBean&quot; class=&quot;me.wbprime.java.ExampleBean&quot; &gt;
+    &lt;constructor-arg value=&quot;some value&quot; /&gt;
+&lt;/bean&gt;
+</code></pre><p> If your constructor have more than one parameters, for example, class <code>ExampleBean</code>:</p>
+<pre><code>package me.wbprime.java
+
+public class ExampleBean {
+    private int _age;
+    private String _name;
+
+    public ExampleBean(int age, String name) {
+        this._age = age;
+        this._name = name;
+    }
+}
+</code></pre><p> You can specify the parameter type:</p>
+<pre><code>&lt;bean id=&quot;exampleBean&quot; class=&quot;me.wbprime.java.ExampleBean&quot; &gt;
+    &lt;constructor-arg type=&quot;int&quot; value=&quot;26&quot; /&gt;
+    &lt;constructor-arg type=&quot;java.lang.String&quot; value=&quot;Elvis Wang&quot; /&gt;
+&lt;/bean&gt;
+</code></pre><p> Or you can specify the parameter position:</p>
+<pre><code>&lt;bean id=&quot;exampleBean&quot; class=&quot;me.wbprime.java.ExampleBean&quot; &gt;
+    &lt;constructor-arg index=&quot;0&quot; value=&quot;26&quot; /&gt;
+    &lt;constructor-arg index=&quot;1&quot; value=&quot;Elvis Wang&quot; /&gt;
+&lt;/bean&gt;
+</code></pre><p> Or you can use parameter names:</p>
+<pre><code>&lt;bean id=&quot;exampleBean&quot; class=&quot;me.wbprime.java.ExampleBean&quot; &gt;
+    &lt;constructor-arg name=&quot;age&quot; value=&quot;26&quot; /&gt;
+    &lt;constructor-arg name=&quot;name&quot; value=&quot;Elvis Wang&quot; /&gt;
+&lt;/bean&gt;
+</code></pre><p> Keep in mind that to make this work out of the box your code must be compiled with the debug flag enabled so that Spring can look up the parameter name from the constructor.</p>
+</li>
+<li><p>using a static factory method</p>
+<p> You may want to implement your <code>Factory method</code> pattern, by using a static factory method.  Of cource you can make your work together with Spring.  In such case, you need a <code>class</code> attribute which contains the static factory method as is discussed right before.  Then you need a new attribute named <code>factory-method</code>.</p>
+<p> For example: </p>
+<pre><code>package me.wbprime.java
+
+public class ExampleFactory {
+    private static ExampleBean aBean = new ExampleBean();
+    private ExampleFactory() {}
+
+    public static ExampleBean createBean() {
+        return aBean;
+    }
+}
+</code></pre><p> You can add a <code>&lt;bean /&gt;</code> like this:</p>
+<pre><code>&lt;bean id=&quot;aaBean&quot;
+    class=&quot;me.wbprime.java.ExampleFactory&quot;
+    factory-method=&quot;createBean&quot;/&gt;
+</code></pre><p> The definition does not specify the return type.</p>
+</li>
+<li><p>using a non-static factory method</p>
+<p> Similar to a static factory method, instance factory method is also supported by Spring.  All you need to do is to leave the <code>class</code> attribute empty, set the <code>factory-bean</code> attribute to the bean reference containning the factory method, set the <code>factory-method</code> attribute to the name of the factory method.</p>
+<p> Example:</p>
+<pre><code>package me.wbprime.java
+
+public class ExampleFactory {
+    public ExampleFactory() {}
+
+    public ExampleBean createBeanA() {
+        return new BeanA;
+    }
+
+    public ExampleBean createBeanB() {
+        return new BeanB;
+    }
+}
+</code></pre><p> Configuration in xml file:</p>
+<pre><code>...
+
+&lt;bean id=&quot;aFactory&quot; class=&quot;ExampleFactory&quot; /&gt;
+&lt;bean id=&quot;aBean&quot; factory-bean=&quot;aFactory&quot; factory-method=&quot;createBeanA&quot; /&gt;
+&lt;bean id=&quot;bBean&quot; factory-bean=&quot;aFactory&quot; factory-method=&quot;createBeanB&quot; /&gt;
+
+...
+</code></pre><p> Note that a <code>factory-bean</code> can have more than one factory method, and the return type is not specified.</p>
+</li>
+</ol>
+<h2 id="Scope"><a href="#Scope" class="headerlink" title="Scope"></a>Scope</h2><p>You can control the bean scope by specifying an additional <code>scope</code> attribute to your <code>&lt;bean /&gt;</code> element.  The Spring Framework supports six scopes out of box, four of which are web-aware.</p>
+<table>
+<thead>
+<tr>
+<th>Scope</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>singleton</td>
+<td>(Default) Scopes a single bean definition to a single object instance per Spring IoC container.</td>
+</tr>
+<tr>
+<td>prototype</td>
+<td>Scopes a single bean definition to any number of object instances.</td>
+</tr>
+<tr>
+<td>request</td>
+<td>Scopes a single bean definition to the lifecycle of a single HTTP request. Web-aware.</td>
+</tr>
+<tr>
+<td>session</td>
+<td>Scopes a single bean definition to the lifecycle of an HTTP Session. Web-aware.</td>
+</tr>
+<tr>
+<td>global session</td>
+<td>Scopes a single bean definition to the lifecycle of a global HTTP Session. Web-aware.</td>
+</tr>
+<tr>
+<td>application</td>
+<td>Scopes a single bean definition to the lifecycle of a ServletContext. Web-aware.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="singleton"><a href="#singleton" class="headerlink" title="singleton"></a><code>singleton</code></h3><p>The Spring container creates only one instance of that object if you specify singleton scope to a bean by adding a <code>scope</code> attribute.</p>
+<pre><code>&lt;bean id=&quot;demo1&quot; class=&quot;Demo1&quot; scope=&quot;singleton&quot; /&gt;
+</code></pre><p>Note that this is the default value for <code>scope</code> attribute, if not specified explicitly.</p>
+<h3 id="prototype"><a href="#prototype" class="headerlink" title="prototype"></a><code>prototype</code></h3><p>In contrast to singleton, prototype scope means that the Spring container creates an instance each time a request for that bean is made. As a rule, use the prototype scope for all stateful beans and the singleton scope for stateless beans.</p>
+<pre><code>&lt;bean id=&quot;demo2&quot; class=&quot;Demo2&quot; scope=&quot;prototype&quot; /&gt;
+</code></pre><p>If you use a singleton-scoped bean which referenced a prototype-scoped bean, all dependencies are injected at instantiation time and injected once.</p>
+<h3 id="request-session-and-global-session"><a href="#request-session-and-global-session" class="headerlink" title="request, session and global session"></a><code>request</code>, <code>session</code> and <code>global session</code></h3><p>The request, session, and global session scopes are web-aware (using <code>ApplicationContext</code> such as <code>XmlWebApplicationContext</code>). If you use these scopes with regular <code>ApplicationContext</code> such as the <code>ClassPathXmlApplicationContext</code>, you get an <code>IllegalStateException</code> complaining about an unknown bean scope.</p>
+<h3 id="application"><a href="#application" class="headerlink" title="application"></a><code>application</code></h3><p>The application scope is similar to singleton for a entire web application, but differs in 2 ways: It is a singleton per <code>ServletContext</code>, not per Spring <code>ApplicationContext</code>, and it is actually exposed and therefore visible as a <code>ServletContext</code> attribute.</p>
+<h3 id="Custom-Scope"><a href="#Custom-Scope" class="headerlink" title="Custom Scope"></a>Custom Scope</h3><p>To do.</p>
+<h2 id="Lazy-initializing"><a href="#Lazy-initializing" class="headerlink" title="Lazy-initializing"></a>Lazy-initializing</h2><p>By default, the Spring container creates and configures all singleton dependencies when initializing a bean.  If this behavior is not desirable, you can set lazy initializing mode for a bean.</p>
+<pre><code>&lt;bean id=&quot;lazyBean&quot; class=&quot;LazyBean&quot; lazy-init=&quot;true&quot; /&gt;
+</code></pre><p>Now <code>lazyBean</code> bean will not be pre-instantiated when the Spring container is starting up.  However, if a lazy-initialized bean is referenced by another singleton bean that is not lazy-initialized, the lazy-initialized bean will still be created and initialized when starting up.</p>
+<h2 id="Lifecycle-Callbacks"><a href="#Lifecycle-Callbacks" class="headerlink" title="Lifecycle Callbacks"></a>Lifecycle Callbacks</h2><h3 id="init-method"><a href="#init-method" class="headerlink" title="init-method"></a><code>init-method</code></h3><p>The Spring provides <code>init-method</code> attribute to allow a bean performing initialization work after instantiating and all necessary properties been set.</p>
+<pre><code>&lt;bean id=&quot;exampleBean&quot; class=&quot;examples.ExampleBean&quot; init-method=&quot;init&quot;/&gt;
+</code></pre><p><code>init</code> is a name of method in <code>examples.ExampleBean</code> with a <code>public void init() {..}</code> like implementation.</p>
+<h3 id="destroy-method"><a href="#destroy-method" class="headerlink" title="destroy-method"></a><code>destroy-method</code></h3><p>The Spring provides <code>destroy-method</code> attribute to allow a bean performing cleaning up work before destroyed.</p>
+<pre><code>&lt;bean id=&quot;exampleBean&quot; class=&quot;examples.ExampleBean&quot; destroy-method=&quot;cleanup&quot;/&gt;
+</code></pre><p><code>cleanup</code> is a name of method in <code>examples.ExampleBean</code> with a <code>public void cleanup() {...}</code> like implementation.</p>
+<h3 id="Default-init-destroy-Method"><a href="#Default-init-destroy-Method" class="headerlink" title="Default init/destroy Method"></a>Default <code>init/destroy</code> Method</h3><p>The fact is that init methods in your project keep the same name such as <code>init()</code>, <code>initialize()</code> and so on.  Adding it to each bean seems stupid.  To avoid this, you can set <code>default-init-method</code> attribute for <code>beans</code> element.</p>
+<pre><code>&lt;beans default-init-method=&quot;init&quot;/&gt;
+</code></pre><p>Similarly, you can set <code>default-destroy-method</code> attribute for destroy methods.</p>
+<pre><code>&lt;beans default-destroy-method=&quot;destroy&quot;/&gt;
+</code></pre><p>The <code>init-method</code>/<code>destroy-method</code> attribute for <code>bean</code> element will override the default values set to <code>beans</code>.</p>
+<h2 id="Dependency-Injection"><a href="#Dependency-Injection" class="headerlink" title="Dependency Injection"></a>Dependency Injection</h2><p>Dependency injection (DI) is a process that bean objects define their dependencies, while the dependencies are handled by the container.  DI can be fulfilled by 1) interface, 2) constructor and 3) setters.</p>
+<p>The Spring provides support for constructor-based DI and setter-based DI.</p>
+<h3 id="Constructor-based-DI"><a href="#Constructor-based-DI" class="headerlink" title="Constructor-based DI"></a>Constructor-based DI</h3><p>This applies to constructor and factory method based bean instantiation process.</p>
+<pre><code>&lt;bean id=&quot;bBean&quot; ... &gt;
+    &lt;constructor-arg value=&quot;lalala&quot; /&gt; &lt;!-- auto detecting --&gt;
+    &lt;constructor-arg type=&quot;java.lang.String&quot; value=&quot;lalala&quot; /&gt; &lt;!-- using type detecting --&gt;
+    &lt;constructor-arg index=&quot;0&quot; value=&quot;lalala&quot; /&gt; &lt;!-- using index detecting --&gt;
+    &lt;constructor-arg name=&quot;info&quot; value=&quot;lalala&quot; /&gt; &lt;!-- using name detecting --&gt;
+&lt;/bean&gt;
+</code></pre><h3 id="Setter-based-DI"><a href="#Setter-based-DI" class="headerlink" title="Setter-based DI"></a>Setter-based DI</h3><p>Setter-based DI applies to beans being instantiated. </p>
+<p>Setter-based DI can be done via <code>property</code> sub-element.</p>
+<pre><code>&lt;bean id=&quot;exampleBean&quot; class=&quot;examples.ExampleBean&quot;&gt;
+    &lt;property name=&quot;prop1&quot;&gt;
+        &lt;ref bean=&quot;anotherExampleBean&quot;/&gt;
+    &lt;/property&gt;
+
+    &lt;property name=&quot;prop2&quot; ref=&quot;yetAnotherBean&quot;/&gt;
+    &lt;property name=&quot;prop3&quot; value=&quot;1&quot;/&gt;
+&lt;/bean&gt;
+</code></pre><h3 id="DI-Values"><a href="#DI-Values" class="headerlink" title="DI Values"></a>DI Values</h3><p>The Spring supports constructor-based DI via <code>&lt;constructor-arg /&gt;</code> element and setter-based DI via <code>&lt;property /&gt;</code> element.  Values for these two elements can be specified inline (via attribute) or via sub element.  And values can be Java primitives (int, boolean and so on), String (java.lang.String) and reference to other beans.</p>
+<ol>
+<li><p>straight values</p>
+<p> Java primitives and String values can be setted using <code>value</code> attribute or <code>value</code> element.</p>
+<pre><code>&lt;bean id=&quot;exampleBean&quot; class=&quot;examples.ExampleBean&quot;&gt;
+    &lt;property name=&quot;prop1&quot; value=&quot;1&quot;/&gt;
+    &lt;property name=&quot;prop2&quot;&gt;
+        &lt;value&gt;1&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;property name=&quot;prop3&quot; value=&quot;My name&quot;/&gt;
+    &lt;property name=&quot;prop4&quot;&gt;
+        &lt;value&gt;My name&lt;/value&gt;
+    &lt;/property&gt;
+&lt;/bean&gt;
+</code></pre></li>
+<li><p>bean reference</p>
+<p> References to other beans can be setted using <code>ref</code> attribute or <code>ref</code> element.  You can specify each of <code>bean</code>, <code>local</code> and <code>parent</code> attributes to <code>ref</code> element.</p>
+<p> Specifying the target bean through the <code>bean</code> attribute of the <code>&lt;ref/&gt;</code> tag is the most general form, and allows creation of a reference to any bean in the same container or parent container, regardless of whether it is in the same XML file. The value of the <code>bean</code> attribute may be the same as the <code>id</code> attribute of the target bean, or as one of the values in the <code>name</code> attribute of the target bean.</p>
+<p> Specifying the target bean through the <code>parent</code> attribute creates a reference to a bean that is in a parent container of the current container. The value of the <code>parent</code> attribute may be the same as either the <code>id</code> attribute of the target bean, or one of the values in the <code>name</code> attribute of the target bean, and the target bean must be in a parent container of the current one. You use this bean reference variant mainly when you have a hierarchy of containers and you want to wrap an existing bean in a parent container with a proxy that will have the same name as the parent bean.</p>
+<p> The <code>local</code> attribute on the <code>ref</code> element is no longer supported in the 4.0 beans xsd since it does not provide value over a regular bean reference any more.</p>
+<pre><code>&lt;bean id=&quot;exampleBean&quot; class=&quot;examples.ExampleBean&quot;&gt;
+    &lt;property name=&quot;prop1&quot; ref=&quot;aBean&quot;/&gt;
+    &lt;property name=&quot;prop2&quot;&gt;
+        &lt;ref bean=&quot;aBean&quot; /&gt;
+    &lt;/property&gt;
+&lt;/bean&gt;
+</code></pre></li>
+<li><p>inner beans</p>
+<p> A <code>&lt;bean/&gt;</code> element inside the <code>&lt;property/&gt;</code> or <code>&lt;constructor-arg/&gt;</code> elements defines a inner bean. An inner bean definition does not require a defined id or name; the container ignores these values. It also ignores the scope flag. Inner beans are always anonymous and they are always created with the outer bean. It is not possible to inject inner beans into collaborating beans other than into the enclosing bean.</p>
+<pre><code>&lt;bean id=&quot;outer&quot; class=&quot;...&quot;&gt;
+    &lt;!-- instead of using a reference to a target bean, simply define the target bean inline --&gt;
+    &lt;property name=&quot;target&quot;&gt;
+        &lt;bean class=&quot;com.example.Person&quot;&gt; &lt;!-- this is the inner bean --&gt;
+            &lt;property name=&quot;name&quot; value=&quot;Fiona Apple&quot;/&gt;
+            &lt;property name=&quot;age&quot; value=&quot;25&quot;/&gt;
+        &lt;/bean&gt;
+    &lt;/property&gt;
+&lt;/bean&gt;
+</code></pre></li>
+<li><p>collections</p>
+<p> You can set values of Java collection types <code>List</code>, <code>Set</code>, <code>Map</code> and <code>Properties</code> via <code>&lt;list /&gt;</code>, <code>&lt;set /&gt;</code>, <code>&lt;map /&gt;</code> and <code>&lt;props /&gt;</code> elements respectively.</p>
+<pre><code>&lt;bean id=&quot;moreComplexObject&quot; class=&quot;example.ComplexObject&quot;&gt;
+    &lt;!-- results in a setAdminEmails(java.util.Properties) call --&gt;
+    &lt;property name=&quot;adminEmails&quot;&gt;
+        &lt;props&gt;
+            &lt;prop key=&quot;administrator&quot;&gt;administrator@example.org&lt;/prop&gt;
+            &lt;prop key=&quot;support&quot;&gt;support@example.org&lt;/prop&gt;
+            &lt;prop key=&quot;development&quot;&gt;development@example.org&lt;/prop&gt;
+        &lt;/props&gt;
+    &lt;/property&gt;
+    &lt;!-- results in a setSomeList(java.util.List) call --&gt;
+    &lt;property name=&quot;someList&quot;&gt;
+        &lt;list&gt;
+            &lt;value&gt;a list element followed by a reference&lt;/value&gt;
+            &lt;ref bean=&quot;myDataSource&quot; /&gt;
+        &lt;/list&gt;
+    &lt;/property&gt;
+    &lt;!-- results in a setSomeMap(java.util.Map) call --&gt;
+    &lt;property name=&quot;someMap&quot;&gt;
+        &lt;map&gt;
+            &lt;entry key=&quot;an entry&quot; value=&quot;just some string&quot;/&gt;
+            &lt;entry key =&quot;a ref&quot; value-ref=&quot;myDataSource&quot;/&gt;
+        &lt;/map&gt;
+    &lt;/property&gt;
+    &lt;!-- results in a setSomeSet(java.util.Set) call --&gt;
+    &lt;property name=&quot;someSet&quot;&gt;
+        &lt;set&gt;
+            &lt;value&gt;just some string&lt;/value&gt;
+            &lt;ref bean=&quot;myDataSource&quot; /&gt;
+        &lt;/set&gt;
+    &lt;/property&gt;
+&lt;/bean&gt;
+</code></pre></li>
+<li><p>null</p>
+<p> Using <code>&lt;null /&gt;</code> element to set Java <code>null</code> value.</p>
+<pre><code>&lt;bean class=&quot;ExampleBean&quot;&gt;
+    &lt;property name=&quot;email&quot;&gt;
+        &lt;null/&gt;
+    &lt;/property&gt;
+&lt;/bean&gt;
+</code></pre></li>
+</ol>
+<h3 id="p-namespace"><a href="#p-namespace" class="headerlink" title="p-namespace"></a><code>p-namespace</code></h3><p>The Spring p-namespace (property namespace ?) is introduced to describe straight values and bean references as a shorcut/replacement for <code>&lt;property /&gt;</code> element.</p>
+<pre><code>&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xmlns:p=&quot;http://www.springframework.org/schema/p&quot;
+    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;
+</code></pre><p>Typically </p>
+<pre><code>&lt;bean name=&quot;pnamespaceBean&quot; class=&quot;com.example.ExampleBean&quot;
+    p:email=&quot;foo@bar.com&quot;/&gt;
+</code></pre><p>is the same as </p>
+<pre><code>&lt;bean name=&quot;classicBean&quot; class=&quot;com.example.ExampleBean&quot;&gt;
+    &lt;property name=&quot;email&quot; value=&quot;foo@bar.com&quot;/&gt;
+&lt;/bean&gt;
+</code></pre><p>And also </p>
+<pre><code>&lt;bean name=&quot;pnamespaceStudent&quot;
+    class=&quot;com.example.Student&quot;
+    p:teacher-ref=&quot;jane&quot;/&gt;
+</code></pre><p>is the same as </p>
+<pre><code>&lt;bean name=&quot;classicStudent&quot; class=&quot;com.example.Student&quot;&gt;
+    &lt;property name=&quot;teacher&quot; ref=&quot;jane&quot;/&gt;
+&lt;/bean&gt;
+</code></pre><p>Spring p-namespace provide inline attribute for <code>&lt;property /&gt;</code> element, using <code>p:PROPERRY</code> to set straight values and <code>p:PROPERTY-ref</code> to set bean references, of which <code>PROPERTY</code> is the actual property name.</p>
+<h3 id="c-namespace"><a href="#c-namespace" class="headerlink" title="c-namespace"></a><code>c-namespace</code></h3><p>The Spring c-namespace (constructor namespace ?) is introduced to describe straight values and bean references as a shorcut/replacement for <code>&lt;constructor-arg /&gt;</code> element.</p>
+<pre><code>&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xmlns:c=&quot;http://www.springframework.org/schema/c&quot;
+    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;
+</code></pre><p>Typically </p>
+<pre><code>&lt;bean name=&quot;cnamespaceBean&quot; class=&quot;com.example.ExampleBean&quot;
+    c:email=&quot;foo@bar.com&quot;/&gt;
+</code></pre><p>is the same as </p>
+<pre><code>&lt;bean name=&quot;classicBean&quot; class=&quot;com.example.ExampleBean&quot;&gt;
+    &lt;constraint-arg name=&quot;email&quot; value=&quot;foo@bar.com&quot;/&gt;
+&lt;/bean&gt;
+</code></pre><p>And also </p>
+<pre><code>&lt;bean name=&quot;cnamespaceStudent&quot;
+    class=&quot;com.example.Student&quot;
+    c:teacher-ref=&quot;jane&quot;/&gt;
+</code></pre><p>is the same as </p>
+<pre><code>&lt;bean name=&quot;classicStudent&quot; class=&quot;com.example.Student&quot;&gt;
+    &lt;constructor-arg name=&quot;teacher&quot; ref=&quot;jane&quot;/&gt;
+&lt;/bean&gt;
+</code></pre><p>Of course the name of constructor parameters should be available (compiled with debug information).  If this is not the case, you can use index position based version.</p>
+<pre><code>&lt;bean id=&quot;foo&quot; class=&quot;Foo&quot; c:_0=&quot;foo@bar.com&quot; c:_1-ref=&quot;jane&quot;/&gt;
+</code></pre><h3 id="Compound-Property"><a href="#Compound-Property" class="headerlink" title="Compound Property"></a>Compound Property</h3><p>You can use compound property to simplify property injection.</p>
+<pre><code>&lt;bean id=&quot;foo&quot; class=&quot;foo.Bar&quot;&gt;
+    &lt;property name=&quot;fred.bob.sammy&quot; value=&quot;123&quot; /&gt;
+&lt;/bean&gt;
+</code></pre><p>will call <code>foo.getFred().getBob().setSammy(&quot;123&quot;)</code> equally.  In order for this to work, the fred property of foo, and the bob property of fred must not be null after the bean is constructed, or a NullPointerException is thrown.</p>
+<h2 id="Autowiring"><a href="#Autowiring" class="headerlink" title="Autowiring"></a>Autowiring</h2><p>Autowiring is such a feature that the container manages the relationship between a bean and its implicit collaborating beans and resolves the dependencies automatically.  Within the Spring autowiring decrease your work significantly specifying properties/constructor-args and helps when your project evolves and bean dependencies changes slightly.  To be brief, autowiring moves additional work to the Spring container to detect bean dependencies which needs explicit to be done by you programmers. </p>
+<p>The Spring supports 4 kinds of autowiring modes:</p>
+<ul>
+<li><code>no</code> autowiring.  (Default) No autowiring means all dependencies must be specified explicitely.</li>
+<li><code>byName</code> autowiring.  Autowiring is done by property name.</li>
+<li><code>byType</code> autowiring.  Autowiring is done by property type.  Note that if more than one beans for target type exists, a fatal exception is thrown.</li>
+<li><code>constructor</code> autowiring.  Autowiring is done by constructor-arg type, similar to <code>byType</code> for property.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;bean ... autowire=&quot;byName&quot; /&gt;</div></pre></td></tr></table></figure>
+<p>If you want to exclude a bean from the autowiring of another bean, you can:</p>
+<ul>
+<li>set <code>default-autowire-candidates</code> attribute for top level <code>&lt;beans /&gt;</code> element.  For example, <code>&lt;beans ... default-autowire-candidates=&quot;*DAO&quot; /&gt;</code> will exclude all beans in this element not matching <code>&quot;*DAO</code> pattern for autowiring.</li>
+<li>set <code>autowire-candidates</code> attribute for target <code>&lt;bean /&gt;</code> element to <code>false</code>.</li>
+</ul>
+<p>The latter takes precedence.</p>
+<p>Typically it is best practice to keep consistent across your project when using autowiring.</p>
+<h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><p>XML based configuration is the traditional method to fulfill ths Spring IoC/DI and other features, and it is the best supported and documented.</p>
+<p>Ths Spring also supports Annotation based configuration and Java based configuration.  Annotation based configuration is more convenient and simply in syntax; Java based configuration is implemented using Java classes.</p>
+
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+
+
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2015/06/08/Spring-Annotation-based-configuration/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2015/05/28/Spring-At-First-Glance/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="Elvis Wang's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        youremail@email.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="#" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/" target="_self">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2016/04/">四月 2016<span class="sidebar_archives-count">17</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">六月 2015<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/05/">五月 2015<span class="sidebar_archives-count">16</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/05/">五月 2014<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2013/05/">五月 2013<span class="sidebar_archives-count">18</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+
+    <!-- Pages  -->
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+    <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+            主题 - Material
+            <span class="sidebar-badge badge-circle">i</span>
+        </div>
+    </a>
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/twitter" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-twitter.png);">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+        <a href="https://www.facebook.com/facebook" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-facebook.png);">
+                <span class="visuallyhidden">Facebook</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Google + -->
+    
+        <a href="https://www.google.com/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-gplus.png);">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;
+            <script type="text/javascript">
+                var fd = new Date();
+                document.write(fd.getFullYear());
+            </script>
+            &nbsp;wbprime
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import File -->
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
+
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Swiftye -->
+
+
+<!-- Local Search-->
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+</script>
+
+<!-- MathJax Load-->
+
+
+                </main>
+            </div>
+        </body>
+    
+</html>

@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+    <!-- 
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.3.0 -->
+
+    <!-- Title -->
+    
+    <title>
+        
+            Spring MVC Unit Testing - Configuration | 
+        
+        wbprime
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- Meta & Info -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="Elvis Wang">
+    <meta name="description" content="Why bloging ?">
+    <meta name="keywords" content="null,Java,Spring MVC,Test">
+
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="wbprime">
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://www.wbprime.me">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Spring MVC Unit Testing - Configuration | wbprime">
+    <meta property="og:description" content="Why bloging ?">
+    <meta property="og:article:tag" content="Java"> <meta property="og:article:tag" content="Spring MVC"> <meta property="og:article:tag" content="Test"> 
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
+    <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/queue.js"></script>
+
+    <!-- UC Browser Compatible -->
+    <script>
+        var agent = navigator.userAgent.toLowerCase();
+        if(agent.indexOf('ucbrowser')>0) {
+            document.write("<link rel=\"stylesheet\" href=\"/css/uc.css\">");
+            alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+        }
+    </script>
+
+    
+
+    
+
+    <!-- Bing Background -->
+    
+
+    <!-- Custom Head -->
+    
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#通过Maven获取依赖"><span class="post-toc-number">1.</span> <span class="post-toc-text">通过Maven获取依赖</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#示例程序的结构"><span class="post-toc-number">2.</span> <span class="post-toc-text">示例程序的结构</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#程序上下文配置"><span class="post-toc-number">3.</span> <span class="post-toc-text">程序上下文配置</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#主配置（生产环境）"><span class="post-toc-number">4.</span> <span class="post-toc-text">主配置（生产环境）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Java类配置"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">Java类配置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#XML配置"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">XML配置</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#主配置（测试环境）"><span class="post-toc-number">5.</span> <span class="post-toc-text">主配置（测试环境）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Java类配置-1"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">Java类配置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#XML配置-1"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">XML配置</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#测试类的编写"><span class="post-toc-number">6.</span> <span class="post-toc-text">测试类的编写</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Standalone方式"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">Standalone方式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#WebApplicationContext方式"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">WebApplicationContext方式</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结"><span class="post-toc-number">7.</span> <span class="post-toc-text">总结</span></a></li></ol>
+
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script>
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                Spring MVC Unit Testing - Configuration
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>Elvis Wang</strong>
+        <span>4月 09, 2016</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/java/">Java</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/spring-mvc/">Spring MVC</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/test/">Test</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Spring MVC Unit Testing - Configuration&url=http://www.wbprime.me//2016/04/09/spring-mvc-testing-unit-testing-configuration/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Spring MVC Unit Testing - Configuration&url=http://www.wbprime.me//2016/04/09/spring-mvc-testing-unit-testing-configuration/index.html&via=Elvis Wang" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://www.wbprime.me//2016/04/09/spring-mvc-testing-unit-testing-configuration/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://www.wbprime.me//2016/04/09/spring-mvc-testing-unit-testing-configuration/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>本文是 <a href="/2016/04/09/spring-mvc-testing-content/">Spring MVC Testing</a> 单元测试系列的第1篇，原文链接：<a href="http://www.petrikainulainen.net/programming/spring-framework/unit-testing-of-spring-mvc-controllers-configuration/" target="_blank" rel="external">Unit Testing of Spring MVC Controllers: Configuration</a>。</p>
+<p>一直以来，为Spring MVC的Controller写单元测试的工作既简单又问题多多。简单体现在单元测试可以很简单地写个测试用例调用一下目标Controller的方法；问题在于这种单元测试完全没有用（不是HTTP的请求），比如说，这种单元测试的方法没办法测试请求映射、参数验证和异常映射等。</p>
+<p>幸运的是，从Spring 3.2开始，我们可以使用<a href="http://docs.spring.io/spring/docs/3.2.x/spring-framework-reference/htmlsingle/#new-in-3.2-spring-mvc-test" target="_blank" rel="external">Spring MVC Test Framework</a>这一强大的工具通过DispatcherServlet来仿照HTTP请求的方式来单元测试Controller的方法。</p>
+<p>本文主要介绍如何配置Spring使得可以单元测试Spring MVC Controllers。</p>
+<p>下面进入正题。</p>
+<a id="more"></a>
+<h1 id="通过Maven获取依赖"><a href="#通过Maven获取依赖" class="headerlink" title="通过Maven获取依赖"></a>通过Maven获取依赖</h1><p>本系列用到的依赖如下：</p>
+<ul>
+<li>JUnit 4.11</li>
+<li>Mockito Core 1.9.5</li>
+<li>Spring Test 3.2.3.RELEASE</li>
+</ul>
+<p>生成的<code>pom.xml</code>文件的片段如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.11<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mockito<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mockito-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.9.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.2.3.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>然后，我们进一步去看一下示例程序。</p>
+<h1 id="示例程序的结构"><a href="#示例程序的结构" class="headerlink" title="示例程序的结构"></a>示例程序的结构</h1><p>本教程的示例程序提供用于访问todo项的增删改查（CRUD）入口。为了更好地理解测试配置，首先看一下需要测试的controller类。</p>
+<p>到目前为止，我们需要回答以下两个问题：</p>
+<ul>
+<li>待测试的controller类有哪些依赖</li>
+<li>这些以来是如何注入待测试的controller类</li>
+</ul>
+<p>我们可以创建的<code>TodoController</code>目标类的代码中去查找答案。相关代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</div><div class="line"><span class="keyword">import</span> org.springframework.context.MessageSource;</div><div class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</div><div class="line"> </div><div class="line"><span class="meta">@Controller</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TodoController</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> TodoService service;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> MessageSource messageSource;</div><div class="line"></div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TodoController</span><span class="params">(MessageSource messageSource, TodoService service)</span> </span>&#123;</div><div class="line">    <span class="keyword">this</span>.messageSource = messageSource;</div><div class="line">    <span class="keyword">this</span>.service = service;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//Other methods are omitted.</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>从代码中可以看出，<code>TodoController</code>类依赖于<code>TodoService</code>类和<code>MessageSource</code>类，并且使用的是构造器注入。</p>
+<p>好了，到目前我们已经知道了需要的信息，下一步是去了解上下文配置信息。</p>
+<h1 id="程序上下文配置"><a href="#程序上下文配置" class="headerlink" title="程序上下文配置"></a>程序上下文配置</h1><p>为程序在生产环境和测试分别准备不同的上下文配置是不合算的，除了增加额外的工作量之外，还将导致二者配置不一致的问题，比如我们修改了生产环境的配置但是忘了修改测试配置的话。</p>
+<p>所以我们将配置上下文按功能片段进行拆分，以使生产环境和测试环境可以做各自的自定义配置，还能最大程度的共用配置。</p>
+<p>我们将程序配置拆分为3个部分。</p>
+<ol>
+<li>第一部分称之为主配置，主要是配置webapp相关的信息</li>
+<li>第二部分称之为Web配置，主要是配置Controller层的注入等信息</li>
+<li>第三部分称之为持久层配置，主要包含程序的持久层信息</li>
+</ol>
+<p>注意：因为Spring同时支持Java类配置和XML配置，所以下面的配置信息都会给出两者的配置方式。</p>
+<p>下一步我们看一下主配置的主要设置内容，以及我们如何使用Spring的方式进行配置。</p>
+<h1 id="主配置（生产环境）"><a href="#主配置（生产环境）" class="headerlink" title="主配置（生产环境）"></a>主配置（生产环境）</h1><p>本示例程序的主配置主要做如下工作：</p>
+<ol>
+<li>启用Spring MVC对<code>@Controller</code>注解的支持</li>
+<li>配置静态资源的路由位置</li>
+<li>配置静态资源由容器的默认servlet解析</li>
+<li>配置Bean搜索的包路径</li>
+<li>配置<code>ExceptionResolver</code> bean</li>
+<li>配置<code>ViewResolver</code> bean</li>
+</ol>
+<p>我们直接看看使用Java类配置和XML配置的结果。</p>
+<h2 id="Java类配置"><a href="#Java类配置" class="headerlink" title="Java类配置"></a>Java类配置</h2><p>如果使用Java类配置方式，配置类<code>WebAppContext</code>的代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.ComponentScan;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</div><div class="line"><span class="keyword">import</span> org.springframework.web.servlet.ViewResolver;</div><div class="line"><span class="keyword">import</span> org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;</div><div class="line"><span class="keyword">import</span> org.springframework.web.servlet.config.annotation.EnableWebMvc;</div><div class="line"><span class="keyword">import</span> org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;</div><div class="line"><span class="keyword">import</span> org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;</div><div class="line"><span class="keyword">import</span> org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;</div><div class="line"><span class="keyword">import</span> org.springframework.web.servlet.view.InternalResourceViewResolver;</div><div class="line"><span class="keyword">import</span> org.springframework.web.servlet.view.JstlView;</div><div class="line"> </div><div class="line"><span class="keyword">import</span> java.util.Properties;</div><div class="line"> </div><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@EnableWebMvc</span></div><div class="line"><span class="meta">@ComponentScan</span>(basePackages = &#123;</div><div class="line">        <span class="string">"net.petrikainulainen.spring.testmvc.common.controller"</span>,</div><div class="line">        <span class="string">"net.petrikainulainen.spring.testmvc.todo.controller"</span></div><div class="line">&#125;)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebAppContext</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurerAdapter</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addResourceHandlers</span><span class="params">(ResourceHandlerRegistry registry)</span> </span>&#123;</div><div class="line">        registry.addResourceHandler(<span class="string">"/static/**"</span>).addResourceLocations(<span class="string">"/static/"</span>);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">configureDefaultServletHandling</span><span class="params">(DefaultServletHandlerConfigurer configurer)</span> </span>&#123;</div><div class="line">        configurer.enable();</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> SimpleMappingExceptionResolver <span class="title">exceptionResolver</span><span class="params">()</span> </span>&#123;</div><div class="line">        SimpleMappingExceptionResolver exceptionResolver = <span class="keyword">new</span> SimpleMappingExceptionResolver();</div><div class="line"> </div><div class="line">        Properties exceptionMappings = <span class="keyword">new</span> Properties();</div><div class="line"> </div><div class="line">        exceptionMappings.put(<span class="string">"net.petrikainulainen.spring.testmvc.todo.exception.TodoNotFoundException"</span>, <span class="string">"error/404"</span>);</div><div class="line">        exceptionMappings.put(<span class="string">"java.lang.Exception"</span>, <span class="string">"error/error"</span>);</div><div class="line">        exceptionMappings.put(<span class="string">"java.lang.RuntimeException"</span>, <span class="string">"error/error"</span>);</div><div class="line"> </div><div class="line">        exceptionResolver.setExceptionMappings(exceptionMappings);</div><div class="line"> </div><div class="line">        Properties statusCodes = <span class="keyword">new</span> Properties();</div><div class="line"> </div><div class="line">        statusCodes.put(<span class="string">"error/404"</span>, <span class="string">"404"</span>);</div><div class="line">        statusCodes.put(<span class="string">"error/error"</span>, <span class="string">"500"</span>);</div><div class="line"> </div><div class="line">        exceptionResolver.setStatusCodes(statusCodes);</div><div class="line"> </div><div class="line">        <span class="keyword">return</span> exceptionResolver;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> ViewResolver <span class="title">viewResolver</span><span class="params">()</span> </span>&#123;</div><div class="line">        InternalResourceViewResolver viewResolver = <span class="keyword">new</span> InternalResourceViewResolver();</div><div class="line"> </div><div class="line">        viewResolver.setViewClass(JstlView.class);</div><div class="line">        viewResolver.setPrefix(<span class="string">"/WEB-INF/jsp/"</span>);</div><div class="line">        viewResolver.setSuffix(<span class="string">".jsp"</span>);</div><div class="line"> </div><div class="line">        <span class="keyword">return</span> viewResolver;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="XML配置"><a href="#XML配置" class="headerlink" title="XML配置"></a>XML配置</h2><p>如果使用XML配置方式，配置文件<code>exampleApplicationContext-web.xml</code>的内容如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></div><div class="line">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></div><div class="line">       <span class="attr">xmlns:mvc</span>=<span class="string">"http://www.springframework.org/schema/mvc"</span></div><div class="line">       <span class="attr">xmlns:context</span>=<span class="string">"http://www.springframework.org/schema/context"</span></div><div class="line">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd</span></div><div class="line">       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd</div><div class="line">       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd"&gt;</div><div class="line"> </div><div class="line">    <span class="tag">&lt;<span class="name">mvc:annotation-driven</span>/&gt;</span></div><div class="line"> </div><div class="line">    <span class="tag">&lt;<span class="name">mvc:resources</span> <span class="attr">mapping</span>=<span class="string">"/static/**"</span> <span class="attr">location</span>=<span class="string">"/static/"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">mvc:default-servlet-handler</span>/&gt;</span></div><div class="line"> </div><div class="line">    <span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"net.petrikainulainen.spring.testmvc.common.controller"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"net.petrikainulainen.spring.testmvc.todo.controller"</span>/&gt;</span></div><div class="line"> </div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"exceptionResolver"</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.handler.SimpleMappingExceptionResolver"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"exceptionMappings"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">props</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"net.petrikainulainen.spring.testmvc.todo.exception.TodoNotFoundException"</span>&gt;</span>error/404<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"java.lang.Exception"</span>&gt;</span>error/error<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"java.lang.RuntimeException"</span>&gt;</span>error/error<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">props</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"statusCodes"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">props</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"error/404"</span>&gt;</span>404<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"error/error"</span>&gt;</span>500<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">props</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"> </div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"viewResolver"</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.view.InternalResourceViewResolver"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"prefix"</span> <span class="attr">value</span>=<span class="string">"/WEB-INF/jsp/"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"suffix"</span> <span class="attr">value</span>=<span class="string">".jsp"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"viewClass"</span> <span class="attr">value</span>=<span class="string">"org.springframework.web.servlet.view.JstlView"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></div></pre></td></tr></table></figure>
+<h1 id="主配置（测试环境）"><a href="#主配置（测试环境）" class="headerlink" title="主配置（测试环境）"></a>主配置（测试环境）</h1><p>用于测试环境的主配置片段主要用于：</p>
+<ul>
+<li>配置一个<code>MessageSource</code> bean用于依赖注入</li>
+<li>配置一个<code>TodoService</code> bean用于依赖注入</li>
+</ul>
+<h2 id="Java类配置-1"><a href="#Java类配置-1" class="headerlink" title="Java类配置"></a>Java类配置</h2><p><code>TestContext</code>类的代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.mockito.Mockito;</div><div class="line"><span class="keyword">import</span> org.springframework.context.MessageSource;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</div><div class="line"><span class="keyword">import</span> org.springframework.context.support.ResourceBundleMessageSource;</div><div class="line"> </div><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestContext</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> MessageSource <span class="title">messageSource</span><span class="params">()</span> </span>&#123;</div><div class="line">        ResourceBundleMessageSource messageSource = <span class="keyword">new</span> ResourceBundleMessageSource();</div><div class="line"> </div><div class="line">        messageSource.setBasename(<span class="string">"i18n/messages"</span>);</div><div class="line">        messageSource.setUseCodeAsDefaultMessage(<span class="keyword">true</span>);</div><div class="line"> </div><div class="line">        <span class="keyword">return</span> messageSource;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> TodoService <span class="title">todoService</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> Mockito.mock(TodoService.class);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="XML配置-1"><a href="#XML配置-1" class="headerlink" title="XML配置"></a>XML配置</h2><p><code>testContext.xml</code>文件的内容如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></div><div class="line">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></div><div class="line">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"</span>&gt;</div><div class="line"> </div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"messageSource"</span> <span class="attr">class</span>=<span class="string">"org.springframework.context.support.ResourceBundleMessageSource"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"basename"</span> <span class="attr">value</span>=<span class="string">"i18n/messages"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"useCodeAsDefaultMessage"</span> <span class="attr">value</span>=<span class="string">"true"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"> </div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"todoService"</span> <span class="attr">name</span>=<span class="string">"todoService"</span> <span class="attr">class</span>=<span class="string">"org.mockito.Mockito"</span> <span class="attr">factory-method</span>=<span class="string">"mock"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">value</span>=<span class="string">"net.petrikainulainen.spring.testmvc.todo.service.TodoService"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></div></pre></td></tr></table></figure>
+<h1 id="测试类的编写"><a href="#测试类的编写" class="headerlink" title="测试类的编写"></a>测试类的编写</h1><p>我们可以使用以下两种方式来编写我们的controller测试用例：</p>
+<ul>
+<li>当待测试的controller类依赖比较简单时，可以使用所谓的<code>Standalone</code>方式显示的创建controller实例并手动地配置Spring MVC组件（指ExceptionHandler和ViewResolver等）</li>
+<li>当待测试的controller类依赖比较复杂时，可以使用所谓的<code>WebApplicationContext</code>方式启动一个配置好的<code>WebApplicationContext</code>实例</li>
+</ul>
+<p>接下来看一下这两种方式分别如何编写测试用例。</p>
+<h2 id="Standalone方式"><a href="#Standalone方式" class="headerlink" title="Standalone方式"></a><code>Standalone</code>方式</h2><p>使用<code>Standalone</code>方式编写测试用例，我们可以按照如下步骤进行：</p>
+<ol>
+<li>对测试用例类加上<code>@RunWith(MockitoJUnitRunner.class)</code>注解</li>
+<li>测试用例类中添加一个<code>MockMvc</code>类型的成员</li>
+<li>测试用例类中添加一个<code>TodoService</code>类型的成员，并使用<code>@Mock</code>进行注解，表示该成员由<code>MockitoJUnitRunner</code>进行模拟及赋值</li>
+<li>测试用例类中添加一个<code>exceptionResolver()</code>方法，用于生成一个配置好的<code>SimpleMappingExceptionResolver</code>实例以注入</li>
+<li>测试用例类中添加一个<code>messageSource()</code>方法，用于生成一个配置好的<code>ResourceBundleMessageSource</code>实例以注入</li>
+<li>测试用例类中添加一个<code>validator()</code>方法，用于生成一个配置好的<code>LocalValidatorFactoryBean</code>实例以注入</li>
+<li>测试用例类中添加一个<code>viewResolver()</code>方法，用于生成一个配置好的<code>InternalResourceViewResolver</code>实例以注入</li>
+<li>测试用例类中添加一个<code>setUp()</code>方法并用<code>@Before</code>注解，调用<a href="http://docs.spring.io/spring/docs/3.2.x/javadoc-api/org/springframework/test/web/servlet/setup/MockMvcBuilders.html" target="_blank" rel="external"><code>MockMvcBuilders</code></a>的静态方法<code>standaloneSetup()</code>创建并配置好<code>MockMvc</code>类型的成员</li>
+</ol>
+<p>测试用例类的代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.junit.Before;</div><div class="line"><span class="keyword">import</span> org.junit.runner.RunWith;</div><div class="line"><span class="keyword">import</span> org.mockito.Mock;</div><div class="line"><span class="keyword">import</span> org.mockito.runners.MockitoJUnitRunner;</div><div class="line"><span class="keyword">import</span> org.springframework.context.MessageSource;</div><div class="line"><span class="keyword">import</span> org.springframework.context.support.ResourceBundleMessageSource;</div><div class="line"><span class="keyword">import</span> org.springframework.test.web.servlet.MockMvc;</div><div class="line"><span class="keyword">import</span> org.springframework.test.web.servlet.setup.MockMvcBuilders;</div><div class="line"><span class="keyword">import</span> org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;</div><div class="line"><span class="keyword">import</span> org.springframework.web.servlet.HandlerExceptionResolver;</div><div class="line"><span class="keyword">import</span> org.springframework.web.servlet.ViewResolver;</div><div class="line"><span class="keyword">import</span> org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;</div><div class="line"><span class="keyword">import</span> org.springframework.web.servlet.view.InternalResourceViewResolver;</div><div class="line"><span class="keyword">import</span> org.springframework.web.servlet.view.JstlView;</div><div class="line"> </div><div class="line"><span class="keyword">import</span> java.util.Properties;</div><div class="line"> </div><div class="line"><span class="meta">@RunWith</span>(MockitoJUnitRunner.class)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StandaloneTodoControllerTest</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="keyword">private</span> MockMvc mockMvc;</div><div class="line"> </div><div class="line">    <span class="meta">@Mock</span></div><div class="line">    <span class="keyword">private</span> TodoService todoServiceMock;</div><div class="line"> </div><div class="line">    <span class="meta">@Before</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span> </span>&#123;</div><div class="line">        mockMvc = MockMvcBuilders.standaloneSetup(<span class="keyword">new</span> TodoController(messageSource(), todoServiceMock))</div><div class="line">                .setHandlerExceptionResolvers(exceptionResolver())</div><div class="line">                .setValidator(validator())</div><div class="line">                .setViewResolvers(viewResolver())</div><div class="line">                .build();</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">private</span> HandlerExceptionResolver <span class="title">exceptionResolver</span><span class="params">()</span> </span>&#123;</div><div class="line">        SimpleMappingExceptionResolver exceptionResolver = <span class="keyword">new</span> SimpleMappingExceptionResolver();</div><div class="line"> </div><div class="line">        Properties exceptionMappings = <span class="keyword">new</span> Properties();</div><div class="line"> </div><div class="line">        exceptionMappings.put(<span class="string">"net.petrikainulainen.spring.testmvc.todo.exception.TodoNotFoundException"</span>, <span class="string">"error/404"</span>);</div><div class="line">        exceptionMappings.put(<span class="string">"java.lang.Exception"</span>, <span class="string">"error/error"</span>);</div><div class="line">        exceptionMappings.put(<span class="string">"java.lang.RuntimeException"</span>, <span class="string">"error/error"</span>);</div><div class="line"> </div><div class="line">        exceptionResolver.setExceptionMappings(exceptionMappings);</div><div class="line"> </div><div class="line">        Properties statusCodes = <span class="keyword">new</span> Properties();</div><div class="line"> </div><div class="line">        statusCodes.put(<span class="string">"error/404"</span>, <span class="string">"404"</span>);</div><div class="line">        statusCodes.put(<span class="string">"error/error"</span>, <span class="string">"500"</span>);</div><div class="line"> </div><div class="line">        exceptionResolver.setStatusCodes(statusCodes);</div><div class="line"> </div><div class="line">        <span class="keyword">return</span> exceptionResolver;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">private</span> MessageSource <span class="title">messageSource</span><span class="params">()</span> </span>&#123;</div><div class="line">        ResourceBundleMessageSource messageSource = <span class="keyword">new</span> ResourceBundleMessageSource();</div><div class="line"> </div><div class="line">        messageSource.setBasename(<span class="string">"i18n/messages"</span>);</div><div class="line">        messageSource.setUseCodeAsDefaultMessage(<span class="keyword">true</span>);</div><div class="line"> </div><div class="line">        <span class="keyword">return</span> messageSource;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">private</span> LocalValidatorFactoryBean <span class="title">validator</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> LocalValidatorFactoryBean();</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">private</span> ViewResolver <span class="title">viewResolver</span><span class="params">()</span> </span>&#123;</div><div class="line">        InternalResourceViewResolver viewResolver = <span class="keyword">new</span> InternalResourceViewResolver();</div><div class="line"> </div><div class="line">        viewResolver.setViewClass(JstlView.class);</div><div class="line">        viewResolver.setPrefix(<span class="string">"/WEB-INF/jsp/"</span>);</div><div class="line">        viewResolver.setSuffix(<span class="string">".jsp"</span>);</div><div class="line"> </div><div class="line">        <span class="keyword">return</span> viewResolver;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以明显的发现，这种方式有两个问题：</p>
+<ul>
+<li>尽管Spring的配置量变少了，但是测试用例类太难看了，包含了太多无用的与测试无关的代码。我们可以将这些无用代码重构到一个新的类中，这步工作可以留待读者们完成。</li>
+<li>对于webapp的配置与生产环境的配置重复了，导致二者不能有效的同步。</li>
+</ul>
+<h2 id="WebApplicationContext方式"><a href="#WebApplicationContext方式" class="headerlink" title="WebApplicationContext方式"></a><code>WebApplicationContext</code>方式</h2><p>使用<code>Standalone</code>方式编写测试用例，我们可以按照如下步骤进行：</p>
+<ol>
+<li>对测试用例类加上<code>@RunWith(MockitoJUnitRunner.class)</code>注解</li>
+<li>对测试用例类加上<code>@ContextConfiguration</code>注解，并设置要使用的配置（如果使用Java类配置，请使用<code>classes</code>属性；如果使用XML配置，请使用<code>locations</code>属性）</li>
+<li>对测试用例类加上<code>@WebAppConfiguration</code>注解，主要是使用<code>WebApplicationContext</code>实例来管理依赖注入</li>
+<li>测试用例类中添加一个<code>MockMvc</code>类型的成员</li>
+<li>测试用例类中添加一个<code>TodoService</code>类型的成员，并添加<code>@AutoWired</code>注解</li>
+<li>测试用例类中添加一个<code>WebApplicationContext</code>类型的成员，并添加<code>@AutoWired</code>注解</li>
+<li>测试用例类中添加一个<code>setUp()</code>方法并用<code>@Before</code>注解，调用<a href="http://docs.spring.io/spring/docs/3.2.x/javadoc-api/org/springframework/test/web/servlet/setup/MockMvcBuilders.html" target="_blank" rel="external"><code>MockMvcBuilders</code></a>的静态方法<code>webAppContextSetup()</code>创建并配置好<code>MockMvc</code>类型的成员</li>
+</ol>
+<p>测试用例类的代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.junit.Before;</div><div class="line"><span class="keyword">import</span> org.junit.runner.RunWith;</div><div class="line"><span class="keyword">import</span> org.mockito.Mockito;</div><div class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</div><div class="line"><span class="keyword">import</span> org.springframework.test.context.ContextConfiguration;</div><div class="line"><span class="keyword">import</span> org.springframework.test.context.junit4.SpringJUnit4ClassRunner;</div><div class="line"><span class="keyword">import</span> org.springframework.test.context.web.WebAppConfiguration;</div><div class="line"><span class="keyword">import</span> org.springframework.test.web.servlet.MockMvc;</div><div class="line"><span class="keyword">import</span> org.springframework.test.web.servlet.setup.MockMvcBuilders;</div><div class="line"><span class="keyword">import</span> org.springframework.web.context.WebApplicationContext;</div><div class="line"> </div><div class="line"><span class="meta">@RunWith</span>(SpringJUnit4ClassRunner.class)</div><div class="line"><span class="meta">@ContextConfiguration</span>(classes = &#123;TestContext.class, WebAppContext.class&#125;)</div><div class="line"><span class="comment">//@ContextConfiguration(locations = &#123;"classpath:testContext.xml", "classpath:exampleApplicationContext-web.xml"&#125;)</span></div><div class="line"><span class="meta">@WebAppConfiguration</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebApplicationContextTodoControllerTest</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="keyword">private</span> MockMvc mockMvc;</div><div class="line"> </div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> TodoService todoServiceMock;</div><div class="line"> </div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> WebApplicationContext webApplicationContext;</div><div class="line"> </div><div class="line">    <span class="meta">@Before</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">//We have to reset our mock between tests because the mock objects</span></div><div class="line">        <span class="comment">//are managed by the Spring container. If we would not reset them,</span></div><div class="line">        <span class="comment">//stubbing and verified behavior would "leak" from one test to another.</span></div><div class="line">        Mockito.reset(todoServiceMock);</div><div class="line"> </div><div class="line">        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用这种方式使得测试用例类的代码非常干净简洁，但是缺点就是一个测试用例就要加载完整的Spring MVC框架。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本文介绍了使用Spring MVC Test自带的支持进行单元测试的方法和配置：<code>Standalone</code>方式和<code>WebApplicationContext</code>方式，我们应该了解到：</p>
+<ul>
+<li>进行Spring配置的时候按照功能分片段维护是很重要的，能方便配置重用</li>
+<li><code>Standalone</code>方式和<code>WebApplicationContext</code>方式的区别</li>
+</ul>
+<p>下一篇是介绍 <a href="/2016/04/09/spring-mvc-testing-unit-testing-normal-controllers/">Unit Testing - Normal Controllers</a></p>
+<p>本文使用的代码已经放在了 <a href="https://github.com/pkainulainen/spring-mvc-test-examples/tree/master/controllers-unittest" target="_blank" rel="external">Github</a> 上，请自行查阅。</p>
+
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+
+
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2016/04/09/spring-mvc-testing-unit-testing-normal-controllers/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2016/04/09/spring-mvc-testing-content/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="Elvis Wang's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        youremail@email.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="#" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/" target="_self">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2016/04/">四月 2016<span class="sidebar_archives-count">17</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">六月 2015<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/05/">五月 2015<span class="sidebar_archives-count">16</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/05/">五月 2014<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2013/05/">五月 2013<span class="sidebar_archives-count">18</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+
+    <!-- Pages  -->
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+    <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+            主题 - Material
+            <span class="sidebar-badge badge-circle">i</span>
+        </div>
+    </a>
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/twitter" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-twitter.png);">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+        <a href="https://www.facebook.com/facebook" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-facebook.png);">
+                <span class="visuallyhidden">Facebook</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Google + -->
+    
+        <a href="https://www.google.com/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-gplus.png);">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;
+            <script type="text/javascript">
+                var fd = new Date();
+                document.write(fd.getFullYear());
+            </script>
+            &nbsp;wbprime
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import File -->
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
+
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Swiftye -->
+
+
+<!-- Local Search-->
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+</script>
+
+<!-- MathJax Load-->
+
+
+                </main>
+            </div>
+        </body>
+    
+</html>

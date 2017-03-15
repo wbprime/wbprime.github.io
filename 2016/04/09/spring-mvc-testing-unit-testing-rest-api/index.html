@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+    <!-- 
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.3.0 -->
+
+    <!-- Title -->
+    
+    <title>
+        
+            Spring MVC Unit Testing - REST API | 
+        
+        wbprime
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- Meta & Info -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="Elvis Wang">
+    <meta name="description" content="Why bloging ?">
+    <meta name="keywords" content="null,Java,Spring MVC,Test">
+
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="wbprime">
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://www.wbprime.me">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Spring MVC Unit Testing - REST API | wbprime">
+    <meta property="og:description" content="Why bloging ?">
+    <meta property="og:article:tag" content="Java"> <meta property="og:article:tag" content="Spring MVC"> <meta property="og:article:tag" content="Test"> 
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
+    <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/queue.js"></script>
+
+    <!-- UC Browser Compatible -->
+    <script>
+        var agent = navigator.userAgent.toLowerCase();
+        if(agent.indexOf('ucbrowser')>0) {
+            document.write("<link rel=\"stylesheet\" href=\"/css/uc.css\">");
+            alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+        }
+    </script>
+
+    
+
+    
+
+    <!-- Bing Background -->
+    
+
+    <!-- Custom Head -->
+    
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#通过Maven获取依赖"><span class="post-toc-number">1.</span> <span class="post-toc-text">通过Maven获取依赖</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#测试用例配置"><span class="post-toc-number">2.</span> <span class="post-toc-text">测试用例配置</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#测试用例类"><span class="post-toc-number">3.</span> <span class="post-toc-text">测试用例类</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#GET-Todo项列表的接口"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">GET Todo项列表的接口</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#预期的实现"><span class="post-toc-number">3.1.1.</span> <span class="post-toc-text">预期的实现</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#测试用例：Todo项列表GET请求"><span class="post-toc-number">3.1.2.</span> <span class="post-toc-text">测试用例：Todo项列表GET请求</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#GET-Todo项的接口"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">GET Todo项的接口</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#预期的实现-1"><span class="post-toc-number">3.2.1.</span> <span class="post-toc-text">预期的实现</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#测试用例：Todo项GET请求返回404"><span class="post-toc-number">3.2.2.</span> <span class="post-toc-text">测试用例：Todo项GET请求返回404</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#测试用例：Todo项GET请求返回成功"><span class="post-toc-number">3.2.3.</span> <span class="post-toc-text">测试用例：Todo项GET请求返回成功</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#POST-Todo项的接口"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">POST Todo项的接口</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#预期的实现-2"><span class="post-toc-number">3.3.1.</span> <span class="post-toc-text">预期的实现</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#测试用例：Todo项POST请求失败"><span class="post-toc-number">3.3.2.</span> <span class="post-toc-text">测试用例：Todo项POST请求失败</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#测试用例：Todo项POST请求成功"><span class="post-toc-number">3.3.3.</span> <span class="post-toc-text">测试用例：Todo项POST请求成功</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结"><span class="post-toc-number">4.</span> <span class="post-toc-text">总结</span></a></li></ol>
+
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script>
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                Spring MVC Unit Testing - REST API
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>Elvis Wang</strong>
+        <span>4月 09, 2016</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/java/">Java</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/spring-mvc/">Spring MVC</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/test/">Test</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Spring MVC Unit Testing - REST API&url=http://www.wbprime.me//2016/04/09/spring-mvc-testing-unit-testing-rest-api/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Spring MVC Unit Testing - REST API&url=http://www.wbprime.me//2016/04/09/spring-mvc-testing-unit-testing-rest-api/index.html&via=Elvis Wang" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://www.wbprime.me//2016/04/09/spring-mvc-testing-unit-testing-rest-api/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://www.wbprime.me//2016/04/09/spring-mvc-testing-unit-testing-rest-api/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>本文是 <a href="/2016/04/09/spring-mvc-testing-content/">Spring MVC Testing</a> 单元测试系列的第3篇，原文链接：<a href="http://www.petrikainulainen.net/programming/spring-framework/unit-testing-of-spring-mvc-controllers-rest-api/" target="_blank" rel="external">Unit Testing of Spring MVC Controllers: REST API</a>。</p>
+<p>使用Spring MVC可以很方便第创建REST风格的接口，但是编写REST风格接口的单元测试并不是那么方便。幸运的是，Spring MVC Test极大地简化了我们为REST风格controller编写单元测试的工作。</p>
+<p>本文将通过为<code>Todo</code>项的增删改查（CRUD）的REST风格接口操作编写单元测试的方式，一步一步地讲解如何使用Spring MVC Test来进行单元测试。OK，我们快点进入正文吧！</p>
+<a id="more"></a>
+<h1 id="通过Maven获取依赖"><a href="#通过Maven获取依赖" class="headerlink" title="通过Maven获取依赖"></a>通过Maven获取依赖</h1><p>本系列用到的依赖如下：</p>
+<ul>
+<li>Hamcrest 1.3 (hamcrest-all)</li>
+<li>Junit 4.11</li>
+<li>Mockito 1.9.5 (mockito-core)</li>
+<li>Spring Test 3.2.3.RELEASE</li>
+<li>JsonPath 0.8.1 (json-path and json-path-assert)</li>
+</ul>
+<p>生成的pom.xml文件的片段如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.hamcrest<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hamcrest-all<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.11<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hamcrest-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.hamcrest<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mockito<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mockito-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.9.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.2.3.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.jayway.jsonpath<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>json-path<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.8.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.jayway.jsonpath<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>json-path-assert<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.8.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<h1 id="测试用例配置"><a href="#测试用例配置" class="headerlink" title="测试用例配置"></a>测试用例配置</h1><p>同前一篇一样，我们使用<code>WebApplicationContext</code>方式来进行单元测试，这意味着我们需要按照之前介绍的配置方法配置上下文。由于之前对这部分内容已经有了详细的介绍，这里恕不赘述。</p>
+<p>唯一需要注意的一点是，前面我们演示了使用<code>SimpleMappingExceptionResolver</code> bean来映射异常的处理方法，这在标准的controller里面很有用；但对于REST controller而言，异常需要使用<code>ResponseStatusExceptionResolver</code> bean来处理。更进一步，我们在工程中使用了<code>@ControllerAdvice</code>来创建自定义的异常映射处理类。下文我们会详细讲解该类，在此之前，我们先看看如何实现REST controller。</p>
+<h1 id="测试用例类"><a href="#测试用例类" class="headerlink" title="测试用例类"></a>测试用例类</h1><p>要针对REST接口编写单元测试，首先要准备一些基础知识：</p>
+<ul>
+<li>Spring MVC Test如何来进行单元测试，相关内容详见 <a href="/2016/04/09/spring-mvc-testing-unit-testing-normal-controllers/">Spring MVC Unit Testing - Normal Controllers</a></li>
+<li>如何对json结果作断言，我们选择的是 <a href="https://github.com/jayway/JsonPath" target="_blank" rel="external">JsonPath</a></li>
+</ul>
+<p>然后我们可以开始编写代码了。作为演示，我们将编写一下3种类型的REST接口的单元测试：</p>
+<ul>
+<li>返回<code>Todo</code>项列表GET结果的接口</li>
+<li>返回<code>TOdo</code>项GET结果的接口</li>
+<li>返回<code>Todo</code>项POST结果的接口</li>
+</ul>
+<h2 id="GET-Todo项列表的接口"><a href="#GET-Todo项列表的接口" class="headerlink" title="GET Todo项列表的接口"></a>GET <code>Todo</code>项列表的接口</h2><p>首先看一下该接口的实现代码。</p>
+<h3 id="预期的实现"><a href="#预期的实现" class="headerlink" title="预期的实现"></a>预期的实现</h3><p>预期的接口应该做以下几件事：</p>
+<ol>
+<li>接收到”/api/todo”上的GET请求，开始处理流程</li>
+<li>调用<code>TodoService</code>的<code>findAll()</code>方法获取到所有的<code>Todo</code>对象的列表</li>
+<li>将<code>Todo</code>列表转换为<code>TodoDTO</code>列表</li>
+<li>返回<code>TodoDTO</code>列表的json表示</li>
+</ol>
+<p><code>TodoController</code>类内的相关代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.*;</div><div class="line"> </div><div class="line"><span class="keyword">import</span> java.util.ArrayList;</div><div class="line"><span class="keyword">import</span> java.util.List;</div><div class="line"> </div><div class="line"><span class="meta">@Controller</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TodoController</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="keyword">private</span> TodoService service;</div><div class="line"> </div><div class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/api/todo"</span>, method = RequestMethod.GET)</div><div class="line">    <span class="meta">@ResponseBody</span></div><div class="line">    <span class="function"><span class="keyword">public</span> List&lt;TodoDTO&gt; <span class="title">findAll</span><span class="params">()</span> </span>&#123;</div><div class="line">        List&lt;Todo&gt; models = service.findAll();</div><div class="line">        <span class="keyword">return</span> createDTOs(models);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">private</span> List&lt;TodoDTO&gt; <span class="title">createDTOs</span><span class="params">(List&lt;Todo&gt; models)</span> </span>&#123;</div><div class="line">        List&lt;TodoDTO&gt; dtos = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line"> </div><div class="line">        <span class="keyword">for</span> (Todo model: models) &#123;</div><div class="line">            dtos.add(createDTO(model));</div><div class="line">        &#125;</div><div class="line"> </div><div class="line">        <span class="keyword">return</span> dtos;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">private</span> TodoDTO <span class="title">createDTO</span><span class="params">(Todo model)</span> </span>&#123;</div><div class="line">        TodoDTO dto = <span class="keyword">new</span> TodoDTO();</div><div class="line"> </div><div class="line">        dto.setId(model.getId());</div><div class="line">        dto.setDescription(model.getDescription());</div><div class="line">        dto.setTitle(model.getTitle());</div><div class="line"> </div><div class="line">        <span class="keyword">return</span> dto;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>返回的json结果有可能是：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">[</div><div class="line">    &#123;</div><div class="line">        <span class="attr">"id"</span>:<span class="number">1</span>,</div><div class="line">        <span class="attr">"description"</span>:<span class="string">"Lorem ipsum"</span>,</div><div class="line">        <span class="attr">"title"</span>:<span class="string">"Foo"</span></div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">        <span class="attr">"id"</span>:<span class="number">2</span>,</div><div class="line">        <span class="attr">"description"</span>:<span class="string">"Lorem ipsum"</span>,</div><div class="line">        <span class="attr">"title"</span>:<span class="string">"Bar"</span></div><div class="line">    &#125;</div><div class="line">]</div></pre></td></tr></table></figure>
+<p>接下来我们可以编写对应的测试用例了。</p>
+<h3 id="测试用例：Todo项列表GET请求"><a href="#测试用例：Todo项列表GET请求" class="headerlink" title="测试用例：Todo项列表GET请求"></a>测试用例：<code>Todo</code>项列表GET请求</h3><p>该测试用例主要工作如下：</p>
+<ol>
+<li>准备测试数据</li>
+<li>配置mock的<code>TodoService</code>实例在<code>findAll()</code>方法被调用的时候返回准备的数据</li>
+<li>执行一个’/api/todo’的GET请求</li>
+<li>对响应作断言：HTTP返回码是200</li>
+<li>对响应作断言：Content-type的值是”application/json”，并且字符集是”UTF-8”</li>
+<li>对响应作断言：使用jsonpath对结果作验证</li>
+<li>检查请求执行过程中mock的<code>TodoService</code>实例执行了<code>findAll()</code>方法有且仅1次</li>
+<li>检查请求执行过程中mock的<code>TodoService</code>实例未执行其他方法</li>
+</ol>
+<p>相关代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.junit.Test;</div><div class="line"><span class="keyword">import</span> org.junit.runner.RunWith;</div><div class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</div><div class="line"><span class="keyword">import</span> org.springframework.test.context.ContextConfiguration;</div><div class="line"><span class="keyword">import</span> org.springframework.test.context.junit4.SpringJUnit4ClassRunner;</div><div class="line"><span class="keyword">import</span> org.springframework.test.context.web.WebAppConfiguration;</div><div class="line"><span class="keyword">import</span> org.springframework.test.web.servlet.MockMvc;</div><div class="line"> </div><div class="line"><span class="keyword">import</span> java.util.Arrays;</div><div class="line"> </div><div class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.hamcrest.Matchers.*;</div><div class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.mockito.Mockito.*;</div><div class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;</div><div class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;</div><div class="line"> </div><div class="line"><span class="meta">@RunWith</span>(SpringJUnit4ClassRunner.class)</div><div class="line"><span class="meta">@ContextConfiguration</span>(classes = &#123;TestContext.class, WebAppContext.class&#125;)</div><div class="line"><span class="meta">@WebAppConfiguration</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TodoControllerTest</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="keyword">private</span> MockMvc mockMvc;</div><div class="line"> </div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> TodoService todoServiceMock;</div><div class="line"> </div><div class="line">    <span class="comment">//Add WebApplicationContext field here.</span></div><div class="line"> </div><div class="line">    <span class="comment">//The setUp() method is omitted.</span></div><div class="line"> </div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">findAll_TodosFound_ShouldReturnFoundTodoEntries</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        Todo first = <span class="keyword">new</span> TodoBuilder()</div><div class="line">                .id(<span class="number">1L</span>)</div><div class="line">                .description(<span class="string">"Lorem ipsum"</span>)</div><div class="line">                .title(<span class="string">"Foo"</span>)</div><div class="line">                .build();</div><div class="line">        Todo second = <span class="keyword">new</span> TodoBuilder()</div><div class="line">                .id(<span class="number">2L</span>)</div><div class="line">                .description(<span class="string">"Lorem ipsum"</span>)</div><div class="line">                .title(<span class="string">"Bar"</span>)</div><div class="line">                .build();</div><div class="line"> </div><div class="line">        when(todoServiceMock.findAll()).thenReturn(Arrays.asList(first, second));</div><div class="line"> </div><div class="line">        mockMvc.perform(get(<span class="string">"/api/todo"</span>))</div><div class="line">                .andExpect(status().isOk())</div><div class="line">                .andExpect(content().contentType(TestUtil.APPLICATION_JSON_UTF8))</div><div class="line">                .andExpect(jsonPath(<span class="string">"$"</span>, hasSize(<span class="number">2</span>)))</div><div class="line">                .andExpect(jsonPath(<span class="string">"$[0].id"</span>, is(<span class="number">1</span>)))</div><div class="line">                .andExpect(jsonPath(<span class="string">"$[0].description"</span>, is(<span class="string">"Lorem ipsum"</span>)))</div><div class="line">                .andExpect(jsonPath(<span class="string">"$[0].title"</span>, is(<span class="string">"Foo"</span>)))</div><div class="line">                .andExpect(jsonPath(<span class="string">"$[1].id"</span>, is(<span class="number">2</span>)))</div><div class="line">                .andExpect(jsonPath(<span class="string">"$[1].description"</span>, is(<span class="string">"Lorem ipsum"</span>)))</div><div class="line">                .andExpect(jsonPath(<span class="string">"$[1].title"</span>, is(<span class="string">"Bar"</span>)));</div><div class="line"> </div><div class="line">        verify(todoServiceMock, times(<span class="number">1</span>)).findAll();</div><div class="line">        verifyNoMoreInteractions(todoServiceMock);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>代码中使用的<code>TestUtil.APPLICATION_JSON_UTF8</code>的定义如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestUtil</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> MediaType APPLICATION_JSON_UTF8 = </div><div class="line">truetruetrue<span class="keyword">new</span> MediaType(</div><div class="line">truetruetruetrueMediaType.APPLICATION_JSON.getType(),</div><div class="line">truetruetruetrueMediaType.APPLICATION_JSON.getSubtype, </div><div class="line">truetruetruetrueCharset.forName(<span class="string">"utf8"</span>)</div><div class="line">truetruetrue);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="GET-Todo项的接口"><a href="#GET-Todo项的接口" class="headerlink" title="GET Todo项的接口"></a>GET <code>Todo</code>项的接口</h2><p>首先看一下该接口的实现代码。</p>
+<h3 id="预期的实现-1"><a href="#预期的实现-1" class="headerlink" title="预期的实现"></a>预期的实现</h3><p>预期的接口应该做以下几件事：</p>
+<ol>
+<li>接收到”/api/todo/{id}”上的GET请求，开始处理流程</li>
+<li>调用<code>TodoService</code>的<code>findById()</code>方法获取到目标Todo对象</li>
+<li>将<code>Todo</code>项转换为<code>TodoDTO</code>项</li>
+<li>返回<code>TodoDTO</code>项的json表示</li>
+</ol>
+<p><code>TodoController</code>类内的相关代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.*;</div><div class="line"> </div><div class="line"><span class="meta">@Controller</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TodoController</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="keyword">private</span> TodoService service;</div><div class="line"> </div><div class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/api/todo/&#123;id&#125;"</span>, method = RequestMethod.GET)</div><div class="line">    <span class="meta">@ResponseBody</span></div><div class="line">    <span class="function"><span class="keyword">public</span> TodoDTO <span class="title">findById</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span> Long id) <span class="keyword">throws</span> TodoNotFoundException </span>&#123;</div><div class="line">        Todo found = service.findById(id);</div><div class="line">        <span class="keyword">return</span> createDTO(found);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">private</span> TodoDTO <span class="title">createDTO</span><span class="params">(Todo model)</span> </span>&#123;</div><div class="line">        TodoDTO dto = <span class="keyword">new</span> TodoDTO();</div><div class="line"> </div><div class="line">        dto.setId(model.getId());</div><div class="line">        dto.setDescription(model.getDescription());</div><div class="line">        dto.setTitle(model.getTitle());</div><div class="line"> </div><div class="line">        <span class="keyword">return</span> dto;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>如果抛出<code>TodoNotFoundException</code>，程序会怎么处理？</p>
+</blockquote>
+<p>如前所述，我们编写了一个异常处理类来处理异常与HTTP返回码的映射。当程序抛出<code>TodoNotFoundException</code>异常时，异常处理类会将该异常转换为404的状态码，并写一条日志。</p>
+<p><code>RestErrorHandler</code>类的代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.slf4j.Logger;</div><div class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</div><div class="line"><span class="keyword">import</span> org.springframework.http.HttpStatus;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ControllerAdvice;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ExceptionHandler;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ResponseStatus;</div><div class="line"> </div><div class="line"><span class="meta">@ControllerAdvice</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RestErrorHandler</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger LOGGER = LoggerFactory.getLogger(RestErrorHandler.class);</div><div class="line"> </div><div class="line">    <span class="meta">@ExceptionHandler</span>(TodoNotFoundException.class)</div><div class="line">    <span class="meta">@ResponseStatus</span>(HttpStatus.NOT_FOUND)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleTodoNotFoundException</span><span class="params">(TodoNotFoundException ex)</span> </span>&#123;</div><div class="line">        LOGGER.debug(<span class="string">"handling 404 error on a todo entry"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>所以，我们的单元测试需要同时测试<code>Todo</code>项未找到和已找到的情况。</p>
+<h3 id="测试用例：Todo项GET请求返回404"><a href="#测试用例：Todo项GET请求返回404" class="headerlink" title="测试用例：Todo项GET请求返回404"></a>测试用例：<code>Todo</code>项GET请求返回404</h3><p>该测试用例主要工作如下：</p>
+<ol>
+<li>配置mock的<code>TodoService</code>实例在<code>findById()</code>方法被调用的时候抛出<code>TodoNotFoundException</code></li>
+<li>执行一个’/api/todo/1’的GET请求</li>
+<li>对响应作断言：HTTP返回码是404</li>
+<li>检查请求执行过程中mock的<code>TodoService</code>实例执行了<code>findById()</code>方法有且仅1次</li>
+<li>检查请求执行过程中mock的<code>TodoService</code>实例未执行其他方法</li>
+</ol>
+<p>相关代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.junit.Test;</div><div class="line"><span class="keyword">import</span> org.junit.runner.RunWith;</div><div class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</div><div class="line"><span class="keyword">import</span> org.springframework.test.context.ContextConfiguration;</div><div class="line"><span class="keyword">import</span> org.springframework.test.context.junit4.SpringJUnit4ClassRunner;</div><div class="line"><span class="keyword">import</span> org.springframework.test.context.web.WebAppConfiguration;</div><div class="line"><span class="keyword">import</span> org.springframework.test.web.servlet.MockMvc;</div><div class="line"> </div><div class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.mockito.Mockito.*;</div><div class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;</div><div class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;</div><div class="line"> </div><div class="line"><span class="meta">@RunWith</span>(SpringJUnit4ClassRunner.class)</div><div class="line"><span class="meta">@ContextConfiguration</span>(classes = &#123;TestContext.class, WebAppContext.class&#125;)</div><div class="line"><span class="meta">@WebAppConfiguration</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TodoControllerTest</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="keyword">private</span> MockMvc mockMvc;</div><div class="line"> </div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> TodoService todoServiceMock;</div><div class="line"> </div><div class="line">    <span class="comment">//Add WebApplicationContext field here.</span></div><div class="line"> </div><div class="line">    <span class="comment">//The setUp() method is omitted.</span></div><div class="line"> </div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">findById_TodoEntryNotFound_ShouldReturnHttpStatusCode404</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        when(todoServiceMock.findById(<span class="number">1L</span>)).thenThrow(<span class="keyword">new</span> TodoNotFoundException(<span class="string">""</span>));</div><div class="line"> </div><div class="line">        mockMvc.perform(get(<span class="string">"/api/todo/&#123;id&#125;"</span>, <span class="number">1L</span>))</div><div class="line">                .andExpect(status().isNotFound());</div><div class="line"> </div><div class="line">        verify(todoServiceMock, times(<span class="number">1</span>)).findById(<span class="number">1L</span>);</div><div class="line">        verifyNoMoreInteractions(todoServiceMock);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="测试用例：Todo项GET请求返回成功"><a href="#测试用例：Todo项GET请求返回成功" class="headerlink" title="测试用例：Todo项GET请求返回成功"></a>测试用例：<code>Todo</code>项GET请求返回成功</h3><p>该测试用例主要工作如下：</p>
+<ol>
+<li>准备测试数据</li>
+<li>配置mock的<code>TodoService</code>实例在<code>findById()</code>方法被调用的时候返回准备的数据</li>
+<li>执行一个’/api/todo/1’的GET请求</li>
+<li>对响应作断言：HTTP返回码是200</li>
+<li>对响应作断言：Content-type的值是”application/json”，并且字符集是”UTF-8”</li>
+<li>对响应作断言：使用jsonpath对结果作验证</li>
+<li>检查请求执行过程中mock的<code>TodoService</code>实例执行了<code>findById()</code>方法有且仅1次</li>
+<li>检查请求执行过程中mock的<code>TodoService</code>实例未执行其他方法</li>
+</ol>
+<p>代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.junit.Test;</div><div class="line"><span class="keyword">import</span> org.junit.runner.RunWith;</div><div class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</div><div class="line"><span class="keyword">import</span> org.springframework.test.context.ContextConfiguration;</div><div class="line"><span class="keyword">import</span> org.springframework.test.context.junit4.SpringJUnit4ClassRunner;</div><div class="line"><span class="keyword">import</span> org.springframework.test.context.web.WebAppConfiguration;</div><div class="line"><span class="keyword">import</span> org.springframework.test.web.servlet.MockMvc;</div><div class="line"> </div><div class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.hamcrest.Matchers.is;</div><div class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.mockito.Mockito.*;</div><div class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;</div><div class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;</div><div class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;</div><div class="line"> </div><div class="line"><span class="meta">@RunWith</span>(SpringJUnit4ClassRunner.class)</div><div class="line"><span class="meta">@ContextConfiguration</span>(classes = &#123;TestContext.class, WebAppContext.class&#125;)</div><div class="line"><span class="meta">@WebAppConfiguration</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TodoControllerTest</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="keyword">private</span> MockMvc mockMvc;</div><div class="line"> </div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> TodoService todoServiceMock;</div><div class="line"> </div><div class="line">    <span class="comment">//Add WebApplicationContext field here.</span></div><div class="line"> </div><div class="line">    <span class="comment">//The setUp() method is omitted.</span></div><div class="line"> </div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">findById_TodoEntryFound_ShouldReturnFoundTodoEntry</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        Todo found = <span class="keyword">new</span> TodoBuilder()</div><div class="line">                .id(<span class="number">1L</span>)</div><div class="line">                .description(<span class="string">"Lorem ipsum"</span>)</div><div class="line">                .title(<span class="string">"Foo"</span>)</div><div class="line">                .build();</div><div class="line"> </div><div class="line">        when(todoServiceMock.findById(<span class="number">1L</span>)).thenReturn(found);</div><div class="line"> </div><div class="line">        mockMvc.perform(get(<span class="string">"/api/todo/&#123;id&#125;"</span>, <span class="number">1L</span>))</div><div class="line">                .andExpect(status().isOk())</div><div class="line">                .andExpect(content().contentType(TestUtil.APPLICATION_JSON_UTF8))</div><div class="line">                .andExpect(jsonPath(<span class="string">"$.id"</span>, is(<span class="number">1</span>)))</div><div class="line">                .andExpect(jsonPath(<span class="string">"$.description"</span>, is(<span class="string">"Lorem ipsum"</span>)))</div><div class="line">                .andExpect(jsonPath(<span class="string">"$.title"</span>, is(<span class="string">"Foo"</span>)));</div><div class="line"> </div><div class="line">        verify(todoServiceMock, times(<span class="number">1</span>)).findById(<span class="number">1L</span>);</div><div class="line">        verifyNoMoreInteractions(todoServiceMock);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="POST-Todo项的接口"><a href="#POST-Todo项的接口" class="headerlink" title="POST Todo项的接口"></a>POST <code>Todo</code>项的接口</h2><p>首先看一下该接口的实现代码。</p>
+<h3 id="预期的实现-2"><a href="#预期的实现-2" class="headerlink" title="预期的实现"></a>预期的实现</h3><p>预期的接口应该做以下几件事：</p>
+<ol>
+<li>接收到”/api/todo”上的POST请求，开始处理流程</li>
+<li>校验参数向<code>TodoDTO</code>的转换</li>
+<li>调用<code>TodoService</code>的<code>add()</code>方法添加指定的<code>Todo</code>项</li>
+<li>将<code>Todo</code>项转换为<code>TodoDTO</code>项</li>
+<li>返回<code>TodoDTO</code>项的json表示</li>
+</ol>
+<p><code>TodoController</code>类内的相关代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.*;</div><div class="line"> </div><div class="line"><span class="keyword">import</span> javax.validation.Valid;</div><div class="line"> </div><div class="line"><span class="meta">@Controller</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TodoController</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="keyword">private</span> TodoService service;</div><div class="line"> </div><div class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/api/todo"</span>, method = RequestMethod.POST)</div><div class="line">    <span class="meta">@ResponseBody</span></div><div class="line">    <span class="function"><span class="keyword">public</span> TodoDTO <span class="title">add</span><span class="params">(@Valid @RequestBody TodoDTO dto)</span> </span>&#123;</div><div class="line">        Todo added = service.add(dto);</div><div class="line">        <span class="keyword">return</span> createDTO(added);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">private</span> TodoDTO <span class="title">createDTO</span><span class="params">(Todo model)</span> </span>&#123;</div><div class="line">        TodoDTO dto = <span class="keyword">new</span> TodoDTO();</div><div class="line"> </div><div class="line">        dto.setId(model.getId());</div><div class="line">        dto.setDescription(model.getDescription());</div><div class="line">        dto.setTitle(model.getTitle());</div><div class="line"> </div><div class="line">        <span class="keyword">return</span> dto;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们使用了<code>TodoDTO</code>类来封装<code>Todo</code>项的创建信息，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.hibernate.validator.constraints.Length;</div><div class="line"><span class="keyword">import</span> org.hibernate.validator.constraints.NotEmpty;</div><div class="line"> </div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TodoDTO</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="keyword">private</span> Long id;</div><div class="line"> </div><div class="line">    <span class="meta">@Length</span>(max = <span class="number">500</span>)</div><div class="line">    <span class="keyword">private</span> String description;</div><div class="line"> </div><div class="line">    <span class="meta">@NotEmpty</span></div><div class="line">    <span class="meta">@Length</span>(max = <span class="number">100</span>)</div><div class="line">    <span class="keyword">private</span> String title;</div><div class="line"> </div><div class="line">    <span class="comment">//Constructor and other methods are omitted.</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>TodoDTO</code>类里面有一些校验规则，如果不满足规则，Spring在接口的<code>BindingResult</code>参数里面会显示错误。</p>
+<p>所以，我们的测试用例需要考虑两种情况：</p>
+<ul>
+<li>参数校验通过，接口返回json</li>
+<li>参数校验没有通过，异常被映射为状态码400</li>
+</ul>
+<p>也就是说，如果参数正确，返回结果的状态码为200，返回json形如：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"fieldErrors"</span>:[</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"path"</span>:<span class="string">"description"</span>,</div><div class="line">            <span class="attr">"message"</span>:<span class="string">"The maximum length of the description is 500 characters."</span></div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"path"</span>:<span class="string">"title"</span>,</div><div class="line">            <span class="attr">"message"</span>:<span class="string">"The maximum length of the title is 100 characters."</span></div><div class="line">        &#125;</div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果参数不正确，返回结果的状态码为400，返回json形如：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"id"</span>:<span class="number">1</span>,</div><div class="line">    <span class="attr">"description"</span>:<span class="string">"description"</span>,</div><div class="line">    <span class="attr">"title"</span>:<span class="string">"todo"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>接下来可以开始编写测试用例了。</p>
+<h3 id="测试用例：Todo项POST请求失败"><a href="#测试用例：Todo项POST请求失败" class="headerlink" title="测试用例：Todo项POST请求失败"></a>测试用例：<code>Todo</code>项POST请求失败</h3><p>该测试用例主要工作如下：</p>
+<ol>
+<li>创建一个不符合验证规则的title</li>
+<li>创建一个不符合验证规则的description</li>
+<li>执行一个’/api/todo’的POST请求</li>
+<li>对响应作断言：HTTP返回码是400</li>
+<li>对响应作断言：Content-type的值是”application/json”，并且字符集是”UTF-8”</li>
+<li>检查请求执行过程中mock的<code>TodoService</code>实例未执行任何方法</li>
+</ol>
+<p>代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.junit.Test;</div><div class="line"><span class="keyword">import</span> org.junit.runner.RunWith;</div><div class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</div><div class="line"><span class="keyword">import</span> org.springframework.test.context.ContextConfiguration;</div><div class="line"><span class="keyword">import</span> org.springframework.test.context.junit4.SpringJUnit4ClassRunner;</div><div class="line"><span class="keyword">import</span> org.springframework.test.context.web.WebAppConfiguration;</div><div class="line"><span class="keyword">import</span> org.springframework.test.web.servlet.MockMvc;</div><div class="line"> </div><div class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.hamcrest.Matchers.containsInAnyOrder;</div><div class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.hamcrest.Matchers.hasSize;</div><div class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.mockito.Mockito.*;</div><div class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;</div><div class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;</div><div class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;</div><div class="line"> </div><div class="line"><span class="meta">@RunWith</span>(SpringJUnit4ClassRunner.class)</div><div class="line"><span class="meta">@ContextConfiguration</span>(classes = &#123;TestContext.class, WebAppContext.class&#125;)</div><div class="line"><span class="meta">@WebAppConfiguration</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TodoControllerTest</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="keyword">private</span> MockMvc mockMvc;</div><div class="line"> </div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> TodoService todoServiceMock;</div><div class="line"> </div><div class="line">    <span class="comment">//Add WebApplicationContext field here.</span></div><div class="line"> </div><div class="line">    <span class="comment">//The setUp() method is omitted.</span></div><div class="line"> </div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> </span></div><div class="line">    <span class="title">add_TitleAndDescriptionAreTooLong_ShouldReturnValidationErrorsForTitleAndDescription</span><span class="params">()</span></div><div class="line">    <span class="keyword">throws</span> Exception &#123;</div><div class="line">        String title = TestUtil.createStringWithLength(<span class="number">101</span>);</div><div class="line">        String description = TestUtil.createStringWithLength(<span class="number">501</span>);</div><div class="line"> </div><div class="line">        TodoDTO dto = <span class="keyword">new</span> TodoDTOBuilder()</div><div class="line">                .description(description)</div><div class="line">                .title(title)</div><div class="line">                .build();</div><div class="line"> </div><div class="line">        mockMvc.perform(post(<span class="string">"/api/todo"</span>)</div><div class="line">                .contentType(TestUtil.APPLICATION_JSON_UTF8)</div><div class="line">                .content(TestUtil.convertObjectToJsonBytes(dto))</div><div class="line">        )</div><div class="line">                .andExpect(status().isBadRequest())</div><div class="line">                .andExpect(content().contentType(TestUtil.APPLICATION_JSON_UTF8))</div><div class="line">                .andExpect(jsonPath(<span class="string">"$.fieldErrors"</span>, hasSize(<span class="number">2</span>)))</div><div class="line">                .andExpect(</div><div class="line">                    jsonPath(</div><div class="line">                        <span class="string">"$.fieldErrors[*].path"</span>, containsInAnyOrder(<span class="string">"title"</span>, <span class="string">"description"</span>)</div><div class="line">                    )</div><div class="line">                )</div><div class="line">                .andExpect(jsonPath(<span class="string">"$.fieldErrors[*].message"</span>, containsInAnyOrder(</div><div class="line">                        <span class="string">"The maximum length of the description is 500 characters."</span>,</div><div class="line">                        <span class="string">"The maximum length of the title is 100 characters."</span></div><div class="line">                )));</div><div class="line"> </div><div class="line">        verifyZeroInteractions(todoServiceMock);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们使用到了<code>TestUtil</code>类，再一次地将该类的代码贴出来以供参考。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> com.fasterxml.jackson.annotation.JsonInclude;</div><div class="line"><span class="keyword">import</span> com.fasterxml.jackson.databind.ObjectMapper;</div><div class="line"><span class="keyword">import</span> org.springframework.http.MediaType;</div><div class="line"> </div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"><span class="keyword">import</span> java.nio.charset.Charset;</div><div class="line"> </div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestUtil</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> MediaType APPLICATION_JSON_UTF8 = </div><div class="line">        <span class="keyword">new</span> MediaType(</div><div class="line">            MediaType.APPLICATION_JSON.getType(), </div><div class="line">            MediaType.APPLICATION_JSON.getSubtype(),</div><div class="line">            Charset.forName(<span class="string">"utf8"</span>)</div><div class="line">        );</div><div class="line"> </div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">byte</span>[] convertObjectToJsonBytes(Object object) <span class="keyword">throws</span> IOException &#123;</div><div class="line">        ObjectMapper mapper = <span class="keyword">new</span> ObjectMapper();</div><div class="line">        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);</div><div class="line">        <span class="keyword">return</span> mapper.writeValueAsBytes(object);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">createStringWithLength</span><span class="params">(<span class="keyword">int</span> length)</span> </span>&#123;</div><div class="line">        StringBuilder builder = <span class="keyword">new</span> StringBuilder();</div><div class="line"> </div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> index = <span class="number">0</span>; index &lt; length; index++) &#123;</div><div class="line">            builder.append(<span class="string">"a"</span>);</div><div class="line">        &#125;</div><div class="line"> </div><div class="line">        <span class="keyword">return</span> builder.toString();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="测试用例：Todo项POST请求成功"><a href="#测试用例：Todo项POST请求成功" class="headerlink" title="测试用例：Todo项POST请求成功"></a>测试用例：<code>Todo</code>项POST请求成功</h3><p>该测试用例主要工作如下：</p>
+<ol>
+<li>准备测试数据</li>
+<li>配置mock的<code>TodoService</code>实例在<code>add()</code>方法被调用的时候返回一个<code>Todo</code>项</li>
+<li>执行一个’/todo/add’的POST请求</li>
+<li>对响应作断言：HTTP返回码是200</li>
+<li>对响应作断言：Content-type的值是”application/json”，并且字符集是”UTF-8”</li>
+<li>对响应作断言：使用jsonpath对结果作验证</li>
+</ol>
+<p>代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.junit.Test;</div><div class="line"><span class="keyword">import</span> org.junit.runner.RunWith;</div><div class="line"><span class="keyword">import</span> org.mockito.ArgumentCaptor;</div><div class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</div><div class="line"><span class="keyword">import</span> org.springframework.test.context.ContextConfiguration;</div><div class="line"><span class="keyword">import</span> org.springframework.test.context.junit4.SpringJUnit4ClassRunner;</div><div class="line"><span class="keyword">import</span> org.springframework.test.context.web.WebAppConfiguration;</div><div class="line"><span class="keyword">import</span> org.springframework.test.web.servlet.MockMvc;</div><div class="line"> </div><div class="line"><span class="keyword">import</span> <span class="keyword">static</span> junit.framework.Assert.assertNull;</div><div class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.hamcrest.Matchers.is;</div><div class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.junit.Assert.assertThat;</div><div class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.mockito.Mockito.*;</div><div class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;</div><div class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;</div><div class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;</div><div class="line"> </div><div class="line"><span class="meta">@RunWith</span>(SpringJUnit4ClassRunner.class)</div><div class="line"><span class="meta">@ContextConfiguration</span>(classes = &#123;TestContext.class, WebAppContext.class&#125;)</div><div class="line"><span class="meta">@WebAppConfiguration</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TodoControllerTest</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="keyword">private</span> MockMvc mockMvc;</div><div class="line"> </div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> TodoService todoServiceMock;</div><div class="line"> </div><div class="line">    <span class="comment">//Add WebApplicationContext field here.</span></div><div class="line"> </div><div class="line">    <span class="comment">//The setUp() method is omitted.</span></div><div class="line"> </div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> </span></div><div class="line">    <span class="title">add_NewTodoEntry_ShouldAddTodoEntryAndReturnAddedEntry</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</div><div class="line">        TodoDTO dto = <span class="keyword">new</span> TodoDTOBuilder()</div><div class="line">                .description(<span class="string">"description"</span>)</div><div class="line">                .title(<span class="string">"title"</span>)</div><div class="line">                .build();</div><div class="line"> </div><div class="line">        Todo added = <span class="keyword">new</span> TodoBuilder()</div><div class="line">                .id(<span class="number">1L</span>)</div><div class="line">                .description(<span class="string">"description"</span>)</div><div class="line">                .title(<span class="string">"title"</span>)</div><div class="line">                .build();</div><div class="line"> </div><div class="line">        when(todoServiceMock.add(any(TodoDTO.class))).thenReturn(added);</div><div class="line"> </div><div class="line">        mockMvc.perform(post(<span class="string">"/api/todo"</span>)</div><div class="line">                .contentType(TestUtil.APPLICATION_JSON_UTF8)</div><div class="line">                .content(TestUtil.convertObjectToJsonBytes(dto))</div><div class="line">        )</div><div class="line">                .andExpect(status().isOk())</div><div class="line">                .andExpect(content().contentType(TestUtil.APPLICATION_JSON_UTF8))</div><div class="line">                .andExpect(jsonPath(<span class="string">"$.id"</span>, is(<span class="number">1</span>)))</div><div class="line">                .andExpect(jsonPath(<span class="string">"$.description"</span>, is(<span class="string">"description"</span>)))</div><div class="line">                .andExpect(jsonPath(<span class="string">"$.title"</span>, is(<span class="string">"title"</span>)));</div><div class="line"> </div><div class="line">        ArgumentCaptor&lt;TodoDTO&gt; dtoCaptor = ArgumentCaptor.forClass(TodoDTO.class);</div><div class="line">        verify(todoServiceMock, times(<span class="number">1</span>)).add(dtoCaptor.capture());</div><div class="line">        verifyNoMoreInteractions(todoServiceMock);</div><div class="line"> </div><div class="line">        TodoDTO dtoArgument = dtoCaptor.getValue();</div><div class="line">        assertNull(dtoArgument.getId());</div><div class="line">        assertThat(dtoArgument.getDescription(), is(<span class="string">"description"</span>));</div><div class="line">        assertThat(dtoArgument.getTitle(), is(<span class="string">"title"</span>));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本文主要介绍了：</p>
+<ul>
+<li>如何为REST接口的GET请求编写单元测试</li>
+<li>如何为REST接口的POST请求编写单元测试</li>
+<li>如何将对象序列化为json并用POST请求发送出去</li>
+<li>如何使用JsonPath对返回的结果作断言</li>
+</ul>
+<p>到此，整个使用Spring MVC Test来进行单元测试的系列就结束了，希望所有人能有所收获。</p>
+<p>本文使用的代码已经放在了 <a href="https://github.com/pkainulainen/spring-mvc-test-examples/tree/master/controllers-unittest" target="_blank" rel="external">Github</a> 上，请自行查阅。</p>
+<p>翻译完了单元测试的三篇文章，感觉心好累。不得不佩服国外的同行，研究一个东西就研究得很透，分析的很细。本系列不仅仅是一个测试的教程，而且可以作为Spring MVC的开发入门系列。</p>
+<p>对作者致以崇高的敬意，和感谢！</p>
+
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+
+
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2016/04/09/spring-mvc-testing-integration-testing-configuration/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2016/04/09/spring-mvc-testing-unit-testing-normal-controllers/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="Elvis Wang's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        youremail@email.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="#" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/" target="_self">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2016/04/">四月 2016<span class="sidebar_archives-count">17</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">六月 2015<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/05/">五月 2015<span class="sidebar_archives-count">16</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/05/">五月 2014<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2013/05/">五月 2013<span class="sidebar_archives-count">18</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+
+    <!-- Pages  -->
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+    <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+            主题 - Material
+            <span class="sidebar-badge badge-circle">i</span>
+        </div>
+    </a>
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/twitter" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-twitter.png);">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+        <a href="https://www.facebook.com/facebook" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-facebook.png);">
+                <span class="visuallyhidden">Facebook</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Google + -->
+    
+        <a href="https://www.google.com/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-gplus.png);">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;
+            <script type="text/javascript">
+                var fd = new Date();
+                document.write(fd.getFullYear());
+            </script>
+            &nbsp;wbprime
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import File -->
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
+
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Swiftye -->
+
+
+<!-- Local Search-->
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+</script>
+
+<!-- MathJax Load-->
+
+
+                </main>
+            </div>
+        </body>
+    
+</html>
