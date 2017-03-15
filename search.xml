@@ -703,9 +703,9 @@ public void setInner(@Named(&quot;main&quot;) InnerBean inner) {
         
         <tags>
             
-            <tag> Java </tag>
-            
             <tag> Spring </tag>
+            
+            <tag> Java </tag>
             
         </tags>
         
@@ -988,9 +988,9 @@ public class ExampleFactory {
         
         <tags>
             
-            <tag> Java </tag>
-            
             <tag> Spring </tag>
+            
+            <tag> Java </tag>
             
         </tags>
         
@@ -1146,9 +1146,9 @@ I&apos;m first
         
         <tags>
             
-            <tag> Java </tag>
-            
             <tag> Spring </tag>
+            
+            <tag> Java </tag>
             
         </tags>
         
