@@ -4,6 +4,30 @@
   
     
     <entry>
+      <title><![CDATA[Awk Tips: md5]]></title>
+      <url>http://www.wbprime.me/2017/06/01/awk-tips-md5/</url>
+      <content type="html"><![CDATA[<h1 id="Awk-之-md5"><a href="#Awk-之-md5" class="headerlink" title="Awk 之 md5"></a>Awk 之 md5</h1><h2 id="用例"><a href="#用例" class="headerlink" title="用例"></a>用例</h2><p>有这么一个需求：文本文件中每一行是用户名和密码，现在需要对文件进行变换，输出用户名和对应的密码的md5值。</p><p>原始文件(“input.txt”)如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">user1 user1_password</div><div class="line">user2 user2_password</div><div class="line">user3 user3_password</div><div class="line">user4 user4_password</div><div class="line">user5 user5_password</div><div class="line">user6 user6_password</div><div class="line">user7 user7_password</div></pre></td></tr></table></figure><h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>可以使用支持GNU扩展特性的awk来完成这个任务。</p><p>awk 脚本如下:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/awk -f</div><div class="line"></div><div class="line">BEGIN &#123;</div><div class="line">    md5cmd = &quot;md5sum&quot;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">&#123;</div><div class="line">    printf $2 |&amp; md5cmd;</div><div class="line">    close(md5cmd, &quot;to&quot;);</div><div class="line"></div><div class="line">    md5cmd |&amp; getline md5result;</div><div class="line">trueclose(md5cmd);</div><div class="line"></div><div class="line">    print $1, substr(md5result, 1, 32);</div><div class="line">&#125;</div></pre></td></tr></table></figure><p>脚本另存为 “md5.awk” 。</p><p>在终端中输入:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; awk -f md5.awk input.txt</div></pre></td></tr></table></figure><p>输出结果如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">user1 b4ca6e90dcef1196a20930c2d9ecfbc0</div><div class="line">user2 049914ab3268e59eb90526f64a5322d9</div><div class="line">user3 99675fb0c81fdf505a95318e4c72b685</div><div class="line">user4 5f3cca1f85aa649323c336546b3c7cc0</div><div class="line">user5 41a87fa27533b238ed77824267259837</div><div class="line">user6 758b093168f255636ad83f5f076213e6</div><div class="line">user7 c1293b0e2400acb1461d25dbe4c6e75c</div></pre></td></tr></table></figure><h2 id="释义"><a href="#释义" class="headerlink" title="释义"></a>释义</h2><p>解决方案使用了GNU awk扩展的协程功能，详解参见 [Two-Way Communications with Another Process](<a href="https://www.gnu.org/software/gawk/manual/html_node/Two_002dway-I_002fO.html#Two_002dway-I_002fO）。" target="_blank" rel="external">https://www.gnu.org/software/gawk/manual/html_node/Two_002dway-I_002fO.html#Two_002dway-I_002fO）。</a></p><p>具体来说，<code>printf $2 |&amp; md5cmd;</code> 这一行会将用户密码输出，同时 awk 会使用 sh 启动 md5cmd 进程，并将该进程的标准输入与 awk 的标准输出相连接；md5cmd 读取标准输入之后会输出其 md5sum 的结果到标准输出；<code>md5cmd |&amp; getline md5result;</code> 这一行会将 md5cmd 进程的标准输出作为输入，读取一行文本并存储到变量 md5result 中。</p><p>因为这些语句是对每一行输入文本都会执行的，所以需要在合适的时候关闭 md5cmd 进程的输入输出文件标识符。<code>close(md5cmd, &quot;to&quot;);</code> 关闭输入到 md5cmd 进程的文件标识符；<code>close(md5cmd)</code> 关闭剩下的其他文件标识符。如果不关闭的话，在如入文本文件行数很多的情况下，可能会出现由于大量打开一次性文件标识符而不释放导致可用文件标识符被耗尽的错误。</p>]]></content>
+      
+        <categories>
+            
+            <category> Awk </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> tech </tag>
+            
+            <tag> awk </tag>
+            
+            <tag> md5 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[当时明月在 曾照彩云归]]></title>
       <url>http://www.wbprime.me/2017/04/07/huangyi-memory/</url>
       <content type="html"><![CDATA[<blockquote class="blockquote-center"><br>当时明月在，曾照彩云归。<br></blockquote>]]></content>
@@ -17,7 +41,9 @@
         
         <tags>
             
-            <tag> huangyi，upset </tag>
+            <tag> upset </tag>
+            
+            <tag> huangyi </tag>
             
         </tags>
         
@@ -745,9 +771,9 @@ public void setInner(@Named(&quot;main&quot;) InnerBean inner) {
         
         <tags>
             
-            <tag> Java </tag>
-            
             <tag> Spring </tag>
+            
+            <tag> Java </tag>
             
         </tags>
         
@@ -1030,9 +1056,9 @@ public class ExampleFactory {
         
         <tags>
             
-            <tag> Java </tag>
-            
             <tag> Spring </tag>
+            
+            <tag> Java </tag>
             
         </tags>
         
@@ -1188,9 +1214,9 @@ I&apos;m first
         
         <tags>
             
-            <tag> Java </tag>
-            
             <tag> Spring </tag>
+            
+            <tag> Java </tag>
             
         </tags>
         
