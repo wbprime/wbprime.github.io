@@ -1,4 +1,0 @@
-graph start {
-    hello -- {graphviz world};
-    graphviz -- world
-}
