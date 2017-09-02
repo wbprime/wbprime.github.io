@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>突然想起注释来</title>
+        <style>
+
+    html body {
+        font-family: Raleway, sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: lightseagreen;
+        --border-width:  0 ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/java.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/c&#43;&#43;.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.26" />
+        
+    </head>
+
+    <body>
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">突然想起注释来</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/posts/">Posts</a></li>
+                            
+                                <li><a href="/categories/">Categories</a></li>
+                            
+                                <li><a href="/tags/">Tags</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:mail@wbprime.me"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/wbprime/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://www.stackoverflow.com/wbprime/"><i class="fa fa-stack-overflow"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+      
+
+    <h4><a href="/posts/2014-05-16-turan-xiangqi-zhushi-lai/">突然想起注释来</a></h4>
+    <h5>在南京第二天了，昨天晚上吃完饭心情极其低落。打了个车走上长江边上，夜晚中的江流起伏，暗涌的潮声淹没在夜幕里。听得见去看不见，听见了就会很害怕，害怕未知，害怕黑暗，害怕恐惧。凉风侵袭过来，漫天的都是黑夜，看不见江水，看不见灯光，看不见北京。</h5>
+     <kbd class="item-tag">upset</kbd> 
+
+</div>
+
+
+    <br> <div class="text-justify"><p>很奇怪的念头突然在脑中浮现出来：为什么代码中可以有注释？</p>
+
+<p>先来看看C/C++的代码：</p>
+
+<pre><code>int main(int, char **)
+{    
+    ......    
+
+    int a;
+    doSomthing(a);
+    //  maybeDosomthing(a);
+
+    ......
+
+    return 0;
+}
+</code></pre>
+
+<p>这一行：<code>//  maybeDosomthing(a);</code>说明了注释的用途。可能作者原来想干点什么事情，然后在后续的过程中又改变了主意。</p>
+
+<p>注释在这里起到了一个后悔药的作用，以前的东西先暂时保存起来，在当前消失，在未来可能再现。</p>
+
+<p>然而，版本控制工具可以达到更好的效果，不需要注释：不是代码本身，而是额外的载体记录代码改动的变化。过去就是过去，历史就是历史。过往的可以存在于记忆中，可以记录在空气里，但是却不能再回来了。</p>
+
+<p>没有事情会永远不变，也没有东西永远改变。希望过去的要过去，过去了就过去。</p>
+
+<p>什么乱七八糟的，自己都不知道自己在说什么。</p>
+
+<p>在南京第二天了，昨天晚上吃完饭心情极其低落。打了个车走上长江边上，夜晚中的江流起伏，暗涌的潮声淹没在夜幕里。听得见去看不见，听见了就会很害怕，害怕未知，害怕黑暗，害怕恐惧。凉风侵袭过来，漫天的都是黑夜，看不见江水，看不见灯光，看不见北京。</p>
+
+<p>谨记之！</p>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+
+    </body>
+
+</html>
+

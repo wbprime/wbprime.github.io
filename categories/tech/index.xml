@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tech on wbprime</title>
+    <link>http://www.wbprime.me/categories/tech/</link>
+    <description>Recent content in Tech on wbprime</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Mon, 25 May 2015 11:07:13 +0000</lastBuildDate>
+    
+	<atom:link href="http://www.wbprime.me/categories/tech/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>JDK installation on Archlinux</title>
+      <link>http://www.wbprime.me/posts/2015-05-25-jdk-installation-on-archlinux/</link>
+      <pubDate>Mon, 25 May 2015 11:07:13 +0000</pubDate>
+      
+      <guid>http://www.wbprime.me/posts/2015-05-25-jdk-installation-on-archlinux/</guid>
+      <description>Basically, Archlinux provide OpenJDK 7&amp;frasl;8 in official repository. Java JDK environment will be setup in quite a little minutes follwing Archliux official guide.
+However, some java programmes does not work well on OpenJDK, and achives better performance on Sun/Oracle JDK. For example, Intellij Idea in Archlinux official repository produces warning message blaming OpenJDK. So Sun/Oracle JDK maybe welcomed by some users who wanted a clean installation of Intellij Idea.
+ Choose and download the JDK version you want to install.</description>
+    </item>
+    
+  </channel>
+</rss>

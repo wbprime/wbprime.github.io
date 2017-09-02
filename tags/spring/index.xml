@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Spring on wbprime</title>
+    <link>http://www.wbprime.me/tags/spring/</link>
+    <description>Recent content in Spring on wbprime</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Mon, 08 Jun 2015 10:45:49 +0000</lastBuildDate>
+    
+	<atom:link href="http://www.wbprime.me/tags/spring/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Spring: Annotation based configuration</title>
+      <link>http://www.wbprime.me/posts/2015-06-08-spring-annotation-based-configuration/</link>
+      <pubDate>Mon, 08 Jun 2015 10:45:49 +0000</pubDate>
+      
+      <guid>http://www.wbprime.me/posts/2015-06-08-spring-annotation-based-configuration/</guid>
+      <description>Despite XML-based configuration, the Springframework provides full support for annotation-based metadata configuration.
+XML-based configuration isolates the configuration metadata from source code using independent xml files, while annotation-based configuration mixes source code and configuration data. Thus which is the better one to collaborate with the Springframework? The answer is it depends. The XML one performes good isolation between source code and configuration, however you need to bear its stupid and complex and long-but-useless xml syntax, and you must do additional work to sync youc onfiguration data and you source code when you need to update your code, which however is very frequent during development.</description>
+    </item>
+    
+    <item>
+      <title>Spring: XML based configuration</title>
+      <link>http://www.wbprime.me/posts/2015-06-02-spring-xml-based-configuration/</link>
+      <pubDate>Tue, 02 Jun 2015 10:12:47 +0000</pubDate>
+      
+      <guid>http://www.wbprime.me/posts/2015-06-02-spring-xml-based-configuration/</guid>
+      <description>Overview Spring Configuration The Springframework supports 3 kinds of configuration methods, including XML-based configuration, annotation-based configuration and Java-based configuration.
+ Xml-based configuration: traditionally supplied as a simple and intuitive XMl format metadata. Annotation-based configuration: introduced by Spring 2.5. Java-based configuration: introduced as the Spring JavaConfig project by Spring 3.0.  XML-based configuration is widely used and best supported.
+Typical xml configuration file:
+&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt; &amp;lt;beans xmlns=&amp;quot;http://www.springframework.org/schema/beans&amp;quot; xmlns:xsi=&amp;quot;http://www.w3.org/2001/XMLSchema-instance&amp;quot; xsi:schemaLocation=&amp;quot;http://www.springframework.org/schema/beans http://www.</description>
+    </item>
+    
+    <item>
+      <title>Spring DI: At First Glance</title>
+      <link>http://www.wbprime.me/posts/2015-05-28-spring-at-first-glance/</link>
+      <pubDate>Thu, 28 May 2015 19:11:56 +0000</pubDate>
+      
+      <guid>http://www.wbprime.me/posts/2015-05-28-spring-at-first-glance/</guid>
+      <description>Spring is a world famous Java developing framework.
+ The Spring Framework is a lightweight solution and a potential one-stop-shop for building your enterprise-ready applications. However, Spring is modular, allowing you to use only those parts that you need, without having to bring in the rest. You can use the IoC container, with any web framework on top, but you can also use only the Hibernate integration code or the JDBC abstraction layer.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Huangyi on wbprime</title>
+    <link>http://www.wbprime.me/tags/huangyi/</link>
+    <description>Recent content in Huangyi on wbprime</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Fri, 07 Apr 2017 10:42:29 +0000</lastBuildDate>
+    
+	<atom:link href="http://www.wbprime.me/tags/huangyi/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>当时明月在 曾照彩云归</title>
+      <link>http://www.wbprime.me/posts/2017-04-07-huangyi-memory/</link>
+      <pubDate>Fri, 07 Apr 2017 10:42:29 +0000</pubDate>
+      
+      <guid>http://www.wbprime.me/posts/2017-04-07-huangyi-memory/</guid>
+      <description>当时明月在，曾照彩云归。  </description>
+    </item>
+    
+  </channel>
+</rss>

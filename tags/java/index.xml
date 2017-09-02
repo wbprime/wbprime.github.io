@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Java on wbprime</title>
+    <link>http://www.wbprime.me/tags/java/</link>
+    <description>Recent content in Java on wbprime</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Fri, 15 Apr 2016 16:34:20 +0000</lastBuildDate>
+    
+	<atom:link href="http://www.wbprime.me/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Learning Java Concurrency - Executors(1) ExecutorService</title>
+      <link>http://www.wbprime.me/posts/2016-04-15-learning-java-concurrency-executors-1-executorservice/</link>
+      <pubDate>Fri, 15 Apr 2016 16:34:20 +0000</pubDate>
+      
+      <guid>http://www.wbprime.me/posts/2016-04-15-learning-java-concurrency-executors-1-executorservice/</guid>
+      <description>回过头来看Thread类，其实可以发现该类是对一件任务的抽象。通过将要完成的任务抽象出来用Thread或者Runnable来表示，然后委托给另外的线程来处理。Thread类在这里充当的是任务执行者的角色，表示一个执行任务的线程。
+有时候，任务是不是由另一个线程执行并不重要，甚至于由几个线程共同完成我们也并不在意，我们只关心任务被完成了。任务这个概念已经被抽象的很好了：Runnable；接下来要抽象出任务执行者这个概念了。
+Java提供了另一个接口Executor来真正地抽象任务执行者这个概念：线程池。怎么理解呢，看一下Executor接口的代码就好了。
+Executor public interface Executor { void execute(Runnable command); }  是不是很简单？
+任务执行者的角色有了，但是还是不够，我们还需要控制任务执行者的行为。
+ExecutorService public interface ExecutorService extends Executor { void shutdown(); List&amp;lt;Runnable&amp;gt; shutdownNow(); boolean isShutdown(); boolean isTerminated(); boolean awaitTermination(long timeout, TimeUnit unit) throws InterruptedException; &amp;lt;T&amp;gt; Future&amp;lt;T&amp;gt; submit(Callable&amp;lt;T&amp;gt; task); &amp;lt;T&amp;gt; Future&amp;lt;T&amp;gt; submit(Runnable task, T result); Future&amp;lt;?&amp;gt; submit(Runnable task); &amp;lt;T&amp;gt; List&amp;lt;Future&amp;lt;T&amp;gt;&amp;gt; invokeAll(Collection&amp;lt;? extends Callable&amp;lt;T&amp;gt;&amp;gt; tasks) throws InterruptedException; &amp;lt;T&amp;gt; List&amp;lt;Future&amp;lt;T&amp;gt;&amp;gt; invokeAll( Collection&amp;lt;? extends Callable&amp;lt;T&amp;gt;&amp;gt; tasks, long timeout, TimeUnit unit ) throws InterruptedException; &amp;lt;T&amp;gt; T invokeAny(Collection&amp;lt;?</description>
+    </item>
+    
+    <item>
+      <title>Learning Java Concurrency - FutureTask &amp; Callable</title>
+      <link>http://www.wbprime.me/posts/2016-04-13-learning-java-concurrency-futuretask-callable/</link>
+      <pubDate>Wed, 13 Apr 2016 10:17:57 +0000</pubDate>
+      
+      <guid>http://www.wbprime.me/posts/2016-04-13-learning-java-concurrency-futuretask-callable/</guid>
+      <description>Java的java.util.concurrent包里面提供了多线程并发和同步的支持。
+最开始的时候，多线程被认为是执行任务的手段，也就是说，我启动一个新线程来执行代码，至于资源共享、线程同步等可以用锁、同步器等解决。所以Thread类和Rannable接口暴露了一个void run()方法来提供自定义行为。
+但慢慢地，人们开始发现如果自定义的线程是计算结果的，那我怎么来拿到计算之后的结果呢？另外，我得知道什么时候计算结束了，如果计算的时间太长了，我也想能够终止计算线程的执行。这些需求其实用基本的多线程工具也可以实现，但是过程比较繁琐；而且这些需求有一段时间又特别普遍。终于，jdk 1.5开始引入了Callable接口和Future接口，用于支援有返回值的计算任务。
+Callable Callable接口和Runnable接口很接近，有多接近呢？对比一下代码就知道了。
+这是Runnable的代码：
+public interface Runnable { public abstract void run(); }  这是Callable的接口：
+public interface Callable&amp;lt;V&amp;gt; { V call() throws Exception; }  可以看到，Callable接口比Runnable接口多了两个功能：
+ 方法可以有返回值 方法可以抛出Checked异常  添加返回值就是为了支援计算类的任务；可以抛出Checked异常则是为了完善错误处理机制。
+Thread/Runnable 机制是不允许抛出Checked异常的；如果抛出了Unchecked异常，会自动去寻找线程的异常处理器进行处理，参见 Learning Java Concurrency - Thread &amp;amp; Runnable 里面关于线程异常处理的部分。
+Future Future接口封装了异步计算的结果，用于在异步任务完成之后获取结果。
+接口的方法如下：
+public interface Future&amp;lt;V&amp;gt; { boolean cancel(boolean mayInterruptIfRunning); boolean isCancelled(); boolean isDone(); V get() throws InterruptedException, ExecutionException; V get(long timeout, TimeUnit unit) throws InterruptedException, ExecutionException, TimeoutException; }  get()方法用于获取异步任务的结果。如果异步任务还没有结束，该方法的调用会被阻塞，一直到异步任务运行结束（正常结束或者抛出异常），或者异步任务线程被中断。如果异步任务线程被中断，该方法抛出InterruptedException异常；如果异步任务执行抛出异常，该方法抛出ExecutionException异常。</description>
+    </item>
+    
+    <item>
+      <title>Learning Java Concurrency - Thread &amp; Runnable</title>
+      <link>http://www.wbprime.me/posts/2016-04-11-learning-java-concurrency-thread-runnable/</link>
+      <pubDate>Mon, 11 Apr 2016 10:04:31 +0000</pubDate>
+      
+      <guid>http://www.wbprime.me/posts/2016-04-11-learning-java-concurrency-thread-runnable/</guid>
+      <description>Java并发多线程的第一课，应该就是Thread了。顾名思义，Thread就是一个线程。线程是很底层的一个概念，在不同的操作系统上实现的模型和细节并不相同，甚至于可以说天差地别；但是总体来说，线程是比进程更细粒度的操作系统调度的单位，线程有自己的运行栈，但是同一个进程的线程共享方法区和堆区数据。
+对于进程和线程的差别，有一种说法是：线程是操作系统调度的基本单位，而进程是操作系统分配运行资源的基本单位。
+Java中对线程作了很好的封装：Thread类。Thread类的使用非常简单。
+public class ThreadCase { private static class EchoThread extends Thread { private final String word; public EchoThread(final String word) { this.word = word; } @Override public void run() { for (int i = 0; i &amp;lt; 1000; i++) { System.out.println(this.getName() + &amp;quot; echos &amp;quot; + word); } } } public static void main(String [] _args) { final Thread echo1 = new EchoThread(&amp;quot;First&amp;quot;); final Thread echo2 = new EchoThread(&amp;quot;Second&amp;quot;); System.</description>
+    </item>
+    
+    <item>
+      <title>Spring MVC Integration Testing - JsonPath</title>
+      <link>http://www.wbprime.me/posts/2016-04-09-spring-mvc-testing-integration-testing-jsonpath/</link>
+      <pubDate>Sat, 09 Apr 2016 23:09:10 +0000</pubDate>
+      
+      <guid>http://www.wbprime.me/posts/2016-04-09-spring-mvc-testing-integration-testing-jsonpath/</guid>
+      <description>本文是Spring MVC Testing集成测试系列的第1篇，原文链接：Integration Testing of Spring MVC Applications: Write Clean Assertions with JsonPath。</description>
+    </item>
+    
+    <item>
+      <title>Spring MVC Integration Testing - Security</title>
+      <link>http://www.wbprime.me/posts/2016-04-09-spring-mvc-testing-integration-testing-security/</link>
+      <pubDate>Sat, 09 Apr 2016 23:08:58 +0000</pubDate>
+      
+      <guid>http://www.wbprime.me/posts/2016-04-09-spring-mvc-testing-integration-testing-security/</guid>
+      <description>本文是Spring MVC Testing集成测试系列的第1篇，原文链接：Integration Testing of Spring MVC Applications: Security。</description>
+    </item>
+    
+    <item>
+      <title>Spring MVC Integration Testing - REST API</title>
+      <link>http://www.wbprime.me/posts/2016-04-09-spring-mvc-testing-integration-testing-rest-api/</link>
+      <pubDate>Sat, 09 Apr 2016 23:08:39 +0000</pubDate>
+      
+      <guid>http://www.wbprime.me/posts/2016-04-09-spring-mvc-testing-integration-testing-rest-api/</guid>
+      <description>本文是 Spring MVC Testing 集成测试系列的第4篇，原文链接：Integration Testing of Spring MVC Applications: REST API, Part One 和 Integration Testing of Spring MVC Applications: REST API, Part Two。
+本文主要介绍如何为基于Spring MVC的REST-full的web应用程序添加集成测试。REST服务通过HTTP标准方法的语义（GET/POST/PUT/DELETE等）来隐喻常见的增删改查（CRUD）操作。
+本文主要演示如何一步一步地为REST-full API服务添加集成测试用例，包括：
+ 获取Todo项列表接口的集成测试 获取单个Todo项接口的集成测试 删除单个Todo项接口的集成测试 添加新Todo项接口的集成测试 更新Todo项接口的集成测试  示例web应用结构 Domain 层 Domain层有一个Todo的实体类，代码如下：
+import org.hibernate.annotations.Type; import org.joda.time.DateTime; import javax.persistence.*; @Entity @Table(name=&amp;quot;todos&amp;quot;) public class Todo { @Id @GeneratedValue(strategy = GenerationType.AUTO) private Long id; @Column(name = &amp;quot;creation_time&amp;quot;, nullable = false) @Type(type=&amp;quot;org.jadira.usertype.dateandtime.joda.PersistentDateTime&amp;quot;) private DateTime creationTime; @Column(name = &amp;quot;description&amp;quot;, nullable = true, length = 500) private String description; @Column(name = &amp;quot;modification_time&amp;quot;, nullable = false) @Type(type=&amp;quot;org.</description>
+    </item>
+    
+    <item>
+      <title>Spring MVC Integration Testing - Forms</title>
+      <link>http://www.wbprime.me/posts/2016-04-09-spring-mvc-testing-integration-testing-forms/</link>
+      <pubDate>Sat, 09 Apr 2016 23:08:24 +0000</pubDate>
+      
+      <guid>http://www.wbprime.me/posts/2016-04-09-spring-mvc-testing-integration-testing-forms/</guid>
+      <description>本文是 Spring MVC Testing 集成测试系列的第3篇，原文链接：Integration Testing of Spring MVC Applications: Forms。
+本文主要介绍为处理Form表单请求的接口编写集成测试用例。
+本文紧接着上一篇 Spring MVC Integration Testing - Controllers 的内容，主要涉及到两个接口：创建新的Todo项和更新指定的Todo项。
+通过Maven获取依赖 除了上一篇中介绍的依赖之外，本文添加了新的依赖：
+ jackson-core-asl 1.9.9 jackson-mapper-asl 1.9.9  对应的pom.xml文件片段如下：
+&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.codehaus.jackson&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;jackson-core-asl&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.9.9&amp;lt;/version&amp;gt; &amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.codehaus.jackson&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;jackson-mapper-asl&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.9.9&amp;lt;/version&amp;gt; &amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt; &amp;lt;/dependency&amp;gt;  示例web应用结构 DTO 本文主要处理Form表单，对应的类为TodoDTO。TodoDTO类是一个简单的Java Bean类，除了setter和getter方法外，还是用到了validator规则：
+ title项不能为空 title项的最大长度为100 description项的最大长度为500  对应的代码如下：
+import org.hibernate.validator.constraints.Length; import org.hibernate.validator.constraints.NotEmpty; public class TodoDTO { private Long id; @Length(max = 500) private String description; @NotEmpty @Length(max = 100) private String title; public TodoDTO() { } //Getters and setters }  Service 层 对应地，TodoService接口也添加了两个方法：</description>
+    </item>
+    
+    <item>
+      <title>Spring MVC Integration Testing - Controllers</title>
+      <link>http://www.wbprime.me/posts/2016-04-09-spring-mvc-testing-integration-testing-controllers/</link>
+      <pubDate>Sat, 09 Apr 2016 23:08:01 +0000</pubDate>
+      
+      <guid>http://www.wbprime.me/posts/2016-04-09-spring-mvc-testing-integration-testing-controllers/</guid>
+      <description>本文是Spring MVC Testing 集成测试系列的第2篇，原文链接：Integration Testing of Spring MVC Applications: Controllers。
+本文主要介绍如何为“标准”Controller编写集成测试。在这里“标准”的含义延续前一个序列 Spring MVC Testing 中的含义，表示不使用Ajax的请求或者处理Form结果的请求。
+同样地，本文还是一步一步地为我们的TodoApplication编写集成测试。该程序提供Todo项的增删改查（CRUD）接口，本文主要关注其中的3个接口：获取Todo项列表；查看单个Todo项的详情；以及删除某个Todo项。
+通过Maven获取依赖 本文用到的依赖如下：
+ Hamcrest 1.3 JUnit 4.10 Spring Test 3.2.3.RELEASE Spring Test DBUnit 1.0.0 DBUnit 2.4.8  生成的pom.xml文件的片段如下：
+&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.hamcrest&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;hamcrest-all&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.3&amp;lt;/version&amp;gt; &amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;junit&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;junit&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;4.10&amp;lt;/version&amp;gt; &amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt; &amp;lt;exclusions&amp;gt; &amp;lt;exclusion&amp;gt; &amp;lt;artifactId&amp;gt;hamcrest-core&amp;lt;/artifactId&amp;gt; &amp;lt;groupId&amp;gt;org.hamcrest&amp;lt;/groupId&amp;gt; &amp;lt;/exclusion&amp;gt; &amp;lt;/exclusions&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-test&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;3.1.2.RELEASE&amp;lt;/version&amp;gt; &amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-test&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;3.2.3.RELEASE&amp;lt;/version&amp;gt; &amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.github.springtestdbunit&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-test-dbunit&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.0.0&amp;lt;/version&amp;gt; &amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.</description>
+    </item>
+    
+    <item>
+      <title>Spring MVC Integration Testing - Configuration</title>
+      <link>http://www.wbprime.me/posts/2016-04-09-spring-mvc-testing-integration-testing-configuration/</link>
+      <pubDate>Sat, 09 Apr 2016 23:07:53 +0000</pubDate>
+      
+      <guid>http://www.wbprime.me/posts/2016-04-09-spring-mvc-testing-integration-testing-configuration/</guid>
+      <description>本文是 Spring MVC Testing 集成测试系列的第1篇，原文链接：Integration Testing of Spring MVC Applications: Configuration。
+没有人会否认集成测试的重要性，它是验证我们开发的组件能够正常协同工作的重要手段。不幸的是，对使用Spring MVC开发的web应用程序作集成测试有一点麻烦。
+过去我们一直用 Selenium 和 JWebUnit 来对web应用接口作集成测试，然后效果不是很好。这种方法有以下三个缺点：
+ 对于开发中的web接口，编写和维护测试的工作量比较大 对于使用Javascript，尤其是Ajax的web应用，可用性不高 必须在web容器中启动运行，导致速度慢而且很没有效率  经常就是开发者在后续开发过程中觉得维护之前的集成测试用例太过耗时而且效果不大，所以废弃了这种形式的集成测试。幸运的是，我们找到了一种新型的集成测试框架Spring MVC Test可以用来简化测试工作。
+本文主要介绍如何配置Spring MVC Test框架来进行web应用的测试。本系列使用的工具包括：
+ Spring Framework 3.2 JUnit 4.10 Maven 3.0.3  我们一起来开始进入Spring MVC Test的世界吧！
+通过Maven获取依赖 译者注：原文写作的时候是基于Spring Framework 3.1.2，当时Spring-test-mvc还是作为一个独立的项目进行开发和发布。在Spring Framework 3.2以后，该项目被合并到Spring Framework中去了。现在Spring Framework已经发布了4.X系列，很少有人在使用3.2以下的版本，为了减少混淆，直接将原文的pom文件加以修改。特此说明。
+生成的pom.xml文件如下：
+&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-test&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;3.2&amp;lt;/version&amp;gt; &amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt; &amp;lt;/dependency&amp;gt;  MockMvc 配置 Spring MVC Test框架提供了MockMvc类体系来辅助编写基于Spring MVC开发的web应用的测试代码。我们需要做的就是使用MockMvcBuilder接口的实际实现来生成MockMvc实例。MockMvcBuilders工厂类提供了两个工厂方法创建MockMvcBuilder实例：
+ StandaloneMockMvcBuilder standaloneSetup(Object… controllers) 主要用来对单个Controller进行测试，需要手动地配置各种Bean DefaultMockMvcBuilder webAppContextSetup(WebApplicationContext context) 主要使用配置好的Spring上下文来配置Bean  下面来详细看一下这两种方式分别如何使用。</description>
+    </item>
+    
+    <item>
+      <title>Spring MVC Unit Testing - REST API</title>
+      <link>http://www.wbprime.me/posts/2016-04-09-spring-mvc-testing-unit-testing-rest-api/</link>
+      <pubDate>Sat, 09 Apr 2016 23:07:22 +0000</pubDate>
+      
+      <guid>http://www.wbprime.me/posts/2016-04-09-spring-mvc-testing-unit-testing-rest-api/</guid>
+      <description>本文是 Spring MVC Testing 单元测试系列的第3篇，原文链接：Unit Testing of Spring MVC Controllers: REST API。
+使用Spring MVC可以很方便第创建REST风格的接口，但是编写REST风格接口的单元测试并不是那么方便。幸运的是，Spring MVC Test极大地简化了我们为REST风格controller编写单元测试的工作。
+本文将通过为Todo项的增删改查（CRUD）的REST风格接口操作编写单元测试的方式，一步一步地讲解如何使用Spring MVC Test来进行单元测试。OK，我们快点进入正文吧！
+通过Maven获取依赖 本系列用到的依赖如下：
+ Hamcrest 1.3 (hamcrest-all) Junit 4.11 Mockito 1.9.5 (mockito-core) Spring Test 3.2.3.RELEASE JsonPath 0.8.1 (json-path and json-path-assert)  生成的pom.xml文件的片段如下：
+&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.hamcrest&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;hamcrest-all&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.3&amp;lt;/version&amp;gt; &amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;junit&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;junit&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;4.11&amp;lt;/version&amp;gt; &amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt; &amp;lt;exclusions&amp;gt; &amp;lt;exclusion&amp;gt; &amp;lt;artifactId&amp;gt;hamcrest-core&amp;lt;/artifactId&amp;gt; &amp;lt;groupId&amp;gt;org.hamcrest&amp;lt;/groupId&amp;gt; &amp;lt;/exclusion&amp;gt; &amp;lt;/exclusions&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.mockito&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;mockito-core&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.9.5&amp;lt;/version&amp;gt; &amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-test&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;3.2.3.RELEASE&amp;lt;/version&amp;gt; &amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.</description>
+    </item>
+    
+    <item>
+      <title>Spring MVC Unit Testing - Normal Controllers</title>
+      <link>http://www.wbprime.me/posts/2016-04-09-spring-mvc-testing-unit-testing-normal-controllers/</link>
+      <pubDate>Sat, 09 Apr 2016 23:07:12 +0000</pubDate>
+      
+      <guid>http://www.wbprime.me/posts/2016-04-09-spring-mvc-testing-unit-testing-normal-controllers/</guid>
+      <description>本文是 Spring MVC Testing 单元测试系列的第2篇，原文链接：Unit Testing of Spring MVC Controllers: &amp;ldquo;Normal&amp;rdquo; Controllers。
+本系列的第1部分讲述了使用Spring MVC Test应如何进行单元测试的配置，现在可以开始实战一下如何对标准controller编写单元测试。
+首先需要明确一下。
+ 何为标准controller？
+ 注意：原文标准是加了双引号的（&amp;rdquo;normal&amp;rdquo;）
+我们称之为标准controller的Controller，是渲染view或者处理form提交请求的Controller。（与之相对的是Rest Controller）。
+OK，现在我们进入正文。
+通过Maven获取依赖 本系列用到的依赖如下：
+ Jackson 2.2.1 (core and databind modules) Hamcrest 1.3 JUnit 4.11 Mockito 1.9.5 Spring Test 3.2.3.RELEASE  生成的pom.xml文件的片段如下：
+&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.fasterxml.jackson.core&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;jackson-core&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.2.1&amp;lt;/version&amp;gt; &amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.fasterxml.jackson.core&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;jackson-databind&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.2.1&amp;lt;/version&amp;gt; &amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.hamcrest&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;hamcrest-all&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.3&amp;lt;/version&amp;gt; &amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;junit&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;junit&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;4.11&amp;lt;/version&amp;gt; &amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt; &amp;lt;exclusions&amp;gt; &amp;lt;exclusion&amp;gt; &amp;lt;artifactId&amp;gt;hamcrest-core&amp;lt;/artifactId&amp;gt; &amp;lt;groupId&amp;gt;org.</description>
+    </item>
+    
+    <item>
+      <title>Spring MVC Unit Testing - Configuration</title>
+      <link>http://www.wbprime.me/posts/2016-04-09-spring-mvc-testing-unit-testing-configuration/</link>
+      <pubDate>Sat, 09 Apr 2016 23:06:57 +0000</pubDate>
+      
+      <guid>http://www.wbprime.me/posts/2016-04-09-spring-mvc-testing-unit-testing-configuration/</guid>
+      <description>本文是 Spring MVC Testing 单元测试系列的第1篇，原文链接：Unit Testing of Spring MVC Controllers: Configuration。
+一直以来，为Spring MVC的Controller写单元测试的工作既简单又问题多多。简单体现在单元测试可以很简单地写个测试用例调用一下目标Controller的方法；问题在于这种单元测试完全没有用（不是HTTP的请求），比如说，这种单元测试的方法没办法测试请求映射、参数验证和异常映射等。
+幸运的是，从Spring 3.2开始，我们可以使用Spring MVC Test Framework这一强大的工具通过DispatcherServlet来仿照HTTP请求的方式来单元测试Controller的方法。
+本文主要介绍如何配置Spring使得可以单元测试Spring MVC Controllers。
+下面进入正题。
+通过Maven获取依赖 本系列用到的依赖如下：
+ JUnit 4.11 Mockito Core 1.9.5 Spring Test 3.2.3.RELEASE  生成的pom.xml文件的片段如下：
+&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;junit&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;junit&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;4.11&amp;lt;/version&amp;gt; &amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.mockito&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;mockito-core&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.9.5&amp;lt;/version&amp;gt; &amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-test&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;3.2.3.RELEASE&amp;lt;/version&amp;gt; &amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt; &amp;lt;/dependency&amp;gt;  然后，我们进一步去看一下示例程序。
+示例程序的结构 本教程的示例程序提供用于访问todo项的增删改查（CRUD）入口。为了更好地理解测试配置，首先看一下需要测试的controller类。
+到目前为止，我们需要回答以下两个问题：
+ 待测试的controller类有哪些依赖 这些以来是如何注入待测试的controller类  我们可以创建的TodoController目标类的代码中去查找答案。相关代码如下：
+import org.springframework.beans.factory.annotation.Autowired; import org.springframework.context.MessageSource; import org.springframework.stereotype.Controller; @Controller public class TodoController { private final TodoService service; private final MessageSource messageSource; @Autowired public TodoController(MessageSource messageSource, TodoService service) { this.</description>
+    </item>
+    
+    <item>
+      <title>Spring MVC Testing: Content</title>
+      <link>http://www.wbprime.me/posts/2016-04-09-spring-mvc-testing-content/</link>
+      <pubDate>Sat, 09 Apr 2016 23:03:35 +0000</pubDate>
+      
+      <guid>http://www.wbprime.me/posts/2016-04-09-spring-mvc-testing-content/</guid>
+      <description>本系列翻译自Spring MVC Test Tutorial。
+Springframework自3.2版本以后，提供了Spring MVC Test Framework用于对Spring MVC项目进行测试。
+本系列一共两个部分：单元测试和集成测试。
+单元测试将一个一个的Spring MVC Controller作为一个单元，对每一个接口进行测试。Controller层对Service层的调用使用Mockito进行模拟。
+集成测试对整个web服务进行测试，虽然测试的单位仍然是接口，但是测试结果更偏向于生产环境。为了保证测试的稳定性，使用了DBUnit来控制每一次测试的数据样本。
+需要注意的是，虽然这个系列将Spring MVC Test Framework分为单元测试和集成测试两个部分，但是对于Spring本身来说，其内部实现都是一样的。单元测试和集成测试的区分，是从开发者的角度进行的区分。
+Spring MVC 单元测试：
+ Unit Testing - Configuration Unit Testing - Normal Controllers Unit Testing - REST API  Spring MVC 集成测试：
+ Integration Testing - Configuration Integration Testing - Controllers Integration Testing - Forms Integration Testing - REST API Integration Testing - Security Integration Testing - JsonPath  </description>
+    </item>
+    
+    <item>
+      <title>Learning Java Concurrency - ReentrantReadWriteLock</title>
+      <link>http://www.wbprime.me/posts/2016-04-07-learning-java-concurrency-reentrantreadwritelock/</link>
+      <pubDate>Thu, 07 Apr 2016 21:54:38 +0000</pubDate>
+      
+      <guid>http://www.wbprime.me/posts/2016-04-07-learning-java-concurrency-reentrantreadwritelock/</guid>
+      <description>ReentrantLock是互斥锁，对于要保护的资源，同一时间只能有一个线程进行访问。所谓的访问，就是读和写。但是在实际中，往往是读操作对互斥性的要求远远低于写操作。
+考虑一个共享资源，比如一个List对象，可能会有多个线程对其进行读写。
+下面是使用ReentrantLock实现的一个版本。
+private static class ExclusiveLockStack { private final List&amp;lt;String&amp;gt; list = new ArrayList&amp;lt;String&amp;gt;(); private final ReentrantLock lock = new ReentrantLock(); public void push(final String val) { if (null == val) return; lock.lock(); try { list.add(val); } finally { lock.unlock(); } } public String last() { lock.lock(); String str = null; try { final int lastIdx = list.size() - 1; if (lastIdx &amp;gt;= 0) { str = list.get(lastIdx); } } finally { lock.</description>
+    </item>
+    
+    <item>
+      <title>Learning Java Concurrency - ReentrantLock &amp; Condition</title>
+      <link>http://www.wbprime.me/posts/2016-04-07-learning-java-concurrency-reentrantlock-condition/</link>
+      <pubDate>Thu, 07 Apr 2016 09:47:10 +0000</pubDate>
+      
+      <guid>http://www.wbprime.me/posts/2016-04-07-learning-java-concurrency-reentrantlock-condition/</guid>
+      <description>ReentrantLock是synchronized的高阶版本，用来控制多线程同步。ReentrantLock是一种独占锁，同一时间只能有一个线程使用一把锁，其他请求加锁的线程都会被阻塞。除了控制多线程同步之外，ReentrantLock还提供了Condition用来进行多线程通讯。Condition是Object类的方法wait &amp;amp; notify的替代版本，可以用等待/通知模式来有效控制多线程对共享资源的访问。
+仿synchronized，用ReentrantLock实现单例模式的代码如下：
+private static class Singleton { private static volatile Singleton INSTANCE; private static ReentrantLock lock = new ReentrantLock(); private Singleton() {} public static Singleton instance() { Singleton var = INSTANCE; if (null == var) { lock.lock(); try { var = INSTANCE; if (null == var) { INSTANCE = var = new Singleton(); } } finally { lock.unlock(); } } return var; } }  仿wait &amp;amp; notify，用Condition来实现父子通知汇款的代码如下：</description>
+    </item>
+    
+    <item>
+      <title>Learning Java Concurrency - wait &amp; notify</title>
+      <link>http://www.wbprime.me/posts/2016-04-06-learning-java-concurrency-wait-notify/</link>
+      <pubDate>Wed, 06 Apr 2016 10:00:56 +0000</pubDate>
+      
+      <guid>http://www.wbprime.me/posts/2016-04-06-learning-java-concurrency-wait-notify/</guid>
+      <description>在synchronized关键字之外，Java提供了另外的wait和notify函数族用于支援多线程通信，使用上类似于JUC的Condition类。
+wait()、notify()和notifyAll()是Object类的方法，与synchronized配套使用。
+public class Object { ... public final native void wait(long timeout) throws InterruptedException; public final void wait(long timeout, int nanos) throws InterruptedException; public final void wait() throws InterruptedException; public final native void notify(); public final native void notifyAll(); ... }  wait一共有三个函数。调用wait的线程必须已经持有了同一个对象的同步器（使用synchronized）。调用wait的线程会进入等待状态，直到另外的线程调用了同一个对象的notify函数，或者指定的等待时间过期，或者被中断（引发InterruptedException）。调用wait函数之后，当前线程会放弃已经持有的同步器。
+notify一共是有两个函数。notify()函数会唤醒当前的由于执行wait而进入等待的某个线程；注意，被唤醒的线程是不可预料的，也就是说不同的JVM实现可以用不同的规则算法来决定被唤醒的是哪一个线程。notifyAll()函数会唤醒所有的等待线程，但是只会有一个线程最终进入执行。
+下面用两个例子来说明wait &amp;amp; notify的使用场景和使用方式。
+银行取钱 银行取钱是传统的生产者和消费者模型的一个简化版本。
+假设有一个银行账户，两个用户分别要往里面存钱和取钱（可以想象为一个通知汇款，儿子在上大学要花钱，打电话让父亲给打钱；两个ATM机，父亲手哆嗦地五百五百地存，儿子不耐烦地刷，有钱就取出来）。
+代码 package me.wbprime.showcase.concurrent; import java.util.concurrent.ExecutorService; import java.util.concurrent.Executors; /** * Class: DepositCase * Date: 2016/04/05 14:42 * * @author Elvis Wang [mail@wbprime.</description>
+    </item>
+    
+    <item>
+      <title>Learning Java Concurrency - synchronized</title>
+      <link>http://www.wbprime.me/posts/2016-04-01-java-concurrency-synchronized/</link>
+      <pubDate>Fri, 01 Apr 2016 16:39:24 +0000</pubDate>
+      
+      <guid>http://www.wbprime.me/posts/2016-04-01-java-concurrency-synchronized/</guid>
+      <description>synchronized，同步控制器，是Java原生提供的多线程同步控制的工具，是Java语法的一部分。
+synchronized在语义上等同于一个独占锁。synchronized可以用来修饰一个方法，标识该方法是可同步的；也可以用来修饰语句块，标识该语句块是同步的。在代码经过编译之后，JVM会在方法或者语句块的前后插入monitorenter和monitorexit的虚拟机指令，这两条指令又会隐式地调用lock原语。
+synchronized可以使用在普通方法里，也可以使用在静态方法里。
+class Synchronized { public synchronized void method1(final String val) { System.out.println(&amp;quot;1: Begin add &amp;quot; + val); System.out.println(&amp;quot;1: Finish add &amp;quot; + val); } public synchronized static void method2(final String val) { System.out.println(&amp;quot;2: Begin add &amp;quot; + val); System.out.println(&amp;quot;2: Finish add &amp;quot; + val); } public void method3(final String val) { synchronized(this) { System.out.println(&amp;quot;3: Begin add &amp;quot; + val); System.out.println(&amp;quot;3: Finish add &amp;quot; + val); } } public static void method4(final String val) { synchronized(Synchronized.</description>
+    </item>
+    
+    <item>
+      <title>Learning Java Concurrency - Content</title>
+      <link>http://www.wbprime.me/posts/2016-03-31-java-concurrency-content/</link>
+      <pubDate>Thu, 31 Mar 2016 10:10:46 +0000</pubDate>
+      
+      <guid>http://www.wbprime.me/posts/2016-03-31-java-concurrency-content/</guid>
+      <description> Java Concurrency是学习Java的过程中绕不过去的一道坎。既然绕不过去，只能一点一点去学习它，然后了解它。本系列是在学习Java Concurrency过程中的记录，鉴于网络上关于原理和实现代码的文章一大堆，所以本系列会尽量以实际应用为主。毕竟原理了解的再深，还是要落地为代码。
+本系列主要参考《深入浅出Java Concurrency》系列。
+目录  Learning Java Concurrency - Thread &amp;amp; Runnable Learning Java Concurrency - FutureTask &amp;amp; Callable Learning Java Concurrency - synchronized Learning Java Concurrency - wait &amp;amp; notify Learning Java Concurrency - ReentrantLock &amp;amp; Condition Learning Java Concurrency - CountDownLatch Learning Java Concurrency - CyclicBarrier Learning Java Concurrency - Semaphore Learning Java Concurrency - ReentrantReadWriteLock Learning Java Concurrency - Executors(1)  </description>
+    </item>
+    
+    <item>
+      <title>Learning Java Concurrency - CyclicBarrier</title>
+      <link>http://www.wbprime.me/posts/2016-03-30-java-concurrency-cyclicbarrier/</link>
+      <pubDate>Wed, 30 Mar 2016 21:06:26 +0000</pubDate>
+      
+      <guid>http://www.wbprime.me/posts/2016-03-30-java-concurrency-cyclicbarrier/</guid>
+      <description>CyclicBarrier，正如同名字里面表达出来的，是一个可以循环使用的屏障。与CountDownLatch类似，它可以用来表达等待某个状态，比如大家都到齐了，那么开始开会吧。与CountDownLatch不同的是，它可以多次等待，也就是可以等待多个状态。
+好吃不过栗子。比如哈利波特的三强争霸赛，要一项一项任务地完成，大家都结束了（不管成功还是失败），才开始计划下一个任务。第一个是去挑战龙；然后是到海里面挑战人鱼群；最后是挑战伏地魔。每一个任务总是要等大家都完成了才开始。
+还有一个栗子。大家一起去面试，有的公司为了省事，等凑齐了一波人才开始走流程。HR领着大家一起先笔试，然后安排初面官，然后安排复试官。每一关刷掉一波人，但是只有大家都结束了才进行下一轮。别问我哪里有这样的招聘部门，人家开心就好。
+CyclicBarrier 的简单使用 首先，需要判断有哪些关卡，设计好通关条件。
+然后，创建闯关的线程，各自吃好喝好，准备闯关。
+然后，每过一关，可以有看守的线程出来引导，这也是一个任务。
+之后，就可以开始了。
+CyclicBarrier 的API CyclicBarrier是来做多线程同步的，首先需要确定有多少个线程参与同步。每一个线程都需要调用await()表示自己已经就绪；当所有线程都调用了await()之后，CyclicBarrier达到了第一个屏障。此时可以简单地放行，也可以设置一个任务，由最后一个就绪的线程执行，执行完才放行。
+ CyclicBarrier(int n) 构造一个有n个线程参与同步的同步器，阻塞所有线程直到阻塞的线程个数大于等于n。 CyclicBarrier(int n, Runnable action) 构造一个有n个线程参与同步的同步器，阻塞所有线程直到阻塞的线程个数大于等于n。接触阻塞之前，由最后一个达到的新城执行action。 int await() throws InterruptedException, BrokenBarrierException 阻塞调用线程，直到所有n个线程都调用了本方法。最后一个调用本方法的线程，需要去执行设置的阻塞任务，如果设置了的话。 int await(long timeout, TimeUnit unit) throws InterruptedException, BrokenBarrierException, TimeoutException 同上，加上了超时限制。返回值表示还有多少个线程未就绪，0表示调用线程是最后一个线程。 int getParties() 返回构造器传入的n值。 boolean isBroken() 是否被损坏，损坏原因可能是线程被中断或者超时，或者阻塞action发生异常。 void reset() 重置到初始化状态。 int getNumberWaiting() 返回当前已经等待的线程数。  CyclicBarrier内部是通过一个ReentrantLock实例来进行同步的，用该实例的一个Condition实例来控制是否达到放行状态。
+/** The lock for guarding barrier entry */ private final ReentrantLock lock = new ReentrantLock(); /** Condition to wait on until tripped */ private final Condition trip = lock.</description>
+    </item>
+    
+    <item>
+      <title>Learning Java Concurrency - CountDownLatch</title>
+      <link>http://www.wbprime.me/posts/2016-03-30-java-concurrency-countdownlatch/</link>
+      <pubDate>Wed, 30 Mar 2016 21:06:08 +0000</pubDate>
+      
+      <guid>http://www.wbprime.me/posts/2016-03-30-java-concurrency-countdownlatch/</guid>
+      <description>CountDownLatch 是一种比较有意思的线程同步方法，主要用于需要同步启动的环境中。
+举个栗子，部门进行聚餐要等到大家都到齐了才能开动。这个时候CountDownLatch可以理解为“还有多少人没有到”这个东西，来了一个，这个东西的值就会减1。一直到人都到齐了，这个东西的值变为了0,也就是可以开吃了。
+举个栗子，通用的make进行多工程代码编译，必须所有工程编译完了才能结束。
+举个栗子，项目上线，各个模块都上线完了，leader说一句OK，大家才能走。
+要注意以上几个栗子都是每个线程减1，但是实际中具体减多少不做限制。
+比如，猫有9条命，两个人你一下我一下一刀一刀砍上去，然后它就死了。这个也可用CountDownLatch来描述。
+CountDownLatch 的简单使用 首先，估计要参与工作的子工作数，创建一个CountDownLatch。
+然后，创建干活的线程，持有该CountDownLatch实例，调用await()等待事件。比如具体到聚餐就是“开吃”，具体到9命猫就是“命没了要死了”。
+然后，创建多个准备的线程，每个线程持有相同的CountDownLatch实例。这些线程用来做准备工作，争取早日达到能干活的状态。具体到聚餐上就是“人一个一个来”，具体到猫上就是“一次一次被砍死”。
+然后，就结束了。
+CountDownLatch 的 API  CountDownLatch(int) 构造一个可以由n个线程共享的闭锁。 void await() throws InterruptedException 等待原始的n变成0。调用的线程会被阻塞，直到条件达到。 boolean await(long timeout, TimeUnit unit) throws InterruptedException 等待原始的n变成0。调用的线程会被阻塞，直到条件达到(return true)或者超时(return false)。 void countDown() n - 1。 long getCount() 查询n的值。  CountDownLatch内部有一个静态类Sync。CountDownLatch的所有方法都委托到内部一个Sync实例。
+private static final class Sync extends AbstractQueuedSynchronizer  Sync可以理解为一个共享锁，主要使用AbstractQueuedSynchronizer的共享锁方面的功能。
+示例代码 package me.wbprime.showcase.concurrent; import java.util.Random; import java.util.concurrent.CountDownLatch; import java.util.concurrent.ExecutorService; import java.util.concurrent.Executors; /** * Class: CountDownLatchCase * Date: 2016/03/30 13:05 * * @author Elvis Wang [mail@wbprime.</description>
+    </item>
+    
+    <item>
+      <title>Learning Java Concurrency - Semaphore</title>
+      <link>http://www.wbprime.me/posts/2016-03-30-java-concurrent-semaphore/</link>
+      <pubDate>Wed, 30 Mar 2016 20:33:17 +0000</pubDate>
+      
+      <guid>http://www.wbprime.me/posts/2016-03-30-java-concurrent-semaphore/</guid>
+      <description>Semaphore，信号量。信号量可以理解为令牌掌牌使，负责令牌的发放；当线程需要执行任务时，先到信号量处领取令牌，领取到了令牌再去执行任务；如果令牌被领光了，就需要一直等待；如果任务执行完了，需要到信号量处交还令牌。很简单的逻辑！
+还是吃个栗子，地铁里面公厕，一般也就3、4个坑位。人有三急，当你有需要的时候，还必须得靠这个解决。这个时候，如果公厕里没有人，或者还剩最后一个坑位，那就啥也别说了，进去吧。但是，如果，满了。就，只有，等，了。不着急可以等一等；实在憋不住的，可以催一催。但是不管急不急，都要等里面随便一个里面出来人了才能进去。这个就是典型的信号量。
+还有就是非常典型的生产者/消费者问题了。有一个仓库，里面的仓位是有限的。生产者只有当仓库里面有空仓位时才能进行生产；如果没有空仓位，则需要等待；如果生产了一次，则仓库少了一个空仓位。消费者只有当仓库里有非空仓位时才能消费；如果没有非空仓位，就需要等待；如果消费了一次，仓库里多了一个空仓位。
+Semaphore的简单实用 首先，初始化信号量控制的令牌的个数。
+然后，消费者去申请令牌，可能申请到，也可能被阻塞。
+然后，生产者去释放令牌。
+然后，交互就可以开始了。
+注意，信号量只是保证资源的可用性，当资源不可用时，阻塞线程；然而线程使用资源的过程不保证是原子的，需要另外加锁控制。
+举个例子，你成功申请到了令牌开始执行任务，但是这个任务可能失败，可能成功，还有可能部分成功部分失败。
+Semaphore的API  Semaphore(int permits) &amp;amp; Semaphore(int permits, boolean fair) 构造一个信号量实例（可以是公平的或者非公平的），默认是非公平的。 void acquire() throws InterruptedException 申请一枚令牌；如果没有可用令牌，则阻塞。 void acquireUninterruptibly() 同上；当调用线程被中断时，不抛出异常。 void acquire(int permits) throws InterruptedException 申请多枚令牌；如果没有可用令牌，则阻塞。 void acquireUninterruptibly(int permits) 同上；当调用线程被中断时，不抛出异常。 boolean tryAcquire() 申请一枚令牌；立即返回，申请成功返回true，反之false。 boolean tryAcquire(int permits) 申请多枚令牌；立即返回，申请成功返回true，反之false。 boolean tryAcquire(long timeout, TimeUnit unit) throws TimeoutException 申请一枚令牌，不允许超时；立即返回，申请成功返回true，反之false。 boolean tryAcquire(int permits, long timeout, TimeUnit unit) throws TimeoutException 申请多枚令牌，不允许超时；立即返回，申请成功返回true，反之false。 void release() 归还一枚令牌。 void release(int permits) 归还多枚令牌。 int availablePermits() 当前可用的令牌数。 int drainPermits() 申请获取所有可用令牌，返回申请到的令牌数。 boolean isFair() 是否公平。  Semaphore内部有一个静态类Sync来实现公平策略，NonFairSync来实现非公平策略。</description>
+    </item>
+    
+    <item>
+      <title>Spring: Annotation based configuration</title>
+      <link>http://www.wbprime.me/posts/2015-06-08-spring-annotation-based-configuration/</link>
+      <pubDate>Mon, 08 Jun 2015 10:45:49 +0000</pubDate>
+      
+      <guid>http://www.wbprime.me/posts/2015-06-08-spring-annotation-based-configuration/</guid>
+      <description>Despite XML-based configuration, the Springframework provides full support for annotation-based metadata configuration.
+XML-based configuration isolates the configuration metadata from source code using independent xml files, while annotation-based configuration mixes source code and configuration data. Thus which is the better one to collaborate with the Springframework? The answer is it depends. The XML one performes good isolation between source code and configuration, however you need to bear its stupid and complex and long-but-useless xml syntax, and you must do additional work to sync youc onfiguration data and you source code when you need to update your code, which however is very frequent during development.</description>
+    </item>
+    
+    <item>
+      <title>Spring: XML based configuration</title>
+      <link>http://www.wbprime.me/posts/2015-06-02-spring-xml-based-configuration/</link>
+      <pubDate>Tue, 02 Jun 2015 10:12:47 +0000</pubDate>
+      
+      <guid>http://www.wbprime.me/posts/2015-06-02-spring-xml-based-configuration/</guid>
+      <description>Overview Spring Configuration The Springframework supports 3 kinds of configuration methods, including XML-based configuration, annotation-based configuration and Java-based configuration.
+ Xml-based configuration: traditionally supplied as a simple and intuitive XMl format metadata. Annotation-based configuration: introduced by Spring 2.5. Java-based configuration: introduced as the Spring JavaConfig project by Spring 3.0.  XML-based configuration is widely used and best supported.
+Typical xml configuration file:
+&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt; &amp;lt;beans xmlns=&amp;quot;http://www.springframework.org/schema/beans&amp;quot; xmlns:xsi=&amp;quot;http://www.w3.org/2001/XMLSchema-instance&amp;quot; xsi:schemaLocation=&amp;quot;http://www.springframework.org/schema/beans http://www.</description>
+    </item>
+    
+    <item>
+      <title>Spring DI: At First Glance</title>
+      <link>http://www.wbprime.me/posts/2015-05-28-spring-at-first-glance/</link>
+      <pubDate>Thu, 28 May 2015 19:11:56 +0000</pubDate>
+      
+      <guid>http://www.wbprime.me/posts/2015-05-28-spring-at-first-glance/</guid>
+      <description>Spring is a world famous Java developing framework.
+ The Spring Framework is a lightweight solution and a potential one-stop-shop for building your enterprise-ready applications. However, Spring is modular, allowing you to use only those parts that you need, without having to bring in the rest. You can use the IoC container, with any web framework on top, but you can also use only the Hibernate integration code or the JDBC abstraction layer.</description>
+    </item>
+    
+    <item>
+      <title>JDK installation on Archlinux</title>
+      <link>http://www.wbprime.me/posts/2015-05-25-jdk-installation-on-archlinux/</link>
+      <pubDate>Mon, 25 May 2015 11:07:13 +0000</pubDate>
+      
+      <guid>http://www.wbprime.me/posts/2015-05-25-jdk-installation-on-archlinux/</guid>
+      <description>Basically, Archlinux provide OpenJDK 7&amp;frasl;8 in official repository. Java JDK environment will be setup in quite a little minutes follwing Archliux official guide.
+However, some java programmes does not work well on OpenJDK, and achives better performance on Sun/Oracle JDK. For example, Intellij Idea in Archlinux official repository produces warning message blaming OpenJDK. So Sun/Oracle JDK maybe welcomed by some users who wanted a clean installation of Intellij Idea.
+ Choose and download the JDK version you want to install.</description>
+    </item>
+    
+  </channel>
+</rss>
