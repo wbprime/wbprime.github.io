@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Spring MVC Unit Testing - Normal Controllers</title>
+        <style>
+
+    html body {
+        font-family: Raleway, sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: lightseagreen;
+        --border-width:  0 ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/java.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/c&#43;&#43;.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.26" />
+        
+    </head>
+
+    <body>
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Spring MVC Unit Testing - Normal Controllers</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/posts/">Posts</a></li>
+                            
+                                <li><a href="/categories/">Categories</a></li>
+                            
+                                <li><a href="/tags/">Tags</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:mail@wbprime.me"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/wbprime/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://www.stackoverflow.com/wbprime/"><i class="fa fa-stack-overflow"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/posts/2016-04-09-spring-mvc-testing-unit-testing-normal-controllers/">Spring MVC Unit Testing - Normal Controllers</a></h4>
+    <h5>April 9, 2016</h5>
+     <kbd class="item-tag">Spring MVC</kbd>  <kbd class="item-tag">Test</kbd>  <kbd class="item-tag">Java</kbd> 
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<p>本文是 <a href="/2016/04/09/spring-mvc-testing-content/">Spring MVC Testing</a> 单元测试系列的第2篇，原文链接：<a href="http://www.petrikainulainen.net/programming/spring-framework/unit-testing-of-spring-mvc-controllers-normal-controllers/">Unit Testing of Spring MVC Controllers: &ldquo;Normal&rdquo; Controllers</a>。</p>
+
+<p>本系列的第1部分讲述了使用Spring MVC Test应如何进行单元测试的<a href="/2016/04/09/spring-mvc-testing-unit-testing-configuration/">配置</a>，现在可以开始实战一下如何对标准controller编写单元测试。</p>
+
+<p>首先需要明确一下。</p>
+
+<blockquote>
+<p>何为标准controller？</p>
+</blockquote>
+
+<p>注意：原文标准是加了双引号的（&rdquo;normal&rdquo;）</p>
+
+<p>我们称之为标准controller的Controller，是渲染view或者处理form提交请求的Controller。（与之相对的是Rest Controller）。</p>
+
+<p>OK，现在我们进入正文。</p>
+
+<!-- More -->
+
+<h1 id="通过maven获取依赖">通过Maven获取依赖</h1>
+
+<p>本系列用到的依赖如下：</p>
+
+<ul>
+<li>Jackson 2.2.1 (core and databind modules)</li>
+<li>Hamcrest 1.3</li>
+<li>JUnit 4.11</li>
+<li>Mockito 1.9.5</li>
+<li>Spring Test 3.2.3.RELEASE</li>
+</ul>
+
+<p>生成的pom.xml文件的片段如下：</p>
+
+<pre><code class="language-xml">&lt;dependency&gt;
+    &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
+    &lt;artifactId&gt;jackson-core&lt;/artifactId&gt;
+    &lt;version&gt;2.2.1&lt;/version&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
+    &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;
+    &lt;version&gt;2.2.1&lt;/version&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.hamcrest&lt;/groupId&gt;
+    &lt;artifactId&gt;hamcrest-all&lt;/artifactId&gt;
+    &lt;version&gt;1.3&lt;/version&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;junit&lt;/groupId&gt;
+    &lt;artifactId&gt;junit&lt;/artifactId&gt;
+    &lt;version&gt;4.11&lt;/version&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+    &lt;exclusions&gt;
+        &lt;exclusion&gt;
+            &lt;artifactId&gt;hamcrest-core&lt;/artifactId&gt;
+            &lt;groupId&gt;org.hamcrest&lt;/groupId&gt;
+        &lt;/exclusion&gt;
+    &lt;/exclusions&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.mockito&lt;/groupId&gt;
+    &lt;artifactId&gt;mockito-core&lt;/artifactId&gt;
+    &lt;version&gt;1.9.5&lt;/version&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-test&lt;/artifactId&gt;
+    &lt;version&gt;3.2.3.RELEASE&lt;/version&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+<p>然后可以开始编写测试用例了。</p>
+
+<h1 id="测试用例类">测试用例类</h1>
+
+<p>对controller方法进行单元测试，原则上有以下两个步骤：</p>
+
+<ol>
+<li>首先向目标controller发送一个请求</li>
+<li>然后检验收到的响应是否符合预期</li>
+</ol>
+
+<p>Spring MVC Test模块提供了一些工具简化我们的工作，这些类主要是：</p>
+
+<ul>
+<li><a href="http://docs.spring.io/spring/docs/3.2.x/javadoc-api/org/springframework/test/web/servlet/request/MockMvcRequestBuilders.html"><code>MockMvcRequestBuilders</code></a> 类可以用来简化创建请求的工作</li>
+<li><a href="http://docs.spring.io/spring/docs/3.2.x/javadoc-api/org/springframework/test/web/servlet/MockMvc.html"><code>MockMvc</code></a> 类可以用来执行请求并获取响应</li>
+<li><a href="http://docs.spring.io/spring/docs/3.2.x/javadoc-api/org/springframework/test/web/servlet/result/MockMvcResultMatchers.html"><code>MockMvcResultMatchers</code></a> 类可以用来辅助对响应作校验</li>
+</ul>
+
+<p>为了演示完整的流程，我们将编写单元测试测试3个controller方法：</p>
+
+<ol>
+<li>第一个主要是渲染显示<code>Todo</code>项列表页面的接口</li>
+<li>第二个主要是渲染显示单个<code>Todo</code>项详情的接口</li>
+<li>第三个主要是处理添加<code>Todo</code>项的表单请求的接口</li>
+</ol>
+
+<h2 id="todo-项列表页接口"><code>Todo</code>项列表页接口</h2>
+
+<p>首先看一下该接口的实现代码。</p>
+
+<h3 id="预期的实现">预期的实现</h3>
+
+<p>预期的接口应该做以下几件事：</p>
+
+<ol>
+<li>接收到&rdquo;/&ldquo;上的GET请求，开始处理流程</li>
+<li>调用<code>TodoService</code>的<code>findAll()</code>方法获取到所有的<code>Todo</code>对象的列表</li>
+<li>将获取到的列表加入到model中</li>
+<li>返回对应的view名称</li>
+</ol>
+
+<p><code>TodoController</code>类内的相关代码如下：</p>
+
+<pre><code class="language-java">import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+ 
+@Controller
+public class TodoController {
+    private final TodoService service;
+     
+    @RequestMapping(value = &quot;/&quot;, method = RequestMethod.GET)
+    public String findAll(Model model) {
+        List&lt;Todo&gt; models = service.findAll();
+        model.addAttribute(&quot;todos&quot;, models);
+        return &quot;todo/list&quot;;
+    }
+}
+</code></pre>
+
+<p>接下来可以开始编写测试用例了。</p>
+
+<h3 id="测试用例-todo-列表页接口">测试用例：<code>Todo</code>列表页接口</h3>
+
+<p>该测试用例主要工作如下：</p>
+
+<ol>
+<li>准备测试数据</li>
+<li>配置mock的<code>TodoService</code>实例在<code>findAll()</code>方法被调用的时候返回准备的数据</li>
+<li>执行一个&rsquo;/&lsquo;的GET请求</li>
+<li>对响应作断言：HTTP返回码是200</li>
+<li>对响应作断言：view的名称是&rdquo;todo/list&rdquo;</li>
+<li>对响应作断言：请求拿到的是&rsquo;/WEB-INF/jsp/todo/list.jsp&rsquo;页面</li>
+<li>对响应作断言：model里面的元素个数是2</li>
+<li>对响应作断言：model里面的元素是正确的</li>
+<li>检查请求执行过程中mock的<code>TodoService</code>实例执行了<code>findAll()</code>方法有且仅1次</li>
+<li>检查请求执行过程中mock的<code>TodoService</code>实例未执行其他方法</li>
+</ol>
+
+<p>相关代码如下：</p>
+
+<pre><code class="language-java">import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+ 
+import java.util.Arrays;
+ 
+import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.is;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+ 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {TestContext.class, WebAppContext.class})
+@WebAppConfiguration
+public class TodoControllerTest {
+ 
+    private MockMvc mockMvc;
+ 
+    @Autowired
+    private TodoService todoServiceMock;
+ 
+    //Add WebApplicationContext field here
+ 
+    //The setUp() method is omitted.
+ 
+    @Test
+    public void 
+    findAll_ShouldAddTodoEntriesToModelAndRenderTodoListView() throws Exception {
+        Todo first = new TodoBuilder()
+                .id(1L)
+                .description(&quot;Lorem ipsum&quot;)
+                .title(&quot;Foo&quot;)
+                .build();
+ 
+        Todo second = new TodoBuilder()
+                .id(2L)
+                .description(&quot;Lorem ipsum&quot;)
+                .title(&quot;Bar&quot;)
+                .build();
+ 
+        when(todoServiceMock.findAll()).thenReturn(Arrays.asList(first, second));
+ 
+        mockMvc.perform(get(&quot;/&quot;))
+                .andExpect(status().isOk())
+                .andExpect(view().name(&quot;todo/list&quot;))
+                .andExpect(forwardedUrl(&quot;/WEB-INF/jsp/todo/list.jsp&quot;))
+                .andExpect(model().attribute(&quot;todos&quot;, hasSize(2)))
+                .andExpect(model().attribute(&quot;todos&quot;, hasItem(
+                        allOf(
+                                hasProperty(&quot;id&quot;, is(1L)),
+                                hasProperty(&quot;description&quot;, is(&quot;Lorem ipsum&quot;)),
+                                hasProperty(&quot;title&quot;, is(&quot;Foo&quot;))
+                        )
+                )))
+                .andExpect(model().attribute(&quot;todos&quot;, hasItem(
+                        allOf(
+                                hasProperty(&quot;id&quot;, is(2L)),
+                                hasProperty(&quot;description&quot;, is(&quot;Lorem ipsum&quot;)),
+                                hasProperty(&quot;title&quot;, is(&quot;Bar&quot;))
+                        )
+                )));
+ 
+        verify(todoServiceMock, times(1)).findAll();
+        verifyNoMoreInteractions(todoServiceMock);
+    }
+}
+</code></pre>
+
+<h2 id="todo-项详情页接口"><code>Todo</code>项详情页接口</h2>
+
+<p>首先看一下该接口的实现代码。</p>
+
+<h3 id="预期的实现-1">预期的实现</h3>
+
+<p>预期的接口应该做以下几件事：</p>
+
+<ol>
+<li>接收到&rdquo;/todo/{id}&ldquo;上的GET请求，{id}是<code>Todo</code>的id值，开始处理流程</li>
+<li>调用<code>TodoService</code>的<code>findById()</code>方法获取到目标<code>Todo</code>对象</li>
+<li>将获取到的<code>Todo</code>项加入到model中</li>
+<li>返回对应的view名称</li>
+</ol>
+
+<p><code>TodoController</code>类内的相关代码如下：</p>
+
+<pre><code class="language-java">@RequestMapping(value = &quot;/todo/{id}&quot;, method = RequestMethod.GET)
+public String findById(@PathVariable(&quot;id&quot;) Long id, Model model) throws TodoNotFoundException {
+    Todo found = service.findById(id);
+    model.addAttribute(&quot;todo&quot;, found);
+    return &quot;todo/view&quot;;
+}
+</code></pre>
+
+<blockquote>
+<p>如果抛出了<code>TodoNotFoundException</code>，Spring Mvc是怎么处理的呢？</p>
+</blockquote>
+
+<p>在本系列的前一篇中，我们在webapp的配置中注册了一个<code>exceptionResolver()</code>：</p>
+
+<pre><code class="language-java">@Bean
+public SimpleMappingExceptionResolver exceptionResolver() {
+    SimpleMappingExceptionResolver exceptionResolver = new SimpleMappingExceptionResolver();
+ 
+    Properties exceptionMappings = new Properties();
+ 
+    exceptionMappings.put(
+        &quot;net.petrikainulainen.spring.testmvc.todo.exception.TodoNotFoundException&quot;,
+        &quot;error/404&quot;
+    );
+    exceptionMappings.put(&quot;java.lang.Exception&quot;, &quot;error/error&quot;);
+    exceptionMappings.put(&quot;java.lang.RuntimeException&quot;, &quot;error/error&quot;);
+ 
+    exceptionResolver.setExceptionMappings(exceptionMappings);
+ 
+    Properties statusCodes = new Properties();
+ 
+    statusCodes.put(&quot;error/404&quot;, &quot;404&quot;);
+    statusCodes.put(&quot;error/error&quot;, &quot;500&quot;);
+ 
+    exceptionResolver.setStatusCodes(statusCodes);
+ 
+    return exceptionResolver;
+}
+</code></pre>
+
+<p>所以，当抛出<code>TodoNotFoundException</code>异常时，会返回&rsquo;error/404&rsquo;的页面。</p>
+
+<p>所以我们的测试用例要测试两种情况：</p>
+
+<ul>
+<li>接口找到了指定的<code>Todo</code>项</li>
+<li>接口没有找到指定的<code>Todo</code>项</li>
+</ul>
+
+<p>接下来可以开始编写测试用例了。</p>
+
+<h3 id="测试用例-todo-项未找到">测试用例：<code>Todo</code>项未找到</h3>
+
+<p>该测试用例主要工作如下：</p>
+
+<ol>
+<li>配置mock的<code>TodoService</code>实例在<code>findById()</code>方法被调用的时候抛出<code>TodoNotFoundException</code></li>
+<li>执行一个&rsquo;/todo/1&rsquo;的GET请求</li>
+<li>对响应作断言：HTTP返回码是404</li>
+<li>对响应作断言：view的名称是&rdquo;error/404&rdquo;</li>
+<li>对响应作断言：请求拿到的是&rsquo;/WEB-INF/jsp/error/404.jsp&rsquo;页面</li>
+<li>检查请求执行过程中mock的<code>TodoService</code>实例执行了<code>findById()</code>方法有且仅1次</li>
+<li>检查请求执行过程中mock的<code>TodoService</code>实例未执行其他方法</li>
+</ol>
+
+<p>代码如下：</p>
+
+<pre><code class="language-java">import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+ 
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+ 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {TestContext.class, WebAppContext.class})
+@WebAppConfiguration
+public class TodoControllerTest {
+ 
+    private MockMvc mockMvc;
+ 
+    @Autowired
+    private TodoService todoServiceMock;
+ 
+    //Add WebApplicationContext field here
+ 
+    //The setUp() method is omitted.
+ 
+    @Test
+    public void findById_TodoEntryNotFound_ShouldRender404View() throws Exception {
+        when(todoServiceMock.findById(1L)).thenThrow(new TodoNotFoundException(&quot;&quot;));
+ 
+        mockMvc.perform(get(&quot;/todo/{id}&quot;, 1L))
+                .andExpect(status().isNotFound())
+                .andExpect(view().name(&quot;error/404&quot;))
+                .andExpect(forwardedUrl(&quot;/WEB-INF/jsp/error/404.jsp&quot;));
+ 
+        verify(todoServiceMock, times(1)).findById(1L);
+        verifyZeroInteractions(todoServiceMock);
+    }
+}
+</code></pre>
+
+<h3 id="测试用例-todo-项被找到">测试用例：<code>Todo</code>项被找到</h3>
+
+<p>该测试用例主要工作如下：</p>
+
+<ol>
+<li>准备测试数据</li>
+<li>配置mock的<code>TodoService</code>实例在<code>findById()</code>方法被调用的时候返回准备的数据</li>
+<li>执行一个&rsquo;/todo/1&rsquo;的GET请求</li>
+<li>对响应作断言：HTTP返回码是200</li>
+<li>对响应作断言：view的名称是&rdquo;todo/view&rdquo;</li>
+<li>对响应作断言：请求拿到的是&rsquo;/WEB-INF/jsp/todo/view.jsp&rsquo;页面</li>
+<li>对响应作断言：model里面的元素是正确的</li>
+<li>检查请求执行过程中mock的<code>TodoService</code>实例执行了<code>findById()</code>方法有且仅1次</li>
+<li>检查请求执行过程中mock的<code>TodoService</code>实例未执行其他方法</li>
+</ol>
+
+<p>代码如下：</p>
+
+<pre><code class="language-java">import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+ 
+import static org.hamcrest.Matchers.hasProperty;
+import static org.hamcrest.Matchers.is;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+ 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {TestContext.class, WebAppContext.class})
+@WebAppConfiguration
+public class TodoControllerTest {
+ 
+    private MockMvc mockMvc;
+ 
+    @Autowired
+    private TodoService todoServiceMock;
+ 
+    //Add WebApplicationContext field here
+ 
+    //The setUp() method is omitted.
+ 
+    @Test
+    public void 
+    findById_TodoEntryFound_ShouldAddTodoEntryToModelAndRenderViewTodoEntryView() throws Exception {
+        Todo found = new TodoBuilder()
+                .id(1L)
+                .description(&quot;Lorem ipsum&quot;)
+                .title(&quot;Foo&quot;)
+                .build();
+ 
+        when(todoServiceMock.findById(1L)).thenReturn(found);
+ 
+        mockMvc.perform(get(&quot;/todo/{id}&quot;, 1L))
+                .andExpect(status().isOk())
+                .andExpect(view().name(&quot;todo/view&quot;))
+                .andExpect(forwardedUrl(&quot;/WEB-INF/jsp/todo/view.jsp&quot;))
+                .andExpect(model().attribute(&quot;todo&quot;, hasProperty(&quot;id&quot;, is(1L))))
+                .andExpect(model().attribute(&quot;todo&quot;, hasProperty(&quot;description&quot;, is(&quot;Lorem ipsum&quot;))))
+                .andExpect(model().attribute(&quot;todo&quot;, hasProperty(&quot;title&quot;, is(&quot;Foo&quot;))));
+ 
+        verify(todoServiceMock, times(1)).findById(1L);
+        verifyNoMoreInteractions(todoServiceMock);
+    }
+}
+</code></pre>
+
+<h2 id="todo-项创建表单请求接口"><code>Todo</code>项创建表单请求接口</h2>
+
+<p>首先看一下该接口的实现代码。</p>
+
+<h3 id="预期的实现-2">预期的实现</h3>
+
+<p>预期的接口应该做以下几件事：</p>
+
+<ol>
+<li>接收到&rdquo;/todo/add&rdquo;上的POST请求，开始处理流程</li>
+<li>检测表单是否有错误</li>
+<li>调用<code>TodoService</code>的<code>add()</code>方法添加指定的<code>Todo</code>项</li>
+<li>将需要的信息加入到model中</li>
+<li>返回重定向的view名称</li>
+</ol>
+
+<p><code>TodoController</code>类内的相关代码如下：</p>
+
+<pre><code class="language-java">import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+ 
+import javax.validation.Valid;
+import java.util.Locale;
+ 
+@Controller
+@SessionAttributes(&quot;todo&quot;)
+public class TodoController {
+ 
+    private final TodoService service;
+ 
+    private final MessageSource messageSource;
+ 
+    @RequestMapping(value = &quot;/todo/add&quot;, method = RequestMethod.POST)
+    public String add(
+        @Valid @ModelAttribute(&quot;todo&quot;) TodoDTO dto,
+        BindingResult result,
+        RedirectAttributes attributes
+    ) {
+        if (result.hasErrors()) {
+            return &quot;todo/add&quot;;
+        }
+ 
+        Todo added = service.add(dto);
+ 
+        addFeedbackMessage(attributes, &quot;feedback.message.todo.added&quot;, added.getTitle());
+        attributes.addAttribute(&quot;id&quot;, added.getId());
+ 
+        return createRedirectViewPath(&quot;todo/view&quot;);
+    }
+ 
+    private void addFeedbackMessage(
+        RedirectAttributes attributes,
+        String messageCode,
+        Object... messageParameters
+    ) {
+        String localizedFeedbackMessage = getMessage(messageCode, messageParameters);
+        attributes.addFlashAttribute(&quot;feedbackMessage&quot;, localizedFeedbackMessage);
+    }
+ 
+    private String getMessage(String messageCode, Object... messageParameters) {
+        Locale current = LocaleContextHolder.getLocale();
+        return messageSource.getMessage(messageCode, messageParameters, current);
+    }
+ 
+    private String createRedirectViewPath(String requestMapping) {
+        StringBuilder redirectViewPath = new StringBuilder();
+        redirectViewPath.append(&quot;redirect:&quot;);
+        redirectViewPath.append(requestMapping);
+        return redirectViewPath.toString();
+    }
+}
+</code></pre>
+
+<p>我们使用了<code>TodoDTO</code>类来封装<code>Todo</code>项的创建信息，代码如下：</p>
+
+<pre><code class="language-java">import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+ 
+public class TodoDTO {
+ 
+    private Long id;
+ 
+    @Length(max = 500)
+    private String description;
+ 
+    @NotEmpty
+    @Length(max = 100)
+    private String title;
+ 
+    //Constructor and other methods are omitted.
+}
+</code></pre>
+
+<p><code>TodoDTO</code>类里面有一些校验规则，如果不满足规则，Spring在接口的<code>BindingResult</code>参数里面会显示错误。</p>
+
+<p>所以，我们的测试用例需要考虑两种情况：</p>
+
+<ul>
+<li>参数校验通过</li>
+<li>参数校验没有通过</li>
+</ul>
+
+<p>接下来可以开始编写测试用例了。</p>
+
+<h3 id="测试用例-tododto-参数校验未通过">测试用例：<code>TodoDTO</code>参数校验未通过</h3>
+
+<p>该测试用例主要工作如下：</p>
+
+<ol>
+<li>创建一个不符合验证规则的title</li>
+<li>创建一个不符合验证规则的description</li>
+<li>执行一个&rsquo;/todo/add&rsquo;的POST请求</li>
+<li>对响应作断言：HTTP返回码是200</li>
+<li>对响应作断言：view的名称是&rdquo;todo/add&rdquo;</li>
+<li>对响应作断言：请求拿到的是&rsquo;/WEB-INF/jsp/todo/add.jsp&rsquo;页面</li>
+</ol>
+
+<p>代码如下：</p>
+
+<pre><code class="language-java">import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+ 
+import static org.hamcrest.Matchers.hasProperty;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+ 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {TestContext.class, WebAppContext.class})
+@WebAppConfiguration
+public class TodoControllerTest {
+ 
+    private MockMvc mockMvc;
+ 
+    @Autowired
+    private TodoService todoServiceMock;
+ 
+    //Add WebApplicationContext field here
+ 
+    //The setUp() method is omitted.
+ 
+    @Test
+    public void 
+    add_DescriptionAndTitleAreTooLong_ShouldRenderFormViewAndReturnValidationErrorsForTitleAndDescription()
+    throws Exception {
+        String title = TestUtil.createStringWithLength(101);
+        String description = TestUtil.createStringWithLength(501);
+ 
+        mockMvc.perform(post(&quot;/todo/add&quot;)
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param(&quot;description&quot;, description)
+                .param(&quot;title&quot;, title)
+                .sessionAttr(&quot;todo&quot;, new TodoDTO())
+        )
+                .andExpect(status().isOk())
+                .andExpect(view().name(&quot;todo/add&quot;))
+                .andExpect(forwardedUrl(&quot;/WEB-INF/jsp/todo/add.jsp&quot;))
+                .andExpect(model().attributeHasFieldErrors(&quot;todo&quot;, &quot;title&quot;))
+                .andExpect(model().attributeHasFieldErrors(&quot;todo&quot;, &quot;description&quot;))
+                .andExpect(model().attribute(&quot;todo&quot;, hasProperty(&quot;id&quot;, nullValue())))
+                .andExpect(model().attribute(&quot;todo&quot;, hasProperty(&quot;description&quot;, is(description))))
+                .andExpect(model().attribute(&quot;todo&quot;, hasProperty(&quot;title&quot;, is(title))));
+ 
+        verifyZeroInteractions(todoServiceMock);
+    }
+}
+</code></pre>
+
+<p>为了简化代码，我们新建了一个新的类<code>TestUtil</code>，用来生成固定长度的字符串。<code>TestUtil</code>类代码如下：</p>
+
+<pre><code class="language-java">import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.ObjectMapper;
+ 
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+ 
+public class TestUtil {
+ 
+    public static String createStringWithLength(int length) {
+        StringBuilder builder = new StringBuilder();
+ 
+        for (int index = 0; index &lt; length; index++) {
+            builder.append(&quot;a&quot;);
+        }
+ 
+        return builder.toString();
+    }
+}
+</code></pre>
+
+<h3 id="测试用例-tododto-参数校验通过">测试用例：<code>TodoDTO</code>参数校验通过</h3>
+
+<p>该测试用例主要工作如下：</p>
+
+<ol>
+<li>准备测试数据</li>
+<li>配置mock的<code>TodoService</code>实例在<code>add()</code>方法被调用的时候返回一个<code>Todo</code>项</li>
+<li>执行一个&rsquo;/todo/add&rsquo;的POST请求</li>
+<li>对响应作断言：HTTP返回码是302</li>
+<li>对响应作断言：view的名称是&rdquo;redirect:todo/{id}&rdquo;</li>
+<li>对响应作断言：请求被重定向到&rdquo;todo/1&rdquo;</li>
+<li>检查请求执行过程中mock的<code>TodoService</code>实例执行了<code>add()</code>方法有且仅1次</li>
+<li>检查请求执行过程中mock的<code>TodoService</code>实例未执行其他方法</li>
+</ol>
+
+<p>代码如下：</p>
+
+<pre><code class="language-java">import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+ 
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.isA;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+ 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {TestContext.class, WebAppContext.class})
+@WebAppConfiguration
+public class TodoControllerTest {
+ 
+    private MockMvc mockMvc;
+ 
+    @Autowired
+    private TodoService todoServiceMock;
+ 
+    //Add WebApplicationContext field here
+ 
+    //The setUp() method is omitted.
+ 
+    @Test
+    public void add_NewTodoEntry_ShouldAddTodoEntryAndRenderViewTodoEntryView() throws Exception {
+        Todo added = new TodoBuilder()
+                .id(1L)
+                .description(&quot;description&quot;)
+                .title(&quot;title&quot;)
+                .build();
+ 
+        when(todoServiceMock.add(isA(TodoDTO.class))).thenReturn(added);
+ 
+        mockMvc.perform(post(&quot;/todo/add&quot;)
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param(&quot;description&quot;, &quot;description&quot;)
+                .param(&quot;title&quot;, &quot;title&quot;)
+                .sessionAttr(&quot;todo&quot;, new TodoDTO())
+        )
+                .andExpect(status().isMovedTemporarily())
+                .andExpect(view().name(&quot;redirect:todo/{id}&quot;))
+                .andExpect(redirectedUrl(&quot;/todo/1&quot;))
+                .andExpect(model().attribute(&quot;id&quot;, is(&quot;1&quot;)))
+                .andExpect(flash().attribute(&quot;feedbackMessage&quot;, is(&quot;Todo entry: title was added.&quot;)));
+ 
+        ArgumentCaptor&lt;TodoDTO&gt; formObjectArgument = ArgumentCaptor.forClass(TodoDTO.class);
+        verify(todoServiceMock, times(1)).add(formObjectArgument.capture());
+        verifyNoMoreInteractions(todoServiceMock);
+ 
+        TodoDTO formObject = formObjectArgument.getValue();
+ 
+        assertThat(formObject.getDescription(), is(&quot;description&quot;));
+        assertNull(formObject.getId());
+        assertThat(formObject.getTitle(), is(&quot;title&quot;));
+    }
+}
+</code></pre>
+
+<h1 id="总结">总结</h1>
+
+<p>本文主要介绍了如何使用Spring MVC Test来对标准controller进行单元测试，主要内容如下：</p>
+
+<ul>
+<li>如何创建一个请求</li>
+<li>如何对请求的响应作断言</li>
+<li>如何单元测试一个渲染view的接口</li>
+<li>如何单元测试一个处理表单请求的接口</li>
+</ul>
+
+<p>下一篇是介绍<a href="/2016/04/09/spring-mvc-testing-unit-testing-rest-api/">Spring MVC Unit Testing - REST API</a>。</p>
+
+<p>本文使用的代码已经放在了 <a href="https://github.com/pkainulainen/spring-mvc-test-examples/tree/master/controllers-unittest">Github</a> 上，请自行查阅。</p>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+
+    </body>
+
+</html>
+

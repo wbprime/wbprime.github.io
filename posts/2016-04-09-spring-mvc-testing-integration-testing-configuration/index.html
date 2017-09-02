@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Spring MVC Integration Testing - Configuration</title>
+        <style>
+
+    html body {
+        font-family: Raleway, sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: lightseagreen;
+        --border-width:  0 ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/java.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/c&#43;&#43;.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.26" />
+        
+    </head>
+
+    <body>
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Spring MVC Integration Testing - Configuration</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/posts/">Posts</a></li>
+                            
+                                <li><a href="/categories/">Categories</a></li>
+                            
+                                <li><a href="/tags/">Tags</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:mail@wbprime.me"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/wbprime/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://www.stackoverflow.com/wbprime/"><i class="fa fa-stack-overflow"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/posts/2016-04-09-spring-mvc-testing-integration-testing-configuration/">Spring MVC Integration Testing - Configuration</a></h4>
+    <h5>April 9, 2016</h5>
+     <kbd class="item-tag">Spring MVC</kbd>  <kbd class="item-tag">Test</kbd>  <kbd class="item-tag">Java</kbd> 
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<p>本文是 <a href="/2016/04/09/spring-mvc-testing-content/">Spring MVC Testing</a> 集成测试系列的第1篇，原文链接：<a href="http://www.petrikainulainen.net/programming/spring-framework/integration-testing-of-spring-mvc-applications-configuration/">Integration Testing of Spring MVC Applications: Configuration</a>。</p>
+
+<p>没有人会否认集成测试的重要性，它是验证我们开发的组件能够正常协同工作的重要手段。不幸的是，对使用Spring MVC开发的web应用程序作集成测试有一点麻烦。</p>
+
+<p>过去我们一直用 <a href="http://docs.seleniumhq.org">Selenium</a> 和 <a href="https://jwebunit.github.io/jwebunit/">JWebUnit</a> 来对web应用接口作集成测试，然后效果不是很好。这种方法有以下三个缺点：</p>
+
+<ul>
+<li>对于开发中的web接口，编写和维护测试的工作量比较大</li>
+<li>对于使用Javascript，尤其是Ajax的web应用，可用性不高</li>
+<li>必须在web容器中启动运行，导致速度慢而且很没有效率</li>
+</ul>
+
+<p>经常就是开发者在后续开发过程中觉得维护之前的集成测试用例太过耗时而且效果不大，所以废弃了这种形式的集成测试。幸运的是，我们找到了一种新型的集成测试框架Spring MVC Test可以用来简化测试工作。</p>
+
+<p>本文主要介绍如何配置Spring MVC Test框架来进行web应用的测试。本系列使用的工具包括：</p>
+
+<ul>
+<li>Spring Framework 3.2</li>
+<li>JUnit 4.10</li>
+<li>Maven 3.0.3</li>
+</ul>
+
+<p>我们一起来开始进入Spring MVC Test的世界吧！</p>
+
+<!-- More -->
+
+<h1 id="通过maven获取依赖">通过Maven获取依赖</h1>
+
+<p>译者注：原文写作的时候是基于Spring Framework 3.1.2，当时Spring-test-mvc还是作为一个独立的项目进行开发和发布。在Spring Framework 3.2以后，该项目被合并到Spring Framework中去了。现在Spring Framework已经发布了4.X系列，很少有人在使用3.2以下的版本，为了减少混淆，直接将原文的pom文件加以修改。特此说明。</p>
+
+<p>生成的pom.xml文件如下：</p>
+
+<pre><code class="language-xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-test&lt;/artifactId&gt;
+    &lt;version&gt;3.2&lt;/version&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+<h1 id="mockmvc-配置">MockMvc 配置</h1>
+
+<p>Spring MVC Test框架提供了<code>MockMvc</code>类体系来辅助编写基于Spring MVC开发的web应用的测试代码。我们需要做的就是使用<code>MockMvcBuilder</code>接口的实际实现来生成<code>MockMvc</code>实例。<code>MockMvcBuilders</code>工厂类提供了两个工厂方法创建<code>MockMvcBuilder</code>实例：</p>
+
+<ul>
+<li><code>StandaloneMockMvcBuilder standaloneSetup(Object… controllers)</code> 主要用来对单个Controller进行测试，需要手动地配置各种Bean</li>
+<li><code>DefaultMockMvcBuilder webAppContextSetup(WebApplicationContext context)</code> 主要使用配置好的Spring上下文来配置Bean</li>
+</ul>
+
+<p>下面来详细看一下这两种方式分别如何使用。</p>
+
+<h2 id="standalonesetup">standaloneSetup</h2>
+
+<p>如果要测试的类是<code>HomeController</code>，我们可以用如下的方式创建一个<code>MockMvc</code>实例：</p>
+
+<pre><code class="language-java">MockMvc mockMvc = MockMvcBuilders.standaloneSetup(new HomeController()).build();
+</code></pre>
+
+<h2 id="webappcontextsetup">webAppContextSetup</h2>
+
+<p>这种方式我们要先初始化一个配置好的<code>WebApplicationContext</code>实例，然后通过如下代码创建一个<code>MockMvc</code>实例：</p>
+
+<pre><code class="language-java">WebApplicationContext wac ;
+MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
+</code></pre>
+
+<h1 id="测试用例类的配置">测试用例类的配置</h1>
+
+<p>在集成测试中我们应该使用webAppContextSetup方式的<code>MockMvc</code>配置方式，这样可以最大化地共用Spring配置代码。</p>
+
+<p>我们可以按照如下的步骤来配置集成测试用例类：</p>
+
+<ol>
+<li>对测试用例类加上<code>@RunWith(SpringJUnit4ClassRunner.class)</code>注解</li>
+<li>对测试用例类加上<code>@ContextConfiguration</code>注解，并指定Spring配置文件（XML）或者配置类（Java）</li>
+<li>对测试用例类加上<code>@WebAppConfiguration</code>注解，表明这是一个web应用的测试用例</li>
+<li>测试用例类中添加一个<code>MockMvc</code>类型的成员</li>
+<li>测试用例类中添加一个<code>setUp()</code>方法并用<code>@Before</code>注解，调用<code>MockMvcBuilders</code>的静态方法<code>webAppContextSetup()</code>创建并配置好<code>MockMvc</code>类型的成员</li>
+</ol>
+
+<p>完成后的测试用例类大概长成这个样子：</p>
+
+<pre><code class="language-java">@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {&quot;classpath:testContext.xml&quot;, &quot;classpath:webMvcContext.xml&quot;})
+//@ContextConfiguration(classes = {TestContext.class, WebMvcContext.class})
+@WebAppConfiguration
+public class TodoControllerTest_WebAppContext {
+    private MockMvc mockMvc;
+
+    @Autowired
+    private WebApplicationContext webApplicationContext;
+
+    @Before
+    public void setUp() throws Exception {
+        Mockito.reset(mockedTodoService);
+
+        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+    }
+
+    // Add tests here
+}
+</code></pre>
+
+<p>本文使用的代码被放在了 <a href="https://github.com/pkainulainen/spring-mvc-test-examples/tree/master/configuration">Github</a> 上。使用Maven进行集成测试的方法可以参见我的另外一篇文章 <a href="http://www.petrikainulainen.net/programming/maven/integration-testing-with-maven/">Integration Testing with Maven</a>。</p>
+
+<h1 id="总结">总结</h1>
+
+<p>本文主要介绍了如何来配置基于Spring MVC Test的集成测试，主要内容有：</p>
+
+<ul>
+<li>如何使用不同的Spring配置方式（XML/Java）来配置测试用例</li>
+<li>应该使用<code>webAppContextSetup</code>的方式而不是<code>standaloneSetup</code>方式</li>
+<li>如何使用<code>WebApplicationContext</code>注入来完成Spring配置的加载</li>
+</ul>
+
+<p>下一篇是 <a href="/2016/04/09/spring-mvc-testing-integration-testing-controllers/">Spring MVC Integration Testing - Controllers</a>。</p>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+
+    </body>
+
+</html>
+

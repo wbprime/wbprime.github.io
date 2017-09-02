@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Fast into Graphviz</title>
+        <style>
+
+    html body {
+        font-family: Raleway, sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: lightseagreen;
+        --border-width:  0 ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/java.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/c&#43;&#43;.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.26" />
+        
+    </head>
+
+    <body>
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Fast into Graphviz</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/posts/">Posts</a></li>
+                            
+                                <li><a href="/categories/">Categories</a></li>
+                            
+                                <li><a href="/tags/">Tags</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:mail@wbprime.me"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/wbprime/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://www.stackoverflow.com/wbprime/"><i class="fa fa-stack-overflow"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/posts/2017-03-20-fast-into-graphviz/">Fast into Graphviz</a></h4>
+    <h5>March 20, 2017</h5>
+     <kbd class="item-tag">graphviz</kbd>  <kbd class="item-tag">tech</kbd> 
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<p><a href="http://www.graphviz.org">Graphviz - Graph Visualization Software</a> 由 AT&amp;T 出品， 是一种结构化信息的可视化方式，也是一套开放源代码软件，可以被广泛地使用于网络拓扑、软件工程、数据库设计、机器学习等方向的图表展示。</p>
+
+<p>Graphviz 1.2D 及之前的版本使用了 AT&amp;T 代码许可证 (the AT&amp;T Source Code Agreement)，之后的版本使用了EPL (The Eclipse Public License) 。</p>
+
+<p>Graphviz 是一款面向程序员的绘图软件，不仅体现在其设计和使用方式上，还体现在其文档上 :)</p>
+
+<!-- More --> 
+
+<h1 id="demos">Demos</h1>
+
+<h2 id="hello-world">Hello world</h2>
+
+<p>新建一个文本文件 <code>a.dot</code> 。</p>
+
+<pre><code>graph start {
+   hello -- {graphviz world};
+   graphviz -- world
+}
+</code></pre>
+
+<p>运行 <code>dot -Tpng a.dot -o a.png</code></p>
+
+<p>得到：</p>
+
+<p><img src="demo0_start.png" alt="a.png" /></p>
+
+<h2 id="程序调用">程序调用</h2>
+
+<p>新建一个文本文件 <code>b.dot</code> 。</p>
+
+<pre><code>digraph Invoke {
+    size = &quot;4, 4&quot;;// 图片大小
+    main[shape=box];/* 形状 */
+
+    main-&gt;parse;
+    parse-&gt;execute;
+
+    main-&gt;init[style = dotted];// 虚线
+
+    main-&gt;cleanup;
+
+    execute-&gt;{make_string; printf}// 连接两个
+
+    init-&gt;make_string;
+
+    edge[color = red]; // 连接线的颜色
+
+    main-&gt;printf[style=bold, label=&quot;100 times&quot;];// 线的 label
+
+    make_string[label = &quot;make a\nstring&quot;]// \n, 这个node的label，注意和上一行的区别
+
+    node[shape = box, style = filled, color = &quot;.7.3 1.0&quot;];// 一个node的属性
+
+    execute-&gt;compare;
+}
+</code></pre>
+
+<p>运行 <code>dot -Tpng b.dot -o b.png</code></p>
+
+<p>得到：</p>
+
+<p><img src="demo1_invoke.png" alt="b.png" /></p>
+
+<h2 id="节点形状">节点形状</h2>
+
+<p>新建一个文本文件 <code>c.dot</code> 。</p>
+
+<pre><code>digraph node_shape {
+    size = &quot;4, 4&quot;
+
+    a-&gt;b-&gt;c;
+    b-&gt;d;
+
+    a[shape = polygon, sides = 5, peripheries=3, color = lightblue, style = filled];
+
+    c[shape = polygon, sides = 4, skew= 0.4, lable = &quot;hello world&quot;];
+
+    d[shape = rect];
+
+    e[shape = polygon, side = 4, distortion = .7];
+}
+</code></pre>
+
+<p>运行 <code>dot -Tpng c.dot -o c.png</code></p>
+
+<p>得到：</p>
+
+<p><img src="demo2_node_shape.png" alt="c.png" /></p>
+
+<h2 id="数据结构">数据结构</h2>
+
+<p>新建一个文本文件 <code>d.dot</code> 。</p>
+
+<pre><code>digraph data_struct {
+    node [shape = record, height=.1]; // 全局样式;  
+
+    node0[label = &quot;&lt;f0&gt; |&lt;f1&gt; G|&lt;f2&gt; &quot;];  
+    node1[label = &quot;&lt;f0&gt; |&lt;f1&gt; E|&lt;f2&gt; &quot;];  
+    node2[label = &quot;&lt;f0&gt; |&lt;f1&gt; B|&lt;f2&gt; &quot;];  
+    node3[label = &quot;&lt;f0&gt; |&lt;f1&gt; F|&lt;f2&gt; &quot;];  
+    node4[label = &quot;&lt;f0&gt; |&lt;f1&gt; R|&lt;f2&gt; &quot;];  
+    node5[label = &quot;&lt;f0&gt; |&lt;f1&gt; H|&lt;f2&gt; &quot;];  
+    node6[label = &quot;&lt;f0&gt; |&lt;f1&gt; Y|&lt;f2&gt; &quot;];  
+    node7[label = &quot;&lt;f0&gt; |&lt;f1&gt; A|&lt;f2&gt; &quot;];  
+    node8[label = &quot;&lt;f0&gt; |&lt;f1&gt; C|&lt;f2&gt; &quot;];  
+
+    &quot;node0&quot;:f2 -&gt; &quot;node4&quot;:f1;
+    &quot;node0&quot;:f0 -&gt; &quot;node1&quot;:f1;
+    &quot;node1&quot;:f0 -&gt; &quot;node2&quot;:f1;
+    &quot;node1&quot;:f2 -&gt; &quot;node3&quot;:f1;
+    &quot;node2&quot;:f2 -&gt; &quot;node8&quot;:f1;
+    &quot;node2&quot;:f0 -&gt; &quot;node7&quot;:f1;
+    &quot;node4&quot;:f2 -&gt; &quot;node6&quot;:f1;
+    &quot;node4&quot;:f0 -&gt; &quot;node5&quot;:f1;
+}
+</code></pre>
+
+<p>运行 <code>dot -Tpng d.dot -o d.png</code></p>
+
+<p>得到：</p>
+
+<p><img src="demo3_data_struct.png" alt="d.png" /></p>
+
+<h2 id="hash-table">Hash table</h2>
+
+<p>新建一个文本文件 <code>e.dot</code> 。</p>
+
+<pre><code>digraph hash_table {
+    nodesep = .05;
+    rankdir = LR;
+
+    node[shape = record, width = .1, height = .1];
+
+    node0[label = &quot;&lt;f0&gt; |&lt;f1&gt; |&lt;f2&gt; |&lt;f3&gt; |&lt;f4&gt; |&lt;f5&gt; |&lt;f6&gt; |&quot;, height = 2.5];
+
+    node [width = 1.5];
+
+    node1[label = &quot;{&lt;n&gt; n14 | 719 |&lt;p&gt;}&quot;];
+    node2[label = &quot;{&lt;n&gt; a1 | 719 |&lt;p&gt;}&quot;];
+    node3[label = &quot;{&lt;n&gt; i9 | 512 |&lt;p&gt;}&quot;];
+    node4[label = &quot;{&lt;n&gt; e5 | 632 |&lt;p&gt;}&quot;];
+    node5[label = &quot;{&lt;n&gt; t20 | 959 |&lt;p&gt;}&quot;];
+    node6[label = &quot;{&lt;n&gt; o15 | 794 |&lt;p&gt;}&quot;];
+    node7[label = &quot;{&lt;n&gt; s19 | 659 |&lt;p&gt;}&quot;];
+
+    node0:f0 -&gt; node1:n;
+    node0:f1 -&gt; node2:n;
+    node0:f2 -&gt; node3:n;
+    node0:f5 -&gt; node4:n;
+    node0:f6 -&gt; node5:n;
+    node2:p  -&gt; node6:n;
+    node4:p  -&gt; node7:n;
+} 
+</code></pre>
+
+<p>运行 <code>dot -Tpng e.dot -o e.png</code></p>
+
+<p>得到：</p>
+
+<p><img src="demo4_hash_table.png" alt="e.png" /></p>
+
+<h2 id="流程图">流程图</h2>
+
+<p>新建一个文本文件 <code>f.dot</code> 。</p>
+
+<pre><code>digraph work_flow {
+    subgraph cluster0 {
+        node[style = filled, color = white];
+        style = filled;
+        color = lightgrey;
+
+        a0-&gt;a1-&gt;a2-&gt;a3;
+
+        label = &quot;prcess #1&quot;
+    }
+
+    subgraph cluster1 {
+        node[style = filled];
+
+        b0-&gt;b1-&gt;b2-&gt;b3;
+
+        label = &quot;process #2&quot;;
+        color = blue;
+    }
+
+    start-&gt;a0;
+    start-&gt;b0;
+    a1-&gt;b3;
+    b2-&gt;a3;
+    a3-&gt;end;
+    b3-&gt;end;
+
+    start[shape=Mdiamond];
+    end[shape=Msquare];
+}
+</code></pre>
+
+<p>运行 <code>dot -Tpng f.dot -o f.png</code></p>
+
+<p>得到：</p>
+
+<p><img src="demo5_work_flow.png" alt="f.png" /></p>
+
+<h1 id="utilities">Utilities</h1>
+
+<ul>
+<li>dot       : filter for drawing directed graphs</li>
+<li>neato     : filter for drawing undirected graphs</li>
+<li>twopi     : filter for radial layouts of graphs</li>
+<li>circo     : filter for circular layout of graphs</li>
+<li>fdp       : filter for drawing undirected graphs</li>
+<li>sfdp      : filter for drawing large undirected graphs</li>
+<li>patchwork : filter for tree maps</li>
+</ul>
+
+<p>以上命令工具是同一套代码的wrapper，共享相同的命令行参数:</p>
+
+<ul>
+<li><code>-G</code> sets a default graph attribute.</li>
+<li><code>-N</code> sets a default node attribute.</li>
+<li><code>-E</code> sets a default edge attribute.</li>
+<li><code>-Tlang</code> sets the output language.</li>
+<li><code>-Klayout</code> override the default layout engine implied by the command name.</li>
+<li><code>-O</code> automatically generate output filenames based on the input filename and the -T format.</li>
+<li><code>-ooutfile</code> writes output to file outfile.</li>
+</ul>
+
+<p>常用的输出格式有:</p>
+
+<ul>
+<li>-Tps (PostScript)</li>
+<li>-Tsvg -Tsvgz (Structured Vector Graphics)</li>
+<li>-Tfig (XFIG graphics)</li>
+<li>-Tpng -Tgif (bitmap graphics)</li>
+<li>-Timap (imagemap files for httpd servers for each node or edge that has a non‐null &ldquo;href&rdquo; attribute)</li>
+<li>-Tcmapx (client‐side imagemap for use in html and xhtml)</li>
+</ul>
+
+<p>更多输出格式参见 <a href="http://www.graphviz.org/content/output-format">http://www.graphviz.org/content/output-format</a> 。</p>
+
+<h1 id="dot-language">DOT Language</h1>
+
+<h2 id="abstract-grammar-definition">Abstract Grammar Definition</h2>
+
+<p>官方对DOT语言的语法的描述如下：</p>
+
+<pre><code>     graph: [ strict ] (graph | digraph) [ ID ] '{' stmt_list '}'
+ stmt_list: [ stmt [ ';' ] stmt_list ]
+      stmt: node_stmt |	edge_stmt |	attr_stmt |	ID '=' ID |	subgraph
+ attr_stmt: (graph | node | edge) attr_list
+ attr_list: '[' [ a_list ] ']' [ attr_list ]
+    a_list: ID '=' ID [ (';' | ',') ] [ a_list ]
+ edge_stmt: (node_id | subgraph) edgeRHS [ attr_list ]
+   edgeRHS: edgeop (node_id | subgraph) [ edgeRHS ]
+ node_stmt: node_id [ attr_list ]
+   node_id: ID [ port ]
+      port: ': ' ID [ ':' compass_pt ] |	':      ' compass_pt
+  subgraph: [ subgraph [ ID ] ] '{' stmt_list '}'
+compass_pt: (n | ne | e | se | s | sw | w | nw | c | _)
+</code></pre>
+
+<p>具体说明，参见 <a href="http://www.graphviz.org/content/dot-language">The DOT Language</a>
+。</p>
+
+<h2 id="keywords">keywords</h2>
+
+<p>DOT 语言里面的关键字是大小写无关的 (node, edge, graph, digraph, subgraph,
+        strict) 。</p>
+
+<h2 id="graph-digraph"><code>graph</code> &amp; <code>digraph</code></h2>
+
+<p>一个图由 <code>graph</code> 或者 <code>digraph</code> 关键字定义，后面跟一个可选的图ID，后跟一对大括号 (<code>{</code>, <code>}</code>) 包围的语句块。<code>grpha</code> 是无向图，<code>digraph</code> 是有向图。</p>
+
+<h2 id="id">ID</h2>
+
+<p>图ID是一个常规的字符串，可以由一个可选的双引号包围起来；如果要使用关键字作为ID，则必须要用双引号；图ID字符串中的字符可以是任意的大小写字符 (<code>[a-zA-Z\200-\377]</code>) ，下划线 (<code>_</code>) 和数字 (<code>[0-9]</code>) ，但不能是以数字开头；图ID也可以是有效的数字 (<code>[-]?(.[0-9]+ | [0-9]+(.[0-9]*)? )</code>) ；图ID也可以是有效的HTML串。</p>
+
+<h2 id="stmt"><code>stmt</code></h2>
+
+<p>语句是可以是节点定义语句 (<code>node_stmt</code>) 、边定义语句 (<code>edge_stmt</code>) 、属性定义语句 (<code>attr_stmt</code>) 或者子图定义语句 (<code>subgraph</code>) 。</p>
+
+<p>在 <code>graph</code> 中，需要用 <code>--</code> 操作符来定义一条边；在 <code>digraph</code> 中，需要用 <code>-&gt;</code> 操作符来定义一条边。</p>
+
+<p>两个语句之间可以用一个可选的 <code>;</code> 分隔。</p>
+
+<h2 id="subgraph"><code>subgraph</code></h2>
+
+<p>子图可以用来对节点和边进行分组。</p>
+
+<pre><code>A -&gt; {B C}
+</code></pre>
+
+<p>子图也可以用来批量设置属性。</p>
+
+<pre><code>subgraph {
+    rank = same; A; B; C;
+}
+</code></pre>
+
+<p>子图也可以用来指定布局引擎。如果子图ID以 &ldquo;cluster&rdquo;
+开始，则该子图会被布局引擎作为特殊的集聚图来对待。</p>
+
+<h2 id="strict"><code>strict</code></h2>
+
+<p>如果使用了 <code>strict</code>
+关键字，则图中一个起点一个终点之间最多生成一条边。在无向图中，两个点之间最多一条边；在有向图中，两个点之间最多两条边，并且方向相反。</p>
+
+<h2 id="attrs">attrs</h2>
+
+<p>属性可以是特定于节点或者边的，也可以是特定于图的。多个属性之间由空格分隔，也可以有可选的 <code>;</code> 或者 <code>,</code> 。</p>
+
+<ul>
+<li><code>name=val;</code> : 图属性</li>
+<li><code>node [name=val];</code> : 节点属性</li>
+<li><code>edge [name=val];</code> : 边属性</li>
+</ul>
+
+<p>详细说明，参见 <a href="http://www.graphviz.org/content/attrs">Graphviz attrs</a> 。</p>
+
+<h1 id="参考">参考</h1>
+
+<ul>
+<li><a href="http://www.graphviz.org/content/dot-language">http://www.graphviz.org/content/dot-language</a></li>
+<li><a href="http://www.cnblogs.com/sld666666/archive/2010/06/25/1765510.html">http://www.cnblogs.com/sld666666/archive/2010/06/25/1765510.html</a></li>
+</ul>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+
+    </body>
+
+</html>
+

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Awk Tips: md5</title>
+        <style>
+
+    html body {
+        font-family: Raleway, sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: lightseagreen;
+        --border-width:  0 ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/java.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/c&#43;&#43;.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.26" />
+        
+    </head>
+
+    <body>
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Awk Tips: md5</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/posts/">Posts</a></li>
+                            
+                                <li><a href="/categories/">Categories</a></li>
+                            
+                                <li><a href="/tags/">Tags</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:mail@wbprime.me"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/wbprime/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://www.stackoverflow.com/wbprime/"><i class="fa fa-stack-overflow"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/posts/2017-06-01-awk-tips-md5/">Awk Tips: md5</a></h4>
+    <h5>June 1, 2017</h5>
+     <kbd class="item-tag">awk</kbd>  <kbd class="item-tag">tech</kbd>  <kbd class="item-tag">md5</kbd> 
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<h1 id="awk-之-md5">Awk 之 md5</h1>
+
+<h2 id="用例">用例</h2>
+
+<p>有这么一个需求：文本文件中每一行是用户名和密码，现在需要对文件进行变换，输出用户名和对应的密码的md5值。</p>
+
+<p>原始文件(&ldquo;input.txt&rdquo;)如下：</p>
+
+<pre><code>user1 user1_password
+user2 user2_password
+user3 user3_password
+user4 user4_password
+user5 user5_password
+user6 user6_password
+user7 user7_password
+</code></pre>
+
+<h2 id="解决">解决</h2>
+
+<p>可以使用支持GNU扩展特性的awk来完成这个任务。</p>
+
+<p>awk 脚本如下:</p>
+
+<pre><code>#!/usr/bin/awk -f
+
+BEGIN {
+    md5cmd = &quot;md5sum&quot;;
+}
+
+{
+    printf $2 |&amp; md5cmd;
+    close(md5cmd, &quot;to&quot;);
+
+    md5cmd |&amp; getline md5result;
+	close(md5cmd);
+
+    print $1, substr(md5result, 1, 32);
+}
+</code></pre>
+
+<p>脚本另存为 &ldquo;md5.awk&rdquo; 。</p>
+
+<p>在终端中输入:</p>
+
+<pre><code>&gt; awk -f md5.awk input.txt
+</code></pre>
+
+<p>输出结果如下：</p>
+
+<pre><code>user1 b4ca6e90dcef1196a20930c2d9ecfbc0
+user2 049914ab3268e59eb90526f64a5322d9
+user3 99675fb0c81fdf505a95318e4c72b685
+user4 5f3cca1f85aa649323c336546b3c7cc0
+user5 41a87fa27533b238ed77824267259837
+user6 758b093168f255636ad83f5f076213e6
+user7 c1293b0e2400acb1461d25dbe4c6e75c
+</code></pre>
+
+<h2 id="释义">释义</h2>
+
+<p>解决方案使用了GNU awk扩展的协程功能，详解参见 [Two-Way Communications with Another Process](<a href="https://www.gnu.org/software/gawk/manual/html_node/Two_002dway-I_002fO.html#Two_002dway-I_002fO）。">https://www.gnu.org/software/gawk/manual/html_node/Two_002dway-I_002fO.html#Two_002dway-I_002fO）。</a></p>
+
+<p>具体来说，<code>printf $2 |&amp; md5cmd;</code> 这一行会将用户密码输出，同时 awk 会使用 sh 启动 md5cmd 进程，并将该进程的标准输入与 awk 的标准输出相连接；md5cmd 读取标准输入之后会输出其 md5sum 的结果到标准输出；<code>md5cmd |&amp; getline md5result;</code> 这一行会将 md5cmd 进程的标准输出作为输入，读取一行文本并存储到变量 md5result 中。</p>
+
+<p>因为这些语句是对每一行输入文本都会执行的，所以需要在合适的时候关闭 md5cmd 进程的输入输出文件标识符。<code>close(md5cmd, &quot;to&quot;);</code> 关闭输入到 md5cmd 进程的文件标识符；<code>close(md5cmd)</code> 关闭剩下的其他文件标识符。如果不关闭的话，在如入文本文件行数很多的情况下，可能会出现由于大量打开一次性文件标识符而不释放导致可用文件标识符被耗尽的错误。</p>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+
+    </body>
+
+</html>
+
