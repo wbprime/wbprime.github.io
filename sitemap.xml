@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://www.wbprime.me/posts/2018-02-05-jvm-gc-options/</loc>
+    <lastmod>2018-02-05T16:16:53+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://www.wbprime.me/posts/2018-02-05-jdk-vs-jre/</loc>
     <lastmod>2018-02-05T15:54:01+08:00</lastmod>
   </url>
@@ -371,6 +376,12 @@
   </url>
   
   <url>
+    <loc>http://www.wbprime.me/tags/gc/</loc>
+    <lastmod>2018-02-05T16:16:53+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://www.wbprime.me/tags/graphviz/</loc>
     <lastmod>2017-03-20T11:55:45+00:00</lastmod>
     <priority>0</priority>
@@ -425,6 +436,12 @@
   </url>
   
   <url>
+    <loc>http://www.wbprime.me/tags/jvm/</loc>
+    <lastmod>2018-02-05T16:16:53+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://www.wbprime.me/categories/learning-java-concurrency/</loc>
     <lastmod>2016-04-15T16:34:20+00:00</lastmod>
     <priority>0</priority>
@@ -456,13 +473,13 @@
   
   <url>
     <loc>http://www.wbprime.me/categories/notes/</loc>
-    <lastmod>2018-02-05T15:54:01+08:00</lastmod>
+    <lastmod>2018-02-05T16:16:53+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://www.wbprime.me/posts/</loc>
-    <lastmod>2018-02-05T15:54:01+08:00</lastmod>
+    <lastmod>2018-02-05T16:16:53+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -540,7 +557,7 @@
   
   <url>
     <loc>http://www.wbprime.me/</loc>
-    <lastmod>2018-02-05T15:54:01+08:00</lastmod>
+    <lastmod>2018-02-05T16:16:53+08:00</lastmod>
     <priority>0</priority>
   </url>
   
