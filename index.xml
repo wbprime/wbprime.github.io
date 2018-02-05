@@ -17,16 +17,11 @@
       <pubDate>Mon, 05 Feb 2018 16:16:53 +0800</pubDate>
       
       <guid>http://www.wbprime.me/posts/2018-02-05-jvm-gc-options/</guid>
-      <description>General options -XX:+PrintFlagsFinal -XX:+PrintFlagsInitial -XX:+PrintCommandLineFlags -XX:+UnlockExperimentalVMOptions -XX:+UnlockDiagnosticVMOptions
--XX:+ParallelRefProcEnabled
-java -server -XX:+UnlockExperimentalVMOptions -XX:+UnlockDiagnosticVMOptions -XX:+PrintFlagsFinal java -client -XX:+UnlockExperimentalVMOptions -XX:+UnlockDiagnosticVMOptions -XX:+PrintFlagsFinal
-GC See following image first:
-Young generation  Serial  是 -client 默认的GC收集器，可以 -XX:+UseSerialGC 来强制开启
- ParNew  是 -server 默认的GC收集器，可以 -XX:+UseParallelGC 来强制开启
- Parallel Scavenge  -XX:+UseParallelGC
-Old generation  CMS   CMS-initial-mark CMS-concurrent-mark CMS-concurrent-preclean CMS-remark CMS-concurrent-sweep CMS-concurrent-reset  -XX:+UseConcMarkSweepGC -XX:CMSFullGCsBeforeCompaction=n -XX:ParallelGCThreads=n -XX:+ConcGCThreads=n
- Serail Old
- Parallel Old</description>
+      <description>General options  -XX:+PrintFlagsFinal -XX:+PrintFlagsInitial -XX:+PrintCommandLineFlags -XX:+UnlockExperimentalVMOptions -XX:+UnlockDiagnosticVMOptions
+ -XX:+ParallelRefProcEnabled
+  java -server -XX:+UnlockExperimentalVMOptions -XX:+UnlockDiagnosticVMOptions -XX:+PrintFlagsFinal java -client -XX:+UnlockExperimentalVMOptions -XX:+UnlockDiagnosticVMOptions -XX:+PrintFlagsFinal  GC See following image first:
+Young generation  &amp;ldquo;Serial&amp;rdquo; 是串行收集器，也是 -client 默认的GC收集器，可以 -XX:+UseSerialGC 来强制开启 &amp;ldquo;ParNew&amp;rdquo; 是并行收集齐，也是 -server 默认的GC收集器，可以 -XX:+UseParallelGC 来强制开启 &amp;ldquo;Parallel Scavenge&amp;rdquo; 是吞吐量优先收集器，可以通过 -XX:+UseParallelGC 来强制开启  Old generation  &amp;ldquo;CMS&amp;rdquo; 是 Concurrent Mark Sweep 收集器  执行阶段：
+ CMS-initial-mark CMS-concurrent-mark CMS-concurrent-preclean CMS-remark CMS-concurrent-sweep CMS-concurrent-reset  相关参数：</description>
     </item>
     
     <item>

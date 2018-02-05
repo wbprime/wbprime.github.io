@@ -132,16 +132,20 @@
 
 <h1 id="general-options">General options</h1>
 
-<p>-XX:+PrintFlagsFinal
--XX:+PrintFlagsInitial
--XX:+PrintCommandLineFlags
--XX:+UnlockExperimentalVMOptions
--XX:+UnlockDiagnosticVMOptions</p>
+<ul>
+<li><code>-XX:+PrintFlagsFinal</code></li>
+<li><code>-XX:+PrintFlagsInitial</code></li>
+<li><code>-XX:+PrintCommandLineFlags</code></li>
+<li><code>-XX:+UnlockExperimentalVMOptions</code></li>
 
-<p>-XX:+ParallelRefProcEnabled</p>
+<li><p><code>-XX:+UnlockDiagnosticVMOptions</code></p></li>
 
-<p>java -server -XX:+UnlockExperimentalVMOptions -XX:+UnlockDiagnosticVMOptions -XX:+PrintFlagsFinal
-java -client -XX:+UnlockExperimentalVMOptions -XX:+UnlockDiagnosticVMOptions -XX:+PrintFlagsFinal</p>
+<li><p><code>-XX:+ParallelRefProcEnabled</code></p></li>
+</ul>
+
+<pre><code>java -server -XX:+UnlockExperimentalVMOptions -XX:+UnlockDiagnosticVMOptions -XX:+PrintFlagsFinal 
+java -client -XX:+UnlockExperimentalVMOptions -XX:+UnlockDiagnosticVMOptions -XX:+PrintFlagsFinal 
+</code></pre>
 
 <h1 id="gc">GC</h1>
 
@@ -152,28 +156,18 @@ java -client -XX:+UnlockExperimentalVMOptions -XX:+UnlockDiagnosticVMOptions -XX
 <h2 id="young-generation">Young generation</h2>
 
 <ol>
-<li>Serial</li>
+<li>&ldquo;Serial&rdquo; 是串行收集器，也是 <code>-client</code> 默认的GC收集器，可以 <code>-XX:+UseSerialGC</code> 来强制开启</li>
+<li>&ldquo;ParNew&rdquo; 是并行收集齐，也是 <code>-server</code> 默认的GC收集器，可以 <code>-XX:+UseParallelGC</code> 来强制开启</li>
+<li>&ldquo;Parallel Scavenge&rdquo; 是吞吐量优先收集器，可以通过 <code>-XX:+UseParallelGC</code> 来强制开启</li>
 </ol>
-
-<p>是 -client 默认的GC收集器，可以 -XX:+UseSerialGC 来强制开启</p>
-
-<ol>
-<li>ParNew</li>
-</ol>
-
-<p>是 -server 默认的GC收集器，可以 -XX:+UseParallelGC 来强制开启</p>
-
-<ol>
-<li>Parallel Scavenge</li>
-</ol>
-
-<p>-XX:+UseParallelGC</p>
 
 <h2 id="old-generation">Old generation</h2>
 
 <ol>
-<li>CMS</li>
+<li>&ldquo;CMS&rdquo; 是 Concurrent Mark Sweep 收集器</li>
 </ol>
+
+<p>执行阶段：</p>
 
 <ul>
 <li>CMS-initial-mark</li>
@@ -184,42 +178,45 @@ java -client -XX:+UnlockExperimentalVMOptions -XX:+UnlockDiagnosticVMOptions -XX
 <li>CMS-concurrent-reset</li>
 </ul>
 
-<p>-XX:+UseConcMarkSweepGC
--XX:CMSFullGCsBeforeCompaction=n
--XX:ParallelGCThreads=n
--XX:+ConcGCThreads=n</p>
+<p>相关参数：</p>
+
+<ul>
+<li><code>-XX:+UseConcMarkSweepGC</code></li>
+<li><code>-XX:CMSFullGCsBeforeCompaction=n</code></li>
+<li><code>-XX:ParallelGCThreads=n</code></li>
+<li><code>-XX:+ConcGCThreads=n</code></li>
+</ul>
 
 <ol>
-<li><p>Serail Old</p></li>
+<li><p>&ldquo;Serail Old&rdquo; 是串行收集器</p></li>
 
-<li><p>Parallel Old</p></li>
+<li><p>&ldquo;Parallel Old&rdquo; 是并行收集器，可以通过 <code>-XX:+UseParallelOldGC</code> 来手动开启</p></li>
 </ol>
-
-<p>-XX:+UseParallelOldGC</p>
 
 <h2 id="flags">Flags</h2>
 
 <ol>
-<li><p>-XX:+UseSerialGC： 相当于&rdquo;Serial&rdquo; + &ldquo;SerialOld&rdquo;，这个方案直观上就应该是性能最差的，我的实验证明也确实如此；</p></li>
-
-<li><p>-XX:+UseParallelGC： 相当于&rdquo;Parallel Scavenge&rdquo; + &ldquo;SerialOld&rdquo;，也就是说，在young generation中是多线程处理，但是在tenured generation中则是单线程；</p></li>
-
-<li><p>-XX:+UseParallelOldGC： 相当于 &ldquo;Parallel Scavenge&rdquo; + &ldquo;ParallelOld&rdquo;，都是多线程并行处理；</p></li>
-
-<li><p>-XX:+UseConcMarkSweepGC： 相当于&rdquo;ParNew&rdquo; + &ldquo;CMS&rdquo; + &ldquo;Serial Old&rdquo;，即在young generation中采用ParNew，多线程处理；在tenured generation中使用CMS，以求得到最低的暂停时间，但是，采用CMS有可能出现”Concurrent Mode Failure”（这个后面再说），如果出现了，就只能采用”SerialOld”模式了；</p></li>
+<li><code>-XX:+UseSerialGC</code>： 相当于&rdquo;Serial&rdquo; + &ldquo;SerialOld&rdquo;，这个方案直观上就应该是性能最差的</li>
+<li><code>-XX:+UseParallelGC</code>： 相当于&rdquo;Parallel Scavenge&rdquo; + &ldquo;SerialOld&rdquo;，也就是说，在young generation中是多线程处理，但是在tenured generation中则是单线程</li>
+<li><code>-XX:+UseParallelOldGC</code>： 相当于 &ldquo;Parallel Scavenge&rdquo; + &ldquo;ParallelOld&rdquo;，都是多线程并行处理</li>
+<li><code>-XX:+UseConcMarkSweepGC</code>： 相当于&rdquo;ParNew&rdquo; + &ldquo;CMS&rdquo; + &ldquo;Serial Old&rdquo;，即在 Young Generation 中采用 &ldquo;ParNew&rdquo;，多线程处理；在 Tenured Generation 中使用&rdquo;CMS&rdquo;，以求得到最低的暂停时间，但是，采用CMS有可能出现 &ldquo;Concurrent Mode Failure&rdquo; ，如果出现了，就只能采用 &ldquo;SerialOld&rdquo; 模式了</li>
 </ol>
 
-<h2 id="latency">latency</h2>
+<h2 id="latency">Latency</h2>
+
+<p>For some GC collectors:</p>
 
 <ol>
-<li>-XX:MaxGCPauseMillis=10000</li>
-<li>-XX:MaxGCMinorPauseMillis=100</li>
+<li><code>-XX:MaxGCPauseMillis=10000</code></li>
+<li><code>-XX:MaxGCMinorPauseMillis=100</code></li>
 </ol>
 
 <h2 id="throughput">throughput</h2>
 
+<p>For some GC collectors:</p>
+
 <ol>
-<li>-XX:GCTimeRatio=2</li>
+<li><code>-XX:GCTimeRatio=2</code></li>
 </ol>
 </div>
 
