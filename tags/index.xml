@@ -140,7 +140,7 @@
     <item>
       <title>Jvm</title>
       <link>http://www.wbprime.me/tags/jvm/</link>
-      <pubDate>Mon, 05 Feb 2018 16:16:53 +0800</pubDate>
+      <pubDate>Mon, 05 Feb 2018 16:47:59 +0800</pubDate>
       
       <guid>http://www.wbprime.me/tags/jvm/</guid>
       <description></description>
@@ -161,6 +161,15 @@
       <pubDate>Thu, 01 Jun 2017 09:43:06 +0000</pubDate>
       
       <guid>http://www.wbprime.me/tags/md5/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Memory Model</title>
+      <link>http://www.wbprime.me/tags/memory-model/</link>
+      <pubDate>Mon, 05 Feb 2018 16:47:59 +0800</pubDate>
+      
+      <guid>http://www.wbprime.me/tags/memory-model/</guid>
       <description></description>
     </item>
     

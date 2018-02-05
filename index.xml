@@ -6,10 +6,19 @@
     <description>Recent content on wbprime</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Mon, 05 Feb 2018 16:16:53 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 05 Feb 2018 16:47:59 +0800</lastBuildDate>
     
 	<atom:link href="http://www.wbprime.me/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Jvm Memory Model</title>
+      <link>http://www.wbprime.me/posts/2018-02-05-jvm-memory-model/</link>
+      <pubDate>Mon, 05 Feb 2018 16:47:59 +0800</pubDate>
+      
+      <guid>http://www.wbprime.me/posts/2018-02-05-jvm-memory-model/</guid>
+      <description>JVM 的内存模型，从网上整理的图片：</description>
+    </item>
     
     <item>
       <title>Jvm GC Options</title>
