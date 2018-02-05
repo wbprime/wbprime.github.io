@@ -3,6 +3,16 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://www.wbprime.me/posts/2018-02-05-jdk-vs-jre/</loc>
+    <lastmod>2018-02-05T15:54:01+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.wbprime.me/posts/2018-02-05-http_responce_status_code/</loc>
+    <lastmod>2018-02-05T15:45:52+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://www.wbprime.me/posts/2017-06-01-awk-tips-md5/</loc>
     <lastmod>2017-06-01T09:43:06+00:00</lastmod>
   </url>
@@ -319,13 +329,13 @@
   </url>
   
   <url>
-    <loc>http://www.wbprime.me/tags/awk/</loc>
+    <loc>http://www.wbprime.me/categories/awk/</loc>
     <lastmod>2017-06-01T09:43:06+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.wbprime.me/categories/awk/</loc>
+    <loc>http://www.wbprime.me/tags/awk/</loc>
     <lastmod>2017-06-01T09:43:06+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -361,13 +371,13 @@
   </url>
   
   <url>
-    <loc>http://www.wbprime.me/tags/graphviz/</loc>
+    <loc>http://www.wbprime.me/categories/graphviz/</loc>
     <lastmod>2017-03-20T11:55:45+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.wbprime.me/categories/graphviz/</loc>
+    <loc>http://www.wbprime.me/tags/graphviz/</loc>
     <lastmod>2017-03-20T11:55:45+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -385,6 +395,12 @@
   </url>
   
   <url>
+    <loc>http://www.wbprime.me/tags/http/</loc>
+    <lastmod>2018-02-05T15:45:52+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://www.wbprime.me/tags/huangyi/</loc>
     <lastmod>2017-04-07T10:42:29+00:00</lastmod>
     <priority>0</priority>
@@ -398,7 +414,13 @@
   
   <url>
     <loc>http://www.wbprime.me/tags/jdk/</loc>
-    <lastmod>2015-05-25T11:07:13+00:00</lastmod>
+    <lastmod>2018-02-05T15:54:01+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.wbprime.me/tags/jre/</loc>
+    <lastmod>2018-02-05T15:54:01+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -415,13 +437,13 @@
   </url>
   
   <url>
-    <loc>http://www.wbprime.me/tags/mayday/</loc>
+    <loc>http://www.wbprime.me/categories/mayday/</loc>
     <lastmod>2015-05-16T17:27:36+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.wbprime.me/categories/mayday/</loc>
+    <loc>http://www.wbprime.me/tags/mayday/</loc>
     <lastmod>2015-05-16T17:27:36+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -433,8 +455,14 @@
   </url>
   
   <url>
+    <loc>http://www.wbprime.me/categories/notes/</loc>
+    <lastmod>2018-02-05T15:54:01+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://www.wbprime.me/posts/</loc>
-    <lastmod>2017-06-01T09:43:06+00:00</lastmod>
+    <lastmod>2018-02-05T15:54:01+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -463,7 +491,19 @@
   </url>
   
   <url>
+    <loc>http://www.wbprime.me/tags/status-code/</loc>
+    <lastmod>2018-02-05T15:45:52+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://www.wbprime.me/tags/</loc>
+    <lastmod>2015-05-25T11:07:13+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.wbprime.me/categories/tech/</loc>
     <lastmod>2015-05-25T11:07:13+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -471,12 +511,6 @@
   <url>
     <loc>http://www.wbprime.me/tags/tech/</loc>
     <lastmod>2017-06-01T09:43:06+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.wbprime.me/categories/tech/</loc>
-    <lastmod>2015-05-25T11:07:13+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -506,7 +540,7 @@
   
   <url>
     <loc>http://www.wbprime.me/</loc>
-    <lastmod>2017-06-01T09:43:06+00:00</lastmod>
+    <lastmod>2018-02-05T15:54:01+08:00</lastmod>
     <priority>0</priority>
   </url>
   

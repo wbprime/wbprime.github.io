@@ -6,10 +6,32 @@
     <description>Recent content in Posts on wbprime</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Thu, 01 Jun 2017 09:43:06 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 05 Feb 2018 15:54:01 +0800</lastBuildDate>
     
 	<atom:link href="http://www.wbprime.me/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>2018 02 05 Jdk vs Jre</title>
+      <link>http://www.wbprime.me/posts/2018-02-05-jdk-vs-jre/</link>
+      <pubDate>Mon, 05 Feb 2018 15:54:01 +0800</pubDate>
+      
+      <guid>http://www.wbprime.me/posts/2018-02-05-jdk-vs-jre/</guid>
+      <description>&lt;p&gt;JDK 与 JRE 的区别。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>2018 02 05 Http_responce_status_code</title>
+      <link>http://www.wbprime.me/posts/2018-02-05-http_responce_status_code/</link>
+      <pubDate>Mon, 05 Feb 2018 15:45:52 +0800</pubDate>
+      
+      <guid>http://www.wbprime.me/posts/2018-02-05-http_responce_status_code/</guid>
+      <description>&lt;p&gt;Notes about HTTP response status code.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Awk Tips: md5</title>

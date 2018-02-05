@@ -6,10 +6,21 @@
     <description>Recent content in Jdk on wbprime</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Mon, 25 May 2015 11:07:13 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 05 Feb 2018 15:54:01 +0800</lastBuildDate>
     
 	<atom:link href="http://www.wbprime.me/tags/jdk/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>2018 02 05 Jdk vs Jre</title>
+      <link>http://www.wbprime.me/posts/2018-02-05-jdk-vs-jre/</link>
+      <pubDate>Mon, 05 Feb 2018 15:54:01 +0800</pubDate>
+      
+      <guid>http://www.wbprime.me/posts/2018-02-05-jdk-vs-jre/</guid>
+      <description>&lt;p&gt;JDK 与 JRE 的区别。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>JDK installation on Archlinux</title>
