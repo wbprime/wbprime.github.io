@@ -6,10 +6,21 @@
     <description>Recent content in Notes on wbprime</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Mon, 05 Feb 2018 17:46:28 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 05 Feb 2018 18:00:50 +0800</lastBuildDate>
     
 	<atom:link href="http://www.wbprime.me/categories/notes/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Posix &amp; GNU Make Note</title>
+      <link>http://www.wbprime.me/posts/2018-02-05-posix-make-note/</link>
+      <pubDate>Mon, 05 Feb 2018 18:00:50 +0800</pubDate>
+      
+      <guid>http://www.wbprime.me/posts/2018-02-05-posix-make-note/</guid>
+      <description>Compile Source code -&amp;gt; object file: &amp;ldquo;*.c -&amp;gt; *.o&amp;rdquo;
+Link Object files -&amp;gt; executable: &amp;ldquo;*.o -&amp;gt; a.out&amp;rdquo;
+makefile Rules target : prerequisites command1 command2 ... commandn   target is a target to be generated. It can be a object file, or a executable file or a label. prerequisites are dependecies of target. It is required to generate target. commandn are commands to generate target. Lines started with a &amp;lsquo;\t&amp;rsquo;  If any of prerequisites is newer than target, then make will call command1 to commandn.</description>
+    </item>
     
     <item>
       <title>Access Control List</title>

@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Tags</title>
+        <title>Posix &amp; GNU Make Note</title>
         <style>
 
     html body {
@@ -59,9 +59,6 @@
 <script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
  <meta name="generator" content="Hugo 0.32-DEV" />
         
-        <link href="http://www.wbprime.me/tags/index.xml" rel="alternate" type="application/rss+xml" title="wbprime" />
-        <link href="http://www.wbprime.me/tags/index.xml" rel="feed" type="application/rss+xml" title="wbprime" />
-        
     </head>
 
     <body>
@@ -72,7 +69,7 @@
 
                 <div class="navbar-header">
 
-                    <a class="navbar-brand visible-xs" href="#">Tags</a>
+                    <a class="navbar-brand visible-xs" href="#">Posix &amp; GNU Make Note</a>
 
                     <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
                         <span class="icon-bar"></span>
@@ -115,99 +112,89 @@
 
 <main>
 
-    <h2>Tags</h2>
-
-     <div class="item">
+    <div class="item">
 
     
     
     
 
     
-    
+      
 
-    <h4><a href="/tags/spring/">Spring</a></h4>
-    <h5>June 8, 2015</h5>
-    
+    <h4><a href="/posts/2018-02-05-posix-make-note/">Posix &amp; GNU Make Note</a></h4>
+    <h5>Note on make and makefile</h5>
+     <kbd class="item-tag">make</kbd>  <kbd class="item-tag">makefile</kbd> 
 
 </div>
-  <div class="item">
 
-    
-    
-    
 
-    
-    
+    <br> <div class="text-justify">
 
-    <h4><a href="/tags/spring-mvc/">Spring Mvc</a></h4>
-    <h5>April 9, 2016</h5>
-    
+<h2 id="compile">Compile</h2>
 
+<p>Source code -&gt; object file: &ldquo;*.c -&gt; *.o&rdquo;</p>
+
+<h2 id="link">Link</h2>
+
+<p>Object files -&gt; executable: &ldquo;*.o -&gt; a.out&rdquo;</p>
+
+<h1 id="makefile">makefile</h1>
+
+<h2 id="rules">Rules</h2>
+
+<pre><code>target : prerequisites
+    command1
+    command2
+    ...
+    commandn
+</code></pre>
+
+<ul>
+<li><code>target</code> is a target to be generated.  It can be a object file, or a executable file or a label.</li>
+<li><code>prerequisites</code> are dependecies of <code>target</code>.  It is required to generate <code>target</code>.</li>
+<li><code>commandn</code> are commands to generate <code>target</code>.  Lines started with a &lsquo;\t&rsquo;</li>
+</ul>
+
+<p>If any of <code>prerequisites</code> is newer than <code>target</code>, then make will call <code>command1</code> to <code>commandn</code>.
+If any of <code>prerequisites</code> is not existed, then make will call <code>command1</code> to <code>commandn</code>.</p>
+
+<p>在默认的方式下，也就是我们只输入make命令。那么，</p>
+
+<ol>
+<li>make会在当前目录下找名字叫“Makefile”或“makefile”的文件。</li>
+<li>如果找到，它会找文件中的第一个目标文件（target），在上面的例子中，他会找到“edit”这个文件，并把这个文件作为最终的目标文件。</li>
+<li>如果edit文件不存在，或是edit所依赖的后面的 .o 文件的文件修改时间要比edit这个文件新，那么，他就会执行后面所定义的命令来生成edit这个文件。</li>
+<li>如果edit所依赖的.o文件也存在，那么make会在当前文件中找目标为.o文件的依赖性，如果找到则再根据那一个规则生成.o文件。（这有点像一个堆栈的过程）</li>
+<li>当然，你的C文件和H文件是存在的啦，于是make会生成 .o 文件，然后再用 .o 文件生命make的终极任务，也就是执行文件edit了。</li>
+</ol>
+
+<h2 id="variables">Variables</h2>
+
+<p><code>$&lt;</code> : 所有的依赖目标集
+<code>$@</code> : 目标集</p>
+
+<h2 id="variables-used-by-built-in-rules">Variables Used by Built-in Rules</h2>
+
+<ul>
+<li><code>CC</code> &ndash; the c compiler to use</li>
+<li><code>CXX</code> &ndash; the c++ compiler to use</li>
+<li><code>LD</code> &ndash; the linker to use</li>
+<li><code>CFLAGS</code> &ndash; compilation flag for c source files</li>
+<li><code>CXXFLAGS</code> &ndash; compilation flags for c++ source files</li>
+<li><code>CPPFLAGS</code> &ndash; flags for the c-preprocessor (typically include file paths and symbols defined on the command line), used by c and c++</li>
+<li><code>LDFLAGS</code> &ndash; linker flags</li>
+<li><code>LDLIBS</code> &ndash; libraries to link</li>
+</ul>
 </div>
-  <div class="item">
-
-    
-    
-    
 
     
     
 
-    <h4><a href="/tags/status-code/">Status Code</a></h4>
-    <h5>February 5, 2018</h5>
-    
-
-</div>
-  <div class="item">
-
-    
-    
     
 
     
-    
-
-    <h4><a href="/tags/tech/">Tech</a></h4>
-    <h5>June 1, 2017</h5>
-    
-
-</div>
-  <div class="item">
-
-    
-    
-    
-
-    
-    
-
-    <h4><a href="/tags/testing/">Testing</a></h4>
-    <h5>April 9, 2016</h5>
-    
-
-</div>
- 
 
 </main>
-
-
-
-<div class="pages">
-
-    
-    <a class="icon pages-icon" href="/tags/page/5/" rel="prev">
-        <i class="fa fa-arrow-left"></i>
-    </a>
-     
-    <a class="icon pages-icon" href="/tags/page/7/" rel="next">
-        <i class="fa fa-arrow-right"></i>
-    </a>
-    
-
-</div>
-
-
 
         <footer>
 
