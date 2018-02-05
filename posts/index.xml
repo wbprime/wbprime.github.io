@@ -6,10 +6,19 @@
     <description>Recent content in Posts on wbprime</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Mon, 05 Feb 2018 17:08:50 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 05 Feb 2018 17:46:28 +0800</lastBuildDate>
     
 	<atom:link href="http://www.wbprime.me/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Access Control List</title>
+      <link>http://www.wbprime.me/posts/2018-02-05-acl-note/</link>
+      <pubDate>Mon, 05 Feb 2018 17:46:28 +0800</pubDate>
+      
+      <guid>http://www.wbprime.me/posts/2018-02-05-acl-note/</guid>
+      <description>Linux ACL - Access Control List Commands  setfacl getfacl  ACL Permission - Comma separated entry. - Each entry consists of type, value and permissions, separated by colon. - type is one of `u` (user), `g` (group), `o` (other), `m` (mask) - value is the user name or uid for `u`, group name or gid for `g`, nothing for `o` - permissions is the combination of `r` (read), `w` (write) and `e` (execute) - if value is empty, then means all users/groups - if no read permission is to granted, the replace `r` with `-` for read char - if no write permission is to granted, the replace `w` with `-` for read char - if no execute permission is to granted, the replace `x` with `-` for read char - `-` in value can be ommited, if at least one of `r`, `w` and `x` is present: `r-x` =&amp;gt; `rx` - at least one `-` in value must be present if none of `r`, `w` and `x` is present: `---` =&amp;gt; `-` - e.</description>
+    </item>
     
     <item>
       <title>Libevent Note</title>

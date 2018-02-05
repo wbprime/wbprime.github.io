@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Posts</title>
+        <title>Access Control List</title>
         <style>
 
     html body {
@@ -59,9 +59,6 @@
 <script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
  <meta name="generator" content="Hugo 0.32-DEV" />
         
-        <link href="http://www.wbprime.me/posts/index.xml" rel="alternate" type="application/rss+xml" title="wbprime" />
-        <link href="http://www.wbprime.me/posts/index.xml" rel="feed" type="application/rss+xml" title="wbprime" />
-        
     </head>
 
     <body>
@@ -72,7 +69,7 @@
 
                 <div class="navbar-header">
 
-                    <a class="navbar-brand visible-xs" href="#">Posts</a>
+                    <a class="navbar-brand visible-xs" href="#">Access Control List</a>
 
                     <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
                         <span class="icon-bar"></span>
@@ -115,99 +112,133 @@
 
 <main>
 
-    <h2>Posts</h2>
-
-     <div class="item">
+    <div class="item">
 
     
     
     
 
     
-    
+      
 
-    <h4><a href="/posts/2016-04-09-spring-mvc-testing-integration-testing-forms/">Spring MVC Integration Testing - Forms</a></h4>
-    <h5>April 9, 2016</h5>
-     <kbd class="item-tag">Spring MVC</kbd>  <kbd class="item-tag">testing</kbd>  <kbd class="item-tag">java</kbd> 
+    <h4><a href="/posts/2018-02-05-acl-note/">Access Control List</a></h4>
+    <h5>Note on access control list (ACL) for file system</h5>
+     <kbd class="item-tag">linux</kbd>  <kbd class="item-tag">acl</kbd>  <kbd class="item-tag">setacl</kbd>  <kbd class="item-tag">getacl</kbd> 
 
 </div>
-  <div class="item">
 
-    
-    
-    
 
-    
-    
+    <br> <div class="text-justify">
 
-    <h4><a href="/posts/2016-04-09-spring-mvc-testing-integration-testing-controllers/">Spring MVC Integration Testing - Controllers</a></h4>
-    <h5>April 9, 2016</h5>
-     <kbd class="item-tag">Spring MVC</kbd>  <kbd class="item-tag">testing</kbd>  <kbd class="item-tag">java</kbd> 
+<h1 id="linux-acl-access-control-list">Linux ACL - Access Control List</h1>
 
+<h2 id="commands">Commands</h2>
+
+<ul>
+<li><code>setfacl</code></li>
+<li><code>getfacl</code></li>
+</ul>
+
+<h2 id="acl">ACL</h2>
+
+<h3 id="permission">Permission</h3>
+
+<pre><code>- Comma separated entry.
+- Each entry consists of type, value and permissions, separated by colon.
+    - type is one of `u` (user), `g` (group), `o` (other), `m` (mask)
+    - value is the user name or uid for `u`, group name or gid for `g`, nothing for `o`
+    - permissions is the combination of `r` (read), `w` (write) and `e` (execute)
+    - if value is empty, then means all users/groups
+    - if no read permission is to granted, the replace `r` with `-` for read char
+    - if no write permission is to granted, the replace `w` with `-` for read char
+    - if no execute permission is to granted, the replace `x` with `-` for read char
+    - `-` in value can be ommited, if at least one of `r`, `w` and `x` is
+      present: `r-x` =&gt; `rx`
+    - at least one `-` in value must be present if none of `r`, `w` and `x`
+      is present: `---` =&gt; `-`
+- e.g., `u:wb:rwx`, `u::rwx`
+</code></pre>
+
+<h3 id="file-directory-acl">File &amp; Directory ACL</h3>
+
+<h4 id="user-acl">User ACL</h4>
+
+<pre><code>- For file owner: `u::rwx`
+- For user with username 'aaa': `u:aaa:rwx`
+- For user with uid '2000': `u:2000:rwx`
+</code></pre>
+
+<h4 id="group-acl">Group ACL</h4>
+
+<pre><code>- For file owner: `g::rwx`
+- For user with username 'aaa': `g:aaa:rwx`
+- For user with uid '2000': `g:2000:rwx`
+</code></pre>
+
+<h4 id="other-acl">Other ACL</h4>
+
+<pre><code>- For file owner: `o::rwx`
+- For user with username 'aaa': `o:aaa:rwx`
+- For user with uid '2000': `o:2000:rwx`
+</code></pre>
+
+<h4 id="mask-acl">Mask acl</h4>
+
+<pre><code>- The effective acl is the intersection of given acl and mask acl
+- e.g., if `m::r-x` and `u:wb:rwx`, the the effective acl for wb is `u:wb:r-x`
+</code></pre>
+
+<h3 id="default-acl">Default acl</h3>
+
+<p>For directory, newly create files can inherited from the parent directory if
+default acl set for the parent directory.</p>
+
+<h2 id="the-way-to-set-acl">THe Way to Set ACL</h2>
+
+<h3 id="add-acl-entry">Add ACL Entry</h3>
+
+<pre><code>setfacl -m 'u:wb:rwx,g:wb:r-x' a.file
+</code></pre>
+
+<h3 id="remove-acl-entry">Remove ACL Entry</h3>
+
+<pre><code>setfacl -x 'u:wb:rwx,g:wb:r-x' a.file
+</code></pre>
+
+<h3 id="override-existing-acl-entries">Override Existing ACL Entries</h3>
+
+<pre><code>setfacl --set 'u:wb:rwx,g:wb:r-x:o::r--' a.file
+</code></pre>
+
+<h3 id="clear-acl-entries">Clear ACL Entries</h3>
+
+<pre><code>setfacl -b a.file
+</code></pre>
+
+<h3 id="apply-acl-recursively">Apply ACL Recursively</h3>
+
+<pre><code>setfacl -R -m 'u:wb:rwx,g:wb:r-x' a.file
+</code></pre>
+
+<h3 id="change-default-acl">Change Default ACL</h3>
+
+<pre><code>setfacl -d -m 'u:wb:rwx,g:wb:r-x' a.file
+</code></pre>
+
+<h2 id="get-acl">Get ACL</h2>
+
+<pre><code>getfacl a.file
+</code></pre>
 </div>
-  <div class="item">
-
-    
-    
-    
 
     
     
 
-    <h4><a href="/posts/2016-04-09-spring-mvc-testing-integration-testing-configuration/">Spring MVC Integration Testing - Configuration</a></h4>
-    <h5>April 9, 2016</h5>
-     <kbd class="item-tag">Spring MVC</kbd>  <kbd class="item-tag">testing</kbd>  <kbd class="item-tag">java</kbd> 
-
-</div>
-  <div class="item">
-
-    
-    
     
 
     
-    
-
-    <h4><a href="/posts/2016-04-09-spring-mvc-testing-unit-testing-rest-api/">Spring MVC Unit Testing - REST API</a></h4>
-    <h5>April 9, 2016</h5>
-     <kbd class="item-tag">Spring MVC</kbd>  <kbd class="item-tag">testing</kbd>  <kbd class="item-tag">java</kbd> 
-
-</div>
-  <div class="item">
-
-    
-    
-    
-
-    
-    
-
-    <h4><a href="/posts/2016-04-09-spring-mvc-testing-unit-testing-normal-controllers/">Spring MVC Unit Testing - Normal Controllers</a></h4>
-    <h5>April 9, 2016</h5>
-     <kbd class="item-tag">Spring MVC</kbd>  <kbd class="item-tag">testing</kbd>  <kbd class="item-tag">java</kbd> 
-
-</div>
- 
 
 </main>
-
-
-
-<div class="pages">
-
-    
-    <a class="icon pages-icon" href="/posts/page/3/" rel="prev">
-        <i class="fa fa-arrow-left"></i>
-    </a>
-     
-    <a class="icon pages-icon" href="/posts/page/5/" rel="next">
-        <i class="fa fa-arrow-right"></i>
-    </a>
-    
-
-</div>
-
-
 
         <footer>
 

@@ -6,10 +6,19 @@
     <description>Recent content in Tags on wbprime</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Mon, 25 May 2015 11:07:13 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 05 Feb 2018 17:46:28 +0800</lastBuildDate>
     
 	<atom:link href="http://www.wbprime.me/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Acl</title>
+      <link>http://www.wbprime.me/tags/acl/</link>
+      <pubDate>Mon, 05 Feb 2018 17:46:28 +0800</pubDate>
+      
+      <guid>http://www.wbprime.me/tags/acl/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Archlinux</title>
@@ -62,6 +71,15 @@
       <pubDate>Mon, 05 Feb 2018 16:16:53 +0800</pubDate>
       
       <guid>http://www.wbprime.me/tags/gc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Getacl</title>
+      <link>http://www.wbprime.me/tags/getacl/</link>
+      <pubDate>Mon, 05 Feb 2018 17:46:28 +0800</pubDate>
+      
+      <guid>http://www.wbprime.me/tags/getacl/</guid>
       <description></description>
     </item>
     
@@ -156,6 +174,15 @@
     </item>
     
     <item>
+      <title>Linux</title>
+      <link>http://www.wbprime.me/tags/linux/</link>
+      <pubDate>Mon, 05 Feb 2018 17:46:28 +0800</pubDate>
+      
+      <guid>http://www.wbprime.me/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Mayday</title>
       <link>http://www.wbprime.me/tags/mayday/</link>
       <pubDate>Sat, 16 May 2015 17:27:36 +0000</pubDate>
@@ -179,6 +206,15 @@
       <pubDate>Mon, 05 Feb 2018 16:47:59 +0800</pubDate>
       
       <guid>http://www.wbprime.me/tags/memory-model/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Setacl</title>
+      <link>http://www.wbprime.me/tags/setacl/</link>
+      <pubDate>Mon, 05 Feb 2018 17:46:28 +0800</pubDate>
+      
+      <guid>http://www.wbprime.me/tags/setacl/</guid>
       <description></description>
     </item>
     
