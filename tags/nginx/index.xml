@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Nginx on wbprime</title>
+    <link>http://www.wbprime.me/tags/nginx/</link>
+    <description>Recent content in Nginx on wbprime</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Tue, 06 Feb 2018 16:26:08 +0800</lastBuildDate>
+    
+	<atom:link href="http://www.wbprime.me/tags/nginx/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Nginx Note - Config Parsing and Loading</title>
+      <link>http://www.wbprime.me/posts/2018-02-06-nginx-note-config-loading/</link>
+      <pubDate>Tue, 06 Feb 2018 16:26:08 +0800</pubDate>
+      
+      <guid>http://www.wbprime.me/posts/2018-02-06-nginx-note-config-loading/</guid>
+      <description>转载自Nginx 配置信息的解析流程
+Nginx 配置信息的解析流程 这一系列的文章还是在09年写的，存在电脑里很久了，现在贴出来。顺序也不记得了，看到那个就发那个吧，最近都会发上来。欢迎转载，但请保留链接：http://lenky.info/ ，谢谢。
+Nginx 的配置文件格式是 Nginx 作者自己定义的，并没有采用像语法分析生成器LEMON那种经典的LALR（1）来描述配置信息，这样做的好处就是自由，而坏处就是对于Nginx的每一项配置信息都必须自己去解析，因此我们很容易看到Nginx模块里大量篇幅的配置信息解析代码，比如模块 ngx_http_core_module。
+当然，Nginx配置文件的格式也不是随意的，它有自己的一套规范：
+Nginx配置文件是由多个配置项组成的。每一个配置项都有一个项目名和对应的项目值，项目名又被称为指令（Directive），而项目值可能简单的字符串（以分号结尾），也可能是由简单字符串和多个配置项组合而成配置块的复杂结构（以大括号}结尾），因此我们可以将配置项归纳为两种：简单配置项和复杂配置项。
+其项目名 &amp;ldquo;daemon&amp;rdquo; 为一个token，项目值 &amp;ldquo;off&amp;rdquo; 也是一个token。而简单配置项：
+error_page 404 /404.html;
+其项目值就包含有两个token，分别为 &amp;ldquo;404&amp;rdquo; 和 &amp;ldquo;/404.html&amp;rdquo; 。
+对于复杂配置项：
+location /www { index index.html index.htm index.php; }  其项目名 location 为一个token，项目值是一个token(&amp;ldquo;/www&amp;rdquo;)和多条简单配置项组成的复合结构。
+前面将token解释为一个配置文件字符串内容中被空格、引号、括号，比如 &amp;lsquo;{&amp;rsquo; 等分割开来的字符子串，那么很明显，上面例子中的taken是被空格分割出来，事实上下面这样的配置也是正确的：
+&amp;quot;daemon&amp;quot; &amp;quot;off&amp;quot;; &#39;daemon&#39; &#39;off&#39;; daemon &#39;off&#39;; &amp;quot;daemon&amp;quot; off;  当然，一般情况下没必要这样费事去加些引号，除非我们需要在token内包含空格而又不想使用转义字符(&amp;rsquo;\&amp;lsquo;)的话就可以利用引号，比如：
+log_format main &#39;$remote_addr – $remote_user [$time_local] $status &#39; &#39;&amp;quot;$request&amp;quot; $body_bytes_sent &amp;quot;$http_referer&amp;quot; &#39; &#39;&amp;quot;$http_user_agent&amp;quot; &amp;quot;$http_x_forwarded_for&amp;quot;&#39;;  但是像下面这种格式就会有问题，这对于我们来说很容易理解，不多详叙：
+&amp;quot;daemon &amp;quot;off&amp;quot;;  对于如此多的配置项，Nginx怎样去解析它们呢？在什么时候去解析呢？事实上，对于Nginx所有可能出现的配置项(通过项目名即指令Directive去判断)，Nginx都会提供有对应的代码去解析它，如果配置文件内出现了Nginx无法解析的配置项，那么Nginx将报错并直接退出程序。</description>
+    </item>
+    
+    <item>
+      <title>Nginx Note - Process Cycle</title>
+      <link>http://www.wbprime.me/posts/2018-02-06-nginx-note-process-cycle/</link>
+      <pubDate>Tue, 06 Feb 2018 16:25:54 +0800</pubDate>
+      
+      <guid>http://www.wbprime.me/posts/2018-02-06-nginx-note-process-cycle/</guid>
+      <description>转载自Nginx 的执行模型
+Nginx 的执行模型 这一系列的文章还是在09年写的，存在电脑里很久了，现在贴出来。顺序也不记得了，看到那个就发那个吧，最近都会发上来。欢迎转载，但请保留链接：http://lenky.info/ ，谢谢。
+Nginx 的进程模型和大多数同类服务程序一样，按职责将进程分成监控进程和工作进程两类。在多进程模型下，主进程就充当监控进程，而由主进程fork出来的子进程则充当工作进程；在单进程模型下，主进程就是工作进程，此时没有监控进程。Nginx 的单进程模型比较简单，下面主要分析多进程模型。
+分析 Nginx 多进程模型的入口函数为主进程的 ngx_master_process_cycle ，在该函数做完信号处理设置等之后就会调用一个名为 ngx_start_worker_processes 的函数用于 fork 产生出子进程(子进程数目通过函数调用的第二个参数指定)，子进程作为一个新的实体开始充当工作进程的角色处理客户端的服务请求；而主进程继续执行 ngx_master_process_cycle 函数，也就是作为监控进程执行主体 for 循环，这是一个死循环，直到进程终止才退出，服务进程基本都是这种写法，所以不用详述，下面先看看这个模型的图示：
+图示里表现得很明朗，监控进程和工作进程各有一个无限 for 循环，以便进程持续的等待和处理自己负责的事务，直到进程退出。
+监控进程的无限 for 循环内有一个关键的 sigsuspend 函数调用，该函数的调用使得监控进程的大部分时间都处于挂起状态，直到监控进程接收到信号为止，当监控进程接收到信号时，调用信号处理函数 ngx_signal_handler 进行处理。我们知道，信号处理函数一般都比较简单，故此在函数 ngx_signal_handler 内执行的动作主要也就是对一些标识字段进行设置，而更具体的处理逻辑仍直接放在 for 循环内，所以该 for 循环接下来的代码就是判断那些标识字段，比如 ngx_reap (有子进程退出？), ngx_quit 或 ngx_terminate (进行要退出或终止？), ngx_reconfigure (重新加载配置？)等是否被置位并相应的做出处理。当所有信号都处理完时又挂起在函数 sigsuspend 调用处继续等待新的信号，如此反复，构成监控进程的主要执行体。
+工作进程的执行主体与监控进程类似，不过工作进程既然是工作进程，那么它的主要关注点就是与客户端之间的数据可读/可写事件，而不是信号，所以，工作进程的阻塞点是在像 select, epoll_wait 等这样的函数调用处，以等待发生数据可读/可写事件或是被新收到的信号中断。Nginx 的 IO复用模型封装得相当不错，当然也非一两句言语能够说得清楚，这将在我们的IO复用模型章节做详细介绍。
+转载请保留地址：http://www.lenky.info/archives/2011/09/48 或 http://lenky.info/?p=48
+备注：如无特殊说明，文章内容均出自Lenky个人的真实理解而并非存心妄自揣测来故意愚人耳目。由于个人水平有限，虽力求内容正确无误，但仍然难免出错，请勿见怪，如果可以则请留言告之，并欢迎来信讨论。另外值得说明的是，Lenky的部分文章以及部分内容参考借鉴了网络上各位网友的热心分享，特别是一些带有完全参考的文章，其后附带的链接内容也许更直接、更丰富，而我只是做了一下归纳&amp;amp;转述，在此也一并表示感谢。关于本站的所有技术文章，欢迎转载，但请遵从CC创作共享协议，而一些私人性质较强的心情随笔，建议不要转载。</description>
+    </item>
+    
+    <item>
+      <title>Nginx Note - Signal Handling</title>
+      <link>http://www.wbprime.me/posts/2018-02-06-nginx-note-signal-handling/</link>
+      <pubDate>Tue, 06 Feb 2018 16:25:24 +0800</pubDate>
+      
+      <guid>http://www.wbprime.me/posts/2018-02-06-nginx-note-signal-handling/</guid>
+      <description>转载自Nginx 的信号管理
+Nginx 的信号管理 这一系列的文章还是在09年写的，存在电脑里很久了，现在贴出来。顺序也不记得了，看到那个就发那个吧，最近都会发上来。欢迎转载，但请保留链接：http://lenky.info/ ，谢谢。
+Nginx对所有发往其自身的信号进行了统一管理，这部分相关实现代码不多，而且十分清晰易懂，下面来逐步解析。
+首先，Nginx对一种信号以及该信号的处理封装了一个对应的名为ngx_signal_t的结构体：
+typedef struct { int signo; // 信号值 char *signame; // 信号名 char *name; // 名称，和信号名不一样，名称表明该信号的自定义作用 void (*handler)(int signo);// 信号处理函数指针 } ngx_signal_t;  接着，Nginx定义了一个ngx_signal_t类型的全局数组变量signals，该变量内包含了Nginx所有要处理的信号，如下：
+ngx_signal_t signals[] = { { ngx_signal_value(NGX_RECONFIGURE_SIGNAL), //SIGHUP &amp;quot;SIG&amp;quot; ngx_value(NGX_RECONFIGURE_SIGNAL), //&amp;quot;SIGHUP&amp;quot;，这里带了引号 &amp;quot;reload&amp;quot;, //表示SIGHUP用户重新加载Nginx，也就是reload configure ngx_signal_handler }, //信号处理函数，重点 { ngx_signal_value(NGX_REOPEN_SIGNAL), &amp;quot;SIG&amp;quot; ngx_value(NGX_REOPEN_SIGNAL), &amp;quot;reopen&amp;quot;, ngx_signal_handler }, // ... { SIGPIPE, &amp;quot;SIGPIPE, SIG_IGN&amp;quot;, &amp;quot;&amp;quot;, SIG_IGN }, //忽略信号也是一种处理方式 { 0, NULL, &amp;quot;&amp;quot;, NULL } //数组结束哨兵元素，很多地方都这么用 }  ngx_signal_value、NGX_RECONFIGURE_SIGNAL、ngx_value都是一些宏，扩展开来就容易看懂，而ngx_signal_handler为一个函数指针，用来处理接收到的信号。</description>
+    </item>
+    
+    <item>
+      <title>Nginx Note - Modules Design</title>
+      <link>http://www.wbprime.me/posts/2018-02-06-nginx-note-modules-design/</link>
+      <pubDate>Tue, 06 Feb 2018 16:23:34 +0800</pubDate>
+      
+      <guid>http://www.wbprime.me/posts/2018-02-06-nginx-note-modules-design/</guid>
+      <description>转载自Nginx 模块的统一架构
+Nginx 的模块统一架构 这一系列的文章还是在09年写的，存在电脑里很久了，现在贴出来。顺序也不记得了，看到那个就发那个吧，最近都会发上来。欢迎转载，但请保留链接：http://lenky.info/ ，谢谢。
+当我们configure配置 Nginx 后，将在一个名为objs的文件夹里找一个 ngx_modules.c 源文件，该文件内就包含了我们待编译生成的 Nginx 程序即将包含的模块。
+Nginx 的模块可以简单点分为 core, conf, event, http 和 mail 五种类型，这从 Nginx 源码的目录结构也可以依稀看出。
+封装 Nginx 模块的结构体为 ngx_module_s，定义如下：
+typedef struct ngx_module_s ngx_module_t; struct ngx_module_s { //存储当前模块在同类模块中的排号。 ngx_uint_t ctx_index; //存储当前模块在所有模块中的排号。 ngx_uint_t index; //以下四字段留作备用，用于将来扩展。 ngx_uint_t spare0; ngx_uint_t spare1; ngx_uint_t spare2; ngx_uint_t spare3; //记录模块版本号 ngx_uint_t version; //指向模块特有的数据，因为指向的数据类型不确定，所以是个void类型指针。 void *ctx; //指向一个ngx_command_t类型的数组，具体后面会讲解到。 ngx_command_t *commands; //取值为NGX_CORE_MODULE、NGX_EVENT_MODULE、 //NGX_HTTP_MODULE、NGX_MAIL_MODULE、NGX_CONF_MODULE //之一，用于标识当前模块属于哪种类型。 ngx_uint_t type; //以下7个字段为函数指针，可以给它们赋上合适的回调函数，则nginx会在 //相应的时机调用它们，如果模块不关心（比如不用做初始化或销毁）则直接 //赋值为NULL即可。 //回调函数，master初始化时调用。 ngx_int_t (*init_master)(ngx_log_t *log); //回调函数，模块初始化时调用。 ngx_int_t (*init_module)(ngx_cycle_t *cycle); //回调函数，工作进程初始化时调用。 ngx_int_t (*init_process)(ngx_cycle_t *cycle); //回调函数，线程初始化时调用。 ngx_int_t (*init_thread)(ngx_cycle_t *cycle); //回调函数，线程退出时调用。 void (*exit_thread)(ngx_cycle_t *cycle); //回调函数，工作进程退出时调用。 void (*exit_process)(ngx_cycle_t *cycle); //回调函数，master退出时调用。 void (*exit_master)(ngx_cycle_t *cycle); //同之前的spare0~ spare4字段一样，下面这八个字段留作备用。 uintptr_t spare_hook0; uintptr_t spare_hook1; uintptr_t spare_hook2; uintptr_t spare_hook3; uintptr_t spare_hook4; uintptr_t spare_hook5; uintptr_t spare_hook6; uintptr_t spare_hook7; };  众览Nginx各模块对应的 ngx_module_t 结构体变量，可以看到上面介绍的各字段基本都为 NULL 或 0，而只有几个字段 ctx, commands, type，几乎每个模块都有使用，而 type 显然是必须的，那么另外两个字段 ctx, commands 有何作用？</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Nginx Note - Process Cycle</title>
+        <style>
+
+    html body {
+        font-family: Raleway, sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: lightseagreen;
+        --border-width:  0 ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/java.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/c&#43;&#43;.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.32-DEV" />
+        
+    </head>
+
+    <body>
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Nginx Note - Process Cycle</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/posts/">Posts</a></li>
+                            
+                                <li><a href="/categories/">Categories</a></li>
+                            
+                                <li><a href="/tags/">Tags</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="https://github.com/wbprime/"><i class="fa fa-github"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+      
+
+    <h4><a href="/posts/2018-02-06-nginx-note-process-cycle/">Nginx Note - Process Cycle</a></h4>
+    <h5>Note of main process cycle for Nginx</h5>
+     <kbd class="item-tag">nginx</kbd> 
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<p>转载自<a href="http://www.lenky.info/archives/2011/09/48">Nginx 的执行模型</a></p>
+
+<h1 id="nginx-的执行模型">Nginx 的执行模型</h1>
+
+<p>这一系列的文章还是在09年写的，存在电脑里很久了，现在贴出来。顺序也不记得了，看到那个就发那个吧，最近都会发上来。欢迎转载，但请保留链接：<a href="http://lenky.info/">http://lenky.info/</a> ，谢谢。</p>
+
+<p>Nginx 的进程模型和大多数同类服务程序一样，按职责将进程分成监控进程和工作进程两类。在多进程模型下，主进程就充当监控进程，而由主进程fork出来的子进程则充当工作进程；在单进程模型下，主进程就是工作进程，此时没有监控进程。Nginx 的单进程模型比较简单，下面主要分析多进程模型。</p>
+
+<p>分析 Nginx 多进程模型的入口函数为主进程的 <code>ngx_master_process_cycle</code> ，在该函数做完信号处理设置等之后就会调用一个名为 <code>ngx_start_worker_processes</code> 的函数用于 <code>fork</code> 产生出子进程(子进程数目通过函数调用的第二个参数指定)，子进程作为一个新的实体开始充当工作进程的角色处理客户端的服务请求；而主进程继续执行 <code>ngx_master_process_cycle</code> 函数，也就是作为监控进程执行主体 <code>for</code> 循环，这是一个死循环，直到进程终止才退出，服务进程基本都是这种写法，所以不用详述，下面先看看这个模型的图示：</p>
+
+<p><img src="/posts/2018-02-06-nginx-note.dir/nginx_process_procedure_01.jpg" alt="执行模型流程图" /></p>
+
+<p>图示里表现得很明朗，监控进程和工作进程各有一个无限 <code>for</code> 循环，以便进程持续的等待和处理自己负责的事务，直到进程退出。</p>
+
+<p>监控进程的无限 <code>for</code> 循环内有一个关键的 <code>sigsuspend</code> 函数调用，该函数的调用使得监控进程的大部分时间都处于挂起状态，直到监控进程接收到信号为止，当监控进程接收到信号时，调用信号处理函数 <code>ngx_signal_handler</code> 进行处理。我们知道，信号处理函数一般都比较简单，故此在函数 <code>ngx_signal_handler</code> 内执行的动作主要也就是对一些标识字段进行设置，而更具体的处理逻辑仍直接放在 <code>for</code> 循环内，所以该 <code>for</code> 循环接下来的代码就是判断那些标识字段，比如 <code>ngx_reap</code> (有子进程退出？), <code>ngx_quit</code> 或 <code>ngx_terminate</code> (进行要退出或终止？), <code>ngx_reconfigure</code> (重新加载配置？)等是否被置位并相应的做出处理。当所有信号都处理完时又挂起在函数 <code>sigsuspend</code> 调用处继续等待新的信号，如此反复，构成监控进程的主要执行体。</p>
+
+<p>工作进程的执行主体与监控进程类似，不过工作进程既然是工作进程，那么它的主要关注点就是与客户端之间的数据可读/可写事件，而不是信号，所以，工作进程的阻塞点是在像 <code>select</code>, <code>epoll_wait</code> 等这样的函数调用处，以等待发生数据可读/可写事件或是被新收到的信号中断。Nginx 的 IO复用模型封装得相当不错，当然也非一两句言语能够说得清楚，这将在我们的IO复用模型章节做详细介绍。</p>
+
+<p>转载请保留地址：<a href="http://www.lenky.info/archives/2011/09/48">http://www.lenky.info/archives/2011/09/48</a> 或 <a href="http://lenky.info/?p=48">http://lenky.info/?p=48</a></p>
+
+<p>备注：如无特殊说明，文章内容均出自Lenky个人的真实理解而并非存心妄自揣测来故意愚人耳目。由于个人水平有限，虽力求内容正确无误，但仍然难免出错，请勿见怪，如果可以则请留言告之，并欢迎来信讨论。另外值得说明的是，Lenky的部分文章以及部分内容参考借鉴了网络上各位网友的热心分享，特别是一些带有完全参考的文章，其后附带的链接内容也许更直接、更丰富，而我只是做了一下归纳&amp;转述，在此也一并表示感谢。关于本站的所有技术文章，欢迎转载，但请遵从CC创作共享协议，而一些私人性质较强的心情随笔，建议不要转载。</p>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+
+    </body>
+
+</html>
+
