@@ -385,13 +385,13 @@
   </url>
   
   <url>
-    <loc>http://www.wbprime.me/tags/awk/</loc>
+    <loc>http://www.wbprime.me/categories/awk/</loc>
     <lastmod>2017-06-01T09:43:06+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.wbprime.me/categories/awk/</loc>
+    <loc>http://www.wbprime.me/tags/awk/</loc>
     <lastmod>2017-06-01T09:43:06+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -439,13 +439,13 @@
   </url>
   
   <url>
-    <loc>http://www.wbprime.me/tags/graphviz/</loc>
+    <loc>http://www.wbprime.me/categories/graphviz/</loc>
     <lastmod>2017-03-20T11:55:45+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.wbprime.me/categories/graphviz/</loc>
+    <loc>http://www.wbprime.me/tags/graphviz/</loc>
     <lastmod>2017-03-20T11:55:45+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -541,13 +541,13 @@
   </url>
   
   <url>
-    <loc>http://www.wbprime.me/tags/mayday/</loc>
+    <loc>http://www.wbprime.me/categories/mayday/</loc>
     <lastmod>2015-05-16T17:27:36+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.wbprime.me/categories/mayday/</loc>
+    <loc>http://www.wbprime.me/tags/mayday/</loc>
     <lastmod>2015-05-16T17:27:36+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -631,14 +631,14 @@
   </url>
   
   <url>
-    <loc>http://www.wbprime.me/tags/tech/</loc>
-    <lastmod>2017-06-01T09:43:06+00:00</lastmod>
+    <loc>http://www.wbprime.me/categories/tech/</loc>
+    <lastmod>2015-05-25T11:07:13+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.wbprime.me/categories/tech/</loc>
-    <lastmod>2015-05-25T11:07:13+00:00</lastmod>
+    <loc>http://www.wbprime.me/tags/tech/</loc>
+    <lastmod>2017-06-01T09:43:06+00:00</lastmod>
     <priority>0</priority>
   </url>
   
