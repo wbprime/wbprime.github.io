@@ -1,567 +1,567 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     
         <url>
-            <loc>https://www.wangbo.im/about/</loc>
+            <loc>https://wbprime.github.io/about/</loc>
             
                 <lastmod>2019-01-23T19:20:50+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/2012/</loc>
+            <loc>https://wbprime.github.io/posts/2012/</loc>
             
                 <lastmod>2013-05-16T20:39:50+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/2016-03-30-learning-java-concurrency-countdownlatch/</loc>
+            <loc>https://wbprime.github.io/posts/2016-03-30-learning-java-concurrency-countdownlatch/</loc>
             
                 <lastmod>2016-03-30T21:06:08+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/2016-03-30-learning-java-concurrency-cyclicbarrier/</loc>
+            <loc>https://wbprime.github.io/posts/2016-03-30-learning-java-concurrency-cyclicbarrier/</loc>
             
                 <lastmod>2016-03-30T21:06:26+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/2016-03-30-learning-java-concurrent-semaphore/</loc>
+            <loc>https://wbprime.github.io/posts/2016-03-30-learning-java-concurrent-semaphore/</loc>
             
                 <lastmod>2016-03-30T20:33:17+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/2016-04-06-learning-java-concurrency-wait-notify/</loc>
+            <loc>https://wbprime.github.io/posts/2016-04-06-learning-java-concurrency-wait-notify/</loc>
             
                 <lastmod>2016-04-06T10:00:56+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/2016-04-07-learning-java-concurrency-reentrantlock-condition/</loc>
+            <loc>https://wbprime.github.io/posts/2016-04-07-learning-java-concurrency-reentrantlock-condition/</loc>
             
                 <lastmod>2016-04-07T09:47:10+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/2016-04-07-learning-java-concurrency-reentrantreadwritelock/</loc>
+            <loc>https://wbprime.github.io/posts/2016-04-07-learning-java-concurrency-reentrantreadwritelock/</loc>
             
                 <lastmod>2016-04-07T21:54:38+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/2016-04-11-learning-java-concurrency-thread-runnable/</loc>
+            <loc>https://wbprime.github.io/posts/2016-04-11-learning-java-concurrency-thread-runnable/</loc>
             
                 <lastmod>2016-04-11T10:04:31+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/2016-04-13-learning-java-concurrency-futuretask-callable/</loc>
+            <loc>https://wbprime.github.io/posts/2016-04-13-learning-java-concurrency-futuretask-callable/</loc>
             
                 <lastmod>2016-04-13T10:17:57+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/2017-03-20-fast-into-graphviz/</loc>
+            <loc>https://wbprime.github.io/posts/2017-03-20-fast-into-graphviz/</loc>
             
                 <lastmod>2017-03-20T11:55:45+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/2017-06-01-awk-tips-md5/</loc>
+            <loc>https://wbprime.github.io/posts/2017-06-01-awk-tips-md5/</loc>
             
                 <lastmod>2017-06-01T09:43:06+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/2018-01-08-ansi-colors/</loc>
+            <loc>https://wbprime.github.io/posts/2018-01-08-ansi-colors/</loc>
             
                 <lastmod>2018-01-08T10:45:11+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/2018-02-05-jdk-vs-jre/</loc>
+            <loc>https://wbprime.github.io/posts/2018-02-05-jdk-vs-jre/</loc>
             
                 <lastmod>2018-02-05T15:54:01+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/2018-02-05-jvm-gc-options/</loc>
+            <loc>https://wbprime.github.io/posts/2018-02-05-jvm-gc-options/</loc>
             
                 <lastmod>2018-02-05T16:16:53+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/2018-02-05-jvm-memory-model/</loc>
+            <loc>https://wbprime.github.io/posts/2018-02-05-jvm-memory-model/</loc>
             
                 <lastmod>2018-02-05T16:47:59+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/2018-02-06-ip-tcp-udp-frames/</loc>
+            <loc>https://wbprime.github.io/posts/2018-02-06-ip-tcp-udp-frames/</loc>
             
                 <lastmod>2018-02-06T13:08:22+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/2018-02-06-thrift-note/</loc>
+            <loc>https://wbprime.github.io/posts/2018-02-06-thrift-note/</loc>
             
                 <lastmod>2018-02-06T13:22:50+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/acl-note/</loc>
+            <loc>https://wbprime.github.io/posts/acl-note/</loc>
             
                 <lastmod>2018-02-05T17:46:28+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/baiyun-yijiu-zai/</loc>
+            <loc>https://wbprime.github.io/posts/baiyun-yijiu-zai/</loc>
             
                 <lastmod>2015-05-16T19:59:21+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/c-mantan/</loc>
+            <loc>https://wbprime.github.io/posts/c-mantan/</loc>
             
                 <lastmod>2015-05-16T19:18:33+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/cangjie/</loc>
+            <loc>https://wbprime.github.io/posts/cangjie/</loc>
             
                 <lastmod>2013-05-16T20:50:09+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/chunzhen/</loc>
+            <loc>https://wbprime.github.io/posts/chunzhen/</loc>
             
                 <lastmod>2013-05-16T20:35:19+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/danan/</loc>
+            <loc>https://wbprime.github.io/posts/danan/</loc>
             
                 <lastmod>2015-05-16T19:14:49+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/feichangliujiayi/</loc>
+            <loc>https://wbprime.github.io/posts/feichangliujiayi/</loc>
             
                 <lastmod>2015-05-16T14:44:12+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/fengkuangshijie/</loc>
+            <loc>https://wbprime.github.io/posts/fengkuangshijie/</loc>
             
                 <lastmod>2013-05-16T21:01:44+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/hello-world/</loc>
+            <loc>https://wbprime.github.io/posts/hello-world/</loc>
             
                 <lastmod>2015-05-13T12:30:23+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/houqingchunqi-de-shi/</loc>
+            <loc>https://wbprime.github.io/posts/houqingchunqi-de-shi/</loc>
             
                 <lastmod>2013-05-16T20:46:59+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/http-responce-status-code/</loc>
+            <loc>https://wbprime.github.io/posts/http-responce-status-code/</loc>
             
                 <lastmod>2018-02-05T15:45:52+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/huangyi-memory/</loc>
+            <loc>https://wbprime.github.io/posts/huangyi-memory/</loc>
             
                 <lastmod>2017-04-07T10:42:29+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/jdk-installation-on-archlinux/</loc>
+            <loc>https://wbprime.github.io/posts/jdk-installation-on-archlinux/</loc>
             
                 <lastmod>2015-05-25T11:07:13+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/ji-huairou-shaokao/</loc>
+            <loc>https://wbprime.github.io/posts/ji-huairou-shaokao/</loc>
             
                 <lastmod>2015-05-14T08:23:02+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/jianchizhu-waipo/</loc>
+            <loc>https://wbprime.github.io/posts/jianchizhu-waipo/</loc>
             
                 <lastmod>2014-05-16T20:09:06+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/jiuhaoqiu/</loc>
+            <loc>https://wbprime.github.io/posts/jiuhaoqiu/</loc>
             
                 <lastmod>2013-05-16T21:00:11+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/kan-dianying/</loc>
+            <loc>https://wbprime.github.io/posts/kan-dianying/</loc>
             
                 <lastmod>2015-05-16T19:15:55+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/learning-java-concurrency-content/</loc>
+            <loc>https://wbprime.github.io/posts/learning-java-concurrency-content/</loc>
             
                 <lastmod>2016-03-31T10:10:46+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/learning-java-concurrency-executors-1-executorservice/</loc>
+            <loc>https://wbprime.github.io/posts/learning-java-concurrency-executors-1-executorservice/</loc>
             
                 <lastmod>2016-04-15T16:34:20+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/learning-java-concurrency-synchronized/</loc>
+            <loc>https://wbprime.github.io/posts/learning-java-concurrency-synchronized/</loc>
             
                 <lastmod>2016-04-01T16:39:24+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/libevent-notes/</loc>
+            <loc>https://wbprime.github.io/posts/libevent-notes/</loc>
             
                 <lastmod>2018-02-05T17:08:50+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/man-man-zou/</loc>
+            <loc>https://wbprime.github.io/posts/man-man-zou/</loc>
             
                 <lastmod>2015-05-16T20:00:57+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/maven-note/</loc>
+            <loc>https://wbprime.github.io/posts/maven-note/</loc>
             
                 <lastmod>2018-02-06T10:50:17+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/milaoshu/</loc>
+            <loc>https://wbprime.github.io/posts/milaoshu/</loc>
             
                 <lastmod>2013-05-16T20:53:27+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/mybatis-note/</loc>
+            <loc>https://wbprime.github.io/posts/mybatis-note/</loc>
             
                 <lastmod>2018-02-06T11:40:06+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/nginx-note-config-loading/</loc>
+            <loc>https://wbprime.github.io/posts/nginx-note-config-loading/</loc>
             
                 <lastmod>2018-02-06T16:26:08+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/nginx-note-modules-design/</loc>
+            <loc>https://wbprime.github.io/posts/nginx-note-modules-design/</loc>
             
                 <lastmod>2018-02-06T16:23:34+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/nginx-note-process-cycle/</loc>
+            <loc>https://wbprime.github.io/posts/nginx-note-process-cycle/</loc>
             
                 <lastmod>2018-02-06T16:25:54+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/nginx-note-signal-handling/</loc>
+            <loc>https://wbprime.github.io/posts/nginx-note-signal-handling/</loc>
             
                 <lastmod>2018-02-06T16:25:24+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/nuoya-fangzhou/</loc>
+            <loc>https://wbprime.github.io/posts/nuoya-fangzhou/</loc>
             
                 <lastmod>2013-05-16T20:20:46+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/posix-make-note/</loc>
+            <loc>https://wbprime.github.io/posts/posix-make-note/</loc>
             
                 <lastmod>2018-02-05T18:00:50+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/qiangjinjiu/</loc>
+            <loc>https://wbprime.github.io/posts/qiangjinjiu/</loc>
             
                 <lastmod>2015-05-16T19:10:58+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/qilai-live/</loc>
+            <loc>https://wbprime.github.io/posts/qilai-live/</loc>
             
                 <lastmod>2015-05-16T17:27:36+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/qusuodui/</loc>
+            <loc>https://wbprime.github.io/posts/qusuodui/</loc>
             
                 <lastmod>2015-05-16T19:04:12+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/shengmingzhong-you-yizhong-juedui/</loc>
+            <loc>https://wbprime.github.io/posts/shengmingzhong-you-yizhong-juedui/</loc>
             
                 <lastmod>2013-05-16T21:04:55+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/shiguangji/</loc>
+            <loc>https://wbprime.github.io/posts/shiguangji/</loc>
             
                 <lastmod>2013-05-16T20:32:58+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/shuohaode-anjingde-meinanzi-ne/</loc>
+            <loc>https://wbprime.github.io/posts/shuohaode-anjingde-meinanzi-ne/</loc>
             
                 <lastmod>2015-05-16T19:54:33+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/spring-annotation-based-configuration/</loc>
+            <loc>https://wbprime.github.io/posts/spring-annotation-based-configuration/</loc>
             
                 <lastmod>2015-06-08T10:45:49+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/spring-at-first-glance/</loc>
+            <loc>https://wbprime.github.io/posts/spring-at-first-glance/</loc>
             
                 <lastmod>2015-05-28T19:11:56+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/spring-mvc-note/</loc>
+            <loc>https://wbprime.github.io/posts/spring-mvc-note/</loc>
             
                 <lastmod>2018-02-06T12:51:13+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/spring-mvc-testing-content/</loc>
+            <loc>https://wbprime.github.io/posts/spring-mvc-testing-content/</loc>
             
                 <lastmod>2016-04-09T23:03:35+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/spring-mvc-testing-integration-testing-configuration/</loc>
+            <loc>https://wbprime.github.io/posts/spring-mvc-testing-integration-testing-configuration/</loc>
             
                 <lastmod>2016-04-09T23:07:53+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/spring-mvc-testing-integration-testing-controllers/</loc>
+            <loc>https://wbprime.github.io/posts/spring-mvc-testing-integration-testing-controllers/</loc>
             
                 <lastmod>2016-04-09T23:08:01+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/spring-mvc-testing-integration-testing-forms/</loc>
+            <loc>https://wbprime.github.io/posts/spring-mvc-testing-integration-testing-forms/</loc>
             
                 <lastmod>2016-04-09T23:08:24+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/spring-mvc-testing-integration-testing-jsonpath/</loc>
+            <loc>https://wbprime.github.io/posts/spring-mvc-testing-integration-testing-jsonpath/</loc>
             
                 <lastmod>2016-04-09T23:09:10+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/spring-mvc-testing-integration-testing-rest-api/</loc>
+            <loc>https://wbprime.github.io/posts/spring-mvc-testing-integration-testing-rest-api/</loc>
             
                 <lastmod>2016-04-09T23:08:39+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/spring-mvc-testing-integration-testing-security/</loc>
+            <loc>https://wbprime.github.io/posts/spring-mvc-testing-integration-testing-security/</loc>
             
                 <lastmod>2016-04-09T23:08:58+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/spring-mvc-testing-unit-testing-configuration/</loc>
+            <loc>https://wbprime.github.io/posts/spring-mvc-testing-unit-testing-configuration/</loc>
             
                 <lastmod>2016-04-09T23:06:57+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/spring-mvc-testing-unit-testing-normal-controllers/</loc>
+            <loc>https://wbprime.github.io/posts/spring-mvc-testing-unit-testing-normal-controllers/</loc>
             
                 <lastmod>2016-04-09T23:07:12+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/spring-mvc-testing-unit-testing-rest-api/</loc>
+            <loc>https://wbprime.github.io/posts/spring-mvc-testing-unit-testing-rest-api/</loc>
             
                 <lastmod>2016-04-09T23:07:22+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/spring-xml-based-configuration/</loc>
+            <loc>https://wbprime.github.io/posts/spring-xml-based-configuration/</loc>
             
                 <lastmod>2015-06-02T10:12:47+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/suoban-qushi/</loc>
+            <loc>https://wbprime.github.io/posts/suoban-qushi/</loc>
             
                 <lastmod>2015-05-16T19:01:57+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/tomcat-note/</loc>
+            <loc>https://wbprime.github.io/posts/tomcat-note/</loc>
             
                 <lastmod>2018-02-06T15:28:53+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/turan-hao-xiangni/</loc>
+            <loc>https://wbprime.github.io/posts/turan-hao-xiangni/</loc>
             
                 <lastmod>2013-05-16T20:25:07+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/turan-xiangqi-zhushi-lai/</loc>
+            <loc>https://wbprime.github.io/posts/turan-xiangqi-zhushi-lai/</loc>
             
                 <lastmod>2014-05-16T20:03:36+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/women/</loc>
+            <loc>https://wbprime.github.io/posts/women/</loc>
             
                 <lastmod>2013-05-16T20:56:25+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/woxinzhong-shangwei-benghuai-de-difang/</loc>
+            <loc>https://wbprime.github.io/posts/woxinzhong-shangwei-benghuai-de-difang/</loc>
             
                 <lastmod>2013-05-16T20:29:10+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/xiaoshihou/</loc>
+            <loc>https://wbprime.github.io/posts/xiaoshihou/</loc>
             
                 <lastmod>2013-05-16T20:43:42+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/xiaowang-ersanshi/</loc>
+            <loc>https://wbprime.github.io/posts/xiaowang-ersanshi/</loc>
             
                 <lastmod>2015-05-16T19:07:06+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/xingkong/</loc>
+            <loc>https://wbprime.github.io/posts/xingkong/</loc>
             
                 <lastmod>2013-05-16T20:37:45+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/xiyiji/</loc>
+            <loc>https://wbprime.github.io/posts/xiyiji/</loc>
             
                 <lastmod>2013-05-16T20:57:59+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/yikepingguo/</loc>
+            <loc>https://wbprime.github.io/posts/yikepingguo/</loc>
             
                 <lastmod>2013-05-16T21:03:17+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/zhizu/</loc>
+            <loc>https://wbprime.github.io/posts/zhizu/</loc>
             
                 <lastmod>2013-05-16T21:08:50+08:00</lastmod>
             
@@ -569,243 +569,243 @@
     
     
         <url>
-            <loc>https://www.wangbo.im/</loc>
+            <loc>https://wbprime.github.io/</loc>
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/pages/</loc>
+            <loc>https://wbprime.github.io/pages/</loc>
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/</loc>
+            <loc>https://wbprime.github.io/posts/</loc>
         </url>
     
     
         
         <url>
-            <loc>https://www.wangbo.im/categories/</loc>
+            <loc>https://wbprime.github.io/tags/</loc>
         </url>
         
         <url>
-            <loc>https://www.wangbo.im/categories/awk/</loc>
+            <loc>https://wbprime.github.io/tags/acl/</loc>
         </url>
         
         <url>
-            <loc>https://www.wangbo.im/categories/c-c/</loc>
+            <loc>https://wbprime.github.io/tags/ansi-color/</loc>
         </url>
         
         <url>
-            <loc>https://www.wangbo.im/categories/graphviz/</loc>
+            <loc>https://wbprime.github.io/tags/archlinux/</loc>
         </url>
         
         <url>
-            <loc>https://www.wangbo.im/categories/learning-java-concurrency/</loc>
+            <loc>https://wbprime.github.io/tags/awk/</loc>
         </url>
         
         <url>
-            <loc>https://www.wangbo.im/categories/life/</loc>
+            <loc>https://wbprime.github.io/tags/c/</loc>
         </url>
         
         <url>
-            <loc>https://www.wangbo.im/categories/life/</loc>
+            <loc>https://wbprime.github.io/tags/calm/</loc>
         </url>
         
         <url>
-            <loc>https://www.wangbo.im/categories/mayday/</loc>
+            <loc>https://wbprime.github.io/tags/concurrency/</loc>
         </url>
         
         <url>
-            <loc>https://www.wangbo.im/categories/notes/</loc>
+            <loc>https://wbprime.github.io/tags/gc/</loc>
         </url>
         
         <url>
-            <loc>https://www.wangbo.im/categories/spring-di/</loc>
+            <loc>https://wbprime.github.io/tags/getacl/</loc>
         </url>
         
         <url>
-            <loc>https://www.wangbo.im/categories/spring-mvc-testing/</loc>
+            <loc>https://wbprime.github.io/tags/graphviz/</loc>
         </url>
         
         <url>
-            <loc>https://www.wangbo.im/categories/tech/</loc>
+            <loc>https://wbprime.github.io/tags/happy/</loc>
+        </url>
+        
+        <url>
+            <loc>https://wbprime.github.io/tags/hexo/</loc>
+        </url>
+        
+        <url>
+            <loc>https://wbprime.github.io/tags/http/</loc>
+        </url>
+        
+        <url>
+            <loc>https://wbprime.github.io/tags/huangyi/</loc>
+        </url>
+        
+        <url>
+            <loc>https://wbprime.github.io/tags/ip/</loc>
+        </url>
+        
+        <url>
+            <loc>https://wbprime.github.io/tags/java/</loc>
+        </url>
+        
+        <url>
+            <loc>https://wbprime.github.io/tags/jdk/</loc>
+        </url>
+        
+        <url>
+            <loc>https://wbprime.github.io/tags/jdk/</loc>
+        </url>
+        
+        <url>
+            <loc>https://wbprime.github.io/tags/jre/</loc>
+        </url>
+        
+        <url>
+            <loc>https://wbprime.github.io/tags/jvm/</loc>
+        </url>
+        
+        <url>
+            <loc>https://wbprime.github.io/tags/libevent/</loc>
+        </url>
+        
+        <url>
+            <loc>https://wbprime.github.io/tags/linux/</loc>
+        </url>
+        
+        <url>
+            <loc>https://wbprime.github.io/tags/make/</loc>
+        </url>
+        
+        <url>
+            <loc>https://wbprime.github.io/tags/makefile/</loc>
+        </url>
+        
+        <url>
+            <loc>https://wbprime.github.io/tags/mayday/</loc>
+        </url>
+        
+        <url>
+            <loc>https://wbprime.github.io/tags/md5/</loc>
+        </url>
+        
+        <url>
+            <loc>https://wbprime.github.io/tags/memory-model/</loc>
+        </url>
+        
+        <url>
+            <loc>https://wbprime.github.io/tags/mybatis/</loc>
+        </url>
+        
+        <url>
+            <loc>https://wbprime.github.io/tags/nginx/</loc>
+        </url>
+        
+        <url>
+            <loc>https://wbprime.github.io/tags/setacl/</loc>
+        </url>
+        
+        <url>
+            <loc>https://wbprime.github.io/tags/spring-mvc/</loc>
+        </url>
+        
+        <url>
+            <loc>https://wbprime.github.io/tags/spring-mvc/</loc>
+        </url>
+        
+        <url>
+            <loc>https://wbprime.github.io/tags/spring/</loc>
+        </url>
+        
+        <url>
+            <loc>https://wbprime.github.io/tags/status-code/</loc>
+        </url>
+        
+        <url>
+            <loc>https://wbprime.github.io/tags/tcp/</loc>
+        </url>
+        
+        <url>
+            <loc>https://wbprime.github.io/tags/tech/</loc>
+        </url>
+        
+        <url>
+            <loc>https://wbprime.github.io/tags/testing/</loc>
+        </url>
+        
+        <url>
+            <loc>https://wbprime.github.io/tags/thoughts/</loc>
+        </url>
+        
+        <url>
+            <loc>https://wbprime.github.io/tags/thrift/</loc>
+        </url>
+        
+        <url>
+            <loc>https://wbprime.github.io/tags/tomcat/</loc>
+        </url>
+        
+        <url>
+            <loc>https://wbprime.github.io/tags/trip/</loc>
+        </url>
+        
+        <url>
+            <loc>https://wbprime.github.io/tags/udp/</loc>
+        </url>
+        
+        <url>
+            <loc>https://wbprime.github.io/tags/upset/</loc>
         </url>
         
     
         
         <url>
-            <loc>https://www.wangbo.im/tags/</loc>
+            <loc>https://wbprime.github.io/categories/</loc>
         </url>
         
         <url>
-            <loc>https://www.wangbo.im/tags/acl/</loc>
+            <loc>https://wbprime.github.io/categories/awk/</loc>
         </url>
         
         <url>
-            <loc>https://www.wangbo.im/tags/ansi-color/</loc>
+            <loc>https://wbprime.github.io/categories/c-c/</loc>
         </url>
         
         <url>
-            <loc>https://www.wangbo.im/tags/archlinux/</loc>
+            <loc>https://wbprime.github.io/categories/graphviz/</loc>
         </url>
         
         <url>
-            <loc>https://www.wangbo.im/tags/awk/</loc>
+            <loc>https://wbprime.github.io/categories/learning-java-concurrency/</loc>
         </url>
         
         <url>
-            <loc>https://www.wangbo.im/tags/c/</loc>
+            <loc>https://wbprime.github.io/categories/life/</loc>
         </url>
         
         <url>
-            <loc>https://www.wangbo.im/tags/calm/</loc>
+            <loc>https://wbprime.github.io/categories/life/</loc>
         </url>
         
         <url>
-            <loc>https://www.wangbo.im/tags/concurrency/</loc>
+            <loc>https://wbprime.github.io/categories/mayday/</loc>
         </url>
         
         <url>
-            <loc>https://www.wangbo.im/tags/gc/</loc>
+            <loc>https://wbprime.github.io/categories/notes/</loc>
         </url>
         
         <url>
-            <loc>https://www.wangbo.im/tags/getacl/</loc>
+            <loc>https://wbprime.github.io/categories/spring-di/</loc>
         </url>
         
         <url>
-            <loc>https://www.wangbo.im/tags/graphviz/</loc>
+            <loc>https://wbprime.github.io/categories/spring-mvc-testing/</loc>
         </url>
         
         <url>
-            <loc>https://www.wangbo.im/tags/happy/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/tags/hexo/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/tags/http/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/tags/huangyi/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/tags/ip/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/tags/java/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/tags/jdk/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/tags/jdk/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/tags/jre/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/tags/jvm/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/tags/libevent/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/tags/linux/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/tags/make/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/tags/makefile/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/tags/mayday/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/tags/md5/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/tags/memory-model/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/tags/mybatis/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/tags/nginx/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/tags/setacl/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/tags/spring-mvc/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/tags/spring-mvc/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/tags/spring/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/tags/status-code/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/tags/tcp/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/tags/tech/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/tags/testing/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/tags/thoughts/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/tags/thrift/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/tags/tomcat/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/tags/trip/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/tags/udp/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/tags/upset/</loc>
+            <loc>https://wbprime.github.io/categories/tech/</loc>
         </url>
         
     
