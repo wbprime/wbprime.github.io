@@ -1,0 +1,264 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>Wbprime</title>
+
+      
+
+      
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
+          
+      
+
+      
+          <link rel="stylesheet" href="http:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
+          
+      
+
+      
+      
+    </head>
+
+    <body>
+        <div class="container">
+
+            <div id="mobile-navbar" class="mobile-navbar">
+              <div class="mobile-header-logo">
+                <a href="/" class="logo">Wbprime</a>
+              </div>
+              <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+
+            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
+              <ul class="mobile-menu-list">
+                
+                    <li class="mobile-menu-item">
+                        <a href="http://www.wangbo.im">
+                            Home
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="http://www.wangbo.im&#x2F;categories">
+                            Categories
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="http://www.wangbo.im&#x2F;tags">
+                            Tags
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="http://www.wangbo.im&#x2F;about">
+                            About
+                        </a>
+                    </li>
+                
+              </ul>
+            </nav>
+
+            <header id="header">
+                <div class="logo"><a href="http:&#x2F;&#x2F;www.wangbo.im">Wbprime</a></div>
+                <nav class="menu">
+                    <ul>
+                        
+                            <li>
+                                <a href="http://www.wangbo.im">
+                                    Home
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="http://www.wangbo.im&#x2F;categories">
+                                    Categories
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="http://www.wangbo.im&#x2F;tags">
+                                    Tags
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="http://www.wangbo.im&#x2F;about">
+                                    About
+                                </a>
+                            </li>
+                        
+                    </ul>
+                </nav>
+            </header>
+
+            <main>
+                <div class="content" id="mobile-panel">
+                    
+    <div class="about">
+        <h1 id="elvis-wang">Elvis Wang</h1>
+<h2 id="c-version">C++ version</h2>
+<pre style="background-color:#2b303b;">
+<span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">Person </span><span style="color:#eff1f5;">{
+</span><span style="color:#b48ead;">private</span><span style="color:#eff1f5;">:
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">string name_;
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">string gender_;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">string location_;
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">string from_;
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">string currentCompany_;
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">string email_;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">volatile bool</span><span style="color:#eff1f5;"> isPersonAlive;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#b48ead;">public</span><span style="color:#eff1f5;">:
+</span><span style="color:#eff1f5;">    </span><span style="color:#8fa1b3;">Person</span><span style="color:#eff1f5;">(string </span><span style="color:#c0c5ce;">&amp;</span><span style="color:#bf616a;">n</span><span style="color:#eff1f5;">, string </span><span style="color:#c0c5ce;">&amp;</span><span style="color:#bf616a;">g</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">name_ </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> n;
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">gender_ </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> g;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">isPersonAlive </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">true</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">    </span><span style="color:#8fa1b3;">~Person</span><span style="color:#eff1f5;">() {
+</span><span style="color:#eff1f5;">        </span><span style="color:#65737e;">// todo
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#b48ead;">public</span><span style="color:#eff1f5;">:
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">Person </span><span style="color:#c0c5ce;">&amp; </span><span style="color:#8fa1b3;">location</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">const</span><span style="color:#eff1f5;"> string </span><span style="color:#c0c5ce;">&amp;</span><span style="color:#bf616a;">val</span><span style="color:#eff1f5;">){
+</span><span style="color:#eff1f5;">        </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">-&gt;</span><span style="color:#bf616a;">location_ </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> val;
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">return </span><span style="color:#c0c5ce;">*</span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">Person </span><span style="color:#c0c5ce;">&amp; </span><span style="color:#8fa1b3;">from</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">const</span><span style="color:#eff1f5;"> string </span><span style="color:#c0c5ce;">&amp;</span><span style="color:#bf616a;">val</span><span style="color:#eff1f5;">){
+</span><span style="color:#eff1f5;">        </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">-&gt;</span><span style="color:#bf616a;">from_ </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> val;
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">return </span><span style="color:#c0c5ce;">*</span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">Person </span><span style="color:#c0c5ce;">&amp; </span><span style="color:#8fa1b3;">workFor</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">const</span><span style="color:#eff1f5;"> string </span><span style="color:#c0c5ce;">&amp;</span><span style="color:#bf616a;">val</span><span style="color:#eff1f5;">){
+</span><span style="color:#eff1f5;">        </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">-&gt;</span><span style="color:#bf616a;">currentCompany_ </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> val;
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">return </span><span style="color:#c0c5ce;">*</span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">Person </span><span style="color:#c0c5ce;">&amp; </span><span style="color:#8fa1b3;">email</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">const</span><span style="color:#eff1f5;"> string </span><span style="color:#c0c5ce;">&amp;</span><span style="color:#bf616a;">val</span><span style="color:#eff1f5;">){
+</span><span style="color:#eff1f5;">        </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">-&gt;</span><span style="color:#bf616a;">email_ </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> val;
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">return </span><span style="color:#c0c5ce;">*</span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">live</span><span style="color:#eff1f5;">() {
+</span><span style="color:#eff1f5;">        </span><span style="color:#65737e;">// Struggle to live
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">} 
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">bool </span><span style="color:#8fa1b3;">isAlive</span><span style="color:#eff1f5;">() {
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">return</span><span style="color:#eff1f5;"> isPersonAlive;
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#b48ead;">private</span><span style="color:#eff1f5;">:
+</span><span style="color:#eff1f5;">    </span><span style="color:#8fa1b3;">Person</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">const</span><span style="color:#eff1f5;"> Person </span><span style="color:#c0c5ce;">&amp;</span><span style="color:#eff1f5;">);
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">Person </span><span style="color:#c0c5ce;">&amp;</span><span style="color:#8fa1b3;">operator=</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">const</span><span style="color:#eff1f5;"> Person </span><span style="color:#c0c5ce;">&amp;</span><span style="color:#eff1f5;">);
+</span><span style="color:#eff1f5;">}
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#b48ead;">int </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">(</span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">argc</span><span style="color:#c0c5ce;">, </span><span style="color:#b48ead;">char </span><span style="color:#c0c5ce;">*</span><span style="color:#bf616a;">argv</span><span style="color:#c0c5ce;">[]) {
+</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">Person </span><span style="color:#bf616a;">elvisWang</span><span style="color:#c0c5ce;">(&quot;</span><span style="color:#a3be8c;">Elvis Wang</span><span style="color:#c0c5ce;">&quot;, &quot;</span><span style="color:#a3be8c;">Male</span><span style="color:#c0c5ce;">&quot;);
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">elvisWang.</span><span style="color:#bf616a;">workFor</span><span style="color:#c0c5ce;">(&quot;</span><span style="color:#a3be8c;">58.com</span><span style="color:#c0c5ce;">&quot;)
+</span><span style="color:#c0c5ce;">             </span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">location</span><span style="color:#c0c5ce;">(&quot;</span><span style="color:#a3be8c;">Beijing, Beijing, P.R. China</span><span style="color:#c0c5ce;">&quot;)
+</span><span style="color:#c0c5ce;">             </span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">from</span><span style="color:#c0c5ce;">(&quot;</span><span style="color:#a3be8c;">Anqing, Anhui, P.R. China</span><span style="color:#c0c5ce;">&quot;)
+</span><span style="color:#c0c5ce;">             </span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">email</span><span style="color:#c0c5ce;">(&quot;</span><span style="color:#a3be8c;">mail@wangbo.im</span><span style="color:#c0c5ce;">&quot;);
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">    </span><span style="color:#b48ead;">while </span><span style="color:#c0c5ce;">(elvisWang.</span><span style="color:#bf616a;">isAlive</span><span style="color:#c0c5ce;">()) {
+</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">elvisWang.</span><span style="color:#bf616a;">live</span><span style="color:#c0c5ce;">();
+</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">}
+</span><span style="color:#c0c5ce;">}
+</span></pre><h2 id="java-version">Java version</h2>
+<pre style="background-color:#2b303b;">
+<span style="color:#b48ead;">public final class </span><span style="color:#ebcb8b;">Person </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private final </span><span style="color:#ebcb8b;">String </span><span style="color:#eff1f5;">name_;
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private final </span><span style="color:#ebcb8b;">String </span><span style="color:#eff1f5;">gender_;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private </span><span style="color:#ebcb8b;">String </span><span style="color:#eff1f5;">location_;
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private </span><span style="color:#ebcb8b;">String </span><span style="color:#eff1f5;">from_;
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private </span><span style="color:#ebcb8b;">String </span><span style="color:#eff1f5;">currentCompany_;
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private </span><span style="color:#ebcb8b;">String </span><span style="color:#eff1f5;">email_;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private volatile boolean </span><span style="color:#eff1f5;">isPersonAlive;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public </span><span style="color:#8fa1b3;">Person</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">String </span><span style="color:#bf616a;">name</span><span style="color:#eff1f5;">, </span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">String </span><span style="color:#bf616a;">gender</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">        </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.name_ </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> name;
+</span><span style="color:#eff1f5;">        </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.gender_ </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> gender;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.location_ </span><span style="color:#c0c5ce;">= &quot;&quot;</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">        </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.from_ </span><span style="color:#c0c5ce;">= &quot;&quot;</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">        </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.currentCompany_ </span><span style="color:#c0c5ce;">= &quot;&quot;</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">        </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.email_ </span><span style="color:#c0c5ce;">= &quot;&quot;</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.isPersonAlive </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">true</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public </span><span style="color:#ebcb8b;">Person </span><span style="color:#8fa1b3;">location</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">String </span><span style="color:#bf616a;">val</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">        </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.location_ </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> val;
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">return </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public </span><span style="color:#ebcb8b;">Person </span><span style="color:#8fa1b3;">from</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">String </span><span style="color:#bf616a;">val</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">        </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.from_ </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> val;
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">return </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public </span><span style="color:#ebcb8b;">Person </span><span style="color:#8fa1b3;">workFor</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">String </span><span style="color:#bf616a;">val</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">        </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.currentCompany_ </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> val;
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">return </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public </span><span style="color:#ebcb8b;">Person </span><span style="color:#8fa1b3;">email</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">String </span><span style="color:#bf616a;">val</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">        </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.email_ </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> val;
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">return </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public void </span><span style="color:#8fa1b3;">live</span><span style="color:#eff1f5;">() {
+</span><span style="color:#eff1f5;">        </span><span style="color:#65737e;">// Struggle to live
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public boolean </span><span style="color:#8fa1b3;">isAlive</span><span style="color:#eff1f5;">() {
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">return</span><span style="color:#eff1f5;"> isPersonAlive;
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public static void </span><span style="color:#8fa1b3;">main</span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">String </span><span style="color:#b48ead;">[] </span><span style="color:#bf616a;">_args</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">Person</span><span style="color:#eff1f5;"> elvisWang </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">Person</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">Elvis Wang</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">, </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">Male</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">);
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">elvisWang.</span><span style="color:#bf616a;">workFor</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">58.com</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">)
+</span><span style="color:#eff1f5;">                 </span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">location</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">Beijing, Beijing, P.R. China</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">)
+</span><span style="color:#eff1f5;">                 </span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">from</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">Anqing, Anhui, P.R. China</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">)
+</span><span style="color:#eff1f5;">                 </span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">email</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">mail@wangbo.im</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">);
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">while </span><span style="color:#eff1f5;">(elvisWang.</span><span style="color:#bf616a;">isAlive</span><span style="color:#eff1f5;">()) {
+</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">elvisWang.</span><span style="color:#bf616a;">live</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">}
+</span></pre>
+    </div>
+
+                </div>
+            </main>
+
+            
+            
+        </div>
+
+      
+          <script type="text/javascript" src="http:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
+      
+    </body>
+
+</html>

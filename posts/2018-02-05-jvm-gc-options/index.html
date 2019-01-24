@@ -1,174 +1,215 @@
+
+
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Jvm GC Options</title>
-        <style>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
-    html body {
-        font-family: Raleway, sans-serif;
-        background-color: white;
-    }
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
-    :root {
-        --accent: lightseagreen;
-        --border-width:  0 ;
-    }
+      <title>Wbprime</title>
 
-</style>
+      
 
+      
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
+          
+      
 
-<link rel="stylesheet" href="/css/main.css">
+      
+          <link rel="stylesheet" href="http:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
+          
+      
 
-
-
-
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-
-
- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
-
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
- 
-
-
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-
-     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/java.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/c&#43;&#43;.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
-
-    <script>hljs.initHighlightingOnLoad();</script>
-
-
-
-
-
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-
-<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
- <meta name="generator" content="Hugo 0.49" />
-        
+      
+      
     </head>
 
     <body>
+        <div class="container">
 
-        <nav class="navbar navbar-default navbar-fixed-top">
-
-            <div class="container">
-
-                <div class="navbar-header">
-
-                    <a class="navbar-brand visible-xs" href="#">Jvm GC Options</a>
-
-                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-                </div>
-
-                <div class="collapse navbar-collapse">
-
-                    
-                        <ul class="nav navbar-nav">
-                            
-                                <li><a href="/">Home</a></li>
-                            
-                                <li><a href="/posts/">Posts</a></li>
-                            
-                                <li><a href="/categories/">Categories</a></li>
-                            
-                                <li><a href="/tags/">Tags</a></li>
-                            
-                        </ul>
-                    
-
-                    
-                        <ul class="nav navbar-nav navbar-right">
-                            
-                                <li class="navbar-icon"><a href="https://github.com/wbprime/"><i class="fa fa-github"></i></a></li>
-                            
-                        </ul>
-                    
-
-                </div>
-
+            <div id="mobile-navbar" class="mobile-navbar">
+              <div class="mobile-header-logo">
+                <a href="/" class="logo">Wbprime</a>
+              </div>
+              <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
             </div>
 
+            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
+              <ul class="mobile-menu-list">
+                
+                    <li class="mobile-menu-item">
+                        <a href="http://www.wangbo.im">
+                            Home
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="http://www.wangbo.im&#x2F;categories">
+                            Categories
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="http://www.wangbo.im&#x2F;tags">
+                            Tags
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="http://www.wangbo.im&#x2F;about">
+                            About
+                        </a>
+                    </li>
+                
+              </ul>
+            </nav>
+
+            <header id="header">
+                <div class="logo"><a href="http:&#x2F;&#x2F;www.wangbo.im">Wbprime</a></div>
+                <nav class="menu">
+                    <ul>
+                        
+                            <li>
+                                <a href="http://www.wangbo.im">
+                                    Home
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="http://www.wangbo.im&#x2F;categories">
+                                    Categories
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="http://www.wangbo.im&#x2F;tags">
+                                    Tags
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="http://www.wangbo.im&#x2F;about">
+                                    About
+                                </a>
+                            </li>
+                        
+                    </ul>
+                </nav>
+            </header>
+
+            <main>
+                <div class="content" id="mobile-panel">
+                    
+
+
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="http://www.wangbo.im/posts/2018-02-05-jvm-gc-options/#general-options" class="toc-link">General options</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="http://www.wangbo.im/posts/2018-02-05-jvm-gc-options/#gc" class="toc-link">GC</a>
+                    
+                    <ul>
+                        
+                        <li>
+                            <a href="http://www.wangbo.im/posts/2018-02-05-jvm-gc-options/#young-generation" class="toc-link">Young generation</a>
+                        </li>
+                        
+                        <li>
+                            <a href="http://www.wangbo.im/posts/2018-02-05-jvm-gc-options/#old-generation" class="toc-link">Old generation</a>
+                        </li>
+                        
+                        <li>
+                            <a href="http://www.wangbo.im/posts/2018-02-05-jvm-gc-options/#flags" class="toc-link">Flags</a>
+                        </li>
+                        
+                        <li>
+                            <a href="http://www.wangbo.im/posts/2018-02-05-jvm-gc-options/#latency" class="toc-link">Latency</a>
+                        </li>
+                        
+                        <li>
+                            <a href="http://www.wangbo.im/posts/2018-02-05-jvm-gc-options/#throughput" class="toc-link">throughput</a>
+                        </li>
+                        
+                    </ul>
+                    
+                </li>
+                
+            </ul>
         </nav>
-
-
-<main>
-
-    <div class="item">
-
-    
-    
-    
-
-    
-      
-
-    <h4><a href="/posts/2018-02-05-jvm-gc-options/">Jvm GC Options</a></h4>
-    <h5>Notes on JVM gc types &amp; options</h5>
-     <kbd class="item-tag">jvm</kbd>  <kbd class="item-tag">gc</kbd> 
-
+    </div>
 </div>
 
 
-    <br> <div class="text-justify">
+<article class="post">
+    
+    <header class="post__header">
+        <h1 class="post__title">
+            <a href="http:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2018-02-05-jvm-gc-options&#x2F;">Jvm GC Options</a>
+        </h1>
+        <div class="post__meta">
+            <span class="post__time">2018-02-05</span>
+            
+        </div>
+    </header>
 
-<h1 id="general-options">General options</h1>
-
+    <div class="post-content">
+      <h1 id="general-options"><a class="zola-anchor" href="#general-options" aria-label="Anchor link for: general-options">🔗</a>
+General options</h1>
 <ul>
-<li><code>-XX:+PrintFlagsFinal</code></li>
-<li><code>-XX:+PrintFlagsInitial</code></li>
-<li><code>-XX:+PrintCommandLineFlags</code></li>
-<li><code>-XX:+UnlockExperimentalVMOptions</code></li>
-
-<li><p><code>-XX:+UnlockDiagnosticVMOptions</code></p></li>
-
-<li><p><code>-XX:+ParallelRefProcEnabled</code></p></li>
+<li>
+<p><code>-XX:+PrintFlagsFinal</code></p>
+</li>
+<li>
+<p><code>-XX:+PrintFlagsInitial</code></p>
+</li>
+<li>
+<p><code>-XX:+PrintCommandLineFlags</code></p>
+</li>
+<li>
+<p><code>-XX:+UnlockExperimentalVMOptions</code></p>
+</li>
+<li>
+<p><code>-XX:+UnlockDiagnosticVMOptions</code></p>
+</li>
+<li>
+<p><code>-XX:+ParallelRefProcEnabled</code></p>
+</li>
 </ul>
-
-<pre><code>java -server -XX:+UnlockExperimentalVMOptions -XX:+UnlockDiagnosticVMOptions -XX:+PrintFlagsFinal 
-java -client -XX:+UnlockExperimentalVMOptions -XX:+UnlockDiagnosticVMOptions -XX:+PrintFlagsFinal 
-</code></pre>
-
-<h1 id="gc">GC</h1>
-
+<pre style="background-color:#2b303b;">
+<span style="color:#c0c5ce;">java -server -XX:+UnlockExperimentalVMOptions -XX:+UnlockDiagnosticVMOptions -XX:+PrintFlagsFinal 
+</span><span style="color:#c0c5ce;">java -client -XX:+UnlockExperimentalVMOptions -XX:+UnlockDiagnosticVMOptions -XX:+PrintFlagsFinal 
+</span></pre><h1 id="gc"><a class="zola-anchor" href="#gc" aria-label="Anchor link for: gc">🔗</a>
+GC</h1>
 <p>See following image first:</p>
-
-<p><img src="/posts/2018-02-05-jvm-gc-options.dir/jvm_gc_combinations.png" alt="GC options table" /></p>
-
-<h2 id="young-generation">Young generation</h2>
-
+<p><img src="http://www.wangbo.im/posts/2018-02-05-jvm-gc-options/jvm_gc_combinations.png" alt="GC options table" /></p>
+<h2 id="young-generation"><a class="zola-anchor" href="#young-generation" aria-label="Anchor link for: young-generation">🔗</a>
+Young generation</h2>
 <ol>
-<li>&ldquo;Serial&rdquo; 是串行收集器，也是 <code>-client</code> 默认的GC收集器，可以 <code>-XX:+UseSerialGC</code> 来强制开启</li>
-<li>&ldquo;ParNew&rdquo; 是并行收集齐，也是 <code>-server</code> 默认的GC收集器，可以 <code>-XX:+UseParallelGC</code> 来强制开启</li>
-<li>&ldquo;Parallel Scavenge&rdquo; 是吞吐量优先收集器，可以通过 <code>-XX:+UseParallelGC</code> 来强制开启</li>
+<li>&quot;Serial&quot; 是串行收集器，也是 <code>-client</code> 默认的GC收集器，可以 <code>-XX:+UseSerialGC</code> 来强制开启</li>
+<li>&quot;ParNew&quot; 是并行收集齐，也是 <code>-server</code> 默认的GC收集器，可以 <code>-XX:+UseParallelGC</code> 来强制开启</li>
+<li>&quot;Parallel Scavenge&quot; 是吞吐量优先收集器，可以通过 <code>-XX:+UseParallelGC</code> 来强制开启</li>
 </ol>
-
-<h2 id="old-generation">Old generation</h2>
-
+<h2 id="old-generation"><a class="zola-anchor" href="#old-generation" aria-label="Anchor link for: old-generation">🔗</a>
+Old generation</h2>
 <ol>
-<li>&ldquo;CMS&rdquo; 是 Concurrent Mark Sweep 收集器</li>
+<li>&quot;CMS&quot; 是 Concurrent Mark Sweep 收集器</li>
 </ol>
-
 <p>执行阶段：</p>
-
 <ul>
 <li>CMS-initial-mark</li>
 <li>CMS-concurrent-mark</li>
@@ -177,90 +218,99 @@ java -client -XX:+UnlockExperimentalVMOptions -XX:+UnlockDiagnosticVMOptions -XX
 <li>CMS-concurrent-sweep</li>
 <li>CMS-concurrent-reset</li>
 </ul>
-
 <p>相关参数：</p>
-
 <ul>
-<li><code>-XX:+UseConcMarkSweepGC</code></li>
-<li><code>-XX:CMSFullGCsBeforeCompaction=n</code></li>
-<li><code>-XX:ParallelGCThreads=n</code></li>
-<li><code>-XX:+ConcGCThreads=n</code></li>
+<li>
+<p><code>-XX:+UseConcMarkSweepGC</code></p>
+</li>
+<li>
+<p><code>-XX:CMSFullGCsBeforeCompaction=n</code></p>
+</li>
+<li>
+<p><code>-XX:ParallelGCThreads=n</code></p>
+</li>
+<li>
+<p><code>-XX:+ConcGCThreads=n</code></p>
+</li>
 </ul>
-
-<ol>
-<li><p>&ldquo;Serail Old&rdquo; 是串行收集器</p></li>
-
-<li><p>&ldquo;Parallel Old&rdquo; 是并行收集器，可以通过 <code>-XX:+UseParallelOldGC</code> 来手动开启</p></li>
+<ol start="2">
+<li>
+<p>&quot;Serail Old&quot; 是串行收集器</p>
+</li>
+<li>
+<p>&quot;Parallel Old&quot; 是并行收集器，可以通过 <code>-XX:+UseParallelOldGC</code> 来手动开启</p>
+</li>
 </ol>
-
-<h2 id="flags">Flags</h2>
-
+<h2 id="flags"><a class="zola-anchor" href="#flags" aria-label="Anchor link for: flags">🔗</a>
+Flags</h2>
 <ol>
-<li><code>-XX:+UseSerialGC</code>： 相当于&rdquo;Serial&rdquo; + &ldquo;SerialOld&rdquo;，这个方案直观上就应该是性能最差的</li>
-<li><code>-XX:+UseParallelGC</code>： 相当于&rdquo;Parallel Scavenge&rdquo; + &ldquo;SerialOld&rdquo;，也就是说，在young generation中是多线程处理，但是在tenured generation中则是单线程</li>
-<li><code>-XX:+UseParallelOldGC</code>： 相当于 &ldquo;Parallel Scavenge&rdquo; + &ldquo;ParallelOld&rdquo;，都是多线程并行处理</li>
-<li><code>-XX:+UseConcMarkSweepGC</code>： 相当于&rdquo;ParNew&rdquo; + &ldquo;CMS&rdquo; + &ldquo;Serial Old&rdquo;，即在 Young Generation 中采用 &ldquo;ParNew&rdquo;，多线程处理；在 Tenured Generation 中使用&rdquo;CMS&rdquo;，以求得到最低的暂停时间，但是，采用CMS有可能出现 &ldquo;Concurrent Mode Failure&rdquo; ，如果出现了，就只能采用 &ldquo;SerialOld&rdquo; 模式了</li>
+<li><code>-XX:+UseSerialGC</code>： 相当于&quot;Serial&quot; + &quot;SerialOld&quot;，这个方案直观上就应该是性能最差的</li>
+<li><code>-XX:+UseParallelGC</code>： 相当于&quot;Parallel Scavenge&quot; + &quot;SerialOld&quot;，也就是说，在young generation中是多线程处理，但是在tenured generation中则是单线程</li>
+<li><code>-XX:+UseParallelOldGC</code>： 相当于 &quot;Parallel Scavenge&quot; + &quot;ParallelOld&quot;，都是多线程并行处理</li>
+<li><code>-XX:+UseConcMarkSweepGC</code>： 相当于&quot;ParNew&quot; + &quot;CMS&quot; + &quot;Serial Old&quot;，即在 Young Generation 中采用 &quot;ParNew&quot;，多线程处理；在 Tenured Generation 中使用&quot;CMS&quot;，以求得到最低的暂停时间，但是，采用CMS有可能出现 &quot;Concurrent Mode Failure&quot; ，如果出现了，就只能采用 &quot;SerialOld&quot; 模式了</li>
 </ol>
-
-<h2 id="latency">Latency</h2>
-
+<h2 id="latency"><a class="zola-anchor" href="#latency" aria-label="Anchor link for: latency">🔗</a>
+Latency</h2>
 <p>For some GC collectors:</p>
-
 <ol>
 <li><code>-XX:MaxGCPauseMillis=10000</code></li>
 <li><code>-XX:MaxGCMinorPauseMillis=100</code></li>
 </ol>
-
-<h2 id="throughput">throughput</h2>
-
+<h2 id="throughput"><a class="zola-anchor" href="#throughput" aria-label="Anchor link for: throughput">🔗</a>
+throughput</h2>
 <p>For some GC collectors:</p>
-
 <ol>
 <li><code>-XX:GCTimeRatio=2</code></li>
 </ol>
-</div>
+
+    </div>
 
     
     
 
-    
+    <div class="post-footer">
+        
+            
+                <div class="post-tags">
+                    
+                        <a href="http:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;jvm&#x2F;">#jvm</a>
+                    
+                        <a href="http:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;gc&#x2F;">#gc</a>
+                    
+                </div>
+            
+            
+                <div class="post-nav">
+                    
+                        <a class="previous" href="http:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2018-02-05-jdk-vs-jre&#x2F;">‹ Jdk VS Jre</a>
+                    
+                    
+                        <a class="next" href="http:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2018-02-05-jvm-memory-model&#x2F;">Jvm Memory Model ›</a>
+                    
+                    
+                    
+                </div>
+            
+
+        
+
+    </div>
 
     
-
-        <h4 class="page-header">Comments</h4>
-
-        <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
     
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "wbprime" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</article>
 
-    
 
-</main>
+                </div>
+            </main>
 
-        <footer>
+            
+            
+        </div>
 
-            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
-
-        </footer>
-
+      
+          <script type="text/javascript" src="http:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
+      
     </body>
 
 </html>
-

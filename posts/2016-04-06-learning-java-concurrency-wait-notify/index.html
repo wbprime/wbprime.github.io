@@ -1,493 +1,521 @@
+
+
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Learning Java Concurrency - wait &amp; notify</title>
-        <style>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
-    html body {
-        font-family: Raleway, sans-serif;
-        background-color: white;
-    }
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
-    :root {
-        --accent: lightseagreen;
-        --border-width:  0 ;
-    }
+      <title>Wbprime</title>
 
-</style>
+      
 
+      
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
+          
+      
 
-<link rel="stylesheet" href="/css/main.css">
+      
+          <link rel="stylesheet" href="http:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
+          
+      
 
-
-
-
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-
-
- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
-
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
- 
-
-
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-
-     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/java.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/c&#43;&#43;.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
-
-    <script>hljs.initHighlightingOnLoad();</script>
-
-
-
-
-
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-
-<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
- <meta name="generator" content="Hugo 0.49" />
-        
+      
+      
     </head>
 
     <body>
+        <div class="container">
 
-        <nav class="navbar navbar-default navbar-fixed-top">
-
-            <div class="container">
-
-                <div class="navbar-header">
-
-                    <a class="navbar-brand visible-xs" href="#">Learning Java Concurrency - wait &amp; notify</a>
-
-                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-                </div>
-
-                <div class="collapse navbar-collapse">
-
-                    
-                        <ul class="nav navbar-nav">
-                            
-                                <li><a href="/">Home</a></li>
-                            
-                                <li><a href="/posts/">Posts</a></li>
-                            
-                                <li><a href="/categories/">Categories</a></li>
-                            
-                                <li><a href="/tags/">Tags</a></li>
-                            
-                        </ul>
-                    
-
-                    
-                        <ul class="nav navbar-nav navbar-right">
-                            
-                                <li class="navbar-icon"><a href="https://github.com/wbprime/"><i class="fa fa-github"></i></a></li>
-                            
-                        </ul>
-                    
-
-                </div>
-
+            <div id="mobile-navbar" class="mobile-navbar">
+              <div class="mobile-header-logo">
+                <a href="/" class="logo">Wbprime</a>
+              </div>
+              <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
             </div>
 
+            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
+              <ul class="mobile-menu-list">
+                
+                    <li class="mobile-menu-item">
+                        <a href="http://www.wangbo.im">
+                            Home
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="http://www.wangbo.im&#x2F;categories">
+                            Categories
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="http://www.wangbo.im&#x2F;tags">
+                            Tags
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="http://www.wangbo.im&#x2F;about">
+                            About
+                        </a>
+                    </li>
+                
+              </ul>
+            </nav>
+
+            <header id="header">
+                <div class="logo"><a href="http:&#x2F;&#x2F;www.wangbo.im">Wbprime</a></div>
+                <nav class="menu">
+                    <ul>
+                        
+                            <li>
+                                <a href="http://www.wangbo.im">
+                                    Home
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="http://www.wangbo.im&#x2F;categories">
+                                    Categories
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="http://www.wangbo.im&#x2F;tags">
+                                    Tags
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="http://www.wangbo.im&#x2F;about">
+                                    About
+                                </a>
+                            </li>
+                        
+                    </ul>
+                </nav>
+            </header>
+
+            <main>
+                <div class="content" id="mobile-panel">
+                    
+
+
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="http://www.wangbo.im/posts/2016-04-06-learning-java-concurrency-wait-notify/#yin-xing-qu-qian" class="toc-link">银行取钱</a>
+                    
+                    <ul>
+                        
+                        <li>
+                            <a href="http://www.wangbo.im/posts/2016-04-06-learning-java-concurrency-wait-notify/#dai-ma" class="toc-link">代码</a>
+                        </li>
+                        
+                        <li>
+                            <a href="http://www.wangbo.im/posts/2016-04-06-learning-java-concurrency-wait-notify/#dai-ma-shuo-ming" class="toc-link">代码说明</a>
+                        </li>
+                        
+                    </ul>
+                    
+                </li>
+                
+                <li>
+                    <a href="http://www.wangbo.im/posts/2016-04-06-learning-java-concurrency-wait-notify/#ling-hu-chong-bei-kun-xi-hu-di" class="toc-link">令狐冲被困西湖底</a>
+                    
+                    <ul>
+                        
+                        <li>
+                            <a href="http://www.wangbo.im/posts/2016-04-06-learning-java-concurrency-wait-notify/#dai-ma-1" class="toc-link">代码</a>
+                        </li>
+                        
+                        <li>
+                            <a href="http://www.wangbo.im/posts/2016-04-06-learning-java-concurrency-wait-notify/#dai-ma-shuo-ming-1" class="toc-link">代码说明</a>
+                        </li>
+                        
+                    </ul>
+                    
+                </li>
+                
+                <li>
+                    <a href="http://www.wangbo.im/posts/2016-04-06-learning-java-concurrency-wait-notify/#dai-ma-xia-zai" class="toc-link">代码下载</a>
+                    
+                </li>
+                
+            </ul>
         </nav>
-
-
-<main>
-
-    <div class="item">
-
-    
-    
-    
-
-    
-    
-
-    <h4><a href="/posts/2016-04-06-learning-java-concurrency-wait-notify/">Learning Java Concurrency - wait &amp; notify</a></h4>
-    <h5>April 6, 2016</h5>
-     <kbd class="item-tag">java</kbd>  <kbd class="item-tag">concurrency</kbd> 
-
+    </div>
 </div>
 
 
-    <br> <div class="text-justify">
+<article class="post">
+    
+    <header class="post__header">
+        <h1 class="post__title">
+            <a href="http:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2016-04-06-learning-java-concurrency-wait-notify&#x2F;">Learning Java Concurrency - wait &amp; notify</a>
+        </h1>
+        <div class="post__meta">
+            <span class="post__time">2016-04-06</span>
+            
+        </div>
+    </header>
 
-<p>在synchronized关键字之外，Java提供了另外的<code>wait</code>和<code>notify</code>函数族用于支援多线程通信，使用上类似于JUC的Condition类。</p>
-
+    <div class="post-content">
+      <p>在synchronized关键字之外，Java提供了另外的<code>wait</code>和<code>notify</code>函数族用于支援多线程通信，使用上类似于JUC的Condition类。</p>
 <p><code>wait()</code>、<code>notify()</code>和<code>notifyAll()</code>是Object类的方法，与synchronized配套使用。</p>
-
-<pre><code class="language-java">public class Object {
-    ...
-
-    public final native void wait(long timeout) throws InterruptedException;
-    public final void wait(long timeout, int nanos) throws InterruptedException;
-    public final void wait() throws InterruptedException;
-
-    public final native void notify();
-    public final native void notifyAll();
-
-    ...
-}
-</code></pre>
-
+<pre style="background-color:#2b303b;">
+<span style="color:#b48ead;">public class </span><span style="color:#ebcb8b;">Object </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">...
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public final native void </span><span style="color:#8fa1b3;">wait</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">long </span><span style="color:#bf616a;">timeout</span><span style="color:#eff1f5;">) </span><span style="color:#b48ead;">throws </span><span style="color:#ebcb8b;">InterruptedException</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public final void </span><span style="color:#8fa1b3;">wait</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">long </span><span style="color:#bf616a;">timeout</span><span style="color:#eff1f5;">, </span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">nanos</span><span style="color:#eff1f5;">) </span><span style="color:#b48ead;">throws </span><span style="color:#ebcb8b;">InterruptedException</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public final void </span><span style="color:#8fa1b3;">wait</span><span style="color:#eff1f5;">() </span><span style="color:#b48ead;">throws </span><span style="color:#ebcb8b;">InterruptedException</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public final native void </span><span style="color:#8fa1b3;">notify</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public final native void </span><span style="color:#8fa1b3;">notifyAll</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">...
+</span><span style="color:#eff1f5;">}
+</span></pre>
 <p><code>wait</code>一共有三个函数。调用<code>wait</code>的线程必须已经持有了同一个对象的同步器（使用synchronized）。调用<code>wait</code>的线程会进入等待状态，直到另外的线程调用了同一个对象的<code>notify</code>函数，或者指定的等待时间过期，或者被中断（引发InterruptedException）。调用<code>wait</code>函数之后，当前线程会放弃已经持有的同步器。</p>
-
 <p><code>notify</code>一共是有两个函数。<code>notify()</code>函数会唤醒当前的由于执行<code>wait</code>而进入等待的某个线程；注意，被唤醒的线程是不可预料的，也就是说不同的JVM实现可以用不同的规则算法来决定被唤醒的是哪一个线程。<code>notifyAll()</code>函数会唤醒所有的等待线程，但是只会有一个线程最终进入执行。</p>
-
-<!-- More -->
-
+<p><a name="continue-reading"></a></p>
 <p>下面用两个例子来说明<code>wait &amp; notify</code>的使用场景和使用方式。</p>
-
-<h1 id="银行取钱">银行取钱</h1>
-
+<h1 id="yin-xing-qu-qian"><a class="zola-anchor" href="#yin-xing-qu-qian" aria-label="Anchor link for: yin-xing-qu-qian">🔗</a>
+银行取钱</h1>
 <p>银行取钱是传统的生产者和消费者模型的一个简化版本。</p>
-
 <p>假设有一个银行账户，两个用户分别要往里面存钱和取钱（可以想象为一个通知汇款，儿子在上大学要花钱，打电话让父亲给打钱；两个ATM机，父亲手哆嗦地五百五百地存，儿子不耐烦地刷，有钱就取出来）。</p>
-
-<h2 id="代码">代码</h2>
-
-<pre><code class="language-java">package me.wbprime.showcase.concurrent;
-
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-/**
- * Class: DepositCase
- * Date: 2016/04/05 14:42
- *
- * @author Elvis Wang [mail@wbprime.me]
- */
-public class DepositCase {
-    private static class DepositAccount {
-        private int money;
-
-        public DepositAccount() {
-            this.money = 0;
-        }
-
-        public synchronized void withdraw(final int val) {
-            while (money &lt; val) {
-                try {
-                    this.wait(); // 钱不够，等一会儿
-                } catch (InterruptedException e) {
-                    // do nothing here
-                }
-            }
-
-            money -= val;
-        }
-
-        public synchronized void deposite(final int val) {
-            money += val;
-            this.notifyAll(); // 存完钱周知一下
-        }
-    }
-
-    private static class OldFather implements Runnable {
-        private DepositAccount account;
-        private final int totalMoney;
-        private int depositedMoney;
-
-        public OldFather(final DepositAccount account, final int val) {
-            this.account = account;
-
-            this.totalMoney = val;
-            this.depositedMoney = 0;
-        }
-
-        public void run() {
-            final int MAX_MONEY_EACH_TIME = 5000; // 每次最多存这么多钱
-            while (depositedMoney &lt; totalMoney) {
-                final int moneyEachTime =
-                    (totalMoney - depositedMoney) &lt; MAX_MONEY_EACH_TIME ? (totalMoney - depositedMoney) : MAX_MONEY_EACH_TIME;
-
-                account.deposite(moneyEachTime);
-                depositedMoney += moneyEachTime;
-
-                System.out.println(&quot;父亲 sent &quot; + moneyEachTime + &quot; RMB to his son&quot;);
-
-                try {
-                    Thread.sleep(5000); // 缓口气
-                } catch (InterruptedException e) {
-                    // do nothing
-                }
-            }
-        }
-    }
-
-    private static class Son implements Runnable {
-        private final String name;
-        private DepositAccount account;
-        private final int neededMoney;
-        private int availMoney;
-
-        public Son(final String name, final DepositAccount account, final int money) {
-            this.name = name;
-
-            this.account = account;
-
-            this.neededMoney = money;
-            this.availMoney = 0;
-        }
-
-        public void run() {
-            final int MAX_MONEY_EACH_TIME = 1000; // 每次最多取这么多钱
-            while (availMoney &lt; neededMoney) {
-                final int moneyEachTime =
-                    (neededMoney - availMoney) &lt; MAX_MONEY_EACH_TIME ? (neededMoney - availMoney) : MAX_MONEY_EACH_TIME;
-
-                account.withdraw(moneyEachTime);
-                availMoney += moneyEachTime;
-
-                System.out.println(name + &quot; get &quot; + moneyEachTime + &quot; RMB from his father&quot;);
-
-                try {
-                    Thread.sleep(1000); // 抽根烟
-                } catch (InterruptedException e) {
-                    // do nothing
-                }
-            }
-        }
-    }
-
-    public static void main(final String[] args) {
-        final DepositAccount account = new DepositAccount();
-
-        final ExecutorService executorService = Executors.newCachedThreadPool();
-
-        final int moneyToSon1 = 10000;
-        final int moneyToSon2 = 18600;
-        final int moneyToSon3 = 10240;
-
-        executorService.execute(
-            new OldFather(account, moneyToSon1 + moneyToSon2 + moneyToSon3)
-        );
-        executorService.execute(
-            new Son(&quot;胡大&quot;, account, moneyToSon1)
-        );
-        executorService.execute(
-            new Son(&quot;胡二&quot;, account, moneyToSon2)
-        );
-        executorService.execute(
-            new Son(&quot;胡三&quot;, account, moneyToSon3)
-        );
-
-        executorService.shutdown();
-    }
-}
-</code></pre>
-
-<h2 id="代码说明">代码说明</h2>
-
+<h2 id="dai-ma"><a class="zola-anchor" href="#dai-ma" aria-label="Anchor link for: dai-ma">🔗</a>
+代码</h2>
+<pre style="background-color:#2b303b;">
+<span style="color:#b48ead;">package </span><span style="color:#c0c5ce;">me.wbprime.showcase.concurrent;
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">java.util.concurrent.</span><span style="color:#ebcb8b;">ExecutorService</span><span style="color:#c0c5ce;">;
+</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">java.util.concurrent.</span><span style="color:#ebcb8b;">Executors</span><span style="color:#c0c5ce;">;
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#65737e;">/**
+</span><span style="color:#65737e;"> </span><span style="color:#65737e;">* Class: DepositCase
+</span><span style="color:#65737e;"> </span><span style="color:#65737e;">* Date: 2016/04/05 14:42
+</span><span style="color:#65737e;"> </span><span style="color:#65737e;">*/
+</span><span style="color:#b48ead;">public class </span><span style="color:#ebcb8b;">DepositCase </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private static class </span><span style="color:#ebcb8b;">DepositAccount </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">private int </span><span style="color:#eff1f5;">money;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">public </span><span style="color:#8fa1b3;">DepositAccount</span><span style="color:#eff1f5;">() {
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.money </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">0</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">public synchronized void </span><span style="color:#8fa1b3;">withdraw</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">final int </span><span style="color:#bf616a;">val</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">while </span><span style="color:#eff1f5;">(money </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#eff1f5;"> val) {
+</span><span style="color:#eff1f5;">                </span><span style="color:#b48ead;">try </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">                    </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">wait</span><span style="color:#eff1f5;">(); </span><span style="color:#65737e;">// 钱不够，等一会儿
+</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">} </span><span style="color:#b48ead;">catch </span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">InterruptedException </span><span style="color:#bf616a;">e</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">                    </span><span style="color:#65737e;">// do nothing here
+</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">money </span><span style="color:#c0c5ce;">-=</span><span style="color:#eff1f5;"> val;
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">public synchronized void </span><span style="color:#8fa1b3;">deposite</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">final int </span><span style="color:#bf616a;">val</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">money </span><span style="color:#c0c5ce;">+=</span><span style="color:#eff1f5;"> val;
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">notifyAll</span><span style="color:#eff1f5;">(); </span><span style="color:#65737e;">// 存完钱周知一下
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private static class </span><span style="color:#ebcb8b;">OldFather </span><span style="color:#b48ead;">implements </span><span style="color:#a3be8c;">Runnable </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">private </span><span style="color:#ebcb8b;">DepositAccount </span><span style="color:#eff1f5;">account;
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">private final int </span><span style="color:#eff1f5;">totalMoney;
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">private int </span><span style="color:#eff1f5;">depositedMoney;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">public </span><span style="color:#8fa1b3;">OldFather</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">DepositAccount </span><span style="color:#bf616a;">account</span><span style="color:#eff1f5;">, </span><span style="color:#b48ead;">final int </span><span style="color:#bf616a;">val</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.account </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> account;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.totalMoney </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> val;
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.depositedMoney </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">0</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">public void </span><span style="color:#8fa1b3;">run</span><span style="color:#eff1f5;">() {
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">final int </span><span style="color:#d08770;">MAX_MONEY_EACH_TIME </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">5000</span><span style="color:#eff1f5;">; </span><span style="color:#65737e;">// 每次最多存这么多钱
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">while </span><span style="color:#eff1f5;">(depositedMoney </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#eff1f5;"> totalMoney) {
+</span><span style="color:#eff1f5;">                </span><span style="color:#b48ead;">final int</span><span style="color:#eff1f5;"> moneyEachTime </span><span style="color:#c0c5ce;">=
+</span><span style="color:#eff1f5;">                    </span><span style="color:#eff1f5;">(totalMoney </span><span style="color:#c0c5ce;">-</span><span style="color:#eff1f5;"> depositedMoney) </span><span style="color:#c0c5ce;">&lt; </span><span style="color:#d08770;">MAX_MONEY_EACH_TIME </span><span style="color:#c0c5ce;">? </span><span style="color:#eff1f5;">(totalMoney </span><span style="color:#c0c5ce;">-</span><span style="color:#eff1f5;"> depositedMoney) </span><span style="color:#c0c5ce;">: </span><span style="color:#d08770;">MAX_MONEY_EACH_TIME</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">account.</span><span style="color:#bf616a;">deposite</span><span style="color:#eff1f5;">(moneyEachTime);
+</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">depositedMoney </span><span style="color:#c0c5ce;">+=</span><span style="color:#eff1f5;"> moneyEachTime;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">                </span><span style="color:#ebcb8b;">System</span><span style="color:#eff1f5;">.out.</span><span style="color:#bf616a;">println</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">父亲 sent </span><span style="color:#c0c5ce;">&quot; +</span><span style="color:#eff1f5;"> moneyEachTime </span><span style="color:#c0c5ce;">+ &quot;</span><span style="color:#a3be8c;"> RMB to his son</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">);
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">                </span><span style="color:#b48ead;">try </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">                    </span><span style="color:#ebcb8b;">Thread</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">sleep</span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">5000</span><span style="color:#eff1f5;">); </span><span style="color:#65737e;">// 缓口气
+</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">} </span><span style="color:#b48ead;">catch </span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">InterruptedException </span><span style="color:#bf616a;">e</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">                    </span><span style="color:#65737e;">// do nothing
+</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private static class </span><span style="color:#ebcb8b;">Son </span><span style="color:#b48ead;">implements </span><span style="color:#a3be8c;">Runnable </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">private final </span><span style="color:#ebcb8b;">String </span><span style="color:#eff1f5;">name;
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">private </span><span style="color:#ebcb8b;">DepositAccount </span><span style="color:#eff1f5;">account;
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">private final int </span><span style="color:#eff1f5;">neededMoney;
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">private int </span><span style="color:#eff1f5;">availMoney;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">public </span><span style="color:#8fa1b3;">Son</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">String </span><span style="color:#bf616a;">name</span><span style="color:#eff1f5;">, </span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">DepositAccount </span><span style="color:#bf616a;">account</span><span style="color:#eff1f5;">, </span><span style="color:#b48ead;">final int </span><span style="color:#bf616a;">money</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.name </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> name;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.account </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> account;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.neededMoney </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> money;
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.availMoney </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">0</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">public void </span><span style="color:#8fa1b3;">run</span><span style="color:#eff1f5;">() {
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">final int </span><span style="color:#d08770;">MAX_MONEY_EACH_TIME </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">1000</span><span style="color:#eff1f5;">; </span><span style="color:#65737e;">// 每次最多取这么多钱
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">while </span><span style="color:#eff1f5;">(availMoney </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#eff1f5;"> neededMoney) {
+</span><span style="color:#eff1f5;">                </span><span style="color:#b48ead;">final int</span><span style="color:#eff1f5;"> moneyEachTime </span><span style="color:#c0c5ce;">=
+</span><span style="color:#eff1f5;">                    </span><span style="color:#eff1f5;">(neededMoney </span><span style="color:#c0c5ce;">-</span><span style="color:#eff1f5;"> availMoney) </span><span style="color:#c0c5ce;">&lt; </span><span style="color:#d08770;">MAX_MONEY_EACH_TIME </span><span style="color:#c0c5ce;">? </span><span style="color:#eff1f5;">(neededMoney </span><span style="color:#c0c5ce;">-</span><span style="color:#eff1f5;"> availMoney) </span><span style="color:#c0c5ce;">: </span><span style="color:#d08770;">MAX_MONEY_EACH_TIME</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">account.</span><span style="color:#bf616a;">withdraw</span><span style="color:#eff1f5;">(moneyEachTime);
+</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">availMoney </span><span style="color:#c0c5ce;">+=</span><span style="color:#eff1f5;"> moneyEachTime;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">                </span><span style="color:#ebcb8b;">System</span><span style="color:#eff1f5;">.out.</span><span style="color:#bf616a;">println</span><span style="color:#eff1f5;">(name </span><span style="color:#c0c5ce;">+ &quot;</span><span style="color:#a3be8c;"> get </span><span style="color:#c0c5ce;">&quot; +</span><span style="color:#eff1f5;"> moneyEachTime </span><span style="color:#c0c5ce;">+ &quot;</span><span style="color:#a3be8c;"> RMB from his father</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">);
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">                </span><span style="color:#b48ead;">try </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">                    </span><span style="color:#ebcb8b;">Thread</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">sleep</span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">1000</span><span style="color:#eff1f5;">); </span><span style="color:#65737e;">// 抽根烟
+</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">} </span><span style="color:#b48ead;">catch </span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">InterruptedException </span><span style="color:#bf616a;">e</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">                    </span><span style="color:#65737e;">// do nothing
+</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public static void </span><span style="color:#8fa1b3;">main</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">String</span><span style="color:#b48ead;">[] </span><span style="color:#bf616a;">args</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">DepositAccount</span><span style="color:#eff1f5;"> account </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">DepositAccount</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">ExecutorService</span><span style="color:#eff1f5;"> executorService </span><span style="color:#c0c5ce;">= </span><span style="color:#ebcb8b;">Executors</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">newCachedThreadPool</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">final int</span><span style="color:#eff1f5;"> moneyToSon1 </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">10000</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">final int</span><span style="color:#eff1f5;"> moneyToSon2 </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">18600</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">final int</span><span style="color:#eff1f5;"> moneyToSon3 </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">10240</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">executorService.</span><span style="color:#bf616a;">execute</span><span style="color:#eff1f5;">(
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">OldFather</span><span style="color:#eff1f5;">(account, moneyToSon1 </span><span style="color:#c0c5ce;">+</span><span style="color:#eff1f5;"> moneyToSon2 </span><span style="color:#c0c5ce;">+</span><span style="color:#eff1f5;"> moneyToSon3)
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">);
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">executorService.</span><span style="color:#bf616a;">execute</span><span style="color:#eff1f5;">(
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">Son</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">胡大</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">, account, moneyToSon1)
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">);
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">executorService.</span><span style="color:#bf616a;">execute</span><span style="color:#eff1f5;">(
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">Son</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">胡二</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">, account, moneyToSon2)
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">);
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">executorService.</span><span style="color:#bf616a;">execute</span><span style="color:#eff1f5;">(
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">Son</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">胡三</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">, account, moneyToSon3)
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">);
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">executorService.</span><span style="color:#bf616a;">shutdown</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">}
+</span></pre><h2 id="dai-ma-shuo-ming"><a class="zola-anchor" href="#dai-ma-shuo-ming" aria-label="Anchor link for: dai-ma-shuo-ming">🔗</a>
+代码说明</h2>
 <ol>
 <li><code>DepositAccount</code>类表征银行存款帐号，主要记录当前有多少钱，并提供同步的存款、取款的方法。取钱的钱不够了就没法取，只能等着；存钱的就没关系，可以一直往里面存，每存一笔钱就通知一遍要取钱的人。</li>
 <li><code>OldFather</code>类表征存钱的父亲，连续往账户里面存钱，每次存钱都有一个限额。父亲每存一笔钱，要叹一口气。</li>
 <li><code>Son</code>类表征在外的儿子（们），缺钱了去取钱，每次取钱有限额。如果账户里面没有钱了，只能抽一根烟等着了。</li>
 <li><code>main()</code>函数，首先构造帐号，然后构造父亲和儿子（胡大、胡二和胡三），然后用一个线程池跑起来。</li>
 </ol>
-
 <p>代码很简单。</p>
-
-<h1 id="令狐冲被困西湖底">令狐冲被困西湖底</h1>
-
+<h1 id="ling-hu-chong-bei-kun-xi-hu-di"><a class="zola-anchor" href="#ling-hu-chong-bei-kun-xi-hu-di" aria-label="Anchor link for: ling-hu-chong-bei-kun-xi-hu-di">🔗</a>
+令狐冲被困西湖底</h1>
 <p>另外一个例子可以考虑令狐冲被困在西湖底下面的情形。</p>
-
 <p>冲哥被困在了西湖底的地牢里面，不见天日。梅庄四友发善心，每天都让人送饭给他吃。</p>
-
 <p>现在来看，冲哥要吃饭，只能等人送饭过来；送饭的人是个聋哑人，到点了过来看一下，发现饭被吃了，就给一份新的饭。也就是，一个人送一个人吃；吃完了才送，没吃完不送；送来了才有得吃，没送就没得吃。</p>
-
 <p>代码说话。</p>
-
-<h2 id="代码-1">代码</h2>
-
-<pre><code class="language-java">package me.wbprime.showcase.concurrent;
-
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-/**
- * Class: LinghuChongCase
- * Date: 2016/04/06 12:38
- *
- * @author Elvis Wang [mail@wbprime.me]
- */
-public class LinghuChongCase {
-    private static class Bowl {
-        private boolean isFull;
-
-        public synchronized void eat() {
-            while (! isFull) {
-                try {
-                    this.wait();
-                } catch (InterruptedException e) {
-                    // do nothing
-                }
-            }
-
-            isFull = false;
-            this.notifyAll();
-        }
-
-        public synchronized void provide() {
-            while (isFull) {
-                try {
-                    this.wait();
-                } catch (InterruptedException e) {
-                    // do nothing
-                }
-            }
-
-            isFull = true;
-            this.notifyAll();
-        }
-    }
-
-    private static class LinghuChong implements Runnable{
-        private final Bowl bowl;
-        private final int days;
-
-        public LinghuChong(final Bowl bowl, final int days) {
-            this.bowl = bowl;
-            this.days = days;
-        }
-
-        public void run() {
-            int existingDays = 0;
-            while (existingDays &lt; days) {
-                bowl.eat();
-                System.out.println(&quot;Linghu Chong enjoys eating，&quot;);
-
-                try {
-                    Thread.sleep(1000); // 练吸心大法
-                } catch (InterruptedException e) {
-                    // do nothing
-                }
-
-                existingDays ++;
-            }
-        }
-    }
-
-    private static class SomeBody implements Runnable{
-        private final Bowl bowl;
-        private final int days;
-
-        public SomeBody(final Bowl bowl, final int days) {
-            this.bowl = bowl;
-            this.days = days;
-        }
-
-        public void run() {
-            int existingDays = 0;
-            while (existingDays &lt; days) {
-                bowl.provide();
-                System.out.println(&quot;Prepared a bowl for a prisoner to eat&quot;);
-
-                try {
-                    Thread.sleep(2000); // 不知道干嘛
-                } catch (InterruptedException e) {
-                    // do nothing
-                }
-                existingDays++;
-            }
-        }
-    }
-
-    public static void main(final String[] args) {
-        final Bowl bowl = new Bowl();
-
-        final ExecutorService executorService = Executors.newCachedThreadPool();
-
-        final int daysLostFreedom = 15;
-
-        executorService.execute(
-            new LinghuChong(bowl, daysLostFreedom)
-        );
-        executorService.execute(
-            new SomeBody(bowl, daysLostFreedom)
-        );
-
-        executorService.shutdown();
-    }
-}
-</code></pre>
-
-<h2 id="代码说明-1">代码说明</h2>
-
+<h2 id="dai-ma-1"><a class="zola-anchor" href="#dai-ma-1" aria-label="Anchor link for: dai-ma-1">🔗</a>
+代码</h2>
+<pre style="background-color:#2b303b;">
+<span style="color:#b48ead;">package </span><span style="color:#c0c5ce;">me.wbprime.showcase.concurrent;
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">java.util.concurrent.</span><span style="color:#ebcb8b;">ExecutorService</span><span style="color:#c0c5ce;">;
+</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">java.util.concurrent.</span><span style="color:#ebcb8b;">Executors</span><span style="color:#c0c5ce;">;
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#65737e;">/**
+</span><span style="color:#65737e;"> </span><span style="color:#65737e;">* Class: LinghuChongCase
+</span><span style="color:#65737e;"> </span><span style="color:#65737e;">* Date: 2016/04/06 12:38
+</span><span style="color:#65737e;"> </span><span style="color:#65737e;">*/
+</span><span style="color:#b48ead;">public class </span><span style="color:#ebcb8b;">LinghuChongCase </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private static class </span><span style="color:#ebcb8b;">Bowl </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">private boolean </span><span style="color:#eff1f5;">isFull;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">public synchronized void </span><span style="color:#8fa1b3;">eat</span><span style="color:#eff1f5;">() {
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">while </span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">!</span><span style="color:#eff1f5;"> isFull) {
+</span><span style="color:#eff1f5;">                </span><span style="color:#b48ead;">try </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">                    </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">wait</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">} </span><span style="color:#b48ead;">catch </span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">InterruptedException </span><span style="color:#bf616a;">e</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">                    </span><span style="color:#65737e;">// do nothing
+</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">isFull </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">false</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">notifyAll</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">public synchronized void </span><span style="color:#8fa1b3;">provide</span><span style="color:#eff1f5;">() {
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">while </span><span style="color:#eff1f5;">(isFull) {
+</span><span style="color:#eff1f5;">                </span><span style="color:#b48ead;">try </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">                    </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">wait</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">} </span><span style="color:#b48ead;">catch </span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">InterruptedException </span><span style="color:#bf616a;">e</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">                    </span><span style="color:#65737e;">// do nothing
+</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">isFull </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">true</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">notifyAll</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private static class </span><span style="color:#ebcb8b;">LinghuChong </span><span style="color:#b48ead;">implements </span><span style="color:#a3be8c;">Runnable</span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">private final </span><span style="color:#ebcb8b;">Bowl </span><span style="color:#eff1f5;">bowl;
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">private final int </span><span style="color:#eff1f5;">days;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">public </span><span style="color:#8fa1b3;">LinghuChong</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">Bowl </span><span style="color:#bf616a;">bowl</span><span style="color:#eff1f5;">, </span><span style="color:#b48ead;">final int </span><span style="color:#bf616a;">days</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.bowl </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> bowl;
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.days </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> days;
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">public void </span><span style="color:#8fa1b3;">run</span><span style="color:#eff1f5;">() {
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">int</span><span style="color:#eff1f5;"> existingDays </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">0</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">while </span><span style="color:#eff1f5;">(existingDays </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#eff1f5;"> days) {
+</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">bowl.</span><span style="color:#bf616a;">eat</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">                </span><span style="color:#ebcb8b;">System</span><span style="color:#eff1f5;">.out.</span><span style="color:#bf616a;">println</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">Linghu Chong enjoys eating，</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">);
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">                </span><span style="color:#b48ead;">try </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">                    </span><span style="color:#ebcb8b;">Thread</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">sleep</span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">1000</span><span style="color:#eff1f5;">); </span><span style="color:#65737e;">// 练吸心大法
+</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">} </span><span style="color:#b48ead;">catch </span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">InterruptedException </span><span style="color:#bf616a;">e</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">                    </span><span style="color:#65737e;">// do nothing
+</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">existingDays </span><span style="color:#c0c5ce;">++</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private static class </span><span style="color:#ebcb8b;">SomeBody </span><span style="color:#b48ead;">implements </span><span style="color:#a3be8c;">Runnable</span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">private final </span><span style="color:#ebcb8b;">Bowl </span><span style="color:#eff1f5;">bowl;
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">private final int </span><span style="color:#eff1f5;">days;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">public </span><span style="color:#8fa1b3;">SomeBody</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">Bowl </span><span style="color:#bf616a;">bowl</span><span style="color:#eff1f5;">, </span><span style="color:#b48ead;">final int </span><span style="color:#bf616a;">days</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.bowl </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> bowl;
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.days </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> days;
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">public void </span><span style="color:#8fa1b3;">run</span><span style="color:#eff1f5;">() {
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">int</span><span style="color:#eff1f5;"> existingDays </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">0</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">while </span><span style="color:#eff1f5;">(existingDays </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#eff1f5;"> days) {
+</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">bowl.</span><span style="color:#bf616a;">provide</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">                </span><span style="color:#ebcb8b;">System</span><span style="color:#eff1f5;">.out.</span><span style="color:#bf616a;">println</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">Prepared a bowl for a prisoner to eat</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">);
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">                </span><span style="color:#b48ead;">try </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">                    </span><span style="color:#ebcb8b;">Thread</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">sleep</span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">2000</span><span style="color:#eff1f5;">); </span><span style="color:#65737e;">// 不知道干嘛
+</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">} </span><span style="color:#b48ead;">catch </span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">InterruptedException </span><span style="color:#bf616a;">e</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">                    </span><span style="color:#65737e;">// do nothing
+</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">existingDays</span><span style="color:#c0c5ce;">++</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public static void </span><span style="color:#8fa1b3;">main</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">String</span><span style="color:#b48ead;">[] </span><span style="color:#bf616a;">args</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">Bowl</span><span style="color:#eff1f5;"> bowl </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">Bowl</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">ExecutorService</span><span style="color:#eff1f5;"> executorService </span><span style="color:#c0c5ce;">= </span><span style="color:#ebcb8b;">Executors</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">newCachedThreadPool</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">final int</span><span style="color:#eff1f5;"> daysLostFreedom </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">15</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">executorService.</span><span style="color:#bf616a;">execute</span><span style="color:#eff1f5;">(
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">LinghuChong</span><span style="color:#eff1f5;">(bowl, daysLostFreedom)
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">);
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">executorService.</span><span style="color:#bf616a;">execute</span><span style="color:#eff1f5;">(
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">SomeBody</span><span style="color:#eff1f5;">(bowl, daysLostFreedom)
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">);
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">executorService.</span><span style="color:#bf616a;">shutdown</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">}
+</span></pre><h2 id="dai-ma-shuo-ming-1"><a class="zola-anchor" href="#dai-ma-shuo-ming-1" aria-label="Anchor link for: dai-ma-shuo-ming-1">🔗</a>
+代码说明</h2>
 <ol>
 <li><code>Bowl</code>类表征饭碗，里面还有饭令狐冲才可以吃，送饭人就不会送；里面没饭了，令狐冲就没得吃，送饭人才会送。</li>
 <li><code>LinghuChong</code>类表征令狐冲，吃饭，没饭吃的时候就练吸心大法。</li>
 <li><code>SomeBody</code>类表征送饭的人，不知道干嘛的。定时送饭。</li>
 <li><code>main()</code>函数，构造饭碗，构造令狐冲和送饭人，然后设定冲哥被关了半个月。</li>
 </ol>
+<h1 id="dai-ma-xia-zai"><a class="zola-anchor" href="#dai-ma-xia-zai" aria-label="Anchor link for: dai-ma-xia-zai">🔗</a>
+代码下载</h1>
+<p><a href="http://www.wangbo.im/posts/2016-04-06-learning-java-concurrency-wait-notify/DepositCase.java">DepositCase.java</a>
+<a href="http://www.wangbo.im/posts/2016-04-06-learning-java-concurrency-wait-notify/LinghuChongCase.java">LinghuChongCase.java</a></p>
 
-<h1 id="代码下载">代码下载</h1>
+    </div>
 
-<p><a href="2016-04-06-learning-java-concurrency-wait-notify/DepositCase.java">DepositCase.java</a>
-<a href="2016-04-06-learning-java-concurrency-wait-notify/LinghuChongCase.java">LinghuChongCase.java</a></p>
-</div>
+    
+    
+
+    <div class="post-footer">
+        
+            
+                <div class="post-tags">
+                    
+                        <a href="http:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;java&#x2F;">#java</a>
+                    
+                        <a href="http:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;concurrency&#x2F;">#concurrency</a>
+                    
+                </div>
+            
+            
+                <div class="post-nav">
+                    
+                        <a class="previous" href="http:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;learning-java-concurrency-synchronized&#x2F;">‹ Learning Java Concurrency - synchronized</a>
+                    
+                    
+                        <a class="next" href="http:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2016-04-07-learning-java-concurrency-reentrantlock-condition&#x2F;">Learning Java Concurrency - ReentrantLock &amp; Condition ›</a>
+                    
+                    
+                    
+                </div>
+            
+
+        
+
+    </div>
 
     
     
+</article>
 
-    
 
-    
+                </div>
+            </main>
 
-        <h4 class="page-header">Comments</h4>
+            
+            
+        </div>
 
-        <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "wbprime" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-    
-
-</main>
-
-        <footer>
-
-            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
-
-        </footer>
-
+      
+          <script type="text/javascript" src="http:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
+      
     </body>
 
 </html>
-

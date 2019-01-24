@@ -1,250 +1,309 @@
+
+
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Learning Java Concurrency - ReentrantReadWriteLock</title>
-        <style>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
-    html body {
-        font-family: Raleway, sans-serif;
-        background-color: white;
-    }
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
-    :root {
-        --accent: lightseagreen;
-        --border-width:  0 ;
-    }
+      <title>Wbprime</title>
 
-</style>
+      
 
+      
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
+          
+      
 
-<link rel="stylesheet" href="/css/main.css">
+      
+          <link rel="stylesheet" href="http:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
+          
+      
 
-
-
-
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-
-
- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
-
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
- 
-
-
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-
-     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/java.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/c&#43;&#43;.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
-
-    <script>hljs.initHighlightingOnLoad();</script>
-
-
-
-
-
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-
-<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
- <meta name="generator" content="Hugo 0.49" />
-        
+      
+      
     </head>
 
     <body>
+        <div class="container">
 
-        <nav class="navbar navbar-default navbar-fixed-top">
-
-            <div class="container">
-
-                <div class="navbar-header">
-
-                    <a class="navbar-brand visible-xs" href="#">Learning Java Concurrency - ReentrantReadWriteLock</a>
-
-                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-                </div>
-
-                <div class="collapse navbar-collapse">
-
-                    
-                        <ul class="nav navbar-nav">
-                            
-                                <li><a href="/">Home</a></li>
-                            
-                                <li><a href="/posts/">Posts</a></li>
-                            
-                                <li><a href="/categories/">Categories</a></li>
-                            
-                                <li><a href="/tags/">Tags</a></li>
-                            
-                        </ul>
-                    
-
-                    
-                        <ul class="nav navbar-nav navbar-right">
-                            
-                                <li class="navbar-icon"><a href="https://github.com/wbprime/"><i class="fa fa-github"></i></a></li>
-                            
-                        </ul>
-                    
-
-                </div>
-
+            <div id="mobile-navbar" class="mobile-navbar">
+              <div class="mobile-header-logo">
+                <a href="/" class="logo">Wbprime</a>
+              </div>
+              <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
             </div>
 
+            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
+              <ul class="mobile-menu-list">
+                
+                    <li class="mobile-menu-item">
+                        <a href="http://www.wangbo.im">
+                            Home
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="http://www.wangbo.im&#x2F;categories">
+                            Categories
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="http://www.wangbo.im&#x2F;tags">
+                            Tags
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="http://www.wangbo.im&#x2F;about">
+                            About
+                        </a>
+                    </li>
+                
+              </ul>
+            </nav>
+
+            <header id="header">
+                <div class="logo"><a href="http:&#x2F;&#x2F;www.wangbo.im">Wbprime</a></div>
+                <nav class="menu">
+                    <ul>
+                        
+                            <li>
+                                <a href="http://www.wangbo.im">
+                                    Home
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="http://www.wangbo.im&#x2F;categories">
+                                    Categories
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="http://www.wangbo.im&#x2F;tags">
+                                    Tags
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="http://www.wangbo.im&#x2F;about">
+                                    About
+                                </a>
+                            </li>
+                        
+                    </ul>
+                </nav>
+            </header>
+
+            <main>
+                <div class="content" id="mobile-panel">
+                    
+
+
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="http://www.wangbo.im/posts/2016-04-07-learning-java-concurrency-reentrantreadwritelock/#jie-kou-gai-lan" class="toc-link">接口概览</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="http://www.wangbo.im/posts/2016-04-07-learning-java-concurrency-reentrantreadwritelock/#gong-xiang-suo-yu-hu-chi-suo" class="toc-link">共享锁与互斥锁</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="http://www.wangbo.im/posts/2016-04-07-learning-java-concurrency-reentrantreadwritelock/#zhen-zheng-de-suo" class="toc-link">真正的锁</a>
+                    
+                    <ul>
+                        
+                        <li>
+                            <a href="http://www.wangbo.im/posts/2016-04-07-learning-java-concurrency-reentrantreadwritelock/#xie-suo-de-huo-qu" class="toc-link">写锁的获取</a>
+                        </li>
+                        
+                        <li>
+                            <a href="http://www.wangbo.im/posts/2016-04-07-learning-java-concurrency-reentrantreadwritelock/#xie-suo-de-shi-fang" class="toc-link">写锁的释放</a>
+                        </li>
+                        
+                        <li>
+                            <a href="http://www.wangbo.im/posts/2016-04-07-learning-java-concurrency-reentrantreadwritelock/#du-suo-de-huo-qu" class="toc-link">读锁的获取</a>
+                        </li>
+                        
+                        <li>
+                            <a href="http://www.wangbo.im/posts/2016-04-07-learning-java-concurrency-reentrantreadwritelock/#du-suo-de-shi-fang" class="toc-link">读锁的释放</a>
+                        </li>
+                        
+                    </ul>
+                    
+                </li>
+                
+                <li>
+                    <a href="http://www.wangbo.im/posts/2016-04-07-learning-java-concurrency-reentrantreadwritelock/#gong-ping-xing" class="toc-link">公平性</a>
+                    
+                    <ul>
+                        
+                        <li>
+                            <a href="http://www.wangbo.im/posts/2016-04-07-learning-java-concurrency-reentrantreadwritelock/#fei-gong-ping-de-ce-lue" class="toc-link">非公平的策略</a>
+                        </li>
+                        
+                        <li>
+                            <a href="http://www.wangbo.im/posts/2016-04-07-learning-java-concurrency-reentrantreadwritelock/#gong-ping-de-ce-lue" class="toc-link">公平的策略</a>
+                        </li>
+                        
+                    </ul>
+                    
+                </li>
+                
+                <li>
+                    <a href="http://www.wangbo.im/posts/2016-04-07-learning-java-concurrency-reentrantreadwritelock/#suo-jiang-ji" class="toc-link">锁降级</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="http://www.wangbo.im/posts/2016-04-07-learning-java-concurrency-reentrantreadwritelock/#tiao-jian-bian-liang" class="toc-link">条件变量</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="http://www.wangbo.im/posts/2016-04-07-learning-java-concurrency-reentrantreadwritelock/#zong-jie" class="toc-link">总结</a>
+                    
+                </li>
+                
+            </ul>
         </nav>
-
-
-<main>
-
-    <div class="item">
-
-    
-    
-    
-
-    
-    
-
-    <h4><a href="/posts/2016-04-07-learning-java-concurrency-reentrantreadwritelock/">Learning Java Concurrency - ReentrantReadWriteLock</a></h4>
-    <h5>April 7, 2016</h5>
-     <kbd class="item-tag">java</kbd>  <kbd class="item-tag">concurrency</kbd> 
-
+    </div>
 </div>
 
 
-    <br> <div class="text-justify">
+<article class="post">
+    
+    <header class="post__header">
+        <h1 class="post__title">
+            <a href="http:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2016-04-07-learning-java-concurrency-reentrantreadwritelock&#x2F;">Learning Java Concurrency - ReentrantReadWriteLock</a>
+        </h1>
+        <div class="post__meta">
+            <span class="post__time">2016-04-07</span>
+            
+        </div>
+    </header>
 
-<p><code>ReentrantLock</code>是互斥锁，对于要保护的资源，同一时间只能有一个线程进行访问。所谓的访问，就是读和写。但是在实际中，往往是读操作对互斥性的要求远远低于写操作。</p>
-
+    <div class="post-content">
+      <p><code>ReentrantLock</code>是互斥锁，对于要保护的资源，同一时间只能有一个线程进行访问。所谓的访问，就是读和写。但是在实际中，往往是读操作对互斥性的要求远远低于写操作。</p>
 <p>考虑一个共享资源，比如一个List对象，可能会有多个线程对其进行读写。</p>
-
 <p>下面是使用<code>ReentrantLock</code>实现的一个版本。</p>
-
-<pre><code class="language-java">private static class ExclusiveLockStack {
-    private final List&lt;String&gt; list = new ArrayList&lt;String&gt;();
-    private final ReentrantLock lock = new ReentrantLock();
-
-    public void push(final String val) {
-        if (null == val)    return;
-
-        lock.lock();
-        try {
-            list.add(val);
-        } finally {
-            lock.unlock();
-        }
-    }
-
-    public String last() {
-        lock.lock();
-        String str = null;
-        try {
-            final int lastIdx = list.size() - 1;
-            if (lastIdx &gt;= 0) {
-                str = list.get(lastIdx);
-            }
-        } finally {
-            lock.unlock();
-        }
-        return str;
-    }
-}
-</code></pre>
-
+<pre style="background-color:#2b303b;">
+<span style="color:#b48ead;">private static class </span><span style="color:#ebcb8b;">ExclusiveLockStack </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private final </span><span style="color:#ebcb8b;">List</span><span style="color:#eff1f5;">&lt;</span><span style="color:#ebcb8b;">String</span><span style="color:#eff1f5;">&gt; list </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">ArrayList</span><span style="color:#eff1f5;">&lt;</span><span style="color:#ebcb8b;">String</span><span style="color:#eff1f5;">&gt;();
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private final </span><span style="color:#ebcb8b;">ReentrantLock </span><span style="color:#eff1f5;">lock </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">ReentrantLock</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public void </span><span style="color:#8fa1b3;">push</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">String </span><span style="color:#bf616a;">val</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">null </span><span style="color:#c0c5ce;">==</span><span style="color:#eff1f5;"> val)    </span><span style="color:#b48ead;">return</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">lock.</span><span style="color:#bf616a;">lock</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">try </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">list.</span><span style="color:#bf616a;">add</span><span style="color:#eff1f5;">(val);
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">} </span><span style="color:#b48ead;">finally </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">lock.</span><span style="color:#bf616a;">unlock</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public </span><span style="color:#ebcb8b;">String </span><span style="color:#8fa1b3;">last</span><span style="color:#eff1f5;">() {
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">lock.</span><span style="color:#bf616a;">lock</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">        </span><span style="color:#ebcb8b;">String</span><span style="color:#eff1f5;"> str </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">null</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">try </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">final int</span><span style="color:#eff1f5;"> lastIdx </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> list.</span><span style="color:#bf616a;">size</span><span style="color:#eff1f5;">() </span><span style="color:#c0c5ce;">- </span><span style="color:#d08770;">1</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(lastIdx </span><span style="color:#c0c5ce;">&gt;= </span><span style="color:#d08770;">0</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">str </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> list.</span><span style="color:#bf616a;">get</span><span style="color:#eff1f5;">(lastIdx);
+</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">} </span><span style="color:#b48ead;">finally </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">lock.</span><span style="color:#bf616a;">unlock</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">return</span><span style="color:#eff1f5;"> str;
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">}
+</span></pre>
 <p>下面是使用<code>ReentrantReadWriteLock</code>实现的一个版本。</p>
-
-<pre><code class="language-java">ReadWrittatic class ReadWriteLockStack {
-    private final List&lt;String&gt;           list  = new ArrayList&lt;String&gt;();
-    private final ReentrantReadWriteLock lock  = new ReentrantReadWriteLock();
-    private final Lock                   rLock = lock.readLock();
-    private final Lock                   wLock = lock.writeLock();
-
-    public void push(final String val) {
-        if (null == val)    return;
-
-        wLock.lock();
-        try {
-            list.add(val);
-        } finally {
-            wLock.unlock();
-        }
-    }
-
-    public String last() {
-        rLock.lock();
-        String str = null;
-        try {
-            final int lastIdx = list.size() - 1;
-            if (lastIdx &gt;= 0) {
-                str = list.get(lastIdx);
-            }
-        } finally {
-            rLock.unlock();
-        }
-        return str;
-    }
-}
-</code></pre>
-
-<!-- More -->
-
+<pre style="background-color:#2b303b;">
+<span style="color:#eff1f5;">ReadWrittatic </span><span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">ReadWriteLockStack </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private final </span><span style="color:#ebcb8b;">List</span><span style="color:#eff1f5;">&lt;</span><span style="color:#ebcb8b;">String</span><span style="color:#eff1f5;">&gt;           list  </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">ArrayList</span><span style="color:#eff1f5;">&lt;</span><span style="color:#ebcb8b;">String</span><span style="color:#eff1f5;">&gt;();
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private final </span><span style="color:#ebcb8b;">ReentrantReadWriteLock </span><span style="color:#eff1f5;">lock  </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">ReentrantReadWriteLock</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private final </span><span style="color:#ebcb8b;">Lock                   </span><span style="color:#eff1f5;">rLock </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> lock.</span><span style="color:#bf616a;">readLock</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private final </span><span style="color:#ebcb8b;">Lock                   </span><span style="color:#eff1f5;">wLock </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> lock.</span><span style="color:#bf616a;">writeLock</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public void </span><span style="color:#8fa1b3;">push</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">String </span><span style="color:#bf616a;">val</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">null </span><span style="color:#c0c5ce;">==</span><span style="color:#eff1f5;"> val)    </span><span style="color:#b48ead;">return</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">wLock.</span><span style="color:#bf616a;">lock</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">try </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">list.</span><span style="color:#bf616a;">add</span><span style="color:#eff1f5;">(val);
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">} </span><span style="color:#b48ead;">finally </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">wLock.</span><span style="color:#bf616a;">unlock</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public </span><span style="color:#ebcb8b;">String </span><span style="color:#8fa1b3;">last</span><span style="color:#eff1f5;">() {
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">rLock.</span><span style="color:#bf616a;">lock</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">        </span><span style="color:#ebcb8b;">String</span><span style="color:#eff1f5;"> str </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">null</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">try </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">final int</span><span style="color:#eff1f5;"> lastIdx </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> list.</span><span style="color:#bf616a;">size</span><span style="color:#eff1f5;">() </span><span style="color:#c0c5ce;">- </span><span style="color:#d08770;">1</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(lastIdx </span><span style="color:#c0c5ce;">&gt;= </span><span style="color:#d08770;">0</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">str </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> list.</span><span style="color:#bf616a;">get</span><span style="color:#eff1f5;">(lastIdx);
+</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">} </span><span style="color:#b48ead;">finally </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">rLock.</span><span style="color:#bf616a;">unlock</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">return</span><span style="color:#eff1f5;"> str;
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">}
+</span></pre><p><a name="continue-reading"></a></p>
 <p><code>ReentrantReadWriteLock</code>虽然看起来像一个Lock，但却并不是真正的Lock，没有去实现<code>java.util.concurrent.locks.Lock</code>接口，而是去实现了一个<code>ReadWriteLock</code>的接口。</p>
-
-<h1 id="接口概览">接口概览</h1>
-
+<h1 id="jie-kou-gai-lan"><a class="zola-anchor" href="#jie-kou-gai-lan" aria-label="Anchor link for: jie-kou-gai-lan">🔗</a>
+接口概览</h1>
 <p>对比一下<code>ReentrantLock</code>和<code>ReentrantReadWriteLock</code>的实现的接口就能知道二者有什么区别了。</p>
-
 <p><code>ReentrantLock</code>的根底如下：</p>
-
-<pre><code class="language-java">public class ReentrantLock implements Lock {}
-
-public interface Lock {
-
-    boolean tryLock();
-
-    void lockInterruptibly() throws InterruptedException;
-
-    boolean tryLock();
-
-    boolean tryLock(long time, TimeUnit unit) throws InterruptedException;
-
-    void unlock();
-
-    Condition newCondition();
-}
-</code></pre>
-
+<pre style="background-color:#2b303b;">
+<span style="color:#b48ead;">public class </span><span style="color:#ebcb8b;">ReentrantLock </span><span style="color:#b48ead;">implements </span><span style="color:#a3be8c;">Lock </span><span style="color:#eff1f5;">{}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#b48ead;">public interface </span><span style="color:#ebcb8b;">Lock </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">boolean </span><span style="color:#8fa1b3;">tryLock</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">lockInterruptibly</span><span style="color:#eff1f5;">() </span><span style="color:#b48ead;">throws </span><span style="color:#ebcb8b;">InterruptedException</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">boolean </span><span style="color:#8fa1b3;">tryLock</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">boolean </span><span style="color:#8fa1b3;">tryLock</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">long </span><span style="color:#bf616a;">time</span><span style="color:#eff1f5;">, </span><span style="color:#ebcb8b;">TimeUnit </span><span style="color:#bf616a;">unit</span><span style="color:#eff1f5;">) </span><span style="color:#b48ead;">throws </span><span style="color:#ebcb8b;">InterruptedException</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">unlock</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#ebcb8b;">Condition </span><span style="color:#8fa1b3;">newCondition</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">}
+</span></pre>
 <p><code>ReentrantReadWriteLock</code>的跟脚如下：</p>
-
-<pre><code class="language-java">public class ReentrantReadWriteLock implements ReadWriteLock {}
-
-public interface ReadWriteLock {
-    Lock readLock();
-
-    Lock writeLock();
-}
-</code></pre>
-
+<pre style="background-color:#2b303b;">
+<span style="color:#b48ead;">public class </span><span style="color:#ebcb8b;">ReentrantReadWriteLock </span><span style="color:#b48ead;">implements </span><span style="color:#a3be8c;">ReadWriteLock </span><span style="color:#eff1f5;">{}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#b48ead;">public interface </span><span style="color:#ebcb8b;">ReadWriteLock </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">    </span><span style="color:#ebcb8b;">Lock </span><span style="color:#8fa1b3;">readLock</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#ebcb8b;">Lock </span><span style="color:#8fa1b3;">writeLock</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">}
+</span></pre>
 <p>可见，一个真正的锁需要提供<code>lock</code>和<code>unlock</code>等方法。<code>ReentrantLock</code>直接实现了<code>Lock</code>接口，而<code>ReentrantReadWriteLock</code>通过<code>readLock()</code>和<code>writeLock()</code>方法来返回<code>Lock</code>供使用。</p>
-
 <p><code>ReentrantReadWriteLock</code>类提供的方法如下：</p>
-
 <ol>
 <li>ReentrantReadWriteLock() &amp; ReentrantReadWriteLock(boolean fair)</li>
 <li>Lock readLock()</li>
@@ -253,354 +312,319 @@ public interface ReadWriteLock {
 <li>int getReadLockCount()</li>
 <li>boolean isWriteLocker()</li>
 </ol>
-
-<h1 id="共享锁与互斥锁">共享锁与互斥锁</h1>
-
+<h1 id="gong-xiang-suo-yu-hu-chi-suo"><a class="zola-anchor" href="#gong-xiang-suo-yu-hu-chi-suo" aria-label="Anchor link for: gong-xiang-suo-yu-hu-chi-suo">🔗</a>
+共享锁与互斥锁</h1>
 <p><code>ReentrantReadWriteLock</code>向外界提供了一个读锁和写锁。</p>
-
 <p>读锁是一种共享锁，同一时间多个线程都可以持有该锁。</p>
-
 <p>写锁是一种互斥锁，同一时间只能有一个线程持有该锁。写锁上有一个计数器，只有当计数器为0时，新的线程才能去持有该锁；如果计数器不为0,但是持有锁的线程正是当前线程，则计数器加1,表示锁需要被unlock两次才能真正释放。</p>
-
 <p>读锁和写锁在一起工作时，相互之间也会有影响。如果读锁已经被持有，则所有请求写锁的线程会被阻塞。如果写锁已经被持有，则任何新的读锁和写锁的请求线程都会被阻塞。</p>
-
-<pre><code class="language-java">public static class ReadLock implements Lock {
-    private final Sync sync;
-
-    public void lock() {
-        sync.acquireShared(1);
-    }
-
-    public void lockInterruptibly() throws InterruptedException {
-        sync.acquireSharedInterruptibly(1);
-    }
-
-    public  void unlock() {
-        sync.releaseShared(1);
-    }
-}
-
-public static class WriteLock implements Lock {
-    private final Sync sync;
-
-    public void lock() {
-        sync.acquire(1);
-    }
-
-    public void lockInterruptibly() throws InterruptedException {
-        sync.acquireInterruptibly(1);
-    }
-
-    public void unlock() {
-        sync.release(1);
-    }
-}
-</code></pre>
-
+<pre style="background-color:#2b303b;">
+<span style="color:#b48ead;">public static class </span><span style="color:#ebcb8b;">ReadLock </span><span style="color:#b48ead;">implements </span><span style="color:#a3be8c;">Lock </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private final </span><span style="color:#ebcb8b;">Sync </span><span style="color:#eff1f5;">sync;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public void </span><span style="color:#8fa1b3;">lock</span><span style="color:#eff1f5;">() {
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">sync.</span><span style="color:#bf616a;">acquireShared</span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">1</span><span style="color:#eff1f5;">);
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public void </span><span style="color:#8fa1b3;">lockInterruptibly</span><span style="color:#eff1f5;">() </span><span style="color:#b48ead;">throws </span><span style="color:#ebcb8b;">InterruptedException </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">sync.</span><span style="color:#bf616a;">acquireSharedInterruptibly</span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">1</span><span style="color:#eff1f5;">);
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public  void </span><span style="color:#8fa1b3;">unlock</span><span style="color:#eff1f5;">() {
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">sync.</span><span style="color:#bf616a;">releaseShared</span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">1</span><span style="color:#eff1f5;">);
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#b48ead;">public static class </span><span style="color:#ebcb8b;">WriteLock </span><span style="color:#b48ead;">implements </span><span style="color:#a3be8c;">Lock </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private final </span><span style="color:#ebcb8b;">Sync </span><span style="color:#eff1f5;">sync;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public void </span><span style="color:#8fa1b3;">lock</span><span style="color:#eff1f5;">() {
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">sync.</span><span style="color:#bf616a;">acquire</span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">1</span><span style="color:#eff1f5;">);
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public void </span><span style="color:#8fa1b3;">lockInterruptibly</span><span style="color:#eff1f5;">() </span><span style="color:#b48ead;">throws </span><span style="color:#ebcb8b;">InterruptedException </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">sync.</span><span style="color:#bf616a;">acquireInterruptibly</span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">1</span><span style="color:#eff1f5;">);
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public void </span><span style="color:#8fa1b3;">unlock</span><span style="color:#eff1f5;">() {
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">sync.</span><span style="color:#bf616a;">release</span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">1</span><span style="color:#eff1f5;">);
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">}
+</span></pre>
 <p><code>ReadLock</code>和<code>WriteLock</code>持有同一个<code>Sync</code>的对象实例，而<code>Sync</code>继承自<code>AbstractQueuedSynchronizer</code>。二者的区别在于各自的<code>lock &amp; unlock</code>操作分别调用的是<code>AbstractQueuedSynchronizer</code>的共享和独占方法。</p>
-
 <p>所以，读锁和写锁，实际上是同一个锁。</p>
-
-<h1 id="真正的锁">真正的锁</h1>
-
+<h1 id="zhen-zheng-de-suo"><a class="zola-anchor" href="#zhen-zheng-de-suo" aria-label="Anchor link for: zhen-zheng-de-suo">🔗</a>
+真正的锁</h1>
 <p><code>Sync</code>中主要的方法如下：</p>
-
-<pre><code class="language-java">abstract static class Sync extends AbstractQueuedSynchronizer {
-    abstract boolean readerShouldBlock();
-
-    abstract boolean writerShouldBlock();
-}
-</code></pre>
-
+<pre style="background-color:#2b303b;">
+<span style="color:#b48ead;">abstract static class </span><span style="color:#ebcb8b;">Sync </span><span style="color:#b48ead;">extends </span><span style="color:#a3be8c;">AbstractQueuedSynchronizer </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">abstract boolean </span><span style="color:#8fa1b3;">readerShouldBlock</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">abstract boolean </span><span style="color:#8fa1b3;">writerShouldBlock</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">}
+</span></pre>
 <p><code>Sync</code>定义了两个抽象方法，用来实现公平性策略。这两个方法的作用不言自明，具体的实现在其两个子类中。</p>
-
-<h2 id="写锁的获取">写锁的获取</h2>
-
+<h2 id="xie-suo-de-huo-qu"><a class="zola-anchor" href="#xie-suo-de-huo-qu" aria-label="Anchor link for: xie-suo-de-huo-qu">🔗</a>
+写锁的获取</h2>
 <p>写锁的<code>lock</code>调用了<code>Sync</code>的<code>tryAcquire()</code>。</p>
-
 <p>当前线程获取写锁的需要先判断逻辑：</p>
-
 <ol>
 <li>没有上锁的读线程；</li>
 <li>如果有上锁的写线程，则该线程必须是当前线程；</li>
 <li>公平性策略允许。如果通过了逻辑判断，则获取写锁，写计数器加1（这意味着写计数器的值与持有锁的重入次数保持一致）。</li>
 </ol>
-
-<pre><code class="language-java">abstract static class Sync extends AbstractQueuedSynchronizer {
-    protected final boolean tryAcquire(int acquires) {
-        /*
-         * 总结:
-         * 1. 如果当前有读线程持有锁，直接返回失败
-         × 2. 如果当前有写线程持有锁，并且当前线程并不是该写线程，直接失败
-         * 3. 如果当前有写线程持有锁，并且当前线程是该写线程，预判断加锁后的写计
-         *		数器的值是否超过了最大值（65535），超过则失败，否则成功
-         * 4. 如果没有读线程和写线程持有锁，则进行公平性策略判断
-         *		如果读线程可以非公平抢占锁，则去插队；否则，失败（去排队）
-         */
-        Thread current = Thread.currentThread();
-        int c = getState();
-        int w = exclusiveCount(c);
-        if (c != 0) {
-            // (Note: if c != 0 and w == 0 then shared count != 0)
-            if (w == 0 || current != getExclusiveOwnerThread())
-                return false;
-            if (w + exclusiveCount(acquires) &gt; MAX_COUNT)
-                throw new Error(&quot;Maximum lock count exceeded&quot;);
-            // Reentrant acquire
-            setState(c + acquires);
-            return true;
-        }
-        if (writerShouldBlock() ||
-            !compareAndSetState(c, c + acquires))
-            return false;
-        setExclusiveOwnerThread(current);
-        return true;
-    }
-}
-</code></pre>
-
-<h2 id="写锁的释放">写锁的释放</h2>
-
+<pre style="background-color:#2b303b;">
+<span style="color:#b48ead;">abstract static class </span><span style="color:#ebcb8b;">Sync </span><span style="color:#b48ead;">extends </span><span style="color:#a3be8c;">AbstractQueuedSynchronizer </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">protected final boolean </span><span style="color:#8fa1b3;">tryAcquire</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">acquires</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">        </span><span style="color:#65737e;">/*
+</span><span style="color:#65737e;">         </span><span style="color:#65737e;">* 总结:
+</span><span style="color:#65737e;">         </span><span style="color:#65737e;">* 1. 如果当前有读线程持有锁，直接返回失败
+</span><span style="color:#65737e;">         </span><span style="color:#65737e;">× 2. 如果当前有写线程持有锁，并且当前线程并不是该写线程，直接失败
+</span><span style="color:#65737e;">         </span><span style="color:#65737e;">* 3. 如果当前有写线程持有锁，并且当前线程是该写线程，预判断加锁后的写计
+</span><span style="color:#65737e;">         </span><span style="color:#65737e;">*		数器的值是否超过了最大值（65535），超过则失败，否则成功
+</span><span style="color:#65737e;">         </span><span style="color:#65737e;">* 4. 如果没有读线程和写线程持有锁，则进行公平性策略判断
+</span><span style="color:#65737e;">         </span><span style="color:#65737e;">*		如果读线程可以非公平抢占锁，则去插队；否则，失败（去排队）
+</span><span style="color:#65737e;">         </span><span style="color:#65737e;">*/
+</span><span style="color:#eff1f5;">        </span><span style="color:#ebcb8b;">Thread</span><span style="color:#eff1f5;"> current </span><span style="color:#c0c5ce;">= </span><span style="color:#ebcb8b;">Thread</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">currentThread</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">int</span><span style="color:#eff1f5;"> c </span><span style="color:#c0c5ce;">= </span><span style="color:#bf616a;">getState</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">int</span><span style="color:#eff1f5;"> w </span><span style="color:#c0c5ce;">= </span><span style="color:#bf616a;">exclusiveCount</span><span style="color:#eff1f5;">(c);
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(c </span><span style="color:#c0c5ce;">!= </span><span style="color:#d08770;">0</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">            </span><span style="color:#65737e;">// (Note: if c != 0 and w == 0 then shared count != 0)
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(w </span><span style="color:#c0c5ce;">== </span><span style="color:#d08770;">0 </span><span style="color:#c0c5ce;">||</span><span style="color:#eff1f5;"> current </span><span style="color:#c0c5ce;">!= </span><span style="color:#bf616a;">getExclusiveOwnerThread</span><span style="color:#eff1f5;">())
+</span><span style="color:#eff1f5;">                </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">false</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(w </span><span style="color:#c0c5ce;">+ </span><span style="color:#bf616a;">exclusiveCount</span><span style="color:#eff1f5;">(acquires) </span><span style="color:#c0c5ce;">&gt; </span><span style="color:#d08770;">MAX_COUNT</span><span style="color:#eff1f5;">)
+</span><span style="color:#eff1f5;">                </span><span style="color:#b48ead;">throw new </span><span style="color:#ebcb8b;">Error</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">Maximum lock count exceeded</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">);
+</span><span style="color:#eff1f5;">            </span><span style="color:#65737e;">// Reentrant acquire
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">setState</span><span style="color:#eff1f5;">(c </span><span style="color:#c0c5ce;">+</span><span style="color:#eff1f5;"> acquires);
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">true</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(</span><span style="color:#bf616a;">writerShouldBlock</span><span style="color:#eff1f5;">() </span><span style="color:#c0c5ce;">||
+</span><span style="color:#eff1f5;">            </span><span style="color:#c0c5ce;">!</span><span style="color:#bf616a;">compareAndSetState</span><span style="color:#eff1f5;">(c, c </span><span style="color:#c0c5ce;">+</span><span style="color:#eff1f5;"> acquires))
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">false</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">        </span><span style="color:#bf616a;">setExclusiveOwnerThread</span><span style="color:#eff1f5;">(current);
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">true</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">}
+</span></pre><h2 id="xie-suo-de-shi-fang"><a class="zola-anchor" href="#xie-suo-de-shi-fang" aria-label="Anchor link for: xie-suo-de-shi-fang">🔗</a>
+写锁的释放</h2>
 <p>写锁的<code>unlock</code>调用了<code>Sync</code>的<code>tryRelease()</code>。</p>
-
 <p>当前线程释放写锁，只需要判断：</p>
-
 <ol>
 <li>当前线程确实持有写锁；</li>
 <li>写计数器的值是否会变为0。</li>
 </ol>
-
 <p>如果写计数器的值会变为0，则写锁会被释放；否则说明当前线程多次调用了<code>lock</code>而没有执行相应数目的<code>unlock</code>操作，需要等更多的<code>unlock</code>才能释放写锁（可重入）。</p>
-
-<pre><code class="language-java">abstract static class Sync extends AbstractQueuedSynchronizer {
-    protected final boolean tryRelease(int releases) {
-        /*
-         * 总结：
-         * 1. 如果当前线程没有持有锁，则失败，抛出异常
-         * 2. 如果当前的写计数器的值减1之后为0,则成功；否则失败
-         */
-        if (!isHeldExclusively())
-            throw new IllegalMonitorStateException();
-        int nextc = getState() - releases;
-        boolean free = exclusiveCount(nextc) == 0;
-        if (free)
-            setExclusiveOwnerThread(null);
-        setState(nextc);
-        return free;
-    }
-}
-</code></pre>
-
-<h2 id="读锁的获取">读锁的获取</h2>
-
+<pre style="background-color:#2b303b;">
+<span style="color:#b48ead;">abstract static class </span><span style="color:#ebcb8b;">Sync </span><span style="color:#b48ead;">extends </span><span style="color:#a3be8c;">AbstractQueuedSynchronizer </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">protected final boolean </span><span style="color:#8fa1b3;">tryRelease</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">releases</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">        </span><span style="color:#65737e;">/*
+</span><span style="color:#65737e;">         </span><span style="color:#65737e;">* 总结：
+</span><span style="color:#65737e;">         </span><span style="color:#65737e;">* 1. 如果当前线程没有持有锁，则失败，抛出异常
+</span><span style="color:#65737e;">         </span><span style="color:#65737e;">* 2. 如果当前的写计数器的值减1之后为0,则成功；否则失败
+</span><span style="color:#65737e;">         </span><span style="color:#65737e;">*/
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">!</span><span style="color:#bf616a;">isHeldExclusively</span><span style="color:#eff1f5;">())
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">throw new </span><span style="color:#ebcb8b;">IllegalMonitorStateException</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">int</span><span style="color:#eff1f5;"> nextc </span><span style="color:#c0c5ce;">= </span><span style="color:#bf616a;">getState</span><span style="color:#eff1f5;">() </span><span style="color:#c0c5ce;">-</span><span style="color:#eff1f5;"> releases;
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">boolean</span><span style="color:#eff1f5;"> free </span><span style="color:#c0c5ce;">= </span><span style="color:#bf616a;">exclusiveCount</span><span style="color:#eff1f5;">(nextc) </span><span style="color:#c0c5ce;">== </span><span style="color:#d08770;">0</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(free)
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">setExclusiveOwnerThread</span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">null</span><span style="color:#eff1f5;">);
+</span><span style="color:#eff1f5;">        </span><span style="color:#bf616a;">setState</span><span style="color:#eff1f5;">(nextc);
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">return</span><span style="color:#eff1f5;"> free;
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">}
+</span></pre><h2 id="du-suo-de-huo-qu"><a class="zola-anchor" href="#du-suo-de-huo-qu" aria-label="Anchor link for: du-suo-de-huo-qu">🔗</a>
+读锁的获取</h2>
 <p>读锁的<code>lock</code>调用了<code>Sync</code>的<code>tryAcquireShared()</code>。</p>
-
 <p>线程获取读锁的需要先判断逻辑：</p>
-
 <ol>
 <li>写锁没有被其他线程获取，同一个线程可以先获取写锁在获取读锁（降级）；</li>
 <li>公平性策略允许。</li>
 </ol>
-
 <p>如果通过了逻辑判断，则获取读锁，读计数器加1（这意味着读计数器的值与持有锁的重入次数保持一致）。读锁的获取是一个不断尝试的自旋过程。</p>
-
 <p>由于读锁也是可以重入的，所以用读计数器表示所有读线程的重入次数外，<code>Sync</code>还维护了一套读线程的线程局部计数器（ThreadLocal），用于记录每一个写线程的重入数。</p>
-
-<pre><code class="language-java">
-abstract static class Sync extends AbstractQueuedSynchronizer {
-    protected final int tryAcquireShared(int unused) {
-        /*
-         * 总结：
-         * 1. 如果已经有写线程持有锁，判断该线程是不是当前线程，
-         *		如果不是，直接失败；否则可以试图去获取锁
-         * 2. 不管有没有写线程持有锁，当前线程都可以去试图获取锁
-         * 3. 如果读计数器的值会超过最大值（65535），则失败
-         */
-        Thread current = Thread.currentThread();
-        int c = getState();
-        if (exclusiveCount(c) != 0 &amp;&amp;
-            getExclusiveOwnerThread() != current)
-            return -1;
-        int r = sharedCount(c);
-        if (!readerShouldBlock() &amp;&amp;
-            r &lt; MAX_COUNT &amp;&amp;
-            compareAndSetState(c, c + SHARED_UNIT)) {
-            if (r == 0) {
-                firstReader = current;
-                firstReaderHoldCount = 1;
-            } else if (firstReader == current) {
-                firstReaderHoldCount++;
-            } else {
-                HoldCounter rh = cachedHoldCounter;
-                if (rh == null || rh.tid != current.getId())
-                    cachedHoldCounter = rh = readHolds.get();
-                else if (rh.count == 0)
-                    readHolds.set(rh);
-                rh.count++;
-            }
-            return 1;
-        }
-        return fullTryAcquireShared(current);
-    }
-}
-</code></pre>
-
-<h2 id="读锁的释放">读锁的释放</h2>
-
+<pre style="background-color:#2b303b;">
+<span style="color:#c0c5ce;">
+</span><span style="color:#b48ead;">abstract static class </span><span style="color:#ebcb8b;">Sync </span><span style="color:#b48ead;">extends </span><span style="color:#a3be8c;">AbstractQueuedSynchronizer </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">protected final int </span><span style="color:#8fa1b3;">tryAcquireShared</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">unused</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">        </span><span style="color:#65737e;">/*
+</span><span style="color:#65737e;">         </span><span style="color:#65737e;">* 总结：
+</span><span style="color:#65737e;">         </span><span style="color:#65737e;">* 1. 如果已经有写线程持有锁，判断该线程是不是当前线程，
+</span><span style="color:#65737e;">         </span><span style="color:#65737e;">*		如果不是，直接失败；否则可以试图去获取锁
+</span><span style="color:#65737e;">         </span><span style="color:#65737e;">* 2. 不管有没有写线程持有锁，当前线程都可以去试图获取锁
+</span><span style="color:#65737e;">         </span><span style="color:#65737e;">* 3. 如果读计数器的值会超过最大值（65535），则失败
+</span><span style="color:#65737e;">         </span><span style="color:#65737e;">*/
+</span><span style="color:#eff1f5;">        </span><span style="color:#ebcb8b;">Thread</span><span style="color:#eff1f5;"> current </span><span style="color:#c0c5ce;">= </span><span style="color:#ebcb8b;">Thread</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">currentThread</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">int</span><span style="color:#eff1f5;"> c </span><span style="color:#c0c5ce;">= </span><span style="color:#bf616a;">getState</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(</span><span style="color:#bf616a;">exclusiveCount</span><span style="color:#eff1f5;">(c) </span><span style="color:#c0c5ce;">!= </span><span style="color:#d08770;">0 </span><span style="color:#c0c5ce;">&amp;&amp;
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">getExclusiveOwnerThread</span><span style="color:#eff1f5;">() </span><span style="color:#c0c5ce;">!=</span><span style="color:#eff1f5;"> current)
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">return </span><span style="color:#c0c5ce;">-</span><span style="color:#d08770;">1</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">int</span><span style="color:#eff1f5;"> r </span><span style="color:#c0c5ce;">= </span><span style="color:#bf616a;">sharedCount</span><span style="color:#eff1f5;">(c);
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">!</span><span style="color:#bf616a;">readerShouldBlock</span><span style="color:#eff1f5;">() </span><span style="color:#c0c5ce;">&amp;&amp;
+</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">r </span><span style="color:#c0c5ce;">&lt; </span><span style="color:#d08770;">MAX_COUNT </span><span style="color:#c0c5ce;">&amp;&amp;
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">compareAndSetState</span><span style="color:#eff1f5;">(c, c </span><span style="color:#c0c5ce;">+ </span><span style="color:#d08770;">SHARED_UNIT</span><span style="color:#eff1f5;">)) {
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(r </span><span style="color:#c0c5ce;">== </span><span style="color:#d08770;">0</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">firstReader </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> current;
+</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">firstReaderHoldCount </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">1</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">} </span><span style="color:#b48ead;">else if </span><span style="color:#eff1f5;">(firstReader </span><span style="color:#c0c5ce;">==</span><span style="color:#eff1f5;"> current) {
+</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">firstReaderHoldCount</span><span style="color:#c0c5ce;">++</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">} </span><span style="color:#b48ead;">else </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">                </span><span style="color:#ebcb8b;">HoldCounter</span><span style="color:#eff1f5;"> rh </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> cachedHoldCounter;
+</span><span style="color:#eff1f5;">                </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(rh </span><span style="color:#c0c5ce;">== </span><span style="color:#d08770;">null </span><span style="color:#c0c5ce;">||</span><span style="color:#eff1f5;"> rh.tid </span><span style="color:#c0c5ce;">!=</span><span style="color:#eff1f5;"> current.</span><span style="color:#bf616a;">getId</span><span style="color:#eff1f5;">())
+</span><span style="color:#eff1f5;">                    </span><span style="color:#eff1f5;">cachedHoldCounter </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> rh </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> readHolds.</span><span style="color:#bf616a;">get</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">                </span><span style="color:#b48ead;">else if </span><span style="color:#eff1f5;">(rh.count </span><span style="color:#c0c5ce;">== </span><span style="color:#d08770;">0</span><span style="color:#eff1f5;">)
+</span><span style="color:#eff1f5;">                    </span><span style="color:#eff1f5;">readHolds.</span><span style="color:#bf616a;">set</span><span style="color:#eff1f5;">(rh);
+</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">rh.count</span><span style="color:#c0c5ce;">++</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">1</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">return </span><span style="color:#bf616a;">fullTryAcquireShared</span><span style="color:#eff1f5;">(current);
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">}
+</span></pre><h2 id="du-suo-de-shi-fang"><a class="zola-anchor" href="#du-suo-de-shi-fang" aria-label="Anchor link for: du-suo-de-shi-fang">🔗</a>
+读锁的释放</h2>
 <p>读锁的<code>unlock</code>调用了<code>Sync</code>的<code>tryReleaseShared()</code>。当前线程释放写锁，只需要判断线程局部计数器是否大于1。</p>
-
-<pre><code class="language-java">abstract static class Sync extends AbstractQueuedSynchronizer {
-    protected final boolean tryReleaseShared(int unused) {
-        /*
-         * 总结：
-         * 1. 判断当前读线程的局部计数器是否可以往下减（大于1）
-         */
-        Thread current = Thread.currentThread();
-        if (firstReader == current) {
-            // assert firstReaderHoldCount &gt; 0;
-            if (firstReaderHoldCount == 1)
-                firstReader = null;
-            else
-                firstReaderHoldCount--;
-        } else {
-            HoldCounter rh = cachedHoldCounter;
-            if (rh == null || rh.tid != current.getId())
-                rh = readHolds.get();
-            int count = rh.count;
-            if (count &lt;= 1) {
-                readHolds.remove();
-                if (count &lt;= 0)
-                    throw unmatchedUnlockException();
-            }
-            --rh.count;
-        }
-        for (;;) {
-            int c = getState();
-            int nextc = c - SHARED_UNIT;
-            if (compareAndSetState(c, nextc))
-                // Releasing the read lock has no effect on readers,
-                // but it may allow waiting writers to proceed if
-                // both read and write locks are now free.
-                return nextc == 0;
-        }
-    }
-}
-</code></pre>
-
-<h1 id="公平性">公平性</h1>
-
+<pre style="background-color:#2b303b;">
+<span style="color:#b48ead;">abstract static class </span><span style="color:#ebcb8b;">Sync </span><span style="color:#b48ead;">extends </span><span style="color:#a3be8c;">AbstractQueuedSynchronizer </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">protected final boolean </span><span style="color:#8fa1b3;">tryReleaseShared</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">unused</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">        </span><span style="color:#65737e;">/*
+</span><span style="color:#65737e;">         </span><span style="color:#65737e;">* 总结：
+</span><span style="color:#65737e;">         </span><span style="color:#65737e;">* 1. 判断当前读线程的局部计数器是否可以往下减（大于1）
+</span><span style="color:#65737e;">         </span><span style="color:#65737e;">*/
+</span><span style="color:#eff1f5;">        </span><span style="color:#ebcb8b;">Thread</span><span style="color:#eff1f5;"> current </span><span style="color:#c0c5ce;">= </span><span style="color:#ebcb8b;">Thread</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">currentThread</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(firstReader </span><span style="color:#c0c5ce;">==</span><span style="color:#eff1f5;"> current) {
+</span><span style="color:#eff1f5;">            </span><span style="color:#65737e;">// assert firstReaderHoldCount &gt; 0;
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(firstReaderHoldCount </span><span style="color:#c0c5ce;">== </span><span style="color:#d08770;">1</span><span style="color:#eff1f5;">)
+</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">firstReader </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">null</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">else
+</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">firstReaderHoldCount</span><span style="color:#c0c5ce;">--</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">} </span><span style="color:#b48ead;">else </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">            </span><span style="color:#ebcb8b;">HoldCounter</span><span style="color:#eff1f5;"> rh </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> cachedHoldCounter;
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(rh </span><span style="color:#c0c5ce;">== </span><span style="color:#d08770;">null </span><span style="color:#c0c5ce;">||</span><span style="color:#eff1f5;"> rh.tid </span><span style="color:#c0c5ce;">!=</span><span style="color:#eff1f5;"> current.</span><span style="color:#bf616a;">getId</span><span style="color:#eff1f5;">())
+</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">rh </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> readHolds.</span><span style="color:#bf616a;">get</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">int</span><span style="color:#eff1f5;"> count </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> rh.count;
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(count </span><span style="color:#c0c5ce;">&lt;= </span><span style="color:#d08770;">1</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">readHolds.</span><span style="color:#bf616a;">remove</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">                </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(count </span><span style="color:#c0c5ce;">&lt;= </span><span style="color:#d08770;">0</span><span style="color:#eff1f5;">)
+</span><span style="color:#eff1f5;">                    </span><span style="color:#b48ead;">throw </span><span style="color:#bf616a;">unmatchedUnlockException</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">            </span><span style="color:#c0c5ce;">--</span><span style="color:#eff1f5;">rh.count;
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">for </span><span style="color:#eff1f5;">(;;) {
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">int</span><span style="color:#eff1f5;"> c </span><span style="color:#c0c5ce;">= </span><span style="color:#bf616a;">getState</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">int</span><span style="color:#eff1f5;"> nextc </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> c </span><span style="color:#c0c5ce;">- </span><span style="color:#d08770;">SHARED_UNIT</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(</span><span style="color:#bf616a;">compareAndSetState</span><span style="color:#eff1f5;">(c, nextc))
+</span><span style="color:#eff1f5;">                </span><span style="color:#65737e;">// Releasing the read lock has no effect on readers,
+</span><span style="color:#eff1f5;">                </span><span style="color:#65737e;">// but it may allow waiting writers to proceed if
+</span><span style="color:#eff1f5;">                </span><span style="color:#65737e;">// both read and write locks are now free.
+</span><span style="color:#eff1f5;">                </span><span style="color:#b48ead;">return</span><span style="color:#eff1f5;"> nextc </span><span style="color:#c0c5ce;">== </span><span style="color:#d08770;">0</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">}
+</span></pre><h1 id="gong-ping-xing"><a class="zola-anchor" href="#gong-ping-xing" aria-label="Anchor link for: gong-ping-xing">🔗</a>
+公平性</h1>
 <p>在<code>Sync</code>的共享锁和互斥锁的获取过程中都去判断了公平性策略，公平性是同时对写线程和读线程起作用，因为读线程和写线程在同一个等待队列里面进行排队。公平性判断实在获取锁的过程中进行的，此时有空余的锁可供获取（有可能是等待队列是空的；也有可能等待队列不是空的，里面有很多读线程和写线程，但是当前线程申请锁的时候，刚好有一个线程释放了锁）。如果当前线程申请锁的时候没有空余的锁，只能乖乖地进入等待序列排队。</p>
-
 <p>公平与非公平是通过<code>FairSync</code>和<code>NonfairSync</code>来区分的，分别实现<code>writerShouldBlock()</code>和<code>readerShouldBlock()</code>方法。</p>
-
-<h2 id="非公平的策略">非公平的策略</h2>
-
+<h2 id="fei-gong-ping-de-ce-lue"><a class="zola-anchor" href="#fei-gong-ping-de-ce-lue" aria-label="Anchor link for: fei-gong-ping-de-ce-lue">🔗</a>
+非公平的策略</h2>
 <p>对于写线程而言，非公平就是能插队就插队。不公平是对那些在等待队列中线程而言的，它们有可能一直在等待锁。</p>
-
 <p>对于读线程而言，非公平就是只要等待队列的第一个（等待最久）线程不是写线程就去插队。但其实读锁是一个共享锁，所以插队也没有意义；但是可以保证写线程有机会拿到锁。</p>
-
-<pre><code class="language-java">static final class NonfairSync extends Sync {
-    final boolean writerShouldBlock() {
-        return false; // 写线程有机会就抢锁，没办法采取排队等锁
-    }
-    final boolean readerShouldBlock() {
-        /*
-         × 请求写锁和读锁的线程在同一个队列里面排队
-         * 如果等待队列的第一个线程（等的黄花菜最凉的那一位）请求的是写锁，返回true；否则返回false
-         */
-        return apparentlyFirstQueuedIsExclusive();
-    }
-}
-</code></pre>
-
-<h2 id="公平的策略">公平的策略</h2>
-
+<pre style="background-color:#2b303b;">
+<span style="color:#b48ead;">static final class </span><span style="color:#ebcb8b;">NonfairSync </span><span style="color:#b48ead;">extends </span><span style="color:#a3be8c;">Sync </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">final boolean </span><span style="color:#8fa1b3;">writerShouldBlock</span><span style="color:#eff1f5;">() {
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">false</span><span style="color:#eff1f5;">; </span><span style="color:#65737e;">// 写线程有机会就抢锁，没办法采取排队等锁
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">final boolean </span><span style="color:#8fa1b3;">readerShouldBlock</span><span style="color:#eff1f5;">() {
+</span><span style="color:#eff1f5;">        </span><span style="color:#65737e;">/*
+</span><span style="color:#65737e;">         </span><span style="color:#65737e;">× 请求写锁和读锁的线程在同一个队列里面排队
+</span><span style="color:#65737e;">         </span><span style="color:#65737e;">* 如果等待队列的第一个线程（等的黄花菜最凉的那一位）请求的是写锁，返回true；否则返回false
+</span><span style="color:#65737e;">         </span><span style="color:#65737e;">*/
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">return </span><span style="color:#bf616a;">apparentlyFirstQueuedIsExclusive</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">}
+</span></pre><h2 id="gong-ping-de-ce-lue"><a class="zola-anchor" href="#gong-ping-de-ce-lue" aria-label="Anchor link for: gong-ping-de-ce-lue">🔗</a>
+公平的策略</h2>
 <p>对于写线程而言，公平就是只要等待队列中没有其他就插队；对于读线程也是一样。</p>
-
 <p>好像这个没有什么意义。进入等待队列进行排队的意思是，当前线程要被挂起，排到了的时候要被恢复，这都需要操作系统的调度，存在一定的开销。而插队就是先不去挂起，先尝试获取锁，获取失败再排队。当队列是空的情况下，当然不需要去排队了，这样貌似可以降低一些系统开销。</p>
-
-<pre><code class="language-java">static final class FairSync extends Sync {
-    final boolean writerShouldBlock() {
-        /*
-         * 等待队列没有前驱节点
-         */
-        return hasQueuedPredecessors();
-    }
-    final boolean readerShouldBlock() {
-        /*
-         * 等待队列没有前驱节点
-         */
-        return hasQueuedPredecessors();
-    }
-}
-</code></pre>
-
-<h1 id="锁降级">锁降级</h1>
-
+<pre style="background-color:#2b303b;">
+<span style="color:#b48ead;">static final class </span><span style="color:#ebcb8b;">FairSync </span><span style="color:#b48ead;">extends </span><span style="color:#a3be8c;">Sync </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">final boolean </span><span style="color:#8fa1b3;">writerShouldBlock</span><span style="color:#eff1f5;">() {
+</span><span style="color:#eff1f5;">        </span><span style="color:#65737e;">/*
+</span><span style="color:#65737e;">         </span><span style="color:#65737e;">* 等待队列没有前驱节点
+</span><span style="color:#65737e;">         </span><span style="color:#65737e;">*/
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">return </span><span style="color:#bf616a;">hasQueuedPredecessors</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">final boolean </span><span style="color:#8fa1b3;">readerShouldBlock</span><span style="color:#eff1f5;">() {
+</span><span style="color:#eff1f5;">        </span><span style="color:#65737e;">/*
+</span><span style="color:#65737e;">         </span><span style="color:#65737e;">* 等待队列没有前驱节点
+</span><span style="color:#65737e;">         </span><span style="color:#65737e;">*/
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">return </span><span style="color:#bf616a;">hasQueuedPredecessors</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">}
+</span></pre><h1 id="suo-jiang-ji"><a class="zola-anchor" href="#suo-jiang-ji" aria-label="Anchor link for: suo-jiang-ji">🔗</a>
+锁降级</h1>
 <p>如果当前线程已经持有了读锁，下一次可以再次申请到读锁，这个是读锁的可重入。对于写锁也是存在可重入的。</p>
-
 <p>如果当前线程已经持有了写锁，可以申请到读锁，然后释放写锁，这个称之为锁的降级。</p>
-
 <p>但是，锁不能升级。获取到写锁的条件之一是没有读锁被持有，不管是不是当前线程。</p>
-
-<h1 id="条件变量">条件变量</h1>
-
+<h1 id="tiao-jian-bian-liang"><a class="zola-anchor" href="#tiao-jian-bian-liang" aria-label="Anchor link for: tiao-jian-bian-liang">🔗</a>
+条件变量</h1>
 <p>锁就有条件变量<code>Condition</code>。</p>
-
 <p>读锁是共享锁，条件变量没有意义，所以获取条件变量的方法会抛出<code>UnsupportedOperationException</code>异常。</p>
-
-<p>写锁的条件变量的用法同<a href="/2016/04/07/learning-java-concurrency-reentrantlock-condition/"><code>ReentrantLock</code></a></p>
-
-<h1 id="总结">总结</h1>
-
+<p>写锁的条件变量的用法同
+<a href="http://www.wangbo.im/posts/2016-04-07-learning-java-concurrency-reentrantlock-condition/"><code>ReentrantLock</code></a> 。</p>
+<h1 id="zong-jie"><a class="zola-anchor" href="#zong-jie" aria-label="Anchor link for: zong-jie">🔗</a>
+总结</h1>
 <p><code>ReentrantReadWriteLock</code>本身并不是锁，它通过一个内部锁来实现读锁、写锁以及二者的同步。读锁是一种共享锁，写锁是一种互斥锁。</p>
-
 <p><code>ReentrantReadWriteLock</code>的使用也存在公平不公平的选择。</p>
-
 <p><code>ReentrantReadWriteLock</code>可以保护共享资源的访问，当共享资源是很大的集合并且读线程（远远）多余写线程的时候，对于性能的提升有很明显效果。</p>
-</div>
+
+    </div>
 
     
     
 
-    
+    <div class="post-footer">
+        
+            
+                <div class="post-tags">
+                    
+                        <a href="http:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;java&#x2F;">#java</a>
+                    
+                        <a href="http:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;concurrency&#x2F;">#concurrency</a>
+                    
+                </div>
+            
+            
+                <div class="post-nav">
+                    
+                        <a class="previous" href="http:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2016-04-07-learning-java-concurrency-reentrantlock-condition&#x2F;">‹ Learning Java Concurrency - ReentrantLock &amp; Condition</a>
+                    
+                    
+                        <a class="next" href="http:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;spring-mvc-testing-content&#x2F;">Spring MVC Testing: Content&#x2F;目录 ›</a>
+                    
+                    
+                    
+                </div>
+            
+
+        
+
+    </div>
 
     
-
-        <h4 class="page-header">Comments</h4>
-
-        <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
     
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "wbprime" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</article>
 
-    
 
-</main>
+                </div>
+            </main>
 
-        <footer>
+            
+            
+        </div>
 
-            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
-
-        </footer>
-
+      
+          <script type="text/javascript" src="http:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
+      
     </body>
 
 </html>
-
