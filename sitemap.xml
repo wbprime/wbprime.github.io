@@ -127,6 +127,13 @@
         </url>
     
         <url>
+            <loc>https://www.wangbo.im/posts/2019-02-01-a-gc-tuning-practise-involving-mysql/</loc>
+            
+                <lastmod>2019-02-11T13:08:22+08:00</lastmod>
+            
+        </url>
+    
+        <url>
             <loc>https://www.wangbo.im/posts/acl-note/</loc>
             
                 <lastmod>2018-02-05T17:46:28+08:00</lastmod>
@@ -583,56 +590,6 @@
     
         
         <url>
-            <loc>https://www.wangbo.im/categories/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/awk/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/c-c/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/graphviz/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/learning-java-concurrency/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/life/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/life/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/mayday/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/notes/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/spring-di/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/spring-mvc-testing/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/tech/</loc>
-        </url>
-        
-    
-        
-        <url>
             <loc>https://www.wangbo.im/tags/</loc>
         </url>
         
@@ -658,6 +615,10 @@
         
         <url>
             <loc>https://www.wangbo.im/tags/calm/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/tags/cms/</loc>
         </url>
         
         <url>
@@ -694,6 +655,10 @@
         
         <url>
             <loc>https://www.wangbo.im/tags/ip/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/tags/java/</loc>
         </url>
         
         <url>
@@ -806,6 +771,60 @@
         
         <url>
             <loc>https://www.wangbo.im/tags/upset/</loc>
+        </url>
+        
+    
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/awk/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/c-c/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/graphviz/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/java-gc/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/learning-java-concurrency/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/life/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/life/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/mayday/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/notes/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/spring-di/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/spring-mvc-testing/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/tech/</loc>
         </url>
         
     
