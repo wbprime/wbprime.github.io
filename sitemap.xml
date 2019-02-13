@@ -662,14 +662,6 @@
         </url>
         
         <url>
-            <loc>https://www.wangbo.im/tags/java/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/tags/jdk/</loc>
-        </url>
-        
-        <url>
             <loc>https://www.wangbo.im/tags/jdk/</loc>
         </url>
         
@@ -750,10 +742,6 @@
         </url>
         
         <url>
-            <loc>https://www.wangbo.im/tags/thoughts/</loc>
-        </url>
-        
-        <url>
             <loc>https://www.wangbo.im/tags/thrift/</loc>
         </url>
         
@@ -792,15 +780,11 @@
         </url>
         
         <url>
-            <loc>https://www.wangbo.im/categories/java-gc/</loc>
+            <loc>https://www.wangbo.im/categories/java/</loc>
         </url>
         
         <url>
             <loc>https://www.wangbo.im/categories/learning-java-concurrency/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/life/</loc>
         </url>
         
         <url>
@@ -816,15 +800,11 @@
         </url>
         
         <url>
-            <loc>https://www.wangbo.im/categories/spring-di/</loc>
-        </url>
-        
-        <url>
             <loc>https://www.wangbo.im/categories/spring-mvc-testing/</loc>
         </url>
         
         <url>
-            <loc>https://www.wangbo.im/categories/tech/</loc>
+            <loc>https://www.wangbo.im/categories/spring/</loc>
         </url>
         
     
