@@ -134,6 +134,13 @@
         </url>
     
         <url>
+            <loc>https://www.wangbo.im/posts/2019-02-13-a-cache-timeout-tuning-practise/</loc>
+            
+                <lastmod>2019-02-13T12:03:25+08:00</lastmod>
+            
+        </url>
+    
+        <url>
             <loc>https://www.wangbo.im/posts/acl-note/</loc>
             
                 <lastmod>2018-02-05T17:46:28+08:00</lastmod>
@@ -590,6 +597,56 @@
     
         
         <url>
+            <loc>https://www.wangbo.im/categories/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/awk/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/c-c/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/graphviz/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/java/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/learning-java-concurrency/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/life/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/mayday/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/notes/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/practise/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/spring-mvc-testing/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/spring/</loc>
+        </url>
+        
+    
+        
+        <url>
             <loc>https://www.wangbo.im/tags/</loc>
         </url>
         
@@ -614,6 +671,10 @@
         </url>
         
         <url>
+            <loc>https://www.wangbo.im/tags/cache/</loc>
+        </url>
+        
+        <url>
             <loc>https://www.wangbo.im/tags/calm/</loc>
         </url>
         
@@ -623,6 +684,14 @@
         
         <url>
             <loc>https://www.wangbo.im/tags/concurrency/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/tags/congistion/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/tags/fast-retransmit/</loc>
         </url>
         
         <url>
@@ -759,56 +828,6 @@
         
         <url>
             <loc>https://www.wangbo.im/tags/upset/</loc>
-        </url>
-        
-    
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/awk/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/c-c/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/graphviz/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/java/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/learning-java-concurrency/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/life/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/mayday/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/notes/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/practise/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/spring-mvc-testing/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/spring/</loc>
         </url>
         
     
