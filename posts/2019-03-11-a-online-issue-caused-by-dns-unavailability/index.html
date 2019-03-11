@@ -1,0 +1,354 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>Wbprime</title>
+
+      
+
+      
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
+          
+      
+
+      
+          <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
+          
+      
+
+      
+      
+    </head>
+
+    <body>
+        <div class="container">
+
+            <div id="mobile-navbar" class="mobile-navbar">
+              <div class="mobile-header-logo">
+                <a href="/" class="logo">Wbprime</a>
+              </div>
+              <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+
+            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
+              <ul class="mobile-menu-list">
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im">
+                            Home
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im&#x2F;categories">
+                            Categories
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im&#x2F;tags">
+                            Tags
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im&#x2F;about">
+                            About
+                        </a>
+                    </li>
+                
+              </ul>
+            </nav>
+
+            <header id="header">
+                <div class="logo"><a href="https:&#x2F;&#x2F;www.wangbo.im">Wbprime</a></div>
+                <nav class="menu">
+                    <ul>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im">
+                                    Home
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im&#x2F;categories">
+                                    Categories
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im&#x2F;tags">
+                                    Tags
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im&#x2F;about">
+                                    About
+                                </a>
+                            </li>
+                        
+                    </ul>
+                </nav>
+            </header>
+
+            <main>
+                <div class="content" id="mobile-panel">
+                    
+
+
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="https://www.wangbo.im/posts/2019-03-11-a-online-issue-caused-by-dns-unavailability/#huan-jing-yu-bei-jing" class="toc-link">环境与背景</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://www.wangbo.im/posts/2019-03-11-a-online-issue-caused-by-dns-unavailability/#shu-ju-ku-lian-jie-chi" class="toc-link">数据库连接池</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://www.wangbo.im/posts/2019-03-11-a-online-issue-caused-by-dns-unavailability/#shi-gu-hui-gu" class="toc-link">事故回顾</a>
+                    
+                    <ul>
+                        
+                        <li>
+                            <a href="https://www.wangbo.im/posts/2019-03-11-a-online-issue-caused-by-dns-unavailability/#kai-shi-chu-xian-fu-wu-pao-qi-liang-10-30" class="toc-link">开始出现服务抛弃量 10:30</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://www.wangbo.im/posts/2019-03-11-a-online-issue-caused-by-dns-unavailability/#hui-du-shang-xian-udp-ip-ban-ben-14-30" class="toc-link">灰度上线 UDP IP 版本 14:30</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://www.wangbo.im/posts/2019-03-11-a-online-issue-caused-by-dns-unavailability/#kai-shi-chu-xian-shu-ju-ku-lian-jie-shu-guo-gao-bao-jing" class="toc-link">开始出现数据库连接数过高报警</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://www.wangbo.im/posts/2019-03-11-a-online-issue-caused-by-dns-unavailability/#hui-du-shang-xian-huan-cun-he-mysql-ip-ban-ben-16-30" class="toc-link">灰度上线缓存和 MySQL IP 版本 16:30</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://www.wangbo.im/posts/2019-03-11-a-online-issue-caused-by-dns-unavailability/#shang-xian-zhi-du-mysql-cong-ku-ban-ben" class="toc-link">上线只读 MySQL 从库版本</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://www.wangbo.im/posts/2019-03-11-a-online-issue-caused-by-dns-unavailability/#xia-xian-du-xie-zhu-ku-ban-ben" class="toc-link">下线读写主库版本</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://www.wangbo.im/posts/2019-03-11-a-online-issue-caused-by-dns-unavailability/#hui-fu-zhu-ku-ban-ben" class="toc-link">回复主库版本</a>
+                        </li>
+                        
+                    </ul>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://www.wangbo.im/posts/2019-03-11-a-online-issue-caused-by-dns-unavailability/#lian-jie-chi-bug-fen-xi" class="toc-link">连接池 BUG 分析</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://www.wangbo.im/posts/2019-03-11-a-online-issue-caused-by-dns-unavailability/#shi-gu-zong-jie" class="toc-link">事故总结</a>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article class="post">
+    
+    <header class="post__header">
+        <h1 class="post__title">
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-03-11-a-online-issue-caused-by-dns-unavailability&#x2F;">一次由 DNS 解析服务失效引发的线上 DB 连接打满的事故实践</a>
+        </h1>
+        <div class="post__meta">
+            <span class="post__time">2019-03-11</span>
+            
+        </div>
+    </header>
+
+    <div class="post-content">
+      <p>最近经历了一次由于线上 DNS 解析大范围失效引发的问题排查，并且由于应对不当导致的 MySQL 连接数打满。由于问题发上在周末，网络访问和内部沟通都不方便，整个问题的处理大概花费了 14 个小时（上午 10：00 左右到晚上 03：00）。</p>
+<p>事故的起因是由于网络 DNS 解析失效，导致服务里面的一段发送 UDP 消息的代码超时，导致接口访问时长增加，导致后续请求在任务队列中排队并超时。排查发现问题之后紧急上线，导致所有服务节点重启之后连接 MySQL 出现域名解析问题，在处理请求的过程中不断创建连接，在域名解析恢复之后把 MySQL 的服务器的连接打满导致部分请求超时。连接打满之后再创建新连接就会失败，触发了一个连接池的 BUG，导致连接池会不断地创建连接，重启也不能解决问题。</p>
+<p><a name="continue-reading"></a></p>
+<h1 id="huan-jing-yu-bei-jing"><a class="zola-anchor" href="#huan-jing-yu-bei-jing" aria-label="Anchor link for: huan-jing-yu-bei-jing">🔗</a>
+环境与背景</h1>
+<p>所涉及的服务记为 A 服务。</p>
+<p>A 服务是一个线上服务，通过公司的私有云平台进行部署，一共 16 个服务实例。</p>
+<p>A 服务背后使用的存储为 MySQL，缓存为 memcache。MySQL 使用主从配置，并使用了分库分表配置，一共 16 个子库：其中，0-7 库和 8-15 库分别部署于独立的 MySQL 实例上，并且分别设置了主从同步。</p>
+<h1 id="shu-ju-ku-lian-jie-chi"><a class="zola-anchor" href="#shu-ju-ku-lian-jie-chi" aria-label="Anchor link for: shu-ju-ku-lian-jie-chi">🔗</a>
+数据库连接池</h1>
+<p>服务通过 tomcat dbcp 连接池控制数据库访问，A 服务所使用的数据库连接池版本为：</p>
+<pre style="background-color:#2b303b;">
+<span style="color:#c0c5ce;">&lt;dependency&gt;
+</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;groupId&gt;org.apache.tomcat&lt;/groupId&gt;
+</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;artifactId&gt;tomcat-dhcp&lt;/artifactId&gt;
+</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;version&gt;7.0.52&lt;/version&gt;
+</span><span style="color:#c0c5ce;">&lt;/dependency&gt;
+</span></pre>
+<p>A 服务的数据库访问模型如：</p>
+<p><img src="https://www.wangbo.im/posts/2019-03-11-a-online-issue-caused-by-dns-unavailability/access_model_of_mysql.png" alt="数据库访问模型" /></p>
+<p>正常情况下，如果一个 A 服务实例和一个数据库的连接数为 m 的话，则：</p>
+<ol>
+<li>对于 MySQL 数据库来说，会有来自 16*m 个 A 服务实例的连接</li>
+<li>对于 MySQL 实例来说，会有 16<em>8</em>m 个 A 服务实例的连接</li>
+<li>对于 A 服务的实例来说，会有 16*m 个与数据库的连接</li>
+</ol>
+<p>A 服务使用的连接池配置如下：</p>
+<pre style="background-color:#2b303b;">
+<span style="color:#c0c5ce;">&lt;initialSize&gt;10&lt;/initialSize&gt;
+</span><span style="color:#c0c5ce;">&lt;maxActive&gt;20&lt;/maxActive&gt;
+</span><span style="color:#c0c5ce;">&lt;maxWait&gt;4000&lt;/maxWait&gt;
+</span><span style="color:#c0c5ce;">&lt;minIdle&gt;10&lt;/minIdle&gt;
+</span><span style="color:#c0c5ce;">&lt;maxIdle&gt;20&lt;/maxIdle&gt;
+</span></pre><h1 id="shi-gu-hui-gu"><a class="zola-anchor" href="#shi-gu-hui-gu" aria-label="Anchor link for: shi-gu-hui-gu">🔗</a>
+事故回顾</h1>
+<h2 id="kai-shi-chu-xian-fu-wu-pao-qi-liang-10-30"><a class="zola-anchor" href="#kai-shi-chu-xian-fu-wu-pao-qi-liang-10-30" aria-label="Anchor link for: kai-shi-chu-xian-fu-wu-pao-qi-liang-10-30">🔗</a>
+开始出现服务抛弃量 10:30</h2>
+<p>从周末的上午 10:30 开始收到服务报警，提示服务的任务队列长时间堵塞导致任务队列中出现大量的任务由于等待超时被抛弃。</p>
+<p>出现任务抛弃量，一般来说，说明服务遇到了多个处理耗时的任务请求。任务请求耗时较大，有可能是由于该操作实际耗时较长，如非分库字段的分库查询结果合并操作；也有可能是缓存访问超时。</p>
+<p>出现了大量的任务抛弃量，当时的第一反应是，有业务线在批量调用耗时操作。所以通过 VPN 连接公司内网，查找有问题的调用方。发现调用方的情况正常，没有触发大量任务抛弃量的条件。</p>
+<p>通过服务日志，发现服务运行基本正常：访问 cache 的监控正常，访问 MySQL 的监控正常。在服务器上检查网络、磁盘 IO等系统数据，没有发现异常。通过 GC 日志，发现 GC 正常。</p>
+<p>当时线上环境的服务版本已经将近 1 个月没有变动，代码、配置和环境都没有改动。</p>
+<p>在检查了当时能想到所有检查项之后，不能定位到问题所在。由于抛弃量的数量和频率还可以接受，所以着急没有重启服务，想要排查出来问题之后上线解决。</p>
+<p>紧接着开始细粒度地排查监控项，从服务实例维度和服务方法维度检查服务抛弃量、异常量和请求耗时，发现 <strong>用户注册</strong> 和 <strong>用户登录</strong> 这两个服务方法的请求耗时明显较大。</p>
+<p>对比方法逻辑，没有发现显著的问题点。</p>
+<p>这时候，公司的技术支持群里面反馈说腾讯的 DNS 解析出现故障（其实该反馈出现较早，但是没有与 A 服务的抛弃量现象联系起来）。根据该信息排查代码，发现问题有可能是 UDP 消息发送超时。原来，该两个方法属于敏感接口，会在处理成功之后给指定服务地址发送一条操作的消息；该操作通过 UDP socket 操作，目标地址为内网域名，地址解析依赖于 腾讯的 DNS (公司的服务器托管给了腾讯云机房，包括A 服务所在的私有云集群服务器)。</p>
+<p>经过分析之后，认为问题已经找到，可以通过修改目标地址的域名为 IP 地址解决问题。</p>
+<p>结果开始了一个大悲剧。。。</p>
+<h2 id="hui-du-shang-xian-udp-ip-ban-ben-14-30"><a class="zola-anchor" href="#hui-du-shang-xian-udp-ip-ban-ben-14-30" aria-label="Anchor link for: hui-du-shang-xian-udp-ip-ban-ben-14-30">🔗</a>
+灰度上线 UDP IP 版本 14:30</h2>
+<p>在短暂评估之后，决定将修改了 UDP 目标地址的版本灰度上线。</p>
+<p>灰度过程首先更新 1 个服务实例，在确认没有问题之后继续灰度 2 个实例。</p>
+<p>在灰度过程中，监控一切正常，服务日志也没有异常（或者有少量异常，但是被忽略了，呵呵，当时主要还是太自信了）。已经灰度的服务实例上的监控数据确实显示任务请求耗时恢复到正常水平。</p>
+<p>事后分析，其实腾讯 DNS 的解析故障发生后，公司的运维同事们就开始启用备用方案，将内网域名的解析的工作迁移到公司的备份服务器上。但是由于公司没有对方案进行过灾难演练，DNS 迁移又比较复杂，导致域名解析有时候正常有时候不正常。这样，在服务灰度数较少的时候，问题没有明显暴露出来。</p>
+<p>在认为灰度没有问题之后，线上全量了服务的新版本。</p>
+<h2 id="kai-shi-chu-xian-shu-ju-ku-lian-jie-shu-guo-gao-bao-jing"><a class="zola-anchor" href="#kai-shi-chu-xian-shu-ju-ku-lian-jie-shu-guo-gao-bao-jing" aria-label="Anchor link for: kai-shi-chu-xian-shu-ju-ku-lian-jie-shu-guo-gao-bao-jing">🔗</a>
+开始出现数据库连接数过高报警</h2>
+<p>第一个 MySQL 的连接数报警发生于 15：20。</p>
+<p>每一个 MySQL 实例对于所能提供服务的连接数的限制是 5000。但是根据数据库连接池的配置来计算，到达每一个 MySQL 实例的最大连接数为 2560 (maxActive * 服务实例数 * 单实例数据库数)。</p>
+<p>所以当时就反应过来，A 服务访问 cache 和 MySQL 都是通过域名来进行的。查看服务访问 cache 的监控，确实访问量有一个较大的下降。</p>
+<p>当时已经发现了连接池不起作用，但是短时间内查不到连接池的 BUG 所在；所以决定临时修改 cache 和 mysql 访问的配置文件里面的目标地址配置，将域名修改为固定的 IP 地址。</p>
+<h2 id="hui-du-shang-xian-huan-cun-he-mysql-ip-ban-ben-16-30"><a class="zola-anchor" href="#hui-du-shang-xian-huan-cun-he-mysql-ip-ban-ben-16-30" aria-label="Anchor link for: hui-du-shang-xian-huan-cun-he-mysql-ip-ban-ben-16-30">🔗</a>
+灰度上线缓存和 MySQL IP 版本 16:30</h2>
+<p>将 cache 和 MySQL 的访问域名修改为固定 IP 之后，上线。 MySQL 连接打满的问题没有得到缓解。</p>
+<p>此时开始确定是 tomcat dbcp 连接池的问题，一方面与相关负责人沟通解决方案，一方面将有问题的服务实例摘除流量。</p>
+<p>此时，A 服务的实例大部分对外响应正常，偶尔有 MySQL 请求超时。</p>
+<p>与 DBA 沟通，发现有一个服务实例的连接数异常地多（4000+）。</p>
+<ol>
+<li>重启之后，该实例的连接数下降，但是另外的几台实例的连接数迅速上升，出现一个最多的实例的连接数达到 2000+</li>
+<li>再次重启之后，现象仍然存在</li>
+<li>通过 DBA 手动 kill 连接，出现类似现象，连接数迅速上升直至打满</li>
+<li>对 A 服务进行缩容，将实例个数从 16 降为 12，连接数过多现象不能得到缓解</li>
+</ol>
+<p>发现重启服务和减少服务实例数不能解决问题，而且此时服务的访问量已经降到了一般以下（晚上10点以后），开始考虑从 MySQL 实例上想办法。</p>
+<h2 id="shang-xian-zhi-du-mysql-cong-ku-ban-ben"><a class="zola-anchor" href="#shang-xian-zhi-du-mysql-cong-ku-ban-ben" aria-label="Anchor link for: shang-xian-zhi-du-mysql-cong-ku-ban-ben">🔗</a>
+上线只读 MySQL 从库版本</h2>
+<p>进一步发现，MySQL 只有主库出现连接打满的现象，从库正常工作。</p>
+<p>此时，计划将所有的读请求转移到从库上，主库只处理写请求和少量的读请求。由于公司的私有云平台上线实在是太复杂，所以在物理服务器上部署新服务实例，只读 MySQL 从库。</p>
+<p>MySQL 从库的连接数正常。</p>
+<h2 id="xia-xian-du-xie-zhu-ku-ban-ben"><a class="zola-anchor" href="#xia-xian-du-xie-zhu-ku-ban-ben" aria-label="Anchor link for: xia-xian-du-xie-zhu-ku-ban-ben">🔗</a>
+下线读写主库版本</h2>
+<p>物理机上的服务实例启动后，现象仍然出现，可以判断问题与私有云平台无关（之前也怀疑过私有云平台有问题）。逐步把调用方的流量导流到物理机上，再逐步减少私有云的服务实例数，直到实例数为 1；在私有云实例减少的过程中，每减少一个实例，会导致其他实例的连接数增加，直到连接数再次打满。</p>
+<p>私有云实例数降为 1 之后，此时已经是晚上 02:00，写请求每分钟 300+，果断迅速重启该实例。</p>
+<p>该实例重启后，连接数得到控制。</p>
+<h2 id="hui-fu-zhu-ku-ban-ben"><a class="zola-anchor" href="#hui-fu-zhu-ku-ban-ben" aria-label="Anchor link for: hui-fu-zhu-ku-ban-ben">🔗</a>
+回复主库版本</h2>
+<p>连接数得到控制之后，逐步增加私有云服务的数量并导回流量，发现所有服务实例的连接数都得到控制，总的 MySQL 的连接数按预期逐步增加。直到所有的私有云实例得到恢复之后，连接数的变化都符合预期。</p>
+<p>到此时，线上问题基本得到解决。</p>
+<h1 id="lian-jie-chi-bug-fen-xi"><a class="zola-anchor" href="#lian-jie-chi-bug-fen-xi" aria-label="Anchor link for: lian-jie-chi-bug-fen-xi">🔗</a>
+连接池 BUG 分析</h1>
+<p>事后排查，发现连接池的 [BUG DBCP-470] (https://issues.apache.org/jira/browse/DBCP-470) 已经被发现并解决过了。</p>
+<p>BUG 的分析参见 <a href="https://blog.csdn.net/u010920692/article/details/61417914">数据库连接泄漏问题</a> 。简单地说，tomcat dbcp 连接池（BasicDataSource）在分配连接（getConnection）时，会先去创建一个内部的连接池（PoolingDataSource）实例；该实例依赖于：</p>
+<ol>
+<li>先创建一个连接工厂（DriverConnectionFactory）对象和一个对象缓冲池（AbandonedObjectPool）对象</li>
+<li>然后用该连接工厂对象和对象缓冲池对象去创建一个可缓冲的连接工厂（PoolableConnectionFactory）对象</li>
+<li>成功之后再用该对象缓冲池对象创建连接池对象（PoolingDataSource）</li>
+</ol>
+<p>问题在于，第 2 步不一定会成功。因为第 2 步虽然函数名为 createPoolableConnectionFactory，但实际上除了创建连接工厂对象之外，还会使用创建好的工厂对象建立一个数据库连接并测试连接的有效性（validateConnectionFactory），该过程是会抛出异常的。在 MySQL 服务端拒绝连接的情况下，该方法抛出的异常会导致第 3 步不会执行，从而导致每次调用 getConnection 时都会去创建一个对象缓冲池（AbandonedObjectPool）对象；该对象是一个池化对象的管理器，支持池化对象的提前创建和缓存逻辑，即当设置了 minIdle 次数时，该对象会创建并维持至少有 minIdle 个池化对象（当前为数据库连接对象）。这就使得只要有数据库请求超时（间接导致第 2 步失败），就可能造成数据库连接泄漏，直到数据库被打满。</p>
+<h1 id="shi-gu-zong-jie"><a class="zola-anchor" href="#shi-gu-zong-jie" aria-label="Anchor link for: shi-gu-zong-jie">🔗</a>
+事故总结</h1>
+<ol>
+<li>类似于 UDP 消息这种优先级不是很高的操作，可以考虑放到单独的线程池异步执行，不能阻塞必要的请求处理逻辑。事实上，该 UDP 发送的消息虽然作为日志进行了收集，但是基本没有使用过，可以考虑删除掉；而且由于 UDP 是无连接的，每次发送消息都需要进行 DNS 解析，大大影响了服务的响应时间，放大了问题的严重级别，诱使了一系列的后续操作。</li>
+<li>线上操作需要非常慎重。需要在沙箱环境验证后才能上线，直接在线上环境进行灰度有可能有安全隐患。</li>
+<li>经验非常重要。在 DNS 失效的情况下，其实 cache 和 MySQL 的访问是不受影响的，因为连接是长期保活的；一旦重启服务，所有的连接的建立都是需要依赖于域名的解析的。DNS 出现问题需要意识到所有的通过域名访问的代码都会出问题。</li>
+<li>常规的依赖（连接池等）需要跟进 BUG 情况。事后分析时，发现数据库连接池相关的 BUG 已经被修复，如果能及时跟进补丁情况，就能避免这次事故了。</li>
+<li>线上服务依赖别的服务，需要做好容灾工作。服务调用的接口处需要详细的日志和错误处理；多个服务之间需要使用断路器（circuit breaker）做好隔离。</li>
+</ol>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+            
+                <div class="post-tags">
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;dns&#x2F;">#dns</a>
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;mysql&#x2F;">#mysql</a>
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;tomcat-dbcp&#x2F;">#tomcat dbcp</a>
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;connection-leak&#x2F;">#connection leak</a>
+                    
+                </div>
+            
+            
+                <div class="post-nav">
+                    
+                        <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-02-13-a-cache-timeout-tuning-practise&#x2F;">‹ 一次 Cache 问题排查实践</a>
+                    
+                    
+                    
+                    
+                </div>
+            
+
+        
+
+    </div>
+
+    
+    
+</article>
+
+
+                </div>
+            </main>
+
+            
+            
+        </div>
+
+      
+          <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
+      
+    </body>
+
+</html>

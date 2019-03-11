@@ -113,6 +113,28 @@
                                     
     <header class="post__header">
         <h1 class="post__title">
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-03-11-a-online-issue-caused-by-dns-unavailability&#x2F;">一次由 DNS 解析服务失效引发的线上 DB 连接打满的事故实践</a>
+        </h1>
+        <div class="post__meta">
+            <span class="post__time">2019-03-11</span>
+            
+        </div>
+    </header>
+
+                                    <div class="post__summary">
+                                        <p>最近经历了一次由于线上 DNS 解析大范围失效引发的问题排查，并且由于应对不当导致的 MySQL 连接数打满。由于问题发上在周末，网络访问和内部沟通都不方便，整个问题的处理大概花费了 14 个小时（上午 10：00 左右到晚上 03：00）。</p>
+<p>事故的起因是由于网络 DNS 解析失效，导致服务里面的一段发送 UDP 消息的代码超时，导致接口访问时长增加，导致后续请求在任务队列中排队并超时。排查发现问题之后紧急上线，导致所有服务节点重启之后连接 MySQL 出现域名解析问题，在处理请求的过程中不断创建连接，在域名解析恢复之后把 MySQL 的服务器的连接打满导致部分请求超时。连接打满之后再创建新连接就会失败，触发了一个连接池的 BUG，导致连接池会不断地创建连接，重启也不能解决问题。</p>
+
+                                    </div>
+                                    <div class="read-more">
+                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-03-11-a-online-issue-caused-by-dns-unavailability&#x2F;">Read more...</a>
+                                    </div>
+                                </article>
+                            
+                                <article class="post">
+                                    
+    <header class="post__header">
+        <h1 class="post__title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-02-13-a-cache-timeout-tuning-practise&#x2F;">一次 Cache 问题排查实践</a>
         </h1>
         <div class="post__meta">
@@ -390,26 +412,6 @@
                                     </div>
                                     <div class="read-more">
                                         <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;acl-note&#x2F;">Read more...</a>
-                                    </div>
-                                </article>
-                            
-                                <article class="post">
-                                    
-    <header class="post__header">
-        <h1 class="post__title">
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;libevent-notes&#x2F;">Libevent Note</a>
-        </h1>
-        <div class="post__meta">
-            <span class="post__time">2018-02-05</span>
-            
-        </div>
-    </header>
-
-                                    <div class="post__summary">
-                                        
-                                    </div>
-                                    <div class="read-more">
-                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;libevent-notes&#x2F;">Read more...</a>
                                     </div>
                                 </article>
                             
