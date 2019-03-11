@@ -182,7 +182,7 @@
     
     <header class="post__header">
         <h1 class="post__title">
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-03-11-a-online-issue-caused-by-dns-unavailability&#x2F;">一次由 DNS 解析服务失效引发的线上 DB 连接打满的事故实践</a>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-03-11-a-online-issue-caused-by-dns-unavailability&#x2F;">一次由 DNS 解析服务失效引发的线上 DB 连接打满的事故经历</a>
         </h1>
         <div class="post__meta">
             <span class="post__time">2019-03-11</span>
@@ -281,7 +281,7 @@
 <p>到此时，线上问题基本得到解决。</p>
 <h1 id="lian-jie-chi-bug-fen-xi"><a class="zola-anchor" href="#lian-jie-chi-bug-fen-xi" aria-label="Anchor link for: lian-jie-chi-bug-fen-xi">🔗</a>
 连接池 BUG 分析</h1>
-<p>事后排查，发现连接池的 [BUG DBCP-470] (https://issues.apache.org/jira/browse/DBCP-470) 已经被发现并解决过了。</p>
+<p>事后排查，发现连接池的 <a href="https://issues.apache.org/jira/browse/DBCP-470">BUG DBCP-470</a> 已经被发现并解决过了。</p>
 <p>BUG 的分析参见 <a href="https://blog.csdn.net/u010920692/article/details/61417914">数据库连接泄漏问题</a> 。简单地说，tomcat dbcp 连接池（BasicDataSource）在分配连接（getConnection）时，会先去创建一个内部的连接池（PoolingDataSource）实例；该实例依赖于：</p>
 <ol>
 <li>先创建一个连接工厂（DriverConnectionFactory）对象和一个对象缓冲池（AbandonedObjectPool）对象</li>
@@ -324,6 +324,8 @@
                     
                         <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-02-13-a-cache-timeout-tuning-practise&#x2F;">‹ 一次 Cache 问题排查实践</a>
                     
+                    
+                        <a class="next" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-03-11-graphviz-note&#x2F;">Graphviz Dot Note ›</a>
                     
                     
                     
