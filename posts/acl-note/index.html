@@ -129,11 +129,11 @@
                         </li>
                         
                         <li>
-                            <a href="https://www.wangbo.im/posts/acl-note/#the-way-to-set-acl" class="toc-link">THe Way to Set ACL</a>
+                            <a href="https://www.wangbo.im/posts/acl-note/#set-acl-setfacl" class="toc-link">Set ACL - setfacl</a>
                         </li>
                         
                         <li>
-                            <a href="https://www.wangbo.im/posts/acl-note/#get-acl" class="toc-link">Get ACL</a>
+                            <a href="https://www.wangbo.im/posts/acl-note/#get-acl-getfacl" class="toc-link">Get ACL - getfacl</a>
                         </li>
                         
                     </ul>
@@ -191,21 +191,19 @@ File & Directory ACL</h3>
 <h4 id="user-acl"><a class="zola-anchor" href="#user-acl" aria-label="Anchor link for: user-acl">🔗</a>
 User ACL</h4>
 <pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">- For file owner: `u::rwx`
+<span style="color:#c0c5ce;">- For all users: `u::rwx`
 </span><span style="color:#c0c5ce;">- For user with username &#39;aaa&#39;: `u:aaa:rwx`
 </span><span style="color:#c0c5ce;">- For user with uid &#39;2000&#39;: `u:2000:rwx`
 </span></pre><h4 id="group-acl"><a class="zola-anchor" href="#group-acl" aria-label="Anchor link for: group-acl">🔗</a>
 Group ACL</h4>
 <pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">- For file owner: `g::rwx`
-</span><span style="color:#c0c5ce;">- For user with username &#39;aaa&#39;: `g:aaa:rwx`
-</span><span style="color:#c0c5ce;">- For user with uid &#39;2000&#39;: `g:2000:rwx`
+<span style="color:#c0c5ce;">- For all groups: `g::rwx`
+</span><span style="color:#c0c5ce;">- For group with group name &#39;aaa&#39;: `g:aaa:rwx`
+</span><span style="color:#c0c5ce;">- For group with group id &#39;2000&#39;: `g:2000:rwx`
 </span></pre><h4 id="other-acl"><a class="zola-anchor" href="#other-acl" aria-label="Anchor link for: other-acl">🔗</a>
 Other ACL</h4>
 <pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">- For file owner: `o::rwx`
-</span><span style="color:#c0c5ce;">- For user with username &#39;aaa&#39;: `o:aaa:rwx`
-</span><span style="color:#c0c5ce;">- For user with uid &#39;2000&#39;: `o:2000:rwx`
+<span style="color:#c0c5ce;">- For other users: `o::rwx`
 </span></pre><h4 id="mask-acl"><a class="zola-anchor" href="#mask-acl" aria-label="Anchor link for: mask-acl">🔗</a>
 Mask acl</h4>
 <pre style="background-color:#2b303b;">
@@ -215,8 +213,8 @@ Mask acl</h4>
 Default acl</h3>
 <p>For directory, newly create files can inherited from the parent directory if
 default acl set for the parent directory.</p>
-<h2 id="the-way-to-set-acl"><a class="zola-anchor" href="#the-way-to-set-acl" aria-label="Anchor link for: the-way-to-set-acl">🔗</a>
-THe Way to Set ACL</h2>
+<h2 id="set-acl-setfacl"><a class="zola-anchor" href="#set-acl-setfacl" aria-label="Anchor link for: set-acl-setfacl">🔗</a>
+Set ACL - setfacl</h2>
 <h3 id="add-acl-entry"><a class="zola-anchor" href="#add-acl-entry" aria-label="Anchor link for: add-acl-entry">🔗</a>
 Add ACL Entry</h3>
 <pre style="background-color:#2b303b;">
@@ -241,8 +239,8 @@ Apply ACL Recursively</h3>
 Change Default ACL</h3>
 <pre style="background-color:#2b303b;">
 <span style="color:#c0c5ce;">setfacl -d -m &#39;u:wb:rwx,g:wb:r-x&#39; a.file
-</span></pre><h2 id="get-acl"><a class="zola-anchor" href="#get-acl" aria-label="Anchor link for: get-acl">🔗</a>
-Get ACL</h2>
+</span></pre><h2 id="get-acl-getfacl"><a class="zola-anchor" href="#get-acl-getfacl" aria-label="Anchor link for: get-acl-getfacl">🔗</a>
+Get ACL - getfacl</h2>
 <pre style="background-color:#2b303b;">
 <span style="color:#c0c5ce;">getfacl a.file
 </span></pre>
