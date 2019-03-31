@@ -176,6 +176,13 @@
         </url>
     
         <url>
+            <loc>https://www.wangbo.im/posts/2019-03-31-a-bug-introduced-by-optionallong-abuse/</loc>
+            
+                <lastmod>2019-03-31T15:31:07+08:00</lastmod>
+            
+        </url>
+    
+        <url>
             <loc>https://www.wangbo.im/posts/acl-note/</loc>
             
                 <lastmod>2018-02-05T17:46:28+08:00</lastmod>
@@ -851,6 +858,14 @@
         
         <url>
             <loc>https://www.wangbo.im/tags/nullability/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/tags/optional/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/tags/optionallong/</loc>
         </url>
         
         <url>
