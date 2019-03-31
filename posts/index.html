@@ -145,7 +145,7 @@
     </header>
 
                                     <div class="post__summary">
-                                        <p>本文在项目中实践了在基于 <a href="https://vertx.io" title="Eclipse Vert.x">Eclipse Vert.x</a> 的 Verticle 中使用 <a href="https://github.com/google/guice" title="Google Guice">Google Guice</a> 进行依赖注入，主要的思路是在 <code>io.vertx.core.Verticle#start</code> 方法中主动创建 <code>com.google.inject.Injector</code> 注入器实例并实行注入操作，在注入操作成功结束之后再进行后续的操作。</p>
+                                        <p>本文介绍了项目中在基于 <a href="https://vertx.io" title="Eclipse Vert.x">Eclipse Vert.x</a> 的 Verticle 中使用 <a href="https://github.com/google/guice" title="Google Guice">Google Guice</a> 进行依赖注入的实践，主要的思路是在 <code>io.vertx.core.Verticle#start</code> 方法中主动创建 <code>com.google.inject.Injector</code> 注入器实例并实行注入操作，在注入操作成功结束之后再进行后续的操作。</p>
 <p>在开发结束后的某一天，通过万能的搜索发现已经有人提供了基于 <a href="https://github.com/google/guice" title="Google Guice">Google Guice</a> 的 <a href="https://vertx.io" title="Eclipse Vert.x">Eclipse Vert.x</a> 扩展: <a href="https://github.com/ef-labs/vertx-guice" title="Google Guice">Vert.x Guice Extension</a>。<a href="https://github.com/ef-labs/vertx-guice" title="Google Guice">Vert.x Guice Extension</a> 扩展了 <a href="https://vertx.io" title="Eclipse Vert.x">Vert.x</a> 内置的 <code>io.vertx.core.spi.VerticleFactory</code> 机制，能够使用 SPI 的方式加载需要的
 Guice 依赖。</p>
 <p>本文总结一下自己的实现思路，然后分析 <a href="https://github.com/ef-labs/vertx-guice" title="Google Guice">Vert.x Guice Extension</a> 的实现细节，希望能提高自己的代码水平。</p>
