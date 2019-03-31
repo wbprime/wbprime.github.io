@@ -113,6 +113,79 @@
                                     
     <header class="post__header">
         <h1 class="post__title">
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2016-04-11-learning-java-concurrency-thread-runnable&#x2F;">Learning Java Concurrency - Thread &amp; Runnable</a>
+        </h1>
+        <div class="post__meta">
+            <span class="post__time">2016-04-11</span>
+            
+        </div>
+    </header>
+
+                                    <div class="post__summary">
+                                        <p>Java并发多线程的第一课，应该就是<code>Thread</code>了。顾名思义，<code>Thread</code>就是一个线程。线程是很底层的一个概念，在不同的操作系统上实现的模型和细节并不相同，甚至于可以说天差地别；但是总体来说，线程是比进程更细粒度的操作系统调度的单位，线程有自己的运行栈，但是同一个进程的线程共享方法区和堆区数据。</p>
+<p>对于进程和线程的差别，有一种说法是：线程是操作系统调度的基本单位，而进程是操作系统分配运行资源的基本单位。</p>
+<p>Java中对线程作了很好的封装：<code>Thread</code>类。<code>Thread</code>类的使用非常简单。</p>
+<pre style="background-color:#2b303b;">
+<span style="color:#b48ead;">public class </span><span style="color:#ebcb8b;">ThreadCase </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private static class </span><span style="color:#ebcb8b;">EchoThread </span><span style="color:#b48ead;">extends </span><span style="color:#a3be8c;">Thread </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">private final </span><span style="color:#ebcb8b;">String </span><span style="color:#eff1f5;">word;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">public </span><span style="color:#8fa1b3;">EchoThread</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">String </span><span style="color:#bf616a;">word</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.word </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> word;
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">@</span><span style="color:#bf616a;">Override
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">public void </span><span style="color:#8fa1b3;">run</span><span style="color:#eff1f5;">() {
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">for </span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">int</span><span style="color:#eff1f5;"> i </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">0</span><span style="color:#eff1f5;">; i </span><span style="color:#c0c5ce;">&lt; </span><span style="color:#d08770;">1000</span><span style="color:#eff1f5;">; i</span><span style="color:#c0c5ce;">++</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">                </span><span style="color:#ebcb8b;">System</span><span style="color:#eff1f5;">.out.</span><span style="color:#bf616a;">println</span><span style="color:#eff1f5;">(</span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">getName</span><span style="color:#eff1f5;">() </span><span style="color:#c0c5ce;">+ &quot;</span><span style="color:#a3be8c;"> echos </span><span style="color:#c0c5ce;">&quot; +</span><span style="color:#eff1f5;"> word);
+</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public static void </span><span style="color:#8fa1b3;">main</span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">String </span><span style="color:#b48ead;">[] </span><span style="color:#bf616a;">_args</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">Thread</span><span style="color:#eff1f5;"> echo1 </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">EchoThread</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">First</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">);
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">Thread</span><span style="color:#eff1f5;"> echo2 </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">EchoThread</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">Second</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">);
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#ebcb8b;">System</span><span style="color:#eff1f5;">.out.</span><span style="color:#bf616a;">println</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">Main thread started!</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">);
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">echo1.</span><span style="color:#bf616a;">start</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">echo2.</span><span style="color:#bf616a;">start</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#bf616a;">joinThread</span><span style="color:#eff1f5;">(echo1);
+</span><span style="color:#eff1f5;">        </span><span style="color:#bf616a;">joinThread</span><span style="color:#eff1f5;">(echo2);
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#ebcb8b;">System</span><span style="color:#eff1f5;">.out.</span><span style="color:#bf616a;">println</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">Main thread finished!</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">);
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private static void </span><span style="color:#8fa1b3;">joinThread</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">Thread </span><span style="color:#bf616a;">th</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">try </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">th.</span><span style="color:#bf616a;">join</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">} </span><span style="color:#b48ead;">catch </span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">InterruptedException </span><span style="color:#bf616a;">e</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">            </span><span style="color:#ebcb8b;">System</span><span style="color:#eff1f5;">.out.</span><span style="color:#bf616a;">println</span><span style="color:#eff1f5;">(th.</span><span style="color:#bf616a;">getName</span><span style="color:#eff1f5;">() </span><span style="color:#c0c5ce;">+ &quot;</span><span style="color:#a3be8c;"> interrupted!</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">);
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">}
+</span></pre>
+<p>可以很明显地发现：</p>
+<ul>
+<li>main负责启动其他线程，main本身也是一个线程</li>
+<li>线程的调度是难以预料的，<code>echo1</code>和<code>echo2</code>的输出结果相互交错可以看出这一点</li>
+<li>线程之间可以进行同步控制，使用<code>Thread.join()</code>方法可以强制等待另一个线程结束</li>
+<li>自定义线程行为只需要重新实现<code>Thread.run()</code>方法即可</li>
+<li>线程的启动入口是<code>Thread.start()</code>方法，不要直接运行<code>Thread.run()</code>方法</li>
+<li><code>Thread</code>类是一个<code>class</code>（与<code>interface</code>相对应），意味着自定义线程类不能继承别的父类</li>
+</ul>
+
+                                    </div>
+                                    <div class="read-more">
+                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2016-04-11-learning-java-concurrency-thread-runnable&#x2F;">Read more...</a>
+                                    </div>
+                                </article>
+                            
+                                <article class="post">
+                                    
+    <header class="post__header">
+        <h1 class="post__title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;spring-mvc-testing-integration-testing-jsonpath&#x2F;">Spring MVC Integration Testing - JsonPath</a>
         </h1>
         <div class="post__meta">
@@ -623,28 +696,6 @@
                                     </div>
                                     <div class="read-more">
                                         <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;learning-java-concurrency-synchronized&#x2F;">Read more...</a>
-                                    </div>
-                                </article>
-                            
-                                <article class="post">
-                                    
-    <header class="post__header">
-        <h1 class="post__title">
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;learning-java-concurrency-content&#x2F;">Learning Java Concurrency - Content&#x2F;目录</a>
-        </h1>
-        <div class="post__meta">
-            <span class="post__time">2016-03-31</span>
-            
-        </div>
-    </header>
-
-                                    <div class="post__summary">
-                                        <p>Java Concurrency是学习Java的过程中绕不过去的一道坎。既然绕不过去，只能一点一点去学习它，然后了解它。本系列是在学习Java Concurrency过程中的记录，鉴于网络上关于原理和实现代码的文章一大堆，所以本系列会尽量以实际应用为主。毕竟原理了解的再深，还是要落地为代码。</p>
-<p>本系列主要参考<a href="http://www.blogjava.net/xylz/archive/2010/07/08/325587.html">《深入浅出Java Concurrency》</a>系列。</p>
-
-                                    </div>
-                                    <div class="read-more">
-                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;learning-java-concurrency-content&#x2F;">Read more...</a>
                                     </div>
                                 </article>
                             

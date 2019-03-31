@@ -155,6 +155,13 @@
         </url>
     
         <url>
+            <loc>https://www.wangbo.im/posts/2019-03-12-combine-vertx-and-guice-dependency-injection/</loc>
+            
+                <lastmod>2019-03-31T11:19:14+08:00</lastmod>
+            
+        </url>
+    
+        <url>
             <loc>https://www.wangbo.im/posts/2019-03-12-multiple-jwt-auth-handler-in-vertx/</loc>
             
                 <lastmod>2019-03-12T21:19:30+08:00</lastmod>
@@ -747,6 +754,10 @@
         </url>
         
         <url>
+            <loc>https://www.wangbo.im/tags/guice/</loc>
+        </url>
+        
+        <url>
             <loc>https://www.wangbo.im/tags/happy/</loc>
         </url>
         
@@ -780,6 +791,10 @@
         
         <url>
             <loc>https://www.wangbo.im/tags/jre/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/tags/jsr303/</loc>
         </url>
         
         <url>
