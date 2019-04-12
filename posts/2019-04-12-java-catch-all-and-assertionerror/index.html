@@ -143,6 +143,10 @@
                         </li>
                         
                         <li>
+                            <a href="https://www.wangbo.im/posts/2019-04-12-java-catch-all-and-assertionerror/#uncaughtexceptionhandler" class="toc-link">UncaughtExceptionHandler</a>
+                        </li>
+                        
+                        <li>
                             <a href="https://www.wangbo.im/posts/2019-04-12-java-catch-all-and-assertionerror/#result-t-e-in-rust" class="toc-link">Result&lt;T, E&gt; in Rust</a>
                         </li>
                         
@@ -242,7 +246,24 @@ enum 相关</h2>
 <li>策略 2 是抛出异常。</li>
 </ul>
 <p>实际的策略需要分析场景具体制定。对于有确定分类的类型，我倾向于抛出异常。对于异常类型，我之前倾向于使用 AssertionError，现在则倾向于使用 RuntimeException。</p>
-<h2 id="result-t-e-in-rust"><a class="zola-anchor" href="#result-t-e-in-rust" aria-label="Anchor link for: result-t-e-in-rust">🔗</a>
+<h2 id="uncaughtexceptionhandler"><a class="zola-anchor" href="#uncaughtexceptionhandler" aria-label="Anchor link for: uncaughtexceptionhandler">🔗</a>
+UncaughtExceptionHandler</h2>
+<p>对于没有捕获的异常，JVM 会调用线程的 uncaughtExceptionHandler 进行处理；如果需要对线程的未捕获的异常做一个最终的处理，需要设置线程的 uncaughtExceptionHandler 或静态的 defaultUncaughtExceptionHandler 。</p>
+<pre style="background-color:#2b303b;">
+<span style="color:#c0c5ce;">public class Thread {
+</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">public interface UncaughtExceptionHandler {
+</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">void uncaughtException(Thread t, Throwable e);
+</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">}
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">public static void setDefaultUncaughtExceptionHandler(UncaughtExceptionHandler eh) {
+</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">defaultUncaughtExceptionHandler = eh;
+</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">}
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">public void setUncaughtExceptionHandler(UncaughtExceptionHandler eh) {
+</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">uncaughtExceptionHandler = eh;
+</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">}
+</span><span style="color:#c0c5ce;">}
+</span></pre><h2 id="result-t-e-in-rust"><a class="zola-anchor" href="#result-t-e-in-rust" aria-label="Anchor link for: result-t-e-in-rust">🔗</a>
 Result<T, E> in Rust</h2>
 <p>上述的 Error &amp; Exception &amp; RuntimeException 在使用时的区别大部分是语义上的，IDE 和编译器不能帮助开发者严格保持一定的模式。</p>
 <p>作为对比，<a href="https://www.rust-lang.org">Rust</a> 里的错误处理机制是基于 <code>Result&lt;T, E&gt;</code> 的。<code>Result&lt;T, E&gt;</code> 是作为方法的返回值存在的，方法被调用时必须要处理错误。Rust 中不存在由于错误没有捕获导致的 BUG （类比 Java 中未捕获 Error 或 RuntimeException）。</p>
