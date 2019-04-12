@@ -113,6 +113,44 @@
                                     
     <header class="post__header">
         <h1 class="post__title">
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2016-04-06-learning-java-concurrency-wait-notify&#x2F;">Learning Java Concurrency - wait &amp; notify</a>
+        </h1>
+        <div class="post__meta">
+            <span class="post__time">2016-04-06</span>
+            
+        </div>
+    </header>
+
+                                    <div class="post__summary">
+                                        <p>在synchronized关键字之外，Java提供了另外的<code>wait</code>和<code>notify</code>函数族用于支援多线程通信，使用上类似于JUC的Condition类。</p>
+<p><code>wait()</code>、<code>notify()</code>和<code>notifyAll()</code>是Object类的方法，与synchronized配套使用。</p>
+<pre style="background-color:#2b303b;">
+<span style="color:#b48ead;">public class </span><span style="color:#ebcb8b;">Object </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">...
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public final native void </span><span style="color:#8fa1b3;">wait</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">long </span><span style="color:#bf616a;">timeout</span><span style="color:#eff1f5;">) </span><span style="color:#b48ead;">throws </span><span style="color:#ebcb8b;">InterruptedException</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public final void </span><span style="color:#8fa1b3;">wait</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">long </span><span style="color:#bf616a;">timeout</span><span style="color:#eff1f5;">, </span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">nanos</span><span style="color:#eff1f5;">) </span><span style="color:#b48ead;">throws </span><span style="color:#ebcb8b;">InterruptedException</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public final void </span><span style="color:#8fa1b3;">wait</span><span style="color:#eff1f5;">() </span><span style="color:#b48ead;">throws </span><span style="color:#ebcb8b;">InterruptedException</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public final native void </span><span style="color:#8fa1b3;">notify</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public final native void </span><span style="color:#8fa1b3;">notifyAll</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">...
+</span><span style="color:#eff1f5;">}
+</span></pre>
+<p><code>wait</code>一共有三个函数。调用<code>wait</code>的线程必须已经持有了同一个对象的同步器（使用synchronized）。调用<code>wait</code>的线程会进入等待状态，直到另外的线程调用了同一个对象的<code>notify</code>函数，或者指定的等待时间过期，或者被中断（引发InterruptedException）。调用<code>wait</code>函数之后，当前线程会放弃已经持有的同步器。</p>
+<p><code>notify</code>一共是有两个函数。<code>notify()</code>函数会唤醒当前的由于执行<code>wait</code>而进入等待的某个线程；注意，被唤醒的线程是不可预料的，也就是说不同的JVM实现可以用不同的规则算法来决定被唤醒的是哪一个线程。<code>notifyAll()</code>函数会唤醒所有的等待线程，但是只会有一个线程最终进入执行。</p>
+
+                                    </div>
+                                    <div class="read-more">
+                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2016-04-06-learning-java-concurrency-wait-notify&#x2F;">Read more...</a>
+                                    </div>
+                                </article>
+                            
+                                <article class="post">
+                                    
+    <header class="post__header">
+        <h1 class="post__title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;learning-java-concurrency-synchronized&#x2F;">Learning Java Concurrency - synchronized</a>
         </h1>
         <div class="post__meta">
@@ -430,26 +468,6 @@
                                     </div>
                                     <div class="read-more">
                                         <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;kan-dianying&#x2F;">Read more...</a>
-                                    </div>
-                                </article>
-                            
-                                <article class="post">
-                                    
-    <header class="post__header">
-        <h1 class="post__title">
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;danan&#x2F;">大难</a>
-        </h1>
-        <div class="post__meta">
-            <span class="post__time">2015-05-16</span>
-            
-        </div>
-    </header>
-
-                                    <div class="post__summary">
-                                        
-                                    </div>
-                                    <div class="read-more">
-                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;danan&#x2F;">Read more...</a>
                                     </div>
                                 </article>
                             
