@@ -1,0 +1,366 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>Wbprime</title>
+
+      
+
+      
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
+          
+      
+
+      
+          <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
+          
+      
+
+      
+      
+    </head>
+
+    <body>
+        <div class="container">
+
+            <div id="mobile-navbar" class="mobile-navbar">
+              <div class="mobile-header-logo">
+                <a href="/" class="logo">Wbprime</a>
+              </div>
+              <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+
+            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
+              <ul class="mobile-menu-list">
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im">
+                            Home
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im&#x2F;categories">
+                            Categories
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im&#x2F;tags">
+                            Tags
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im&#x2F;about">
+                            About
+                        </a>
+                    </li>
+                
+              </ul>
+            </nav>
+
+            <header id="header">
+                <div class="logo"><a href="https:&#x2F;&#x2F;www.wangbo.im">Wbprime</a></div>
+                <nav class="menu">
+                    <ul>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im">
+                                    Home
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im&#x2F;categories">
+                                    Categories
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im&#x2F;tags">
+                                    Tags
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im&#x2F;about">
+                                    About
+                                </a>
+                            </li>
+                        
+                    </ul>
+                </nav>
+            </header>
+
+            <main>
+                <div class="content" id="mobile-panel">
+                    
+
+
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="https://www.wangbo.im/posts/2019-04-19-communication-bridge-between-webrtc-and-wechat-rtmp/#bei-jing" class="toc-link">背景</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://www.wangbo.im/posts/2019-04-19-communication-bridge-between-webrtc-and-wechat-rtmp/#ji-yu-webrtc-de-shi-shi-yin-shi-pin-fang-an" class="toc-link">基于 WebRTC 的实时音视频方案</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://www.wangbo.im/posts/2019-04-19-communication-bridge-between-webrtc-and-wechat-rtmp/#wei-xin-xiao-cheng-xu-de-yin-shi-pin-zhi-chi" class="toc-link">微信小程序的音视频支持</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://www.wangbo.im/posts/2019-04-19-communication-bridge-between-webrtc-and-wechat-rtmp/#hu-tong-fang-an" class="toc-link">互通方案</a>
+                    
+                    <ul>
+                        
+                        <li>
+                            <a href="https://www.wangbo.im/posts/2019-04-19-communication-bridge-between-webrtc-and-wechat-rtmp/#zong-ti-jia-gou" class="toc-link">总体架构</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://www.wangbo.im/posts/2019-04-19-communication-bridge-between-webrtc-and-wechat-rtmp/#hui-hua-jian-li" class="toc-link">会话建立</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://www.wangbo.im/posts/2019-04-19-communication-bridge-between-webrtc-and-wechat-rtmp/#mei-ti-liu-jiao-huan" class="toc-link">媒体流交换</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://www.wangbo.im/posts/2019-04-19-communication-bridge-between-webrtc-and-wechat-rtmp/#liu-mei-ti-ge-shi-zhuan-huan" class="toc-link">流媒体格式转换</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://www.wangbo.im/posts/2019-04-19-communication-bridge-between-webrtc-and-wechat-rtmp/#zhong-zhuan-liu-cheng-you-hua" class="toc-link">中转流程优化</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://www.wangbo.im/posts/2019-04-19-communication-bridge-between-webrtc-and-wechat-rtmp/#rtmp-shou-zheng-you-hua" class="toc-link">RTMP 首帧优化</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://www.wangbo.im/posts/2019-04-19-communication-bridge-between-webrtc-and-wechat-rtmp/#hui-hua-bao-chi" class="toc-link">会话保持</a>
+                        </li>
+                        
+                    </ul>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://www.wangbo.im/posts/2019-04-19-communication-bridge-between-webrtc-and-wechat-rtmp/#zong-jie" class="toc-link">总结</a>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article class="post">
+    
+    <header class="post__header">
+        <h1 class="post__title">
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-04-19-communication-bridge-between-webrtc-and-wechat-rtmp&#x2F;">WebRTC 与微信小程序的音视频互通</a>
+        </h1>
+        <div class="post__meta">
+            <span class="post__time">2019-04-19</span>
+            
+        </div>
+    </header>
+
+    <div class="post-content">
+      <p>本文主要介绍我们打通 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 端和微信小程序端的音视频互通方案，实现在尽量不需要改动 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 端代码的情况下，添加对主叫和被叫微信小程序端的支持。</p>
+<p><a name="continue-reading"></a></p>
+<h1 id="bei-jing"><a class="zola-anchor" href="#bei-jing" aria-label="Anchor link for: bei-jing">🔗</a>
+背景</h1>
+<p>考虑到腾讯微信的小程序平台提供了音视频的支持，如果能打通基于 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 的实时音视频通话与微信小程序，就能够极大地扩展音视频的能力范围，为业务线的产品和服务提供更多更好的选择。</p>
+<p>本文主要介绍我们打通 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 端和微信小程序端的音视频互通方案，实现在尽量不需要改动 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 端代码的情况下，添加对主叫和被叫微信小程序端的支持。</p>
+<h1 id="ji-yu-webrtc-de-shi-shi-yin-shi-pin-fang-an"><a class="zola-anchor" href="#ji-yu-webrtc-de-shi-shi-yin-shi-pin-fang-an" aria-label="Anchor link for: ji-yu-webrtc-de-shi-shi-yin-shi-pin-fang-an">🔗</a>
+基于 WebRTC 的实时音视频方案</h1>
+<p>我们使用网络上开源的 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 的方案部署了实时音视频支撑系统，能够支持多端（iOS/Android/Web）之间的音视频会话。其通过后端的 Room Server 服务来管理会话；某端需要发起音视频会话，首先需要到 Room Server 中注册一个房间，之后基于房间来进行信令的交互；主叫端和被叫端的音视频数据传输通过 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/RTCPeerConnection" title="RTCPeerConnection">PeerConnection</a> 进行。</p>
+<p><a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 端的媒体流方案是采用标准的 <a href="https://en.wikipedia.org/wiki/Real-time_Transport_Protocol" title="Real-time_Transport_Protocol">RTP</a> 和 <a href="https://en.wikipedia.org/wiki/RTP_Control_Protocol" title="RTP_Control_Protocol">RTCP</a> 协议。</p>
+<h1 id="wei-xin-xiao-cheng-xu-de-yin-shi-pin-zhi-chi"><a class="zola-anchor" href="#wei-xin-xiao-cheng-xu-de-yin-shi-pin-zhi-chi" aria-label="Anchor link for: wei-xin-xiao-cheng-xu-de-yin-shi-pin-zhi-chi">🔗</a>
+微信小程序的音视频支持</h1>
+<p>微信的小程序对外开放了 <a href="https://cloud.tencent.com/document/product/454/12517">音视频直播</a> 的能力，使用方可以通过 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/live-pusher.html">live-pusher</a> 标签实现基于 <a href="https://en.wikipedia.org/wiki/Real-Time_Messaging_Protocol" title="Real-Time_Messaging_Protocol">RTMP</a> 的音视频推流（录制），<a href="https://developers.weixin.qq.com/miniprogram/dev/component/live-player.html">live-player</a> 标签实现基于 <a href="https://en.wikipedia.org/wiki/Real-Time_Messaging_Protocol" title="Real-Time_Messaging_Protocol">RTMP</a> 的音视频拉流（播放）。</p>
+<ul>
+<li>微信 App iOS 最低版本要求：6.5.21</li>
+<li>微信 App Android 最低版本要求：6.5.19</li>
+<li>小程序基础库最低版本要求：1.7.0</li>
+</ul>
+<p>微信小程序的音视频方案是基于 <a href="https://en.wikipedia.org/wiki/Real-Time_Messaging_Protocol" title="Real-Time_Messaging_Protocol">RTMP</a> 流媒体协议的。</p>
+<h1 id="hu-tong-fang-an"><a class="zola-anchor" href="#hu-tong-fang-an" aria-label="Anchor link for: hu-tong-fang-an">🔗</a>
+互通方案</h1>
+<h2 id="zong-ti-jia-gou"><a class="zola-anchor" href="#zong-ti-jia-gou" aria-label="Anchor link for: zong-ti-jia-gou">🔗</a>
+总体架构</h2>
+<p>方案的总体架构如下：</p>
+<p><img src="https://www.wangbo.im/posts/2019-04-19-communication-bridge-between-webrtc-and-wechat-rtmp/overview.png" alt="总体架构" /></p>
+<ol>
+<li>Janus Server 作为一个特殊的 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 端与指定的另一个 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 端通过 Room Server 交换信令并建立会话</li>
+<li>会话建立后，<a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 端与 Janus Server 直接（P2P）或间接（<a href="https://tools.ietf.org/html/rfc5766" title="Traversal Using Relays around NAT (TURN): Relay Extensions to Session Traversal Utilities for NAT (STUN)">TURN</a>）交换音视频流</li>
+<li>Janus Server 将 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 端之音视频流经 Streaming Server 转发至微信小程序端；微信小程序音视频输入流经 Streaming Server 转发至 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 端</li>
+</ol>
+<p>其中，Janus Server 使用 <a href="https://janus.conf.meetecho.com">Janus</a> 来搭建，主要作为微信小程序端的 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 代理辅助微信小程序端参与 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 的会话，主要进行信令的沟通、<a href="https://tools.ietf.org/html/rfc3264" title="An Offer/Answer Model with the Session Description Protocol (SDP)">Offer/Answer</a> 的协商和媒体流数据的转发；Streaming Server 使用 <a href="https://ffmpeg.org" title="FFmpeg - A complete, cross-platform solution to record, convert and stream audio and video">FFmpeg</a> 和 <a href="https://github.com/arut/nginx-rtmp-module" title="NGINX-based Media Streaming Server">nginx-rtmp-module</a> 来搭建，主要提供 <a href="https://en.wikipedia.org/wiki/Real-time_Transport_Protocol" title="Real-time_Transport_Protocol">RTP</a> &amp; <a href="https://en.wikipedia.org/wiki/RTP_Control_Protocol" title="RTP_Control_Protocol">RTCP</a> 媒体流和 <a href="https://en.wikipedia.org/wiki/Real-Time_Messaging_Protocol" title="Real-Time_Messaging_Protocol">RTMP</a> 媒体流数据的转换和中继；在已有的 Room Server 上扩展，添加了与接入微信小程序端相关的信令处理逻辑。</p>
+<h2 id="hui-hua-jian-li"><a class="zola-anchor" href="#hui-hua-jian-li" aria-label="Anchor link for: hui-hua-jian-li">🔗</a>
+会话建立</h2>
+<p>需要支持 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 端与微信小程序端的音视频流的互通，首先需要添加对其建立会话的支持；<a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 端与微信小程序端的会话建立，具体来说是指：</p>
+<ol>
+<li><a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 音视频(主叫) 与 微信小程序音视频(被叫)</li>
+<li><a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 音视频(被叫) 与 微信小程序音视频(主叫)</li>
+<li><a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 音视频(主叫) 与 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 音视频(被叫)</li>
+<li>微信小程序音视频(主叫) 与 微信小程序音视频(被叫)</li>
+</ol>
+<p>其中，case 3 和 case 4 不会涉及到 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 端与微信小程序端的交互：case 3 由 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 支持；case 4 由 <a href="https://en.wikipedia.org/wiki/Real-Time_Messaging_Protocol" title="Real-Time_Messaging_Protocol">RTMP</a> 中继方案可解决。</p>
+<p>基于 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 音视频和微信小程序音视频的互通方案，需要能支持 case 1 和 case 2。由于 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 端需要信令交互，所以需要分别讨论这两种情况。</p>
+<h3 id="webrtc-yin-shi-pin-zhu-jiao-yu-wei-xin-xiao-cheng-xu-yin-shi-pin-bei-jiao"><a class="zola-anchor" href="#webrtc-yin-shi-pin-zhu-jiao-yu-wei-xin-xiao-cheng-xu-yin-shi-pin-bei-jiao" aria-label="Anchor link for: webrtc-yin-shi-pin-zhu-jiao-yu-wei-xin-xiao-cheng-xu-yin-shi-pin-bei-jiao">🔗</a>
+WebRTC 音视频(主叫) 与 微信小程序音视频(被叫)</h3>
+<p>在此 case 中，Janus Server 以被叫的身份与 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 端建立标准 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 会话。</p>
+<ol>
+<li><a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 端首先初始化房间</li>
+<li><a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 端加入房间</li>
+<li>微信小程序端加入房间：Room Server 中添加了新的信令类型支持微信小程序以被叫的方式接入；此信令的处理过程中，回调 Janus Server 和 Streaming Server 进行资源初始化准备</li>
+<li><a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 端发送 Offer 至 Room Server</li>
+<li>Room Server 接收到 Offer 之后，将该 Offer 信息转发至 Janus Server；Janus Server 需要响应该 Offer，如果正常的话应该返回一个 Answer 至 Room Server；Room Server 转发 Answer 至 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 端</li>
+<li>进入 <a href="https://tools.ietf.org/html/rfc5245" title="Interactive Connectivity Establishment (ICE): A Protocol for Network Address Translator (NAT) Traversal for Offer/Answer Protocols">ICE</a> 协商和连接建立流程</li>
+</ol>
+<p>此 case下，Janus Server 作为微信小程序端的 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 代理接入标准 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 栈，复用已有的 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 协议栈基础设施（<a href="https://tools.ietf.org/html/rfc5389" title="Session Traversal Utilities for NAT (STUN)">STUN</a>/<a href="https://tools.ietf.org/html/rfc5766" title="Traversal Using Relays around NAT (TURN): Relay Extensions to Session Traversal Utilities for NAT (STUN)">TURN</a>/<a href="https://tools.ietf.org/html/rfc5245" title="Interactive Connectivity Establishment (ICE): A Protocol for Network Address Translator (NAT) Traversal for Offer/Answer Protocols">ICE</a>/<a href="https://tools.ietf.org/html/rfc4566" title="SDP: Session Description Protocol">SDP</a>），以减少对原 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 栈的侵入影响。</p>
+<p><img src="https://www.wangbo.im/posts/2019-04-19-communication-bridge-between-webrtc-and-wechat-rtmp/webrtc_caller_wechat_callee.png" alt="WebRTC端呼叫微信小程序端" /></p>
+<h3 id="webrtc-yin-shi-pin-bei-jiao-yu-wei-xin-xiao-cheng-xu-yin-shi-pin-zhu-jiao"><a class="zola-anchor" href="#webrtc-yin-shi-pin-bei-jiao-yu-wei-xin-xiao-cheng-xu-yin-shi-pin-zhu-jiao" aria-label="Anchor link for: webrtc-yin-shi-pin-bei-jiao-yu-wei-xin-xiao-cheng-xu-yin-shi-pin-zhu-jiao">🔗</a>
+WebRTC 音视频(被叫) 与 微信小程序音视频(主叫)</h3>
+<p>在此 case 中，Janus Server 需要以主叫的身份与 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 端建立标准 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 会话。</p>
+<ol>
+<li>微信小程序端首先初始化房间</li>
+<li>微信小程序端加入房间：Room Server 中添加了新的信令类型支持微信小程序以主叫的方式接入；此信令的处理过程中，回调 Janus Server 和 Streaming Server 进行资源初始化准备</li>
+<li><a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 端加入房间</li>
+<li>Janus Server 生成固定 Offer，发送至 Room Server</li>
+<li>Room Server 接收到 Offer 之后，将该 Offer 信息转发至 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 端；<a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 端需要响应该 Offer，如果正常的话应该返回一个 Answer 至 Room Server；Room Server 转发 Answer 至 Janus Server</li>
+<li>进入 <a href="https://tools.ietf.org/html/rfc5245" title="Interactive Connectivity Establishment (ICE): A Protocol for Network Address Translator (NAT) Traversal for Offer/Answer Protocols">ICE</a> 协商和连接建立流程</li>
+</ol>
+<p>此 case 下，Janus Server 作为微信小程序端的 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 代理接入标准 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 栈，复用已有的 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 协议栈基础设施（<a href="https://tools.ietf.org/html/rfc5389" title="Session Traversal Utilities for NAT (STUN)">STUN</a>/<a href="https://tools.ietf.org/html/rfc5766" title="Traversal Using Relays around NAT (TURN): Relay Extensions to Session Traversal Utilities for NAT (STUN)">TURN</a>/<a href="https://tools.ietf.org/html/rfc5245" title="Interactive Connectivity Establishment (ICE): A Protocol for Network Address Translator (NAT) Traversal for Offer/Answer Protocols">ICE</a>/<a href="https://tools.ietf.org/html/rfc4566" title="SDP: Session Description Protocol">SDP</a>），以减少对原 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 栈的侵入影响。</p>
+<p><img src="https://www.wangbo.im/posts/2019-04-19-communication-bridge-between-webrtc-and-wechat-rtmp/webrtc_caller_wechat_callee.png" alt="微信小程序端呼叫WebRTC端" /></p>
+<p>此 case 与前一个 case 的区别在于 <a href="https://tools.ietf.org/html/rfc4566" title="SDP: Session Description Protocol">SDP</a> 信息（<a href="https://tools.ietf.org/html/rfc3264" title="An Offer/Answer Model with the Session Description Protocol (SDP)">Offer/Answer</a>）的生成和处理。微信小程序端主叫时，由于微信小程序端不能正常参与到 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 栈的协议协商过程中来，需要在生成 Offer 时做一些针对性的优化和处理。</p>
+<h2 id="mei-ti-liu-jiao-huan"><a class="zola-anchor" href="#mei-ti-liu-jiao-huan" aria-label="Anchor link for: mei-ti-liu-jiao-huan">🔗</a>
+媒体流交换</h2>
+<p>由于 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 端和微信小程序端分别是用不同的媒体协议：<a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 端使用 <a href="https://en.wikipedia.org/wiki/Real-time_Transport_Protocol" title="Real-time_Transport_Protocol">RTP</a> &amp; <a href="https://en.wikipedia.org/wiki/RTP_Control_Protocol" title="RTP_Control_Protocol">RTCP</a> ；微信小程序端使用 <a href="https://en.wikipedia.org/wiki/Real-Time_Messaging_Protocol" title="Real-Time_Messaging_Protocol">RTMP</a>，因此采用了Janus Server 转发 <a href="https://en.wikipedia.org/wiki/Real-time_Transport_Protocol" title="Real-time_Transport_Protocol">RTP</a> 流和 Streaming Server 居中转换的方案。</p>
+<h3 id="rtp-zhuan-fa"><a class="zola-anchor" href="#rtp-zhuan-fa" aria-label="Anchor link for: rtp-zhuan-fa">🔗</a>
+RTP 转发</h3>
+<p><a href="https://en.wikipedia.org/wiki/Real-time_Transport_Protocol" title="Real-time_Transport_Protocol">RTP</a> 转发即是将 Janus Server 作为微信小程序端的 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 代理，在通话过程中，将 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 端上传的的 <a href="https://en.wikipedia.org/wiki/Real-time_Transport_Protocol" title="Real-time_Transport_Protocol">RTP</a> 媒体流转发至 Streaming Server，同时将微信小程序端上传的经 Streaming Server 转换过的 <a href="https://en.wikipedia.org/wiki/Real-time_Transport_Protocol" title="Real-time_Transport_Protocol">RTP</a> 流转发至 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 端。</p>
+<p>具体实现基于 Janus 的扩展机制：为每一通会话预分配两组音视频端口 <em>A</em> &amp; <em>B</em> ，并:</p>
+<ol>
+<li>收到 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 端的媒体数据后转发至音视频端口 <em>A</em></li>
+<li>收到音视频端口 <em>B</em> 的媒体数据后转发至 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 端</li>
+</ol>
+<p>其中，音视频端口 <em>A</em> 转发的是 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 端发向微信小程序端的媒体流，由 Streaming Server 监听；音视频端口 <em>B</em> 收到的是微信小程序端发向 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 端的媒体流，来源是 Streaming Server，由 Janus Server 监听。</p>
+<h2 id="liu-mei-ti-ge-shi-zhuan-huan"><a class="zola-anchor" href="#liu-mei-ti-ge-shi-zhuan-huan" aria-label="Anchor link for: liu-mei-ti-ge-shi-zhuan-huan">🔗</a>
+流媒体格式转换</h2>
+<p>Streaming Server 将 Janus Server 转发的 <a href="https://en.wikipedia.org/wiki/Real-time_Transport_Protocol" title="Real-time_Transport_Protocol">RTP</a> &amp; <a href="https://en.wikipedia.org/wiki/RTP_Control_Protocol" title="RTP_Control_Protocol">RTCP</a> 流转换为 <a href="https://en.wikipedia.org/wiki/Real-Time_Messaging_Protocol" title="Real-Time_Messaging_Protocol">RTMP</a> 流输出至微信小程序端，也将微信小程序端上传的 <a href="https://en.wikipedia.org/wiki/Real-Time_Messaging_Protocol" title="Real-Time_Messaging_Protocol">RTMP</a> 流转为 <a href="https://en.wikipedia.org/wiki/Real-time_Transport_Protocol" title="Real-time_Transport_Protocol">RTP</a> &amp; <a href="https://en.wikipedia.org/wiki/RTP_Control_Protocol" title="RTP_Control_Protocol">RTCP</a> 流输出至 Janus Server；最初的实现使用 <a href="https://ffmpeg.org" title="FFmpeg - A complete, cross-platform solution to record, convert and stream audio and video">FFmpeg</a> 搭建，<a href="https://ffmpeg.org" title="FFmpeg - A complete, cross-platform solution to record, convert and stream audio and video">FFmpeg</a> 可以很好地支持 <a href="https://en.wikipedia.org/wiki/Real-time_Transport_Protocol" title="Real-time_Transport_Protocol">RTP</a> &amp; <a href="https://en.wikipedia.org/wiki/RTP_Control_Protocol" title="RTP_Control_Protocol">RTCP</a> 与 <a href="https://en.wikipedia.org/wiki/Real-Time_Messaging_Protocol" title="Real-Time_Messaging_Protocol">RTMP</a> 的双向转换。</p>
+<p><img src="https://www.wangbo.im/posts/2019-04-19-communication-bridge-between-webrtc-and-wechat-rtmp/ffmpeg_based_streaming.png" alt="基于FFmpeg的流媒体中转" /></p>
+<p>具体来说，即：</p>
+<ol>
+<li>将 <a href="https://en.wikipedia.org/wiki/Real-time_Transport_Protocol" title="Real-time_Transport_Protocol">RTP</a> &amp; <a href="https://en.wikipedia.org/wiki/RTP_Control_Protocol" title="RTP_Control_Protocol">RTCP</a> 的媒体封包格式转为 <a href="https://en.wikipedia.org/wiki/Real-Time_Messaging_Protocol" title="Real-Time_Messaging_Protocol">RTMP</a> 的封包格式，反之亦然</li>
+<li>将 <a href="https://en.wikipedia.org/wiki/Real-time_Transport_Protocol" title="Real-time_Transport_Protocol">RTP</a> &amp; <a href="https://en.wikipedia.org/wiki/RTP_Control_Protocol" title="RTP_Control_Protocol">RTCP</a> 中的视频（H264/vp8/vp9）转为 <a href="https://en.wikipedia.org/wiki/Real-Time_Messaging_Protocol" title="Real-Time_Messaging_Protocol">RTMP</a> 支持的 H264 ，反之亦然</li>
+<li>将 <a href="https://en.wikipedia.org/wiki/Real-time_Transport_Protocol" title="Real-time_Transport_Protocol">RTP</a> &amp; <a href="https://en.wikipedia.org/wiki/RTP_Control_Protocol" title="RTP_Control_Protocol">RTCP</a> 中的音频（opus）转为 <a href="https://en.wikipedia.org/wiki/Real-Time_Messaging_Protocol" title="Real-Time_Messaging_Protocol">RTMP</a> 支持的 aac ，反之亦然</li>
+</ol>
+<h2 id="zhong-zhuan-liu-cheng-you-hua"><a class="zola-anchor" href="#zhong-zhuan-liu-cheng-you-hua" aria-label="Anchor link for: zhong-zhuan-liu-cheng-you-hua">🔗</a>
+中转流程优化</h2>
+<p>在实际使用过程中，发现流媒体中转服务的 <a href="https://ffmpeg.org" title="FFmpeg - A complete, cross-platform solution to record, convert and stream audio and video">FFmpeg</a> 处理过程中可以进行优化：Janus Server 转发的 <a href="https://en.wikipedia.org/wiki/Real-time_Transport_Protocol" title="Real-time_Transport_Protocol">RTP</a> &amp; <a href="https://en.wikipedia.org/wiki/RTP_Control_Protocol" title="RTP_Control_Protocol">RTCP</a> 流中的视频编码格式可以为 H264/VP8/VP9 等，具体格式由协商决定；微信小程序端支持的 <a href="https://en.wikipedia.org/wiki/Real-Time_Messaging_Protocol" title="Real-Time_Messaging_Protocol">RTMP</a> 中可用的视频流编码格式为 H264 ；如果能够限制 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 端使用的视频编码格式为 H264 ，可以优化为只解包不解码，减少视频编解码耗时。</p>
+<p>基于以上分析，本文对中转流程进行了重构，限制会话使用 H264 编码传输视频数据，并使用自研的 H264 裸流编解包代码替换 <a href="https://ffmpeg.org" title="FFmpeg - A complete, cross-platform solution to record, convert and stream audio and video">FFmpeg</a> 进行音视频流中转。实现微信小程序端通话时延从基于 <a href="https://ffmpeg.org" title="FFmpeg - A complete, cross-platform solution to record, convert and stream audio and video">FFmpeg</a> 时的 1-5s 优化到 500ms-1s，效果明显。</p>
+<p>实现细节如下：</p>
+<ol>
+<li>修改 Janus Server 的 <a href="https://tools.ietf.org/html/rfc4566" title="SDP: Session Description Protocol">SDP</a> 响应机制，在生成 Offer 或者响应 Answer 时只返回 H264 的视频协商信息。由于我们的 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 端保证肯定支持 H264 ，所以不会导致协商失败</li>
+<li>解析带 H264 数据的 <a href="https://en.wikipedia.org/wiki/Real-time_Transport_Protocol" title="Real-time_Transport_Protocol">RTP</a> 报文之后直接包装成 <a href="https://en.wikipedia.org/wiki/Real-Time_Messaging_Protocol" title="Real-Time_Messaging_Protocol">RTMP</a> 报文发出，不进行编解码操作和视频帧操作</li>
+<li>音频数据使用 <a href="http://ffmpeg.org/libavformat.html">Libavformat</a> 转换。由于音频数据量小，不会对通话时延造成明显影响</li>
+</ol>
+<h2 id="rtmp-shou-zheng-you-hua"><a class="zola-anchor" href="#rtmp-shou-zheng-you-hua" aria-label="Anchor link for: rtmp-shou-zheng-you-hua">🔗</a>
+RTMP 首帧优化</h2>
+<p>微信小程序端与 Streaming Server 之间通过 <a href="https://en.wikipedia.org/wiki/Real-Time_Messaging_Protocol" title="Real-Time_Messaging_Protocol">RTMP</a> 传输音视频数据，在通话开始时可能会有多于 2s 的黑屏现象。这是由于微信小程序端在显示视频流时需要根据 H264 流中的 <a href="https://en.wikipedia.org/wiki/Network_Abstraction_Layer#Coded_Video_Sequences">IDR</a> 帧的数据进行绘制，如果微信小程序端在建立连接时刻附近没有可用的 <a href="https://en.wikipedia.org/wiki/Network_Abstraction_Layer#Coded_Video_Sequences">IDR</a> 帧数据，播放器会进行等待，出现黑屏。</p>
+<p>基于以上分析，本文改造 <a href="https://github.com/arut/nginx-rtmp-module" title="NGINX-based Media Streaming Server">nginx-rtmp-module</a>，在推流就绪而拉流未就绪时会开始缓存数据帧，缓存的数据帧包含最新一帧 <a href="https://en.wikipedia.org/wiki/Network_Abstraction_Layer#Coded_Video_Sequences">IDR</a> 帧及其后的所有数据帧。在拉流就绪之前，新的非 <a href="https://en.wikipedia.org/wiki/Network_Abstraction_Layer#Coded_Video_Sequences">IDR</a> 帧持续加入缓冲队列，新的 <a href="https://en.wikipedia.org/wiki/Network_Abstraction_Layer#Coded_Video_Sequences">IDR</a> 帧重建缓重队列；在拉流就绪之后，使用已有逻辑，拉流消费推流生产的数据流。实现微信小程序端通话建立时延从之前的 2-3s 优化到 1-1.5s，效果明显。</p>
+<h2 id="hui-hua-bao-chi"><a class="zola-anchor" href="#hui-hua-bao-chi" aria-label="Anchor link for: hui-hua-bao-chi">🔗</a>
+会话保持</h2>
+<p>在会话的过程中，由于参与者多，数据链路比较复杂，本文采取了以下策略实现错误恢复和通话保持。</p>
+<ol>
+<li>Janus Server 作为 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 代理人，需要在整通会话中保持可用；如果不可用，Room Server 会使当前会话失败，并将该服务器从可用的列表中删去。可用性的检测目前是在 Room Server 中使用 WebSocket 保持心跳实现的</li>
+<li>Streaming Server 作为中转服务维持着双向的媒体流，需要在整通会话中保持可用；如果不可用，Room Server 会使当前会话失败，并将该服务器从可用的列表中删去。可用性的检测是在 Room Server 中通过 RPC 服务周期性轮循检测实现的</li>
+<li>Streaming Server 在单通会话中会保持双向的媒体流，其任一媒体流失败的概率都较高，因此实现了失败重试逻辑；由于媒体流是有状态的，在多服务器部署环境下，重试任务时能根据服务器进行隔离</li>
+</ol>
+<p>出现错误或不可用的情况下，当前的通话会受到影响，在几秒钟内会被关闭；后续的新通话不会受到影响。</p>
+<h1 id="zong-jie"><a class="zola-anchor" href="#zong-jie" aria-label="Anchor link for: zong-jie">🔗</a>
+总结</h1>
+<p>本文所述的是一个打通 <a href="https://en.wikipedia.org/wiki/WebRTC" title="WebRTC (Web Real-Time Communication)">WebRTC</a> 和微信小程序的音视频通话支持方案。按照本方案，我们完成了原型系统的搭建，基本实现了预期的目标；后续需要不断优化结构，提高通话体验。</p>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+            
+                <div class="post-tags">
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;webrtc&#x2F;">#WebRTC</a>
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;rtmp&#x2F;">#RTMP</a>
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;wechat&#x2F;">#wechat</a>
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;live-pusher&#x2F;">#live-pusher</a>
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;live-player&#x2F;">#live-player</a>
+                    
+                </div>
+            
+            
+                <div class="post-nav">
+                    
+                        <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-04-12-java-catch-all-and-assertionerror&#x2F;">‹ Java try-catch and AssertionError</a>
+                    
+                    
+                    
+                    
+                </div>
+            
+
+        
+
+    </div>
+
+    
+    
+</article>
+
+
+                </div>
+            </main>
+
+            
+            
+        </div>
+
+      
+          <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
+      
+    </body>
+
+</html>

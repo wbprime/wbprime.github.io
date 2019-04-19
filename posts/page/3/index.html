@@ -113,6 +113,29 @@
                                     
     <header class="post__header">
         <h1 class="post__title">
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2017-03-20-fast-into-graphviz&#x2F;">Fast into Graphviz</a>
+        </h1>
+        <div class="post__meta">
+            <span class="post__time">2017-03-20</span>
+            
+        </div>
+    </header>
+
+                                    <div class="post__summary">
+                                        <p><a href="http://www.graphviz.org">Graphviz - Graph Visualization Software</a> 由 AT&amp;T 出品， 是一种结构化信息的可视化方式，也是一套开放源代码软件，可以被广泛地使用于网络拓扑、软件工程、数据库设计、机器学习等方向的图表展示。</p>
+<p>Graphviz 1.2D 及之前的版本使用了 AT&amp;T 代码许可证 (the AT&amp;T Source Code Agreement)，之后的版本使用了EPL (The Eclipse Public License) 。</p>
+<p>Graphviz 是一款面向程序员的绘图软件，不仅体现在其设计和使用方式上，还体现在其文档上 :)</p>
+
+                                    </div>
+                                    <div class="read-more">
+                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2017-03-20-fast-into-graphviz&#x2F;">Read more...</a>
+                                    </div>
+                                </article>
+                            
+                                <article class="post">
+                                    
+    <header class="post__header">
+        <h1 class="post__title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;learning-java-concurrency-executors-1-executorservice&#x2F;">Learning Java Concurrency - Executors(1) ExecutorService</a>
         </h1>
         <div class="post__meta">
@@ -567,93 +590,6 @@
                                     </div>
                                     <div class="read-more">
                                         <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2016-04-07-learning-java-concurrency-reentrantreadwritelock&#x2F;">Read more...</a>
-                                    </div>
-                                </article>
-                            
-                                <article class="post">
-                                    
-    <header class="post__header">
-        <h1 class="post__title">
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2016-04-07-learning-java-concurrency-reentrantlock-condition&#x2F;">Learning Java Concurrency - ReentrantLock &amp; Condition</a>
-        </h1>
-        <div class="post__meta">
-            <span class="post__time">2016-04-07</span>
-            
-        </div>
-    </header>
-
-                                    <div class="post__summary">
-                                        <p><code>ReentrantLock</code>是<code>synchronized</code>的高阶版本，用来控制多线程同步。<code>ReentrantLock</code>是一种独占锁，同一时间只能有一个线程使用一把锁，其他请求加锁的线程都会被阻塞。除了控制多线程同步之外，<code>ReentrantLock</code>还提供了<code>Condition</code>用来进行多线程通讯。<code>Condition</code>是<code>Object</code>类的方法<code>wait &amp; notify</code>的替代版本，可以用等待/通知模式来有效控制多线程对共享资源的访问。</p>
-<p>仿<a href="https://www.wangbo.im/posts/learning-java-concurrency-synchronized/"><code>synchronized</code></a>，用<code>ReentrantLock</code>实现单例模式的代码如下：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">private static class </span><span style="color:#ebcb8b;">Singleton </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private static volatile </span><span style="color:#ebcb8b;">Singleton </span><span style="color:#eff1f5;">INSTANCE;
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private static </span><span style="color:#ebcb8b;">ReentrantLock </span><span style="color:#eff1f5;">lock </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">ReentrantLock</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private </span><span style="color:#8fa1b3;">Singleton</span><span style="color:#eff1f5;">() {}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public static </span><span style="color:#ebcb8b;">Singleton </span><span style="color:#8fa1b3;">instance</span><span style="color:#eff1f5;">() {
-</span><span style="color:#eff1f5;">        </span><span style="color:#ebcb8b;">Singleton </span><span style="color:#b48ead;">var </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">INSTANCE</span><span style="color:#eff1f5;">;
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">null </span><span style="color:#c0c5ce;">==</span><span style="color:#eff1f5;"> var) {
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">lock.</span><span style="color:#bf616a;">lock</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">try </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">                </span><span style="color:#b48ead;">var </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">INSTANCE</span><span style="color:#eff1f5;">;
-</span><span style="color:#eff1f5;">                </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">null </span><span style="color:#c0c5ce;">==</span><span style="color:#eff1f5;"> var) {
-</span><span style="color:#eff1f5;">                    </span><span style="color:#d08770;">INSTANCE </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> var </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">Singleton</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">} </span><span style="color:#b48ead;">finally </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">lock.</span><span style="color:#bf616a;">unlock</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">return var</span><span style="color:#eff1f5;">;
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">}
-</span></pre>
-<p>仿<a href="https://www.wangbo.im/posts/2016-04-06-learning-java-concurrency-wait-notify/"><code>wait &amp; notify</code></a>，用<code>Condition</code>来实现父子通知汇款的代码如下：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">private static class </span><span style="color:#ebcb8b;">DepositAccount </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private int </span><span style="color:#eff1f5;">money;
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private final </span><span style="color:#ebcb8b;">ReentrantLock </span><span style="color:#eff1f5;">lock </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">ReentrantLock</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private final </span><span style="color:#ebcb8b;">Condition </span><span style="color:#eff1f5;">cond </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> lock.</span><span style="color:#bf616a;">newCondition</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public </span><span style="color:#8fa1b3;">DepositAccount</span><span style="color:#eff1f5;">() {
-</span><span style="color:#eff1f5;">        </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.money </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">0</span><span style="color:#eff1f5;">;
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public void </span><span style="color:#8fa1b3;">withdraw</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">final int </span><span style="color:#bf616a;">val</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">lock.</span><span style="color:#bf616a;">lock</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">try </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">while </span><span style="color:#eff1f5;">(money </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#eff1f5;"> val) {
-</span><span style="color:#eff1f5;">                </span><span style="color:#b48ead;">try </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">                    </span><span style="color:#eff1f5;">cond.</span><span style="color:#bf616a;">await</span><span style="color:#eff1f5;">(); </span><span style="color:#65737e;">// 钱不够，等一会儿
-</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">} </span><span style="color:#b48ead;">catch </span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">InterruptedException </span><span style="color:#bf616a;">e</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">                    </span><span style="color:#65737e;">// do nothing here
-</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">money </span><span style="color:#c0c5ce;">-=</span><span style="color:#eff1f5;"> val;
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">} </span><span style="color:#b48ead;">finally </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">lock.</span><span style="color:#bf616a;">unlock</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public void </span><span style="color:#8fa1b3;">deposite</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">final int </span><span style="color:#bf616a;">val</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">lock.</span><span style="color:#bf616a;">lock</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">try </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">money </span><span style="color:#c0c5ce;">+=</span><span style="color:#eff1f5;"> val;
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">cond.</span><span style="color:#bf616a;">signalAll</span><span style="color:#eff1f5;">(); </span><span style="color:#65737e;">// 存完钱周知一下
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">} </span><span style="color:#b48ead;">finally </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">lock.</span><span style="color:#bf616a;">unlock</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">}
-</span></pre>
-                                    </div>
-                                    <div class="read-more">
-                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2016-04-07-learning-java-concurrency-reentrantlock-condition&#x2F;">Read more...</a>
                                     </div>
                                 </article>
                             

@@ -190,6 +190,13 @@
         </url>
     
         <url>
+            <loc>https://www.wangbo.im/posts/2019-04-19-communication-bridge-between-webrtc-and-wechat-rtmp/</loc>
+            
+                <lastmod>2019-04-19T15:35:56+08:00</lastmod>
+            
+        </url>
+    
+        <url>
             <loc>https://www.wangbo.im/posts/acl-note/</loc>
             
                 <lastmod>2018-02-05T17:46:28+08:00</lastmod>
@@ -794,6 +801,14 @@
         </url>
         
         <url>
+            <loc>https://www.wangbo.im/tags/live-player/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/tags/live-pusher/</loc>
+        </url>
+        
+        <url>
             <loc>https://www.wangbo.im/tags/make/</loc>
         </url>
         
@@ -839,6 +854,10 @@
         
         <url>
             <loc>https://www.wangbo.im/tags/optionallong/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/tags/rtmp/</loc>
         </url>
         
         <url>
@@ -905,6 +924,14 @@
             <loc>https://www.wangbo.im/tags/vert-x/</loc>
         </url>
         
+        <url>
+            <loc>https://www.wangbo.im/tags/webrtc/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/tags/wechat/</loc>
+        </url>
+        
     
         
         <url>
@@ -925,6 +952,10 @@
         
         <url>
             <loc>https://www.wangbo.im/categories/mayday/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/multimedia/</loc>
         </url>
         
         <url>
