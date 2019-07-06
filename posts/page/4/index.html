@@ -113,6 +113,93 @@
                                     
     <header class="post__header">
         <h1 class="post__title">
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2016-04-07-learning-java-concurrency-reentrantreadwritelock&#x2F;">Learning Java Concurrency - ReentrantReadWriteLock</a>
+        </h1>
+        <div class="post__meta">
+            <span class="post__time">2016-04-07</span>
+            
+        </div>
+    </header>
+
+                                    <div class="post__summary">
+                                        <p><code>ReentrantLock</code>是互斥锁，对于要保护的资源，同一时间只能有一个线程进行访问。所谓的访问，就是读和写。但是在实际中，往往是读操作对互斥性的要求远远低于写操作。</p>
+<p>考虑一个共享资源，比如一个List对象，可能会有多个线程对其进行读写。</p>
+<p>下面是使用<code>ReentrantLock</code>实现的一个版本。</p>
+<pre style="background-color:#2b303b;">
+<span style="color:#b48ead;">private static class </span><span style="color:#ebcb8b;">ExclusiveLockStack </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private final </span><span style="color:#ebcb8b;">List</span><span style="color:#eff1f5;">&lt;</span><span style="color:#ebcb8b;">String</span><span style="color:#eff1f5;">&gt; list </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">ArrayList</span><span style="color:#eff1f5;">&lt;</span><span style="color:#ebcb8b;">String</span><span style="color:#eff1f5;">&gt;();
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private final </span><span style="color:#ebcb8b;">ReentrantLock </span><span style="color:#eff1f5;">lock </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">ReentrantLock</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public void </span><span style="color:#8fa1b3;">push</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">String </span><span style="color:#bf616a;">val</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">null </span><span style="color:#c0c5ce;">==</span><span style="color:#eff1f5;"> val)    </span><span style="color:#b48ead;">return</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">lock.</span><span style="color:#bf616a;">lock</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">try </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">list.</span><span style="color:#bf616a;">add</span><span style="color:#eff1f5;">(val);
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">} </span><span style="color:#b48ead;">finally </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">lock.</span><span style="color:#bf616a;">unlock</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public </span><span style="color:#ebcb8b;">String </span><span style="color:#8fa1b3;">last</span><span style="color:#eff1f5;">() {
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">lock.</span><span style="color:#bf616a;">lock</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">        </span><span style="color:#ebcb8b;">String</span><span style="color:#eff1f5;"> str </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">null</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">try </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">final int</span><span style="color:#eff1f5;"> lastIdx </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> list.</span><span style="color:#bf616a;">size</span><span style="color:#eff1f5;">() </span><span style="color:#c0c5ce;">- </span><span style="color:#d08770;">1</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(lastIdx </span><span style="color:#c0c5ce;">&gt;= </span><span style="color:#d08770;">0</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">str </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> list.</span><span style="color:#bf616a;">get</span><span style="color:#eff1f5;">(lastIdx);
+</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">} </span><span style="color:#b48ead;">finally </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">lock.</span><span style="color:#bf616a;">unlock</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">return</span><span style="color:#eff1f5;"> str;
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">}
+</span></pre>
+<p>下面是使用<code>ReentrantReadWriteLock</code>实现的一个版本。</p>
+<pre style="background-color:#2b303b;">
+<span style="color:#eff1f5;">ReadWrittatic </span><span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">ReadWriteLockStack </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private final </span><span style="color:#ebcb8b;">List</span><span style="color:#eff1f5;">&lt;</span><span style="color:#ebcb8b;">String</span><span style="color:#eff1f5;">&gt;           list  </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">ArrayList</span><span style="color:#eff1f5;">&lt;</span><span style="color:#ebcb8b;">String</span><span style="color:#eff1f5;">&gt;();
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private final </span><span style="color:#ebcb8b;">ReentrantReadWriteLock </span><span style="color:#eff1f5;">lock  </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">ReentrantReadWriteLock</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private final </span><span style="color:#ebcb8b;">Lock                   </span><span style="color:#eff1f5;">rLock </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> lock.</span><span style="color:#bf616a;">readLock</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private final </span><span style="color:#ebcb8b;">Lock                   </span><span style="color:#eff1f5;">wLock </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> lock.</span><span style="color:#bf616a;">writeLock</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public void </span><span style="color:#8fa1b3;">push</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">String </span><span style="color:#bf616a;">val</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">null </span><span style="color:#c0c5ce;">==</span><span style="color:#eff1f5;"> val)    </span><span style="color:#b48ead;">return</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">wLock.</span><span style="color:#bf616a;">lock</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">try </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">list.</span><span style="color:#bf616a;">add</span><span style="color:#eff1f5;">(val);
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">} </span><span style="color:#b48ead;">finally </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">wLock.</span><span style="color:#bf616a;">unlock</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public </span><span style="color:#ebcb8b;">String </span><span style="color:#8fa1b3;">last</span><span style="color:#eff1f5;">() {
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">rLock.</span><span style="color:#bf616a;">lock</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">        </span><span style="color:#ebcb8b;">String</span><span style="color:#eff1f5;"> str </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">null</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">try </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">final int</span><span style="color:#eff1f5;"> lastIdx </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> list.</span><span style="color:#bf616a;">size</span><span style="color:#eff1f5;">() </span><span style="color:#c0c5ce;">- </span><span style="color:#d08770;">1</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(lastIdx </span><span style="color:#c0c5ce;">&gt;= </span><span style="color:#d08770;">0</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">str </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> list.</span><span style="color:#bf616a;">get</span><span style="color:#eff1f5;">(lastIdx);
+</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">} </span><span style="color:#b48ead;">finally </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">rLock.</span><span style="color:#bf616a;">unlock</span><span style="color:#eff1f5;">();
+</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">return</span><span style="color:#eff1f5;"> str;
+</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
+</span><span style="color:#eff1f5;">}
+</span></pre>
+                                    </div>
+                                    <div class="read-more">
+                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2016-04-07-learning-java-concurrency-reentrantreadwritelock&#x2F;">Read more...</a>
+                                    </div>
+                                </article>
+                            
+                                <article class="post">
+                                    
+    <header class="post__header">
+        <h1 class="post__title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2016-04-07-learning-java-concurrency-reentrantlock-condition&#x2F;">Learning Java Concurrency - ReentrantLock &amp; Condition</a>
         </h1>
         <div class="post__meta">
@@ -515,26 +602,6 @@
                                     </div>
                                     <div class="read-more">
                                         <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;shuohaode-anjingde-meinanzi-ne&#x2F;">Read more...</a>
-                                    </div>
-                                </article>
-                            
-                                <article class="post">
-                                    
-    <header class="post__header">
-        <h1 class="post__title">
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;c-mantan&#x2F;">C 漫谈</a>
-        </h1>
-        <div class="post__meta">
-            <span class="post__time">2015-05-16</span>
-            
-        </div>
-    </header>
-
-                                    <div class="post__summary">
-                                        
-                                    </div>
-                                    <div class="read-more">
-                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;c-mantan&#x2F;">Read more...</a>
                                     </div>
                                 </article>
                             
