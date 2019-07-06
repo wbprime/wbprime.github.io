@@ -124,7 +124,7 @@
 
     <div class="post-content">
       <p>最近在做短视频转码的项目，涉及到视频在线传输的码率控制的问题，于网络搜寻资料时发现了一篇介绍基于
-<a href="http://ffmpeg.org/">FFmpeg</a> 的码率控制综述文章，获益匪浅，翻译出来作为读书笔记。</p>
+<a href="http://ffmpeg.org/" title="FFmpeg A complete, cross-platform solution to record, convert and stream audio and video.">FFmpeg</a> 的码率控制综述文章，获益匪浅，翻译出来作为读书笔记。</p>
 <p>原文：<a href="https://slhck.info/video/2017/03/01/rate-control.html">Understanding Rate Control Modes (x264, x265, vpx)</a></p>
 <p><a name="continue-reading"></a></p>
 <p>词汇对应：</p>
@@ -161,8 +161,8 @@
 <p>了解应用场景有助于选择码率控制的方式。</p>
 <h1 id="ma-lu-kong-zhi-de-ge-chong-tao-lu"><a class="zola-anchor" href="#ma-lu-kong-zhi-de-ge-chong-tao-lu" aria-label="Anchor link for: ma-lu-kong-zhi-de-ge-chong-tao-lu">🔗</a>
 码率控制的各种套路</h1>
-<p>现在可以详细地了解一下 <a href="http://ffmpeg.org/">FFmpeg</a> 中视频编码的各种套路了。本文只涉及 H.264 的编码器 <a href="http://www.videolan.org/developers/x264.html">x264</a> 和 H.265 的编码器 <a href="http://x265.org/">x265</a>，以及 <a href="https://www.webmproject.org/code/">libvpx</a> 编码器。更多的编码器说明请参见此<a href="http://ffmpeg.org/ffmpeg-all.html#libx264_002c-libx264rgb">文档</a>。</p>
-<p>要使用 <a href="http://x265.org/">x265</a> 编码器，<a href="http://ffmpeg.org/">FFmpeg</a> 需要在编译时启用 <code>--enable-libx265</code> 参数；<a href="https://www.webmproject.org/code/">libvpx</a> 需要启用 <code>--enable-libvpx</code> 参数。另外，部分 <a href="http://x265.org/">x265</a> 的参数不能直接通过 <a href="http://ffmpeg.org/">FFmpeg</a> 的命令行传入，需要借助于 <code>-x265-params</code> 选项。</p>
+<p>现在可以详细地了解一下 <a href="http://ffmpeg.org/" title="FFmpeg A complete, cross-platform solution to record, convert and stream audio and video.">FFmpeg</a> 中视频编码的各种套路了。本文只涉及 H.264 的编码器 <a href="http://www.videolan.org/developers/x264.html">x264</a> 和 H.265 的编码器 <a href="http://x265.org/">x265</a>，以及 <a href="https://www.webmproject.org/code/">libvpx</a> 编码器。更多的编码器说明请参见此<a href="http://ffmpeg.org/ffmpeg-all.html#libx264_002c-libx264rgb">文档</a>。</p>
+<p>要使用 <a href="http://x265.org/">x265</a> 编码器，<a href="http://ffmpeg.org/" title="FFmpeg A complete, cross-platform solution to record, convert and stream audio and video.">FFmpeg</a> 需要在编译时启用 <code>--enable-libx265</code> 参数；<a href="https://www.webmproject.org/code/">libvpx</a> 需要启用 <code>--enable-libvpx</code> 参数。另外，部分 <a href="http://x265.org/">x265</a> 的参数不能直接通过 <a href="http://ffmpeg.org/" title="FFmpeg A complete, cross-platform solution to record, convert and stream audio and video.">FFmpeg</a> 的命令行传入，需要借助于 <code>-x265-params</code> 选项。</p>
 <p>请注意：<a href="http://www.videolan.org/developers/x264.html">x264</a> 之类的编码器在工作时无法遵循固定的码率参数，这意味着在编码简单的帧时，其会使用比指定的码率更低的比特位。无需过分关注此特性，只需记住，编码器不会给你机会来浪费码率。</p>
 <h2 id="gu-ding-liang-hua-can-shu-constant-quantization-parameter-cqp"><a class="zola-anchor" href="#gu-ding-liang-hua-can-shu-constant-quantization-parameter-cqp" aria-label="Anchor link for: gu-ding-liang-hua-can-shu-constant-quantization-parameter-cqp">🔗</a>
 固定量化参数 (Constant Quantization Parameter, CQP)</h2>
@@ -350,6 +350,8 @@
                     
                         <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-04-19-communication-bridge-between-webrtc-and-wechat-rtmp&#x2F;">‹ WebRTC 与微信小程序的音视频互通</a>
                     
+                    
+                        <a class="next" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-07-06-generating-hls-m3u8-using-ffmpeg&#x2F;">Generating HLS&#x2F;M3U8 Using FFmpeg ›</a>
                     
                     
                     

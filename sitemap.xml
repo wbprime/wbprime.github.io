@@ -197,6 +197,13 @@
         </url>
     
         <url>
+            <loc>https://www.wangbo.im/posts/2019-07-06-generating-hls-m3u8-using-ffmpeg/</loc>
+            
+                <lastmod>2019-07-06T15:18:04+08:00</lastmod>
+            
+        </url>
+    
+        <url>
             <loc>https://www.wangbo.im/posts/2019-07-06-understanding-rate-control-modes-x264-x265-vpx/</loc>
             
                 <lastmod>2019-07-06T10:50:16+08:00</lastmod>
@@ -780,6 +787,10 @@
         </url>
         
         <url>
+            <loc>https://www.wangbo.im/tags/hls/</loc>
+        </url>
+        
+        <url>
             <loc>https://www.wangbo.im/tags/http/</loc>
         </url>
         
@@ -833,6 +844,10 @@
         
         <url>
             <loc>https://www.wangbo.im/tags/live-pusher/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/tags/m3u8/</loc>
         </url>
         
         <url>

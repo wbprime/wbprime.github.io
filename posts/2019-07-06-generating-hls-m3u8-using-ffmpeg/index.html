@@ -1,0 +1,488 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>wangbo’s home &amp; blog - Generating HLS&#x2F;M3U8 Using FFmpeg</title>
+
+      
+
+      
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
+          
+      
+
+      
+          <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
+          
+      
+
+      
+      
+    </head>
+
+    <body>
+        <div class="container">
+
+            <div id="mobile-navbar" class="mobile-navbar">
+              <div class="mobile-header-logo">
+                <a href="/" class="logo">WB Prime</a>
+              </div>
+              <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+
+            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
+              <ul class="mobile-menu-list">
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im">
+                            Home
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im&#x2F;categories">
+                            Categories
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im&#x2F;tags">
+                            Tags
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im&#x2F;about">
+                            About
+                        </a>
+                    </li>
+                
+              </ul>
+            </nav>
+
+            <header id="header">
+                <div class="logo"><a href="https:&#x2F;&#x2F;www.wangbo.im">WB Prime</a></div>
+                <nav class="menu">
+                    <ul>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im">
+                                    Home
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im&#x2F;categories">
+                                    Categories
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im&#x2F;tags">
+                                    Tags
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im&#x2F;about">
+                                    About
+                                </a>
+                            </li>
+                        
+                    </ul>
+                </nav>
+            </header>
+
+            <main>
+                <div class="content" id="mobile-panel">
+                    
+
+
+
+<article class="post">
+    
+    <header class="post__header">
+        <h1 class="post__title">
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-07-06-generating-hls-m3u8-using-ffmpeg&#x2F;">Generating HLS&#x2F;M3U8 Using FFmpeg</a>
+        </h1>
+        <div class="post__meta">
+            <span class="post__time">2019-07-06</span>
+            
+        </div>
+    </header>
+
+    <div class="post-content">
+      <p><a href="http://ffmpeg.org/" title="FFmpeg A complete, cross-platform solution to record, convert and stream audio and video.">FFmpeg</a> 是开源的音视频处理项目，以使用灵活、功能丰富著称，被各大互联网公司用来构建多媒体服务的基础。</p>
+<p>最近的项目中需要提供音视频多码率转码支持，集中调研了 <a href="http://ffmpeg.org/" title="FFmpeg A complete, cross-platform solution to record, convert and stream audio and video.">FFmpeg</a> 对 <a href="https://developer.apple.com/streaming/">Apple HTTP Live Streaming (HLS)</a> 的支持，总结一下，遂成本文。</p>
+<p>说明：本文中使用的命令行 <code>ffmpeg</code> 版本为：</p>
+<blockquote>
+<pre style="background-color:#2b303b;">
+<span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">~  ffmpeg
+</span><span style="color:#c0c5ce;">ffmpeg version n4.1.3 Copyright (c) 2000-2019 the FFmpeg developers
+</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">built with gcc 8.2.1 (GCC) 20181127
+</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">configuration: --prefix=/usr --disable-debug --disable-static --disable-stripping --enable-fontconfig --enable-gmp --enable-gnutls --enable-gpl --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libdrm --enable-libfreetype --enable-libfribidi --enable-libgsm --enable-libiec61883 --enable-libjack --enable-libmodplug --enable-libmp3lame --enable-libopencore_amrnb --enable-libopencore_amrwb --enable-libopenjpeg --enable-libopus --enable-libpulse --enable-libsoxr --enable-libspeex --enable-libssh --enable-libtheora
+</span><span style="color:#c0c5ce;">--enable-libv4l2 --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxcb --enable-libxml2 --enable-libxvid --enable-nvdec --enable-nvenc --enable-omx --enable-shared --enable-version3
+</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">libavutil      56. 22.100 / 56. 22.100
+</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">libavcodec     58. 35.100 / 58. 35.100
+</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">libavformat    58. 20.100 / 58. 20.100
+</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">libavdevice    58.  5.100 / 58.  5.100
+</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">libavfilter     7. 40.101 /  7. 40.101
+</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">libswscale      5.  3.100 /  5.  3.100
+</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">libswresample   3.  3.100 /  3.  3.100
+</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">libpostproc    55.  3.100 / 55.  3.100
+</span></pre></blockquote>
+<p><a name="continue-reading"></a></p>
+<h1 id="hls-muxer"><a class="zola-anchor" href="#hls-muxer" aria-label="Anchor link for: hls-muxer">🔗</a>
+<code>hls</code> Muxer</h1>
+<p><a href="http://ffmpeg.org/" title="FFmpeg A complete, cross-platform solution to record, convert and stream audio and video.">FFmpeg</a> 通过 <a href="http://ffmpeg.org/ffmpeg-formats.html#hls-2">hls</a> 封装器格式可以支持 <a href="https://tools.ietf.org/html/draft-pantos-http-live-streaming-06" title="HTTP Live Streaming draft-pantos-http-live-streaming-06">HTTP Live Streaming (HLS)</a> 输出。其会将原视频分割为多个 <a href="https://en.wikipedia.org/wiki/MPEG_transport_stream" title="MPEG transport stream">MPEG-TS (.ts)</a> 格式的片段文件，以及一个 <a href="https://en.wikipedia.org/wiki/M3U" title="M3U">M3U8 (.m3u8)</a> 格式的播放列表文件。</p>
+<p>官方提供的示例：</p>
+<pre style="background-color:#2b303b;">
+<span style="color:#bf616a;">ffmpeg -i</span><span style="color:#c0c5ce;"> in.mkv</span><span style="color:#bf616a;"> -c</span><span style="color:#c0c5ce;">:v h264</span><span style="color:#bf616a;"> -flags</span><span style="color:#c0c5ce;"> +cgop</span><span style="color:#bf616a;"> -g</span><span style="color:#c0c5ce;"> 30</span><span style="color:#bf616a;"> -hls_time</span><span style="color:#c0c5ce;"> 1 out.m3u8
+</span></pre>
+<p>会生成一个播放列表文件 <code>out.m3u8</code>，以及多个视频分片文件 <code>out0.ts</code>, <code>out1.ts</code>, <code>out2.ts</code> 等。</p>
+<p>另外，<a href="http://ffmpeg.org/" title="FFmpeg A complete, cross-platform solution to record, convert and stream audio and video.">FFmpeg</a> 也提供了 <a href="http://ffmpeg.org/ffmpeg-formats.html#segment_002c-stream_005fsegment_002c-ssegment">segment</a> 封装器格式可以生成 <a href="https://tools.ietf.org/html/draft-pantos-http-live-streaming-06" title="HTTP Live Streaming draft-pantos-http-live-streaming-06">HTTP Live Streaming (HLS)</a> 格式的输出。</p>
+<h1 id="dan-ma-lu-m3u8"><a class="zola-anchor" href="#dan-ma-lu-m3u8" aria-label="Anchor link for: dan-ma-lu-m3u8">🔗</a>
+单码率 M3U8</h1>
+<h2 id="qi-shi"><a class="zola-anchor" href="#qi-shi" aria-label="Anchor link for: qi-shi">🔗</a>
+起始</h2>
+<p>一个典型的生成 <a href="https://tools.ietf.org/html/draft-pantos-http-live-streaming-06" title="HTTP Live Streaming draft-pantos-http-live-streaming-06">HLS</a> 输出的命令行如下：</p>
+<pre style="background-color:#2b303b;">
+<span style="color:#bf616a;">ffmpeg -hide_banner -loglevel</span><span style="color:#c0c5ce;"> warning \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-ss</span><span style="color:#c0c5ce;"> 10</span><span style="color:#bf616a;"> -t</span><span style="color:#c0c5ce;"> 10 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-i</span><span style="color:#c0c5ce;"> test.avi \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-c:v</span><span style="color:#c0c5ce;"> libx264</span><span style="color:#bf616a;"> -crf</span><span style="color:#c0c5ce;"> 23</span><span style="color:#bf616a;"> -preset</span><span style="color:#c0c5ce;"> veryfast \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-c:a</span><span style="color:#c0c5ce;"> aac</span><span style="color:#bf616a;"> -b</span><span style="color:#c0c5ce;">:a 128k</span><span style="color:#bf616a;"> -ac</span><span style="color:#c0c5ce;"> 2 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-f</span><span style="color:#c0c5ce;"> hls \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-hls_time</span><span style="color:#c0c5ce;"> 4 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-hls_playlist_type</span><span style="color:#c0c5ce;"> vod \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-hls_segment_filename</span><span style="color:#c0c5ce;"> hls.test%</span><span style="color:#bf616a;">d</span><span style="color:#c0c5ce;">.ts \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-hls_list_size</span><span style="color:#c0c5ce;"> 0 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">hls.test.m3u8
+</span></pre>
+<ol>
+<li><code>-f hls</code> 行指定了输出格式为 <code>hls</code>，ffmpeg 会使用 <a href="http://ffmpeg.org/ffmpeg-formats.html#hls-2">hls</a> 来对输出视频做封装操作。</li>
+<li><code>-hls_time 4</code> 行指定了输出视频片段的长度，期望输出的视频片段每一个的时长都是 4s。</li>
+<li><code>-hls_playlist_type vod</code> 行指定了播放列表的类型；<code>vod</code> 即点播，<code>event</code> 即直播。</li>
+<li><code>-hls_segment_filename hls.test%d.ts</code> 行指定了输出片段文件名格式，可以使用 <code>%d</code> 或 <code>%5d</code> 的格式化符</li>
+<li><code>-hls_list_size 0</code> 行指定了输出视频片段的最大个数；如果设置为 0，说明不限制个数。</li>
+</ol>
+<p>该命令会生成以下文件：</p>
+<ul>
+<li>hls.test0.ts</li>
+<li>hls.test1.ts</li>
+<li>hls.test2.ts</li>
+<li>hls.test3.ts</li>
+<li>hls.test.m3u8</li>
+</ul>
+<p>生成的 <code>hls.test.m3u8</code> 文件如下：</p>
+<blockquote>
+<pre style="background-color:#2b303b;">
+<span style="color:#c0c5ce;">#EXTM3U
+</span><span style="color:#c0c5ce;">#EXT-X-VERSION:3
+</span><span style="color:#c0c5ce;">#EXT-X-TARGETDURATION:7
+</span><span style="color:#c0c5ce;">#EXT-X-MEDIA-SEQUENCE:0
+</span><span style="color:#c0c5ce;">#EXT-X-PLAYLIST-TYPE:VOD
+</span><span style="color:#c0c5ce;">#EXTINF:6.760000,
+</span><span style="color:#c0c5ce;">hls.test0.ts
+</span><span style="color:#c0c5ce;">#EXTINF:6.040000,
+</span><span style="color:#c0c5ce;">hls.test1.ts
+</span><span style="color:#c0c5ce;">#EXTINF:4.520000,
+</span><span style="color:#c0c5ce;">hls.test2.ts
+</span><span style="color:#c0c5ce;">#EXTINF:2.680000,
+</span><span style="color:#c0c5ce;">hls.test3.ts
+</span><span style="color:#c0c5ce;">#EXT-X-ENDLIST
+</span></pre></blockquote>
+<p>注意到视频片段的长度并不是指定的 4s。这是因为 <a href="http://ffmpeg.org/" title="FFmpeg A complete, cross-platform solution to record, convert and stream audio and video.">FFmpeg</a> 在生成片段时，总是会在满足时长要求条件的第一个关键帧 (I-frame) 处截断，而不是严格按照时长来截断的。</p>
+<p>[Demo Script][m3u8.simple.01.sh]</p>
+<h2 id="zhi-ding-gop"><a class="zola-anchor" href="#zhi-ding-gop" aria-label="Anchor link for: zhi-ding-gop">🔗</a>
+指定 GOP</h2>
+<p>如果能够使得视频在指定的时间间隔处存在关键帧，则输出的片段时长都能保持一致。可以通过 <code>-g</code> 参数来设置 GOP (相邻的两个关键帧之间的帧数）。</p>
+<p>新的命令如下：</p>
+<pre style="background-color:#2b303b;">
+<span style="color:#bf616a;">ffmpeg -hide_banner -loglevel</span><span style="color:#c0c5ce;"> warning \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-ss</span><span style="color:#c0c5ce;"> 10</span><span style="color:#bf616a;"> -t</span><span style="color:#c0c5ce;"> 10 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-i</span><span style="color:#c0c5ce;"> test.avi \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-c:v</span><span style="color:#c0c5ce;"> libx264</span><span style="color:#bf616a;"> -crf</span><span style="color:#c0c5ce;"> 23</span><span style="color:#bf616a;"> -preset</span><span style="color:#c0c5ce;"> veryfast \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-g</span><span style="color:#c0c5ce;"> 30 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-c:a</span><span style="color:#c0c5ce;"> aac</span><span style="color:#bf616a;"> -b</span><span style="color:#c0c5ce;">:a 128k</span><span style="color:#bf616a;"> -ac</span><span style="color:#c0c5ce;"> 2 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-f</span><span style="color:#c0c5ce;"> hls \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-hls_time</span><span style="color:#c0c5ce;"> 4 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-hls_playlist_type</span><span style="color:#c0c5ce;"> vod \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-hls_segment_filename</span><span style="color:#c0c5ce;"> hls.test%</span><span style="color:#bf616a;">d</span><span style="color:#c0c5ce;">.ts \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-hls_list_size</span><span style="color:#c0c5ce;"> 0 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">hls.test.m3u8
+</span></pre>
+<p>生成的文件如下：</p>
+<blockquote>
+<pre style="background-color:#2b303b;">
+<span style="color:#c0c5ce;">#EXTM3U
+</span><span style="color:#c0c5ce;">#EXT-X-VERSION:3
+</span><span style="color:#c0c5ce;">#EXT-X-TARGETDURATION:5
+</span><span style="color:#c0c5ce;">#EXT-X-MEDIA-SEQUENCE:0
+</span><span style="color:#c0c5ce;">#EXT-X-PLAYLIST-TYPE:VOD
+</span><span style="color:#c0c5ce;">#EXTINF:4.280000,
+</span><span style="color:#c0c5ce;">hls.test0.ts
+</span><span style="color:#c0c5ce;">#EXTINF:4.800000,
+</span><span style="color:#c0c5ce;">hls.test1.ts
+</span><span style="color:#c0c5ce;">#EXTINF:3.600000,
+</span><span style="color:#c0c5ce;">hls.test2.ts
+</span><span style="color:#c0c5ce;">#EXTINF:3.720000,
+</span><span style="color:#c0c5ce;">hls.test3.ts
+</span><span style="color:#c0c5ce;">#EXTINF:3.600000,
+</span><span style="color:#c0c5ce;">hls.test4.ts
+</span><span style="color:#c0c5ce;">#EXT-X-ENDLIST
+</span></pre></blockquote>
+<p>片段的时长和目标时长接近了很多，但还是有一些差异。</p>
+<p>[Demo Script][m3u8.simple.02.sh]</p>
+<h2 id="qu-xiao-yun-dong-chang-jing-jian-ce"><a class="zola-anchor" href="#qu-xiao-yun-dong-chang-jing-jian-ce" aria-label="Anchor link for: qu-xiao-yun-dong-chang-jing-jian-ce">🔗</a>
+取消运动场景检测</h2>
+<p><a href="http://ffmpeg.org/" title="FFmpeg A complete, cross-platform solution to record, convert and stream audio and video.">FFmpeg</a> 在编码时进行运动检测。当检测到运动场景变换时，其会自动插入一帧关键帧；该行为可以通过 <code>-sc_threshold</code> 禁用。</p>
+<p>新命令如下：</p>
+<pre style="background-color:#2b303b;">
+<span style="color:#bf616a;">ffmpeg -hide_banner -loglevel</span><span style="color:#c0c5ce;"> warning \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-ss</span><span style="color:#c0c5ce;"> 10</span><span style="color:#bf616a;"> -t</span><span style="color:#c0c5ce;"> 10 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-i</span><span style="color:#c0c5ce;"> test.avi \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-c:v</span><span style="color:#c0c5ce;"> libx264</span><span style="color:#bf616a;"> -crf</span><span style="color:#c0c5ce;"> 23</span><span style="color:#bf616a;"> -preset</span><span style="color:#c0c5ce;"> veryfast \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-g</span><span style="color:#c0c5ce;"> 30 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-sc_threshold</span><span style="color:#c0c5ce;"> 0 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-c:a</span><span style="color:#c0c5ce;"> aac</span><span style="color:#bf616a;"> -b</span><span style="color:#c0c5ce;">:a 128k</span><span style="color:#bf616a;"> -ac</span><span style="color:#c0c5ce;"> 2 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-f</span><span style="color:#c0c5ce;"> hls \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-hls_time</span><span style="color:#c0c5ce;"> 4 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-hls_playlist_type</span><span style="color:#c0c5ce;"> vod \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-hls_segment_filename</span><span style="color:#c0c5ce;"> hls.test%</span><span style="color:#bf616a;">d</span><span style="color:#c0c5ce;">.ts \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-hls_list_size</span><span style="color:#c0c5ce;"> 0 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">hls.test.m3u8
+</span></pre>
+<p>新的播放列表如下：</p>
+<blockquote>
+<pre style="background-color:#2b303b;">
+<span style="color:#c0c5ce;">#EXTM3U
+</span><span style="color:#c0c5ce;">#EXT-X-VERSION:3
+</span><span style="color:#c0c5ce;">#EXT-X-TARGETDURATION:5
+</span><span style="color:#c0c5ce;">#EXT-X-MEDIA-SEQUENCE:0
+</span><span style="color:#c0c5ce;">#EXT-X-PLAYLIST-TYPE:VOD
+</span><span style="color:#c0c5ce;">#EXTINF:4.800000,
+</span><span style="color:#c0c5ce;">hls.test0.ts
+</span><span style="color:#c0c5ce;">#EXTINF:3.600000,
+</span><span style="color:#c0c5ce;">hls.test1.ts
+</span><span style="color:#c0c5ce;">#EXTINF:3.600000,
+</span><span style="color:#c0c5ce;">hls.test2.ts
+</span><span style="color:#c0c5ce;">#EXTINF:4.800000,
+</span><span style="color:#c0c5ce;">hls.test3.ts
+</span><span style="color:#c0c5ce;">#EXTINF:3.200000,
+</span><span style="color:#c0c5ce;">hls.test4.ts
+</span><span style="color:#c0c5ce;">#EXT-X-ENDLIST
+</span></pre></blockquote>
+<p>[Demo Script][m3u8.simple.03.sh]</p>
+<h2 id="closed-gop"><a class="zola-anchor" href="#closed-gop" aria-label="Anchor link for: closed-gop">🔗</a>
+closed GOP</h2>
+<p>对于视频分片来说，通常还需要设置 <em>closed GOP</em> 模式，防止视频帧去引用 GOP 之外的帧。</p>
+<p><a href="http://ffmpeg.org/" title="FFmpeg A complete, cross-platform solution to record, convert and stream audio and video.">FFmpeg</a> 中通过 <code>-flags +cgop</code> 选项设置 <em>closed GOP</em> 模式。</p>
+<pre style="background-color:#2b303b;">
+<span style="color:#c0c5ce;">ffmpeg -hide_banner -loglevel warning \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">-ss 10 -t 10 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">-i test.avi \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">-c:v libx264 -crf 23 -preset veryfast \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">-g 30 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">-sc_threshold 0 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">-c:a aac -b:a 128k -ac 2 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">-f hls \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">-hls_time 4 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">-hls_playlist_type vod \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">-hls_segment_filename hls.test%d.ts \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">-hls_list_size 0 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">hls.test.m3u8
+</span></pre>
+<p>[Demo Script][m3u8.simple.04.sh]</p>
+<h1 id="duo-ma-lu-m3u8"><a class="zola-anchor" href="#duo-ma-lu-m3u8" aria-label="Anchor link for: duo-ma-lu-m3u8">🔗</a>
+多码率 M3U8</h1>
+<h2 id="duo-ma-lu"><a class="zola-anchor" href="#duo-ma-lu" aria-label="Anchor link for: duo-ma-lu">🔗</a>
+多码率</h2>
+<p><a href="http://ffmpeg.org/" title="FFmpeg A complete, cross-platform solution to record, convert and stream audio and video.">FFmpeg</a> 可以直接支持对多码率 <a href="https://tools.ietf.org/html/draft-pantos-http-live-streaming-06" title="HTTP Live Streaming draft-pantos-http-live-streaming-06">HLS</a> 输出的支持。其在生成多个单码率播放列表之外，还会生成一个层级播放列表文件。</p>
+<p>命令如下：</p>
+<pre style="background-color:#2b303b;">
+<span style="color:#bf616a;">ffmpeg -hide_banner -loglevel</span><span style="color:#c0c5ce;"> warning \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-ss</span><span style="color:#c0c5ce;"> 10</span><span style="color:#bf616a;"> -t</span><span style="color:#c0c5ce;"> 10 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-i</span><span style="color:#c0c5ce;"> test.avi \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-g</span><span style="color:#c0c5ce;"> 30 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-sc_threshold</span><span style="color:#c0c5ce;"> 0 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-c:a</span><span style="color:#c0c5ce;"> aac</span><span style="color:#bf616a;"> -b</span><span style="color:#c0c5ce;">:a 128k</span><span style="color:#bf616a;"> -ac</span><span style="color:#c0c5ce;"> 2 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-f</span><span style="color:#c0c5ce;"> hls \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-hls_time</span><span style="color:#c0c5ce;"> 4 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-hls_playlist_type</span><span style="color:#c0c5ce;"> event \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-hls_segment_filename</span><span style="color:#c0c5ce;"> hls.test%</span><span style="color:#bf616a;">d</span><span style="color:#c0c5ce;">.%</span><span style="color:#bf616a;">v</span><span style="color:#c0c5ce;">.ts \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-hls_list_size</span><span style="color:#c0c5ce;"> 0 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-map</span><span style="color:#c0c5ce;"> v:0</span><span style="color:#bf616a;"> -c</span><span style="color:#c0c5ce;">:v:0 libx264</span><span style="color:#bf616a;"> -b</span><span style="color:#c0c5ce;">:v:0 2000k \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-map</span><span style="color:#c0c5ce;"> v:0</span><span style="color:#bf616a;"> -c</span><span style="color:#c0c5ce;">:v:1 libx264</span><span style="color:#bf616a;"> -b</span><span style="color:#c0c5ce;">:v:1 6000k \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-map</span><span style="color:#c0c5ce;"> a:0 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-map</span><span style="color:#c0c5ce;"> a:0 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-var_stream_map </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">v:0,a:0 v:1,a:1</span><span style="color:#c0c5ce;">&quot; \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-master_pl_name</span><span style="color:#c0c5ce;"> hls.test.m3u8 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">hls.test.m3u8
+</span></pre>
+<p>说明如下：</p>
+<ul>
+<li><code>-var_stream_map &quot;v:0,a:0 v:1,a:1&quot;</code> 行通过逗号和空格分隔的参数指定输出两个码率的播放列表，并指定第一个播放列表对应的视频从第一个视频流和第一个音频流生成，第二个播放列表对应的视频片段从第二个视频流和第二个音频流生成；使用本参数之后，<code>-hls_segment_filename</code> 选项需要添加一个 <code>%v</code> 的占位符，表示第几个播放列表。</li>
+<li><code>-master_pl_name hls.test.master.m3u8</code> 行指定输出的层级播放列表文件名</li>
+</ul>
+<p>注意，由于需要输出多码率，所以在输出参数需要通过 <code>-map</code> 参数准备多个输出流。</p>
+<p>另外，在本文使用的ffmpeg版本中，<code>-hls_playlist_type</code> 需要设置为 <code>event</code>，否则会报 <code>core dump</code> 异常。</p>
+<p>生成的层级播放列表文件内容如下：</p>
+<blockquote>
+<pre style="background-color:#2b303b;">
+<span style="color:#c0c5ce;">#EXTM3U
+</span><span style="color:#c0c5ce;">#EXT-X-VERSION:3
+</span><span style="color:#c0c5ce;">#EXT-X-STREAM-INF:BANDWIDTH=2340800,RESOLUTION=1280x720,CODECS=&quot;avc1.64001f,mp4a.40.2&quot;
+</span><span style="color:#c0c5ce;">hls.test.0.m3u8
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">#EXT-X-STREAM-INF:BANDWIDTH=6740800,RESOLUTION=1280x720,CODECS=&quot;avc1.64001f,mp4a.40.2&quot;
+</span><span style="color:#c0c5ce;">hls.test.1.m3u8
+</span></pre></blockquote>
+<p>对于多码率的选择，可以参考 <a href="https://developer.apple.com/documentation/http_live_streaming/hls_authoring_specification_for_apple_devices">Apple 的推荐码率</a>。</p>
+<p>[Demo Script][m3u8.multi.01.sh]</p>
+<h2 id="duo-fen-bian-lu"><a class="zola-anchor" href="#duo-fen-bian-lu" aria-label="Anchor link for: duo-fen-bian-lu">🔗</a>
+多分辨率</h2>
+<p>如果需要输出的多码率视频匹配多个分辨率，可以使用 <code>-complex_filter</code> 组装过滤器图来实现。</p>
+<p>命令如下：</p>
+<pre style="background-color:#2b303b;">
+<span style="color:#bf616a;">ffmpeg -hide_banner -loglevel</span><span style="color:#c0c5ce;"> warning \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-ss</span><span style="color:#c0c5ce;"> 10</span><span style="color:#bf616a;"> -t</span><span style="color:#c0c5ce;"> 10 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-i</span><span style="color:#c0c5ce;"> test.avi \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-filter_complex </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">[v:0]split=2[vtemp001][vout002];[vtemp001]scale=w=960:h=540[vout001]</span><span style="color:#c0c5ce;">&quot; \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-g</span><span style="color:#c0c5ce;"> 30 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-sc_threshold</span><span style="color:#c0c5ce;"> 0 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-c:a</span><span style="color:#c0c5ce;"> aac</span><span style="color:#bf616a;"> -b</span><span style="color:#c0c5ce;">:a 128k</span><span style="color:#bf616a;"> -ac</span><span style="color:#c0c5ce;"> 2 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-f</span><span style="color:#c0c5ce;"> hls \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-hls_time</span><span style="color:#c0c5ce;"> 4 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-hls_playlist_type</span><span style="color:#c0c5ce;"> event \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-hls_segment_filename</span><span style="color:#c0c5ce;"> hls.test%</span><span style="color:#bf616a;">d</span><span style="color:#c0c5ce;">.%</span><span style="color:#bf616a;">v</span><span style="color:#c0c5ce;">.ts \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-hls_list_size</span><span style="color:#c0c5ce;"> 0 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-map </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">[vout001]</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#bf616a;"> -c</span><span style="color:#c0c5ce;">:v:0 libx264</span><span style="color:#bf616a;"> -b</span><span style="color:#c0c5ce;">:v:0 2000k \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-map </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">[vout002]</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#bf616a;"> -c</span><span style="color:#c0c5ce;">:v:1 libx264</span><span style="color:#bf616a;"> -b</span><span style="color:#c0c5ce;">:v:1 6000k \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-map</span><span style="color:#c0c5ce;"> a:0 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-map</span><span style="color:#c0c5ce;"> a:0 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-var_stream_map </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">v:0,a:0 v:1,a:1</span><span style="color:#c0c5ce;">&quot; \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-master_pl_name</span><span style="color:#c0c5ce;"> hls.test.m3u8 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">hls.test.m3u8
+</span></pre>
+<p>注意，过滤器图需要生成多个输出，<code>-map</code> 行需要与对应的输出匹配。</p>
+<p>生成的播放列表文件内容如下：</p>
+<blockquote>
+<pre style="background-color:#2b303b;">
+<span style="color:#c0c5ce;">#EXTM3U
+</span><span style="color:#c0c5ce;">#EXT-X-VERSION:3
+</span><span style="color:#c0c5ce;">#EXT-X-STREAM-INF:BANDWIDTH=2340800,RESOLUTION=960x540,CODECS=&quot;avc1.64001f,mp4a.40.2&quot;
+</span><span style="color:#c0c5ce;">hls.test.0.m3u8
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">#EXT-X-STREAM-INF:BANDWIDTH=6740800,RESOLUTION=1280x720,CODECS=&quot;avc1.64001f,mp4a.40.2&quot;
+</span><span style="color:#c0c5ce;">hls.test.1.m3u8
+</span></pre></blockquote>
+<p>[Demo Script][m3u8.multi.02.sh]</p>
+<h1 id="ffmpeg-3-x"><a class="zola-anchor" href="#ffmpeg-3-x" aria-label="Anchor link for: ffmpeg-3-x">🔗</a>
+FFmpeg 3.x</h1>
+<p>遗憾的是，<code>-var_stream_map</code> 选项是在 <a href="http://ffmpeg.org/" title="FFmpeg A complete, cross-platform solution to record, convert and stream audio and video.">FFmpeg</a> 4.x 版本以后添加的功能，在 3.x 版本中不被支持。</p>
+<p>解决办法 <s>删掉 3.x 安装 4.x</s> (_^_^_)</p>
+<p>我采用的方法是多输出然后手动合并。</p>
+<p>首先执行：</p>
+<pre style="background-color:#2b303b;">
+<span style="color:#bf616a;">ffmpeg -hide_banner -loglevel</span><span style="color:#c0c5ce;"> warning \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-ss</span><span style="color:#c0c5ce;"> 10</span><span style="color:#bf616a;"> -t</span><span style="color:#c0c5ce;"> 10 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-i</span><span style="color:#c0c5ce;"> test.avi \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-filter_complex </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">[v:0]split=2[vtemp001][vout002];[vtemp001]scale=w=960:h=540[vout001]</span><span style="color:#c0c5ce;">&quot; \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-g</span><span style="color:#c0c5ce;"> 30 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-sc_threshold</span><span style="color:#c0c5ce;"> 0 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-c:a</span><span style="color:#c0c5ce;"> aac</span><span style="color:#bf616a;"> -b</span><span style="color:#c0c5ce;">:a 128k</span><span style="color:#bf616a;"> -ac</span><span style="color:#c0c5ce;"> 2 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-f</span><span style="color:#c0c5ce;"> hls \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-hls_time</span><span style="color:#c0c5ce;"> 4 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-hls_playlist_type</span><span style="color:#c0c5ce;"> event \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-hls_segment_filename</span><span style="color:#c0c5ce;"> hls.test%</span><span style="color:#bf616a;">d</span><span style="color:#c0c5ce;">.0.ts \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-hls_list_size</span><span style="color:#c0c5ce;"> 0 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-map </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">[vout001]</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#bf616a;"> -c</span><span style="color:#c0c5ce;">:v:0 libx264</span><span style="color:#bf616a;"> -b</span><span style="color:#c0c5ce;">:v:0 2000k \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-map</span><span style="color:#c0c5ce;"> a:0 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">hls.test.0.m3u8 </span><span style="color:#c0c5ce;">\
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-g</span><span style="color:#c0c5ce;"> 30 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-sc_threshold</span><span style="color:#c0c5ce;"> 0 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-c:a</span><span style="color:#c0c5ce;"> aac</span><span style="color:#bf616a;"> -b</span><span style="color:#c0c5ce;">:a 128k</span><span style="color:#bf616a;"> -ac</span><span style="color:#c0c5ce;"> 2 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-f</span><span style="color:#c0c5ce;"> hls \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-hls_time</span><span style="color:#c0c5ce;"> 4 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-hls_playlist_type</span><span style="color:#c0c5ce;"> event \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-hls_segment_filename</span><span style="color:#c0c5ce;"> hls.test%</span><span style="color:#bf616a;">d</span><span style="color:#c0c5ce;">.1.ts \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-hls_list_size</span><span style="color:#c0c5ce;"> 0 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-map </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">[vout002]</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#bf616a;"> -c</span><span style="color:#c0c5ce;">:v:1 libx264</span><span style="color:#bf616a;"> -b</span><span style="color:#c0c5ce;">:v:1 6000k \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-map</span><span style="color:#c0c5ce;"> a:0 \
+</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">hls.test.1.m3u8
+</span></pre>
+<p>然后，使用 <code>ffprobe</code> 遍历每一个码率的片段文件，获取最大码率和分辨率之后手动生成层级播放列表文件。</p>
+<p>[Demo Script][m3u8.multi.03.sh]</p>
+<p>以上！</p>
+<p>参考：</p>
+<ul>
+<li><a href="https://www.martin-riedl.de/2018/08/24/using-ffmpeg-as-a-hls-streaming-server-part-1/">Using FFmpeg as a HLS streaming server (Part 1) – HLS Basics</a></li>
+<li><a href="https://www.martin-riedl.de/2018/08/24/using-ffmpeg-as-a-hls-streaming-server-part-2/">Using FFmpeg as a HLS streaming server (Part 2) – Enhanced HLS Segmentation</a></li>
+<li><a href="https://www.martin-riedl.de/2018/08/25/using-ffmpeg-as-a-hls-streaming-server-part-3/">Using FFmpeg as a HLS streaming server (Part 3) – Multiple Bitrates</a></li>
+<li><a href="https://www.martin-riedl.de/2018/08/26/using-ffmpeg-as-a-hls-streaming-server-part-4-multiple-video-resolutions/">Using FFmpeg as a HLS streaming server (Part 4) – Multiple Video Resolutions</a></li>
+<li><a href="https://www.martin-riedl.de/2018/08/30/using-ffmpeg-as-a-hls-streaming-server-part-5-folder-structure/">Using FFmpeg as a HLS streaming server (Part 5) – Folder Structure</a></li>
+</ul>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+            
+                <div class="post-tags">
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;ffmpeg&#x2F;">#ffmpeg</a>
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;hls&#x2F;">#hls</a>
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;m3u8&#x2F;">#m3u8</a>
+                    
+                </div>
+            
+            
+                <div class="post-nav">
+                    
+                        <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-07-06-understanding-rate-control-modes-x264-x265-vpx&#x2F;">‹ [译] Understanding Rate Control Modes (x264, x265, vpx)</a>
+                    
+                    
+                    
+                    
+                </div>
+            
+
+        
+
+    </div>
+
+    
+    
+</article>
+
+
+                </div>
+            </main>
+
+            
+            
+        </div>
+
+      
+          <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
+      
+    </body>
+
+</html>
