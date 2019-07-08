@@ -211,6 +211,13 @@
         </url>
     
         <url>
+            <loc>https://www.wangbo.im/posts/2019-07-08-general-video-bitrate-recommendation/</loc>
+            
+                <lastmod>2019-07-08T10:48:41+08:00</lastmod>
+            
+        </url>
+    
+        <url>
             <loc>https://www.wangbo.im/posts/acl-note/</loc>
             
                 <lastmod>2018-02-05T17:46:28+08:00</lastmod>
@@ -667,6 +674,52 @@
     
         
         <url>
+            <loc>https://www.wangbo.im/categories/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/c-c/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/learning-java-concurrency/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/life/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/mayday/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/notes/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/practise/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/spring-mvc-testing/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/spring/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/streaming/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/vertx/</loc>
+        </url>
+        
+    
+        
+        <url>
             <loc>https://www.wangbo.im/tags/</loc>
         </url>
         
@@ -683,6 +736,10 @@
         </url>
         
         <url>
+            <loc>https://www.wangbo.im/tags/apple/</loc>
+        </url>
+        
+        <url>
             <loc>https://www.wangbo.im/tags/archlinux/</loc>
         </url>
         
@@ -696,6 +753,10 @@
         
         <url>
             <loc>https://www.wangbo.im/tags/awk/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/tags/bitrate/</loc>
         </url>
         
         <url>
@@ -986,50 +1047,8 @@
             <loc>https://www.wangbo.im/tags/wechat/</loc>
         </url>
         
-    
-        
         <url>
-            <loc>https://www.wangbo.im/categories/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/c-c/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/learning-java-concurrency/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/life/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/mayday/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/notes/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/practise/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/spring-mvc-testing/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/spring/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/streaming/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/vertx/</loc>
+            <loc>https://www.wangbo.im/tags/youtube/</loc>
         </url>
         
     
