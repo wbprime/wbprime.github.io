@@ -218,6 +218,13 @@
         </url>
     
         <url>
+            <loc>https://www.wangbo.im/posts/2019-07-21-ffmpeg-snapshot-kuaizhao-thumbnail-concluded/</loc>
+            
+                <lastmod>2019-07-21T15:37:14+08:00</lastmod>
+            
+        </url>
+    
+        <url>
             <loc>https://www.wangbo.im/posts/acl-note/</loc>
             
                 <lastmod>2018-02-05T17:46:28+08:00</lastmod>
@@ -824,6 +831,10 @@
         </url>
         
         <url>
+            <loc>https://www.wangbo.im/tags/gif/</loc>
+        </url>
+        
+        <url>
             <loc>https://www.wangbo.im/tags/graphviz/</loc>
         </url>
         
@@ -968,7 +979,15 @@
         </url>
         
         <url>
+            <loc>https://www.wangbo.im/tags/select/</loc>
+        </url>
+        
+        <url>
             <loc>https://www.wangbo.im/tags/setacl/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/tags/snapshoting/</loc>
         </url>
         
         <url>
@@ -1037,6 +1056,10 @@
         
         <url>
             <loc>https://www.wangbo.im/tags/vert-x/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/tags/webp/</loc>
         </url>
         
         <url>
