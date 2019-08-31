@@ -113,6 +113,29 @@
                                     
     <header class="post__header">
         <h1 class="post__title">
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-02-13-a-cache-timeout-tuning-practise&#x2F;">一次 Cache 问题排查实践</a>
+        </h1>
+        <div class="post__meta">
+            <span class="post__time">2019-02-13</span>
+            
+        </div>
+    </header>
+
+                                    <div class="post__summary">
+                                        <p>负责的服务在线上环境出现了丢弃请求的现象。经排查是由于请求队列中的若干请求处理时间过长，导致队列之后的请求等待以致超时，而在队列中超时的请求会被框架直接抛弃掉。</p>
+<p>排查服务日志，发现访问 Cache 超时的量有明显增加；较多的 Cache 超时导致更多的不必要 DB 访问，以致请求的响应时间变长；同时，更多的 DB 访问压力也会对 DB 的平均响应时间有影响；Cache 访问和 DB 访问超时导致请求响应超时，从而导致抛弃量。</p>
+<p>问题在于 Cache 访问为什么会出现大量超时？一路排查下去发现有可能是 TCP 丢包导致的快速重传(fast retransmission)引起的。</p>
+
+                                    </div>
+                                    <div class="read-more">
+                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-02-13-a-cache-timeout-tuning-practise&#x2F;">Read more...</a>
+                                    </div>
+                                </article>
+                            
+                                <article class="post">
+                                    
+    <header class="post__header">
+        <h1 class="post__title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-02-01-a-gc-tuning-practise-involving-mysql&#x2F;">JAVA 服务从物理机迁移到 Docker 私有云背景下的 GC 调优实践</a>
         </h1>
         <div class="post__meta">
@@ -387,26 +410,6 @@
                                     </div>
                                     <div class="read-more">
                                         <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;libevent-notes&#x2F;">Read more...</a>
-                                    </div>
-                                </article>
-                            
-                                <article class="post">
-                                    
-    <header class="post__header">
-        <h1 class="post__title">
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2018-02-05-jvm-memory-model&#x2F;">Jvm Memory Model</a>
-        </h1>
-        <div class="post__meta">
-            <span class="post__time">2018-02-05</span>
-            
-        </div>
-    </header>
-
-                                    <div class="post__summary">
-                                        
-                                    </div>
-                                    <div class="read-more">
-                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2018-02-05-jvm-memory-model&#x2F;">Read more...</a>
                                     </div>
                                 </article>
                             

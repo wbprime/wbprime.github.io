@@ -239,6 +239,13 @@
         </url>
     
         <url>
+            <loc>https://www.wangbo.im/posts/2019-08-31-slow-mysql-query-on-too-many-cas-updating-failure/</loc>
+            
+                <lastmod>2019-08-31T11:30:40+08:00</lastmod>
+            
+        </url>
+    
+        <url>
             <loc>https://www.wangbo.im/posts/acl-note/</loc>
             
                 <lastmod>2018-02-05T17:46:28+08:00</lastmod>
@@ -723,10 +730,6 @@
         </url>
         
         <url>
-            <loc>https://www.wangbo.im/categories/spring-cloud/</loc>
-        </url>
-        
-        <url>
             <loc>https://www.wangbo.im/categories/spring-mvc-testing/</loc>
         </url>
         
@@ -798,6 +801,10 @@
         
         <url>
             <loc>https://www.wangbo.im/tags/calm/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/tags/cas/</loc>
         </url>
         
         <url>
@@ -942,6 +949,10 @@
         
         <url>
             <loc>https://www.wangbo.im/tags/live-pusher/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/tags/lock/</loc>
         </url>
         
         <url>
