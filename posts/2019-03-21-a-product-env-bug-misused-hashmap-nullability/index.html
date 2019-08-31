@@ -153,13 +153,13 @@ BUG 说明</h1>
 进行优化：即如果修改用户邮箱时，因为有用户邮箱唯一性的限定，可以当用户重复绑定一个相同邮箱的时候可以
 跳过处理。</p>
 <p>旧逻辑如下：</p>
-<p><img src="https://www.wangbo.im/posts/2019-03-21-a-product-env-bug-misused-hashmap-nullability/update_email.old.png" alt="old updating email" /></p>
+<p><img src="https://www.wangbo.im/posts/2019-03-21-a-product-env-bug-misused-hashmap-nullability/update_email.old.svg" alt="old updating email" /></p>
 <p>当通过邮箱找到一个已存在的用户后，如果该用户是本次需要修改的用户（即重复修改）则认为不会破坏邮箱的唯
 一性约束，反之则说明要修改成为的邮箱已经被别的用户占用了，不能修改。</p>
 <p>考虑到用户信息是分表存储的，如果一次修改用户的请求里面包含的用户字段除了邮箱之外还有别的字段，且别的
 字段都与邮箱不是在同一个表里面，则旧的处理流程可以进行优化：当确定是重复修改邮箱之后，可以把邮箱字段
 从 HashMap 中删去并下传到后续的处理中。</p>
-<p><img src="https://www.wangbo.im/posts/2019-03-21-a-product-env-bug-misused-hashmap-nullability/update_email.new.png" alt="new updating email" /></p>
+<p><img src="https://www.wangbo.im/posts/2019-03-21-a-product-env-bug-misused-hashmap-nullability/update_email.new.svg" alt="new updating email" /></p>
 <p><strong>BUG</strong></p>
 <p>问题在于，遗留代码中对于 HashMap 是做了一层封装的。要想从 HashMap 里面删除字段，只能使用
 <code>HashMap.put(key, null)</code> 的方式；而在实际处理修改请求生成 SQL 时是使用的遍历，而且（自作聪明地）对
