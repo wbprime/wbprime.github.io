@@ -1,141 +1,101 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta http-equiv="content-type" content="text/html; charset=utf-8">
-
-      <!-- Enable responsiveness on mobile devices-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-      <title>wangbo’s home &amp; blog - Spring: Annotation based configuration</title>
-
-      
-
-      
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
-          
-      
-
-      
-          <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
-          
-      
-
-      
-      
-    </head>
-
-    <body>
-        <div class="container">
-
-            <div id="mobile-navbar" class="mobile-navbar">
-              <div class="mobile-header-logo">
-                <a href="/" class="logo">WB Prime</a>
-              </div>
-              <div class="mobile-navbar-icon icon-out">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            </div>
-
-            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
-              <ul class="mobile-menu-list">
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im">
-                            Home
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;categories">
-                            Categories
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;tags">
-                            Tags
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;about">
-                            About
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                            Github
-                        </a>
-                    </li>
-                
-              </ul>
-            </nav>
-
-            <header id="header">
-                <div class="logo"><a href="https:&#x2F;&#x2F;www.wangbo.im">WB Prime</a></div>
-                <nav class="menu">
-                    <ul>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im">
-                                    Home
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;categories">
-                                    Categories
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;tags">
-                                    Tags
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;about">
-                                    About
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                                    Github
-                                </a>
-                            </li>
-                        
-                    </ul>
-                </nav>
-            </header>
-
-            <main>
-                <div class="content" id="mobile-panel">
-                    
-
-
-
-<article class="post">
+    <title>Spring: Annotation based configuration - Elvis Wang</title>
     
-    <header class="post__header">
-        <h1 class="post__title">
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="wangbo’s home &amp; blog"/>
+
+    <meta property="og:title" content="
+    wangbo’s home &amp; blog -&nbsp;Spring: Annotation based configuration" />
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;spring-annotation-based-configuration&#x2F;"/>
+    <meta property="og:description" content="The Springframework annotation-based metadata configuration guide."/>
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+<link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
+    <body>
+        <div class="container full">
+<header class="header">
+    <div class="header__inner">
+        <div class="header__logo">
+            <a href="&#x2F;">
+    <div class="logo">
+        WB Prime
+    </div>
+</a>
+        </div>
+        <div class="menu-trigger">menu</div>
+    </div>
+    
+    <nav class="menu">
+        <ul class="menu__inner menu__inner--desktop">
+            
+            
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+                    </li>
+                
+            </ul>
+
+        <ul class="menu__inner menu__inner--mobile">
+            
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+        </li>
+        </ul>
+    </nav>
+
+    </header>
+<div class="content"><div class="post">
+        <h1 class="post-title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;spring-annotation-based-configuration&#x2F;">Spring: Annotation based configuration</a>
         </h1>
-        <div class="post__meta">
-            <span class="post__time">2015-06-08</span>
-            
-        </div>
-    </header>
+        
+    <div class="post-meta">
+        <span class="post-date">2015.06.08
+                </span>
 
-    <div class="post-content">
-      <p>Despite XML-based configuration, the Springframework provides full support for annotation-based metadata configuration.</p>
+        <span class="post-author"></span>
+
+        
+
+    
+    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;spring&#x2F;">Spring</a>} 
+
+            
+    ::
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;spring&#x2F;">spring</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;java&#x2F;">java</a>
+        
+    
+            
+        
+    </div>
+
+
+
+        
+
+        <div class="post-content">
+            <p>Despite XML-based configuration, the Springframework provides full support for annotation-based metadata configuration.</p>
 <p>XML-based configuration isolates the configuration metadata from source code using independent xml files, while annotation-based configuration mixes source code and configuration data.  Thus which is the better one to collaborate with the Springframework?  The answer is it depends.  The XML one performes good isolation between source code and configuration, however you need to bear its stupid and complex and long-but-useless xml syntax, and you must do additional work to sync youc onfiguration data and you source code when you need to update your code, which however is very frequent during development.  The annotation one is easy-understanding and simple to update/sync your configuration with your source code.  The cons is obvious that it addes more semantics to a regular Java bean leading to a mixing of configuration and source.</p>
 <p>Fortunately you can use both styels and mix them together.  Note that annotation-based configuration is performed before XMl injection.</p>
 <p>Note that almost all annotation-based configurations are per-class other than per-bean.</p>
@@ -143,193 +103,193 @@
 Dependency Injection Annotations</h1>
 <p>Beans can be injected into a host bean through annotations.  Typical DI-related annotations are <code>@Required</code>, <code>@Autowired</code>, <code>@Resource</code>, <code>@PostConstruct</code>, <code>@PreDestroy</code>.</p>
 <p>To enable annotations <code>@Required</code>, <code>@Autowired</code>, <code>@Resource</code>, <code>@PostConstruct</code>, <code>@PreDestroy</code>, you need to add a <code>&lt;context:annotation-config /&gt;</code> element in your beans xml file.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-</span><span style="color:#c0c5ce;">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">http://www.springframework.org/schema/beans/spring-beans.xsd
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">http://www.springframework.org/schema/context
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">http://www.springframework.org/schema/context/spring-context.xsd&quot;&gt;
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;context:annotation-config /&gt;
-</span><span style="color:#c0c5ce;">&lt;/beans&gt;
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+</span><span style="color:#dcdcdc;">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">http://www.springframework.org/schema/beans/spring-beans.xsd
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">http://www.springframework.org/schema/context
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">http://www.springframework.org/schema/context/spring-context.xsd&quot;&gt;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&lt;context:annotation-config /&gt;
+</span><span style="color:#dcdcdc;">&lt;/beans&gt;
 </span></pre>
 <p>Alternatively you can include explicite <code>RequiredAnnotationBeanPostProcessor</code>, <code>AutowiredAnnotationBeanPostProcessor</code>, <code>CommonAnnotationBeanPostProcessor</code> or <code>PersistenceAnnotationBeanPostProcessor</code> dependencies instead.</p>
 <p>To make it clear, these annotations help DI procedure, while the annotation detection and bean recovery are done by XML definitions.</p>
 <h2 id="required"><a class="zola-anchor" href="#required" aria-label="Anchor link for: required">🔗</a>
 <code>@Required</code></h2>
 <p>The <code>@Required</code> annotation applies to bean property setter to specify that this property must be populated at configuration time.  This annotation is introduced from Spring 2.0.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">public class SimpleMovieLister {
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">private MovieFinder movieFinder;
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">@Required
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">public void setMovieFinder(MovieFinder movieFinder) {
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">this.movieFinder = movieFinder;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">}
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">// more methods
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">public class SimpleMovieLister {
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">private MovieFinder movieFinder;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Required
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">public void setMovieFinder(MovieFinder movieFinder) {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">this.movieFinder = movieFinder;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">// more methods
+</span><span style="color:#dcdcdc;">}
 </span></pre><h2 id="autowired"><a class="zola-anchor" href="#autowired" aria-label="Anchor link for: autowired">🔗</a>
 <code>@Autowired</code></h2>
 <p>The <code>@Autowired</code> annotation performs autowiring by type.  This annotation is introduced from Spring 2.5.</p>
 <p>The <code>@Autowired</code> annotation can be applied to field.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">public class OuterBean {
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">@Autowired
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">private InnerBean inner;
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">public class OuterBean {
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Autowired
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">private InnerBean inner;
+</span><span style="color:#dcdcdc;">}
 </span></pre>
 <p>Applied to setter:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">public class OuterBean {
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">private InnerBean inner;
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">@Required
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">public void setInner(InnerBean inner) {
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">this.inner = inner;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">}
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">public class OuterBean {
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">private InnerBean inner;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Required
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">public void setInner(InnerBean inner) {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">this.inner = inner;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">}
 </span></pre>
 <p>Applied to regular (set) method:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">public class OuterBean {
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">private InnerBean1 inner1;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">private InnerBean2 inner2;
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">@Autowired
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">public void prepare(InnerBean1 inner1, InnerBean2 inner2) {
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">this.inner1 = inner1;
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">this.inner2 = inner2;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">}
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">public class OuterBean {
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">private InnerBean1 inner1;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">private InnerBean2 inner2;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Autowired
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">public void prepare(InnerBean1 inner1, InnerBean2 inner2) {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">this.inner1 = inner1;
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">this.inner2 = inner2;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">}
 </span></pre>
 <p>Applied to constructor:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">public class OuterBean {
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">private InnerBean inner;
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">@Autowired
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">public void OuterBean(InnerBean inner) {
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">this.inner = inner;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">}
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">public class OuterBean {
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">private InnerBean inner;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Autowired
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">public void OuterBean(InnerBean inner) {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">this.inner = inner;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">}
 </span></pre>
 <p>There should only be one constructor annotated with <code>@Autowired</code> in a class.  However you can use <code>required</code> attribute to annotate multi constructor.  Typically the target constructor is <code>public</code> but not limited to.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">public class OuterBean {
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">private InnerBean inner;
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">@Autowired
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">public void OuterBean(InnerBean inner) {
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">this.inner = inner;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">}
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">@Autowired(required=false)
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">public void OuterBean(InnerBean inner, AnotherBean anther) {
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">this.inner = inner;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">}
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">public class OuterBean {
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">private InnerBean inner;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Autowired
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">public void OuterBean(InnerBean inner) {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">this.inner = inner;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Autowired(required=false)
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">public void OuterBean(InnerBean inner, AnotherBean anther) {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">this.inner = inner;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">}
 </span></pre>
 <p>Applied to array:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">public class OuterBean {
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">@Autowired
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">private InnerBean[] inners;
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">public class OuterBean {
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Autowired
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">private InnerBean[] inners;
+</span><span style="color:#dcdcdc;">}
 </span></pre>
 <p>Applied to typed collection:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">public class OuterBean {
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">@Autowired
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">private Set&lt;InnerBean&gt; inners;
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">public class OuterBean {
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Autowired
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">private Set&lt;InnerBean&gt; inners;
+</span><span style="color:#dcdcdc;">}
 </span></pre>
 <p>Specially, a <code>Map</code> can be autowired if and only if its key type is <code>String</code>.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">public class OuterBean {
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">@Autowired
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">private Map&lt;String, InnerBean&gt; innersMap;
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">public class OuterBean {
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Autowired
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">private Map&lt;String, InnerBean&gt; innersMap;
+</span><span style="color:#dcdcdc;">}
 </span></pre><h2 id="autowired-combined-with-qualifier"><a class="zola-anchor" href="#autowired-combined-with-qualifier" aria-label="Anchor link for: autowired-combined-with-qualifier">🔗</a>
 <code>@Autowired</code> Combined with <code>@Qualifier</code></h2>
 <p>When there are multi candidates for auotwiring, <code>@Qualifier</code> can help you control wiring details.</p>
 <p>Generally you can specify which bean is needed among multi beans of the same type. For example:</p>
 <p>In your annotation source file:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">public class OuterBean {
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">@Autowired
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">@Qualifier(&quot;main&quot;)
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">private InnerBean inner;
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">public class OuterBean {
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Autowired
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Qualifier(&quot;main&quot;)
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">private InnerBean inner;
+</span><span style="color:#dcdcdc;">}
 </span></pre>
 <p>In your xml file:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">&lt;bean id=&quot;inner1&quot; class=&quot;InnerBean&quot;&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;qualifier value=&quot;main&quot;/&gt;
-</span><span style="color:#c0c5ce;">&lt;/bean&gt;
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">&lt;bean id=&quot;inner2&quot; class=&quot;InnerBean&quot;&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;qualifier value=&quot;action&quot;/&gt;
-</span><span style="color:#c0c5ce;">&lt;/bean&gt;
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">&lt;bean id=&quot;outer&quot; class=&quot;OuterBean&quot;/&gt;
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">&lt;bean id=&quot;inner1&quot; class=&quot;InnerBean&quot;&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&lt;qualifier value=&quot;main&quot;/&gt;
+</span><span style="color:#dcdcdc;">&lt;/bean&gt;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">&lt;bean id=&quot;inner2&quot; class=&quot;InnerBean&quot;&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&lt;qualifier value=&quot;action&quot;/&gt;
+</span><span style="color:#dcdcdc;">&lt;/bean&gt;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">&lt;bean id=&quot;outer&quot; class=&quot;OuterBean&quot;/&gt;
 </span></pre>
 <p>Thus bean <code>inner1</code> will be autowired to bean <code>outer</code>.</p>
 <p>The <code>@Qualifier</code> can also be applied to a construtor argument.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">public class OuterBean {
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">@Autowired
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">public void OuterBean(@Qualifier(&quot;main&quot;) InnerBean inner) {
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">}
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">public class OuterBean {
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Autowired
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">public void OuterBean(@Qualifier(&quot;main&quot;) InnerBean inner) {
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">}
 </span></pre>
 <p>If the value of <code>@Qualifier</code> is not given, the bean id/name will be used as a fallback qualifier value.</p>
 <h2 id="custom-qualifier"><a class="zola-anchor" href="#custom-qualifier" aria-label="Anchor link for: custom-qualifier">🔗</a>
 Custom <code>@Qualifier</code></h2>
 <p>Dispite value based <code>@Qualifier</code> identification, you can custom your own qualifier annotation and use type based <code>@Qualifier</code>.</p>
 <p>Given:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">@Target({ElementType.FIELD, ElementType.PARAMETER})
-</span><span style="color:#c0c5ce;">@Retention(RetentionPolicy.RUNTIME)
-</span><span style="color:#c0c5ce;">@Qualifier
-</span><span style="color:#c0c5ce;">public @interface Genre {
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">String value();
-</span><span style="color:#c0c5ce;">}
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">public class OuterBean {
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">@Autowired
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">@Genre(&quot;Action&quot;)
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">private InnerBean inner;
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">@Target({ElementType.FIELD, ElementType.PARAMETER})
+</span><span style="color:#dcdcdc;">@Retention(RetentionPolicy.RUNTIME)
+</span><span style="color:#dcdcdc;">@Qualifier
+</span><span style="color:#dcdcdc;">public @interface Genre {
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">String value();
+</span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">public class OuterBean {
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Autowired
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Genre(&quot;Action&quot;)
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">private InnerBean inner;
+</span><span style="color:#dcdcdc;">}
 </span></pre>
 <p>Thus following configuration works:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">&lt;context:annotation-config/&gt;
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">&lt;bean class=&quot;OuterBean&quot;&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;qualifier type=&quot;Genre&quot; value=&quot;Action&quot;/&gt;
-</span><span style="color:#c0c5ce;">&lt;/bean&gt;
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">&lt;context:annotation-config/&gt;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">&lt;bean class=&quot;OuterBean&quot;&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&lt;qualifier type=&quot;Genre&quot; value=&quot;Action&quot;/&gt;
+</span><span style="color:#dcdcdc;">&lt;/bean&gt;
 </span></pre><h2 id="resource"><a class="zola-anchor" href="#resource" aria-label="Anchor link for: resource">🔗</a>
 <code>@Resource</code></h2>
 <p>The Spring introduces support for JSR-250 annotations like <code>@Resource</code> from version 2.5.  <code>@Resource</code> works on fields or setters, taking a name attribute indicating the bean id/name to be injected.  One of the differences between <code>@Resource</code> and <code>@Autowired</code> is that the former performs by-name injection while the latter by-type.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">public class OuterBean {
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">@Resource(name=&quot;inner&quot;)
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">private InnerBean inner;
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">@Resource
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">private InnerBean inner1;
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">private InnerBean inner2;
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">@Resource
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">public void setInner2(InnerBean inner2) { }
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">public class OuterBean {
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Resource(name=&quot;inner&quot;)
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">private InnerBean inner;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Resource
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">private InnerBean inner1;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">private InnerBean inner2;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Resource
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">public void setInner2(InnerBean inner2) { }
+</span><span style="color:#dcdcdc;">}
 </span></pre>
 <p>The bean <code>inner</code> will be injected as it is specified explicitely.  However, if not specified, a fallback injection will be done by setting the field name (for field annotation, i.e., <code>inner1</code>) or the arguement name (for setter method, e.g., <code>inner2</code>).</p>
 <h2 id="postconstruct-and-predestroy"><a class="zola-anchor" href="#postconstruct-and-predestroy" aria-label="Anchor link for: postconstruct-and-predestroy">🔗</a>
@@ -337,16 +297,16 @@ Custom <code>@Qualifier</code></h2>
 <p>Similar to XML based configuration, the Spring annotation based configuration also provides annotations to support bean lifecycle management.</p>
 <p>The <code>@PostConstruct</code> annotation specifies the callback after bean instantiation and dependency injection.</p>
 <p>The <code>@PreDestroy</code> annotation specifies the callback before bean destruction.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">public class OuterBean {
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">@PostConstruct
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">public void myCustomInit() {
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">}
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">@PreDestroy
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">public void myCustomDestroy() {
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">}
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">public class OuterBean {
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@PostConstruct
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">public void myCustomInit() {
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@PreDestroy
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">public void myCustomDestroy() {
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">}
 </span></pre><h1 id="classpath-scanning"><a class="zola-anchor" href="#classpath-scanning" aria-label="Anchor link for: classpath-scanning">🔗</a>
 Classpath Scanning</h1>
 <p>Last annotations demonstrate ways to help dependency injection, however dependency beans themself need to be specified using traditional XML definitions.</p>
@@ -355,49 +315,49 @@ Classpath Scanning</h1>
 <code>@Component</code>, <code>@Repository</code>, <code>@Service</code> and <code>@Controller</code></h2>
 <p>The <code>@Component</code> annotation is a generic marker of any conponents that are designing to managed by the Spring container.  That is to say, that the any class decorated by <code>@Component</code> would be instatiated as a bean, and the beans lifecycle is managed by the Spring container, and the beans will be scanned and filtered in DI step.</p>
 <p>The <code>@Component</code> annotation provides three specializtions concentrating on semantics.  The <code>@Repository</code> annotation marks, say, a repository type (DAO).  The <code>@Service</code> annotation marks a service layer type.  The <code>@Controller</code> annotation marks a presentation layer type.  These annotations differ in semantics and may be used differently by the Spring framework in future releases.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">@Component
-</span><span style="color:#c0c5ce;">public class MyCustomBean {}
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">@Repository
-</span><span style="color:#c0c5ce;">public class MyCustomDAO {}
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">@Service
-</span><span style="color:#c0c5ce;">public class MyCustomService {}
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">@Controller
-</span><span style="color:#c0c5ce;">public class MyCustomController {}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">@Component
+</span><span style="color:#dcdcdc;">public class MyCustomBean {}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">@Repository
+</span><span style="color:#dcdcdc;">public class MyCustomDAO {}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">@Service
+</span><span style="color:#dcdcdc;">public class MyCustomService {}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">@Controller
+</span><span style="color:#dcdcdc;">public class MyCustomController {}
 </span></pre>
 <p>To enable classpath scanning, you need additional work.  Adding following lines in your xml configuration file:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-</span><span style="color:#c0c5ce;">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">http://www.springframework.org/schema/beans/spring-beans.xsd
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">http://www.springframework.org/schema/context
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">http://www.springframework.org/schema/context/spring-context.xsd&quot;&gt;
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;context:component-scan base-package=&quot;org.example&quot;/&gt;
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">&lt;/beans&gt;
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+</span><span style="color:#dcdcdc;">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">http://www.springframework.org/schema/beans/spring-beans.xsd
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">http://www.springframework.org/schema/context
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">http://www.springframework.org/schema/context/spring-context.xsd&quot;&gt;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&lt;context:component-scan base-package=&quot;org.example&quot;/&gt;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">&lt;/beans&gt;
 </span></pre>
 <p>The <code>&lt;context:component-scan /&gt;</code> calles classpath auto scanning, specifying the qualified package name <code>org.example</code>.  This implicit enables the <code>&lt;context:annotation-config /&gt;</code> which enables <code>AutowiredAnnotationBeanPostProcessor</code>, <code>CommonAnnotationBeanPostProcessor</code> and <code>RequiredAnnotationBeanPostProcessor</code> at the same time.  So the <code>@Required</code>, <code>@Autowired</code>, <code>@PostConstruct</code> and <code>@PreDestroy</code> annotations are also out of box.</p>
 <p>Also you can implement your own annotations based on <code>@Component</code> meta annotation.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">// Spring will treat @MyComponent in the same way as @Component
-</span><span style="color:#c0c5ce;">@Target({ElementType.TYPE})
-</span><span style="color:#c0c5ce;">@Retention(RetentionPolicy.RUNTIME)
-</span><span style="color:#c0c5ce;">@Component
-</span><span style="color:#c0c5ce;">public @interface MyComponent { }
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">// Spring will treat @MyComponent in the same way as @Component
+</span><span style="color:#dcdcdc;">@Target({ElementType.TYPE})
+</span><span style="color:#dcdcdc;">@Retention(RetentionPolicy.RUNTIME)
+</span><span style="color:#dcdcdc;">@Component
+</span><span style="color:#dcdcdc;">public @interface MyComponent { }
 </span></pre>
 <p>The custom <code>@MyComponent</code> annotation will be treated like the <code>@Component</code> besides more costom semantics.</p>
 <p>The bean name for a annotated class is generated by the Spring following a default rule: returning the uncapitalized non-qualified class name.</p>
 <p>i.g.,</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">@Repository
-</span><span style="color:#c0c5ce;">public class MyCustomDAO {}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">@Repository
+</span><span style="color:#dcdcdc;">public class MyCustomDAO {}
 </span></pre>
 <p>will auto introduce a bean named *myCustomDAO&quot;.</p>
 <p>However, if you don't like this name, you can set <code>name</code> using <code>@Repository(&quot;myBestName&quot;)</code>.  The <code>name</code> property applies to <code>@Component</code>, <code>@Repository</code>, <code>@Service</code> and <code>@Controller</code>.</p>
@@ -405,29 +365,29 @@ Classpath Scanning</h1>
 <h2 id="scope"><a class="zola-anchor" href="#scope" aria-label="Anchor link for: scope">🔗</a>
 <code>@Scope</code></h2>
 <p>Specifying bean scope using the <code>@Scope</code> annotation.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">@Scope(&quot;prototype&quot;)
-</span><span style="color:#c0c5ce;">@Repository
-</span><span style="color:#c0c5ce;">public class MyCustomBean { }
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">@Scope(&quot;prototype&quot;)
+</span><span style="color:#dcdcdc;">@Repository
+</span><span style="color:#dcdcdc;">public class MyCustomBean { }
 </span></pre><h2 id="lazy"><a class="zola-anchor" href="#lazy" aria-label="Anchor link for: lazy">🔗</a>
 <code>@Lazy</code></h2>
 <p>Specifying bean lazy instantiating using the <code>@Lazy</code> annotation.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">@Lazy
-</span><span style="color:#c0c5ce;">@Repository
-</span><span style="color:#c0c5ce;">public class MyCustomBean { }
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">@Lazy
+</span><span style="color:#dcdcdc;">@Repository
+</span><span style="color:#dcdcdc;">public class MyCustomBean { }
 </span></pre><h2 id="beans-filtering"><a class="zola-anchor" href="#beans-filtering" aria-label="Anchor link for: beans-filtering">🔗</a>
 Beans Filtering</h2>
 <p>You may want to cusotm the beans are to be scanned by setting some filters.  You can achieve this by adding <code>include-filter</code> and <code>exclude-filter</code> sub-element to <code>component-scan</code> element.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">&lt;beans&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;context:component-scan base-package=&quot;org.example&quot;&gt;
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&lt;context:include-filter type=&quot;regex&quot;
-</span><span style="color:#c0c5ce;">                </span><span style="color:#c0c5ce;">expression=&quot;.*Stub.*Repository&quot;/&gt;
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&lt;context:exclude-filter type=&quot;annotation&quot;
-</span><span style="color:#c0c5ce;">                </span><span style="color:#c0c5ce;">expression=&quot;org.springframework.stereotype.Repository&quot;/&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;/context:component-scan&gt;
-</span><span style="color:#c0c5ce;">&lt;/beans&gt;
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">&lt;beans&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&lt;context:component-scan base-package=&quot;org.example&quot;&gt;
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">&lt;context:include-filter type=&quot;regex&quot;
+</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">expression=&quot;.*Stub.*Repository&quot;/&gt;
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">&lt;context:exclude-filter type=&quot;annotation&quot;
+</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">expression=&quot;org.springframework.stereotype.Repository&quot;/&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&lt;/context:component-scan&gt;
+</span><span style="color:#dcdcdc;">&lt;/beans&gt;
 </span></pre>
 <p>This implies the configuration will ignore all <code>@Repository</code> annotations and using &quot;stub Repository&quot; instead.</p>
 <p>You must set <code>type</code> and <code>expression</code> attributes for a <code>include-filter</code> or a <code>exclude-filter</code> element.  Types are <em>annotation</em>, <em>assignable</em>, <em>aspectj</em>, <em>regex</em> and <em>custom</em>.</p>
@@ -443,47 +403,47 @@ JSR 3.0 Annotations Alternatives</h1>
 <p>You can use also JSR 3.0 standard annotations for dependency injection.  These annotations are scanned in the same way as the Spring annotations.</p>
 <p>To use JSR 3.0 annotations, you need to add relevant jars to your classpath.</p>
 <p>For maven, adding following lines:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">&lt;dependency&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;groupId&gt;javax.inject&lt;/groupId&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;artifactId&gt;javax.inject&lt;/artifactId&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;version&gt;1&lt;/version&gt;
-</span><span style="color:#c0c5ce;">&lt;/dependency&gt;
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">&lt;dependency&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&lt;groupId&gt;javax.inject&lt;/groupId&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&lt;artifactId&gt;javax.inject&lt;/artifactId&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&lt;version&gt;1&lt;/version&gt;
+</span><span style="color:#dcdcdc;">&lt;/dependency&gt;
 </span></pre><h2 id="inject"><a class="zola-anchor" href="#inject" aria-label="Anchor link for: inject">🔗</a>
 <code>@Inject</code></h2>
 <p>Think <code>@Inject</code> as <code>@Autowired</code>.</p>
 <p>The <code>@Inject</code> annotation can be applied at the class-level, field-level, method-level and constructor-argument level.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">import javax.inject.Inject;
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">public class OuterBean {
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">private InnerBean inner;
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">@Inject
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">public void setInner(InnerBean inner) {
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">this.inner = inner;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">}
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">import javax.inject.Inject;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">public class OuterBean {
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">private InnerBean inner;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Inject
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">public void setInner(InnerBean inner) {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">this.inner = inner;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">}
 </span></pre><h2 id="named"><a class="zola-anchor" href="#named" aria-label="Anchor link for: named">🔗</a>
 <code>@Named</code></h2>
 <p>Think <code>@Named</code> as <code>@Component</code>.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">import javax.inject.Named;
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">@Named
-</span><span style="color:#c0c5ce;">public class OuterBean { }
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">import javax.inject.Named;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">@Named
+</span><span style="color:#dcdcdc;">public class OuterBean { }
 </span></pre>
 <p>You can specify a <em>name</em> to the <code>@Named</code>.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">@Named(&quot;myOuterBean&quot;)
-</span><span style="color:#c0c5ce;">public class OuterBean { }
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">@Named(&quot;myOuterBean&quot;)
+</span><span style="color:#dcdcdc;">public class OuterBean { }
 </span></pre>
 <p>Specially, you can use <code>@Named</code> combined with <code>@Inject</code>.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">@Inject
-</span><span style="color:#c0c5ce;">public void setInner(@Named(&quot;main&quot;) InnerBean inner) {
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">this.inner = inner;
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">@Inject
+</span><span style="color:#dcdcdc;">public void setInner(@Named(&quot;main&quot;) InnerBean inner) {
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">this.inner = inner;
+</span><span style="color:#dcdcdc;">}
 </span></pre><em></em><em></em><h2 id="jsr-3-0-annotations-vs-spring-annotations"><a class="zola-anchor" href="#jsr-3-0-annotations-vs-spring-annotations" aria-label="Anchor link for: jsr-3-0-annotations-vs-spring-annotations">🔗</a>
 JSR 3.0 Annotations VS Spring Annotations</h2>
 <p>The comparison between <em>JSR 3.0 annotations</em> VS <em>Spring annotations</em> is shown in following table.</p>
@@ -501,54 +461,24 @@ Summary</h1>
 <p>The Spring annotation-based metadata configuration method is a full-featured and easy to use alternative to traditional XML-based metadata configuration.</p>
 <p>Note that annotation injection is performed before XML injection, thus the latter configuration will override the former for properties wired through both approaches.</p>
 
-    </div>
-
-    
-    
-
-    <div class="post-footer">
-        
-            
-                <div class="post-tags">
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;spring&#x2F;">#spring</a>
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;java&#x2F;">#java</a>
-                    
-                </div>
-            
-            
-                <div class="post-nav">
-                    
-                        <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;spring-xml-based-configuration&#x2F;">‹ Spring: XML based configuration</a>
-                    
-                    
-                        <a class="next" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2016-03-30-learning-java-concurrent-semaphore&#x2F;">Learning Java Concurrency - Semaphore ›</a>
-                    
-                    
-                    
-                </div>
-            
-
-        
-
-    </div>
-
-    
-    
-</article>
-
-
-                </div>
-            </main>
-
-            
-            
         </div>
+        
+    
+</div></div>
+            
+    <div class="pagination">
+        <div class="pagination__buttons">
+            </div>
+    </div>
+<footer class="footer">
+                    <div class="footer__inner"><div class="copyright">
+            <span>© 2019 <a href="https://github.com/ejmg/zerm">zerm</a> :: Powered by <a href="https://www.getzola.org/">Zola</a></span>
+            <span>:: Theme made by <a href="https://github.com/ejmg">ejmg</a></span>
+        </div>
+    <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;assets&#x2F;js&#x2F;main.js"></script>
+</div>
+                    
 
-      
-          <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
-      
+                </footer></div>
     </body>
-
 </html>

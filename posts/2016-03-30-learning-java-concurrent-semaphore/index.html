@@ -1,141 +1,102 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta http-equiv="content-type" content="text/html; charset=utf-8">
-
-      <!-- Enable responsiveness on mobile devices-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-      <title>wangbo’s home &amp; blog - Learning Java Concurrency - Semaphore</title>
-
-      
-
-      
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
-          
-      
-
-      
-          <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
-          
-      
-
-      
-      
-    </head>
-
-    <body>
-        <div class="container">
-
-            <div id="mobile-navbar" class="mobile-navbar">
-              <div class="mobile-header-logo">
-                <a href="/" class="logo">WB Prime</a>
-              </div>
-              <div class="mobile-navbar-icon icon-out">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            </div>
-
-            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
-              <ul class="mobile-menu-list">
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im">
-                            Home
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;categories">
-                            Categories
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;tags">
-                            Tags
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;about">
-                            About
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                            Github
-                        </a>
-                    </li>
-                
-              </ul>
-            </nav>
-
-            <header id="header">
-                <div class="logo"><a href="https:&#x2F;&#x2F;www.wangbo.im">WB Prime</a></div>
-                <nav class="menu">
-                    <ul>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im">
-                                    Home
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;categories">
-                                    Categories
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;tags">
-                                    Tags
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;about">
-                                    About
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                                    Github
-                                </a>
-                            </li>
-                        
-                    </ul>
-                </nav>
-            </header>
-
-            <main>
-                <div class="content" id="mobile-panel">
-                    
-
-
-
-<article class="post">
+    <title>Learning Java Concurrency - Semaphore - Elvis Wang</title>
     
-    <header class="post__header">
-        <h1 class="post__title">
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="wangbo’s home &amp; blog"/>
+
+    <meta property="og:title" content="
+    wangbo’s home &amp; blog -&nbsp;Learning Java Concurrency - Semaphore" />
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2016-03-30-learning-java-concurrent-semaphore&#x2F;"/>
+    <meta property="og:description" content="&lt;p&gt;Semaphore，信号量。信号量可以理解为令牌掌牌使，负责令牌的发放；当线程需要执行任务时，先到信号量处领取令牌，领取到了令牌再去执行任务；如果令牌被领光了，就需要一直等待；如果任务执行完了，需要到信号量处交还令牌。很简单的逻辑！&lt;&#x2F;p&gt;
+&lt;p&gt;还是吃个栗子，地铁里面公厕，一般也就3、4个坑位。人有三急，当你有需要的时候，还必须得靠这个解决。这…"/>
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+<link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
+    <body>
+        <div class="container full">
+<header class="header">
+    <div class="header__inner">
+        <div class="header__logo">
+            <a href="&#x2F;">
+    <div class="logo">
+        WB Prime
+    </div>
+</a>
+        </div>
+        <div class="menu-trigger">menu</div>
+    </div>
+    
+    <nav class="menu">
+        <ul class="menu__inner menu__inner--desktop">
+            
+            
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+                    </li>
+                
+            </ul>
+
+        <ul class="menu__inner menu__inner--mobile">
+            
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+        </li>
+        </ul>
+    </nav>
+
+    </header>
+<div class="content"><div class="post">
+        <h1 class="post-title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2016-03-30-learning-java-concurrent-semaphore&#x2F;">Learning Java Concurrency - Semaphore</a>
         </h1>
-        <div class="post__meta">
-            <span class="post__time">2016-03-30</span>
-            
-        </div>
-    </header>
+        
+    <div class="post-meta">
+        <span class="post-date">2016.03.30
+                </span>
 
-    <div class="post-content">
-      <p>Semaphore，信号量。信号量可以理解为令牌掌牌使，负责令牌的发放；当线程需要执行任务时，先到信号量处领取令牌，领取到了令牌再去执行任务；如果令牌被领光了，就需要一直等待；如果任务执行完了，需要到信号量处交还令牌。很简单的逻辑！</p>
+        <span class="post-author"></span>
+
+        
+
+    
+    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;learning-java-concurrency&#x2F;">Learning Java Concurrency</a>} 
+
+            
+    ::
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;java&#x2F;">java</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;concurrency&#x2F;">concurrency</a>
+        
+    
+            
+        
+    </div>
+
+
+
+        
+
+        <div class="post-content">
+            <p>Semaphore，信号量。信号量可以理解为令牌掌牌使，负责令牌的发放；当线程需要执行任务时，先到信号量处领取令牌，领取到了令牌再去执行任务；如果令牌被领光了，就需要一直等待；如果任务执行完了，需要到信号量处交还令牌。很简单的逻辑！</p>
 <p>还是吃个栗子，地铁里面公厕，一般也就3、4个坑位。人有三急，当你有需要的时候，还必须得靠这个解决。这个时候，如果公厕里没有人，或者还剩最后一个坑位，那就啥也别说了，进去吧。但是，如果，满了。就，只有，等，了。不着急可以等一等；实在憋不住的，可以催一催。但是不管急不急，都要等里面随便一个里面出来人了才能进去。这个就是典型的信号量。</p>
 <p>还有就是非常典型的生产者/消费者问题了。有一个仓库，里面的仓位是有限的。生产者只有当仓库里面有空仓位时才能进行生产；如果没有空仓位，则需要等待；如果生产了一次，则仓库少了一个空仓位。消费者只有当仓库里有非空仓位时才能消费；如果没有非空仓位，就需要等待；如果消费了一次，仓库里多了一个空仓位。</p>
 <p><a name="continue-reading"></a></p>
@@ -180,202 +141,202 @@ Semaphore的API</h1>
 是否公平。</li>
 </ol>
 <p>Semaphore内部有一个静态类Sync来实现公平策略，NonFairSync来实现非公平策略。</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">static class </span><span style="color:#ebcb8b;">Sync </span><span style="color:#b48ead;">extends </span><span style="color:#a3be8c;">AbstractQueuedSynchronizer
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">.</span><span style="color:#c0c5ce;">..
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#b48ead;">static final class </span><span style="color:#ebcb8b;">NonfairSync </span><span style="color:#b48ead;">extends </span><span style="color:#a3be8c;">Sync
+<pre style="background-color:#1e1e1e;">
+<span style="color:#569cd6;">static class </span><span style="color:#dcdcdc;">Sync </span><span style="color:#569cd6;">extends </span><span style="color:#4ec9b0;">AbstractQueuedSynchronizer
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">...
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#569cd6;">static final class </span><span style="color:#dcdcdc;">NonfairSync </span><span style="color:#569cd6;">extends </span><span style="color:#4ec9b0;">Sync
 </span></pre>
 <p>公平与非公平的区别在于申请令牌的调用中是否可以插队。公平的策略是将所有线程放入一个FIFO队列，按照出队顺序分配令牌；非公平策略是如果申请的时候有新的释放出来的令牌，直接获取，不需要排队。由于线程阻塞然后被唤醒的开销可能会比较大，所以非公平可能会比公平策略有潜在的更高的性能。</p>
 <p>公平与非公平策略只影响申请令牌时的操作；如果已经被放入了等待队列，则公平与非公平没有区别。</p>
 <h1 id="shi-li-dai-ma"><a class="zola-anchor" href="#shi-li-dai-ma" aria-label="Anchor link for: shi-li-dai-ma">🔗</a>
 示例代码</h1>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">package </span><span style="color:#c0c5ce;">me.wbprime.showcase.concurrent;
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">com.google.common.collect.</span><span style="color:#ebcb8b;">Lists</span><span style="color:#c0c5ce;">;
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">java.util.</span><span style="color:#ebcb8b;">List</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">java.util.concurrent.</span><span style="color:#ebcb8b;">ExecutorService</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">java.util.concurrent.</span><span style="color:#ebcb8b;">Executors</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">java.util.concurrent.</span><span style="color:#ebcb8b;">Semaphore</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">java.util.concurrent.</span><span style="color:#ebcb8b;">TimeUnit</span><span style="color:#c0c5ce;">;
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#65737e;">/**
-</span><span style="color:#65737e;"> </span><span style="color:#65737e;">* Class: SemaphoreCase
-</span><span style="color:#65737e;"> </span><span style="color:#65737e;">* Date: 2016/03/30 18:15
-</span><span style="color:#65737e;"> </span><span style="color:#65737e;">*/
-</span><span style="color:#b48ead;">public final class </span><span style="color:#ebcb8b;">SemaphoreCase </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private static class </span><span style="color:#ebcb8b;">Item </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">private </span><span style="color:#ebcb8b;">String </span><span style="color:#eff1f5;">name;
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">public </span><span style="color:#8fa1b3;">Item</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">idx</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">name </span><span style="color:#c0c5ce;">= </span><span style="color:#ebcb8b;">String</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">format</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">%s %d</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">, </span><span style="color:#ebcb8b;">Thread</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">currentThread</span><span style="color:#eff1f5;">().</span><span style="color:#bf616a;">getName</span><span style="color:#eff1f5;">(), idx);
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">public final </span><span style="color:#ebcb8b;">String </span><span style="color:#8fa1b3;">getName</span><span style="color:#eff1f5;">() {
-</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">return</span><span style="color:#eff1f5;"> name;
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">@</span><span style="color:#bf616a;">Override
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">public </span><span style="color:#ebcb8b;">String </span><span style="color:#8fa1b3;">toString</span><span style="color:#eff1f5;">() {
-</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">return </span><span style="color:#bf616a;">getName</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private static class </span><span style="color:#ebcb8b;">WareHouse </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">private final </span><span style="color:#ebcb8b;">List</span><span style="color:#eff1f5;">&lt;</span><span style="color:#ebcb8b;">Item</span><span style="color:#eff1f5;">&gt; items;
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">private final </span><span style="color:#ebcb8b;">Semaphore </span><span style="color:#eff1f5;">notFull;
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">private final </span><span style="color:#ebcb8b;">Semaphore </span><span style="color:#eff1f5;">notEmpty;
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">private final </span><span style="color:#ebcb8b;">Semaphore </span><span style="color:#eff1f5;">mutex;
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">public </span><span style="color:#8fa1b3;">WareHouse</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">final int </span><span style="color:#bf616a;">cnt</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">items </span><span style="color:#c0c5ce;">= </span><span style="color:#ebcb8b;">Lists</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">newArrayListWithExpectedSize</span><span style="color:#eff1f5;">(cnt);
-</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.notFull </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">Semaphore</span><span style="color:#eff1f5;">(cnt);
-</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.notEmpty </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">Semaphore</span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">0</span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.mutex </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">Semaphore</span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">1</span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">public </span><span style="color:#ebcb8b;">String </span><span style="color:#8fa1b3;">itemsString</span><span style="color:#eff1f5;">() {
-</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">return</span><span style="color:#eff1f5;"> items.</span><span style="color:#bf616a;">toString</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">public void </span><span style="color:#8fa1b3;">put</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">Item </span><span style="color:#bf616a;">obj</span><span style="color:#eff1f5;">) </span><span style="color:#b48ead;">throws </span><span style="color:#ebcb8b;">InterruptedException </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">null </span><span style="color:#c0c5ce;">!=</span><span style="color:#eff1f5;"> obj) {
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">                </span><span style="color:#65737e;">/*
-</span><span style="color:#65737e;">                 </span><span style="color:#65737e;">* 获取非满的保证
-</span><span style="color:#65737e;">                 </span><span style="color:#65737e;">*
-</span><span style="color:#65737e;">                 </span><span style="color:#65737e;">* 如果是满的，则挂起
-</span><span style="color:#65737e;">                 </span><span style="color:#65737e;">*/
-</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">notFull.</span><span style="color:#bf616a;">acquire</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">                </span><span style="color:#65737e;">/*
-</span><span style="color:#65737e;">                 </span><span style="color:#65737e;">* 获取容器操作的独占保证
-</span><span style="color:#65737e;">                 </span><span style="color:#65737e;">*/
-</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">mutex.</span><span style="color:#bf616a;">acquire</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">items.</span><span style="color:#bf616a;">add</span><span style="color:#eff1f5;">(obj);
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">                </span><span style="color:#ebcb8b;">System</span><span style="color:#eff1f5;">.out.</span><span style="color:#bf616a;">println</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">Put </span><span style="color:#c0c5ce;">&quot; +</span><span style="color:#eff1f5;"> obj.</span><span style="color:#bf616a;">getName</span><span style="color:#eff1f5;">());
-</span><span style="color:#eff1f5;">                </span><span style="color:#ebcb8b;">System</span><span style="color:#eff1f5;">.out.</span><span style="color:#bf616a;">println</span><span style="color:#eff1f5;">(items.</span><span style="color:#bf616a;">toString</span><span style="color:#eff1f5;">());
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">                </span><span style="color:#65737e;">/*
-</span><span style="color:#65737e;">                 </span><span style="color:#65737e;">* 结束容器操作
-</span><span style="color:#65737e;">                 </span><span style="color:#65737e;">*/
-</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">mutex.</span><span style="color:#bf616a;">release</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">                </span><span style="color:#65737e;">/*
-</span><span style="color:#65737e;">                 </span><span style="color:#65737e;">* 保证非空，允许take操作（唤醒挂起线程）
-</span><span style="color:#65737e;">                 </span><span style="color:#65737e;">*/
-</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">notEmpty.</span><span style="color:#bf616a;">release</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">public </span><span style="color:#ebcb8b;">Item </span><span style="color:#8fa1b3;">take</span><span style="color:#eff1f5;">() </span><span style="color:#b48ead;">throws </span><span style="color:#ebcb8b;">InterruptedException </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">            </span><span style="color:#65737e;">/*
-</span><span style="color:#65737e;">             </span><span style="color:#65737e;">* 获取非空的保证
-</span><span style="color:#65737e;">             </span><span style="color:#65737e;">*
-</span><span style="color:#65737e;">             </span><span style="color:#65737e;">* 如果是空的，则挂起
-</span><span style="color:#65737e;">             </span><span style="color:#65737e;">*/
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">notEmpty.</span><span style="color:#bf616a;">acquire</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">            </span><span style="color:#65737e;">/*
-</span><span style="color:#65737e;">             </span><span style="color:#65737e;">* 获取容器操作的独占保证
-</span><span style="color:#65737e;">             </span><span style="color:#65737e;">*/
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">mutex.</span><span style="color:#bf616a;">acquire</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">final int</span><span style="color:#eff1f5;"> lastIdx </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> items.</span><span style="color:#bf616a;">size</span><span style="color:#eff1f5;">() </span><span style="color:#c0c5ce;">- </span><span style="color:#d08770;">1</span><span style="color:#eff1f5;">;
-</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">Item</span><span style="color:#eff1f5;"> item </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> items.</span><span style="color:#bf616a;">get</span><span style="color:#eff1f5;">(lastIdx);
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">items.</span><span style="color:#bf616a;">remove</span><span style="color:#eff1f5;">(lastIdx);
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">            </span><span style="color:#ebcb8b;">System</span><span style="color:#eff1f5;">.out.</span><span style="color:#bf616a;">println</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">Take </span><span style="color:#c0c5ce;">&quot; +</span><span style="color:#eff1f5;"> item.</span><span style="color:#bf616a;">getName</span><span style="color:#eff1f5;">());
-</span><span style="color:#eff1f5;">            </span><span style="color:#ebcb8b;">System</span><span style="color:#eff1f5;">.out.</span><span style="color:#bf616a;">println</span><span style="color:#eff1f5;">(items.</span><span style="color:#bf616a;">toString</span><span style="color:#eff1f5;">());
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">            </span><span style="color:#65737e;">/*
-</span><span style="color:#65737e;">             </span><span style="color:#65737e;">* 结束容器操作
-</span><span style="color:#65737e;">             </span><span style="color:#65737e;">*/
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">mutex.</span><span style="color:#bf616a;">release</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">            </span><span style="color:#65737e;">/*
-</span><span style="color:#65737e;">             </span><span style="color:#65737e;">* 保证非满，允许put操作（唤醒挂起进程）
-</span><span style="color:#65737e;">             </span><span style="color:#65737e;">*/
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">notFull.</span><span style="color:#bf616a;">release</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">return</span><span style="color:#eff1f5;"> item;
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private static class </span><span style="color:#ebcb8b;">Producer </span><span style="color:#b48ead;">implements </span><span style="color:#a3be8c;">Runnable </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">private </span><span style="color:#ebcb8b;">WareHouse </span><span style="color:#eff1f5;">wareHouse;
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">private int </span><span style="color:#eff1f5;">i </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">0</span><span style="color:#eff1f5;">;
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">public </span><span style="color:#8fa1b3;">Producer</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">WareHouse </span><span style="color:#bf616a;">s</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">wareHouse </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> s;
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">public void </span><span style="color:#8fa1b3;">run</span><span style="color:#eff1f5;">() {
-</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">try </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">                </span><span style="color:#b48ead;">while </span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">true</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">                    </span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">Item</span><span style="color:#eff1f5;"> itm </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">Item</span><span style="color:#eff1f5;">(i</span><span style="color:#c0c5ce;">++</span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">                    </span><span style="color:#eff1f5;">wareHouse.</span><span style="color:#bf616a;">put</span><span style="color:#eff1f5;">(itm);
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">                    </span><span style="color:#ebcb8b;">Thread</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">sleep</span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">1000</span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">} </span><span style="color:#b48ead;">catch </span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">InterruptedException </span><span style="color:#bf616a;">e</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private static class </span><span style="color:#ebcb8b;">Consumer </span><span style="color:#b48ead;">implements </span><span style="color:#a3be8c;">Runnable </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">private </span><span style="color:#ebcb8b;">WareHouse </span><span style="color:#eff1f5;">wareHouse;
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">public </span><span style="color:#8fa1b3;">Consumer</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">WareHouse </span><span style="color:#bf616a;">s</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">wareHouse </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> s;
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">public void </span><span style="color:#8fa1b3;">run</span><span style="color:#eff1f5;">() {
-</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">try </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">                </span><span style="color:#b48ead;">while </span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">true</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">                    </span><span style="color:#eff1f5;">wareHouse.</span><span style="color:#bf616a;">take</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">                    </span><span style="color:#ebcb8b;">Thread</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">sleep</span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">1500</span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">} </span><span style="color:#b48ead;">catch </span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">InterruptedException </span><span style="color:#bf616a;">e</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public static void </span><span style="color:#8fa1b3;">main</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">String</span><span style="color:#b48ead;">[] </span><span style="color:#bf616a;">args</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">WareHouse</span><span style="color:#eff1f5;"> wareHouse </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">WareHouse</span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">5</span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">ExecutorService</span><span style="color:#eff1f5;"> executor </span><span style="color:#c0c5ce;">= </span><span style="color:#ebcb8b;">Executors</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">newCachedThreadPool</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">final int</span><span style="color:#eff1f5;"> countOfConsumers </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">3</span><span style="color:#eff1f5;">;
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">final int</span><span style="color:#eff1f5;"> countOfProducers </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">5</span><span style="color:#eff1f5;">;
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">for </span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">int</span><span style="color:#eff1f5;"> i </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">0</span><span style="color:#eff1f5;">; i </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#eff1f5;"> countOfProducers; i</span><span style="color:#c0c5ce;">++</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">executor.</span><span style="color:#bf616a;">execute</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">Producer</span><span style="color:#eff1f5;">(wareHouse));
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">for </span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">int</span><span style="color:#eff1f5;"> i </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">0</span><span style="color:#eff1f5;">; i </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#eff1f5;"> countOfConsumers; i</span><span style="color:#c0c5ce;">++</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">executor.</span><span style="color:#bf616a;">execute</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">Consumer</span><span style="color:#eff1f5;">(wareHouse));
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#65737e;">//        try {
-</span><span style="color:#65737e;">//            executor.awaitTermination(1, TimeUnit.MINUTES);
-</span><span style="color:#65737e;">//        } catch (InterruptedException e) {
-</span><span style="color:#65737e;">//            executor.shutdown();
-</span><span style="color:#65737e;">//        }
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#569cd6;">package </span><span style="color:#dcdcdc;">me.wbprime.showcase.concurrent;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">com.google.common.collect.Lists;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">java.util.List;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">java.util.concurrent.ExecutorService;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">java.util.concurrent.Executors;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">java.util.concurrent.Semaphore;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">java.util.concurrent.TimeUnit;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#608b4e;">/**
+</span><span style="color:#608b4e;"> </span><span style="color:#608b4e;">* Class: SemaphoreCase
+</span><span style="color:#608b4e;"> </span><span style="color:#608b4e;">* Date: 2016/03/30 18:15
+</span><span style="color:#608b4e;"> </span><span style="color:#608b4e;">*/
+</span><span style="color:#569cd6;">public final class </span><span style="color:#dcdcdc;">SemaphoreCase {
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private static class </span><span style="color:#dcdcdc;">Item {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">String name;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">Item(</span><span style="color:#569cd6;">int </span><span style="color:#dcdcdc;">idx) {
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">name = String.format(</span><span style="color:#d69d85;">&quot;%s %d&quot;</span><span style="color:#dcdcdc;">, Thread.currentThread().getName(), idx);
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">public final </span><span style="color:#dcdcdc;">String getName() {
+</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> name;
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">@Override
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">String toString() {
+</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">getName();
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private static class </span><span style="color:#dcdcdc;">WareHouse {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">private final </span><span style="color:#dcdcdc;">List&lt;Item&gt; items;
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">private final </span><span style="color:#dcdcdc;">Semaphore notFull;
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">private final </span><span style="color:#dcdcdc;">Semaphore notEmpty;
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">private final </span><span style="color:#dcdcdc;">Semaphore mutex;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">WareHouse(</span><span style="color:#569cd6;">final int </span><span style="color:#dcdcdc;">cnt) {
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">items = Lists.newArrayListWithExpectedSize(cnt);
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">this.notFull = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">Semaphore(cnt);
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">this.notEmpty = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">Semaphore(</span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">);
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">this.mutex = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">Semaphore(</span><span style="color:#b5cea8;">1</span><span style="color:#dcdcdc;">);
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">String itemsString() {
+</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> items.toString();
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">put(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">Item obj) </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">InterruptedException {
+</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(</span><span style="color:#569cd6;">null </span><span style="color:#dcdcdc;">!= obj) {
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">                </span><span style="color:#608b4e;">/*
+</span><span style="color:#608b4e;">                 </span><span style="color:#608b4e;">* 获取非满的保证
+</span><span style="color:#608b4e;">                 </span><span style="color:#608b4e;">*
+</span><span style="color:#608b4e;">                 </span><span style="color:#608b4e;">* 如果是满的，则挂起
+</span><span style="color:#608b4e;">                 </span><span style="color:#608b4e;">*/
+</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">notFull.acquire();
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">                </span><span style="color:#608b4e;">/*
+</span><span style="color:#608b4e;">                 </span><span style="color:#608b4e;">* 获取容器操作的独占保证
+</span><span style="color:#608b4e;">                 </span><span style="color:#608b4e;">*/
+</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">mutex.acquire();
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">items.add(obj);
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">System.out.println(</span><span style="color:#d69d85;">&quot;Put &quot; </span><span style="color:#dcdcdc;">+ obj.getName());
+</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">System.out.println(items.toString());
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">                </span><span style="color:#608b4e;">/*
+</span><span style="color:#608b4e;">                 </span><span style="color:#608b4e;">* 结束容器操作
+</span><span style="color:#608b4e;">                 </span><span style="color:#608b4e;">*/
+</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">mutex.release();
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">                </span><span style="color:#608b4e;">/*
+</span><span style="color:#608b4e;">                 </span><span style="color:#608b4e;">* 保证非空，允许take操作（唤醒挂起线程）
+</span><span style="color:#608b4e;">                 </span><span style="color:#608b4e;">*/
+</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">notEmpty.release();
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">Item take() </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">InterruptedException {
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">            </span><span style="color:#608b4e;">/*
+</span><span style="color:#608b4e;">             </span><span style="color:#608b4e;">* 获取非空的保证
+</span><span style="color:#608b4e;">             </span><span style="color:#608b4e;">*
+</span><span style="color:#608b4e;">             </span><span style="color:#608b4e;">* 如果是空的，则挂起
+</span><span style="color:#608b4e;">             </span><span style="color:#608b4e;">*/
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">notEmpty.acquire();
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">            </span><span style="color:#608b4e;">/*
+</span><span style="color:#608b4e;">             </span><span style="color:#608b4e;">* 获取容器操作的独占保证
+</span><span style="color:#608b4e;">             </span><span style="color:#608b4e;">*/
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">mutex.acquire();
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">final int</span><span style="color:#dcdcdc;"> lastIdx = items.size() - </span><span style="color:#b5cea8;">1</span><span style="color:#dcdcdc;">;
+</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">Item item = items.get(lastIdx);
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">items.remove(lastIdx);
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">System.out.println(</span><span style="color:#d69d85;">&quot;Take &quot; </span><span style="color:#dcdcdc;">+ item.getName());
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">System.out.println(items.toString());
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">            </span><span style="color:#608b4e;">/*
+</span><span style="color:#608b4e;">             </span><span style="color:#608b4e;">* 结束容器操作
+</span><span style="color:#608b4e;">             </span><span style="color:#608b4e;">*/
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">mutex.release();
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">            </span><span style="color:#608b4e;">/*
+</span><span style="color:#608b4e;">             </span><span style="color:#608b4e;">* 保证非满，允许put操作（唤醒挂起进程）
+</span><span style="color:#608b4e;">             </span><span style="color:#608b4e;">*/
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">notFull.release();
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> item;
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private static class </span><span style="color:#dcdcdc;">Producer </span><span style="color:#569cd6;">implements </span><span style="color:#4ec9b0;">Runnable </span><span style="color:#dcdcdc;">{
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">WareHouse wareHouse;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">private int </span><span style="color:#dcdcdc;">i = </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">Producer(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">WareHouse s) {
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">wareHouse = s;
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">run() {
+</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">try </span><span style="color:#dcdcdc;">{
+</span><span style="color:#dcdcdc;">                </span><span style="color:#569cd6;">while </span><span style="color:#dcdcdc;">(</span><span style="color:#569cd6;">true</span><span style="color:#dcdcdc;">) {
+</span><span style="color:#dcdcdc;">                    </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">Item itm = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">Item(i</span><span style="color:#569cd6;">++</span><span style="color:#dcdcdc;">);
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">wareHouse.put(itm);
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">Thread.sleep(</span><span style="color:#b5cea8;">1000</span><span style="color:#dcdcdc;">);
+</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">} </span><span style="color:#569cd6;">catch </span><span style="color:#dcdcdc;">(InterruptedException e) {
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private static class </span><span style="color:#dcdcdc;">Consumer </span><span style="color:#569cd6;">implements </span><span style="color:#4ec9b0;">Runnable </span><span style="color:#dcdcdc;">{
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">WareHouse wareHouse;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">Consumer(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">WareHouse s) {
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">wareHouse = s;
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">run() {
+</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">try </span><span style="color:#dcdcdc;">{
+</span><span style="color:#dcdcdc;">                </span><span style="color:#569cd6;">while </span><span style="color:#dcdcdc;">(</span><span style="color:#569cd6;">true</span><span style="color:#dcdcdc;">) {
+</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">wareHouse.take();
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">Thread.sleep(</span><span style="color:#b5cea8;">1500</span><span style="color:#dcdcdc;">);
+</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">} </span><span style="color:#569cd6;">catch </span><span style="color:#dcdcdc;">(InterruptedException e) {
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public static void </span><span style="color:#dcdcdc;">main(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">String</span><span style="color:#569cd6;">[] </span><span style="color:#dcdcdc;">args) {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">WareHouse wareHouse = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">WareHouse(</span><span style="color:#b5cea8;">5</span><span style="color:#dcdcdc;">);
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">ExecutorService executor = Executors.newCachedThreadPool();
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">final int</span><span style="color:#dcdcdc;"> countOfConsumers = </span><span style="color:#b5cea8;">3</span><span style="color:#dcdcdc;">;
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">final int</span><span style="color:#dcdcdc;"> countOfProducers = </span><span style="color:#b5cea8;">5</span><span style="color:#dcdcdc;">;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">for </span><span style="color:#dcdcdc;">(</span><span style="color:#569cd6;">int</span><span style="color:#dcdcdc;"> i = </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">; i &lt; countOfProducers; i</span><span style="color:#569cd6;">++</span><span style="color:#dcdcdc;">) {
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">executor.execute(</span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">Producer(wareHouse));
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">for </span><span style="color:#dcdcdc;">(</span><span style="color:#569cd6;">int</span><span style="color:#dcdcdc;"> i = </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">; i &lt; countOfConsumers; i</span><span style="color:#569cd6;">++</span><span style="color:#dcdcdc;">) {
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">executor.execute(</span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">Consumer(wareHouse));
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#608b4e;">//        try {
+</span><span style="color:#608b4e;">//            executor.awaitTermination(1, TimeUnit.MINUTES);
+</span><span style="color:#608b4e;">//        } catch (InterruptedException e) {
+</span><span style="color:#608b4e;">//            executor.shutdown();
+</span><span style="color:#608b4e;">//        }
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">}
 </span></pre><h1 id="shi-li-dai-ma-shuo-ming"><a class="zola-anchor" href="#shi-li-dai-ma-shuo-ming" aria-label="Anchor link for: shi-li-dai-ma-shuo-ming">🔗</a>
 示例代码说明</h1>
 <ol>
@@ -398,54 +359,24 @@ Semaphore的API</h1>
 <li><a href="https://www.wangbo.im/posts/2016-03-30-learning-java-concurrent-semaphore/SemaphoreCase.java">SemaphoreCase.java</a></li>
 </ol>
 
-    </div>
-
-    
-    
-
-    <div class="post-footer">
-        
-            
-                <div class="post-tags">
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;java&#x2F;">#java</a>
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;concurrency&#x2F;">#concurrency</a>
-                    
-                </div>
-            
-            
-                <div class="post-nav">
-                    
-                        <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;spring-annotation-based-configuration&#x2F;">‹ Spring: Annotation based configuration</a>
-                    
-                    
-                        <a class="next" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2016-03-30-learning-java-concurrency-countdownlatch&#x2F;">Learning Java Concurrency - CountDownLatch ›</a>
-                    
-                    
-                    
-                </div>
-            
-
-        
-
-    </div>
-
-    
-    
-</article>
-
-
-                </div>
-            </main>
-
-            
-            
         </div>
+        
+    
+</div></div>
+            
+    <div class="pagination">
+        <div class="pagination__buttons">
+            </div>
+    </div>
+<footer class="footer">
+                    <div class="footer__inner"><div class="copyright">
+            <span>© 2019 <a href="https://github.com/ejmg/zerm">zerm</a> :: Powered by <a href="https://www.getzola.org/">Zola</a></span>
+            <span>:: Theme made by <a href="https://github.com/ejmg">ejmg</a></span>
+        </div>
+    <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;assets&#x2F;js&#x2F;main.js"></script>
+</div>
+                    
 
-      
-          <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
-      
+                </footer></div>
     </body>
-
 </html>

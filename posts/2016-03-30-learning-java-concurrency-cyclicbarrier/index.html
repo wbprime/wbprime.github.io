@@ -1,141 +1,102 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta http-equiv="content-type" content="text/html; charset=utf-8">
-
-      <!-- Enable responsiveness on mobile devices-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-      <title>wangbo’s home &amp; blog - Learning Java Concurrency - CyclicBarrier</title>
-
-      
-
-      
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
-          
-      
-
-      
-          <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
-          
-      
-
-      
-      
-    </head>
-
-    <body>
-        <div class="container">
-
-            <div id="mobile-navbar" class="mobile-navbar">
-              <div class="mobile-header-logo">
-                <a href="/" class="logo">WB Prime</a>
-              </div>
-              <div class="mobile-navbar-icon icon-out">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            </div>
-
-            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
-              <ul class="mobile-menu-list">
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im">
-                            Home
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;categories">
-                            Categories
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;tags">
-                            Tags
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;about">
-                            About
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                            Github
-                        </a>
-                    </li>
-                
-              </ul>
-            </nav>
-
-            <header id="header">
-                <div class="logo"><a href="https:&#x2F;&#x2F;www.wangbo.im">WB Prime</a></div>
-                <nav class="menu">
-                    <ul>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im">
-                                    Home
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;categories">
-                                    Categories
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;tags">
-                                    Tags
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;about">
-                                    About
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                                    Github
-                                </a>
-                            </li>
-                        
-                    </ul>
-                </nav>
-            </header>
-
-            <main>
-                <div class="content" id="mobile-panel">
-                    
-
-
-
-<article class="post">
+    <title>Learning Java Concurrency - CyclicBarrier - Elvis Wang</title>
     
-    <header class="post__header">
-        <h1 class="post__title">
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="wangbo’s home &amp; blog"/>
+
+    <meta property="og:title" content="
+    wangbo’s home &amp; blog -&nbsp;Learning Java Concurrency - CyclicBarrier" />
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2016-03-30-learning-java-concurrency-cyclicbarrier&#x2F;"/>
+    <meta property="og:description" content="&lt;p&gt;CyclicBarrier，正如同名字里面表达出来的，是一个可以循环使用的屏障。与CountDownLatch类似，它可以用来表达等待某个状态，比如大家都到齐了，那么开始开会吧。与CountDownLatch不同的是，它可以多次等待，也就是可以等待多个状态。&lt;&#x2F;p&gt;
+&lt;p&gt;好吃不过栗子。比如哈利波特的三强争霸赛，要一项一项任务地完成，大家都结束了…"/>
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+<link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
+    <body>
+        <div class="container full">
+<header class="header">
+    <div class="header__inner">
+        <div class="header__logo">
+            <a href="&#x2F;">
+    <div class="logo">
+        WB Prime
+    </div>
+</a>
+        </div>
+        <div class="menu-trigger">menu</div>
+    </div>
+    
+    <nav class="menu">
+        <ul class="menu__inner menu__inner--desktop">
+            
+            
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+                    </li>
+                
+            </ul>
+
+        <ul class="menu__inner menu__inner--mobile">
+            
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+        </li>
+        </ul>
+    </nav>
+
+    </header>
+<div class="content"><div class="post">
+        <h1 class="post-title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2016-03-30-learning-java-concurrency-cyclicbarrier&#x2F;">Learning Java Concurrency - CyclicBarrier</a>
         </h1>
-        <div class="post__meta">
-            <span class="post__time">2016-03-30</span>
-            
-        </div>
-    </header>
+        
+    <div class="post-meta">
+        <span class="post-date">2016.03.30
+                </span>
 
-    <div class="post-content">
-      <p>CyclicBarrier，正如同名字里面表达出来的，是一个可以循环使用的屏障。与CountDownLatch类似，它可以用来表达等待某个状态，比如大家都到齐了，那么开始开会吧。与CountDownLatch不同的是，它可以多次等待，也就是可以等待多个状态。</p>
+        <span class="post-author"></span>
+
+        
+
+    
+    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;learning-java-concurrency&#x2F;">Learning Java Concurrency</a>} 
+
+            
+    ::
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;java&#x2F;">java</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;concurrency&#x2F;">concurrency</a>
+        
+    
+            
+        
+    </div>
+
+
+
+        
+
+        <div class="post-content">
+            <p>CyclicBarrier，正如同名字里面表达出来的，是一个可以循环使用的屏障。与CountDownLatch类似，它可以用来表达等待某个状态，比如大家都到齐了，那么开始开会吧。与CountDownLatch不同的是，它可以多次等待，也就是可以等待多个状态。</p>
 <p>好吃不过栗子。比如哈利波特的三强争霸赛，要一项一项任务地完成，大家都结束了（不管成功还是失败），才开始计划下一个任务。第一个是去挑战龙；然后是到海里面挑战人鱼群；最后是挑战伏地魔。每一个任务总是要等大家都完成了才开始。</p>
 <p>还有一个栗子。大家一起去面试，有的公司为了省事，等凑齐了一波人才开始走流程。HR领着大家一起先笔试，然后安排初面官，然后安排复试官。每一关刷掉一波人，但是只有大家都结束了才进行下一轮。别问我哪里有这样的招聘部门，人家开心就好。</p>
 <p><a name="continue-reading"></a></p>
@@ -167,98 +128,98 @@ CyclicBarrier 的API</h1>
 返回当前已经等待的线程数。</li>
 </ol>
 <p>CyclicBarrier内部是通过一个ReentrantLock实例来进行同步的，用该实例的一个Condition实例来控制是否达到放行状态。</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#65737e;">/** The lock for guarding barrier entry */
-</span><span style="color:#b48ead;">private final </span><span style="color:#ebcb8b;">ReentrantLock</span><span style="color:#c0c5ce;"> lock = </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">ReentrantLock</span><span style="color:#c0c5ce;">();
-</span><span style="color:#65737e;">/** Condition to wait on until tripped */
-</span><span style="color:#b48ead;">private final </span><span style="color:#ebcb8b;">Condition</span><span style="color:#c0c5ce;"> trip = lock.</span><span style="color:#bf616a;">newCondition</span><span style="color:#c0c5ce;">();
+<pre style="background-color:#1e1e1e;">
+<span style="color:#608b4e;">/** The lock for guarding barrier entry */
+</span><span style="color:#569cd6;">private final </span><span style="color:#dcdcdc;">ReentrantLock lock = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">ReentrantLock();
+</span><span style="color:#608b4e;">/** Condition to wait on until tripped */
+</span><span style="color:#569cd6;">private final </span><span style="color:#dcdcdc;">Condition trip = lock.newCondition();
 </span></pre><h1 id="shi-li-dai-ma"><a class="zola-anchor" href="#shi-li-dai-ma" aria-label="Anchor link for: shi-li-dai-ma">🔗</a>
 示例代码</h1>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">package </span><span style="color:#c0c5ce;">me.wbprime.showcase.concurrent;
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">com.google.common.collect.</span><span style="color:#ebcb8b;">ImmutableList</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.joda.time.</span><span style="color:#ebcb8b;">LocalDate</span><span style="color:#c0c5ce;">;
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">java.util.</span><span style="color:#ebcb8b;">List</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">java.util.</span><span style="color:#ebcb8b;">Random</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">java.util.concurrent.</span><span style="color:#ebcb8b;">BrokenBarrierException</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">java.util.concurrent.</span><span style="color:#ebcb8b;">CyclicBarrier</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">java.util.concurrent.</span><span style="color:#ebcb8b;">ExecutorService</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">java.util.concurrent.</span><span style="color:#ebcb8b;">Executors</span><span style="color:#c0c5ce;">;
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#65737e;">/**
-</span><span style="color:#65737e;"> </span><span style="color:#65737e;">* Class: CyclicBarrierCase
-</span><span style="color:#65737e;"> </span><span style="color:#65737e;">* Date: 2016/03/30 13:35
-</span><span style="color:#65737e;"> </span><span style="color:#65737e;">*/
-</span><span style="color:#b48ead;">public final class </span><span style="color:#ebcb8b;">CyclicBarrierCase </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private static class </span><span style="color:#ebcb8b;">Interviewee </span><span style="color:#b48ead;">implements </span><span style="color:#a3be8c;">Runnable </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">private </span><span style="color:#ebcb8b;">CyclicBarrier </span><span style="color:#eff1f5;">barrier;
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">private </span><span style="color:#ebcb8b;">List</span><span style="color:#eff1f5;">&lt;</span><span style="color:#ebcb8b;">String</span><span style="color:#eff1f5;">&gt;  jobs;
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">public </span><span style="color:#8fa1b3;">Interviewee</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">List</span><span style="color:#eff1f5;">&lt;</span><span style="color:#ebcb8b;">String</span><span style="color:#eff1f5;">&gt; </span><span style="color:#bf616a;">dt</span><span style="color:#eff1f5;">, </span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">CyclicBarrier </span><span style="color:#bf616a;">b</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">barrier </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> b;
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">jobs </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> dt;
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">public void </span><span style="color:#8fa1b3;">run</span><span style="color:#eff1f5;">() {
-</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">try </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">                </span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">String</span><span style="color:#eff1f5;"> myName </span><span style="color:#c0c5ce;">= </span><span style="color:#ebcb8b;">Thread</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">currentThread</span><span style="color:#eff1f5;">().</span><span style="color:#bf616a;">getName</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">                </span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">Random</span><span style="color:#eff1f5;"> rnd </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">Random</span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">System</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">currentTimeMillis</span><span style="color:#eff1f5;">());
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">                </span><span style="color:#b48ead;">for </span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">String</span><span style="color:#eff1f5;"> eachJob</span><span style="color:#c0c5ce;">:</span><span style="color:#eff1f5;"> jobs) {
-</span><span style="color:#eff1f5;">                    </span><span style="color:#eff1f5;">barrier.</span><span style="color:#bf616a;">await</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">                    </span><span style="color:#ebcb8b;">System</span><span style="color:#eff1f5;">.out.</span><span style="color:#bf616a;">println</span><span style="color:#eff1f5;">(myName </span><span style="color:#c0c5ce;">+ &quot;</span><span style="color:#a3be8c;">: Start processing job: </span><span style="color:#c0c5ce;">&quot; +</span><span style="color:#eff1f5;"> eachJob);
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">                    </span><span style="color:#b48ead;">final int</span><span style="color:#eff1f5;"> sleepTime </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> rnd.</span><span style="color:#bf616a;">nextInt</span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">1000</span><span style="color:#eff1f5;">) </span><span style="color:#c0c5ce;">+ </span><span style="color:#d08770;">1</span><span style="color:#eff1f5;">;
-</span><span style="color:#eff1f5;">                    </span><span style="color:#ebcb8b;">Thread</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">sleep</span><span style="color:#eff1f5;">(sleepTime);
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">                    </span><span style="color:#ebcb8b;">System</span><span style="color:#eff1f5;">.out.</span><span style="color:#bf616a;">println</span><span style="color:#eff1f5;">(myName </span><span style="color:#c0c5ce;">+ &quot;</span><span style="color:#a3be8c;">: Finish processing job: </span><span style="color:#c0c5ce;">&quot; +</span><span style="color:#eff1f5;"> eachJob);
-</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">} </span><span style="color:#b48ead;">catch </span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">InterruptedException </span><span style="color:#bf616a;">e</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">                </span><span style="color:#65737e;">// do nothing
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">} </span><span style="color:#b48ead;">catch </span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">BrokenBarrierException </span><span style="color:#bf616a;">e</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">                </span><span style="color:#65737e;">// do nothing
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private static class </span><span style="color:#ebcb8b;">HR </span><span style="color:#b48ead;">implements </span><span style="color:#a3be8c;">Runnable </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">public </span><span style="color:#8fa1b3;">HR</span><span style="color:#eff1f5;">() {
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">public void </span><span style="color:#8fa1b3;">run</span><span style="color:#eff1f5;">() {
-</span><span style="color:#eff1f5;">            </span><span style="color:#ebcb8b;">System</span><span style="color:#eff1f5;">.out.</span><span style="color:#bf616a;">println</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">Hello everyone, go on to next challenge</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public static void </span><span style="color:#8fa1b3;">main</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">String</span><span style="color:#b48ead;">[] </span><span style="color:#bf616a;">args</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">final int</span><span style="color:#eff1f5;"> memberCount </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">3</span><span style="color:#eff1f5;">;
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">List</span><span style="color:#eff1f5;">&lt;</span><span style="color:#ebcb8b;">String</span><span style="color:#eff1f5;">&gt; workflow </span><span style="color:#c0c5ce;">= </span><span style="color:#ebcb8b;">ImmutableList</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">of</span><span style="color:#eff1f5;">(
-</span><span style="color:#eff1f5;">            </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">Self introduction</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">,
-</span><span style="color:#eff1f5;">            </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">Coding exam</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">,
-</span><span style="color:#eff1f5;">            </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">Tech interview</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">,
-</span><span style="color:#eff1f5;">            </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">Leader interview</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">,
-</span><span style="color:#eff1f5;">            </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">HR interview</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">,
-</span><span style="color:#eff1f5;">            </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">Offer</span><span style="color:#c0c5ce;">&quot;
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">CyclicBarrier</span><span style="color:#eff1f5;"> barrier </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">CyclicBarrier</span><span style="color:#eff1f5;">(memberCount, </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">HR</span><span style="color:#eff1f5;">());
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">ExecutorService</span><span style="color:#eff1f5;"> executor </span><span style="color:#c0c5ce;">= </span><span style="color:#ebcb8b;">Executors</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">newCachedThreadPool</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">for </span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">int</span><span style="color:#eff1f5;"> i </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">0</span><span style="color:#eff1f5;">; i </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#eff1f5;"> memberCount; i </span><span style="color:#c0c5ce;">++</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">executor.</span><span style="color:#bf616a;">execute</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">Interviewee</span><span style="color:#eff1f5;">(workflow, barrier));
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">executor.</span><span style="color:#bf616a;">shutdown</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#569cd6;">package </span><span style="color:#dcdcdc;">me.wbprime.showcase.concurrent;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">com.google.common.collect.ImmutableList;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.joda.time.LocalDate;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">java.util.List;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">java.util.Random;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">java.util.concurrent.BrokenBarrierException;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">java.util.concurrent.CyclicBarrier;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">java.util.concurrent.ExecutorService;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">java.util.concurrent.Executors;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#608b4e;">/**
+</span><span style="color:#608b4e;"> </span><span style="color:#608b4e;">* Class: CyclicBarrierCase
+</span><span style="color:#608b4e;"> </span><span style="color:#608b4e;">* Date: 2016/03/30 13:35
+</span><span style="color:#608b4e;"> </span><span style="color:#608b4e;">*/
+</span><span style="color:#569cd6;">public final class </span><span style="color:#dcdcdc;">CyclicBarrierCase {
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private static class </span><span style="color:#dcdcdc;">Interviewee </span><span style="color:#569cd6;">implements </span><span style="color:#4ec9b0;">Runnable </span><span style="color:#dcdcdc;">{
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">CyclicBarrier barrier;
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">List&lt;String&gt;  jobs;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">Interviewee(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">List&lt;String&gt; dt, </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">CyclicBarrier b) {
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">barrier = b;
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">jobs = dt;
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">run() {
+</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">try </span><span style="color:#dcdcdc;">{
+</span><span style="color:#dcdcdc;">                </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">String myName = Thread.currentThread().getName();
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">                </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">Random rnd = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">Random(System.currentTimeMillis());
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">                </span><span style="color:#569cd6;">for </span><span style="color:#dcdcdc;">(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">String eachJob</span><span style="color:#569cd6;">:</span><span style="color:#dcdcdc;"> jobs) {
+</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">barrier.await();
+</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">System.out.println(myName + </span><span style="color:#d69d85;">&quot;: Start processing job: &quot; </span><span style="color:#dcdcdc;">+ eachJob);
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">                    </span><span style="color:#569cd6;">final int</span><span style="color:#dcdcdc;"> sleepTime = rnd.nextInt(</span><span style="color:#b5cea8;">1000</span><span style="color:#dcdcdc;">) + </span><span style="color:#b5cea8;">1</span><span style="color:#dcdcdc;">;
+</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">Thread.sleep(sleepTime);
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">System.out.println(myName + </span><span style="color:#d69d85;">&quot;: Finish processing job: &quot; </span><span style="color:#dcdcdc;">+ eachJob);
+</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">} </span><span style="color:#569cd6;">catch </span><span style="color:#dcdcdc;">(InterruptedException e) {
+</span><span style="color:#dcdcdc;">                </span><span style="color:#608b4e;">// do nothing
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">} </span><span style="color:#569cd6;">catch </span><span style="color:#dcdcdc;">(BrokenBarrierException e) {
+</span><span style="color:#dcdcdc;">                </span><span style="color:#608b4e;">// do nothing
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private static class </span><span style="color:#dcdcdc;">HR </span><span style="color:#569cd6;">implements </span><span style="color:#4ec9b0;">Runnable </span><span style="color:#dcdcdc;">{
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">HR() {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">run() {
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">System.out.println(</span><span style="color:#d69d85;">&quot;Hello everyone, go on to next challenge&quot;</span><span style="color:#dcdcdc;">);
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public static void </span><span style="color:#dcdcdc;">main(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">String</span><span style="color:#569cd6;">[] </span><span style="color:#dcdcdc;">args) {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">final int</span><span style="color:#dcdcdc;"> memberCount = </span><span style="color:#b5cea8;">3</span><span style="color:#dcdcdc;">;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">List&lt;String&gt; workflow = ImmutableList.of(
+</span><span style="color:#dcdcdc;">            </span><span style="color:#d69d85;">&quot;Self introduction&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">            </span><span style="color:#d69d85;">&quot;Coding exam&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">            </span><span style="color:#d69d85;">&quot;Tech interview&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">            </span><span style="color:#d69d85;">&quot;Leader interview&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">            </span><span style="color:#d69d85;">&quot;HR interview&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">            </span><span style="color:#d69d85;">&quot;Offer&quot;
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">);
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">CyclicBarrier barrier = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">CyclicBarrier(memberCount, </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">HR());
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">ExecutorService executor = Executors.newCachedThreadPool();
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">for </span><span style="color:#dcdcdc;">(</span><span style="color:#569cd6;">int</span><span style="color:#dcdcdc;"> i = </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">; i &lt; memberCount; i </span><span style="color:#569cd6;">++</span><span style="color:#dcdcdc;">) {
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">executor.execute(</span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">Interviewee(workflow, barrier));
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">executor.shutdown();
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">}
 </span></pre><h1 id="shi-li-dai-ma-shuo-ming"><a class="zola-anchor" href="#shi-li-dai-ma-shuo-ming" aria-label="Anchor link for: shi-li-dai-ma-shuo-ming">🔗</a>
 示例代码说明</h1>
 <ol>
@@ -281,54 +242,24 @@ CyclicBarrier 的API</h1>
 <li><a href="https://www.wangbo.im/posts/2016-03-30-learning-java-concurrency-cyclicbarrier/CyclicBarrierCase.java">CyclicBarrierCase.java</a></li>
 </ol>
 
-    </div>
-
-    
-    
-
-    <div class="post-footer">
-        
-            
-                <div class="post-tags">
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;java&#x2F;">#java</a>
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;concurrency&#x2F;">#concurrency</a>
-                    
-                </div>
-            
-            
-                <div class="post-nav">
-                    
-                        <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2016-03-30-learning-java-concurrency-countdownlatch&#x2F;">‹ Learning Java Concurrency - CountDownLatch</a>
-                    
-                    
-                        <a class="next" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;learning-java-concurrency-content&#x2F;">Learning Java Concurrency - Content&#x2F;目录 ›</a>
-                    
-                    
-                    
-                </div>
-            
-
-        
-
-    </div>
-
-    
-    
-</article>
-
-
-                </div>
-            </main>
-
-            
-            
         </div>
+        
+    
+</div></div>
+            
+    <div class="pagination">
+        <div class="pagination__buttons">
+            </div>
+    </div>
+<footer class="footer">
+                    <div class="footer__inner"><div class="copyright">
+            <span>© 2019 <a href="https://github.com/ejmg/zerm">zerm</a> :: Powered by <a href="https://www.getzola.org/">Zola</a></span>
+            <span>:: Theme made by <a href="https://github.com/ejmg">ejmg</a></span>
+        </div>
+    <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;assets&#x2F;js&#x2F;main.js"></script>
+</div>
+                    
 
-      
-          <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
-      
+                </footer></div>
     </body>
-
 </html>

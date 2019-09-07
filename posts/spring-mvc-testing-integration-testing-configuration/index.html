@@ -1,141 +1,103 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta http-equiv="content-type" content="text/html; charset=utf-8">
-
-      <!-- Enable responsiveness on mobile devices-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-      <title>wangbo’s home &amp; blog - Spring MVC Integration Testing - Configuration</title>
-
-      
-
-      
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
-          
-      
-
-      
-          <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
-          
-      
-
-      
-      
-    </head>
-
-    <body>
-        <div class="container">
-
-            <div id="mobile-navbar" class="mobile-navbar">
-              <div class="mobile-header-logo">
-                <a href="/" class="logo">WB Prime</a>
-              </div>
-              <div class="mobile-navbar-icon icon-out">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            </div>
-
-            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
-              <ul class="mobile-menu-list">
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im">
-                            Home
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;categories">
-                            Categories
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;tags">
-                            Tags
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;about">
-                            About
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                            Github
-                        </a>
-                    </li>
-                
-              </ul>
-            </nav>
-
-            <header id="header">
-                <div class="logo"><a href="https:&#x2F;&#x2F;www.wangbo.im">WB Prime</a></div>
-                <nav class="menu">
-                    <ul>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im">
-                                    Home
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;categories">
-                                    Categories
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;tags">
-                                    Tags
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;about">
-                                    About
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                                    Github
-                                </a>
-                            </li>
-                        
-                    </ul>
-                </nav>
-            </header>
-
-            <main>
-                <div class="content" id="mobile-panel">
-                    
-
-
-
-<article class="post">
+    <title>Spring MVC Integration Testing - Configuration - Elvis Wang</title>
     
-    <header class="post__header">
-        <h1 class="post__title">
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="wangbo’s home &amp; blog"/>
+
+    <meta property="og:title" content="
+    wangbo’s home &amp; blog -&nbsp;Spring MVC Integration Testing - Configuration" />
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;spring-mvc-testing-integration-testing-configuration&#x2F;"/>
+    <meta property="og:description" content="&lt;p&gt;本文是 &lt;a href=&quot;https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;spring-mvc-testing-content&#x2F;&quot;&gt;Spring MVC Testing&lt;&#x2F;a&gt; 集成测试系列的第1篇，原文链接：&lt;a href=&quot;http:&#x2F;&#…"/>
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+<link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
+    <body>
+        <div class="container full">
+<header class="header">
+    <div class="header__inner">
+        <div class="header__logo">
+            <a href="&#x2F;">
+    <div class="logo">
+        WB Prime
+    </div>
+</a>
+        </div>
+        <div class="menu-trigger">menu</div>
+    </div>
+    
+    <nav class="menu">
+        <ul class="menu__inner menu__inner--desktop">
+            
+            
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+                    </li>
+                
+            </ul>
+
+        <ul class="menu__inner menu__inner--mobile">
+            
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+        </li>
+        </ul>
+    </nav>
+
+    </header>
+<div class="content"><div class="post">
+        <h1 class="post-title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;spring-mvc-testing-integration-testing-configuration&#x2F;">Spring MVC Integration Testing - Configuration</a>
         </h1>
-        <div class="post__meta">
-            <span class="post__time">2016-04-09</span>
-            
-        </div>
-    </header>
+        
+    <div class="post-meta">
+        <span class="post-date">2016.04.09
+                </span>
 
-    <div class="post-content">
-      <p>本文是 <a href="https://www.wangbo.im/posts/spring-mvc-testing-content/">Spring MVC Testing</a> 集成测试系列的第1篇，原文链接：<a href="http://www.petrikainulainen.net/programming/spring-framework/integration-testing-of-spring-mvc-applications-configuration/">Integration Testing of Spring MVC Applications: Configuration</a>。</p>
+        <span class="post-author"></span>
+
+        
+
+    
+    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;spring-mvc-testing&#x2F;">Spring MVC Testing</a>} 
+
+            
+    ::
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;spring-mvc&#x2F;">Spring MVC</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;testing&#x2F;">testing</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;java&#x2F;">java</a>
+        
+    
+            
+        
+    </div>
+
+
+
+        
+
+        <div class="post-content">
+            <p>本文是 <a href="https://www.wangbo.im/posts/spring-mvc-testing-content/">Spring MVC Testing</a> 集成测试系列的第1篇，原文链接：<a href="http://www.petrikainulainen.net/programming/spring-framework/integration-testing-of-spring-mvc-applications-configuration/">Integration Testing of Spring MVC Applications: Configuration</a>。</p>
 <p>没有人会否认集成测试的重要性，它是验证我们开发的组件能够正常协同工作的重要手段。不幸的是，对使用Spring MVC开发的web应用程序作集成测试有一点麻烦。</p>
 <p>过去我们一直用 <a href="http://docs.seleniumhq.org">Selenium</a> 和 <a href="https://jwebunit.github.io/jwebunit/">JWebUnit</a> 来对web应用接口作集成测试，然后效果不是很好。这种方法有以下三个缺点：</p>
 <ul>
@@ -156,13 +118,13 @@
 通过Maven获取依赖</h1>
 <p>译者注：原文写作的时候是基于Spring Framework 3.1.2，当时Spring-test-mvc还是作为一个独立的项目进行开发和发布。在Spring Framework 3.2以后，该项目被合并到Spring Framework中去了。现在Spring Framework已经发布了4.X系列，很少有人在使用3.2以下的版本，为了减少混淆，直接将原文的pom文件加以修改。特此说明。</p>
 <p>生成的pom.xml文件如下：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">dependency</span><span style="color:#c0c5ce;">&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">groupId</span><span style="color:#c0c5ce;">&gt;org.springframework&lt;/</span><span style="color:#bf616a;">groupId</span><span style="color:#c0c5ce;">&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">artifactId</span><span style="color:#c0c5ce;">&gt;spring-test&lt;/</span><span style="color:#bf616a;">artifactId</span><span style="color:#c0c5ce;">&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">version</span><span style="color:#c0c5ce;">&gt;3.2&lt;/</span><span style="color:#bf616a;">version</span><span style="color:#c0c5ce;">&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">scope</span><span style="color:#c0c5ce;">&gt;test&lt;/</span><span style="color:#bf616a;">scope</span><span style="color:#c0c5ce;">&gt;
-</span><span style="color:#c0c5ce;">&lt;/</span><span style="color:#bf616a;">dependency</span><span style="color:#c0c5ce;">&gt;
+<pre style="background-color:#1e1e1e;">
+<span style="color:#808080;">&lt;</span><span style="color:#569cd6;">dependency</span><span style="color:#808080;">&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">groupId</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">org.springframework</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">groupId</span><span style="color:#808080;">&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">artifactId</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">spring-test</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">artifactId</span><span style="color:#808080;">&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">version</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">3.2</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">version</span><span style="color:#808080;">&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">scope</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">test</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">scope</span><span style="color:#808080;">&gt;
+</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">dependency</span><span style="color:#808080;">&gt;
 </span></pre><h1 id="mockmvc-pei-zhi"><a class="zola-anchor" href="#mockmvc-pei-zhi" aria-label="Anchor link for: mockmvc-pei-zhi">🔗</a>
 MockMvc 配置</h1>
 <p>Spring MVC Test框架提供了<code>MockMvc</code>类体系来辅助编写基于Spring MVC开发的web应用的测试代码。我们需要做的就是使用<code>MockMvcBuilder</code>接口的实际实现来生成<code>MockMvc</code>实例。<code>MockMvcBuilders</code>工厂类提供了两个工厂方法创建<code>MockMvcBuilder</code>实例：</p>
@@ -174,14 +136,14 @@ MockMvc 配置</h1>
 <h2 id="standalonesetup"><a class="zola-anchor" href="#standalonesetup" aria-label="Anchor link for: standalonesetup">🔗</a>
 standaloneSetup</h2>
 <p>如果要测试的类是<code>HomeController</code>，我们可以用如下的方式创建一个<code>MockMvc</code>实例：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#ebcb8b;">MockMvc</span><span style="color:#c0c5ce;"> mockMvc = </span><span style="color:#ebcb8b;">MockMvcBuilders</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">standaloneSetup</span><span style="color:#c0c5ce;">(</span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">HomeController</span><span style="color:#c0c5ce;">()).</span><span style="color:#bf616a;">build</span><span style="color:#c0c5ce;">();
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">MockMvc mockMvc = MockMvcBuilders.standaloneSetup(</span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">HomeController()).build();
 </span></pre><h2 id="webappcontextsetup"><a class="zola-anchor" href="#webappcontextsetup" aria-label="Anchor link for: webappcontextsetup">🔗</a>
 webAppContextSetup</h2>
 <p>这种方式我们要先初始化一个配置好的<code>WebApplicationContext</code>实例，然后通过如下代码创建一个<code>MockMvc</code>实例：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#ebcb8b;">WebApplicationContext</span><span style="color:#c0c5ce;"> wac ;
-</span><span style="color:#ebcb8b;">MockMvc</span><span style="color:#c0c5ce;"> mockMvc = </span><span style="color:#ebcb8b;">MockMvcBuilders</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">webAppContextSetup</span><span style="color:#c0c5ce;">(wac).</span><span style="color:#bf616a;">build</span><span style="color:#c0c5ce;">();
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">WebApplicationContext wac ;
+</span><span style="color:#dcdcdc;">MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
 </span></pre><h1 id="ce-shi-yong-li-lei-de-pei-zhi"><a class="zola-anchor" href="#ce-shi-yong-li-lei-de-pei-zhi" aria-label="Anchor link for: ce-shi-yong-li-lei-de-pei-zhi">🔗</a>
 测试用例类的配置</h1>
 <p>在集成测试中我们应该使用webAppContextSetup方式的<code>MockMvc</code>配置方式，这样可以最大化地共用Spring配置代码。</p>
@@ -194,26 +156,26 @@ webAppContextSetup</h2>
 <li>测试用例类中添加一个<code>setUp()</code>方法并用<code>@Before</code>注解，调用<code>MockMvcBuilders</code>的静态方法<code>webAppContextSetup()</code>创建并配置好<code>MockMvc</code>类型的成员</li>
 </ol>
 <p>完成后的测试用例类大概长成这个样子：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">@</span><span style="color:#bf616a;">RunWith</span><span style="color:#c0c5ce;">(</span><span style="color:#ebcb8b;">SpringJUnit4ClassRunner</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">class</span><span style="color:#c0c5ce;">)
-</span><span style="color:#c0c5ce;">@</span><span style="color:#bf616a;">ContextConfiguration</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">locations </span><span style="color:#c0c5ce;">= {&quot;</span><span style="color:#a3be8c;">classpath:testContext.xml</span><span style="color:#c0c5ce;">&quot;, &quot;</span><span style="color:#a3be8c;">classpath:webMvcContext.xml</span><span style="color:#c0c5ce;">&quot;})
-</span><span style="color:#65737e;">//@ContextConfiguration(classes = {TestContext.class, WebMvcContext.class})
-</span><span style="color:#c0c5ce;">@</span><span style="color:#bf616a;">WebAppConfiguration
-</span><span style="color:#b48ead;">public class </span><span style="color:#ebcb8b;">TodoControllerTest_WebAppContext </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private </span><span style="color:#ebcb8b;">MockMvc </span><span style="color:#eff1f5;">mockMvc;
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">@</span><span style="color:#bf616a;">Autowired
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private </span><span style="color:#ebcb8b;">WebApplicationContext </span><span style="color:#eff1f5;">webApplicationContext;
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">@</span><span style="color:#bf616a;">Before
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public void </span><span style="color:#8fa1b3;">setUp</span><span style="color:#eff1f5;">() </span><span style="color:#b48ead;">throws </span><span style="color:#ebcb8b;">Exception </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">        </span><span style="color:#ebcb8b;">Mockito</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">reset</span><span style="color:#eff1f5;">(mockedTodoService);
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">mockMvc </span><span style="color:#c0c5ce;">= </span><span style="color:#ebcb8b;">MockMvcBuilders</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">webAppContextSetup</span><span style="color:#eff1f5;">(webApplicationContext).</span><span style="color:#bf616a;">build</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#65737e;">// Add tests here
-</span><span style="color:#eff1f5;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">@RunWith(SpringJUnit4ClassRunner.class)
+</span><span style="color:#dcdcdc;">@ContextConfiguration(locations = {</span><span style="color:#d69d85;">&quot;classpath:testContext.xml&quot;</span><span style="color:#dcdcdc;">, </span><span style="color:#d69d85;">&quot;classpath:webMvcContext.xml&quot;</span><span style="color:#dcdcdc;">})
+</span><span style="color:#608b4e;">//@ContextConfiguration(classes = {TestContext.class, WebMvcContext.class})
+</span><span style="color:#dcdcdc;">@WebAppConfiguration
+</span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">TodoControllerTest_WebAppContext {
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">MockMvc mockMvc;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Autowired
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">WebApplicationContext webApplicationContext;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Before
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">setUp() </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">Exception {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Mockito.reset(mockedTodoService);
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">// Add tests here
+</span><span style="color:#dcdcdc;">}
 </span></pre>
 <p>本文使用的代码被放在了 <a href="https://github.com/pkainulainen/spring-mvc-test-examples/tree/master/configuration">Github</a> 上。使用Maven进行集成测试的方法可以参见我的另外一篇文章 <a href="http://www.petrikainulainen.net/programming/maven/integration-testing-with-maven/">Integration Testing with Maven</a>。</p>
 <h1 id="zong-jie"><a class="zola-anchor" href="#zong-jie" aria-label="Anchor link for: zong-jie">🔗</a>
@@ -226,56 +188,24 @@ webAppContextSetup</h2>
 </ul>
 <p>下一篇是 <a href="https://www.wangbo.im/posts/spring-mvc-testing-integration-testing-controllers/">Spring MVC Integration Testing - Controllers</a>。</p>
 
-    </div>
-
-    
-    
-
-    <div class="post-footer">
-        
-            
-                <div class="post-tags">
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;spring-mvc&#x2F;">#Spring MVC</a>
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;testing&#x2F;">#testing</a>
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;java&#x2F;">#java</a>
-                    
-                </div>
-            
-            
-                <div class="post-nav">
-                    
-                        <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;spring-mvc-testing-unit-testing-rest-api&#x2F;">‹ Spring MVC Unit Testing - REST API</a>
-                    
-                    
-                        <a class="next" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;spring-mvc-testing-integration-testing-controllers&#x2F;">Spring MVC Integration Testing - Controllers ›</a>
-                    
-                    
-                    
-                </div>
-            
-
-        
-
-    </div>
-
-    
-    
-</article>
-
-
-                </div>
-            </main>
-
-            
-            
         </div>
+        
+    
+</div></div>
+            
+    <div class="pagination">
+        <div class="pagination__buttons">
+            </div>
+    </div>
+<footer class="footer">
+                    <div class="footer__inner"><div class="copyright">
+            <span>© 2019 <a href="https://github.com/ejmg/zerm">zerm</a> :: Powered by <a href="https://www.getzola.org/">Zola</a></span>
+            <span>:: Theme made by <a href="https://github.com/ejmg">ejmg</a></span>
+        </div>
+    <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;assets&#x2F;js&#x2F;main.js"></script>
+</div>
+                    
 
-      
-          <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
-      
+                </footer></div>
     </body>
-
 </html>

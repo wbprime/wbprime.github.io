@@ -1,141 +1,105 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta http-equiv="content-type" content="text/html; charset=utf-8">
-
-      <!-- Enable responsiveness on mobile devices-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-      <title>wangbo’s home &amp; blog - Access Control List</title>
-
-      
-
-      
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
-          
-      
-
-      
-          <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
-          
-      
-
-      
-      
-    </head>
-
-    <body>
-        <div class="container">
-
-            <div id="mobile-navbar" class="mobile-navbar">
-              <div class="mobile-header-logo">
-                <a href="/" class="logo">WB Prime</a>
-              </div>
-              <div class="mobile-navbar-icon icon-out">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            </div>
-
-            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
-              <ul class="mobile-menu-list">
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im">
-                            Home
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;categories">
-                            Categories
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;tags">
-                            Tags
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;about">
-                            About
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                            Github
-                        </a>
-                    </li>
-                
-              </ul>
-            </nav>
-
-            <header id="header">
-                <div class="logo"><a href="https:&#x2F;&#x2F;www.wangbo.im">WB Prime</a></div>
-                <nav class="menu">
-                    <ul>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im">
-                                    Home
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;categories">
-                                    Categories
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;tags">
-                                    Tags
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;about">
-                                    About
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                                    Github
-                                </a>
-                            </li>
-                        
-                    </ul>
-                </nav>
-            </header>
-
-            <main>
-                <div class="content" id="mobile-panel">
-                    
-
-
-
-<article class="post">
+    <title>Access Control List - Elvis Wang</title>
     
-    <header class="post__header">
-        <h1 class="post__title">
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="wangbo’s home &amp; blog"/>
+
+    <meta property="og:title" content="
+    wangbo’s home &amp; blog -&nbsp;Access Control List" />
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;acl-note&#x2F;"/>
+    <meta property="og:description" content="Note on access control list (ACL) for file system"/>
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+<link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
+    <body>
+        <div class="container full">
+<header class="header">
+    <div class="header__inner">
+        <div class="header__logo">
+            <a href="&#x2F;">
+    <div class="logo">
+        WB Prime
+    </div>
+</a>
+        </div>
+        <div class="menu-trigger">menu</div>
+    </div>
+    
+    <nav class="menu">
+        <ul class="menu__inner menu__inner--desktop">
+            
+            
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+                    </li>
+                
+            </ul>
+
+        <ul class="menu__inner menu__inner--mobile">
+            
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+        </li>
+        </ul>
+    </nav>
+
+    </header>
+<div class="content"><div class="post">
+        <h1 class="post-title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;acl-note&#x2F;">Access Control List</a>
         </h1>
-        <div class="post__meta">
-            <span class="post__time">2018-02-05</span>
-            
-        </div>
-    </header>
+        
+    <div class="post-meta">
+        <span class="post-date">2018.02.05
+                </span>
 
-    <div class="post-content">
-      <h1 id="linux-acl-access-control-list"><a class="zola-anchor" href="#linux-acl-access-control-list" aria-label="Anchor link for: linux-acl-access-control-list">🔗</a>
+        <span class="post-author"></span>
+
+        
+
+    
+    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;notes&#x2F;">Notes</a>} 
+
+            
+    ::
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;linux&#x2F;">linux</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;acl&#x2F;">acl</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;setacl&#x2F;">setacl</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;getacl&#x2F;">getacl</a>
+        
+    
+            
+        
+    </div>
+
+
+
+        
+
+        <div class="post-content">
+            <h1 id="linux-acl-access-control-list"><a class="zola-anchor" href="#linux-acl-access-control-list" aria-label="Anchor link for: linux-acl-access-control-list">🔗</a>
 Linux ACL - Access Control List</h1>
 <h2 id="commands"><a class="zola-anchor" href="#commands" aria-label="Anchor link for: commands">🔗</a>
 Commands</h2>
@@ -147,44 +111,44 @@ Commands</h2>
 ACL</h2>
 <h3 id="permission"><a class="zola-anchor" href="#permission" aria-label="Anchor link for: permission">🔗</a>
 Permission</h3>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">- Comma separated entry.
-</span><span style="color:#c0c5ce;">- Each entry consists of type, value and permissions, separated by colon.
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">- type is one of `u` (user), `g` (group), `o` (other), `m` (mask)
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">- value is the user name or uid for `u`, group name or gid for `g`, nothing for `o`
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">- permissions is the combination of `r` (read), `w` (write) and `e` (execute)
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">- if value is empty, then means all users/groups
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">- if no read permission is to granted, the replace `r` with `-` for read char
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">- if no write permission is to granted, the replace `w` with `-` for read char
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">- if no execute permission is to granted, the replace `x` with `-` for read char
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">- `-` in value can be ommited, if at least one of `r`, `w` and `x` is
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">present: `r-x` =&gt; `rx`
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">- at least one `-` in value must be present if none of `r`, `w` and `x`
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">is present: `---` =&gt; `-`
-</span><span style="color:#c0c5ce;">- e.g., `u:wb:rwx`, `u::rwx`
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">- Comma separated entry.
+</span><span style="color:#dcdcdc;">- Each entry consists of type, value and permissions, separated by colon.
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">- type is one of `u` (user), `g` (group), `o` (other), `m` (mask)
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">- value is the user name or uid for `u`, group name or gid for `g`, nothing for `o`
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">- permissions is the combination of `r` (read), `w` (write) and `e` (execute)
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">- if value is empty, then means all users/groups
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">- if no read permission is to granted, the replace `r` with `-` for read char
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">- if no write permission is to granted, the replace `w` with `-` for read char
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">- if no execute permission is to granted, the replace `x` with `-` for read char
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">- `-` in value can be ommited, if at least one of `r`, `w` and `x` is
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">present: `r-x` =&gt; `rx`
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">- at least one `-` in value must be present if none of `r`, `w` and `x`
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">is present: `---` =&gt; `-`
+</span><span style="color:#dcdcdc;">- e.g., `u:wb:rwx`, `u::rwx`
 </span></pre><h3 id="file-directory-acl"><a class="zola-anchor" href="#file-directory-acl" aria-label="Anchor link for: file-directory-acl">🔗</a>
 File & Directory ACL</h3>
 <h4 id="user-acl"><a class="zola-anchor" href="#user-acl" aria-label="Anchor link for: user-acl">🔗</a>
 User ACL</h4>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">- For all users: `u::rwx`
-</span><span style="color:#c0c5ce;">- For user with username &#39;aaa&#39;: `u:aaa:rwx`
-</span><span style="color:#c0c5ce;">- For user with uid &#39;2000&#39;: `u:2000:rwx`
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">- For all users: `u::rwx`
+</span><span style="color:#dcdcdc;">- For user with username &#39;aaa&#39;: `u:aaa:rwx`
+</span><span style="color:#dcdcdc;">- For user with uid &#39;2000&#39;: `u:2000:rwx`
 </span></pre><h4 id="group-acl"><a class="zola-anchor" href="#group-acl" aria-label="Anchor link for: group-acl">🔗</a>
 Group ACL</h4>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">- For all groups: `g::rwx`
-</span><span style="color:#c0c5ce;">- For group with group name &#39;aaa&#39;: `g:aaa:rwx`
-</span><span style="color:#c0c5ce;">- For group with group id &#39;2000&#39;: `g:2000:rwx`
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">- For all groups: `g::rwx`
+</span><span style="color:#dcdcdc;">- For group with group name &#39;aaa&#39;: `g:aaa:rwx`
+</span><span style="color:#dcdcdc;">- For group with group id &#39;2000&#39;: `g:2000:rwx`
 </span></pre><h4 id="other-acl"><a class="zola-anchor" href="#other-acl" aria-label="Anchor link for: other-acl">🔗</a>
 Other ACL</h4>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">- For other users: `o::rwx`
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">- For other users: `o::rwx`
 </span></pre><h4 id="mask-acl"><a class="zola-anchor" href="#mask-acl" aria-label="Anchor link for: mask-acl">🔗</a>
 Mask acl</h4>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">- The effective acl is the intersection of given acl and mask acl
-</span><span style="color:#c0c5ce;">- e.g., if `m::r-x` and `u:wb:rwx`, the the effective acl for wb is `u:wb:r-x`
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">- The effective acl is the intersection of given acl and mask acl
+</span><span style="color:#dcdcdc;">- e.g., if `m::r-x` and `u:wb:rwx`, the the effective acl for wb is `u:wb:r-x`
 </span></pre><h3 id="default-acl"><a class="zola-anchor" href="#default-acl" aria-label="Anchor link for: default-acl">🔗</a>
 Default acl</h3>
 <p>For directory, newly create files can inherited from the parent directory if
@@ -193,85 +157,51 @@ default acl set for the parent directory.</p>
 Set ACL - setfacl</h2>
 <h3 id="add-acl-entry"><a class="zola-anchor" href="#add-acl-entry" aria-label="Anchor link for: add-acl-entry">🔗</a>
 Add ACL Entry</h3>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">setfacl -m &#39;u:wb:rwx,g:wb:r-x&#39; a.file
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">setfacl -m &#39;u:wb:rwx,g:wb:r-x&#39; a.file
 </span></pre><h3 id="remove-acl-entry"><a class="zola-anchor" href="#remove-acl-entry" aria-label="Anchor link for: remove-acl-entry">🔗</a>
 Remove ACL Entry</h3>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">setfacl -x &#39;u:wb:rwx,g:wb:r-x&#39; a.file
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">setfacl -x &#39;u:wb:rwx,g:wb:r-x&#39; a.file
 </span></pre><h3 id="override-existing-acl-entries"><a class="zola-anchor" href="#override-existing-acl-entries" aria-label="Anchor link for: override-existing-acl-entries">🔗</a>
 Override Existing ACL Entries</h3>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">setfacl --set &#39;u:wb:rwx,g:wb:r-x:o::r--&#39; a.file
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">setfacl --set &#39;u:wb:rwx,g:wb:r-x:o::r--&#39; a.file
 </span></pre><h3 id="clear-acl-entries"><a class="zola-anchor" href="#clear-acl-entries" aria-label="Anchor link for: clear-acl-entries">🔗</a>
 Clear ACL Entries</h3>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">setfacl -b a.file
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">setfacl -b a.file
 </span></pre><h3 id="apply-acl-recursively"><a class="zola-anchor" href="#apply-acl-recursively" aria-label="Anchor link for: apply-acl-recursively">🔗</a>
 Apply ACL Recursively</h3>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">setfacl -R -m &#39;u:wb:rwx,g:wb:r-x&#39; a.file
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">setfacl -R -m &#39;u:wb:rwx,g:wb:r-x&#39; a.file
 </span></pre><h3 id="change-default-acl"><a class="zola-anchor" href="#change-default-acl" aria-label="Anchor link for: change-default-acl">🔗</a>
 Change Default ACL</h3>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">setfacl -d -m &#39;u:wb:rwx,g:wb:r-x&#39; a.file
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">setfacl -d -m &#39;u:wb:rwx,g:wb:r-x&#39; a.file
 </span></pre><h2 id="get-acl-getfacl"><a class="zola-anchor" href="#get-acl-getfacl" aria-label="Anchor link for: get-acl-getfacl">🔗</a>
 Get ACL - getfacl</h2>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">getfacl a.file
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">getfacl a.file
 </span></pre>
-    </div>
-
-    
-    
-
-    <div class="post-footer">
-        
-            
-                <div class="post-tags">
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;linux&#x2F;">#linux</a>
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;acl&#x2F;">#acl</a>
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;setacl&#x2F;">#setacl</a>
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;getacl&#x2F;">#getacl</a>
-                    
-                </div>
-            
-            
-                <div class="post-nav">
-                    
-                        <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;libevent-notes&#x2F;">‹ Libevent Note</a>
-                    
-                    
-                        <a class="next" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;posix-make-note&#x2F;">Posix &amp; GNU Make Note ›</a>
-                    
-                    
-                    
-                </div>
-            
-
-        
-
-    </div>
-
-    
-    
-</article>
-
-
-                </div>
-            </main>
-
-            
-            
         </div>
+        
+    
+</div></div>
+            
+    <div class="pagination">
+        <div class="pagination__buttons">
+            </div>
+    </div>
+<footer class="footer">
+                    <div class="footer__inner"><div class="copyright">
+            <span>© 2019 <a href="https://github.com/ejmg/zerm">zerm</a> :: Powered by <a href="https://www.getzola.org/">Zola</a></span>
+            <span>:: Theme made by <a href="https://github.com/ejmg">ejmg</a></span>
+        </div>
+    <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;assets&#x2F;js&#x2F;main.js"></script>
+</div>
+                    
 
-      
-          <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
-      
+                </footer></div>
     </body>
-
 </html>

@@ -1,155 +1,113 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta http-equiv="content-type" content="text/html; charset=utf-8">
-
-      <!-- Enable responsiveness on mobile devices-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-      <title>wangbo’s home &amp; blog - Mybatis Note</title>
-
-      
-
-      
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
-          
-      
-
-      
-          <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
-          
-      
-
-      
-      
-    </head>
-
-    <body>
-        <div class="container">
-
-            <div id="mobile-navbar" class="mobile-navbar">
-              <div class="mobile-header-logo">
-                <a href="/" class="logo">WB Prime</a>
-              </div>
-              <div class="mobile-navbar-icon icon-out">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            </div>
-
-            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
-              <ul class="mobile-menu-list">
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im">
-                            Home
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;categories">
-                            Categories
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;tags">
-                            Tags
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;about">
-                            About
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                            Github
-                        </a>
-                    </li>
-                
-              </ul>
-            </nav>
-
-            <header id="header">
-                <div class="logo"><a href="https:&#x2F;&#x2F;www.wangbo.im">WB Prime</a></div>
-                <nav class="menu">
-                    <ul>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im">
-                                    Home
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;categories">
-                                    Categories
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;tags">
-                                    Tags
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;about">
-                                    About
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                                    Github
-                                </a>
-                            </li>
-                        
-                    </ul>
-                </nav>
-            </header>
-
-            <main>
-                <div class="content" id="mobile-panel">
-                    
-
-
-
-<article class="post">
+    <title>Mybatis Note - Elvis Wang</title>
     
-    <header class="post__header">
-        <h1 class="post__title">
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="wangbo’s home &amp; blog"/>
+
+    <meta property="og:title" content="
+    wangbo’s home &amp; blog -&nbsp;Mybatis Note" />
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;mybatis-note&#x2F;"/>
+    <meta property="og:description" content="Note on mybatis"/>
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+<link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
+    <body>
+        <div class="container full">
+<header class="header">
+    <div class="header__inner">
+        <div class="header__logo">
+            <a href="&#x2F;">
+    <div class="logo">
+        WB Prime
+    </div>
+</a>
+        </div>
+        <div class="menu-trigger">menu</div>
+    </div>
+    
+    <nav class="menu">
+        <ul class="menu__inner menu__inner--desktop">
+            
+            
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+                    </li>
+                
+            </ul>
+
+        <ul class="menu__inner menu__inner--mobile">
+            
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+        </li>
+        </ul>
+    </nav>
+
+    </header>
+<div class="content"><div class="post">
+        <h1 class="post-title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;mybatis-note&#x2F;">Mybatis Note</a>
         </h1>
-        <div class="post__meta">
-            <span class="post__time">2018-02-06</span>
-            
-        </div>
-    </header>
+        
+    <div class="post-meta">
+        <span class="post-date">2018.02.06
+                </span>
 
-    <div class="post-content">
-      <h1 id="select"><a class="zola-anchor" href="#select" aria-label="Anchor link for: select">🔗</a>
+        <span class="post-author"></span>
+
+        
+
+    
+    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;notes&#x2F;">Notes</a>} 
+
+            
+    ::
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;mybatis&#x2F;">mybatis</a>
+        
+    
+            
+        
+    </div>
+
+
+
+        
+
+        <div class="post-content">
+            <h1 id="select"><a class="zola-anchor" href="#select" aria-label="Anchor link for: select">🔗</a>
 "select"</h1>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">&lt;select
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">id=&quot;selectPerson&quot;
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">parameterType=&quot;int&quot;
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">parameterMap=&quot;deprecated&quot;
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">resultType=&quot;hashmap&quot;
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">resultMap=&quot;personResultMap&quot;
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">flushCache=&quot;false&quot;
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">useCache=&quot;true&quot;
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">timeout=&quot;10000&quot;
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">fetchSize=&quot;256&quot;
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">statementType=&quot;PREPARED&quot;
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">resultSetType=&quot;FORWARD_ONLY&quot;&gt;
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">&lt;select
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">id=&quot;selectPerson&quot;
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">parameterType=&quot;int&quot;
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">parameterMap=&quot;deprecated&quot;
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">resultType=&quot;hashmap&quot;
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">resultMap=&quot;personResultMap&quot;
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">flushCache=&quot;false&quot;
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">useCache=&quot;true&quot;
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">timeout=&quot;10000&quot;
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">fetchSize=&quot;256&quot;
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">statementType=&quot;PREPARED&quot;
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">resultSetType=&quot;FORWARD_ONLY&quot;&gt;
 </span></pre><table><thead><tr><th> 属性          </th><th> 描述                                                                                                                                                                                                                                                                                          </th></tr></thead><tbody>
 <tr><td> id            </td><td> 在命名空间中唯一的标识符，可以被用来引用这条语句。                                                                                                                                                                                                                                            </td></tr>
 <tr><td> parameterType </td><td> 将会传入这条语句的参数类的完全限定名或别名。这个属性是可选的，因为 MyBatis 可以通过 TypeHandler 推断出具体传入语句的参数，默认值为 unset。                                                                                                                                              </td></tr>
@@ -168,12 +126,12 @@
 </tbody></table>
 <h1 id="selectkey"><a class="zola-anchor" href="#selectkey" aria-label="Anchor link for: selectkey">🔗</a>
 "selectKey"</h1>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">&lt;selectKey
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">keyProperty=&quot;id&quot;
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">resultType=&quot;int&quot;
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">order=&quot;BEFORE&quot;
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">statementType=&quot;PREPARED&quot;&gt;
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">&lt;selectKey
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">keyProperty=&quot;id&quot;
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">resultType=&quot;int&quot;
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">order=&quot;BEFORE&quot;
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">statementType=&quot;PREPARED&quot;&gt;
 </span></pre><table><thead><tr><th> 属性          </th><th> 描述                                                                                                                                                                                                                                                         </th></tr></thead><tbody>
 <tr><td> keyProperty   </td><td> selectKey 语句结果应该被设置的目标属性。如果希望得到多个生成的列，也可以是逗号分隔的属性名称列表。                                                                                                                                                           </td></tr>
 <tr><td> keyColumn     </td><td> 匹配属性的返回结果集中的列名称。如果希望得到多个生成的列，也可以是逗号分隔的属性名称列表。                                                                                                                                                                   </td></tr>
@@ -183,28 +141,28 @@
 </tbody></table>
 <h1 id="insert"><a class="zola-anchor" href="#insert" aria-label="Anchor link for: insert">🔗</a>
 "insert"</h1>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">&lt;insert id=&quot;insertAuthor&quot;&gt;
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">&lt;selectKey keyProperty=&quot;id&quot; resultType=&quot;int&quot; order=&quot;BEFORE&quot;&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">select CAST(RANDOM()*1000000 as INTEGER) a from SYSIBM.SYSDUMMY1
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">&lt;/selectKey&gt;
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">insert into Author
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">(id, username, password, email,bio, favourite_section)
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">values
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">(#{id}, #{username}, #{password}, #{email}, #{bio}, #{favouriteSection,jdbcType=VARCHAR})
-</span><span style="color:#c0c5ce;">&lt;/insert&gt;
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">&lt;insert id=&quot;insertAuthor&quot;&gt;
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">&lt;selectKey keyProperty=&quot;id&quot; resultType=&quot;int&quot; order=&quot;BEFORE&quot;&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">select CAST(RANDOM()*1000000 as INTEGER) a from SYSIBM.SYSDUMMY1
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">&lt;/selectKey&gt;
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">insert into Author
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">(id, username, password, email,bio, favourite_section)
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">values
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">(#{id}, #{username}, #{password}, #{email}, #{bio}, #{favouriteSection,jdbcType=VARCHAR})
+</span><span style="color:#dcdcdc;">&lt;/insert&gt;
 </span></pre>
 <p>Or</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">&lt;insert
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">id=&quot;insertAuthor&quot;
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">parameterType=&quot;domain.blog.Author&quot;
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">flushCache=&quot;true&quot;
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">statementType=&quot;PREPARED&quot;
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">keyProperty=&quot;&quot;
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">keyColumn=&quot;&quot;
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">useGeneratedKeys=&quot;&quot;
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">timeout=&quot;20&quot;&gt;
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">&lt;insert
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">id=&quot;insertAuthor&quot;
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">parameterType=&quot;domain.blog.Author&quot;
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">flushCache=&quot;true&quot;
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">statementType=&quot;PREPARED&quot;
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">keyProperty=&quot;&quot;
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">keyColumn=&quot;&quot;
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">useGeneratedKeys=&quot;&quot;
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">timeout=&quot;20&quot;&gt;
 </span></pre><table><thead><tr><th> 属性             </th><th> 描述                                                                                                                                                                                                                                                                                                    </th></tr></thead><tbody>
 <tr><td> id               </td><td> 命名空间中的唯一标识符，可被用来代表这条语句。                                                                                                                                                                                                                                                          </td></tr>
 <tr><td> parameterType    </td><td> 将要传入语句的参数的完全限定类名或别名。这个属性是可选的，因为 MyBatis 可以通过 TypeHandler 推断出具体传入语句的参数，默认值为 unset。                                                                                                                                                        </td></tr>
@@ -219,13 +177,13 @@
 </tbody></table>
 <h1 id="update"><a class="zola-anchor" href="#update" aria-label="Anchor link for: update">🔗</a>
 "update"</h1>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">&lt;update
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">id=&quot;updateAuthor&quot;
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">parameterType=&quot;domain.blog.Author&quot;
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">flushCache=&quot;true&quot;
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">statementType=&quot;PREPARED&quot;
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">timeout=&quot;20&quot;&gt;
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">&lt;update
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">id=&quot;updateAuthor&quot;
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">parameterType=&quot;domain.blog.Author&quot;
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">flushCache=&quot;true&quot;
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">statementType=&quot;PREPARED&quot;
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">timeout=&quot;20&quot;&gt;
 </span></pre><table><thead><tr><th> 属性             </th><th> 描述                                                                                                                                                                                                                                                                                                    </th></tr></thead><tbody>
 <tr><td> id               </td><td> 命名空间中的唯一标识符，可被用来代表这条语句。                                                                                                                                                                                                                                                          </td></tr>
 <tr><td> parameterType    </td><td> 将要传入语句的参数的完全限定类名或别名。这个属性是可选的，因为 MyBatis 可以通过 TypeHandler 推断出具体传入语句的参数，默认值为 unset。                                                                                                                                                        </td></tr>
@@ -240,13 +198,13 @@
 </tbody></table>
 <h1 id="delete"><a class="zola-anchor" href="#delete" aria-label="Anchor link for: delete">🔗</a>
 "delete"</h1>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">&lt;delete
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">id=&quot;deleteAuthor&quot;
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">parameterType=&quot;domain.blog.Author&quot;
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">flushCache=&quot;true&quot;
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">statementType=&quot;PREPARED&quot;
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">timeout=&quot;20&quot;&gt;
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">&lt;delete
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">id=&quot;deleteAuthor&quot;
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">parameterType=&quot;domain.blog.Author&quot;
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">flushCache=&quot;true&quot;
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">statementType=&quot;PREPARED&quot;
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">timeout=&quot;20&quot;&gt;
 </span></pre><table><thead><tr><th> 属性             </th><th> 描述                                                                                                                                                                                                                                                                                                    </th></tr></thead><tbody>
 <tr><td> id               </td><td> 命名空间中的唯一标识符，可被用来代表这条语句。                                                                                                                                                                                                                                                          </td></tr>
 <tr><td> parameterType    </td><td> 将要传入语句的参数的完全限定类名或别名。这个属性是可选的，因为 MyBatis 可以通过 TypeHandler 推断出具体传入语句的参数，默认值为 unset。                                                                                                                                                        </td></tr>
@@ -260,52 +218,24 @@
 <tr><td> databaseId       </td><td> 如果配置了 databaseIdProvider，MyBatis 会加载所有的不带 databaseId 或匹配当前 databaseId 的语句；如果带或者不带的语句都有，则不带的会被忽略。                                                                                                                                              </td></tr>
 </tbody></table>
 
-    </div>
-
-    
-    
-
-    <div class="post-footer">
-        
-            
-                <div class="post-tags">
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;mybatis&#x2F;">#mybatis</a>
-                    
-                </div>
-            
-            
-                <div class="post-nav">
-                    
-                        <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;maven-note&#x2F;">‹ Maven Note</a>
-                    
-                    
-                        <a class="next" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;spring-mvc-note&#x2F;">Spring Mvc Note ›</a>
-                    
-                    
-                    
-                </div>
-            
-
-        
-
-    </div>
-
-    
-    
-</article>
-
-
-                </div>
-            </main>
-
-            
-            
         </div>
+        
+    
+</div></div>
+            
+    <div class="pagination">
+        <div class="pagination__buttons">
+            </div>
+    </div>
+<footer class="footer">
+                    <div class="footer__inner"><div class="copyright">
+            <span>© 2019 <a href="https://github.com/ejmg/zerm">zerm</a> :: Powered by <a href="https://www.getzola.org/">Zola</a></span>
+            <span>:: Theme made by <a href="https://github.com/ejmg">ejmg</a></span>
+        </div>
+    <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;assets&#x2F;js&#x2F;main.js"></script>
+</div>
+                    
 
-      
-          <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
-      
+                </footer></div>
     </body>
-
 </html>

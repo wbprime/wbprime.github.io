@@ -1,141 +1,108 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta http-equiv="content-type" content="text/html; charset=utf-8">
-
-      <!-- Enable responsiveness on mobile devices-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-      <title>wangbo’s home &amp; blog - Ffmpeg snapshot&#x2F;thumbnail 快照套路总结</title>
-
-      
-
-      
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
-          
-      
-
-      
-          <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
-          
-      
-
-      
-      
-    </head>
-
-    <body>
-        <div class="container">
-
-            <div id="mobile-navbar" class="mobile-navbar">
-              <div class="mobile-header-logo">
-                <a href="/" class="logo">WB Prime</a>
-              </div>
-              <div class="mobile-navbar-icon icon-out">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            </div>
-
-            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
-              <ul class="mobile-menu-list">
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im">
-                            Home
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;categories">
-                            Categories
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;tags">
-                            Tags
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;about">
-                            About
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                            Github
-                        </a>
-                    </li>
-                
-              </ul>
-            </nav>
-
-            <header id="header">
-                <div class="logo"><a href="https:&#x2F;&#x2F;www.wangbo.im">WB Prime</a></div>
-                <nav class="menu">
-                    <ul>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im">
-                                    Home
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;categories">
-                                    Categories
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;tags">
-                                    Tags
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;about">
-                                    About
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                                    Github
-                                </a>
-                            </li>
-                        
-                    </ul>
-                </nav>
-            </header>
-
-            <main>
-                <div class="content" id="mobile-panel">
-                    
-
-
-
-<article class="post">
+    <title>Ffmpeg snapshot&#x2F;thumbnail 快照套路总结 - Elvis Wang</title>
     
-    <header class="post__header">
-        <h1 class="post__title">
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="wangbo’s home &amp; blog"/>
+
+    <meta property="og:title" content="
+    wangbo’s home &amp; blog -&nbsp;Ffmpeg snapshot&#x2F;thumbnail 快照套路总结" />
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-07-21-ffmpeg-snapshot-kuaizhao-thumbnail-concluded&#x2F;"/>
+    <meta property="og:description" content="&lt;p&gt;使用 &lt;a href=&quot;http:&#x2F;&#x2F;ffmpeg.org&#x2F;&quot;&gt;Ffmpeg&lt;&#x2F;a&gt; 对视频进行抽帧操作，即把视频中感兴趣的帧输出为图片；该操作也经常被称之为视频快照、视频截图等。&lt;&#x2F;p&gt;
+&lt;p&gt;视频抽帧按照输出文件的格式不同，可以输出为 &lt;code&gt;…"/>
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+<link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
+    <body>
+        <div class="container full">
+<header class="header">
+    <div class="header__inner">
+        <div class="header__logo">
+            <a href="&#x2F;">
+    <div class="logo">
+        WB Prime
+    </div>
+</a>
+        </div>
+        <div class="menu-trigger">menu</div>
+    </div>
+    
+    <nav class="menu">
+        <ul class="menu__inner menu__inner--desktop">
+            
+            
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+                    </li>
+                
+            </ul>
+
+        <ul class="menu__inner menu__inner--mobile">
+            
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+        </li>
+        </ul>
+    </nav>
+
+    </header>
+<div class="content"><div class="post">
+        <h1 class="post-title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-07-21-ffmpeg-snapshot-kuaizhao-thumbnail-concluded&#x2F;">Ffmpeg snapshot&#x2F;thumbnail 快照套路总结</a>
         </h1>
-        <div class="post__meta">
-            <span class="post__time">2019-07-21</span>
-            
-        </div>
-    </header>
+        
+    <div class="post-meta">
+        <span class="post-date">2019.07.21
+                </span>
 
-    <div class="post-content">
-      <p>使用 <a href="http://ffmpeg.org/">Ffmpeg</a> 对视频进行抽帧操作，即把视频中感兴趣的帧输出为图片；该操作也经常被称之为视频快照、视频截图等。</p>
+        <span class="post-author"></span>
+
+        
+
+    
+    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;streaming&#x2F;">Streaming</a>} 
+
+            
+    ::
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;ffmpeg&#x2F;">ffmpeg</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;snapshoting&#x2F;">snapshoting</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;gif&#x2F;">gif</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;webp&#x2F;">webp</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;select&#x2F;">select</a>
+        
+    
+            
+        
+    </div>
+
+
+
+        
+
+        <div class="post-content">
+            <p>使用 <a href="http://ffmpeg.org/">Ffmpeg</a> 对视频进行抽帧操作，即把视频中感兴趣的帧输出为图片；该操作也经常被称之为视频快照、视频截图等。</p>
 <p>视频抽帧按照输出文件的格式不同，可以输出为 <code>jpg</code>、<code>png</code>、<code>gif</code>、<code>webp</code> 等格式文件。</p>
 <p>视频抽帧按照选取视频帧的条件不同，可以分为按类型、按时间、按场景变化等不同的套路。</p>
 <p>本文从以上两个方面汇总使用 <a href="http://ffmpeg.org/">Ffmpeg</a> 抽帧的套路。</p>
@@ -159,8 +126,8 @@ png</h2>
 <p>首先需要设置输出的格式(通过 <code>-f</code> 选项)为 <a href="https://ffmpeg.org/ffmpeg-all.html#image2-2">image2</a>。</p>
 <p>输出文件名需要以 <code>.png</code> 结尾；由于 <code>image2</code> 格式支持输出多张图像文件，所以输出文件名支持 <code>%d</code> 占位符，也支持其他的占位符，具体用法参见 <a href="https://ffmpeg.org/ffmpeg-all.html#image2-2">image2</a> 的文档。</p>
 <p>典型的用法如下：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">ffmpeg -i</span><span style="color:#c0c5ce;"> input.flv</span><span style="color:#bf616a;"> -vf</span><span style="color:#c0c5ce;"> fps=1</span><span style="color:#bf616a;"> -frames</span><span style="color:#c0c5ce;">:v 10 out%</span><span style="color:#bf616a;">d</span><span style="color:#c0c5ce;">.png
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">ffmpeg -i input.flv -vf fps=1 -frames:v 10 out%d.png
 </span></pre><h2 id="jpg"><a class="zola-anchor" href="#jpg" aria-label="Anchor link for: jpg">🔗</a>
 jpg</h2>
 <p>视频抽帧输出为 <code>jpg/jpeg</code> 格式文件的方式与 <code>png</code> 很类似。</p>
@@ -168,8 +135,8 @@ jpg</h2>
 <p>输出文件名需要以 <code>.jpg</code> 结尾；文件名也支持占位符。</p>
 <p>另外，可以通过额外的参数控制输出图像的质量：<code>-q</code> 取值范围为 <code>[2, 31]</code>, <code>2</code> 的输出质量最好。</p>
 <p>典型的用法如下：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">ffmpeg -i</span><span style="color:#c0c5ce;"> input.flv</span><span style="color:#bf616a;"> -vf</span><span style="color:#c0c5ce;"> fps=1</span><span style="color:#bf616a;"> -frames</span><span style="color:#c0c5ce;">:v 10</span><span style="color:#bf616a;"> -q</span><span style="color:#c0c5ce;">:v 2 out%</span><span style="color:#bf616a;">d</span><span style="color:#c0c5ce;">.jpg
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">ffmpeg -i input.flv -vf fps=1 -frames:v 10 -q:v 2 out%d.jpg
 </span></pre><h2 id="gif"><a class="zola-anchor" href="#gif" aria-label="Anchor link for: gif">🔗</a>
 gif</h2>
 <p><code>gif</code> 格式支持动画显示，所以可以把多个图像文件合并为一个 <code>gif</code> 文件。</p>
@@ -177,15 +144,15 @@ gif</h2>
 <p>输出文件名需要以 <code>.gif</code> 结尾。</p>
 <p>另外，可以通过额外的参数控制动画的循环次数：<code>-loop</code> 取值 <code>&gt; 0</code> 表示动画的循环次数；取值 <code>-1</code> 表示不循环；取值 <code>0</code> 表示无限循环。</p>
 <p>典型的用法如下：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">ffmpeg -i</span><span style="color:#c0c5ce;"> input.flv</span><span style="color:#bf616a;"> -vf</span><span style="color:#c0c5ce;"> fps=1</span><span style="color:#bf616a;"> -frames</span><span style="color:#c0c5ce;">:v 10</span><span style="color:#bf616a;"> -loop</span><span style="color:#c0c5ce;"> 0</span><span style="color:#bf616a;"> -f</span><span style="color:#c0c5ce;"> gif out.gif
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">ffmpeg -i input.flv -vf fps=1 -frames:v 10 -loop 0 -f gif out.gif
 </span></pre>
 <p>上述的方法的最大问题是输出的图像质量较差，优化的方法是（参见 <a href="https://superuser.com/questions/556029/how-do-i-convert-a-video-to-gif-using-ffmpeg-with-reasonable-quality">Stackoverflow 答案</a>）添加过滤器 <code>palettegen</code> 和 <code>paletteuse</code>：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">ffmpeg -i</span><span style="color:#c0c5ce;"> input.flv</span><span style="color:#bf616a;"> -frames</span><span style="color:#c0c5ce;">:v 10</span><span style="color:#bf616a;"> -loop</span><span style="color:#c0c5ce;"> 0</span><span style="color:#bf616a;"> -f</span><span style="color:#c0c5ce;"> gif \
-</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-filter </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">split[x1][x2];[x1]palettegen[p];[x2][p]paletteuse</span><span style="color:#c0c5ce;">&quot; \
-</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-r</span><span style="color:#c0c5ce;"> 1 \
-</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">out.gif
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">ffmpeg -i input.flv -frames:v 10 -loop 0 -f gif \
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">-filter </span><span style="color:#d69d85;">&quot;split[x1][x2];[x1]palettegen[p];[x2][p]paletteuse&quot; </span><span style="color:#dcdcdc;">\
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">-r 1 \
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">out.gif
 </span></pre><h2 id="webp"><a class="zola-anchor" href="#webp" aria-label="Anchor link for: webp">🔗</a>
 webp</h2>
 <p><code>webp</code> 是那家 <em>中国大陆地区不存在</em> 公司首倡的图像格式，目标是替代 <code>gif</code> 和 <code>png</code> 的应用场景。其支持静态图像和动态图像（动画）。<code>gif</code> 和 <code>webp</code> 的对比可以参见<a href="https://zhuanlan.zhihu.com/p/25598828">客户端上动态图格式对比和解决方案</a>
@@ -193,8 +160,8 @@ webp</h2>
 <p>首先需要设置输出的格式(通过 <code>-f</code> 选项)为 <code>webp</code>；输出编码器设置为 <a href="https://ffmpeg.org/ffmpeg-all.html#libwebp">libwebp</a>。</p>
 <p>输出文件名需要以 <code>.webp</code> 结尾。</p>
 <p>另外，可以通过额外的参数控制动画的循环次数：<code>-loop</code> 取值 <code>&gt; 0</code> 表示动画的循环次数；取值 <code>-1</code> 表示不循环；取值 <code>0</code> 表示无限循环。</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">ffmpeg -i</span><span style="color:#c0c5ce;"> input.flv</span><span style="color:#bf616a;"> -vf</span><span style="color:#c0c5ce;"> fps=1</span><span style="color:#bf616a;"> -frames</span><span style="color:#c0c5ce;">:v 10</span><span style="color:#bf616a;"> -loop</span><span style="color:#c0c5ce;"> 0</span><span style="color:#bf616a;"> -f</span><span style="color:#c0c5ce;"> webp</span><span style="color:#bf616a;"> -c</span><span style="color:#c0c5ce;">:v libwebp out.webp
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">ffmpeg -i input.flv -vf fps=1 -frames:v 10 -loop 0 -f webp -c:v libwebp out.webp
 </span></pre>
 <p>如果需要控制输出图像质量，可以参见 <a href="https://ffmpeg.org/ffmpeg-all.html#libwebp">libwebp</a> 文档；默认的配置基本能够满足需要。</p>
 <h1 id="xuan-zheng-fang-shi"><a class="zola-anchor" href="#xuan-zheng-fang-shi" aria-label="Anchor link for: xuan-zheng-fang-shi">🔗</a>
@@ -205,47 +172,47 @@ webp</h2>
 <h2 id="thumbnail-guo-lu-qi"><a class="zola-anchor" href="#thumbnail-guo-lu-qi" aria-label="Anchor link for: thumbnail-guo-lu-qi">🔗</a>
 <code>thumbnail</code> 过滤器</h2>
 <p><a href="https://ffmpeg.org/ffmpeg-filters.html#thumbnail">thumbnail</a> 过滤器可以在指定大小的一个帧集合里面选出最有代表性的帧。</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">ffmpeg -i</span><span style="color:#c0c5ce;"> input.flv</span><span style="color:#bf616a;"> -frames</span><span style="color:#c0c5ce;">:v 10</span><span style="color:#bf616a;"> -loop</span><span style="color:#c0c5ce;"> 0</span><span style="color:#bf616a;"> -f</span><span style="color:#c0c5ce;"> webp</span><span style="color:#bf616a;"> -c</span><span style="color:#c0c5ce;">:v libwebp \
-</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-filter:v</span><span style="color:#c0c5ce;"> thumbnail \
-</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">out.webp
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">ffmpeg -i input.flv -frames:v 10 -loop 0 -f webp -c:v libwebp \
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">-filter:v thumbnail \
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">out.webp
 </span></pre><h2 id="select-guo-lu-qi"><a class="zola-anchor" href="#select-guo-lu-qi" aria-label="Anchor link for: select-guo-lu-qi">🔗</a>
 <code>select</code> 过滤器</h2>
 <p><a href="https://ffmpeg.org/ffmpeg-filters.html#select_002c-aselect">select</a> 是一个超级强大的过滤器，可以通过表达式实现各种选取帧的套路。</p>
 <h3 id="tong-guo-zheng-lei-xing-xuan-qu"><a class="zola-anchor" href="#tong-guo-zheng-lei-xing-xuan-qu" aria-label="Anchor link for: tong-guo-zheng-lei-xing-xuan-qu">🔗</a>
 通过帧类型选取</h3>
 <p>只选取 <code>I</code> 帧：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">ffmpeg -i</span><span style="color:#c0c5ce;"> input.flv</span><span style="color:#bf616a;"> -frames</span><span style="color:#c0c5ce;">:v 10</span><span style="color:#bf616a;"> -loop</span><span style="color:#c0c5ce;"> 0</span><span style="color:#bf616a;"> -f</span><span style="color:#c0c5ce;"> webp</span><span style="color:#bf616a;"> -c</span><span style="color:#c0c5ce;">:v libwebp \
-</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-filter </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">select=&#39;eq(pict_type,I)&#39;</span><span style="color:#c0c5ce;">&quot; \
-</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">out.webp
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">ffmpeg -i input.flv -frames:v 10 -loop 0 -f webp -c:v libwebp \
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">-filter </span><span style="color:#d69d85;">&quot;select=&#39;eq(pict_type,I)&#39;&quot; </span><span style="color:#dcdcdc;">\
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">out.webp
 </span></pre>
 <p>选取 <code>I</code> 和 <code>P</code> 帧：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">ffmpeg -i</span><span style="color:#c0c5ce;"> input.flv</span><span style="color:#bf616a;"> -frames</span><span style="color:#c0c5ce;">:v 10</span><span style="color:#bf616a;"> -loop</span><span style="color:#c0c5ce;"> 0</span><span style="color:#bf616a;"> -f</span><span style="color:#c0c5ce;"> webp</span><span style="color:#bf616a;"> -c</span><span style="color:#c0c5ce;">:v libwebp \
-</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-filter </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">select=&#39;eq(pict_type,I)+eq(pict_type,P)&#39;</span><span style="color:#c0c5ce;">&quot; \
-</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">out.webp
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">ffmpeg -i input.flv -frames:v 10 -loop 0 -f webp -c:v libwebp \
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">-filter </span><span style="color:#d69d85;">&quot;select=&#39;eq(pict_type,I)+eq(pict_type,P)&#39;&quot; </span><span style="color:#dcdcdc;">\
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">out.webp
 </span></pre><h3 id="tong-guo-shi-jian-jian-ge-xuan-qu"><a class="zola-anchor" href="#tong-guo-shi-jian-jian-ge-xuan-qu" aria-label="Anchor link for: tong-guo-shi-jian-jian-ge-xuan-qu">🔗</a>
 通过时间间隔选取</h3>
 <p>通过 <code>select</code> 也可以实现按时间间隔选取帧。如每 5 秒一帧：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">ffmpeg -i</span><span style="color:#c0c5ce;"> input.flv</span><span style="color:#bf616a;"> -frames</span><span style="color:#c0c5ce;">:v 10</span><span style="color:#bf616a;"> -loop</span><span style="color:#c0c5ce;"> 0</span><span style="color:#bf616a;"> -f</span><span style="color:#c0c5ce;"> webp</span><span style="color:#bf616a;"> -c</span><span style="color:#c0c5ce;">:v libwebp \
-</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-filter </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">select=&#39;gte(t,selected_n</span><span style="color:#96b5b4;">\\</span><span style="color:#a3be8c;">*5</span><span style="color:#96b5b4;">\\</span><span style="color:#a3be8c;">+start_t)&#39;</span><span style="color:#c0c5ce;">&quot; \
-</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">out.webp
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">ffmpeg -i input.flv -frames:v 10 -loop 0 -f webp -c:v libwebp \
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">-filter </span><span style="color:#d69d85;">&quot;select=&#39;gte(t,selected_n</span><span style="color:#e3bbab;">\\</span><span style="color:#d69d85;">*5</span><span style="color:#e3bbab;">\\</span><span style="color:#d69d85;">+start_t)&#39;&quot; </span><span style="color:#dcdcdc;">\
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">out.webp
 </span></pre><h3 id="tong-guo-zheng-jian-ge-xuan-qu"><a class="zola-anchor" href="#tong-guo-zheng-jian-ge-xuan-qu" aria-label="Anchor link for: tong-guo-zheng-jian-ge-xuan-qu">🔗</a>
 通过帧间隔选取</h3>
 <p>通过 <code>select</code> 也可以实现按帧的间隔选取帧。如每 5 帧一帧：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">ffmpeg -i</span><span style="color:#c0c5ce;"> input.flv</span><span style="color:#bf616a;"> -frames</span><span style="color:#c0c5ce;">:v 10</span><span style="color:#bf616a;"> -loop</span><span style="color:#c0c5ce;"> 0</span><span style="color:#bf616a;"> -f</span><span style="color:#c0c5ce;"> webp</span><span style="color:#bf616a;"> -c</span><span style="color:#c0c5ce;">:v libwebp \
-</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-filter </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">select=&#39;not(mod(n,100))&#39;</span><span style="color:#c0c5ce;">&quot; \
-</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">out.webp
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">ffmpeg -i input.flv -frames:v 10 -loop 0 -f webp -c:v libwebp \
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">-filter </span><span style="color:#d69d85;">&quot;select=&#39;not(mod(n,100))&#39;&quot; </span><span style="color:#dcdcdc;">\
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">out.webp
 </span></pre><h3 id="an-chang-jing-bian-hua-cheng-du-yu-zhi-xuan-qu"><a class="zola-anchor" href="#an-chang-jing-bian-hua-cheng-du-yu-zhi-xuan-qu" aria-label="Anchor link for: an-chang-jing-bian-hua-cheng-du-yu-zhi-xuan-qu">🔗</a>
 按场景变化程度阈值选取</h3>
 <p>场景变化是指相邻的两帧之间的运动矢量也就是两帧内容的差异。选择场景变化程度超过某阈值的帧在某些应用场景中有独特的优势。</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">ffmpeg -i</span><span style="color:#c0c5ce;"> input.flv</span><span style="color:#bf616a;"> -frames</span><span style="color:#c0c5ce;">:v 10</span><span style="color:#bf616a;"> -loop</span><span style="color:#c0c5ce;"> 0</span><span style="color:#bf616a;"> -f</span><span style="color:#c0c5ce;"> webp</span><span style="color:#bf616a;"> -c</span><span style="color:#c0c5ce;">:v libwebp \
-</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">-filter </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">select=&#39;gt(scene,0.4)&#39;</span><span style="color:#c0c5ce;">&quot; \
-</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">out.webp
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">ffmpeg -i input.flv -frames:v 10 -loop 0 -f webp -c:v libwebp \
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">-filter </span><span style="color:#d69d85;">&quot;select=&#39;gt(scene,0.4)&#39;&quot; </span><span style="color:#dcdcdc;">\
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">out.webp
 </span></pre><h3 id="duo-chong-tiao-jian-xuan-qu"><a class="zola-anchor" href="#duo-chong-tiao-jian-xuan-qu" aria-label="Anchor link for: duo-chong-tiao-jian-xuan-qu">🔗</a>
 多种条件选取</h3>
 <p>按照 <a href="http://ffmpeg.org/">Ffmpeg</a> 中的<a href="http://ffmpeg.org/ffmpeg-utils.html#Expression-Evaluation">表达式运算规则</a>，<code>*</code> 运算符表示逻辑和（AND），<code>+</code> 运算符表示逻辑或（OR）。如果了解这一点，就可以在 <code>select</code> 过滤器中组合各种条件实现复杂的帧选取逻辑。</p>
@@ -279,60 +246,24 @@ webp</h2>
 <li><a href="http://superuser.com/questions/538112/meaningful-thumbnails-for-a-video-using-ffmpeg">http://superuser.com/questions/538112/meaningful-thumbnails-for-a-video-using-ffmpeg</a></li>
 </ul>
 
-    </div>
-
-    
-    
-
-    <div class="post-footer">
-        
-            
-                <div class="post-tags">
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;ffmpeg&#x2F;">#ffmpeg</a>
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;snapshoting&#x2F;">#snapshoting</a>
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;gif&#x2F;">#gif</a>
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;webp&#x2F;">#webp</a>
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;select&#x2F;">#select</a>
-                    
-                </div>
-            
-            
-                <div class="post-nav">
-                    
-                        <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-07-08-general-video-bitrate-recommendation&#x2F;">‹ [Note] General Video Bitrate Recommendation</a>
-                    
-                    
-                        <a class="next" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-07-21-ffmpeg-vsync-explained&#x2F;">Ffmpeg -vsync 使用场景辨析 ›</a>
-                    
-                    
-                    
-                </div>
-            
-
-        
-
-    </div>
-
-    
-    
-</article>
-
-
-                </div>
-            </main>
-
-            
-            
         </div>
+        
+    
+</div></div>
+            
+    <div class="pagination">
+        <div class="pagination__buttons">
+            </div>
+    </div>
+<footer class="footer">
+                    <div class="footer__inner"><div class="copyright">
+            <span>© 2019 <a href="https://github.com/ejmg/zerm">zerm</a> :: Powered by <a href="https://www.getzola.org/">Zola</a></span>
+            <span>:: Theme made by <a href="https://github.com/ejmg">ejmg</a></span>
+        </div>
+    <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;assets&#x2F;js&#x2F;main.js"></script>
+</div>
+                    
 
-      
-          <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
-      
+                </footer></div>
     </body>
-
 </html>

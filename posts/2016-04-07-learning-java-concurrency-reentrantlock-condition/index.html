@@ -1,207 +1,167 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta http-equiv="content-type" content="text/html; charset=utf-8">
-
-      <!-- Enable responsiveness on mobile devices-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-      <title>wangbo’s home &amp; blog - Learning Java Concurrency - ReentrantLock &amp; Condition</title>
-
-      
-
-      
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
-          
-      
-
-      
-          <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
-          
-      
-
-      
-      
-    </head>
-
-    <body>
-        <div class="container">
-
-            <div id="mobile-navbar" class="mobile-navbar">
-              <div class="mobile-header-logo">
-                <a href="/" class="logo">WB Prime</a>
-              </div>
-              <div class="mobile-navbar-icon icon-out">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            </div>
-
-            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
-              <ul class="mobile-menu-list">
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im">
-                            Home
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;categories">
-                            Categories
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;tags">
-                            Tags
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;about">
-                            About
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                            Github
-                        </a>
-                    </li>
-                
-              </ul>
-            </nav>
-
-            <header id="header">
-                <div class="logo"><a href="https:&#x2F;&#x2F;www.wangbo.im">WB Prime</a></div>
-                <nav class="menu">
-                    <ul>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im">
-                                    Home
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;categories">
-                                    Categories
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;tags">
-                                    Tags
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;about">
-                                    About
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                                    Github
-                                </a>
-                            </li>
-                        
-                    </ul>
-                </nav>
-            </header>
-
-            <main>
-                <div class="content" id="mobile-panel">
-                    
-
-
-
-<article class="post">
+    <title>Learning Java Concurrency - ReentrantLock &amp; Condition - Elvis Wang</title>
     
-    <header class="post__header">
-        <h1 class="post__title">
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="wangbo’s home &amp; blog"/>
+
+    <meta property="og:title" content="
+    wangbo’s home &amp; blog -&nbsp;Learning Java Concurrency - ReentrantLock &amp; Condition" />
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2016-04-07-learning-java-concurrency-reentrantlock-condition&#x2F;"/>
+    <meta property="og:description" content="&lt;p&gt;&lt;code&gt;ReentrantLock&lt;&#x2F;code&gt;是&lt;code&gt;synchronized&lt;&#x2F;code&gt;的高阶版本，用来控制多线程同步。&lt;code&gt;ReentrantLock&lt;&#x2F;code&gt;是一种独占锁，同一时间只能有一个线程使用一把锁，其他请求加锁的线程都会被阻塞。除了控制多线程…"/>
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+<link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
+    <body>
+        <div class="container full">
+<header class="header">
+    <div class="header__inner">
+        <div class="header__logo">
+            <a href="&#x2F;">
+    <div class="logo">
+        WB Prime
+    </div>
+</a>
+        </div>
+        <div class="menu-trigger">menu</div>
+    </div>
+    
+    <nav class="menu">
+        <ul class="menu__inner menu__inner--desktop">
+            
+            
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+                    </li>
+                
+            </ul>
+
+        <ul class="menu__inner menu__inner--mobile">
+            
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+        </li>
+        </ul>
+    </nav>
+
+    </header>
+<div class="content"><div class="post">
+        <h1 class="post-title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2016-04-07-learning-java-concurrency-reentrantlock-condition&#x2F;">Learning Java Concurrency - ReentrantLock &amp; Condition</a>
         </h1>
-        <div class="post__meta">
-            <span class="post__time">2016-04-07</span>
-            
-        </div>
-    </header>
+        
+    <div class="post-meta">
+        <span class="post-date">2016.04.07
+                </span>
 
-    <div class="post-content">
-      <p><code>ReentrantLock</code>是<code>synchronized</code>的高阶版本，用来控制多线程同步。<code>ReentrantLock</code>是一种独占锁，同一时间只能有一个线程使用一把锁，其他请求加锁的线程都会被阻塞。除了控制多线程同步之外，<code>ReentrantLock</code>还提供了<code>Condition</code>用来进行多线程通讯。<code>Condition</code>是<code>Object</code>类的方法<code>wait &amp; notify</code>的替代版本，可以用等待/通知模式来有效控制多线程对共享资源的访问。</p>
+        <span class="post-author"></span>
+
+        
+
+    
+    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;learning-java-concurrency&#x2F;">Learning Java Concurrency</a>} 
+
+            
+    ::
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;java&#x2F;">java</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;concurrency&#x2F;">concurrency</a>
+        
+    
+            
+        
+    </div>
+
+
+
+        
+
+        <div class="post-content">
+            <p><code>ReentrantLock</code>是<code>synchronized</code>的高阶版本，用来控制多线程同步。<code>ReentrantLock</code>是一种独占锁，同一时间只能有一个线程使用一把锁，其他请求加锁的线程都会被阻塞。除了控制多线程同步之外，<code>ReentrantLock</code>还提供了<code>Condition</code>用来进行多线程通讯。<code>Condition</code>是<code>Object</code>类的方法<code>wait &amp; notify</code>的替代版本，可以用等待/通知模式来有效控制多线程对共享资源的访问。</p>
 <p>仿<a href="https://www.wangbo.im/posts/learning-java-concurrency-synchronized/"><code>synchronized</code></a>，用<code>ReentrantLock</code>实现单例模式的代码如下：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">private static class </span><span style="color:#ebcb8b;">Singleton </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private static volatile </span><span style="color:#ebcb8b;">Singleton </span><span style="color:#eff1f5;">INSTANCE;
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private static </span><span style="color:#ebcb8b;">ReentrantLock </span><span style="color:#eff1f5;">lock </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">ReentrantLock</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private </span><span style="color:#8fa1b3;">Singleton</span><span style="color:#eff1f5;">() {}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public static </span><span style="color:#ebcb8b;">Singleton </span><span style="color:#8fa1b3;">instance</span><span style="color:#eff1f5;">() {
-</span><span style="color:#eff1f5;">        </span><span style="color:#ebcb8b;">Singleton </span><span style="color:#b48ead;">var </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">INSTANCE</span><span style="color:#eff1f5;">;
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">null </span><span style="color:#c0c5ce;">==</span><span style="color:#eff1f5;"> var) {
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">lock.</span><span style="color:#bf616a;">lock</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">try </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">                </span><span style="color:#b48ead;">var </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">INSTANCE</span><span style="color:#eff1f5;">;
-</span><span style="color:#eff1f5;">                </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">null </span><span style="color:#c0c5ce;">==</span><span style="color:#eff1f5;"> var) {
-</span><span style="color:#eff1f5;">                    </span><span style="color:#d08770;">INSTANCE </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> var </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">Singleton</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">} </span><span style="color:#b48ead;">finally </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">lock.</span><span style="color:#bf616a;">unlock</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">return var</span><span style="color:#eff1f5;">;
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#569cd6;">private static class </span><span style="color:#dcdcdc;">Singleton {
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private static volatile </span><span style="color:#dcdcdc;">Singleton INSTANCE;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private static </span><span style="color:#dcdcdc;">ReentrantLock lock = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">ReentrantLock();
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">Singleton() {}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public static </span><span style="color:#dcdcdc;">Singleton instance() {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Singleton </span><span style="color:#569cd6;">var </span><span style="color:#dcdcdc;">= </span><span style="color:#b4cea8;">INSTANCE</span><span style="color:#dcdcdc;">;
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(</span><span style="color:#569cd6;">null </span><span style="color:#dcdcdc;">== var) {
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">lock.lock();
+</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">try </span><span style="color:#dcdcdc;">{
+</span><span style="color:#dcdcdc;">                </span><span style="color:#569cd6;">var </span><span style="color:#dcdcdc;">= </span><span style="color:#b4cea8;">INSTANCE</span><span style="color:#dcdcdc;">;
+</span><span style="color:#dcdcdc;">                </span><span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(</span><span style="color:#569cd6;">null </span><span style="color:#dcdcdc;">== var) {
+</span><span style="color:#dcdcdc;">                    </span><span style="color:#b4cea8;">INSTANCE </span><span style="color:#dcdcdc;">= var = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">Singleton();
+</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">} </span><span style="color:#569cd6;">finally </span><span style="color:#dcdcdc;">{
+</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">lock.unlock();
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return var</span><span style="color:#dcdcdc;">;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">}
 </span></pre>
 <p>仿<a href="https://www.wangbo.im/posts/2016-04-06-learning-java-concurrency-wait-notify/"><code>wait &amp; notify</code></a>，用<code>Condition</code>来实现父子通知汇款的代码如下：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">private static class </span><span style="color:#ebcb8b;">DepositAccount </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private int </span><span style="color:#eff1f5;">money;
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private final </span><span style="color:#ebcb8b;">ReentrantLock </span><span style="color:#eff1f5;">lock </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">ReentrantLock</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private final </span><span style="color:#ebcb8b;">Condition </span><span style="color:#eff1f5;">cond </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> lock.</span><span style="color:#bf616a;">newCondition</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public </span><span style="color:#8fa1b3;">DepositAccount</span><span style="color:#eff1f5;">() {
-</span><span style="color:#eff1f5;">        </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.money </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">0</span><span style="color:#eff1f5;">;
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public void </span><span style="color:#8fa1b3;">withdraw</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">final int </span><span style="color:#bf616a;">val</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">lock.</span><span style="color:#bf616a;">lock</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">try </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">while </span><span style="color:#eff1f5;">(money </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#eff1f5;"> val) {
-</span><span style="color:#eff1f5;">                </span><span style="color:#b48ead;">try </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">                    </span><span style="color:#eff1f5;">cond.</span><span style="color:#bf616a;">await</span><span style="color:#eff1f5;">(); </span><span style="color:#65737e;">// 钱不够，等一会儿
-</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">} </span><span style="color:#b48ead;">catch </span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">InterruptedException </span><span style="color:#bf616a;">e</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">                    </span><span style="color:#65737e;">// do nothing here
-</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">money </span><span style="color:#c0c5ce;">-=</span><span style="color:#eff1f5;"> val;
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">} </span><span style="color:#b48ead;">finally </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">lock.</span><span style="color:#bf616a;">unlock</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public void </span><span style="color:#8fa1b3;">deposite</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">final int </span><span style="color:#bf616a;">val</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">lock.</span><span style="color:#bf616a;">lock</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">try </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">money </span><span style="color:#c0c5ce;">+=</span><span style="color:#eff1f5;"> val;
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">cond.</span><span style="color:#bf616a;">signalAll</span><span style="color:#eff1f5;">(); </span><span style="color:#65737e;">// 存完钱周知一下
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">} </span><span style="color:#b48ead;">finally </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">lock.</span><span style="color:#bf616a;">unlock</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#569cd6;">private static class </span><span style="color:#dcdcdc;">DepositAccount {
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private int </span><span style="color:#dcdcdc;">money;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private final </span><span style="color:#dcdcdc;">ReentrantLock lock = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">ReentrantLock();
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private final </span><span style="color:#dcdcdc;">Condition cond = lock.newCondition();
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">DepositAccount() {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">this.money = </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">withdraw(</span><span style="color:#569cd6;">final int </span><span style="color:#dcdcdc;">val) {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">lock.lock();
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">try </span><span style="color:#dcdcdc;">{
+</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">while </span><span style="color:#dcdcdc;">(money &lt; val) {
+</span><span style="color:#dcdcdc;">                </span><span style="color:#569cd6;">try </span><span style="color:#dcdcdc;">{
+</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">cond.await(); </span><span style="color:#608b4e;">// 钱不够，等一会儿
+</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">} </span><span style="color:#569cd6;">catch </span><span style="color:#dcdcdc;">(InterruptedException e) {
+</span><span style="color:#dcdcdc;">                    </span><span style="color:#608b4e;">// do nothing here
+</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">money -= val;
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">} </span><span style="color:#569cd6;">finally </span><span style="color:#dcdcdc;">{
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">lock.unlock();
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">deposite(</span><span style="color:#569cd6;">final int </span><span style="color:#dcdcdc;">val) {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">lock.lock();
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">try </span><span style="color:#dcdcdc;">{
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">money += val;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">cond.signalAll(); </span><span style="color:#608b4e;">// 存完钱周知一下
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">} </span><span style="color:#569cd6;">finally </span><span style="color:#dcdcdc;">{
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">lock.unlock();
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">}
 </span></pre><p><a name="continue-reading"></a></p>
 <h1 id="reentrantlock-s-api"><a class="zola-anchor" href="#reentrantlock-s-api" aria-label="Anchor link for: reentrantlock-s-api">🔗</a>
 ReentrantLock's API</h1>
@@ -219,32 +179,32 @@ ReentrantLock's API</h1>
 <li>boolean hasWaiters(Condition cond)</li>
 </ol>
 <p><code>ReentrantLock</code>的实现是委托给内部静态类<code>FairSync</code>和<code>NonfairSync</code>，这两个类又继承自<code>AbstractQueuedSynchronizer</code>。</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">abstract static class </span><span style="color:#ebcb8b;">Sync </span><span style="color:#b48ead;">extends </span><span style="color:#a3be8c;">AbstractQueuedSynchronizer </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">...
-</span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#b48ead;">static final class </span><span style="color:#ebcb8b;">NonfairSync </span><span style="color:#b48ead;">extends </span><span style="color:#a3be8c;">Sync </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">...
-</span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#b48ead;">static final class </span><span style="color:#ebcb8b;">FairSync </span><span style="color:#b48ead;">extends </span><span style="color:#a3be8c;">Sync </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">...
-</span><span style="color:#eff1f5;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#569cd6;">abstract static class </span><span style="color:#dcdcdc;">Sync </span><span style="color:#569cd6;">extends </span><span style="color:#4ec9b0;">AbstractQueuedSynchronizer </span><span style="color:#dcdcdc;">{
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">...
+</span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#569cd6;">static final class </span><span style="color:#dcdcdc;">NonfairSync </span><span style="color:#569cd6;">extends </span><span style="color:#4ec9b0;">Sync </span><span style="color:#dcdcdc;">{
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">...
+</span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#569cd6;">static final class </span><span style="color:#dcdcdc;">FairSync </span><span style="color:#569cd6;">extends </span><span style="color:#4ec9b0;">Sync </span><span style="color:#dcdcdc;">{
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">...
+</span><span style="color:#dcdcdc;">}
 </span></pre><h2 id="gong-ping-suo-yu-fei-gong-ping-suo"><a class="zola-anchor" href="#gong-ping-suo-yu-fei-gong-ping-suo" aria-label="Anchor link for: gong-ping-suo-yu-fei-gong-ping-suo">🔗</a>
 公平锁与非公平锁</h2>
 <p><code>FairSync</code>和<code>NonfairSync</code>即所谓的公平锁和非公平锁。对比一下两个锁版本对于<code>lock</code>方法的实现，就能明白公平和非公平的区别在哪里了。</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">final</span><span style="color:#c0c5ce;"> void </span><span style="color:#bf616a;">lock</span><span style="color:#c0c5ce;">() { </span><span style="color:#65737e;">// NonfairSync
-</span><span style="color:#c0c5ce;">    </span><span style="color:#b48ead;">if </span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">compareAndSetState</span><span style="color:#c0c5ce;">(</span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">))
-</span><span style="color:#c0c5ce;">        </span><span style="color:#bf616a;">setExclusiveOwnerThread</span><span style="color:#c0c5ce;">(</span><span style="color:#ebcb8b;">Thread</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">currentThread</span><span style="color:#c0c5ce;">());
-</span><span style="color:#c0c5ce;">    </span><span style="color:#b48ead;">else
-</span><span style="color:#c0c5ce;">        </span><span style="color:#bf616a;">acquire</span><span style="color:#c0c5ce;">(</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">);
-</span><span style="color:#c0c5ce;">}
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#b48ead;">final</span><span style="color:#c0c5ce;"> void </span><span style="color:#bf616a;">lock</span><span style="color:#c0c5ce;">() { </span><span style="color:#65737e;">// FairSync
-</span><span style="color:#c0c5ce;">    </span><span style="color:#bf616a;">acquire</span><span style="color:#c0c5ce;">(</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">);
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#569cd6;">final</span><span style="color:#dcdcdc;"> void lock() { </span><span style="color:#608b4e;">// NonfairSync
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(compareAndSetState(</span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">, </span><span style="color:#b5cea8;">1</span><span style="color:#dcdcdc;">))
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">setExclusiveOwnerThread(Thread.currentThread());
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">else
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">acquire(</span><span style="color:#b5cea8;">1</span><span style="color:#dcdcdc;">);
+</span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#569cd6;">final</span><span style="color:#dcdcdc;"> void lock() { </span><span style="color:#608b4e;">// FairSync
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">acquire(</span><span style="color:#b5cea8;">1</span><span style="color:#dcdcdc;">);
+</span><span style="color:#dcdcdc;">}
 </span></pre>
 <p>可以看到，公平锁直接让当前线程加入等待队列；而非公平锁首先试图去获取锁，如果当前有线程恰好释放了锁，就可以插队获取到锁，如果获取失败，还是会加入等待队列。也就是说，非公平锁会在调用lock的时候去尝试获取锁。如果这时候能够获取锁，就直接获取到锁，这样可以减少线程挂起和恢复的性能开销；缺点就是有可能在等待队列中的线程有可能永远拿不到锁。</p>
 <p><code>ReentrantLock</code>在构造器中可以指定使用公平锁还是非公平锁策略，默认是非公平锁。</p>
@@ -291,54 +251,24 @@ Condition's API</h1>
 <p><a href="https://www.wangbo.im/posts/2016-04-07-learning-java-concurrency-reentrantlock-condition/ConditionCase.java">ConditionCase.java</a>
 <a href="https://www.wangbo.im/posts/2016-04-07-learning-java-concurrency-reentrantlock-condition/ReentrantLockCase.java">ReentrantLockCase.java</a></p>
 
-    </div>
-
-    
-    
-
-    <div class="post-footer">
-        
-            
-                <div class="post-tags">
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;java&#x2F;">#java</a>
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;concurrency&#x2F;">#concurrency</a>
-                    
-                </div>
-            
-            
-                <div class="post-nav">
-                    
-                        <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2016-04-06-learning-java-concurrency-wait-notify&#x2F;">‹ Learning Java Concurrency - wait &amp; notify</a>
-                    
-                    
-                        <a class="next" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2016-04-07-learning-java-concurrency-reentrantreadwritelock&#x2F;">Learning Java Concurrency - ReentrantReadWriteLock ›</a>
-                    
-                    
-                    
-                </div>
-            
-
-        
-
-    </div>
-
-    
-    
-</article>
-
-
-                </div>
-            </main>
-
-            
-            
         </div>
+        
+    
+</div></div>
+            
+    <div class="pagination">
+        <div class="pagination__buttons">
+            </div>
+    </div>
+<footer class="footer">
+                    <div class="footer__inner"><div class="copyright">
+            <span>© 2019 <a href="https://github.com/ejmg/zerm">zerm</a> :: Powered by <a href="https://www.getzola.org/">Zola</a></span>
+            <span>:: Theme made by <a href="https://github.com/ejmg">ejmg</a></span>
+        </div>
+    <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;assets&#x2F;js&#x2F;main.js"></script>
+</div>
+                    
 
-      
-          <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
-      
+                </footer></div>
     </body>
-
 </html>

@@ -1,180 +1,143 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta http-equiv="content-type" content="text/html; charset=utf-8">
-
-      <!-- Enable responsiveness on mobile devices-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-      <title>wangbo’s home &amp; blog - 一次由于滥用 OptionalLong.orElse 引发的 BUG</title>
-
-      
-
-      
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
-          
-      
-
-      
-          <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
-          
-      
-
-      
-      
-    </head>
-
-    <body>
-        <div class="container">
-
-            <div id="mobile-navbar" class="mobile-navbar">
-              <div class="mobile-header-logo">
-                <a href="/" class="logo">WB Prime</a>
-              </div>
-              <div class="mobile-navbar-icon icon-out">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            </div>
-
-            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
-              <ul class="mobile-menu-list">
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im">
-                            Home
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;categories">
-                            Categories
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;tags">
-                            Tags
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;about">
-                            About
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                            Github
-                        </a>
-                    </li>
-                
-              </ul>
-            </nav>
-
-            <header id="header">
-                <div class="logo"><a href="https:&#x2F;&#x2F;www.wangbo.im">WB Prime</a></div>
-                <nav class="menu">
-                    <ul>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im">
-                                    Home
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;categories">
-                                    Categories
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;tags">
-                                    Tags
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;about">
-                                    About
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                                    Github
-                                </a>
-                            </li>
-                        
-                    </ul>
-                </nav>
-            </header>
-
-            <main>
-                <div class="content" id="mobile-panel">
-                    
-
-
-
-<article class="post">
+    <title>一次由于滥用 OptionalLong.orElse 引发的 BUG - Elvis Wang</title>
     
-    <header class="post__header">
-        <h1 class="post__title">
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="wangbo’s home &amp; blog"/>
+
+    <meta property="og:title" content="
+    wangbo’s home &amp; blog -&nbsp;一次由于滥用 OptionalLong.orElse 引发的 BUG" />
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-03-31-a-bug-introduced-by-optionallong-abuse&#x2F;"/>
+    <meta property="og:description" content="&lt;p&gt;JDK 8 引入了 Optional 的概念，以解决 &lt;code&gt;null&lt;&#x2F;code&gt; 可能引发的可能的 BUG。新的类型 &lt;code&gt;java.util.Optional&amp;lt;T&amp;gt;&lt;&#x2F;code&gt;,
+&lt;code&gt;java.util.OptionalDouble&lt;&#x2…"/>
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+<link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
+    <body>
+        <div class="container full">
+<header class="header">
+    <div class="header__inner">
+        <div class="header__logo">
+            <a href="&#x2F;">
+    <div class="logo">
+        WB Prime
+    </div>
+</a>
+        </div>
+        <div class="menu-trigger">menu</div>
+    </div>
+    
+    <nav class="menu">
+        <ul class="menu__inner menu__inner--desktop">
+            
+            
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+                    </li>
+                
+            </ul>
+
+        <ul class="menu__inner menu__inner--mobile">
+            
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+        </li>
+        </ul>
+    </nav>
+
+    </header>
+<div class="content"><div class="post">
+        <h1 class="post-title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-03-31-a-bug-introduced-by-optionallong-abuse&#x2F;">一次由于滥用 OptionalLong.orElse 引发的 BUG</a>
         </h1>
-        <div class="post__meta">
-            <span class="post__time">2019-03-31</span>
-            
-        </div>
-    </header>
+        
+    <div class="post-meta">
+        <span class="post-date">2019.03.31
+                </span>
 
-    <div class="post-content">
-      <p>JDK 8 引入了 Optional 的概念，以解决 <code>null</code> 可能引发的可能的 BUG。新的类型 <code>java.util.Optional&lt;T&gt;</code>,
+        <span class="post-author"></span>
+
+        
+
+    
+    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;practise&#x2F;">Practise</a>} 
+
+            
+    ::
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;bug&#x2F;">bug</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;optionallong&#x2F;">OptionalLong</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;optional&#x2F;">Optional</a>
+        
+    
+            
+        
+    </div>
+
+
+
+        
+
+        <div class="post-content">
+            <p>JDK 8 引入了 Optional 的概念，以解决 <code>null</code> 可能引发的可能的 BUG。新的类型 <code>java.util.Optional&lt;T&gt;</code>,
 <code>java.util.OptionalDouble</code>, <code>java.util.OptionalDouble</code> 和 <code>java.util.OptionalDouble</code> 能够有效避免
 <code>null</code> 值的使用，强制使用者去处理 <code>absent &amp; present</code> 的不同情况。</p>
 <p><a name="continue-reading"></a></p>
 <p>比如，去数据库中查询一条指定名称的记录之 ID 的方法可能设计为：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">@</span><span style="color:#bf616a;">Nullable
-</span><span style="color:#ebcb8b;">Long </span><span style="color:#bf616a;">findByName</span><span style="color:#c0c5ce;">(final </span><span style="color:#ebcb8b;">String</span><span style="color:#c0c5ce;"> name);
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#65737e;">// or
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#ebcb8b;">OptionalLong </span><span style="color:#bf616a;">findByName</span><span style="color:#c0c5ce;">(final </span><span style="color:#ebcb8b;">String</span><span style="color:#c0c5ce;"> name);
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">@Nullable
+</span><span style="color:#dcdcdc;">Long findByName(final String name);
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#608b4e;">// or
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">OptionalLong findByName(final String name);
 </span></pre>
 <p>前者设计为：如果能找到对应的 ID，则返回之；否则返回 <code>null</code>。后者设计为：如果能找到对应的记录，则返
 回 <code>Optional.of(id)</code>；否则返回 <code>Optional.empty()</code>。</p>
 <p>则被调用时，前者会倾向于以下代码：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">Long</span><span style="color:#c0c5ce;"> id = service.</span><span style="color:#bf616a;">findByName</span><span style="color:#c0c5ce;">(&quot;</span><span style="color:#a3be8c;">name</span><span style="color:#c0c5ce;">&quot;);
-</span><span style="color:#b48ead;">if </span><span style="color:#c0c5ce;">(</span><span style="color:#d08770;">null </span><span style="color:#c0c5ce;">!= id) { </span><span style="color:#65737e;">// 1
-</span><span style="color:#c0c5ce;">    </span><span style="color:#ebcb8b;">System</span><span style="color:#c0c5ce;">.out.</span><span style="color:#bf616a;">println</span><span style="color:#c0c5ce;">(&quot;&quot; + (id + </span><span style="color:#d08770;">1</span><span style="color:#b48ead;">L</span><span style="color:#c0c5ce;">));
-</span><span style="color:#c0c5ce;">} </span><span style="color:#b48ead;">else </span><span style="color:#c0c5ce;">{
-</span><span style="color:#c0c5ce;">    </span><span style="color:#ebcb8b;">System</span><span style="color:#c0c5ce;">.out.</span><span style="color:#bf616a;">println</span><span style="color:#c0c5ce;">(&quot;</span><span style="color:#a3be8c;">-1</span><span style="color:#c0c5ce;">&quot;);
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">Long id = service.findByName(</span><span style="color:#d69d85;">&quot;name&quot;</span><span style="color:#dcdcdc;">);
+</span><span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(</span><span style="color:#569cd6;">null </span><span style="color:#dcdcdc;">!= id) { </span><span style="color:#608b4e;">// 1
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">System.out.println(</span><span style="color:#d69d85;">&quot;&quot; </span><span style="color:#dcdcdc;">+ (id + </span><span style="color:#b5cea8;">1</span><span style="color:#569cd6;">L</span><span style="color:#dcdcdc;">));
+</span><span style="color:#dcdcdc;">} </span><span style="color:#569cd6;">else </span><span style="color:#dcdcdc;">{
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">System.out.println(</span><span style="color:#d69d85;">&quot;-1&quot;</span><span style="color:#dcdcdc;">);
+</span><span style="color:#dcdcdc;">}
 </span></pre>
 <p>后者会倾向于以下代码：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">OptionalLong</span><span style="color:#c0c5ce;"> opt = service.</span><span style="color:#bf616a;">findByName</span><span style="color:#c0c5ce;">(&quot;</span><span style="color:#a3be8c;">name</span><span style="color:#c0c5ce;">&quot;);
-</span><span style="color:#b48ead;">if </span><span style="color:#c0c5ce;">(opt.</span><span style="color:#bf616a;">isPresent</span><span style="color:#c0c5ce;">()) { </span><span style="color:#65737e;">// 2
-</span><span style="color:#c0c5ce;">    </span><span style="color:#ebcb8b;">System</span><span style="color:#c0c5ce;">.out.</span><span style="color:#bf616a;">println</span><span style="color:#c0c5ce;">(&quot;&quot; + (opt.</span><span style="color:#bf616a;">getAsLong</span><span style="color:#c0c5ce;">() + </span><span style="color:#d08770;">1</span><span style="color:#b48ead;">L</span><span style="color:#c0c5ce;">));
-</span><span style="color:#c0c5ce;">} </span><span style="color:#b48ead;">else </span><span style="color:#c0c5ce;">{
-</span><span style="color:#c0c5ce;">    </span><span style="color:#ebcb8b;">System</span><span style="color:#c0c5ce;">.out.</span><span style="color:#bf616a;">println</span><span style="color:#c0c5ce;">(&quot;</span><span style="color:#a3be8c;">-1</span><span style="color:#c0c5ce;">&quot;);
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">OptionalLong opt = service.findByName(</span><span style="color:#d69d85;">&quot;name&quot;</span><span style="color:#dcdcdc;">);
+</span><span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(opt.isPresent()) { </span><span style="color:#608b4e;">// 2
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">System.out.println(</span><span style="color:#d69d85;">&quot;&quot; </span><span style="color:#dcdcdc;">+ (opt.getAsLong() + </span><span style="color:#b5cea8;">1</span><span style="color:#569cd6;">L</span><span style="color:#dcdcdc;">));
+</span><span style="color:#dcdcdc;">} </span><span style="color:#569cd6;">else </span><span style="color:#dcdcdc;">{
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">System.out.println(</span><span style="color:#d69d85;">&quot;-1&quot;</span><span style="color:#dcdcdc;">);
+</span><span style="color:#dcdcdc;">}
 </span></pre>
 <p>在实际项目中，<code>// 1</code> 处的代码很容易被忽略，从而引发 NPE 导致潜在的 BUG；而 <code>// 2</code> 处的代码基本上不会
 被无意的忽略掉。</p>
 <p>由于以上的优点，以及 Optional 系类型对于函数型用法的支持，我在绝大多数的代码中都会使用 Optional 系的
 类型代替可能的 <code>null</code> 型值，上面的代码可以简化为：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">OptionalLong</span><span style="color:#c0c5ce;"> opt = service.</span><span style="color:#bf616a;">findByName</span><span style="color:#c0c5ce;">(&quot;</span><span style="color:#a3be8c;">name</span><span style="color:#c0c5ce;">&quot;);
-</span><span style="color:#ebcb8b;">System</span><span style="color:#c0c5ce;">.out.</span><span style="color:#bf616a;">println</span><span style="color:#c0c5ce;">(opt.</span><span style="color:#bf616a;">map</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">n </span><span style="color:#b48ead;">-&gt;</span><span style="color:#c0c5ce;"> n + </span><span style="color:#d08770;">1</span><span style="color:#b48ead;">L</span><span style="color:#c0c5ce;">).</span><span style="color:#bf616a;">map</span><span style="color:#c0c5ce;">(</span><span style="color:#ebcb8b;">String</span><span style="color:#c0c5ce;">::</span><span style="color:#bf616a;">valueOf</span><span style="color:#c0c5ce;">).</span><span style="color:#bf616a;">orElse</span><span style="color:#c0c5ce;">(&quot;</span><span style="color:#a3be8c;">-1</span><span style="color:#c0c5ce;">&quot;));
+<pre style="background-color:#1e1e1e;">
+<span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">OptionalLong opt = service.findByName(</span><span style="color:#d69d85;">&quot;name&quot;</span><span style="color:#dcdcdc;">);
+</span><span style="color:#dcdcdc;">System.out.println(opt.map(n </span><span style="color:#569cd6;">-&gt;</span><span style="color:#dcdcdc;"> n + </span><span style="color:#b5cea8;">1</span><span style="color:#569cd6;">L</span><span style="color:#dcdcdc;">).map(String::valueOf).orElse(</span><span style="color:#d69d85;">&quot;-1&quot;</span><span style="color:#dcdcdc;">));
 </span></pre>
 <p>可以看出，<code>OptionalLong#map</code> 与 <code>OptionalLong#orElse</code> 组合使用能够在编写代码的时候带来巨大的快感。</p>
 <p>然而，滥用 <code>OptionalLong#orElse</code> 也可能会导致 BUG。</p>
@@ -183,23 +146,23 @@
 <p>在项目中有段查询的逻辑：查找多个队列中最大的一个任务 ID （select max(id) from the_table where
 queue in (1, 2, 3);），数据库中存储的是 <code>int</code> 类型的队列编号，而查询的条件里面给出的是队列名称。队列
 名称到队列编号的映射关系在数据库外部维护。</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">interface </span><span style="color:#ebcb8b;">TaskService </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">    </span><span style="color:#ebcb8b;">OptionalLong </span><span style="color:#8fa1b3;">findByQueues</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">List</span><span style="color:#eff1f5;">&lt;</span><span style="color:#ebcb8b;">String</span><span style="color:#eff1f5;">&gt; </span><span style="color:#bf616a;">queues</span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#b48ead;">interface </span><span style="color:#ebcb8b;">QueueService </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">    </span><span style="color:#ebcb8b;">OptionalLong </span><span style="color:#8fa1b3;">indexFor</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">String </span><span style="color:#bf616a;">name</span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">long </span><span style="color:#8fa1b3;">fallbackIndex</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#569cd6;">interface </span><span style="color:#dcdcdc;">TaskService {
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">OptionalLong findByQueues(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">List&lt;String&gt; queues);
+</span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#569cd6;">interface </span><span style="color:#dcdcdc;">QueueService {
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">OptionalLong indexFor(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">String name);
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">long </span><span style="color:#dcdcdc;">fallbackIndex();
+</span><span style="color:#dcdcdc;">}
 </span></pre>
 <p>服务的逻辑里面，一个任务必定属于一个队列；一个给定的队列名称可能没有对应的编号（该队列名可能不存在），所以通过名称查询编号的方法返回的是 <code>OptionalLong</code>；存在一个默认队列（fallback 队列）。</p>
 <p>在 <code>findByQueues</code> 的实现中，会首先根据队列的名称和编号的映射关系确定需要查询的队列编号集合，然后生成对应的查询条件查找结果并返回。</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">Set</span><span style="color:#c0c5ce;">&lt;</span><span style="color:#ebcb8b;">Long</span><span style="color:#c0c5ce;">&gt; queueIds = queues.</span><span style="color:#bf616a;">stream</span><span style="color:#c0c5ce;">()
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">map</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">name </span><span style="color:#b48ead;">-&gt;</span><span style="color:#c0c5ce;"> queueService.</span><span style="color:#bf616a;">indexFor</span><span style="color:#c0c5ce;">(name).</span><span style="color:#bf616a;">orElse</span><span style="color:#c0c5ce;">(queueService.</span><span style="color:#bf616a;">fallbackIndex</span><span style="color:#c0c5ce;">()))
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">collect</span><span style="color:#c0c5ce;">(</span><span style="color:#ebcb8b;">Collectors</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">toSet</span><span style="color:#c0c5ce;">());
+<pre style="background-color:#1e1e1e;">
+<span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">Set&lt;Long&gt; queueIds = queues.stream()
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">.map(name </span><span style="color:#569cd6;">-&gt;</span><span style="color:#dcdcdc;"> queueService.indexFor(name).orElse(queueService.fallbackIndex()))
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">.collect(Collectors.toSet());
 </span></pre><h1 id="bug-fen-xi"><a class="zola-anchor" href="#bug-fen-xi" aria-label="Anchor link for: bug-fen-xi">🔗</a>
 BUG 分析</h1>
 <p>线上服务在运行中，有一个增加队列的需求。当增加了队列的映射之后，发现线上服务会不按照限定的队列集合获取任务，查询到的任务有时候会来自于默认队列。因为线上服务对于不同队列的任务可能会有不同的逻辑，获取到的默认队列的任务的处理就出现问题，服务开始报警。</p>
@@ -208,12 +171,12 @@ BUG 分析</h1>
 <h1 id="fix"><a class="zola-anchor" href="#fix" aria-label="Anchor link for: fix">🔗</a>
 Fix</h1>
 <p>问题代码修改为：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">Set</span><span style="color:#c0c5ce;">&lt;</span><span style="color:#ebcb8b;">Long</span><span style="color:#c0c5ce;">&gt; queueIds = queues.</span><span style="color:#bf616a;">stream</span><span style="color:#c0c5ce;">()
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">map</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">name </span><span style="color:#b48ead;">-&gt;</span><span style="color:#c0c5ce;"> queueService.</span><span style="color:#bf616a;">indexFor</span><span style="color:#c0c5ce;">(name))
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">filter</span><span style="color:#c0c5ce;">(</span><span style="color:#ebcb8b;">OptionalLong</span><span style="color:#c0c5ce;">::</span><span style="color:#bf616a;">isPresent</span><span style="color:#c0c5ce;">)
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">map</span><span style="color:#c0c5ce;">(</span><span style="color:#ebcb8b;">OptionalLong</span><span style="color:#c0c5ce;">::</span><span style="color:#bf616a;">getAsLong</span><span style="color:#c0c5ce;">)
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">collect</span><span style="color:#c0c5ce;">(</span><span style="color:#ebcb8b;">Collectors</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">toSet</span><span style="color:#c0c5ce;">());
+<pre style="background-color:#1e1e1e;">
+<span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">Set&lt;Long&gt; queueIds = queues.stream()
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">.map(name </span><span style="color:#569cd6;">-&gt;</span><span style="color:#dcdcdc;"> queueService.indexFor(name))
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">.filter(OptionalLong::isPresent)
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">.map(OptionalLong::getAsLong)
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">.collect(Collectors.toSet());
 </span></pre><h1 id="zong-jie"><a class="zola-anchor" href="#zong-jie" aria-label="Anchor link for: zong-jie">🔗</a>
 总结</h1>
 <p>根据分析，其实这一次的 BUG 并不是 <code>OptionalLong</code> 的锅，而是由与无脑使用 <code>OptionalLong</code> 导致的，是滥
@@ -222,56 +185,24 @@ Fix</h1>
 需要具体分析具体解决。</p>
 <p>以上</p>
 
-    </div>
-
-    
-    
-
-    <div class="post-footer">
-        
-            
-                <div class="post-tags">
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;bug&#x2F;">#bug</a>
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;optionallong&#x2F;">#OptionalLong</a>
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;optional&#x2F;">#Optional</a>
-                    
-                </div>
-            
-            
-                <div class="post-nav">
-                    
-                        <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-03-12-combine-vertx-and-guice-dependency-injection&#x2F;">‹ 在 Vert.x 项目中集成使用 Guice 依赖注入</a>
-                    
-                    
-                        <a class="next" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-04-12-java-catch-all-and-assertionerror&#x2F;">Java try-catch and AssertionError ›</a>
-                    
-                    
-                    
-                </div>
-            
-
-        
-
-    </div>
-
-    
-    
-</article>
-
-
-                </div>
-            </main>
-
-            
-            
         </div>
+        
+    
+</div></div>
+            
+    <div class="pagination">
+        <div class="pagination__buttons">
+            </div>
+    </div>
+<footer class="footer">
+                    <div class="footer__inner"><div class="copyright">
+            <span>© 2019 <a href="https://github.com/ejmg/zerm">zerm</a> :: Powered by <a href="https://www.getzola.org/">Zola</a></span>
+            <span>:: Theme made by <a href="https://github.com/ejmg">ejmg</a></span>
+        </div>
+    <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;assets&#x2F;js&#x2F;main.js"></script>
+</div>
+                    
 
-      
-          <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
-      
+                </footer></div>
     </body>
-
 </html>

@@ -1,147 +1,105 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta http-equiv="content-type" content="text/html; charset=utf-8">
-
-      <!-- Enable responsiveness on mobile devices-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-      <title>wangbo’s home &amp; blog - Spring Mvc Note</title>
-
-      
-
-      
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
-          
-      
-
-      
-          <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
-          
-      
-
-      
-      
-    </head>
-
-    <body>
-        <div class="container">
-
-            <div id="mobile-navbar" class="mobile-navbar">
-              <div class="mobile-header-logo">
-                <a href="/" class="logo">WB Prime</a>
-              </div>
-              <div class="mobile-navbar-icon icon-out">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            </div>
-
-            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
-              <ul class="mobile-menu-list">
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im">
-                            Home
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;categories">
-                            Categories
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;tags">
-                            Tags
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;about">
-                            About
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                            Github
-                        </a>
-                    </li>
-                
-              </ul>
-            </nav>
-
-            <header id="header">
-                <div class="logo"><a href="https:&#x2F;&#x2F;www.wangbo.im">WB Prime</a></div>
-                <nav class="menu">
-                    <ul>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im">
-                                    Home
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;categories">
-                                    Categories
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;tags">
-                                    Tags
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;about">
-                                    About
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                                    Github
-                                </a>
-                            </li>
-                        
-                    </ul>
-                </nav>
-            </header>
-
-            <main>
-                <div class="content" id="mobile-panel">
-                    
-
-
-
-<article class="post">
+    <title>Spring Mvc Note - Elvis Wang</title>
     
-    <header class="post__header">
-        <h1 class="post__title">
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="wangbo’s home &amp; blog"/>
+
+    <meta property="og:title" content="
+    wangbo’s home &amp; blog -&nbsp;Spring Mvc Note" />
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;spring-mvc-note&#x2F;"/>
+    <meta property="og:description" content="Note on Spring MVC"/>
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+<link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
+    <body>
+        <div class="container full">
+<header class="header">
+    <div class="header__inner">
+        <div class="header__logo">
+            <a href="&#x2F;">
+    <div class="logo">
+        WB Prime
+    </div>
+</a>
+        </div>
+        <div class="menu-trigger">menu</div>
+    </div>
+    
+    <nav class="menu">
+        <ul class="menu__inner menu__inner--desktop">
+            
+            
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+                    </li>
+                
+            </ul>
+
+        <ul class="menu__inner menu__inner--mobile">
+            
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+        </li>
+        </ul>
+    </nav>
+
+    </header>
+<div class="content"><div class="post">
+        <h1 class="post-title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;spring-mvc-note&#x2F;">Spring Mvc Note</a>
         </h1>
-        <div class="post__meta">
-            <span class="post__time">2018-02-06</span>
-            
-        </div>
-    </header>
+        
+    <div class="post-meta">
+        <span class="post-date">2018.02.06
+                </span>
 
-    <div class="post-content">
-      <h1 id="scenario-1"><a class="zola-anchor" href="#scenario-1" aria-label="Anchor link for: scenario-1">🔗</a>
+        <span class="post-author"></span>
+
+        
+
+    
+    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;notes&#x2F;">Notes</a>} 
+
+            
+    ::
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;spring-mvc&#x2F;">spring mvc</a>
+        
+    
+            
+        
+    </div>
+
+
+
+        
+
+        <div class="post-content">
+            <h1 id="scenario-1"><a class="zola-anchor" href="#scenario-1" aria-label="Anchor link for: scenario-1">🔗</a>
 Scenario 1</h1>
 <p>In client application (application is not web application, e.g may be swing app)</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">private static ApplicationContext context = new  ClassPathXmlApplicationContext(&quot;test-client.xml&quot;);
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">context.getBean(name);
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">private static ApplicationContext context = new  ClassPathXmlApplicationContext(&quot;test-client.xml&quot;);
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">context.getBean(name);
 </span></pre>
 <p>No need of web.xml. ApplicationContext as container for getting bean service. No need for web server container. In test-client.xml there can be Simple bean with no remoting, bean with remoting.</p>
 <p>Conclusion: In Scenario 1 applicationContext and DispatcherServlet are not related.</p>
@@ -149,18 +107,18 @@ Scenario 1</h1>
 Scenario 2</h1>
 <p>In a server application (application deployed in server e.g Tomcat). Accessed service via remoting from client program (e.g swing app)</p>
 <p>Define listener in web.xml</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">&lt;listener&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;
-</span><span style="color:#c0c5ce;">&lt;/listener&gt;
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">&lt;listener&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;
+</span><span style="color:#dcdcdc;">&lt;/listener&gt;
 </span></pre>
 <p>At server startup ContextLoaderListener instantiates beans defined in applicationcontext.xml.</p>
 <p>Assuming you have defined the following in applicationcontext.xml:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">&lt;import resource=&quot;test1.xml&quot; /&gt;
-</span><span style="color:#c0c5ce;">&lt;import resource=&quot;test2.xml&quot; /&gt;
-</span><span style="color:#c0c5ce;">&lt;import resource=&quot;test3.xml&quot; /&gt;
-</span><span style="color:#c0c5ce;">&lt;import resource=&quot;test4.xml&quot; /&gt;
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">&lt;import resource=&quot;test1.xml&quot; /&gt;
+</span><span style="color:#dcdcdc;">&lt;import resource=&quot;test2.xml&quot; /&gt;
+</span><span style="color:#dcdcdc;">&lt;import resource=&quot;test3.xml&quot; /&gt;
+</span><span style="color:#dcdcdc;">&lt;import resource=&quot;test4.xml&quot; /&gt;
 </span></pre>
 <p>The beans are instantiated from all four configuration files test1.xml, test2.xml, test3.xml, test4.xml.</p>
 <p>Conclusion: In Scenario 2 applicationContext and DispatcherServlet are not related.</p>
@@ -168,16 +126,16 @@ Scenario 2</h1>
 Scenario 3</h1>
 <p>In a web application with spring MVC.</p>
 <p>In web.xml define:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">&lt;servlet&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;servlet-name&gt;springweb&lt;/servlet-name&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;    
-</span><span style="color:#c0c5ce;">&lt;/servlet&gt;
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">&lt;servlet-mapping&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;servlet-name&gt;springweb&lt;/servlet-name&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;url-pattern&gt;*.action&lt;/url-pattern&gt;
-</span><span style="color:#c0c5ce;">&lt;/servlet-mapping&gt;
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">&lt;servlet&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&lt;servlet-name&gt;springweb&lt;/servlet-name&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;    
+</span><span style="color:#dcdcdc;">&lt;/servlet&gt;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">&lt;servlet-mapping&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&lt;servlet-name&gt;springweb&lt;/servlet-name&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&lt;url-pattern&gt;*.action&lt;/url-pattern&gt;
+</span><span style="color:#dcdcdc;">&lt;/servlet-mapping&gt;
 </span></pre>
 <p>When tomcat starts, beans defined in springweb-servlet.xml are instantiated. DispatcherServlet extends FrameworkServlet. In FrameworkServlet bean instantiation takes place for springweb . In our case springweb is FrameworkServlet.</p>
 <p>Conclusion: In Scenario 3 applicationContext and DispatcherServlet are not related.</p>
@@ -185,79 +143,51 @@ Scenario 3</h1>
 Scenario 4</h1>
 <p>In web application with spring MVC. springweb-servlet.xml for servlet and applicationcontext.xml for accessing the business service within the server program or for accessing DB service in another server program.</p>
 <p>In web.xml the following are defined:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">&lt;listener&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;
-</span><span style="color:#c0c5ce;">&lt;/listener&gt;
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">&lt;servlet&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;servlet-name&gt;springweb&lt;/servlet-name&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">&lt;/servlet&gt;
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">&lt;servlet-mapping&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;servlet-name&gt;springweb&lt;/servlet-name&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;url-pattern&gt;*.action&lt;/url-pattern&gt;
-</span><span style="color:#c0c5ce;">&lt;/servlet-mapping&gt;
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">&lt;listener&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;
+</span><span style="color:#dcdcdc;">&lt;/listener&gt;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">&lt;servlet&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&lt;servlet-name&gt;springweb&lt;/servlet-name&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">&lt;/servlet&gt;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">&lt;servlet-mapping&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&lt;servlet-name&gt;springweb&lt;/servlet-name&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&lt;url-pattern&gt;*.action&lt;/url-pattern&gt;
+</span><span style="color:#dcdcdc;">&lt;/servlet-mapping&gt;
 </span></pre>
 <p>At server startup, ContextLoaderListener instantiates beans defined in applicationcontext.xml; assuming you have declared herein:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">&lt;import resource=&quot;test1.xml&quot; /&gt;
-</span><span style="color:#c0c5ce;">&lt;import resource=&quot;test2.xml&quot; /&gt;
-</span><span style="color:#c0c5ce;">&lt;import resource=&quot;test3.xml&quot; /&gt;
-</span><span style="color:#c0c5ce;">&lt;import resource=&quot;test4.xml&quot; /&gt;
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">&lt;import resource=&quot;test1.xml&quot; /&gt;
+</span><span style="color:#dcdcdc;">&lt;import resource=&quot;test2.xml&quot; /&gt;
+</span><span style="color:#dcdcdc;">&lt;import resource=&quot;test3.xml&quot; /&gt;
+</span><span style="color:#dcdcdc;">&lt;import resource=&quot;test4.xml&quot; /&gt;
 </span></pre>
 <p>The beans are all instantiated from all four test1.xml, test2.xml, test3.xml, test4.xml. After the completion of bean instantiation defined in applicationcontext.xml then beans defined in springweb-servlet.xml are instantiated.</p>
 <p>So instantiation order is root is application context, then FrameworkServlet.</p>
 <p>Now it makes clear why they are important in which scenario.</p>
 
-    </div>
-
-    
-    
-
-    <div class="post-footer">
-        
-            
-                <div class="post-tags">
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;spring-mvc&#x2F;">#spring mvc</a>
-                    
-                </div>
-            
-            
-                <div class="post-nav">
-                    
-                        <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;mybatis-note&#x2F;">‹ Mybatis Note</a>
-                    
-                    
-                        <a class="next" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2018-02-06-ip-tcp-udp-frames&#x2F;">IP TCP UDP Frame Header Structure ›</a>
-                    
-                    
-                    
-                </div>
-            
-
-        
-
-    </div>
-
-    
-    
-</article>
-
-
-                </div>
-            </main>
-
-            
-            
         </div>
+        
+    
+</div></div>
+            
+    <div class="pagination">
+        <div class="pagination__buttons">
+            </div>
+    </div>
+<footer class="footer">
+                    <div class="footer__inner"><div class="copyright">
+            <span>© 2019 <a href="https://github.com/ejmg/zerm">zerm</a> :: Powered by <a href="https://www.getzola.org/">Zola</a></span>
+            <span>:: Theme made by <a href="https://github.com/ejmg">ejmg</a></span>
+        </div>
+    <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;assets&#x2F;js&#x2F;main.js"></script>
+</div>
+                    
 
-      
-          <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
-      
+                </footer></div>
     </body>
-
 </html>

@@ -1,141 +1,104 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta http-equiv="content-type" content="text/html; charset=utf-8">
-
-      <!-- Enable responsiveness on mobile devices-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-      <title>wangbo’s home &amp; blog - Java try-catch and AssertionError</title>
-
-      
-
-      
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
-          
-      
-
-      
-          <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
-          
-      
-
-      
-      
-    </head>
-
-    <body>
-        <div class="container">
-
-            <div id="mobile-navbar" class="mobile-navbar">
-              <div class="mobile-header-logo">
-                <a href="/" class="logo">WB Prime</a>
-              </div>
-              <div class="mobile-navbar-icon icon-out">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            </div>
-
-            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
-              <ul class="mobile-menu-list">
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im">
-                            Home
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;categories">
-                            Categories
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;tags">
-                            Tags
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;about">
-                            About
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                            Github
-                        </a>
-                    </li>
-                
-              </ul>
-            </nav>
-
-            <header id="header">
-                <div class="logo"><a href="https:&#x2F;&#x2F;www.wangbo.im">WB Prime</a></div>
-                <nav class="menu">
-                    <ul>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im">
-                                    Home
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;categories">
-                                    Categories
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;tags">
-                                    Tags
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;about">
-                                    About
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                                    Github
-                                </a>
-                            </li>
-                        
-                    </ul>
-                </nav>
-            </header>
-
-            <main>
-                <div class="content" id="mobile-panel">
-                    
-
-
-
-<article class="post">
+    <title>Java try-catch and AssertionError - Elvis Wang</title>
     
-    <header class="post__header">
-        <h1 class="post__title">
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="wangbo’s home &amp; blog"/>
+
+    <meta property="og:title" content="
+    wangbo’s home &amp; blog -&nbsp;Java try-catch and AssertionError" />
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-04-12-java-catch-all-and-assertionerror&#x2F;"/>
+    <meta property="og:description" content="&lt;p&gt;Java 的异常处理机制是 try-catch-finally 。被调用的方法或代码块可以抛出异常（Throwable，含 Exception 和 Error）；被调用的方法或代码块被包含在 try 块中；catch 块中会根据具体的异常类型来实现相关的逻辑；finally 块中实现无论是否发生异常都需要的逻辑。&lt;&#x2F;p&gt;
+&lt;p&gt;异常处理机制很简单…"/>
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+<link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
+    <body>
+        <div class="container full">
+<header class="header">
+    <div class="header__inner">
+        <div class="header__logo">
+            <a href="&#x2F;">
+    <div class="logo">
+        WB Prime
+    </div>
+</a>
+        </div>
+        <div class="menu-trigger">menu</div>
+    </div>
+    
+    <nav class="menu">
+        <ul class="menu__inner menu__inner--desktop">
+            
+            
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+                    </li>
+                
+            </ul>
+
+        <ul class="menu__inner menu__inner--mobile">
+            
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+        </li>
+        </ul>
+    </nav>
+
+    </header>
+<div class="content"><div class="post">
+        <h1 class="post-title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-04-12-java-catch-all-and-assertionerror&#x2F;">Java try-catch and AssertionError</a>
         </h1>
-        <div class="post__meta">
-            <span class="post__time">2019-04-12</span>
-            
-        </div>
-    </header>
+        
+    <div class="post-meta">
+        <span class="post-date">2019.04.12
+                </span>
 
-    <div class="post-content">
-      <p>Java 的异常处理机制是 try-catch-finally 。被调用的方法或代码块可以抛出异常（Throwable，含 Exception 和 Error）；被调用的方法或代码块被包含在 try 块中；catch 块中会根据具体的异常类型来实现相关的逻辑；finally 块中实现无论是否发生异常都需要的逻辑。</p>
+        <span class="post-author"></span>
+
+        
+
+    
+    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;practise&#x2F;">Practise</a>} 
+
+            
+    ::
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;java&#x2F;">Java</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;try-catch&#x2F;">try-catch</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;assertionerror&#x2F;">AssertionError</a>
+        
+    
+            
+        
+    </div>
+
+
+
+        
+
+        <div class="post-content">
+            <p>Java 的异常处理机制是 try-catch-finally 。被调用的方法或代码块可以抛出异常（Throwable，含 Exception 和 Error）；被调用的方法或代码块被包含在 try 块中；catch 块中会根据具体的异常类型来实现相关的逻辑；finally 块中实现无论是否发生异常都需要的逻辑。</p>
 <p>异常处理机制很简单；但是怎么设计异常处理方式是有一些坑的。</p>
 <p>有一个线上服务在更新逻辑上线时，触发了一个错误处理异常的 BUG，现简单记录之。</p>
 <p><a name="continue-reading"></a></p>
@@ -143,34 +106,34 @@
 背景</h1>
 <p>服务中有一段逻辑：从 DB 中通过 ID 查询任务的描述；任务描述是一个 JSON 格式的字符串，通过一个 type 字段来决定对应的任务实体类型；任务描述根据任务类型被反序列化为不同的任务实体。</p>
 <p>相关的逻辑伪代码如下：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">final Long taskId = 10000L;
-</span><span style="color:#c0c5ce;">final Integer taskType = findTaskTypeById(taskId);
-</span><span style="color:#c0c5ce;">final String taskStr = findTaskStringById(taskId);
-</span><span style="color:#c0c5ce;">switch (taskType) {
-</span><span style="color:#c0c5ce;">case 0:
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">TaskV1 taskV1 = parseTaskAsV1(taskStr);
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">// More logic on task v1
-</span><span style="color:#c0c5ce;">default:
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">throw new AssertionError(&quot;Unexpected task type &quot; + taskType);
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">final Long taskId = 10000L;
+</span><span style="color:#dcdcdc;">final Integer taskType = findTaskTypeById(taskId);
+</span><span style="color:#dcdcdc;">final String taskStr = findTaskStringById(taskId);
+</span><span style="color:#dcdcdc;">switch (taskType) {
+</span><span style="color:#dcdcdc;">case 0:
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">TaskV1 taskV1 = parseTaskAsV1(taskStr);
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">// More logic on task v1
+</span><span style="color:#dcdcdc;">default:
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">throw new AssertionError(&quot;Unexpected task type &quot; + taskType);
+</span><span style="color:#dcdcdc;">}
 </span></pre>
 <p>当时考虑到任务的类型是静态的：在运行时，对于某个任务类型，服务或者支持或者不支持；如果添加新的任务类型支持，需要开发对应的处理逻辑并重新发布上线；如果在反序列化时遇到了不支持的任务类型，则说明应该是不可恢复的错误。</p>
 <p>新的逻辑如下：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">final Long taskId = 10000L;
-</span><span style="color:#c0c5ce;">final Integer taskType = findTaskTypeById(taskId);
-</span><span style="color:#c0c5ce;">final String taskStr = findTaskStringById(taskId);
-</span><span style="color:#c0c5ce;">switch (taskType) {
-</span><span style="color:#c0c5ce;">case 0:
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">TaskV1 taskV1 = parseTaskAsV1(taskStr);
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">// More logic on task v1
-</span><span style="color:#c0c5ce;">case 1:
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">TaskV1 taskV2 = parseTaskAsV2(taskStr);
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">// More logic on task v2
-</span><span style="color:#c0c5ce;">default:
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">throw new AssertionError(&quot;Unexpected task type &quot; + taskType);
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">final Long taskId = 10000L;
+</span><span style="color:#dcdcdc;">final Integer taskType = findTaskTypeById(taskId);
+</span><span style="color:#dcdcdc;">final String taskStr = findTaskStringById(taskId);
+</span><span style="color:#dcdcdc;">switch (taskType) {
+</span><span style="color:#dcdcdc;">case 0:
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">TaskV1 taskV1 = parseTaskAsV1(taskStr);
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">// More logic on task v1
+</span><span style="color:#dcdcdc;">case 1:
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">TaskV1 taskV2 = parseTaskAsV2(taskStr);
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">// More logic on task v2
+</span><span style="color:#dcdcdc;">default:
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">throw new AssertionError(&quot;Unexpected task type &quot; + taskType);
+</span><span style="color:#dcdcdc;">}
 </span></pre>
 <p>对于不支持的任务类型，处理的方式是直接抛出 <code>java.lang.AssertionError</code> 。</p>
 <h1 id="bug"><a class="zola-anchor" href="#bug" aria-label="Anchor link for: bug">🔗</a>
@@ -193,14 +156,14 @@ AssertionError</h2>
 <h2 id="enum-xiang-guan"><a class="zola-anchor" href="#enum-xiang-guan" aria-label="Anchor link for: enum-xiang-guan">🔗</a>
 enum 相关</h2>
 <p>对于任务类型类似的场景（可简化为一个 switch-case-default 结构）：根据一个枚举类型（或整型）来分别组织不同的代码逻辑，都需要处理不能识别的类型的逻辑。</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">switch (type) {
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">case 0: /* do somthing here */ break;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">case 1: /* do somthing here */ break;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">/* More branches here */
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">default:
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">/* unknown type */ break;
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">switch (type) {
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">case 0: /* do somthing here */ break;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">case 1: /* do somthing here */ break;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">/* More branches here */
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">default:
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">/* unknown type */ break;
+</span><span style="color:#dcdcdc;">}
 </span></pre>
 <p>如何处理不能识别的类型？</p>
 <ul>
@@ -211,75 +174,43 @@ enum 相关</h2>
 <h2 id="uncaughtexceptionhandler"><a class="zola-anchor" href="#uncaughtexceptionhandler" aria-label="Anchor link for: uncaughtexceptionhandler">🔗</a>
 UncaughtExceptionHandler</h2>
 <p>对于没有捕获的异常，JVM 会调用线程的 uncaughtExceptionHandler 进行处理；如果需要对线程的未捕获的异常做一个最终的处理，需要设置线程的 uncaughtExceptionHandler 或静态的 defaultUncaughtExceptionHandler 。</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">public class Thread {
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">public interface UncaughtExceptionHandler {
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">void uncaughtException(Thread t, Throwable e);
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">}
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">public static void setDefaultUncaughtExceptionHandler(UncaughtExceptionHandler eh) {
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">defaultUncaughtExceptionHandler = eh;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">}
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">public void setUncaughtExceptionHandler(UncaughtExceptionHandler eh) {
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">uncaughtExceptionHandler = eh;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">}
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">public class Thread {
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">public interface UncaughtExceptionHandler {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">void uncaughtException(Thread t, Throwable e);
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">public static void setDefaultUncaughtExceptionHandler(UncaughtExceptionHandler eh) {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">defaultUncaughtExceptionHandler = eh;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">public void setUncaughtExceptionHandler(UncaughtExceptionHandler eh) {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">uncaughtExceptionHandler = eh;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">}
 </span></pre><h2 id="result-t-e-in-rust"><a class="zola-anchor" href="#result-t-e-in-rust" aria-label="Anchor link for: result-t-e-in-rust">🔗</a>
 Result<T, E> in Rust</h2>
 <p>上述的 Error &amp; Exception &amp; RuntimeException 在使用时的区别大部分是语义上的，IDE 和编译器不能帮助开发者严格保持一定的模式。</p>
 <p>作为对比，<a href="https://www.rust-lang.org">Rust</a> 里的错误处理机制是基于 <code>Result&lt;T, E&gt;</code> 的。<code>Result&lt;T, E&gt;</code> 是作为方法的返回值存在的，方法被调用时必须要处理错误。Rust 中不存在由于错误没有捕获导致的 BUG （类比 Java 中未捕获 Error 或 RuntimeException）。</p>
 
-    </div>
-
-    
-    
-
-    <div class="post-footer">
-        
-            
-                <div class="post-tags">
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;java&#x2F;">#Java</a>
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;try-catch&#x2F;">#try-catch</a>
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;assertionerror&#x2F;">#AssertionError</a>
-                    
-                </div>
-            
-            
-                <div class="post-nav">
-                    
-                        <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-03-31-a-bug-introduced-by-optionallong-abuse&#x2F;">‹ 一次由于滥用 OptionalLong.orElse 引发的 BUG</a>
-                    
-                    
-                        <a class="next" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-04-19-communication-bridge-between-webrtc-and-wechat-rtmp&#x2F;">WebRTC 与微信小程序的音视频互通 ›</a>
-                    
-                    
-                    
-                </div>
-            
-
-        
-
-    </div>
-
-    
-    
-</article>
-
-
-                </div>
-            </main>
-
-            
-            
         </div>
+        
+    
+</div></div>
+            
+    <div class="pagination">
+        <div class="pagination__buttons">
+            </div>
+    </div>
+<footer class="footer">
+                    <div class="footer__inner"><div class="copyright">
+            <span>© 2019 <a href="https://github.com/ejmg/zerm">zerm</a> :: Powered by <a href="https://www.getzola.org/">Zola</a></span>
+            <span>:: Theme made by <a href="https://github.com/ejmg">ejmg</a></span>
+        </div>
+    <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;assets&#x2F;js&#x2F;main.js"></script>
+</div>
+                    
 
-      
-          <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
-      
+                </footer></div>
     </body>
-
 </html>

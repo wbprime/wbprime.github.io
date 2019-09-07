@@ -1,264 +1,222 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta http-equiv="content-type" content="text/html; charset=utf-8">
-
-      <!-- Enable responsiveness on mobile devices-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-      <title>wangbo’s home &amp; blog - Thrift Note</title>
-
-      
-
-      
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
-          
-      
-
-      
-          <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
-          
-      
-
-      
-      
-    </head>
-
-    <body>
-        <div class="container">
-
-            <div id="mobile-navbar" class="mobile-navbar">
-              <div class="mobile-header-logo">
-                <a href="/" class="logo">WB Prime</a>
-              </div>
-              <div class="mobile-navbar-icon icon-out">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            </div>
-
-            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
-              <ul class="mobile-menu-list">
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im">
-                            Home
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;categories">
-                            Categories
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;tags">
-                            Tags
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;about">
-                            About
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                            Github
-                        </a>
-                    </li>
-                
-              </ul>
-            </nav>
-
-            <header id="header">
-                <div class="logo"><a href="https:&#x2F;&#x2F;www.wangbo.im">WB Prime</a></div>
-                <nav class="menu">
-                    <ul>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im">
-                                    Home
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;categories">
-                                    Categories
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;tags">
-                                    Tags
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;about">
-                                    About
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                                    Github
-                                </a>
-                            </li>
-                        
-                    </ul>
-                </nav>
-            </header>
-
-            <main>
-                <div class="content" id="mobile-panel">
-                    
-
-
-
-<article class="post">
+    <title>Thrift Note - Elvis Wang</title>
     
-    <header class="post__header">
-        <h1 class="post__title">
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="wangbo’s home &amp; blog"/>
+
+    <meta property="og:title" content="
+    wangbo’s home &amp; blog -&nbsp;Thrift Note" />
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2018-02-06-thrift-note&#x2F;"/>
+    <meta property="og:description" content="Note of thrift first guide"/>
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+<link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
+    <body>
+        <div class="container full">
+<header class="header">
+    <div class="header__inner">
+        <div class="header__logo">
+            <a href="&#x2F;">
+    <div class="logo">
+        WB Prime
+    </div>
+</a>
+        </div>
+        <div class="menu-trigger">menu</div>
+    </div>
+    
+    <nav class="menu">
+        <ul class="menu__inner menu__inner--desktop">
+            
+            
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+                    </li>
+                
+            </ul>
+
+        <ul class="menu__inner menu__inner--mobile">
+            
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+        </li>
+        </ul>
+    </nav>
+
+    </header>
+<div class="content"><div class="post">
+        <h1 class="post-title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2018-02-06-thrift-note&#x2F;">Thrift Note</a>
         </h1>
-        <div class="post__meta">
-            <span class="post__time">2018-02-06</span>
-            
-        </div>
-    </header>
+        
+    <div class="post-meta">
+        <span class="post-date">2018.02.06
+                </span>
 
-    <div class="post-content">
-      <p>笔记，来自网络，来源不可考。</p>
+        <span class="post-author"></span>
+
+        
+
+    
+    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;notes&#x2F;">Notes</a>} 
+
+            
+    ::
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;thrift&#x2F;">thrift</a>
+        
+    
+            
+        
+    </div>
+
+
+
+        
+
+        <div class="post-content">
+            <p>笔记，来自网络，来源不可考。</p>
 <h1 id="yi-ge-jian-dan-de-thrift-shi-li"><a class="zola-anchor" href="#yi-ge-jian-dan-de-thrift-shi-li" aria-label="Anchor link for: yi-ge-jian-dan-de-thrift-shi-li">🔗</a>
 一个简单的 Thrift 实例</h1>
 <h2 id="thrift-yuan-wen-jian"><a class="zola-anchor" href="#thrift-yuan-wen-jian" aria-label="Anchor link for: thrift-yuan-wen-jian">🔗</a>
 thrift 源文件</h2>
 <p>清单 1. Hello.thrift</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">namespace java service.demo 
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">service Hello{ 
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">string helloString(1:string para) 
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">i32 helloInt(1:i32 para) 
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">bool helloBoolean(1:bool para) 
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">void helloVoid() 
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">string helloNull() 
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">namespace java service.demo 
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">service Hello{ 
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">string helloString(1:string para) 
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">i32 helloInt(1:i32 para) 
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">bool helloBoolean(1:bool para) 
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">void helloVoid() 
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">string helloNull() 
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">}
 </span></pre><h2 id="helloserivce-shi-xian-dai-ma"><a class="zola-anchor" href="#helloserivce-shi-xian-dai-ma" aria-label="Anchor link for: helloserivce-shi-xian-dai-ma">🔗</a>
 HelloSerivce 实现代码</h2>
 <p>清单 2. HelloServiceImpl.java</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">package service.demo; 
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">import org.apache.thrift.TException; 
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">public class HelloServiceImpl implements Hello.Iface { 
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">@Override 
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">public boolean helloBoolean(boolean para) throws TException { 
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">return para; 
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">} 
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">@Override 
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">public int helloInt(int para) throws TException { 
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">try { 
-</span><span style="color:#c0c5ce;">            </span><span style="color:#c0c5ce;">Thread.sleep(20000); 
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">} catch (InterruptedException e) { 
-</span><span style="color:#c0c5ce;">            </span><span style="color:#c0c5ce;">e.printStackTrace(); 
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">} 
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">return para; 
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">} 
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">@Override 
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">public String helloNull() throws TException { 
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">return null; 
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">} 
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">@Override 
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">public String helloString(String para) throws TException { 
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">return para; 
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">} 
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">@Override 
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">public void helloVoid() throws TException { 
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">System.out.println(&quot;Hello World&quot;); 
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">} 
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">package service.demo; 
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">import org.apache.thrift.TException; 
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">public class HelloServiceImpl implements Hello.Iface { 
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Override 
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">public boolean helloBoolean(boolean para) throws TException { 
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">return para; 
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">} 
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Override 
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">public int helloInt(int para) throws TException { 
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">try { 
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">Thread.sleep(20000); 
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">} catch (InterruptedException e) { 
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">e.printStackTrace(); 
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">} 
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">return para; 
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">} 
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Override 
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">public String helloNull() throws TException { 
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">return null; 
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">} 
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Override 
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">public String helloString(String para) throws TException { 
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">return para; 
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">} 
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Override 
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">public void helloVoid() throws TException { 
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">System.out.println(&quot;Hello World&quot;); 
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">} 
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">}
 </span></pre><h2 id="fu-wu-qi-duan-dai-ma"><a class="zola-anchor" href="#fu-wu-qi-duan-dai-ma" aria-label="Anchor link for: fu-wu-qi-duan-dai-ma">🔗</a>
 服务器端代码</h2>
 <p>清单 3. HelloServiceServer.java</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">package service.server; 
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">import org.apache.thrift.TProcessor; 
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">import org.apache.thrift.protocol.TBinaryProtocol; 
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">import org.apache.thrift.protocol.TBinaryProtocol.Factory; 
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">import org.apache.thrift.server.TServer; 
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">import org.apache.thrift.server.TThreadPoolServer; 
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">import org.apache.thrift.transport.TServerSocket; 
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">import org.apache.thrift.transport.TTransportException; 
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">import service.demo.Hello; 
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">import service.demo.HelloServiceImpl; 
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">public class HelloServiceServer { 
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">/** 
-</span><span style="color:#c0c5ce;">     </span><span style="color:#c0c5ce;">* 启动 Thrift 服务器
-</span><span style="color:#c0c5ce;">     </span><span style="color:#c0c5ce;">* @param args 
-</span><span style="color:#c0c5ce;">     </span><span style="color:#c0c5ce;">*/ 
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">public static void main(String[] args) { 
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">try { 
-</span><span style="color:#c0c5ce;">            </span><span style="color:#c0c5ce;">// 设置服务端口为 7911 
-</span><span style="color:#c0c5ce;">            </span><span style="color:#c0c5ce;">TServerSocket serverTransport = new TServerSocket(7911); 
-</span><span style="color:#c0c5ce;">            </span><span style="color:#c0c5ce;">// 设置协议工厂为 TBinaryProtocol.Factory 
-</span><span style="color:#c0c5ce;">            </span><span style="color:#c0c5ce;">Factory proFactory = new TBinaryProtocol.Factory(); 
-</span><span style="color:#c0c5ce;">            </span><span style="color:#c0c5ce;">// 关联处理器与 Hello 服务的实现
-</span><span style="color:#c0c5ce;">            </span><span style="color:#c0c5ce;">TProcessor processor = new Hello.Processor(new HelloServiceImpl()); 
-</span><span style="color:#c0c5ce;">            </span><span style="color:#c0c5ce;">TServer server = new TThreadPoolServer(processor, serverTransport, 
-</span><span style="color:#c0c5ce;">                    </span><span style="color:#c0c5ce;">proFactory); 
-</span><span style="color:#c0c5ce;">            </span><span style="color:#c0c5ce;">System.out.println(&quot;Start server on port 7911...&quot;); 
-</span><span style="color:#c0c5ce;">            </span><span style="color:#c0c5ce;">server.serve(); 
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">} catch (TTransportException e) { 
-</span><span style="color:#c0c5ce;">            </span><span style="color:#c0c5ce;">e.printStackTrace(); 
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">} 
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">} 
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">package service.server; 
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">import org.apache.thrift.TProcessor; 
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">import org.apache.thrift.protocol.TBinaryProtocol; 
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">import org.apache.thrift.protocol.TBinaryProtocol.Factory; 
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">import org.apache.thrift.server.TServer; 
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">import org.apache.thrift.server.TThreadPoolServer; 
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">import org.apache.thrift.transport.TServerSocket; 
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">import org.apache.thrift.transport.TTransportException; 
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">import service.demo.Hello; 
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">import service.demo.HelloServiceImpl; 
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">public class HelloServiceServer { 
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">/** 
+</span><span style="color:#dcdcdc;">     </span><span style="color:#dcdcdc;">* 启动 Thrift 服务器
+</span><span style="color:#dcdcdc;">     </span><span style="color:#dcdcdc;">* @param args 
+</span><span style="color:#dcdcdc;">     </span><span style="color:#dcdcdc;">*/ 
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">public static void main(String[] args) { 
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">try { 
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">// 设置服务端口为 7911 
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">TServerSocket serverTransport = new TServerSocket(7911); 
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">// 设置协议工厂为 TBinaryProtocol.Factory 
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">Factory proFactory = new TBinaryProtocol.Factory(); 
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">// 关联处理器与 Hello 服务的实现
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">TProcessor processor = new Hello.Processor(new HelloServiceImpl()); 
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">TServer server = new TThreadPoolServer(processor, serverTransport, 
+</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">proFactory); 
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">System.out.println(&quot;Start server on port 7911...&quot;); 
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">server.serve(); 
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">} catch (TTransportException e) { 
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">e.printStackTrace(); 
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">} 
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">} 
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">}
 </span></pre>
 <p>参见:</p>
 <p><img src="https://www.wangbo.im/posts/2018-02-06-thrift-note/uml_thrift_server_side_sequence.png" alt="thrift client" /> 。</p>
 <h2 id="ke-hu-duan-dai-ma"><a class="zola-anchor" href="#ke-hu-duan-dai-ma" aria-label="Anchor link for: ke-hu-duan-dai-ma">🔗</a>
 客户端代码</h2>
 <p>清单 4. HelloServiceClient.java</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">package service.client; 
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">import org.apache.thrift.TException; 
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">import org.apache.thrift.protocol.TBinaryProtocol; 
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">import org.apache.thrift.protocol.TProtocol; 
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">import org.apache.thrift.transport.TSocket; 
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">import org.apache.thrift.transport.TTransport; 
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">import org.apache.thrift.transport.TTransportException; 
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">import service.demo.Hello; 
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">public class HelloServiceClient { 
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">/** 
-</span><span style="color:#c0c5ce;">     </span><span style="color:#c0c5ce;">* 调用 Hello 服务
-</span><span style="color:#c0c5ce;">     </span><span style="color:#c0c5ce;">* @param args 
-</span><span style="color:#c0c5ce;">     </span><span style="color:#c0c5ce;">*/ 
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">public static void main(String[] args) { 
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">try { 
-</span><span style="color:#c0c5ce;">            </span><span style="color:#c0c5ce;">// 设置调用的服务地址为本地，端口为 7911 
-</span><span style="color:#c0c5ce;">            </span><span style="color:#c0c5ce;">TTransport transport = new TSocket(&quot;localhost&quot;, 7911); 
-</span><span style="color:#c0c5ce;">            </span><span style="color:#c0c5ce;">transport.open(); 
-</span><span style="color:#c0c5ce;">            </span><span style="color:#c0c5ce;">// 设置传输协议为 TBinaryProtocol 
-</span><span style="color:#c0c5ce;">            </span><span style="color:#c0c5ce;">TProtocol protocol = new TBinaryProtocol(transport); 
-</span><span style="color:#c0c5ce;">            </span><span style="color:#c0c5ce;">Hello.Client client = new Hello.Client(protocol); 
-</span><span style="color:#c0c5ce;">            </span><span style="color:#c0c5ce;">// 调用服务的 helloVoid 方法
-</span><span style="color:#c0c5ce;">            </span><span style="color:#c0c5ce;">client.helloVoid(); 
-</span><span style="color:#c0c5ce;">            </span><span style="color:#c0c5ce;">transport.close(); 
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">} catch (TTransportException e) { 
-</span><span style="color:#c0c5ce;">            </span><span style="color:#c0c5ce;">e.printStackTrace(); 
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">} catch (TException e) { 
-</span><span style="color:#c0c5ce;">            </span><span style="color:#c0c5ce;">e.printStackTrace(); 
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">} 
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">} 
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">package service.client; 
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">import org.apache.thrift.TException; 
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">import org.apache.thrift.protocol.TBinaryProtocol; 
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">import org.apache.thrift.protocol.TProtocol; 
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">import org.apache.thrift.transport.TSocket; 
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">import org.apache.thrift.transport.TTransport; 
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">import org.apache.thrift.transport.TTransportException; 
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">import service.demo.Hello; 
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">public class HelloServiceClient { 
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">/** 
+</span><span style="color:#dcdcdc;">     </span><span style="color:#dcdcdc;">* 调用 Hello 服务
+</span><span style="color:#dcdcdc;">     </span><span style="color:#dcdcdc;">* @param args 
+</span><span style="color:#dcdcdc;">     </span><span style="color:#dcdcdc;">*/ 
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">public static void main(String[] args) { 
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">try { 
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">// 设置调用的服务地址为本地，端口为 7911 
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">TTransport transport = new TSocket(&quot;localhost&quot;, 7911); 
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">transport.open(); 
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">// 设置传输协议为 TBinaryProtocol 
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">TProtocol protocol = new TBinaryProtocol(transport); 
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">Hello.Client client = new Hello.Client(protocol); 
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">// 调用服务的 helloVoid 方法
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">client.helloVoid(); 
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">transport.close(); 
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">} catch (TTransportException e) { 
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">e.printStackTrace(); 
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">} catch (TException e) { 
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">e.printStackTrace(); 
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">} 
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">} 
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">}
 </span></pre>
 <p>参见：</p>
 <p><img src="https://www.wangbo.im/posts/2018-02-06-thrift-note/uml_thrift_client_side_sequence.png" alt="thrift server" /> 。</p>
@@ -310,22 +268,22 @@ TBinaryProtocol 二进制编码格式进行数据传输</h2>
 TCompactProtocol 高效率的、密集的二进制编码格式进行数据传输</h2>
 <p>构建 TCompactProtocol 协议的服务器和客户端只需替换清单 3 和清单 4 中 TBinaryProtocol 协议部分即可，替换成如下代码：</p>
 <p>清单 5. 使用 TCompactProtocol 协议构建的 HelloServiceServer.java</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">TCompactProtocol.Factory proFactory = new TCompactProtocol.Factory();
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">TCompactProtocol.Factory proFactory = new TCompactProtocol.Factory();
 </span></pre>
 <p>清单 6. 使用 TCompactProtocol 协议的 HelloServiceClient.java</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">TCompactProtocol protocol = new TCompactProtocol(transport);
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">TCompactProtocol protocol = new TCompactProtocol(transport);
 </span></pre><h2 id="tjsonprotocol-shi-yong-json-de-shu-ju-bian-ma-xie-yi-jin-xing-shu-ju-chuan-shu"><a class="zola-anchor" href="#tjsonprotocol-shi-yong-json-de-shu-ju-bian-ma-xie-yi-jin-xing-shu-ju-chuan-shu" aria-label="Anchor link for: tjsonprotocol-shi-yong-json-de-shu-ju-bian-ma-xie-yi-jin-xing-shu-ju-chuan-shu">🔗</a>
 TJSONProtocol 使用 JSON 的数据编码协议进行数据传输</h2>
 <p>构建 TJSONProtocol 协议的服务器和客户端只需替换清单 3 和清单 4 中 TBinaryProtocol 协议部分即可，替换成如下代码：</p>
 <p>清单 7. 使用 TJSONProtocol 协议构建的 HelloServiceServer.java</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">TJSONProtocol.Factory proFactory = new TJSONProtocol.Factory();
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">TJSONProtocol.Factory proFactory = new TJSONProtocol.Factory();
 </span></pre>
 <p>清单 8. 使用 TJSONProtocol 协议的 HelloServiceClient.java</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">TJSONProtocol protocol = new TJSONProtocol(transport);
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">TJSONProtocol protocol = new TJSONProtocol(transport);
 </span></pre><h2 id="tsimplejsonprotocol-zhi-ti-gong-json-zhi-xie-de-xie-yi-gua-yong-yu-tong-guo-jiao-ben-yu-yan-jie-xi"><a class="zola-anchor" href="#tsimplejsonprotocol-zhi-ti-gong-json-zhi-xie-de-xie-yi-gua-yong-yu-tong-guo-jiao-ben-yu-yan-jie-xi" aria-label="Anchor link for: tsimplejsonprotocol-zhi-ti-gong-json-zhi-xie-de-xie-yi-gua-yong-yu-tong-guo-jiao-ben-yu-yan-jie-xi">🔗</a>
 TSimpleJSONProtocol 只提供 JSON 只写的协议，适用于通过脚本语言解析</h2>
 <h1 id="chuan-shu-ceng"><a class="zola-anchor" href="#chuan-shu-ceng" aria-label="Anchor link for: chuan-shu-ceng">🔗</a>
@@ -337,17 +295,17 @@ TSocket 使用阻塞式 I/O 进行传输，是最常见的模式</h2>
 TFramedTransport 使用非阻塞方式，按块的大小进行传输，类似于 Java 中的 NIO</h2>
 <p>若使用 TFramedTransport 传输层，其服务器必须修改为非阻塞的服务类型，客户端只需替换清单 4 中 TTransport 部分，代码如下，清单 9 中 TNonblockingServerTransport 类是构建非阻塞 socket 的抽象类，TNonblockingServerSocket 类继承 TNonblockingServerTransport</p>
 <p>清单 9. 使用 TFramedTransport 传输层构建的 HelloServiceServer.java</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">TNonblockingServerTransport serverTransport; 
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">serverTransport = new TNonblockingServerSocket(10005); 
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">Hello.Processor processor = new Hello.Processor(new HelloServiceImpl()); 
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">TServer server = new TNonblockingServer(processor, serverTransport); 
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">System.out.println(&quot;Start server on port 10005 ...&quot;); 
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">server.serve();
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">TNonblockingServerTransport serverTransport; 
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">serverTransport = new TNonblockingServerSocket(10005); 
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">Hello.Processor processor = new Hello.Processor(new HelloServiceImpl()); 
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">TServer server = new TNonblockingServer(processor, serverTransport); 
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">System.out.println(&quot;Start server on port 10005 ...&quot;); 
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">server.serve();
 </span></pre>
 <p>清单 10. 使用 TFramedTransport 传输层的 HelloServiceClient.java</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">TTransport transport = new TFramedTransport(new TSocket(&quot;localhost&quot;, 10005));
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">TTransport transport = new TFramedTransport(new TSocket(&quot;localhost&quot;, 10005));
 </span></pre><h2 id="tnonblockingtransport-shi-yong-fei-zu-sai-fang-shi-yong-yu-gou-jian-yi-bu-ke-hu-duan"><a class="zola-anchor" href="#tnonblockingtransport-shi-yong-fei-zu-sai-fang-shi-yong-yu-gou-jian-yi-bu-ke-hu-duan" aria-label="Anchor link for: tnonblockingtransport-shi-yong-fei-zu-sai-fang-shi-yong-yu-gou-jian-yi-bu-ke-hu-duan">🔗</a>
 TNonblockingTransport 使用非阻塞方式，用于构建异步客户端</h2>
 <p>使用方法请参考 Thrift 异步客户端构建</p>
@@ -356,12 +314,12 @@ TNonblockingTransport 使用非阻塞方式，用于构建异步客户端</h2>
 <h2 id="tsimpleserver-dan-xian-cheng-fu-wu-qi-duan-shi-yong-biao-zhun-de-zu-sai-shi-i-o"><a class="zola-anchor" href="#tsimpleserver-dan-xian-cheng-fu-wu-qi-duan-shi-yong-biao-zhun-de-zu-sai-shi-i-o" aria-label="Anchor link for: tsimpleserver-dan-xian-cheng-fu-wu-qi-duan-shi-yong-biao-zhun-de-zu-sai-shi-i-o">🔗</a>
 TSimpleServer 单线程服务器端使用标准的阻塞式 I/O</h2>
 <p>清单 11. 使用 TSimpleServer 服务端构建的 HelloServiceServer.java</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">TServerSocket serverTransport = new TServerSocket(7911); 
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">TProcessor processor = new Hello.Processor(new HelloServiceImpl()); 
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">TServer server = new TSimpleServer(processor, serverTransport); 
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">System.out.println(&quot;Start server on port 7911...&quot;); 
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">server.serve();
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">TServerSocket serverTransport = new TServerSocket(7911); 
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">TProcessor processor = new Hello.Processor(new HelloServiceImpl()); 
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">TServer server = new TSimpleServer(processor, serverTransport); 
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">System.out.println(&quot;Start server on port 7911...&quot;); 
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">server.serve();
 </span></pre>
 <p>客户端的构建方式可参考清单 4。</p>
 <h2 id="tthreadpoolserver-duo-xian-cheng-fu-wu-qi-duan-shi-yong-biao-zhun-de-zu-sai-shi-i-o"><a class="zola-anchor" href="#tthreadpoolserver-duo-xian-cheng-fu-wu-qi-duan-shi-yong-biao-zhun-de-zu-sai-shi-i-o" aria-label="Anchor link for: tthreadpoolserver-duo-xian-cheng-fu-wu-qi-duan-shi-yong-biao-zhun-de-zu-sai-shi-i-o">🔗</a>
@@ -371,52 +329,24 @@ TThreadPoolServer 多线程服务器端使用标准的阻塞式 I/O</h2>
 TNonblockingServer 多线程服务器端使用非阻塞式 I/O</h2>
 <p>使用方法请参考 Thrift 异步客户端构建</p>
 
-    </div>
-
-    
-    
-
-    <div class="post-footer">
-        
-            
-                <div class="post-tags">
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;thrift&#x2F;">#thrift</a>
-                    
-                </div>
-            
-            
-                <div class="post-nav">
-                    
-                        <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2018-02-06-ip-tcp-udp-frames&#x2F;">‹ IP TCP UDP Frame Header Structure</a>
-                    
-                    
-                        <a class="next" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;tomcat-note&#x2F;">Tomcat Note ›</a>
-                    
-                    
-                    
-                </div>
-            
-
-        
-
-    </div>
-
-    
-    
-</article>
-
-
-                </div>
-            </main>
-
-            
-            
         </div>
+        
+    
+</div></div>
+            
+    <div class="pagination">
+        <div class="pagination__buttons">
+            </div>
+    </div>
+<footer class="footer">
+                    <div class="footer__inner"><div class="copyright">
+            <span>© 2019 <a href="https://github.com/ejmg/zerm">zerm</a> :: Powered by <a href="https://www.getzola.org/">Zola</a></span>
+            <span>:: Theme made by <a href="https://github.com/ejmg">ejmg</a></span>
+        </div>
+    <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;assets&#x2F;js&#x2F;main.js"></script>
+</div>
+                    
 
-      
-          <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
-      
+                </footer></div>
     </body>
-
 </html>

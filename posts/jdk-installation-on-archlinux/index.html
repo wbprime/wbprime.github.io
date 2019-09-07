@@ -1,188 +1,150 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta http-equiv="content-type" content="text/html; charset=utf-8">
-
-      <!-- Enable responsiveness on mobile devices-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-      <title>wangbo’s home &amp; blog - JDK installation on Archlinux</title>
-
-      
-
-      
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
-          
-      
-
-      
-          <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
-          
-      
-
-      
-      
-    </head>
-
-    <body>
-        <div class="container">
-
-            <div id="mobile-navbar" class="mobile-navbar">
-              <div class="mobile-header-logo">
-                <a href="/" class="logo">WB Prime</a>
-              </div>
-              <div class="mobile-navbar-icon icon-out">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            </div>
-
-            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
-              <ul class="mobile-menu-list">
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im">
-                            Home
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;categories">
-                            Categories
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;tags">
-                            Tags
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;about">
-                            About
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                            Github
-                        </a>
-                    </li>
-                
-              </ul>
-            </nav>
-
-            <header id="header">
-                <div class="logo"><a href="https:&#x2F;&#x2F;www.wangbo.im">WB Prime</a></div>
-                <nav class="menu">
-                    <ul>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im">
-                                    Home
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;categories">
-                                    Categories
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;tags">
-                                    Tags
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;about">
-                                    About
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                                    Github
-                                </a>
-                            </li>
-                        
-                    </ul>
-                </nav>
-            </header>
-
-            <main>
-                <div class="content" id="mobile-panel">
-                    
-
-
-
-<article class="post">
+    <title>JDK installation on Archlinux - Elvis Wang</title>
     
-    <header class="post__header">
-        <h1 class="post__title">
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="wangbo’s home &amp; blog"/>
+
+    <meta property="og:title" content="
+    wangbo’s home &amp; blog -&nbsp;JDK installation on Archlinux" />
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;jdk-installation-on-archlinux&#x2F;"/>
+    <meta property="og:description" content="Step by step guide to install a JDK 7&#x2F;8 on Archlinux."/>
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+<link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
+    <body>
+        <div class="container full">
+<header class="header">
+    <div class="header__inner">
+        <div class="header__logo">
+            <a href="&#x2F;">
+    <div class="logo">
+        WB Prime
+    </div>
+</a>
+        </div>
+        <div class="menu-trigger">menu</div>
+    </div>
+    
+    <nav class="menu">
+        <ul class="menu__inner menu__inner--desktop">
+            
+            
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+                    </li>
+                
+            </ul>
+
+        <ul class="menu__inner menu__inner--mobile">
+            
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+        </li>
+        </ul>
+    </nav>
+
+    </header>
+<div class="content"><div class="post">
+        <h1 class="post-title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;jdk-installation-on-archlinux&#x2F;">JDK installation on Archlinux</a>
         </h1>
-        <div class="post__meta">
-            <span class="post__time">2015-05-25</span>
-            
-        </div>
-    </header>
+        
+    <div class="post-meta">
+        <span class="post-date">2015.05.25
+                </span>
 
-    <div class="post-content">
-      <p>Basically, <a href="https://www.archlinux.org">Archlinux</a> provide OpenJDK 7/8 in <a href="https://wiki.archlinux.org/index.php/Java">official repository</a>.  Java JDK environment will be setup in quite a little minutes follwing Archliux official guide.</p>
+        <span class="post-author"></span>
+
+        
+
+    
+    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;practise&#x2F;">Practise</a>} 
+
+            
+    ::
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;java&#x2F;">java</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;jdk&#x2F;">jdk</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;archlinux&#x2F;">archlinux</a>
+        
+    
+            
+        
+    </div>
+
+
+
+        
+
+        <div class="post-content">
+            <p>Basically, <a href="https://www.archlinux.org">Archlinux</a> provide OpenJDK 7/8 in <a href="https://wiki.archlinux.org/index.php/Java">official repository</a>.  Java JDK environment will be setup in quite a little minutes follwing Archliux official guide.</p>
 <p>However, some java programmes does not work well on OpenJDK, and achives better performance on Sun/Oracle JDK.  For example, <a href="https://www.archlinux.org/packages/community/x86_64/intellij-idea-community-edition/">Intellij Idea</a> in Archlinux official repository produces warning message blaming OpenJDK.  So Sun/Oracle JDK maybe welcomed by some users who wanted a clean installation of Intellij Idea.</p>
 <ol>
 <li>
 <p>Choose and download the JDK version you want to install.</p>
 <p>Offical supported <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">JDK</a> version is 1.7 and 1.8.  This post covers both of them.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">JDK 1.7 : jdk-7u79-linux-x64.tar.gz
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">JDK 1.8 : jdk-8u45-linux-x64.tar.gz
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">JDK 1.7 : jdk-7u79-linux-x64.tar.gz
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">JDK 1.8 : jdk-8u45-linux-x64.tar.gz
 </span></pre>
 <p>Note: according to your platform (i686 or X86_64), the subversion string (7u79 or 8u45) and (x64) may differ in file names.</p>
 </li>
 <li>
 <p>Extract JDK files into installation directory.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">tar zxvf jdk-7u79-linux-x64.tar.gz -C /opt
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">tar zxvf jdk-7u79-linux-x64.tar.gz -C /opt
 </span></pre>
 <p>or</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">tar zxvf jdk-8u45-linux-x64.tar.gz -C /opt
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">tar zxvf jdk-8u45-linux-x64.tar.gz -C /opt
 </span></pre>
 <p>Suppose your jdk is extracted into /opt/jdk.</p>
 </li>
 <li>
 <p>Setup JAVA_HOME variable and add executables into PATH.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">touch /etc/profile.d/java.sh
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">touch /etc/profile.d/java.sh
 </span></pre>
 <p>Edit java.sh.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">#!/bin/bash
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">export JAVA_HOME=/opt/jdk
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">export PATH=$PATH:$JAVA_HOME/jre/bin
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">#!/bin/bash
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">export JAVA_HOME=/opt/jdk
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">export PATH=$PATH:$JAVA_HOME/jre/bin
 </span></pre>
 <p>Finally, set java.sh executable.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">chmod u+x /etc/profile.d/java.sh
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">chmod u+x /etc/profile.d/java.sh
 </span></pre></li>
 <li>
 <p>Test your installation.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">java -version
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">java -version
 </span></pre>
 <p>Output may look like:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">java version &quot;1.7.0_79&quot;
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">Java(TM) SE Runtime Environment (build 1.7.0_79-b15)
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">Java HotSpot(TM) 64-Bit Server VM (build 24.79-b02, mixed mode)
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">java version &quot;1.7.0_79&quot;
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">Java(TM) SE Runtime Environment (build 1.7.0_79-b15)
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">Java HotSpot(TM) 64-Bit Server VM (build 24.79-b02, mixed mode)
 </span></pre></li>
 <li>
 <p>Install a java IDE and start you java developing trip.</p>
@@ -196,56 +158,24 @@
 </li>
 </ol>
 
-    </div>
-
-    
-    
-
-    <div class="post-footer">
-        
-            
-                <div class="post-tags">
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;java&#x2F;">#java</a>
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;jdk&#x2F;">#jdk</a>
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;archlinux&#x2F;">#archlinux</a>
-                    
-                </div>
-            
-            
-                <div class="post-nav">
-                    
-                        <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;man-man-zou&#x2F;">‹ 慢慢走</a>
-                    
-                    
-                        <a class="next" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;spring-at-first-glance&#x2F;">Spring DI: At First Glance ›</a>
-                    
-                    
-                    
-                </div>
-            
-
-        
-
-    </div>
-
-    
-    
-</article>
-
-
-                </div>
-            </main>
-
-            
-            
         </div>
+        
+    
+</div></div>
+            
+    <div class="pagination">
+        <div class="pagination__buttons">
+            </div>
+    </div>
+<footer class="footer">
+                    <div class="footer__inner"><div class="copyright">
+            <span>© 2019 <a href="https://github.com/ejmg/zerm">zerm</a> :: Powered by <a href="https://www.getzola.org/">Zola</a></span>
+            <span>:: Theme made by <a href="https://github.com/ejmg">ejmg</a></span>
+        </div>
+    <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;assets&#x2F;js&#x2F;main.js"></script>
+</div>
+                    
 
-      
-          <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
-      
+                </footer></div>
     </body>
-
 </html>

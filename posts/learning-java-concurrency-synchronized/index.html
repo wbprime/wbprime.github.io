@@ -1,170 +1,131 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta http-equiv="content-type" content="text/html; charset=utf-8">
-
-      <!-- Enable responsiveness on mobile devices-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-      <title>wangbo’s home &amp; blog - Learning Java Concurrency - synchronized</title>
-
-      
-
-      
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
-          
-      
-
-      
-          <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
-          
-      
-
-      
-      
-    </head>
-
-    <body>
-        <div class="container">
-
-            <div id="mobile-navbar" class="mobile-navbar">
-              <div class="mobile-header-logo">
-                <a href="/" class="logo">WB Prime</a>
-              </div>
-              <div class="mobile-navbar-icon icon-out">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            </div>
-
-            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
-              <ul class="mobile-menu-list">
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im">
-                            Home
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;categories">
-                            Categories
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;tags">
-                            Tags
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;about">
-                            About
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                            Github
-                        </a>
-                    </li>
-                
-              </ul>
-            </nav>
-
-            <header id="header">
-                <div class="logo"><a href="https:&#x2F;&#x2F;www.wangbo.im">WB Prime</a></div>
-                <nav class="menu">
-                    <ul>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im">
-                                    Home
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;categories">
-                                    Categories
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;tags">
-                                    Tags
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;about">
-                                    About
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                                    Github
-                                </a>
-                            </li>
-                        
-                    </ul>
-                </nav>
-            </header>
-
-            <main>
-                <div class="content" id="mobile-panel">
-                    
-
-
-
-<article class="post">
+    <title>Learning Java Concurrency - synchronized - Elvis Wang</title>
     
-    <header class="post__header">
-        <h1 class="post__title">
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="wangbo’s home &amp; blog"/>
+
+    <meta property="og:title" content="
+    wangbo’s home &amp; blog -&nbsp;Learning Java Concurrency - synchronized" />
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;learning-java-concurrency-synchronized&#x2F;"/>
+    <meta property="og:description" content="&lt;p&gt;synchronized，同步控制器，是Java原生提供的多线程同步控制的工具，是Java语法的一部分。&lt;&#x2F;p&gt;
+&lt;p&gt;synchronized在语义上等同于一个独占锁。synchronized可以用来修饰一个方法，标识该方法是可同步的；也可以用来修饰语句块，标识该语句块是同步的。在代码经过编译之后，JVM会在方法或者语句块的前后插入&lt;co…"/>
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+<link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
+    <body>
+        <div class="container full">
+<header class="header">
+    <div class="header__inner">
+        <div class="header__logo">
+            <a href="&#x2F;">
+    <div class="logo">
+        WB Prime
+    </div>
+</a>
+        </div>
+        <div class="menu-trigger">menu</div>
+    </div>
+    
+    <nav class="menu">
+        <ul class="menu__inner menu__inner--desktop">
+            
+            
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+                    </li>
+                
+            </ul>
+
+        <ul class="menu__inner menu__inner--mobile">
+            
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+        </li>
+        </ul>
+    </nav>
+
+    </header>
+<div class="content"><div class="post">
+        <h1 class="post-title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;learning-java-concurrency-synchronized&#x2F;">Learning Java Concurrency - synchronized</a>
         </h1>
-        <div class="post__meta">
-            <span class="post__time">2016-04-01</span>
-            
-        </div>
-    </header>
+        
+    <div class="post-meta">
+        <span class="post-date">2016.04.01
+                </span>
 
-    <div class="post-content">
-      <p>synchronized，同步控制器，是Java原生提供的多线程同步控制的工具，是Java语法的一部分。</p>
+        <span class="post-author"></span>
+
+        
+
+    
+    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;learning-java-concurrency&#x2F;">Learning Java Concurrency</a>} 
+
+            
+    ::
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;java&#x2F;">java</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;concurrency&#x2F;">concurrency</a>
+        
+    
+            
+        
+    </div>
+
+
+
+        
+
+        <div class="post-content">
+            <p>synchronized，同步控制器，是Java原生提供的多线程同步控制的工具，是Java语法的一部分。</p>
 <p>synchronized在语义上等同于一个独占锁。synchronized可以用来修饰一个方法，标识该方法是可同步的；也可以用来修饰语句块，标识该语句块是同步的。在代码经过编译之后，JVM会在方法或者语句块的前后插入<code>monitorenter</code>和<code>monitorexit</code>的虚拟机指令，这两条指令又会隐式地调用<code>lock</code>原语。</p>
 <p>synchronized可以使用在普通方法里，也可以使用在静态方法里。</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">Synchronized </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public synchronized void </span><span style="color:#8fa1b3;">method1</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">String </span><span style="color:#bf616a;">val</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">        </span><span style="color:#ebcb8b;">System</span><span style="color:#eff1f5;">.out.</span><span style="color:#bf616a;">println</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">1: Begin add </span><span style="color:#c0c5ce;">&quot; +</span><span style="color:#eff1f5;"> val);
-</span><span style="color:#eff1f5;">        </span><span style="color:#ebcb8b;">System</span><span style="color:#eff1f5;">.out.</span><span style="color:#bf616a;">println</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">1: Finish add </span><span style="color:#c0c5ce;">&quot; +</span><span style="color:#eff1f5;"> val);
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public synchronized static void </span><span style="color:#8fa1b3;">method2</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">String </span><span style="color:#bf616a;">val</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">        </span><span style="color:#ebcb8b;">System</span><span style="color:#eff1f5;">.out.</span><span style="color:#bf616a;">println</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">2: Begin add </span><span style="color:#c0c5ce;">&quot; +</span><span style="color:#eff1f5;"> val);
-</span><span style="color:#eff1f5;">        </span><span style="color:#ebcb8b;">System</span><span style="color:#eff1f5;">.out.</span><span style="color:#bf616a;">println</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">2: Finish add </span><span style="color:#c0c5ce;">&quot; +</span><span style="color:#eff1f5;"> val);
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public void </span><span style="color:#8fa1b3;">method3</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">String </span><span style="color:#bf616a;">val</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">synchronized</span><span style="color:#eff1f5;">(</span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">            </span><span style="color:#ebcb8b;">System</span><span style="color:#eff1f5;">.out.</span><span style="color:#bf616a;">println</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">3: Begin add </span><span style="color:#c0c5ce;">&quot; +</span><span style="color:#eff1f5;"> val);
-</span><span style="color:#eff1f5;">            </span><span style="color:#ebcb8b;">System</span><span style="color:#eff1f5;">.out.</span><span style="color:#bf616a;">println</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">3: Finish add </span><span style="color:#c0c5ce;">&quot; +</span><span style="color:#eff1f5;"> val);
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public static void </span><span style="color:#8fa1b3;">method4</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">String </span><span style="color:#bf616a;">val</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">synchronized</span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">Synchronized</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">class</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">            </span><span style="color:#ebcb8b;">System</span><span style="color:#eff1f5;">.out.</span><span style="color:#bf616a;">println</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">4: Begin add </span><span style="color:#c0c5ce;">&quot; +</span><span style="color:#eff1f5;"> val);
-</span><span style="color:#eff1f5;">            </span><span style="color:#ebcb8b;">System</span><span style="color:#eff1f5;">.out.</span><span style="color:#bf616a;">println</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">4: Finish add </span><span style="color:#c0c5ce;">&quot; +</span><span style="color:#eff1f5;"> val);
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#569cd6;">class </span><span style="color:#dcdcdc;">Synchronized {
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public synchronized void </span><span style="color:#dcdcdc;">method1(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">String val) {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">System.out.println(</span><span style="color:#d69d85;">&quot;1: Begin add &quot; </span><span style="color:#dcdcdc;">+ val);
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">System.out.println(</span><span style="color:#d69d85;">&quot;1: Finish add &quot; </span><span style="color:#dcdcdc;">+ val);
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public synchronized static void </span><span style="color:#dcdcdc;">method2(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">String val) {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">System.out.println(</span><span style="color:#d69d85;">&quot;2: Begin add &quot; </span><span style="color:#dcdcdc;">+ val);
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">System.out.println(</span><span style="color:#d69d85;">&quot;2: Finish add &quot; </span><span style="color:#dcdcdc;">+ val);
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">method3(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">String val) {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">synchronized</span><span style="color:#dcdcdc;">(this) {
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">System.out.println(</span><span style="color:#d69d85;">&quot;3: Begin add &quot; </span><span style="color:#dcdcdc;">+ val);
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">System.out.println(</span><span style="color:#d69d85;">&quot;3: Finish add &quot; </span><span style="color:#dcdcdc;">+ val);
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public static void </span><span style="color:#dcdcdc;">method4(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">String val) {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">synchronized</span><span style="color:#dcdcdc;">(Synchronized.class) {
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">System.out.println(</span><span style="color:#d69d85;">&quot;4: Begin add &quot; </span><span style="color:#dcdcdc;">+ val);
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">System.out.println(</span><span style="color:#d69d85;">&quot;4: Finish add &quot; </span><span style="color:#dcdcdc;">+ val);
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">}
 </span></pre><p><a name="continue-reading"></a></p>
 <h1 id="dan-li-mo-shi"><a class="zola-anchor" href="#dan-li-mo-shi" aria-label="Anchor link for: dan-li-mo-shi">🔗</a>
 单例模式</h1>
@@ -172,172 +133,172 @@
 <h2 id="version-0"><a class="zola-anchor" href="#version-0" aria-label="Anchor link for: version-0">🔗</a>
 Version 0</h2>
 <p>最简单的单例模式，可以表示如下：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">Singleton0 </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">     </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private static </span><span style="color:#ebcb8b;">Singleton0 </span><span style="color:#eff1f5;">instance_ </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">Singleton0</span><span style="color:#eff1f5;">(); </span><span style="color:#65737e;">// init while class loaded
-</span><span style="color:#eff1f5;">     </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private </span><span style="color:#8fa1b3;">Singleton0</span><span style="color:#eff1f5;">(){}
-</span><span style="color:#eff1f5;">     </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public static </span><span style="color:#ebcb8b;">Singleton0 </span><span style="color:#8fa1b3;">instance</span><span style="color:#eff1f5;">() {
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">return</span><span style="color:#eff1f5;"> instance_;
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#569cd6;">class </span><span style="color:#dcdcdc;">Singleton0 {
+</span><span style="color:#dcdcdc;">     </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private static </span><span style="color:#dcdcdc;">Singleton0 instance_ = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">Singleton0(); </span><span style="color:#608b4e;">// init while class loaded
+</span><span style="color:#dcdcdc;">     </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">Singleton0(){}
+</span><span style="color:#dcdcdc;">     </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public static </span><span style="color:#dcdcdc;">Singleton0 instance() {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> instance_;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">}
 </span></pre>
 <p>本单例实现会在Singleton0类加载的时候实例化。使构造器私有是为了保证实例单一化，不允许外部构造新实例。如果要使用Java的序列化机制，可能需要额外的代码保证实例的唯一性。如果有可能用上反射构造对象，最简单的应对方法是在构造器里面抛出异常。</p>
 <h2 id="version-1-wrong"><a class="zola-anchor" href="#version-1-wrong" aria-label="Anchor link for: version-1-wrong">🔗</a>
 Version 1 (wrong)</h2>
 <p>如果想延迟初始化，可以使用下面的方案。</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">Singleton1 </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private static </span><span style="color:#ebcb8b;">Singleton1 </span><span style="color:#eff1f5;">instance_;
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private </span><span style="color:#8fa1b3;">Singleton1</span><span style="color:#eff1f5;">() {}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public static </span><span style="color:#ebcb8b;">Singleton1 </span><span style="color:#8fa1b3;">instance</span><span style="color:#eff1f5;">() { </span><span style="color:#65737e;">// lazy inited but with multi thread problem
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">null </span><span style="color:#c0c5ce;">==</span><span style="color:#eff1f5;"> instance_) {
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">instance_ </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">Singleton1</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">return</span><span style="color:#eff1f5;"> instance_;
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#569cd6;">class </span><span style="color:#dcdcdc;">Singleton1 {
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private static </span><span style="color:#dcdcdc;">Singleton1 instance_;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">Singleton1() {}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public static </span><span style="color:#dcdcdc;">Singleton1 instance() { </span><span style="color:#608b4e;">// lazy inited but with multi thread problem
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(</span><span style="color:#569cd6;">null </span><span style="color:#dcdcdc;">== instance_) {
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">instance_ = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">Singleton1();
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> instance_;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">}
 </span></pre>
 <p>本实现的问题在于多线程同步导致的潜在的多次实例化。可以使用synchronized关键字来解决这个问题，因为synchronized可以保证同一时间只有一个线程进行操作，其他的线程被阻塞。</p>
 <h2 id="version-2"><a class="zola-anchor" href="#version-2" aria-label="Anchor link for: version-2">🔗</a>
 Version 2</h2>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">Singleton2 </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private static </span><span style="color:#ebcb8b;">Singleton2 </span><span style="color:#eff1f5;">instance_;
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private </span><span style="color:#8fa1b3;">Singleton2</span><span style="color:#eff1f5;">() {}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public synchronized static </span><span style="color:#ebcb8b;">Singleton2 </span><span style="color:#8fa1b3;">instance</span><span style="color:#eff1f5;">() {</span><span style="color:#65737e;">// lazy inited
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">null </span><span style="color:#c0c5ce;">==</span><span style="color:#eff1f5;"> instance_) {
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">instance_ </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">Singleton2</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">return</span><span style="color:#eff1f5;"> instance_;
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#569cd6;">class </span><span style="color:#dcdcdc;">Singleton2 {
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private static </span><span style="color:#dcdcdc;">Singleton2 instance_;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">Singleton2() {}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public synchronized static </span><span style="color:#dcdcdc;">Singleton2 instance() {</span><span style="color:#608b4e;">// lazy inited
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(</span><span style="color:#569cd6;">null </span><span style="color:#dcdcdc;">== instance_) {
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">instance_ = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">Singleton2();
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> instance_;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">}
 </span></pre><h2 id="version-3-wrong"><a class="zola-anchor" href="#version-3-wrong" aria-label="Anchor link for: version-3-wrong">🔗</a>
 Version 3 (wrong)</h2>
 <p>然而上面的版本还可以进行改进。可以只在实例化的时候才加以同步控制，如果已经实例化了，就不需要同步控制代码。</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">Singleton3 </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private static </span><span style="color:#ebcb8b;">Singleton3 </span><span style="color:#eff1f5;">instance_;
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private </span><span style="color:#8fa1b3;">Singleton3</span><span style="color:#eff1f5;">() {}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public static </span><span style="color:#ebcb8b;">Singleton3 </span><span style="color:#8fa1b3;">instance</span><span style="color:#eff1f5;">() {
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">null </span><span style="color:#c0c5ce;">==</span><span style="color:#eff1f5;"> instance_) {
-</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">synchronized</span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">Singleton3</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">class</span><span style="color:#eff1f5;">) { </span><span style="color:#65737e;">// multi thread may conflict here
-</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">instance_ </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">Singleton3</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">return</span><span style="color:#eff1f5;"> instance_;
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#569cd6;">class </span><span style="color:#dcdcdc;">Singleton3 {
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private static </span><span style="color:#dcdcdc;">Singleton3 instance_;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">Singleton3() {}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public static </span><span style="color:#dcdcdc;">Singleton3 instance() {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(</span><span style="color:#569cd6;">null </span><span style="color:#dcdcdc;">== instance_) {
+</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">synchronized</span><span style="color:#dcdcdc;">(Singleton3.class) { </span><span style="color:#608b4e;">// multi thread may conflict here
+</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">instance_ = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">Singleton3();
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> instance_;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">}
 </span></pre>
 <p>但是这种方式导致了新的问题：如果在两个线程都通过了为非空的条件判断时，一个线程（线程A）已经获取了同步器并创建了对象实例，另一个线程（线程B）则被阻塞以获取同步器，则线程B获取到同步器之后还是会去创建对象。</p>
 <h2 id="version-4-wrong"><a class="zola-anchor" href="#version-4-wrong" aria-label="Anchor link for: version-4-wrong">🔗</a>
 Version 4 (wrong)</h2>
 <p>这个时候需要使用到双重检锁机制：在获取同步器之前和之后都需要进行条件判断。</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">Singleton4 </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private static </span><span style="color:#ebcb8b;">Singleton4 </span><span style="color:#eff1f5;">instance_; </span><span style="color:#65737e;">// variable visibility
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private </span><span style="color:#8fa1b3;">Singleton4</span><span style="color:#eff1f5;">() {}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public static </span><span style="color:#ebcb8b;">Singleton4 </span><span style="color:#8fa1b3;">instance</span><span style="color:#eff1f5;">() {
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">null </span><span style="color:#c0c5ce;">==</span><span style="color:#eff1f5;"> instance_) {
-</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">synchronized </span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">Singleton4</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">class</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">                </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">null </span><span style="color:#c0c5ce;">==</span><span style="color:#eff1f5;"> instance_) {
-</span><span style="color:#eff1f5;">                    </span><span style="color:#eff1f5;">instance_ </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">Singleton4</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">return</span><span style="color:#eff1f5;"> instance_;
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#569cd6;">class </span><span style="color:#dcdcdc;">Singleton4 {
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private static </span><span style="color:#dcdcdc;">Singleton4 instance_; </span><span style="color:#608b4e;">// variable visibility
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">Singleton4() {}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public static </span><span style="color:#dcdcdc;">Singleton4 instance() {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(</span><span style="color:#569cd6;">null </span><span style="color:#dcdcdc;">== instance_) {
+</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">synchronized </span><span style="color:#dcdcdc;">(Singleton4.class) {
+</span><span style="color:#dcdcdc;">                </span><span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(</span><span style="color:#569cd6;">null </span><span style="color:#dcdcdc;">== instance_) {
+</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">instance_ = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">Singleton4();
+</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> instance_;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">}
 </span></pre>
 <p>这样看起来就可以了。但是还是会有一个问题：JVM无法保证变量instance_在多个线程间的可见性。具体的来说，就是线程A和线程B同时通过了第一次条件判断，然后线程A获取到了同步器并创建实例然后给instance_变量赋值；现在线程B拿到了同步器，开始做第二次条件测试，测试变量instance_的值是否非空。从时间顺序上说，线程A给变量赋完值之后，然后线程B再去取变量的值做判断，此时线程B拿到的肯定是非空的。然而，JVM并不保证线程B拿到的变量值是非空的。</p>
 <p>~~众所周知的，处理器的执行指令的速度高出主内存读写速度好几个量级。为了防止处理器的指令执行经常被主内存读写操作所堵塞，JVM会对指令进行优化，不是所有的对变量的赋值操作都会立即写入到主内存；很合理的假设，JVM只要保证改变量在下一个读取之前被改写就可以了，这样既保证了程序的正确，也保证了JVM可以对指令进行重排序以优化执行效率。但问题是，在执行之前，指令的优化已经做完了；而多线程操作是执行期间的事情；万一线程B获取变量值的指令在线程A赋值变量指令之前执行怎么办？~~ 内存的可见性可以由同步器来保证，根据<a href="https://en.wikipedia.org/wiki/Double-checked_locking">Double-checked locking</a>的说明，本实现的问题在于：实例化执行构造器的有可能是耗时操作，线程A拿到同步器然后执行构造器代码，JVM有可能已经对变量进行了赋值；线程B在第一次条件判断时可能认为对象已经初始化（实际上还没有初始化完成，或者线程A被挂起），就会直接使用部分初始化的对象。</p>
 <h2 id="version-5"><a class="zola-anchor" href="#version-5" aria-label="Anchor link for: version-5">🔗</a>
 Version 5</h2>
 <p>双重检锁的推荐实现是使用synchronized来保证多线程同步，使用volatile来保证变量的多线程可见性：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">Singleton5 </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private static volatile </span><span style="color:#ebcb8b;">Singleton5 </span><span style="color:#eff1f5;">instance_; </span><span style="color:#65737e;">// Add volatile to keep variable memory visibility
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private </span><span style="color:#8fa1b3;">Singleton5</span><span style="color:#eff1f5;">() {}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public static </span><span style="color:#ebcb8b;">Singleton5 </span><span style="color:#8fa1b3;">instance</span><span style="color:#eff1f5;">() {
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">null </span><span style="color:#c0c5ce;">==</span><span style="color:#eff1f5;"> instance_) {
-</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">synchronized </span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">Singleton5</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">class</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">                </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">null </span><span style="color:#c0c5ce;">==</span><span style="color:#eff1f5;"> instance_) {
-</span><span style="color:#eff1f5;">                    </span><span style="color:#eff1f5;">instance_ </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">Singleton5</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">return</span><span style="color:#eff1f5;"> instance_;
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#569cd6;">class </span><span style="color:#dcdcdc;">Singleton5 {
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private static volatile </span><span style="color:#dcdcdc;">Singleton5 instance_; </span><span style="color:#608b4e;">// Add volatile to keep variable memory visibility
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">Singleton5() {}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public static </span><span style="color:#dcdcdc;">Singleton5 instance() {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(</span><span style="color:#569cd6;">null </span><span style="color:#dcdcdc;">== instance_) {
+</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">synchronized </span><span style="color:#dcdcdc;">(Singleton5.class) {
+</span><span style="color:#dcdcdc;">                </span><span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(</span><span style="color:#569cd6;">null </span><span style="color:#dcdcdc;">== instance_) {
+</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">instance_ = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">Singleton5();
+</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> instance_;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">}
 </span></pre><h2 id="other-versions"><a class="zola-anchor" href="#other-versions" aria-label="Anchor link for: other-versions">🔗</a>
 Other versions</h2>
 <p>到这里，基本上可以梳理清楚synchronized关键字的用法。</p>
 <p>事实上，随着Java版本的提升，目前公认的比较好的Java单例模式实现是使用enum。</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">enum </span><span style="color:#ebcb8b;">Singleton6 </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">    </span><span style="color:#d08770;">INSTANCE</span><span style="color:#eff1f5;">;
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#8fa1b3;">Singleton6</span><span style="color:#eff1f5;">() {}
-</span><span style="color:#eff1f5;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#569cd6;">enum </span><span style="color:#dcdcdc;">Singleton6 {
+</span><span style="color:#dcdcdc;">    </span><span style="color:#b4cea8;">INSTANCE</span><span style="color:#dcdcdc;">;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">Singleton6() {}
+</span><span style="color:#dcdcdc;">}
 </span></pre>
 <p>如果不想使用enum关键字，也可以使用<a href="https://en.wikipedia.org/wiki/Initialization_on_demand_holder_idiom">Initialization-on-demand holder idiom</a>。</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">Singleton7 </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private static class </span><span style="color:#ebcb8b;">SingletonHolder </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">private static final </span><span style="color:#ebcb8b;">Singleton7 </span><span style="color:#eff1f5;">INSTANCE </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">Singleton7</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private </span><span style="color:#8fa1b3;">Singleton7</span><span style="color:#eff1f5;">() {}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public static </span><span style="color:#ebcb8b;">Singleton7 </span><span style="color:#8fa1b3;">instance</span><span style="color:#eff1f5;">() {
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">return </span><span style="color:#ebcb8b;">SingletonHolder</span><span style="color:#eff1f5;">.</span><span style="color:#d08770;">INSTANCE</span><span style="color:#eff1f5;">;
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#569cd6;">class </span><span style="color:#dcdcdc;">Singleton7 {
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private static class </span><span style="color:#dcdcdc;">SingletonHolder {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">private static final </span><span style="color:#dcdcdc;">Singleton7 INSTANCE = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">Singleton7();
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">Singleton7() {}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public static </span><span style="color:#dcdcdc;">Singleton7 instance() {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">SingletonHolder.</span><span style="color:#b4cea8;">INSTANCE</span><span style="color:#dcdcdc;">;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">}
 </span></pre>
 <p>当然也可以使用双检锁版本，或者其改进版本：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">Singleton8 </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private static volatile </span><span style="color:#ebcb8b;">Singleton8 </span><span style="color:#eff1f5;">instance_;
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private </span><span style="color:#8fa1b3;">Singleton8</span><span style="color:#eff1f5;">() {}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public </span><span style="color:#ebcb8b;">Singleton8 </span><span style="color:#8fa1b3;">instance</span><span style="color:#eff1f5;">() {
-</span><span style="color:#eff1f5;">        </span><span style="color:#ebcb8b;">Singleton8 </span><span style="color:#b48ead;">var </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> instance_;
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">null </span><span style="color:#c0c5ce;">==</span><span style="color:#eff1f5;"> var) {
-</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">synchronized </span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">Singleton8</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">class</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">                </span><span style="color:#b48ead;">var </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> instance_;
-</span><span style="color:#eff1f5;">                </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">null </span><span style="color:#c0c5ce;">==</span><span style="color:#eff1f5;"> var) {
-</span><span style="color:#eff1f5;">                    </span><span style="color:#eff1f5;">instance_ </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> var </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">Singleton8</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">return var</span><span style="color:#eff1f5;">;
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#569cd6;">class </span><span style="color:#dcdcdc;">Singleton8 {
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private static volatile </span><span style="color:#dcdcdc;">Singleton8 instance_;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">Singleton8() {}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">Singleton8 instance() {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Singleton8 </span><span style="color:#569cd6;">var </span><span style="color:#dcdcdc;">= instance_;
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(</span><span style="color:#569cd6;">null </span><span style="color:#dcdcdc;">== var) {
+</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">synchronized </span><span style="color:#dcdcdc;">(Singleton8.class) {
+</span><span style="color:#dcdcdc;">                </span><span style="color:#569cd6;">var </span><span style="color:#dcdcdc;">= instance_;
+</span><span style="color:#dcdcdc;">                </span><span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(</span><span style="color:#569cd6;">null </span><span style="color:#dcdcdc;">== var) {
+</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">instance_ = var = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">Singleton8();
+</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return var</span><span style="color:#dcdcdc;">;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">}
 </span></pre>
 <p>局部变量<code>var</code>的引入是为了效率考虑，减少对<code>volatile</code>变量的读取次数。按照<a href="https://en.wikipedia.org/wiki/Double-checked_locking">Double-checked locking</a>的说法，可以提升25%的效率。</p>
 <h1 id="tong-bu-qi-de-shi-fang"><a class="zola-anchor" href="#tong-bu-qi-de-shi-fang" aria-label="Anchor link for: tong-bu-qi-de-shi-fang">🔗</a>
@@ -372,54 +333,24 @@ Other versions</h2>
 <p>从性能上讲，synchronized是Java锁，ReentrantLock是使用的底层系统实现，所以ReentrantLock会比synchronized具有更高的性能。根据《深入理解Java虚拟机》（周志明 著）的实验，JDK 1.6以后，JVM实现对synchronized的编译进行了大幅度的优化，两者的性能差别不大；在可以遇见到的未来，JVM的实现团队们肯定会逐步地优化作为Java语法的synchronized的编译和执行，而ReentrantLock作为Java附带的API库，优化的空间不是很大，所以二者的性能差异不应该成为进行选择的主要依据。</p>
 <p>synchronized具有比ReentrantLock更底层的语法和更简单的使用；ReentrantLock具有比synchronized更优秀的性能和更复杂的功能。在实际的使用中，主要应根据使用场景来选择使用的工具；在synchronized可以解决问题的场合，不必要为了追求所谓的一点点性能就去使用ReentrantLock或者其他JUC的API。</p>
 
-    </div>
-
-    
-    
-
-    <div class="post-footer">
-        
-            
-                <div class="post-tags">
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;java&#x2F;">#java</a>
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;concurrency&#x2F;">#concurrency</a>
-                    
-                </div>
-            
-            
-                <div class="post-nav">
-                    
-                        <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;learning-java-concurrency-content&#x2F;">‹ Learning Java Concurrency - Content&#x2F;目录</a>
-                    
-                    
-                        <a class="next" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2016-04-06-learning-java-concurrency-wait-notify&#x2F;">Learning Java Concurrency - wait &amp; notify ›</a>
-                    
-                    
-                    
-                </div>
-            
-
-        
-
-    </div>
-
-    
-    
-</article>
-
-
-                </div>
-            </main>
-
-            
-            
         </div>
+        
+    
+</div></div>
+            
+    <div class="pagination">
+        <div class="pagination__buttons">
+            </div>
+    </div>
+<footer class="footer">
+                    <div class="footer__inner"><div class="copyright">
+            <span>© 2019 <a href="https://github.com/ejmg/zerm">zerm</a> :: Powered by <a href="https://www.getzola.org/">Zola</a></span>
+            <span>:: Theme made by <a href="https://github.com/ejmg">ejmg</a></span>
+        </div>
+    <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;assets&#x2F;js&#x2F;main.js"></script>
+</div>
+                    
 
-      
-          <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
-      
+                </footer></div>
     </body>
-
 </html>

@@ -1,141 +1,103 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta http-equiv="content-type" content="text/html; charset=utf-8">
-
-      <!-- Enable responsiveness on mobile devices-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-      <title>wangbo’s home &amp; blog - Spring MVC Unit Testing - Configuration</title>
-
-      
-
-      
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
-          
-      
-
-      
-          <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
-          
-      
-
-      
-      
-    </head>
-
-    <body>
-        <div class="container">
-
-            <div id="mobile-navbar" class="mobile-navbar">
-              <div class="mobile-header-logo">
-                <a href="/" class="logo">WB Prime</a>
-              </div>
-              <div class="mobile-navbar-icon icon-out">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            </div>
-
-            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
-              <ul class="mobile-menu-list">
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im">
-                            Home
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;categories">
-                            Categories
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;tags">
-                            Tags
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;about">
-                            About
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                            Github
-                        </a>
-                    </li>
-                
-              </ul>
-            </nav>
-
-            <header id="header">
-                <div class="logo"><a href="https:&#x2F;&#x2F;www.wangbo.im">WB Prime</a></div>
-                <nav class="menu">
-                    <ul>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im">
-                                    Home
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;categories">
-                                    Categories
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;tags">
-                                    Tags
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;about">
-                                    About
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                                    Github
-                                </a>
-                            </li>
-                        
-                    </ul>
-                </nav>
-            </header>
-
-            <main>
-                <div class="content" id="mobile-panel">
-                    
-
-
-
-<article class="post">
+    <title>Spring MVC Unit Testing - Configuration - Elvis Wang</title>
     
-    <header class="post__header">
-        <h1 class="post__title">
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="wangbo’s home &amp; blog"/>
+
+    <meta property="og:title" content="
+    wangbo’s home &amp; blog -&nbsp;Spring MVC Unit Testing - Configuration" />
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;spring-mvc-testing-unit-testing-configuration&#x2F;"/>
+    <meta property="og:description" content="&lt;p&gt;本文是 &lt;a href=&quot;https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;spring-mvc-testing-content&#x2F;&quot;&gt;Spring MVC Testing&lt;&#x2F;a&gt; 单元测试系列的第1篇，原文链接：&lt;a href=&quot;http:&#x2F;&#…"/>
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+<link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
+    <body>
+        <div class="container full">
+<header class="header">
+    <div class="header__inner">
+        <div class="header__logo">
+            <a href="&#x2F;">
+    <div class="logo">
+        WB Prime
+    </div>
+</a>
+        </div>
+        <div class="menu-trigger">menu</div>
+    </div>
+    
+    <nav class="menu">
+        <ul class="menu__inner menu__inner--desktop">
+            
+            
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+                    </li>
+                
+            </ul>
+
+        <ul class="menu__inner menu__inner--mobile">
+            
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+        </li>
+        </ul>
+    </nav>
+
+    </header>
+<div class="content"><div class="post">
+        <h1 class="post-title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;spring-mvc-testing-unit-testing-configuration&#x2F;">Spring MVC Unit Testing - Configuration</a>
         </h1>
-        <div class="post__meta">
-            <span class="post__time">2016-04-09</span>
-            
-        </div>
-    </header>
+        
+    <div class="post-meta">
+        <span class="post-date">2016.04.09
+                </span>
 
-    <div class="post-content">
-      <p>本文是 <a href="https://www.wangbo.im/posts/spring-mvc-testing-content/">Spring MVC Testing</a> 单元测试系列的第1篇，原文链接：<a href="http://www.petrikainulainen.net/programming/spring-framework/unit-testing-of-spring-mvc-controllers-configuration/">Unit Testing of Spring MVC Controllers: Configuration</a>。</p>
+        <span class="post-author"></span>
+
+        
+
+    
+    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;spring-mvc-testing&#x2F;">Spring MVC Testing</a>} 
+
+            
+    ::
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;spring-mvc&#x2F;">Spring MVC</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;testing&#x2F;">testing</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;java&#x2F;">java</a>
+        
+    
+            
+        
+    </div>
+
+
+
+        
+
+        <div class="post-content">
+            <p>本文是 <a href="https://www.wangbo.im/posts/spring-mvc-testing-content/">Spring MVC Testing</a> 单元测试系列的第1篇，原文链接：<a href="http://www.petrikainulainen.net/programming/spring-framework/unit-testing-of-spring-mvc-controllers-configuration/">Unit Testing of Spring MVC Controllers: Configuration</a>。</p>
 <p>一直以来，为Spring MVC的Controller写单元测试的工作既简单又问题多多。简单体现在单元测试可以很简单地写个测试用例调用一下目标Controller的方法；问题在于这种单元测试完全没有用（不是HTTP的请求），比如说，这种单元测试的方法没办法测试请求映射、参数验证和异常映射等。</p>
 <p>幸运的是，从Spring 3.2开始，我们可以使用<a href="http://docs.spring.io/spring/docs/3.2.x/spring-framework-reference/htmlsingle/#new-in-3.2-spring-mvc-test">Spring MVC Test Framework</a>这一强大的工具通过DispatcherServlet来仿照HTTP请求的方式来单元测试Controller的方法。</p>
 <p>本文主要介绍如何配置Spring使得可以单元测试Spring MVC Controllers。</p>
@@ -150,25 +112,25 @@
 <li>Spring Test 3.2.3.RELEASE</li>
 </ul>
 <p>生成的<code>pom.xml</code>文件的片段如下：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">dependency</span><span style="color:#c0c5ce;">&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">groupId</span><span style="color:#c0c5ce;">&gt;junit&lt;/</span><span style="color:#bf616a;">groupId</span><span style="color:#c0c5ce;">&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">artifactId</span><span style="color:#c0c5ce;">&gt;junit&lt;/</span><span style="color:#bf616a;">artifactId</span><span style="color:#c0c5ce;">&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">version</span><span style="color:#c0c5ce;">&gt;4.11&lt;/</span><span style="color:#bf616a;">version</span><span style="color:#c0c5ce;">&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">scope</span><span style="color:#c0c5ce;">&gt;test&lt;/</span><span style="color:#bf616a;">scope</span><span style="color:#c0c5ce;">&gt;
-</span><span style="color:#c0c5ce;">&lt;/</span><span style="color:#bf616a;">dependency</span><span style="color:#c0c5ce;">&gt;
-</span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">dependency</span><span style="color:#c0c5ce;">&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">groupId</span><span style="color:#c0c5ce;">&gt;org.mockito&lt;/</span><span style="color:#bf616a;">groupId</span><span style="color:#c0c5ce;">&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">artifactId</span><span style="color:#c0c5ce;">&gt;mockito-core&lt;/</span><span style="color:#bf616a;">artifactId</span><span style="color:#c0c5ce;">&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">version</span><span style="color:#c0c5ce;">&gt;1.9.5&lt;/</span><span style="color:#bf616a;">version</span><span style="color:#c0c5ce;">&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">scope</span><span style="color:#c0c5ce;">&gt;test&lt;/</span><span style="color:#bf616a;">scope</span><span style="color:#c0c5ce;">&gt;
-</span><span style="color:#c0c5ce;">&lt;/</span><span style="color:#bf616a;">dependency</span><span style="color:#c0c5ce;">&gt;
-</span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">dependency</span><span style="color:#c0c5ce;">&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">groupId</span><span style="color:#c0c5ce;">&gt;org.springframework&lt;/</span><span style="color:#bf616a;">groupId</span><span style="color:#c0c5ce;">&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">artifactId</span><span style="color:#c0c5ce;">&gt;spring-test&lt;/</span><span style="color:#bf616a;">artifactId</span><span style="color:#c0c5ce;">&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">version</span><span style="color:#c0c5ce;">&gt;3.2.3.RELEASE&lt;/</span><span style="color:#bf616a;">version</span><span style="color:#c0c5ce;">&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">scope</span><span style="color:#c0c5ce;">&gt;test&lt;/</span><span style="color:#bf616a;">scope</span><span style="color:#c0c5ce;">&gt;
-</span><span style="color:#c0c5ce;">&lt;/</span><span style="color:#bf616a;">dependency</span><span style="color:#c0c5ce;">&gt;
+<pre style="background-color:#1e1e1e;">
+<span style="color:#808080;">&lt;</span><span style="color:#569cd6;">dependency</span><span style="color:#808080;">&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">groupId</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">junit</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">groupId</span><span style="color:#808080;">&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">artifactId</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">junit</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">artifactId</span><span style="color:#808080;">&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">version</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">4.11</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">version</span><span style="color:#808080;">&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">scope</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">test</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">scope</span><span style="color:#808080;">&gt;
+</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">dependency</span><span style="color:#808080;">&gt;
+</span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">dependency</span><span style="color:#808080;">&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">groupId</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">org.mockito</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">groupId</span><span style="color:#808080;">&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">artifactId</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">mockito-core</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">artifactId</span><span style="color:#808080;">&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">version</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">1.9.5</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">version</span><span style="color:#808080;">&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">scope</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">test</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">scope</span><span style="color:#808080;">&gt;
+</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">dependency</span><span style="color:#808080;">&gt;
+</span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">dependency</span><span style="color:#808080;">&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">groupId</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">org.springframework</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">groupId</span><span style="color:#808080;">&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">artifactId</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">spring-test</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">artifactId</span><span style="color:#808080;">&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">version</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">3.2.3.RELEASE</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">version</span><span style="color:#808080;">&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">scope</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">test</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">scope</span><span style="color:#808080;">&gt;
+</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">dependency</span><span style="color:#808080;">&gt;
 </span></pre>
 <p>然后，我们进一步去看一下示例程序。</p>
 <h1 id="shi-li-cheng-xu-de-jie-gou"><a class="zola-anchor" href="#shi-li-cheng-xu-de-jie-gou" aria-label="Anchor link for: shi-li-cheng-xu-de-jie-gou">🔗</a>
@@ -180,25 +142,25 @@
 <li>这些以来是如何注入待测试的controller类</li>
 </ul>
 <p>我们可以创建的<code>TodoController</code>目标类的代码中去查找答案。相关代码如下：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.springframework.beans.factory.annotation.</span><span style="color:#ebcb8b;">Autowired</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.springframework.context.</span><span style="color:#ebcb8b;">MessageSource</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.springframework.stereotype.</span><span style="color:#ebcb8b;">Controller</span><span style="color:#c0c5ce;">;
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">@</span><span style="color:#bf616a;">Controller
-</span><span style="color:#b48ead;">public class </span><span style="color:#ebcb8b;">TodoController </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private final </span><span style="color:#ebcb8b;">TodoService </span><span style="color:#eff1f5;">service;
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private final </span><span style="color:#ebcb8b;">MessageSource </span><span style="color:#eff1f5;">messageSource;
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">@</span><span style="color:#bf616a;">Autowired
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public </span><span style="color:#8fa1b3;">TodoController</span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">MessageSource </span><span style="color:#bf616a;">messageSource</span><span style="color:#eff1f5;">, </span><span style="color:#ebcb8b;">TodoService </span><span style="color:#bf616a;">service</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">    </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.messageSource </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> messageSource;
-</span><span style="color:#eff1f5;">    </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.service </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> service;
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#65737e;">//Other methods are omitted.
-</span><span style="color:#eff1f5;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.beans.factory.annotation.Autowired;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.context.MessageSource;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.stereotype.Controller;
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">@Controller
+</span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">TodoController {
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private final </span><span style="color:#dcdcdc;">TodoService service;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private final </span><span style="color:#dcdcdc;">MessageSource messageSource;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Autowired
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">TodoController(MessageSource messageSource, TodoService service) {
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">this.messageSource = messageSource;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">this.service = service;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Other methods are omitted.
+</span><span style="color:#dcdcdc;">}
 </span></pre>
 <p>从代码中可以看出，<code>TodoController</code>类依赖于<code>TodoService</code>类和<code>MessageSource</code>类，并且使用的是构造器注入。</p>
 <p>好了，到目前我们已经知道了需要的信息，下一步是去了解上下文配置信息。</p>
@@ -229,115 +191,115 @@
 <h2 id="javalei-pei-zhi"><a class="zola-anchor" href="#javalei-pei-zhi" aria-label="Anchor link for: javalei-pei-zhi">🔗</a>
 Java类配置</h2>
 <p>如果使用Java类配置方式，配置类<code>WebAppContext</code>的代码如下：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.springframework.context.annotation.</span><span style="color:#ebcb8b;">Bean</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.springframework.context.annotation.</span><span style="color:#ebcb8b;">ComponentScan</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.springframework.context.annotation.</span><span style="color:#ebcb8b;">Configuration</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.springframework.web.servlet.</span><span style="color:#ebcb8b;">ViewResolver</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.springframework.web.servlet.config.annotation.</span><span style="color:#ebcb8b;">DefaultServletHandlerConfigurer</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.springframework.web.servlet.config.annotation.</span><span style="color:#ebcb8b;">EnableWebMvc</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.springframework.web.servlet.config.annotation.</span><span style="color:#ebcb8b;">ResourceHandlerRegistry</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.springframework.web.servlet.config.annotation.</span><span style="color:#ebcb8b;">WebMvcConfigurerAdapter</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.springframework.web.servlet.handler.</span><span style="color:#ebcb8b;">SimpleMappingExceptionResolver</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.springframework.web.servlet.view.</span><span style="color:#ebcb8b;">InternalResourceViewResolver</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.springframework.web.servlet.view.</span><span style="color:#ebcb8b;">JstlView</span><span style="color:#c0c5ce;">;
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">java.util.</span><span style="color:#ebcb8b;">Properties</span><span style="color:#c0c5ce;">;
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">@</span><span style="color:#bf616a;">Configuration
-</span><span style="color:#c0c5ce;">@</span><span style="color:#bf616a;">EnableWebMvc
-</span><span style="color:#c0c5ce;">@</span><span style="color:#bf616a;">ComponentScan</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">basePackages </span><span style="color:#c0c5ce;">= {
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">net.petrikainulainen.spring.testmvc.common.controller</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">net.petrikainulainen.spring.testmvc.todo.controller</span><span style="color:#c0c5ce;">&quot;
-</span><span style="color:#c0c5ce;">})
-</span><span style="color:#b48ead;">public class </span><span style="color:#ebcb8b;">WebAppContext </span><span style="color:#b48ead;">extends </span><span style="color:#a3be8c;">WebMvcConfigurerAdapter </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;"> </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">@</span><span style="color:#bf616a;">Override
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public void </span><span style="color:#8fa1b3;">addResourceHandlers</span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">ResourceHandlerRegistry </span><span style="color:#bf616a;">registry</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">registry.</span><span style="color:#bf616a;">addResourceHandler</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">/static/**</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">).</span><span style="color:#bf616a;">addResourceLocations</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">/static/</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;"> </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">@</span><span style="color:#bf616a;">Override
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public void </span><span style="color:#8fa1b3;">configureDefaultServletHandling</span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">DefaultServletHandlerConfigurer </span><span style="color:#bf616a;">configurer</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">configurer.</span><span style="color:#bf616a;">enable</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;"> </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">@</span><span style="color:#bf616a;">Bean
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public </span><span style="color:#ebcb8b;">SimpleMappingExceptionResolver </span><span style="color:#8fa1b3;">exceptionResolver</span><span style="color:#eff1f5;">() {
-</span><span style="color:#eff1f5;">        </span><span style="color:#ebcb8b;">SimpleMappingExceptionResolver</span><span style="color:#eff1f5;"> exceptionResolver </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">SimpleMappingExceptionResolver</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;"> </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#ebcb8b;">Properties</span><span style="color:#eff1f5;"> exceptionMappings </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">Properties</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;"> </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">exceptionMappings.</span><span style="color:#bf616a;">put</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">net.petrikainulainen.spring.testmvc.todo.exception.TodoNotFoundException</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">, </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">error/404</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">exceptionMappings.</span><span style="color:#bf616a;">put</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">java.lang.Exception</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">, </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">error/error</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">exceptionMappings.</span><span style="color:#bf616a;">put</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">java.lang.RuntimeException</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">, </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">error/error</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;"> </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">exceptionResolver.</span><span style="color:#bf616a;">setExceptionMappings</span><span style="color:#eff1f5;">(exceptionMappings);
-</span><span style="color:#eff1f5;"> </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#ebcb8b;">Properties</span><span style="color:#eff1f5;"> statusCodes </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">Properties</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;"> </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">statusCodes.</span><span style="color:#bf616a;">put</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">error/404</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">, </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">404</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">statusCodes.</span><span style="color:#bf616a;">put</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">error/error</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">, </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">500</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;"> </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">exceptionResolver.</span><span style="color:#bf616a;">setStatusCodes</span><span style="color:#eff1f5;">(statusCodes);
-</span><span style="color:#eff1f5;"> </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">return</span><span style="color:#eff1f5;"> exceptionResolver;
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;"> </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">@</span><span style="color:#bf616a;">Bean
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public </span><span style="color:#ebcb8b;">ViewResolver </span><span style="color:#8fa1b3;">viewResolver</span><span style="color:#eff1f5;">() {
-</span><span style="color:#eff1f5;">        </span><span style="color:#ebcb8b;">InternalResourceViewResolver</span><span style="color:#eff1f5;"> viewResolver </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">InternalResourceViewResolver</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;"> </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">viewResolver.</span><span style="color:#bf616a;">setViewClass</span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">JstlView</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">class</span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">viewResolver.</span><span style="color:#bf616a;">setPrefix</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">/WEB-INF/jsp/</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">viewResolver.</span><span style="color:#bf616a;">setSuffix</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">.jsp</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;"> </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">return</span><span style="color:#eff1f5;"> viewResolver;
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.context.annotation.Bean;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.context.annotation.ComponentScan;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.context.annotation.Configuration;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.web.servlet.ViewResolver;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.web.servlet.config.annotation.EnableWebMvc;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.web.servlet.view.InternalResourceViewResolver;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.web.servlet.view.JstlView;
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">java.util.Properties;
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">@Configuration
+</span><span style="color:#dcdcdc;">@EnableWebMvc
+</span><span style="color:#dcdcdc;">@ComponentScan(basePackages = {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#d69d85;">&quot;net.petrikainulainen.spring.testmvc.common.controller&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">        </span><span style="color:#d69d85;">&quot;net.petrikainulainen.spring.testmvc.todo.controller&quot;
+</span><span style="color:#dcdcdc;">})
+</span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">WebAppContext </span><span style="color:#569cd6;">extends </span><span style="color:#4ec9b0;">WebMvcConfigurerAdapter </span><span style="color:#dcdcdc;">{
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Override
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">addResourceHandlers(ResourceHandlerRegistry registry) {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">registry.addResourceHandler(</span><span style="color:#d69d85;">&quot;/static/**&quot;</span><span style="color:#dcdcdc;">).addResourceLocations(</span><span style="color:#d69d85;">&quot;/static/&quot;</span><span style="color:#dcdcdc;">);
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Override
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">configurer.enable();
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Bean
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">SimpleMappingExceptionResolver exceptionResolver() {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">SimpleMappingExceptionResolver exceptionResolver = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">SimpleMappingExceptionResolver();
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Properties exceptionMappings = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">Properties();
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">exceptionMappings.put(</span><span style="color:#d69d85;">&quot;net.petrikainulainen.spring.testmvc.todo.exception.TodoNotFoundException&quot;</span><span style="color:#dcdcdc;">, </span><span style="color:#d69d85;">&quot;error/404&quot;</span><span style="color:#dcdcdc;">);
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">exceptionMappings.put(</span><span style="color:#d69d85;">&quot;java.lang.Exception&quot;</span><span style="color:#dcdcdc;">, </span><span style="color:#d69d85;">&quot;error/error&quot;</span><span style="color:#dcdcdc;">);
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">exceptionMappings.put(</span><span style="color:#d69d85;">&quot;java.lang.RuntimeException&quot;</span><span style="color:#dcdcdc;">, </span><span style="color:#d69d85;">&quot;error/error&quot;</span><span style="color:#dcdcdc;">);
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">exceptionResolver.setExceptionMappings(exceptionMappings);
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Properties statusCodes = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">Properties();
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">statusCodes.put(</span><span style="color:#d69d85;">&quot;error/404&quot;</span><span style="color:#dcdcdc;">, </span><span style="color:#d69d85;">&quot;404&quot;</span><span style="color:#dcdcdc;">);
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">statusCodes.put(</span><span style="color:#d69d85;">&quot;error/error&quot;</span><span style="color:#dcdcdc;">, </span><span style="color:#d69d85;">&quot;500&quot;</span><span style="color:#dcdcdc;">);
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">exceptionResolver.setStatusCodes(statusCodes);
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> exceptionResolver;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Bean
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">ViewResolver viewResolver() {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">InternalResourceViewResolver viewResolver = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">InternalResourceViewResolver();
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">viewResolver.setViewClass(JstlView.class);
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">viewResolver.setPrefix(</span><span style="color:#d69d85;">&quot;/WEB-INF/jsp/&quot;</span><span style="color:#dcdcdc;">);
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">viewResolver.setSuffix(</span><span style="color:#d69d85;">&quot;.jsp&quot;</span><span style="color:#dcdcdc;">);
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> viewResolver;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">}
 </span></pre><h2 id="xmlpei-zhi"><a class="zola-anchor" href="#xmlpei-zhi" aria-label="Anchor link for: xmlpei-zhi">🔗</a>
 XML配置</h2>
 <p>如果使用XML配置方式，配置文件<code>exampleApplicationContext-web.xml</code>的内容如下：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">&lt;?</span><span style="color:#bf616a;">xml </span><span style="color:#d08770;">version</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">1.0</span><span style="color:#c0c5ce;">&quot; </span><span style="color:#d08770;">encoding</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">UTF-8</span><span style="color:#c0c5ce;">&quot;?&gt;
-</span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">beans </span><span style="color:#d08770;">xmlns</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">http://www.springframework.org/schema/beans</span><span style="color:#c0c5ce;">&quot;
-</span><span style="color:#c0c5ce;">       </span><span style="color:#d08770;">xmlns:xsi</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">http://www.w3.org/2001/XMLSchema-instance</span><span style="color:#c0c5ce;">&quot;
-</span><span style="color:#c0c5ce;">       </span><span style="color:#d08770;">xmlns:mvc</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">http://www.springframework.org/schema/mvc</span><span style="color:#c0c5ce;">&quot;
-</span><span style="color:#c0c5ce;">       </span><span style="color:#d08770;">xmlns:context</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">http://www.springframework.org/schema/context</span><span style="color:#c0c5ce;">&quot;
-</span><span style="color:#c0c5ce;">       </span><span style="color:#d08770;">xsi:schemaLocation</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-</span><span style="color:#a3be8c;">       </span><span style="color:#a3be8c;">http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
-</span><span style="color:#a3be8c;">       </span><span style="color:#a3be8c;">http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd</span><span style="color:#c0c5ce;">&quot;&gt;
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">mvc:annotation-driven</span><span style="color:#c0c5ce;">/&gt;
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">mvc:resources </span><span style="color:#d08770;">mapping</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">/static/**</span><span style="color:#c0c5ce;">&quot; </span><span style="color:#d08770;">location</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">/static/</span><span style="color:#c0c5ce;">&quot;/&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">mvc:default-servlet-handler</span><span style="color:#c0c5ce;">/&gt;
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">context:component-scan </span><span style="color:#d08770;">base-package</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">net.petrikainulainen.spring.testmvc.common.controller</span><span style="color:#c0c5ce;">&quot;/&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">context:component-scan </span><span style="color:#d08770;">base-package</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">net.petrikainulainen.spring.testmvc.todo.controller</span><span style="color:#c0c5ce;">&quot;/&gt;
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">bean </span><span style="color:#d08770;">id</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">exceptionResolver</span><span style="color:#c0c5ce;">&quot; </span><span style="color:#d08770;">class</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">org.springframework.web.servlet.handler.SimpleMappingExceptionResolver</span><span style="color:#c0c5ce;">&quot;&gt;
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">property </span><span style="color:#d08770;">name</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">exceptionMappings</span><span style="color:#c0c5ce;">&quot;&gt;
-</span><span style="color:#c0c5ce;">            </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">props</span><span style="color:#c0c5ce;">&gt;
-</span><span style="color:#c0c5ce;">                </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">prop </span><span style="color:#d08770;">key</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">net.petrikainulainen.spring.testmvc.todo.exception.TodoNotFoundException</span><span style="color:#c0c5ce;">&quot;&gt;error/404&lt;/</span><span style="color:#bf616a;">prop</span><span style="color:#c0c5ce;">&gt;
-</span><span style="color:#c0c5ce;">                </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">prop </span><span style="color:#d08770;">key</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">java.lang.Exception</span><span style="color:#c0c5ce;">&quot;&gt;error/error&lt;/</span><span style="color:#bf616a;">prop</span><span style="color:#c0c5ce;">&gt;
-</span><span style="color:#c0c5ce;">                </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">prop </span><span style="color:#d08770;">key</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">java.lang.RuntimeException</span><span style="color:#c0c5ce;">&quot;&gt;error/error&lt;/</span><span style="color:#bf616a;">prop</span><span style="color:#c0c5ce;">&gt;
-</span><span style="color:#c0c5ce;">            </span><span style="color:#c0c5ce;">&lt;/</span><span style="color:#bf616a;">props</span><span style="color:#c0c5ce;">&gt;
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&lt;/</span><span style="color:#bf616a;">property</span><span style="color:#c0c5ce;">&gt;
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">property </span><span style="color:#d08770;">name</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">statusCodes</span><span style="color:#c0c5ce;">&quot;&gt;
-</span><span style="color:#c0c5ce;">            </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">props</span><span style="color:#c0c5ce;">&gt;
-</span><span style="color:#c0c5ce;">                </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">prop </span><span style="color:#d08770;">key</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">error/404</span><span style="color:#c0c5ce;">&quot;&gt;404&lt;/</span><span style="color:#bf616a;">prop</span><span style="color:#c0c5ce;">&gt;
-</span><span style="color:#c0c5ce;">                </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">prop </span><span style="color:#d08770;">key</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">error/error</span><span style="color:#c0c5ce;">&quot;&gt;500&lt;/</span><span style="color:#bf616a;">prop</span><span style="color:#c0c5ce;">&gt;
-</span><span style="color:#c0c5ce;">            </span><span style="color:#c0c5ce;">&lt;/</span><span style="color:#bf616a;">props</span><span style="color:#c0c5ce;">&gt;
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&lt;/</span><span style="color:#bf616a;">property</span><span style="color:#c0c5ce;">&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;/</span><span style="color:#bf616a;">bean</span><span style="color:#c0c5ce;">&gt;
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">bean </span><span style="color:#d08770;">id</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">viewResolver</span><span style="color:#c0c5ce;">&quot; </span><span style="color:#d08770;">class</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">org.springframework.web.servlet.view.InternalResourceViewResolver</span><span style="color:#c0c5ce;">&quot;&gt;
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">property </span><span style="color:#d08770;">name</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">prefix</span><span style="color:#c0c5ce;">&quot; </span><span style="color:#d08770;">value</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">/WEB-INF/jsp/</span><span style="color:#c0c5ce;">&quot;/&gt;
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">property </span><span style="color:#d08770;">name</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">suffix</span><span style="color:#c0c5ce;">&quot; </span><span style="color:#d08770;">value</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">.jsp</span><span style="color:#c0c5ce;">&quot;/&gt;
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">property </span><span style="color:#d08770;">name</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">viewClass</span><span style="color:#c0c5ce;">&quot; </span><span style="color:#d08770;">value</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">org.springframework.web.servlet.view.JstlView</span><span style="color:#c0c5ce;">&quot;/&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;/</span><span style="color:#bf616a;">bean</span><span style="color:#c0c5ce;">&gt;
-</span><span style="color:#c0c5ce;">&lt;/</span><span style="color:#bf616a;">beans</span><span style="color:#c0c5ce;">&gt;
+<pre style="background-color:#1e1e1e;">
+<span style="color:#808080;">&lt;?</span><span style="color:#569cd6;">xml </span><span style="color:#92caf4;">version</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;1.0&quot; </span><span style="color:#92caf4;">encoding</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;UTF-8&quot;</span><span style="color:#808080;">?&gt;
+</span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">beans </span><span style="color:#92caf4;">xmlns</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;http://www.springframework.org/schema/beans&quot;
+</span><span style="color:#808080;">       </span><span style="color:#92caf4;">xmlns:xsi</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+</span><span style="color:#808080;">       </span><span style="color:#92caf4;">xmlns:mvc</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;http://www.springframework.org/schema/mvc&quot;
+</span><span style="color:#808080;">       </span><span style="color:#92caf4;">xmlns:context</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;http://www.springframework.org/schema/context&quot;
+</span><span style="color:#808080;">       </span><span style="color:#92caf4;">xsi:schemaLocation</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+</span><span style="color:#c8c8c8;">       </span><span style="color:#c8c8c8;">http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+</span><span style="color:#c8c8c8;">       </span><span style="color:#c8c8c8;">http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd&quot;</span><span style="color:#808080;">&gt;
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">mvc:annotation-driven</span><span style="color:#808080;">/&gt;
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">mvc:resources </span><span style="color:#92caf4;">mapping</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;/static/**&quot; </span><span style="color:#92caf4;">location</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;/static/&quot;</span><span style="color:#808080;">/&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">mvc:default-servlet-handler</span><span style="color:#808080;">/&gt;
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">context:component-scan </span><span style="color:#92caf4;">base-package</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;net.petrikainulainen.spring.testmvc.common.controller&quot;</span><span style="color:#808080;">/&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">context:component-scan </span><span style="color:#92caf4;">base-package</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;net.petrikainulainen.spring.testmvc.todo.controller&quot;</span><span style="color:#808080;">/&gt;
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">bean </span><span style="color:#92caf4;">id</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;exceptionResolver&quot; </span><span style="color:#92caf4;">class</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;org.springframework.web.servlet.handler.SimpleMappingExceptionResolver&quot;</span><span style="color:#808080;">&gt;
+</span><span style="color:#dcdcdc;">        </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">property </span><span style="color:#92caf4;">name</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;exceptionMappings&quot;</span><span style="color:#808080;">&gt;
+</span><span style="color:#dcdcdc;">            </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">props</span><span style="color:#808080;">&gt;
+</span><span style="color:#dcdcdc;">                </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">prop </span><span style="color:#92caf4;">key</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;net.petrikainulainen.spring.testmvc.todo.exception.TodoNotFoundException&quot;</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">error/404</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">prop</span><span style="color:#808080;">&gt;
+</span><span style="color:#dcdcdc;">                </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">prop </span><span style="color:#92caf4;">key</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;java.lang.Exception&quot;</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">error/error</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">prop</span><span style="color:#808080;">&gt;
+</span><span style="color:#dcdcdc;">                </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">prop </span><span style="color:#92caf4;">key</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;java.lang.RuntimeException&quot;</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">error/error</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">prop</span><span style="color:#808080;">&gt;
+</span><span style="color:#dcdcdc;">            </span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">props</span><span style="color:#808080;">&gt;
+</span><span style="color:#dcdcdc;">        </span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">property</span><span style="color:#808080;">&gt;
+</span><span style="color:#dcdcdc;">        </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">property </span><span style="color:#92caf4;">name</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;statusCodes&quot;</span><span style="color:#808080;">&gt;
+</span><span style="color:#dcdcdc;">            </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">props</span><span style="color:#808080;">&gt;
+</span><span style="color:#dcdcdc;">                </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">prop </span><span style="color:#92caf4;">key</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;error/404&quot;</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">404</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">prop</span><span style="color:#808080;">&gt;
+</span><span style="color:#dcdcdc;">                </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">prop </span><span style="color:#92caf4;">key</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;error/error&quot;</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">500</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">prop</span><span style="color:#808080;">&gt;
+</span><span style="color:#dcdcdc;">            </span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">props</span><span style="color:#808080;">&gt;
+</span><span style="color:#dcdcdc;">        </span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">property</span><span style="color:#808080;">&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">bean</span><span style="color:#808080;">&gt;
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">bean </span><span style="color:#92caf4;">id</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;viewResolver&quot; </span><span style="color:#92caf4;">class</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;</span><span style="color:#808080;">&gt;
+</span><span style="color:#dcdcdc;">        </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">property </span><span style="color:#92caf4;">name</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;prefix&quot; </span><span style="color:#92caf4;">value</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;/WEB-INF/jsp/&quot;</span><span style="color:#808080;">/&gt;
+</span><span style="color:#dcdcdc;">        </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">property </span><span style="color:#92caf4;">name</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;suffix&quot; </span><span style="color:#92caf4;">value</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;.jsp&quot;</span><span style="color:#808080;">/&gt;
+</span><span style="color:#dcdcdc;">        </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">property </span><span style="color:#92caf4;">name</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;viewClass&quot; </span><span style="color:#92caf4;">value</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;org.springframework.web.servlet.view.JstlView&quot;</span><span style="color:#808080;">/&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">bean</span><span style="color:#808080;">&gt;
+</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">beans</span><span style="color:#808080;">&gt;
 </span></pre><h1 id="zhu-pei-zhi-ce-shi-huan-jing"><a class="zola-anchor" href="#zhu-pei-zhi-ce-shi-huan-jing" aria-label="Anchor link for: zhu-pei-zhi-ce-shi-huan-jing">🔗</a>
 主配置（测试环境）</h1>
 <p>用于测试环境的主配置片段主要用于：</p>
@@ -348,49 +310,49 @@ XML配置</h2>
 <h2 id="javalei-pei-zhi-1"><a class="zola-anchor" href="#javalei-pei-zhi-1" aria-label="Anchor link for: javalei-pei-zhi-1">🔗</a>
 Java类配置</h2>
 <p><code>TestContext</code>类的代码如下：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.mockito.</span><span style="color:#ebcb8b;">Mockito</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.springframework.context.</span><span style="color:#ebcb8b;">MessageSource</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.springframework.context.annotation.</span><span style="color:#ebcb8b;">Bean</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.springframework.context.annotation.</span><span style="color:#ebcb8b;">Configuration</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.springframework.context.support.</span><span style="color:#ebcb8b;">ResourceBundleMessageSource</span><span style="color:#c0c5ce;">;
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">@</span><span style="color:#bf616a;">Configuration
-</span><span style="color:#b48ead;">public class </span><span style="color:#ebcb8b;">TestContext </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;"> </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">@</span><span style="color:#bf616a;">Bean
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public </span><span style="color:#ebcb8b;">MessageSource </span><span style="color:#8fa1b3;">messageSource</span><span style="color:#eff1f5;">() {
-</span><span style="color:#eff1f5;">        </span><span style="color:#ebcb8b;">ResourceBundleMessageSource</span><span style="color:#eff1f5;"> messageSource </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">ResourceBundleMessageSource</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;"> </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">messageSource.</span><span style="color:#bf616a;">setBasename</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">i18n/messages</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">messageSource.</span><span style="color:#bf616a;">setUseCodeAsDefaultMessage</span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">true</span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;"> </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">return</span><span style="color:#eff1f5;"> messageSource;
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;"> </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">@</span><span style="color:#bf616a;">Bean
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public </span><span style="color:#ebcb8b;">TodoService </span><span style="color:#8fa1b3;">todoService</span><span style="color:#eff1f5;">() {
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">return </span><span style="color:#ebcb8b;">Mockito</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">mock</span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">TodoService</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">class</span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.mockito.Mockito;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.context.MessageSource;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.context.annotation.Bean;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.context.annotation.Configuration;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.context.support.ResourceBundleMessageSource;
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">@Configuration
+</span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">TestContext {
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Bean
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">MessageSource messageSource() {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">ResourceBundleMessageSource messageSource = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">ResourceBundleMessageSource();
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">messageSource.setBasename(</span><span style="color:#d69d85;">&quot;i18n/messages&quot;</span><span style="color:#dcdcdc;">);
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">messageSource.setUseCodeAsDefaultMessage(</span><span style="color:#569cd6;">true</span><span style="color:#dcdcdc;">);
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> messageSource;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Bean
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">TodoService todoService() {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">Mockito.mock(TodoService.class);
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">}
 </span></pre><h2 id="xmlpei-zhi-1"><a class="zola-anchor" href="#xmlpei-zhi-1" aria-label="Anchor link for: xmlpei-zhi-1">🔗</a>
 XML配置</h2>
 <p><code>testContext.xml</code>文件的内容如下：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">&lt;?</span><span style="color:#bf616a;">xml </span><span style="color:#d08770;">version</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">1.0</span><span style="color:#c0c5ce;">&quot; </span><span style="color:#d08770;">encoding</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">UTF-8</span><span style="color:#c0c5ce;">&quot;?&gt;
-</span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">beans </span><span style="color:#d08770;">xmlns</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">http://www.springframework.org/schema/beans</span><span style="color:#c0c5ce;">&quot;
-</span><span style="color:#c0c5ce;">       </span><span style="color:#d08770;">xmlns:xsi</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">http://www.w3.org/2001/XMLSchema-instance</span><span style="color:#c0c5ce;">&quot;
-</span><span style="color:#c0c5ce;">       </span><span style="color:#d08770;">xsi:schemaLocation</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd</span><span style="color:#c0c5ce;">&quot;&gt;
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">bean </span><span style="color:#d08770;">id</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">messageSource</span><span style="color:#c0c5ce;">&quot; </span><span style="color:#d08770;">class</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">org.springframework.context.support.ResourceBundleMessageSource</span><span style="color:#c0c5ce;">&quot;&gt;
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">property </span><span style="color:#d08770;">name</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">basename</span><span style="color:#c0c5ce;">&quot; </span><span style="color:#d08770;">value</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">i18n/messages</span><span style="color:#c0c5ce;">&quot;/&gt;
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">property </span><span style="color:#d08770;">name</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">useCodeAsDefaultMessage</span><span style="color:#c0c5ce;">&quot; </span><span style="color:#d08770;">value</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">true</span><span style="color:#c0c5ce;">&quot;/&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;/</span><span style="color:#bf616a;">bean</span><span style="color:#c0c5ce;">&gt;
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">bean </span><span style="color:#d08770;">id</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">todoService</span><span style="color:#c0c5ce;">&quot; </span><span style="color:#d08770;">name</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">todoService</span><span style="color:#c0c5ce;">&quot; </span><span style="color:#d08770;">class</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">org.mockito.Mockito</span><span style="color:#c0c5ce;">&quot; </span><span style="color:#d08770;">factory-method</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">mock</span><span style="color:#c0c5ce;">&quot;&gt;
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">constructor-arg </span><span style="color:#d08770;">value</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">net.petrikainulainen.spring.testmvc.todo.service.TodoService</span><span style="color:#c0c5ce;">&quot;/&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&lt;/</span><span style="color:#bf616a;">bean</span><span style="color:#c0c5ce;">&gt;
-</span><span style="color:#c0c5ce;">&lt;/</span><span style="color:#bf616a;">beans</span><span style="color:#c0c5ce;">&gt;
+<pre style="background-color:#1e1e1e;">
+<span style="color:#808080;">&lt;?</span><span style="color:#569cd6;">xml </span><span style="color:#92caf4;">version</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;1.0&quot; </span><span style="color:#92caf4;">encoding</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;UTF-8&quot;</span><span style="color:#808080;">?&gt;
+</span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">beans </span><span style="color:#92caf4;">xmlns</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;http://www.springframework.org/schema/beans&quot;
+</span><span style="color:#808080;">       </span><span style="color:#92caf4;">xmlns:xsi</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+</span><span style="color:#808080;">       </span><span style="color:#92caf4;">xsi:schemaLocation</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span><span style="color:#808080;">&gt;
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">bean </span><span style="color:#92caf4;">id</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;messageSource&quot; </span><span style="color:#92caf4;">class</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;org.springframework.context.support.ResourceBundleMessageSource&quot;</span><span style="color:#808080;">&gt;
+</span><span style="color:#dcdcdc;">        </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">property </span><span style="color:#92caf4;">name</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;basename&quot; </span><span style="color:#92caf4;">value</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;i18n/messages&quot;</span><span style="color:#808080;">/&gt;
+</span><span style="color:#dcdcdc;">        </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">property </span><span style="color:#92caf4;">name</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;useCodeAsDefaultMessage&quot; </span><span style="color:#92caf4;">value</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;true&quot;</span><span style="color:#808080;">/&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">bean</span><span style="color:#808080;">&gt;
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">bean </span><span style="color:#92caf4;">id</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;todoService&quot; </span><span style="color:#92caf4;">name</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;todoService&quot; </span><span style="color:#92caf4;">class</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;org.mockito.Mockito&quot; </span><span style="color:#92caf4;">factory-method</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;mock&quot;</span><span style="color:#808080;">&gt;
+</span><span style="color:#dcdcdc;">        </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">constructor-arg </span><span style="color:#92caf4;">value</span><span style="color:#808080;">=</span><span style="color:#c8c8c8;">&quot;net.petrikainulainen.spring.testmvc.todo.service.TodoService&quot;</span><span style="color:#808080;">/&gt;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">bean</span><span style="color:#808080;">&gt;
+</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">beans</span><span style="color:#808080;">&gt;
 </span></pre><h1 id="ce-shi-lei-de-bian-xie"><a class="zola-anchor" href="#ce-shi-lei-de-bian-xie" aria-label="Anchor link for: ce-shi-lei-de-bian-xie">🔗</a>
 测试类的编写</h1>
 <p>我们可以使用以下两种方式来编写我们的controller测试用例：</p>
@@ -413,85 +375,85 @@ XML配置</h2>
 <li>测试用例类中添加一个<code>setUp()</code>方法并用<code>@Before</code>注解，调用<a href="http://docs.spring.io/spring/docs/3.2.x/javadoc-api/org/springframework/test/web/servlet/setup/MockMvcBuilders.html"><code>MockMvcBuilders</code></a>的静态方法<code>standaloneSetup()</code>创建并配置好<code>MockMvc</code>类型的成员</li>
 </ol>
 <p>测试用例类的代码如下：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.junit.</span><span style="color:#ebcb8b;">Before</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.junit.runner.</span><span style="color:#ebcb8b;">RunWith</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.mockito.</span><span style="color:#ebcb8b;">Mock</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.mockito.runners.</span><span style="color:#ebcb8b;">MockitoJUnitRunner</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.springframework.context.</span><span style="color:#ebcb8b;">MessageSource</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.springframework.context.support.</span><span style="color:#ebcb8b;">ResourceBundleMessageSource</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.springframework.test.web.servlet.</span><span style="color:#ebcb8b;">MockMvc</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.springframework.test.web.servlet.setup.</span><span style="color:#ebcb8b;">MockMvcBuilders</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.springframework.validation.beanvalidation.</span><span style="color:#ebcb8b;">LocalValidatorFactoryBean</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.springframework.web.servlet.</span><span style="color:#ebcb8b;">HandlerExceptionResolver</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.springframework.web.servlet.</span><span style="color:#ebcb8b;">ViewResolver</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.springframework.web.servlet.handler.</span><span style="color:#ebcb8b;">SimpleMappingExceptionResolver</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.springframework.web.servlet.view.</span><span style="color:#ebcb8b;">InternalResourceViewResolver</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.springframework.web.servlet.view.</span><span style="color:#ebcb8b;">JstlView</span><span style="color:#c0c5ce;">;
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">java.util.</span><span style="color:#ebcb8b;">Properties</span><span style="color:#c0c5ce;">;
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">@</span><span style="color:#bf616a;">RunWith</span><span style="color:#c0c5ce;">(</span><span style="color:#ebcb8b;">MockitoJUnitRunner</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">class</span><span style="color:#c0c5ce;">)
-</span><span style="color:#b48ead;">public class </span><span style="color:#ebcb8b;">StandaloneTodoControllerTest </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;"> </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private </span><span style="color:#ebcb8b;">MockMvc </span><span style="color:#eff1f5;">mockMvc;
-</span><span style="color:#eff1f5;"> </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">@</span><span style="color:#bf616a;">Mock
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private </span><span style="color:#ebcb8b;">TodoService </span><span style="color:#eff1f5;">todoServiceMock;
-</span><span style="color:#eff1f5;"> </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">@</span><span style="color:#bf616a;">Before
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public void </span><span style="color:#8fa1b3;">setUp</span><span style="color:#eff1f5;">() {
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">mockMvc </span><span style="color:#c0c5ce;">= </span><span style="color:#ebcb8b;">MockMvcBuilders</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">standaloneSetup</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">TodoController</span><span style="color:#eff1f5;">(</span><span style="color:#bf616a;">messageSource</span><span style="color:#eff1f5;">(), todoServiceMock))
-</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">setHandlerExceptionResolvers</span><span style="color:#eff1f5;">(</span><span style="color:#bf616a;">exceptionResolver</span><span style="color:#eff1f5;">())
-</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">setValidator</span><span style="color:#eff1f5;">(</span><span style="color:#bf616a;">validator</span><span style="color:#eff1f5;">())
-</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">setViewResolvers</span><span style="color:#eff1f5;">(</span><span style="color:#bf616a;">viewResolver</span><span style="color:#eff1f5;">())
-</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">build</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;"> </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private </span><span style="color:#ebcb8b;">HandlerExceptionResolver </span><span style="color:#8fa1b3;">exceptionResolver</span><span style="color:#eff1f5;">() {
-</span><span style="color:#eff1f5;">        </span><span style="color:#ebcb8b;">SimpleMappingExceptionResolver</span><span style="color:#eff1f5;"> exceptionResolver </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">SimpleMappingExceptionResolver</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;"> </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#ebcb8b;">Properties</span><span style="color:#eff1f5;"> exceptionMappings </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">Properties</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;"> </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">exceptionMappings.</span><span style="color:#bf616a;">put</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">net.petrikainulainen.spring.testmvc.todo.exception.TodoNotFoundException</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">, </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">error/404</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">exceptionMappings.</span><span style="color:#bf616a;">put</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">java.lang.Exception</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">, </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">error/error</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">exceptionMappings.</span><span style="color:#bf616a;">put</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">java.lang.RuntimeException</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">, </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">error/error</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;"> </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">exceptionResolver.</span><span style="color:#bf616a;">setExceptionMappings</span><span style="color:#eff1f5;">(exceptionMappings);
-</span><span style="color:#eff1f5;"> </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#ebcb8b;">Properties</span><span style="color:#eff1f5;"> statusCodes </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">Properties</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;"> </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">statusCodes.</span><span style="color:#bf616a;">put</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">error/404</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">, </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">404</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">statusCodes.</span><span style="color:#bf616a;">put</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">error/error</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">, </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">500</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;"> </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">exceptionResolver.</span><span style="color:#bf616a;">setStatusCodes</span><span style="color:#eff1f5;">(statusCodes);
-</span><span style="color:#eff1f5;"> </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">return</span><span style="color:#eff1f5;"> exceptionResolver;
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;"> </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private </span><span style="color:#ebcb8b;">MessageSource </span><span style="color:#8fa1b3;">messageSource</span><span style="color:#eff1f5;">() {
-</span><span style="color:#eff1f5;">        </span><span style="color:#ebcb8b;">ResourceBundleMessageSource</span><span style="color:#eff1f5;"> messageSource </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">ResourceBundleMessageSource</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;"> </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">messageSource.</span><span style="color:#bf616a;">setBasename</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">i18n/messages</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">messageSource.</span><span style="color:#bf616a;">setUseCodeAsDefaultMessage</span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">true</span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;"> </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">return</span><span style="color:#eff1f5;"> messageSource;
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;"> </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private </span><span style="color:#ebcb8b;">LocalValidatorFactoryBean </span><span style="color:#8fa1b3;">validator</span><span style="color:#eff1f5;">() {
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">return new </span><span style="color:#ebcb8b;">LocalValidatorFactoryBean</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;"> </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private </span><span style="color:#ebcb8b;">ViewResolver </span><span style="color:#8fa1b3;">viewResolver</span><span style="color:#eff1f5;">() {
-</span><span style="color:#eff1f5;">        </span><span style="color:#ebcb8b;">InternalResourceViewResolver</span><span style="color:#eff1f5;"> viewResolver </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">InternalResourceViewResolver</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;"> </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">viewResolver.</span><span style="color:#bf616a;">setViewClass</span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">JstlView</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">class</span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">viewResolver.</span><span style="color:#bf616a;">setPrefix</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">/WEB-INF/jsp/</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">viewResolver.</span><span style="color:#bf616a;">setSuffix</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">.jsp</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;"> </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">return</span><span style="color:#eff1f5;"> viewResolver;
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.junit.Before;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.junit.runner.RunWith;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.mockito.Mock;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.mockito.runners.MockitoJUnitRunner;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.context.MessageSource;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.context.support.ResourceBundleMessageSource;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.MockMvc;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.setup.MockMvcBuilders;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.web.servlet.HandlerExceptionResolver;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.web.servlet.ViewResolver;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.web.servlet.view.InternalResourceViewResolver;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.web.servlet.view.JstlView;
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">java.util.Properties;
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">@RunWith(MockitoJUnitRunner.class)
+</span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">StandaloneTodoControllerTest {
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">MockMvc mockMvc;
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Mock
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">TodoService todoServiceMock;
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Before
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">setUp() {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">mockMvc = MockMvcBuilders.standaloneSetup(</span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">TodoController(messageSource(), todoServiceMock))
+</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.setHandlerExceptionResolvers(exceptionResolver())
+</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.setValidator(validator())
+</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.setViewResolvers(viewResolver())
+</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.build();
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">HandlerExceptionResolver exceptionResolver() {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">SimpleMappingExceptionResolver exceptionResolver = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">SimpleMappingExceptionResolver();
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Properties exceptionMappings = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">Properties();
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">exceptionMappings.put(</span><span style="color:#d69d85;">&quot;net.petrikainulainen.spring.testmvc.todo.exception.TodoNotFoundException&quot;</span><span style="color:#dcdcdc;">, </span><span style="color:#d69d85;">&quot;error/404&quot;</span><span style="color:#dcdcdc;">);
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">exceptionMappings.put(</span><span style="color:#d69d85;">&quot;java.lang.Exception&quot;</span><span style="color:#dcdcdc;">, </span><span style="color:#d69d85;">&quot;error/error&quot;</span><span style="color:#dcdcdc;">);
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">exceptionMappings.put(</span><span style="color:#d69d85;">&quot;java.lang.RuntimeException&quot;</span><span style="color:#dcdcdc;">, </span><span style="color:#d69d85;">&quot;error/error&quot;</span><span style="color:#dcdcdc;">);
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">exceptionResolver.setExceptionMappings(exceptionMappings);
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Properties statusCodes = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">Properties();
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">statusCodes.put(</span><span style="color:#d69d85;">&quot;error/404&quot;</span><span style="color:#dcdcdc;">, </span><span style="color:#d69d85;">&quot;404&quot;</span><span style="color:#dcdcdc;">);
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">statusCodes.put(</span><span style="color:#d69d85;">&quot;error/error&quot;</span><span style="color:#dcdcdc;">, </span><span style="color:#d69d85;">&quot;500&quot;</span><span style="color:#dcdcdc;">);
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">exceptionResolver.setStatusCodes(statusCodes);
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> exceptionResolver;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">MessageSource messageSource() {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">ResourceBundleMessageSource messageSource = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">ResourceBundleMessageSource();
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">messageSource.setBasename(</span><span style="color:#d69d85;">&quot;i18n/messages&quot;</span><span style="color:#dcdcdc;">);
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">messageSource.setUseCodeAsDefaultMessage(</span><span style="color:#569cd6;">true</span><span style="color:#dcdcdc;">);
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> messageSource;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">LocalValidatorFactoryBean validator() {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return new </span><span style="color:#dcdcdc;">LocalValidatorFactoryBean();
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">ViewResolver viewResolver() {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">InternalResourceViewResolver viewResolver = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">InternalResourceViewResolver();
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">viewResolver.setViewClass(JstlView.class);
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">viewResolver.setPrefix(</span><span style="color:#d69d85;">&quot;/WEB-INF/jsp/&quot;</span><span style="color:#dcdcdc;">);
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">viewResolver.setSuffix(</span><span style="color:#d69d85;">&quot;.jsp&quot;</span><span style="color:#dcdcdc;">);
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> viewResolver;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">}
 </span></pre>
 <p>可以明显的发现，这种方式有两个问题：</p>
 <ul>
@@ -511,42 +473,42 @@ XML配置</h2>
 <li>测试用例类中添加一个<code>setUp()</code>方法并用<code>@Before</code>注解，调用<a href="http://docs.spring.io/spring/docs/3.2.x/javadoc-api/org/springframework/test/web/servlet/setup/MockMvcBuilders.html"><code>MockMvcBuilders</code></a>的静态方法<code>webAppContextSetup()</code>创建并配置好<code>MockMvc</code>类型的成员</li>
 </ol>
 <p>测试用例类的代码如下：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.junit.</span><span style="color:#ebcb8b;">Before</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.junit.runner.</span><span style="color:#ebcb8b;">RunWith</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.mockito.</span><span style="color:#ebcb8b;">Mockito</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.springframework.beans.factory.annotation.</span><span style="color:#ebcb8b;">Autowired</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.springframework.test.context.</span><span style="color:#ebcb8b;">ContextConfiguration</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.springframework.test.context.junit4.</span><span style="color:#ebcb8b;">SpringJUnit4ClassRunner</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.springframework.test.context.web.</span><span style="color:#ebcb8b;">WebAppConfiguration</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.springframework.test.web.servlet.</span><span style="color:#ebcb8b;">MockMvc</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.springframework.test.web.servlet.setup.</span><span style="color:#ebcb8b;">MockMvcBuilders</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">org.springframework.web.context.</span><span style="color:#ebcb8b;">WebApplicationContext</span><span style="color:#c0c5ce;">;
-</span><span style="color:#c0c5ce;"> </span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">@</span><span style="color:#bf616a;">RunWith</span><span style="color:#c0c5ce;">(</span><span style="color:#ebcb8b;">SpringJUnit4ClassRunner</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">class</span><span style="color:#c0c5ce;">)
-</span><span style="color:#c0c5ce;">@</span><span style="color:#bf616a;">ContextConfiguration</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">classes </span><span style="color:#c0c5ce;">= {</span><span style="color:#ebcb8b;">TestContext</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">class</span><span style="color:#c0c5ce;">, </span><span style="color:#ebcb8b;">WebAppContext</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">class</span><span style="color:#c0c5ce;">})
-</span><span style="color:#65737e;">//@ContextConfiguration(locations = {&quot;classpath:testContext.xml&quot;, &quot;classpath:exampleApplicationContext-web.xml&quot;})
-</span><span style="color:#c0c5ce;">@</span><span style="color:#bf616a;">WebAppConfiguration
-</span><span style="color:#b48ead;">public class </span><span style="color:#ebcb8b;">WebApplicationContextTodoControllerTest </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;"> </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private </span><span style="color:#ebcb8b;">MockMvc </span><span style="color:#eff1f5;">mockMvc;
-</span><span style="color:#eff1f5;"> </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">@</span><span style="color:#bf616a;">Autowired
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private </span><span style="color:#ebcb8b;">TodoService </span><span style="color:#eff1f5;">todoServiceMock;
-</span><span style="color:#eff1f5;"> </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">@</span><span style="color:#bf616a;">Autowired
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">private </span><span style="color:#ebcb8b;">WebApplicationContext </span><span style="color:#eff1f5;">webApplicationContext;
-</span><span style="color:#eff1f5;"> </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">@</span><span style="color:#bf616a;">Before
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public void </span><span style="color:#8fa1b3;">setUp</span><span style="color:#eff1f5;">() {
-</span><span style="color:#eff1f5;">        </span><span style="color:#65737e;">//We have to reset our mock between tests because the mock objects
-</span><span style="color:#eff1f5;">        </span><span style="color:#65737e;">//are managed by the Spring container. If we would not reset them,
-</span><span style="color:#eff1f5;">        </span><span style="color:#65737e;">//stubbing and verified behavior would &quot;leak&quot; from one test to another.
-</span><span style="color:#eff1f5;">        </span><span style="color:#ebcb8b;">Mockito</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">reset</span><span style="color:#eff1f5;">(todoServiceMock);
-</span><span style="color:#eff1f5;"> </span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">mockMvc </span><span style="color:#c0c5ce;">= </span><span style="color:#ebcb8b;">MockMvcBuilders</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">webAppContextSetup</span><span style="color:#eff1f5;">(webApplicationContext).</span><span style="color:#bf616a;">build</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.junit.Before;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.junit.runner.RunWith;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.mockito.Mockito;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.beans.factory.annotation.Autowired;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.context.ContextConfiguration;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.context.web.WebAppConfiguration;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.MockMvc;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.setup.MockMvcBuilders;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.web.context.WebApplicationContext;
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">@RunWith(SpringJUnit4ClassRunner.class)
+</span><span style="color:#dcdcdc;">@ContextConfiguration(classes = {TestContext.class, WebAppContext.class})
+</span><span style="color:#608b4e;">//@ContextConfiguration(locations = {&quot;classpath:testContext.xml&quot;, &quot;classpath:exampleApplicationContext-web.xml&quot;})
+</span><span style="color:#dcdcdc;">@WebAppConfiguration
+</span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">WebApplicationContextTodoControllerTest {
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">MockMvc mockMvc;
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Autowired
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">TodoService todoServiceMock;
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Autowired
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">WebApplicationContext webApplicationContext;
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Before
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">setUp() {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#608b4e;">//We have to reset our mock between tests because the mock objects
+</span><span style="color:#dcdcdc;">        </span><span style="color:#608b4e;">//are managed by the Spring container. If we would not reset them,
+</span><span style="color:#dcdcdc;">        </span><span style="color:#608b4e;">//stubbing and verified behavior would &quot;leak&quot; from one test to another.
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Mockito.reset(todoServiceMock);
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">}
 </span></pre>
 <p>使用这种方式使得测试用例类的代码非常干净简洁，但是缺点就是一个测试用例就要加载完整的Spring MVC框架。</p>
 <h1 id="zong-jie"><a class="zola-anchor" href="#zong-jie" aria-label="Anchor link for: zong-jie">🔗</a>
@@ -560,56 +522,24 @@ XML配置</h2>
 Controllers</a></p>
 <p>本文使用的代码已经放在了 <a href="https://github.com/pkainulainen/spring-mvc-test-examples/tree/master/controllers-unittest">Github</a> 上，请自行查阅。</p>
 
-    </div>
-
-    
-    
-
-    <div class="post-footer">
-        
-            
-                <div class="post-tags">
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;spring-mvc&#x2F;">#Spring MVC</a>
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;testing&#x2F;">#testing</a>
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;java&#x2F;">#java</a>
-                    
-                </div>
-            
-            
-                <div class="post-nav">
-                    
-                        <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;spring-mvc-testing-content&#x2F;">‹ Spring MVC Testing: Content&#x2F;目录</a>
-                    
-                    
-                        <a class="next" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;spring-mvc-testing-unit-testing-normal-controllers&#x2F;">Spring MVC Unit Testing - Normal Controllers ›</a>
-                    
-                    
-                    
-                </div>
-            
-
-        
-
-    </div>
-
-    
-    
-</article>
-
-
-                </div>
-            </main>
-
-            
-            
         </div>
+        
+    
+</div></div>
+            
+    <div class="pagination">
+        <div class="pagination__buttons">
+            </div>
+    </div>
+<footer class="footer">
+                    <div class="footer__inner"><div class="copyright">
+            <span>© 2019 <a href="https://github.com/ejmg/zerm">zerm</a> :: Powered by <a href="https://www.getzola.org/">Zola</a></span>
+            <span>:: Theme made by <a href="https://github.com/ejmg">ejmg</a></span>
+        </div>
+    <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;assets&#x2F;js&#x2F;main.js"></script>
+</div>
+                    
 
-      
-          <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
-      
+                </footer></div>
     </body>
-
 </html>

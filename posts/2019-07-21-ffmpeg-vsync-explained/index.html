@@ -1,163 +1,126 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta http-equiv="content-type" content="text/html; charset=utf-8">
-
-      <!-- Enable responsiveness on mobile devices-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-      <title>wangbo’s home &amp; blog - Ffmpeg -vsync 使用场景辨析</title>
-
-      
-
-      
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
-          
-      
-
-      
-          <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
-          
-      
-
-      
-      
-    </head>
-
-    <body>
-        <div class="container">
-
-            <div id="mobile-navbar" class="mobile-navbar">
-              <div class="mobile-header-logo">
-                <a href="/" class="logo">WB Prime</a>
-              </div>
-              <div class="mobile-navbar-icon icon-out">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            </div>
-
-            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
-              <ul class="mobile-menu-list">
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im">
-                            Home
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;categories">
-                            Categories
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;tags">
-                            Tags
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;about">
-                            About
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                            Github
-                        </a>
-                    </li>
-                
-              </ul>
-            </nav>
-
-            <header id="header">
-                <div class="logo"><a href="https:&#x2F;&#x2F;www.wangbo.im">WB Prime</a></div>
-                <nav class="menu">
-                    <ul>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im">
-                                    Home
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;categories">
-                                    Categories
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;tags">
-                                    Tags
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;about">
-                                    About
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                                    Github
-                                </a>
-                            </li>
-                        
-                    </ul>
-                </nav>
-            </header>
-
-            <main>
-                <div class="content" id="mobile-panel">
-                    
-
-
-
-<article class="post">
+    <title>Ffmpeg -vsync 使用场景辨析 - Elvis Wang</title>
     
-    <header class="post__header">
-        <h1 class="post__title">
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="wangbo’s home &amp; blog"/>
+
+    <meta property="og:title" content="
+    wangbo’s home &amp; blog -&nbsp;Ffmpeg -vsync 使用场景辨析" />
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-07-21-ffmpeg-vsync-explained&#x2F;"/>
+    <meta property="og:description" content="&lt;p&gt;在使用 &lt;a href=&quot;http:&#x2F;&#x2F;ffmpeg.org&quot;&gt;Ffmpeg&lt;&#x2F;a&gt; 进行视频抽帧时，发现 &lt;code&gt;-vsync&lt;&#x2F;code&gt; 参数的意思理解的不是很清楚。本文通过不同的场景
+使用结果对比来辨析 &lt;code&gt;-vsync&lt;&#x2F;c…"/>
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+<link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
+    <body>
+        <div class="container full">
+<header class="header">
+    <div class="header__inner">
+        <div class="header__logo">
+            <a href="&#x2F;">
+    <div class="logo">
+        WB Prime
+    </div>
+</a>
+        </div>
+        <div class="menu-trigger">menu</div>
+    </div>
+    
+    <nav class="menu">
+        <ul class="menu__inner menu__inner--desktop">
+            
+            
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+                    </li>
+                
+            </ul>
+
+        <ul class="menu__inner menu__inner--mobile">
+            
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+        </li>
+        </ul>
+    </nav>
+
+    </header>
+<div class="content"><div class="post">
+        <h1 class="post-title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-07-21-ffmpeg-vsync-explained&#x2F;">Ffmpeg -vsync 使用场景辨析</a>
         </h1>
-        <div class="post__meta">
-            <span class="post__time">2019-07-21</span>
-            
-        </div>
-    </header>
+        
+    <div class="post-meta">
+        <span class="post-date">2019.07.21
+                </span>
 
-    <div class="post-content">
-      <p>在使用 <a href="http://ffmpeg.org">Ffmpeg</a> 进行视频抽帧时，发现 <code>-vsync</code> 参数的意思理解的不是很清楚。本文通过不同的场景
+        <span class="post-author"></span>
+
+        
+
+    
+    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;streaming&#x2F;">Streaming</a>} 
+
+            
+    ::
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;ffmpeg&#x2F;">ffmpeg</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;vsync&#x2F;">vsync</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;fps&#x2F;">fps</a>
+        
+    
+            
+        
+    </div>
+
+
+
+        
+
+        <div class="post-content">
+            <p>在使用 <a href="http://ffmpeg.org">Ffmpeg</a> 进行视频抽帧时，发现 <code>-vsync</code> 参数的意思理解的不是很清楚。本文通过不同的场景
 使用结果对比来辨析 <code>-vsync</code> 选项的枚举参数值的区别。</p>
 <p>以下是 <a href="http://ffmpeg.org">Ffmpeg</a> 官网上关于 <code>-vsync</code> 的全部说明：</p>
 <blockquote>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">-vsync parameter
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">Video sync method. For compatibility reasons old values can be specified as numbers. Newly added values will have to be specified as strings always.
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">0, passthrough
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">Each frame is passed with its timestamp from the demuxer to the muxer.
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">1, cfr
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">Frames will be duplicated and dropped to achieve exactly the requested constant frame rate.
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">2, vfr
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">Frames are passed through with their timestamp or dropped so as to prevent 2 frames from having the same timestamp.
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">drop
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">As passthrough but destroys all timestamps, making the muxer generate fresh timestamps based on frame-rate.
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">-1, auto
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">Chooses between 1 and 2 depending on muxer capabilities. This is the default method.
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">Note that the timestamps may be further modified by the muxer, after this. For example, in the case that the format option avoid_negative_ts is enabled.
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">With -map you can select from which stream the timestamps should be taken. You can leave either video or audio unchanged and sync the remaining stream(s) to the unchanged one.
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">-vsync parameter
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">Video sync method. For compatibility reasons old values can be specified as numbers. Newly added values will have to be specified as strings always.
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">0, passthrough
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Each frame is passed with its timestamp from the demuxer to the muxer.
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">1, cfr
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Frames will be duplicated and dropped to achieve exactly the requested constant frame rate.
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">2, vfr
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Frames are passed through with their timestamp or dropped so as to prevent 2 frames from having the same timestamp.
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">drop
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">As passthrough but destroys all timestamps, making the muxer generate fresh timestamps based on frame-rate.
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">-1, auto
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Chooses between 1 and 2 depending on muxer capabilities. This is the default method.
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">Note that the timestamps may be further modified by the muxer, after this. For example, in the case that the format option avoid_negative_ts is enabled.
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">With -map you can select from which stream the timestamps should be taken. You can leave either video or audio unchanged and sync the remaining stream(s) to the unchanged one.
 </span></pre></blockquote>
 <p><a name="continue-reading"></a></p>
 <h1 id="zi-mian-li-jie"><a class="zola-anchor" href="#zi-mian-li-jie" aria-label="Anchor link for: zi-mian-li-jie">🔗</a>
@@ -172,136 +135,136 @@
 <h1 id="case-fen-xi"><a class="zola-anchor" href="#case-fen-xi" aria-label="Anchor link for: case-fen-xi">🔗</a>
 Case 分析</h1>
 <p>使用 <a href="https://peach.blender.org/">Blender - Big Buck Bunny</a> 网站提供的视频进行 case 分析，其 <code>ffprobe</code> 输出信息如下：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">{
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">streams</span><span style="color:#c0c5ce;">&quot;: [
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">{
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">index</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">codec_name</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">h264</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">codec_long_name</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">profile</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">High</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">codec_type</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">video</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">codec_time_base</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">1/60</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">codec_tag_string</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">avc1</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">codec_tag</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">0x31637661</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">width</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">1920</span><span style="color:#c0c5ce;">,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">height</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">1080</span><span style="color:#c0c5ce;">,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">coded_width</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">1920</span><span style="color:#c0c5ce;">,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">coded_height</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">1088</span><span style="color:#c0c5ce;">,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">has_b_frames</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">sample_aspect_ratio</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">1:1</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">display_aspect_ratio</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">16:9</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">pix_fmt</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">yuv420p</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">level</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">40</span><span style="color:#c0c5ce;">,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">chroma_location</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">left</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">refs</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">is_avc</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">true</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">nal_length_size</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">4</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">r_frame_rate</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">30/1</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">avg_frame_rate</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">30/1</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">time_base</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">1/15360</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">start_pts</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">start_time</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">0.000000</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">duration_ts</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">9747456</span><span style="color:#c0c5ce;">,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">duration</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">634.600000</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">bit_rate</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">2736521</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">bits_per_raw_sample</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">8</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">nb_frames</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">19038</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">disposition</span><span style="color:#c0c5ce;">&quot;: {
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">default</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">,
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">dub</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">,
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">original</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">,
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">comment</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">,
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">lyrics</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">,
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">karaoke</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">,
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">forced</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">,
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">hearing_impaired</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">,
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">visual_impaired</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">,
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">clean_effects</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">,
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">attached_pic</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">,
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">timed_thumbnails</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">0
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">},
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">tags</span><span style="color:#c0c5ce;">&quot;: {
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">language</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">und</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">handler_name</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">GPAC ISO Video Handler</span><span style="color:#c0c5ce;">&quot;
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">}
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">},
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">{
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">index</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">codec_name</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">ac3</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">codec_long_name</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">ATSC A/52A (AC-3)</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">codec_type</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">audio</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">codec_time_base</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">1/48000</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">codec_tag_string</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">ac-3</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">codec_tag</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">0x332d6361</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">sample_fmt</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">fltp</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">sample_rate</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">48000</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">channels</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">6</span><span style="color:#c0c5ce;">,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">channel_layout</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">5.1(side)</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">bits_per_sample</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">dmix_mode</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">-1</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">ltrt_cmixlev</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">-1.000000</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">ltrt_surmixlev</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">-1.000000</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">loro_cmixlev</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">-1.000000</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">loro_surmixlev</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">-1.000000</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">r_frame_rate</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">0/0</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">avg_frame_rate</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">0/0</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">time_base</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">1/48000</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">start_pts</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">start_time</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">0.000000</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">duration_ts</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">30438912</span><span style="color:#c0c5ce;">,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">duration</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">634.144000</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">bit_rate</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">320000</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">nb_frames</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">19556</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">disposition</span><span style="color:#c0c5ce;">&quot;: {
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">default</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">,
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">dub</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">,
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">original</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">,
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">comment</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">,
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">lyrics</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">,
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">karaoke</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">,
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">forced</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">,
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">hearing_impaired</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">,
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">visual_impaired</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">,
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">clean_effects</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">,
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">attached_pic</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">,
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">timed_thumbnails</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">0
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">},
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">tags</span><span style="color:#c0c5ce;">&quot;: {
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">language</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">und</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">handler_name</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">GPAC ISO Audio Handler</span><span style="color:#c0c5ce;">&quot;
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">},
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">side_data_list</span><span style="color:#c0c5ce;">&quot;: [
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">{
-</span><span style="color:#c0c5ce;">          </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">side_data_type</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">Audio Service Type</span><span style="color:#c0c5ce;">&quot;
-</span><span style="color:#c0c5ce;">        </span><span style="color:#c0c5ce;">}
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">]
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">}
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">],
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">format</span><span style="color:#c0c5ce;">&quot;: {
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">filename</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">big_buck_bunny.1920x1080.30fps.mp4</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">nb_streams</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">,
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">nb_programs</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">,
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">format_name</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">mov,mp4,m4a,3gp,3g2,mj2</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">format_long_name</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">QuickTime / MOV</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">start_time</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">0.000000</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">duration</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">634.600000</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">size</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">242901742</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">bit_rate</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">3062108</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">probe_score</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">100</span><span style="color:#c0c5ce;">,
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">tags</span><span style="color:#c0c5ce;">&quot;: {
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">major_brand</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">isom</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">minor_version</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">512</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">compatible_brands</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">isomiso2avc1mp41</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">title</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">Big Buck Bunny, Sunflower version</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">artist</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">Blender Foundation 2008, Janus Bager Kristensen 2013</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">composer</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">Sacha Goedegebure</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">encoder</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">Lavf58.20.100</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">comment</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">Creative Commons Attribution 3.0 - http://bbb3d.renderfarming.net</span><span style="color:#c0c5ce;">&quot;,
-</span><span style="color:#c0c5ce;">      </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">genre</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">Animation</span><span style="color:#c0c5ce;">&quot;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#c0c5ce;">}
-</span><span style="color:#c0c5ce;">  </span><span style="color:#c0c5ce;">}
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">{
+</span><span style="color:#dcdcdc;">  </span><span style="color:#d69d85;">&quot;streams&quot;</span><span style="color:#dcdcdc;">: [
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">{
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;index&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;codec_name&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;h264&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;codec_long_name&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;profile&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;High&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;codec_type&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;video&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;codec_time_base&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;1/60&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;codec_tag_string&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;avc1&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;codec_tag&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;0x31637661&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;width&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">1920</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;height&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">1080</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;coded_width&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">1920</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;coded_height&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">1088</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;has_b_frames&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">2</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;sample_aspect_ratio&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;1:1&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;display_aspect_ratio&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;16:9&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;pix_fmt&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;yuv420p&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;level&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">40</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;chroma_location&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;left&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;refs&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">1</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;is_avc&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;true&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;nal_length_size&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;4&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;r_frame_rate&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;30/1&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;avg_frame_rate&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;30/1&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;time_base&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;1/15360&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;start_pts&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;start_time&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;0.000000&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;duration_ts&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">9747456</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;duration&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;634.600000&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;bit_rate&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;2736521&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;bits_per_raw_sample&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;8&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;nb_frames&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;19038&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;disposition&quot;</span><span style="color:#dcdcdc;">: {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#d69d85;">&quot;default&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">1</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">        </span><span style="color:#d69d85;">&quot;dub&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">        </span><span style="color:#d69d85;">&quot;original&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">        </span><span style="color:#d69d85;">&quot;comment&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">        </span><span style="color:#d69d85;">&quot;lyrics&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">        </span><span style="color:#d69d85;">&quot;karaoke&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">        </span><span style="color:#d69d85;">&quot;forced&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">        </span><span style="color:#d69d85;">&quot;hearing_impaired&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">        </span><span style="color:#d69d85;">&quot;visual_impaired&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">        </span><span style="color:#d69d85;">&quot;clean_effects&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">        </span><span style="color:#d69d85;">&quot;attached_pic&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">        </span><span style="color:#d69d85;">&quot;timed_thumbnails&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">0
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">},
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;tags&quot;</span><span style="color:#dcdcdc;">: {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#d69d85;">&quot;language&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;und&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">        </span><span style="color:#d69d85;">&quot;handler_name&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;GPAC ISO Video Handler&quot;
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">},
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">{
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;index&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">1</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;codec_name&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;ac3&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;codec_long_name&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;ATSC A/52A (AC-3)&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;codec_type&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;audio&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;codec_time_base&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;1/48000&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;codec_tag_string&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;ac-3&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;codec_tag&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;0x332d6361&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;sample_fmt&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;fltp&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;sample_rate&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;48000&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;channels&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">6</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;channel_layout&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;5.1(side)&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;bits_per_sample&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;dmix_mode&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;-1&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;ltrt_cmixlev&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;-1.000000&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;ltrt_surmixlev&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;-1.000000&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;loro_cmixlev&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;-1.000000&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;loro_surmixlev&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;-1.000000&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;r_frame_rate&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;0/0&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;avg_frame_rate&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;0/0&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;time_base&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;1/48000&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;start_pts&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;start_time&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;0.000000&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;duration_ts&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">30438912</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;duration&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;634.144000&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;bit_rate&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;320000&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;nb_frames&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;19556&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;disposition&quot;</span><span style="color:#dcdcdc;">: {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#d69d85;">&quot;default&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">1</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">        </span><span style="color:#d69d85;">&quot;dub&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">        </span><span style="color:#d69d85;">&quot;original&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">        </span><span style="color:#d69d85;">&quot;comment&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">        </span><span style="color:#d69d85;">&quot;lyrics&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">        </span><span style="color:#d69d85;">&quot;karaoke&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">        </span><span style="color:#d69d85;">&quot;forced&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">        </span><span style="color:#d69d85;">&quot;hearing_impaired&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">        </span><span style="color:#d69d85;">&quot;visual_impaired&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">        </span><span style="color:#d69d85;">&quot;clean_effects&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">        </span><span style="color:#d69d85;">&quot;attached_pic&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">        </span><span style="color:#d69d85;">&quot;timed_thumbnails&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">0
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">},
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;tags&quot;</span><span style="color:#dcdcdc;">: {
+</span><span style="color:#dcdcdc;">        </span><span style="color:#d69d85;">&quot;language&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;und&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">        </span><span style="color:#d69d85;">&quot;handler_name&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;GPAC ISO Audio Handler&quot;
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">},
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;side_data_list&quot;</span><span style="color:#dcdcdc;">: [
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">{
+</span><span style="color:#dcdcdc;">          </span><span style="color:#d69d85;">&quot;side_data_type&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;Audio Service Type&quot;
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">]
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">],
+</span><span style="color:#dcdcdc;">  </span><span style="color:#d69d85;">&quot;format&quot;</span><span style="color:#dcdcdc;">: {
+</span><span style="color:#dcdcdc;">    </span><span style="color:#d69d85;">&quot;filename&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;big_buck_bunny.1920x1080.30fps.mp4&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">    </span><span style="color:#d69d85;">&quot;nb_streams&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">2</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">    </span><span style="color:#d69d85;">&quot;nb_programs&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">    </span><span style="color:#d69d85;">&quot;format_name&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;mov,mp4,m4a,3gp,3g2,mj2&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">    </span><span style="color:#d69d85;">&quot;format_long_name&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;QuickTime / MOV&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">    </span><span style="color:#d69d85;">&quot;start_time&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;0.000000&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">    </span><span style="color:#d69d85;">&quot;duration&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;634.600000&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">    </span><span style="color:#d69d85;">&quot;size&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;242901742&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">    </span><span style="color:#d69d85;">&quot;bit_rate&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;3062108&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">    </span><span style="color:#d69d85;">&quot;probe_score&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">100</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">    </span><span style="color:#d69d85;">&quot;tags&quot;</span><span style="color:#dcdcdc;">: {
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;major_brand&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;isom&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;minor_version&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;512&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;compatible_brands&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;isomiso2avc1mp41&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;title&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;Big Buck Bunny, Sunflower version&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;artist&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;Blender Foundation 2008, Janus Bager Kristensen 2013&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;composer&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;Sacha Goedegebure&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;encoder&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;Lavf58.20.100&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;comment&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;Creative Commons Attribution 3.0 - http://bbb3d.renderfarming.net&quot;</span><span style="color:#dcdcdc;">,
+</span><span style="color:#dcdcdc;">      </span><span style="color:#d69d85;">&quot;genre&quot;</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;Animation&quot;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">}
 </span></pre><h2 id="ying-yong-yu-zhuan-ma"><a class="zola-anchor" href="#ying-yong-yu-zhuan-ma" aria-label="Anchor link for: ying-yong-yu-zhuan-ma">🔗</a>
 应用于转码</h2>
 <p>对输入视频进行转码，为 4 个 <code>-vsync</code> 枚举值分别生成两个输出视频，其中一个输出视频的帧率大于输入帧率，另一个小于。</p>
@@ -848,56 +811,24 @@ Case 分析</h1>
 <p>参见官方文档中关于 <code>-vsync</code> 的<a href="http://ffmpeg.org/ffmpeg-all.html#Advanced-options">说明文档</a>。</p>
 <p>To be continued</p>
 
-    </div>
-
-    
-    
-
-    <div class="post-footer">
-        
-            
-                <div class="post-tags">
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;ffmpeg&#x2F;">#ffmpeg</a>
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;vsync&#x2F;">#vsync</a>
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;fps&#x2F;">#fps</a>
-                    
-                </div>
-            
-            
-                <div class="post-nav">
-                    
-                        <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-07-21-ffmpeg-snapshot-kuaizhao-thumbnail-concluded&#x2F;">‹ Ffmpeg snapshot&#x2F;thumbnail 快照套路总结</a>
-                    
-                    
-                        <a class="next" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-08-28-intro-to-spring-cloud-gateway-slide&#x2F;">Intro to Spring Cloud Gateway ›</a>
-                    
-                    
-                    
-                </div>
-            
-
-        
-
-    </div>
-
-    
-    
-</article>
-
-
-                </div>
-            </main>
-
-            
-            
         </div>
+        
+    
+</div></div>
+            
+    <div class="pagination">
+        <div class="pagination__buttons">
+            </div>
+    </div>
+<footer class="footer">
+                    <div class="footer__inner"><div class="copyright">
+            <span>© 2019 <a href="https://github.com/ejmg/zerm">zerm</a> :: Powered by <a href="https://www.getzola.org/">Zola</a></span>
+            <span>:: Theme made by <a href="https://github.com/ejmg">ejmg</a></span>
+        </div>
+    <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;assets&#x2F;js&#x2F;main.js"></script>
+</div>
+                    
 
-      
-          <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
-      
+                </footer></div>
     </body>
-
 </html>

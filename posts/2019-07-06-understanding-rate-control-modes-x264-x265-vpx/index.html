@@ -1,141 +1,114 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta http-equiv="content-type" content="text/html; charset=utf-8">
-
-      <!-- Enable responsiveness on mobile devices-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-      <title>wangbo’s home &amp; blog - [译] Understanding Rate Control Modes (x264, x265, vpx)</title>
-
-      
-
-      
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
-          
-      
-
-      
-          <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
-          
-      
-
-      
-      
-    </head>
-
-    <body>
-        <div class="container">
-
-            <div id="mobile-navbar" class="mobile-navbar">
-              <div class="mobile-header-logo">
-                <a href="/" class="logo">WB Prime</a>
-              </div>
-              <div class="mobile-navbar-icon icon-out">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            </div>
-
-            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
-              <ul class="mobile-menu-list">
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im">
-                            Home
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;categories">
-                            Categories
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;tags">
-                            Tags
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;about">
-                            About
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                            Github
-                        </a>
-                    </li>
-                
-              </ul>
-            </nav>
-
-            <header id="header">
-                <div class="logo"><a href="https:&#x2F;&#x2F;www.wangbo.im">WB Prime</a></div>
-                <nav class="menu">
-                    <ul>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im">
-                                    Home
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;categories">
-                                    Categories
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;tags">
-                                    Tags
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;about">
-                                    About
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                                    Github
-                                </a>
-                            </li>
-                        
-                    </ul>
-                </nav>
-            </header>
-
-            <main>
-                <div class="content" id="mobile-panel">
-                    
-
-
-
-<article class="post">
+    <title>[译] Understanding Rate Control Modes (x264, x265, vpx) - Elvis Wang</title>
     
-    <header class="post__header">
-        <h1 class="post__title">
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="wangbo’s home &amp; blog"/>
+
+    <meta property="og:title" content="
+    wangbo’s home &amp; blog -&nbsp;[译] Understanding Rate Control Modes (x264, x265, vpx)" />
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-07-06-understanding-rate-control-modes-x264-x265-vpx&#x2F;"/>
+    <meta property="og:description" content="&lt;p&gt;最近在做短视频转码的项目，涉及到视频在线传输的码率控制的问题，于网络搜寻资料时发现了一篇介绍基于
+&lt;a href=&quot;http:&#x2F;&#x2F;ffmpeg.org&#x2F;&quot; title=&quot;FFmpeg A complete, cross-platform solution to record, convert and stream …"/>
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+<link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
+    <body>
+        <div class="container full">
+<header class="header">
+    <div class="header__inner">
+        <div class="header__logo">
+            <a href="&#x2F;">
+    <div class="logo">
+        WB Prime
+    </div>
+</a>
+        </div>
+        <div class="menu-trigger">menu</div>
+    </div>
+    
+    <nav class="menu">
+        <ul class="menu__inner menu__inner--desktop">
+            
+            
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+                    </li>
+                
+            </ul>
+
+        <ul class="menu__inner menu__inner--mobile">
+            
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+        </li>
+        </ul>
+    </nav>
+
+    </header>
+<div class="content"><div class="post">
+        <h1 class="post-title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-07-06-understanding-rate-control-modes-x264-x265-vpx&#x2F;">[译] Understanding Rate Control Modes (x264, x265, vpx)</a>
         </h1>
-        <div class="post__meta">
-            <span class="post__time">2019-07-06</span>
-            
-        </div>
-    </header>
+        
+    <div class="post-meta">
+        <span class="post-date">2019.07.06
+                </span>
 
-    <div class="post-content">
-      <p>最近在做短视频转码的项目，涉及到视频在线传输的码率控制的问题，于网络搜寻资料时发现了一篇介绍基于
+        <span class="post-author"></span>
+
+        
+
+    
+    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;streaming&#x2F;">Streaming</a>} 
+
+            
+    ::
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;ffmpeg&#x2F;">ffmpeg</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;h264&#x2F;">h264</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;rate-control&#x2F;">rate control</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;crf&#x2F;">crf</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;cbr&#x2F;">cbr</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;vbr&#x2F;">vbr</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;abr&#x2F;">abr</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;vbv&#x2F;">vbv</a>
+        
+    
+            
+        
+    </div>
+
+
+
+        
+
+        <div class="post-content">
+            <p>最近在做短视频转码的项目，涉及到视频在线传输的码率控制的问题，于网络搜寻资料时发现了一篇介绍基于
 <a href="http://ffmpeg.org/" title="FFmpeg A complete, cross-platform solution to record, convert and stream audio and video.">FFmpeg</a> 的码率控制综述文章，获益匪浅，翻译出来作为读书笔记。</p>
 <p>原文：<a href="https://slhck.info/video/2017/03/01/rate-control.html">Understanding Rate Control Modes (x264, x265, vpx)</a></p>
 <p><a name="continue-reading"></a></p>
@@ -180,9 +153,9 @@
 固定量化参数 (Constant Quantization Parameter, CQP)</h2>
 <p>量化参数可以控制一个视频帧中宏块(macroblock)的压缩量。较大的量化参数值意味着更多的压缩和更低的质量；较小的值则反之。H.264 编码中量化参数的取值范围为 [0, 51]。</p>
 <p><a href="http://www.videolan.org/developers/x264.html">x264</a> 和 <a href="http://x265.org/">x265</a> 编码器可以很容易地设置视频的整个编码过程中使用固定量化参数，而 <a href="https://www.webmproject.org/code/">libvpx</a> 则不支持固定量化参数。</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">ffmpeg -i &lt;input&gt; -c:v libx264 -qp 23 &lt;output&gt;
-</span><span style="color:#c0c5ce;">ffmpeg -i &lt;input&gt; -c:v libx265 -x265-params qp=23 &lt;output&gt;
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">ffmpeg -i &lt;input&gt; -c:v libx264 -qp 23 &lt;output&gt;
+</span><span style="color:#dcdcdc;">ffmpeg -i &lt;input&gt; -c:v libx265 -x265-params qp=23 &lt;output&gt;
 </span></pre>
 <p>如果不害怕数学公式的化，可以继续阅读这篇<a href="https://www.vcodex.com/h264avc-4x4-transform-and-quantization/">指南</a>详细了解量化参数的原理。</p>
 <p>如无必要， <strong>不要使用本方法</strong> 。固定的量化参数会使得不同复杂度的场景编码出来的比特率相差悬殊，而且会导致编码低效。你无法控制输出的最终码率，而且会浪费空间。</p>
@@ -194,10 +167,10 @@
 <h2 id="ping-jun-ma-lu-average-bitrate-abr"><a class="zola-anchor" href="#ping-jun-ma-lu-average-bitrate-abr" aria-label="Anchor link for: ping-jun-ma-lu-average-bitrate-abr">🔗</a>
 平均码率 (Average Bitrate, ABR)</h2>
 <p>我们可以指定一个目标码率，然后让编码器自己按照算法趋近之。</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">ffmpeg -i &lt;input&gt; -c:v libx264 -b:v 1M &lt;output&gt;
-</span><span style="color:#c0c5ce;">ffmpeg -i &lt;input&gt; -c:v libx265 -b:v 1M &lt;output&gt;
-</span><span style="color:#c0c5ce;">ffmpeg -i &lt;input&gt; -c:v libvpx-vp9 -b:v 1M &lt;output&gt;
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">ffmpeg -i &lt;input&gt; -c:v libx264 -b:v 1M &lt;output&gt;
+</span><span style="color:#dcdcdc;">ffmpeg -i &lt;input&gt; -c:v libx265 -b:v 1M &lt;output&gt;
+</span><span style="color:#dcdcdc;">ffmpeg -i &lt;input&gt; -c:v libvpx-vp9 -b:v 1M &lt;output&gt;
 </span></pre>
 <p><strong>不要使用本方法</strong></p>
 <p><a href="http://www.videolan.org/developers/x264.html">x264</a> 编码器的一个官方开发人员 <a href="https://mailman.videolan.org/pipermail/x264-devel/2010-February/006934.html">强调千万不要使用这种方法</a>。原因在于编码器在工作时并不知道后续的视频帧的细节，因而需要做出某些假定以达到目标码率。这意味着在区间内开始阶段或达到目标码率时，编码的码率会变化剧烈（译注：码率是单位时间内的视频大小，如果码率控制以固定区间间隔进行，在区间的开始阶段，编码器有富余的比特位进行编码，在区间的后半段，剩余的比特位可能会限制编码器)。尤其对于 HAS 类型的流媒体编码，本方法有可能会导致多个短视频片段的质量差异悬殊。</p>
@@ -209,15 +182,15 @@
 <h2 id="gu-ding-ma-lu-cbr"><a class="zola-anchor" href="#gu-ding-ma-lu-cbr" aria-label="Anchor link for: gu-ding-ma-lu-cbr">🔗</a>
 固定码率 (CBR)</h2>
 <p>可以通过 <code>nal-hrd</code> 选项控制编码器使用固定的码率进行编码，如果真的有需求的话。</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">ffmpeg -i &lt;input&gt; -c:v libx264 -x264-params &quot;nal-hrd=cbr:force-cfr=1&quot; -b:v 1M -minrate 1M -maxrate 1M -bufsize 2M &lt;output&gt;
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">ffmpeg -i &lt;input&gt; -c:v libx264 -x264-params &quot;nal-hrd=cbr:force-cfr=1&quot; -b:v 1M -minrate 1M -maxrate 1M -bufsize 2M &lt;output&gt;
 </span></pre>
 <p>输出文件的格式必须要是 <code>.ts</code> 格式(即 MPEG-2 TS)，因为 MP4 不支持 NAL 填充 (NAL stuffing)。</p>
 <p><strong>本方法会导致带宽的浪费！</strong></p>
 <p>如果原视频很容易被编码，固定码率的设定会导致带宽的浪费，参见更详细的<a href="https://brokenpipe.wordpress.com/2016/10/07/ffmpeg-h-264-constant-bitrate-cbr-encoding-for-iptv/">说明</a>。本方法适应于某些场景，但此时你可能需要设置尽量小的目标码率。</p>
 <p>对于 VP9 编码，请使用：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">ffmpeg -i &lt;input&gt; -c:v libvpx-vp9 -b:v 1M -maxrate 1M -minrate 1M &lt;output&gt;
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">ffmpeg -i &lt;input&gt; -c:v libvpx-vp9 -b:v 1M -maxrate 1M -minrate 1M &lt;output&gt;
 </span></pre>
 <ul>
 <li><em>适用于</em> 保证固定码率；流媒体视频服务</li>
@@ -227,19 +200,19 @@
 两路平均码率 (2-pass Average Bitrate, 2-Pass ABR)</h2>
 <p>如果可以对原视频进行两次（或多次）编码，编码器可以对编码内容进行更好的估计(译注：而不用进行某些可能是错误的假定)。编码器可以在第一次编码时计算编码每一帧的代价，从而在第二次编码时更有效地分配可用的比特位。这使得编码器可以在给定的码率条件下取得最好的视频质量。</p>
 <p>H.264 编码：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">ffmpeg -i &lt;input&gt; -c:v libx264 -b:v 1M -pass 1 -f null /dev/null
-</span><span style="color:#c0c5ce;">ffmpeg -i &lt;input&gt; -c:v libx264 -b:v 1M -pass 2 &lt;output&gt;.mp4
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">ffmpeg -i &lt;input&gt; -c:v libx264 -b:v 1M -pass 1 -f null /dev/null
+</span><span style="color:#dcdcdc;">ffmpeg -i &lt;input&gt; -c:v libx264 -b:v 1M -pass 2 &lt;output&gt;.mp4
 </span></pre>
 <p>H.265 编码：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">ffmpeg -i &lt;input&gt; -c:v libx264 -b:v 1M -x265-params pass=1 -f null /dev/null
-</span><span style="color:#c0c5ce;">ffmpeg -i &lt;input&gt; -c:v libx264 -b:v 1M -x265-params pass=2 &lt;output&gt;.mp4
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">ffmpeg -i &lt;input&gt; -c:v libx264 -b:v 1M -x265-params pass=1 -f null /dev/null
+</span><span style="color:#dcdcdc;">ffmpeg -i &lt;input&gt; -c:v libx264 -b:v 1M -x265-params pass=2 &lt;output&gt;.mp4
 </span></pre>
 <p>VP9 编码：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">ffmpeg -i &lt;input&gt; -c:v libvpx-vp9 -b:v 1M -pass 1 -f null /dev/null
-</span><span style="color:#c0c5ce;">ffmpeg -i &lt;input&gt; -c:v libvpx-vp9 -b:v 1M -pass 2 &lt;output&gt;.webm
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">ffmpeg -i &lt;input&gt; -c:v libvpx-vp9 -b:v 1M -pass 1 -f null /dev/null
+</span><span style="color:#dcdcdc;">ffmpeg -i &lt;input&gt; -c:v libvpx-vp9 -b:v 1M -pass 2 &lt;output&gt;.webm
 </span></pre>
 <p>对流媒体编码来说这是最简单的方式。</p>
 <p>本方法有两个不足：</p>
@@ -256,10 +229,10 @@
 固定质量或固定码率因子 (Constant Quality or Constant Rate Factor, CQ/CRF)</h2>
 <p>我已经在 <a href="https://slhck.info/articles/crf">Constant Rate Factor</a> 这篇文章中详细地介绍过固定码率因子。其可以控制在整个编码过程中保持
 固定的编码质量。设置 CRF 是一个很简单的事情，只需要指定一个目标值然后让编码器来达到它。</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">ffmpeg -i &lt;input&gt; -c:v libx264 -crf 23 &lt;output&gt;
-</span><span style="color:#c0c5ce;">ffmpeg -i &lt;input&gt; -c:v libx265 -crf 28 &lt;output&gt;
-</span><span style="color:#c0c5ce;">ffmpeg -i &lt;input&gt; -c:v libvpx-vp9 -crf 30 -b:v 0 &lt;output&gt;
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">ffmpeg -i &lt;input&gt; -c:v libx264 -crf 23 &lt;output&gt;
+</span><span style="color:#dcdcdc;">ffmpeg -i &lt;input&gt; -c:v libx265 -crf 28 &lt;output&gt;
+</span><span style="color:#dcdcdc;">ffmpeg -i &lt;input&gt; -c:v libvpx-vp9 -crf 30 -b:v 0 &lt;output&gt;
 </span></pre>
 <p>H.264 和 H.265 编码中 CRF 的取值范围为 [0, 51] (同 QP)：<a href="http://www.videolan.org/developers/x264.html">x264</a> 的默认值是 23，<a href="http://x265.org/">x265</a> 的默认值是 28；值 18 (对于 H.265 来说是 24）可以达到视觉无损；更小的值基本上就是在浪费空间。CRF 取值每 +/- 6 会大概导致码率的减半或加倍。</p>
 <p>VP9 编码中 CRF 的取值范围为 [0, 63], 建议取值范围为 [15,35]。</p>
@@ -273,29 +246,29 @@
 限制性编码 (Contrained Encoding, VBV)</h2>
 <p>[Video Buffering Verifer (VBV)][] 可以设定输出码率的上限，这对于流媒体服务很有用。VBV 可以配合两路平均码率方法或固定码率因子方法一起使用，后者通常被称为 &quot;capped CRF&quot;。</p>
 <p>启用 VBV 需要联合使用 <code>-maxrate</code> 和 <code>-bufsize</code> 选项：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">ffmpeg -i &lt;input&gt; -c:v libx264 -crf 23 -maxrate 1M -bufsize 2M &lt;output&gt;
-</span><span style="color:#c0c5ce;">ffmpeg -i &lt;input&gt; -c:v libx265 -crf 28 -x265-params vbv-maxrate=1000:vbv-bufsize=2000 &lt;output&gt;
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">ffmpeg -i &lt;input&gt; -c:v libx264 -crf 23 -maxrate 1M -bufsize 2M &lt;output&gt;
+</span><span style="color:#dcdcdc;">ffmpeg -i &lt;input&gt; -c:v libx265 -crf 28 -x265-params vbv-maxrate=1000:vbv-bufsize=2000 &lt;output&gt;
 </span></pre>
 <p>在 VP9 编码中，该方法不叫 VBV，但是背后的原理相同。</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">ffmpeg -i &lt;input&gt; -c:v libvpx-vp9 -crf 30 -b:v 2M &lt;output&gt;
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">ffmpeg -i &lt;input&gt; -c:v libvpx-vp9 -crf 30 -b:v 2M &lt;output&gt;
 </span></pre>
 <p>备注：<a href="http://www.videolan.org/developers/x264.html">x264</a>/<a href="http://x265.org/">x265</a> 编码器提供了 <code>-tune zerolatency</code> 和 <code>-preset ultrafast</code> 选项以优化流媒体服务场景中的编码速度：降低同码率下的视频质量，但显著提高编码速度。libvpx-vp9 编码器的对应物是 <code>quality realtime</code> 和 <code>-speed 5</code>。参阅 <a href="http://trac.ffmpeg.org/wiki/Encode/H.264">H.264</a> 和 <a href="http://trac.ffmpeg.org/wiki/Encode/VP9">VP9</a>。</p>
 <p>两路平均码率的 VBV 方法如下：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">ffmpeg -i &lt;input&gt; -c:v libx264 -b:v 1M -maxrate 1M -bufsize 2M -pass 1 -f null /dev/null
-</span><span style="color:#c0c5ce;">ffmpeg -i &lt;input&gt; -c:v libx264 -b:v 1M -maxrate 1M -bufsize 2M -pass 2 &lt;output&gt;
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">ffmpeg -i &lt;input&gt; -c:v libx264 -b:v 1M -maxrate 1M -bufsize 2M -pass 1 -f null /dev/null
+</span><span style="color:#dcdcdc;">ffmpeg -i &lt;input&gt; -c:v libx264 -b:v 1M -maxrate 1M -bufsize 2M -pass 2 &lt;output&gt;
 </span></pre>
 <p>x265 版本：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">ffmpeg -i &lt;input&gt; -c:v libx265 -b:v 1M -x265-params pass=1:vbv-maxrate=1000:vbv-bufsize=2000 -f null /dev/null
-</span><span style="color:#c0c5ce;">ffmpeg -i &lt;input&gt; -c:v libx265 -b:v 1M -x265-params pass=2:vbv-maxrate=1000:vbv-bufsize=2000 &lt;output&gt;
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">ffmpeg -i &lt;input&gt; -c:v libx265 -b:v 1M -x265-params pass=1:vbv-maxrate=1000:vbv-bufsize=2000 -f null /dev/null
+</span><span style="color:#dcdcdc;">ffmpeg -i &lt;input&gt; -c:v libx265 -b:v 1M -x265-params pass=2:vbv-maxrate=1000:vbv-bufsize=2000 &lt;output&gt;
 </span></pre>
 <p>VP9 版本：</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">ffmpeg -i &lt;input&gt; -c:v libvpx-vp9 -b:v 1M -maxrate 1M -bufsize 2M -pass 1 -f null /dev/null
-</span><span style="color:#c0c5ce;">ffmpeg -i &lt;input&gt; -c:v libvpx-vp9 -b:v 1M -maxrate 1M -bufsize 2M -pass 2 &lt;output&gt;
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">ffmpeg -i &lt;input&gt; -c:v libvpx-vp9 -b:v 1M -maxrate 1M -bufsize 2M -pass 1 -f null /dev/null
+</span><span style="color:#dcdcdc;">ffmpeg -i &lt;input&gt; -c:v libvpx-vp9 -b:v 1M -maxrate 1M -bufsize 2M -pass 2 &lt;output&gt;
 </span></pre>
 <p>据 x264 的开发者称，一路的平均码率也可以应用 VBV，而且<a href="https://mailman.videolan.org/pipermail/x264-devel/2010-February/006944.html">效果和两路的一样好</a>，除了压缩效果可能会差一些。</p>
 <p>那么问题来了，<code>bufsize</code> 该如何取值呢？答案是 <code>It depends</code>。一个比较好的值是设置为最大码率的两倍；如果客户端缓冲区较小（比如只有几秒钟），<code>bufsize</code> 可以设置为与最大码率相同；如果想尽量限制输出码率，可以将 <code>bufsize</code> 设置为最大码率的一半或更小。</p>
@@ -329,66 +302,24 @@
 <li><a href="https://streaminglearningcenter.com/blogs/saving-encoding-streaming-deploy-capped-crf.html">Streaming Learning Center: Saving on Encoding and Streaming: Deploy Capped CRF</a></li>
 </ul>
 
-    </div>
-
-    
-    
-
-    <div class="post-footer">
-        
-            
-                <div class="post-tags">
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;ffmpeg&#x2F;">#ffmpeg</a>
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;h264&#x2F;">#h264</a>
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;rate-control&#x2F;">#rate control</a>
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;crf&#x2F;">#crf</a>
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;cbr&#x2F;">#cbr</a>
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;vbr&#x2F;">#vbr</a>
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;abr&#x2F;">#abr</a>
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;vbv&#x2F;">#vbv</a>
-                    
-                </div>
-            
-            
-                <div class="post-nav">
-                    
-                        <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-04-19-communication-bridge-between-webrtc-and-wechat-rtmp&#x2F;">‹ WebRTC 与微信小程序的音视频互通</a>
-                    
-                    
-                        <a class="next" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-07-06-generating-hls-m3u8-using-ffmpeg&#x2F;">Generating HLS&#x2F;M3U8 Using FFmpeg ›</a>
-                    
-                    
-                    
-                </div>
-            
-
-        
-
-    </div>
-
-    
-    
-</article>
-
-
-                </div>
-            </main>
-
-            
-            
         </div>
+        
+    
+</div></div>
+            
+    <div class="pagination">
+        <div class="pagination__buttons">
+            </div>
+    </div>
+<footer class="footer">
+                    <div class="footer__inner"><div class="copyright">
+            <span>© 2019 <a href="https://github.com/ejmg/zerm">zerm</a> :: Powered by <a href="https://www.getzola.org/">Zola</a></span>
+            <span>:: Theme made by <a href="https://github.com/ejmg">ejmg</a></span>
+        </div>
+    <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;assets&#x2F;js&#x2F;main.js"></script>
+</div>
+                    
 
-      
-          <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
-      
+                </footer></div>
     </body>
-
 </html>

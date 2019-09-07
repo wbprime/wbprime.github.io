@@ -1,188 +1,148 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta http-equiv="content-type" content="text/html; charset=utf-8">
-
-      <!-- Enable responsiveness on mobile devices-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-      <title>wangbo’s home &amp; blog - Learning Java Concurrency - Executors(1) ExecutorService</title>
-
-      
-
-      
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
-          
-      
-
-      
-          <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
-          
-      
-
-      
-      
-    </head>
-
-    <body>
-        <div class="container">
-
-            <div id="mobile-navbar" class="mobile-navbar">
-              <div class="mobile-header-logo">
-                <a href="/" class="logo">WB Prime</a>
-              </div>
-              <div class="mobile-navbar-icon icon-out">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            </div>
-
-            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
-              <ul class="mobile-menu-list">
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im">
-                            Home
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;categories">
-                            Categories
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;tags">
-                            Tags
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;about">
-                            About
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                            Github
-                        </a>
-                    </li>
-                
-              </ul>
-            </nav>
-
-            <header id="header">
-                <div class="logo"><a href="https:&#x2F;&#x2F;www.wangbo.im">WB Prime</a></div>
-                <nav class="menu">
-                    <ul>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im">
-                                    Home
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;categories">
-                                    Categories
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;tags">
-                                    Tags
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;about">
-                                    About
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                                    Github
-                                </a>
-                            </li>
-                        
-                    </ul>
-                </nav>
-            </header>
-
-            <main>
-                <div class="content" id="mobile-panel">
-                    
-
-
-
-<article class="post">
+    <title>Learning Java Concurrency - Executors(1) ExecutorService - Elvis Wang</title>
     
-    <header class="post__header">
-        <h1 class="post__title">
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="wangbo’s home &amp; blog"/>
+
+    <meta property="og:title" content="
+    wangbo’s home &amp; blog -&nbsp;Learning Java Concurrency - Executors(1) ExecutorService" />
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;learning-java-concurrency-executors-1-executorservice&#x2F;"/>
+    <meta property="og:description" content="&lt;p&gt;回过头来看&lt;code&gt;Thread&lt;&#x2F;code&gt;类，其实可以发现该类是对一件任务的抽象。通过将要完成的任务抽象出来用&lt;code&gt;Thread&lt;&#x2F;code&gt;或者&lt;code&gt;Runnable&lt;&#x2F;code&gt;来表示，然后委托给另外的线程来处理。&lt;code&gt;Thread&lt;…"/>
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+<link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
+    <body>
+        <div class="container full">
+<header class="header">
+    <div class="header__inner">
+        <div class="header__logo">
+            <a href="&#x2F;">
+    <div class="logo">
+        WB Prime
+    </div>
+</a>
+        </div>
+        <div class="menu-trigger">menu</div>
+    </div>
+    
+    <nav class="menu">
+        <ul class="menu__inner menu__inner--desktop">
+            
+            
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+                    </li>
+                
+            </ul>
+
+        <ul class="menu__inner menu__inner--mobile">
+            
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+        </li>
+        </ul>
+    </nav>
+
+    </header>
+<div class="content"><div class="post">
+        <h1 class="post-title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;learning-java-concurrency-executors-1-executorservice&#x2F;">Learning Java Concurrency - Executors(1) ExecutorService</a>
         </h1>
-        <div class="post__meta">
-            <span class="post__time">2016-04-15</span>
-            
-        </div>
-    </header>
+        
+    <div class="post-meta">
+        <span class="post-date">2016.04.15
+                </span>
 
-    <div class="post-content">
-      <p>回过头来看<code>Thread</code>类，其实可以发现该类是对一件任务的抽象。通过将要完成的任务抽象出来用<code>Thread</code>或者<code>Runnable</code>来表示，然后委托给另外的线程来处理。<code>Thread</code>类在这里充当的是任务执行者的角色，表示一个执行任务的线程。</p>
+        <span class="post-author"></span>
+
+        
+
+    
+    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;learning-java-concurrency&#x2F;">Learning Java Concurrency</a>} 
+
+            
+    ::
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;java&#x2F;">java</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;concurrency&#x2F;">concurrency</a>
+        
+    
+            
+        
+    </div>
+
+
+
+        
+
+        <div class="post-content">
+            <p>回过头来看<code>Thread</code>类，其实可以发现该类是对一件任务的抽象。通过将要完成的任务抽象出来用<code>Thread</code>或者<code>Runnable</code>来表示，然后委托给另外的线程来处理。<code>Thread</code>类在这里充当的是任务执行者的角色，表示一个执行任务的线程。</p>
 <p>有时候，任务是不是由另一个线程执行并不重要，甚至于由几个线程共同完成我们也并不在意，我们只关心任务被完成了。任务这个概念已经被抽象的很好了：<code>Runnable</code>；接下来要抽象出任务执行者这个概念了。</p>
 <p>Java提供了另一个接口<code>Executor</code>来真正地抽象任务执行者这个概念：线程池。怎么理解呢，看一下<code>Executor</code>接口的代码就好了。</p>
 <p><a name="continue-reading"></a></p>
 <h1 id="executor"><a class="zola-anchor" href="#executor" aria-label="Anchor link for: executor">🔗</a>
 Executor</h1>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">public interface </span><span style="color:#ebcb8b;">Executor </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">execute</span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">Runnable </span><span style="color:#bf616a;">command</span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#569cd6;">public interface </span><span style="color:#dcdcdc;">Executor {
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">void </span><span style="color:#dcdcdc;">execute(Runnable command);
+</span><span style="color:#dcdcdc;">}
 </span></pre>
 <p>是不是很简单？</p>
 <p>任务执行者的角色有了，但是还是不够，我们还需要控制任务执行者的行为。</p>
 <h1 id="executorservice"><a class="zola-anchor" href="#executorservice" aria-label="Anchor link for: executorservice">🔗</a>
 ExecutorService</h1>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">public interface </span><span style="color:#ebcb8b;">ExecutorService </span><span style="color:#b48ead;">extends </span><span style="color:#a3be8c;">Executor </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">shutdown</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#ebcb8b;">List</span><span style="color:#eff1f5;">&lt;</span><span style="color:#ebcb8b;">Runnable</span><span style="color:#eff1f5;">&gt; </span><span style="color:#8fa1b3;">shutdownNow</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">boolean </span><span style="color:#8fa1b3;">isShutdown</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">boolean </span><span style="color:#8fa1b3;">isTerminated</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">boolean </span><span style="color:#8fa1b3;">awaitTermination</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">long </span><span style="color:#bf616a;">timeout</span><span style="color:#eff1f5;">, </span><span style="color:#ebcb8b;">TimeUnit </span><span style="color:#bf616a;">unit</span><span style="color:#eff1f5;">)
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">throws </span><span style="color:#ebcb8b;">InterruptedException</span><span style="color:#eff1f5;">;
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">&lt;</span><span style="color:#bf616a;">T</span><span style="color:#eff1f5;">&gt; </span><span style="color:#ebcb8b;">Future</span><span style="color:#eff1f5;">&lt;</span><span style="color:#ebcb8b;">T</span><span style="color:#eff1f5;">&gt; </span><span style="color:#8fa1b3;">submit</span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">Callable</span><span style="color:#eff1f5;">&lt;</span><span style="color:#ebcb8b;">T</span><span style="color:#eff1f5;">&gt; </span><span style="color:#bf616a;">task</span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">&lt;</span><span style="color:#bf616a;">T</span><span style="color:#eff1f5;">&gt; </span><span style="color:#ebcb8b;">Future</span><span style="color:#eff1f5;">&lt;</span><span style="color:#ebcb8b;">T</span><span style="color:#eff1f5;">&gt; </span><span style="color:#8fa1b3;">submit</span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">Runnable </span><span style="color:#bf616a;">task</span><span style="color:#eff1f5;">, </span><span style="color:#ebcb8b;">T </span><span style="color:#bf616a;">result</span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#ebcb8b;">Future</span><span style="color:#eff1f5;">&lt;</span><span style="color:#c0c5ce;">?</span><span style="color:#eff1f5;">&gt; </span><span style="color:#8fa1b3;">submit</span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">Runnable </span><span style="color:#bf616a;">task</span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">&lt;</span><span style="color:#bf616a;">T</span><span style="color:#eff1f5;">&gt; </span><span style="color:#ebcb8b;">List</span><span style="color:#eff1f5;">&lt;</span><span style="color:#ebcb8b;">Future</span><span style="color:#eff1f5;">&lt;</span><span style="color:#ebcb8b;">T</span><span style="color:#eff1f5;">&gt;&gt; </span><span style="color:#8fa1b3;">invokeAll</span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">Collection</span><span style="color:#eff1f5;">&lt;</span><span style="color:#c0c5ce;">? </span><span style="color:#b48ead;">extends </span><span style="color:#ebcb8b;">Callable</span><span style="color:#eff1f5;">&lt;</span><span style="color:#ebcb8b;">T</span><span style="color:#eff1f5;">&gt;&gt; </span><span style="color:#bf616a;">tasks</span><span style="color:#eff1f5;">)
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">throws </span><span style="color:#ebcb8b;">InterruptedException</span><span style="color:#eff1f5;">;
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">&lt;</span><span style="color:#bf616a;">T</span><span style="color:#eff1f5;">&gt; </span><span style="color:#ebcb8b;">List</span><span style="color:#eff1f5;">&lt;</span><span style="color:#ebcb8b;">Future</span><span style="color:#eff1f5;">&lt;</span><span style="color:#ebcb8b;">T</span><span style="color:#eff1f5;">&gt;&gt; </span><span style="color:#8fa1b3;">invokeAll</span><span style="color:#eff1f5;">(
-</span><span style="color:#eff1f5;">        </span><span style="color:#ebcb8b;">Collection</span><span style="color:#eff1f5;">&lt;</span><span style="color:#c0c5ce;">? </span><span style="color:#b48ead;">extends </span><span style="color:#ebcb8b;">Callable</span><span style="color:#eff1f5;">&lt;</span><span style="color:#ebcb8b;">T</span><span style="color:#eff1f5;">&gt;&gt; </span><span style="color:#bf616a;">tasks</span><span style="color:#eff1f5;">, </span><span style="color:#b48ead;">long </span><span style="color:#bf616a;">timeout</span><span style="color:#eff1f5;">, </span><span style="color:#ebcb8b;">TimeUnit </span><span style="color:#bf616a;">unit
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">) </span><span style="color:#b48ead;">throws </span><span style="color:#ebcb8b;">InterruptedException</span><span style="color:#eff1f5;">;
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">&lt;</span><span style="color:#bf616a;">T</span><span style="color:#eff1f5;">&gt; </span><span style="color:#ebcb8b;">T </span><span style="color:#8fa1b3;">invokeAny</span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">Collection</span><span style="color:#eff1f5;">&lt;</span><span style="color:#c0c5ce;">? </span><span style="color:#b48ead;">extends </span><span style="color:#ebcb8b;">Callable</span><span style="color:#eff1f5;">&lt;</span><span style="color:#ebcb8b;">T</span><span style="color:#eff1f5;">&gt;&gt; </span><span style="color:#bf616a;">tasks</span><span style="color:#eff1f5;">)
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">throws </span><span style="color:#ebcb8b;">InterruptedException</span><span style="color:#eff1f5;">, </span><span style="color:#ebcb8b;">ExecutionException</span><span style="color:#eff1f5;">;
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">&lt;</span><span style="color:#bf616a;">T</span><span style="color:#eff1f5;">&gt; </span><span style="color:#ebcb8b;">T </span><span style="color:#8fa1b3;">invokeAny</span><span style="color:#eff1f5;">(
-</span><span style="color:#eff1f5;">        </span><span style="color:#ebcb8b;">Collection</span><span style="color:#eff1f5;">&lt;</span><span style="color:#c0c5ce;">? </span><span style="color:#b48ead;">extends </span><span style="color:#ebcb8b;">Callable</span><span style="color:#eff1f5;">&lt;</span><span style="color:#ebcb8b;">T</span><span style="color:#eff1f5;">&gt;&gt; </span><span style="color:#bf616a;">tasks</span><span style="color:#eff1f5;">, </span><span style="color:#b48ead;">long </span><span style="color:#bf616a;">timeout</span><span style="color:#eff1f5;">, </span><span style="color:#ebcb8b;">TimeUnit </span><span style="color:#bf616a;">unit
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">) </span><span style="color:#b48ead;">throws </span><span style="color:#ebcb8b;">InterruptedException</span><span style="color:#eff1f5;">, </span><span style="color:#ebcb8b;">ExecutionException</span><span style="color:#eff1f5;">, </span><span style="color:#ebcb8b;">TimeoutException</span><span style="color:#eff1f5;">;
-</span><span style="color:#eff1f5;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#569cd6;">public interface </span><span style="color:#dcdcdc;">ExecutorService </span><span style="color:#569cd6;">extends </span><span style="color:#4ec9b0;">Executor </span><span style="color:#dcdcdc;">{
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">void </span><span style="color:#dcdcdc;">shutdown();
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">List&lt;Runnable&gt; shutdownNow();
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">boolean </span><span style="color:#dcdcdc;">isShutdown();
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">boolean </span><span style="color:#dcdcdc;">isTerminated();
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">boolean </span><span style="color:#dcdcdc;">awaitTermination(</span><span style="color:#569cd6;">long </span><span style="color:#dcdcdc;">timeout, TimeUnit unit)
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">InterruptedException;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&lt;T&gt; Future&lt;T&gt; submit(Callable&lt;T&gt; task);
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&lt;T&gt; Future&lt;T&gt; submit(Runnable task, T result);
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">Future&lt;</span><span style="color:#569cd6;">?</span><span style="color:#dcdcdc;">&gt; submit(Runnable task);
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&lt;T&gt; List&lt;Future&lt;T&gt;&gt; invokeAll(Collection&lt;</span><span style="color:#569cd6;">? extends </span><span style="color:#dcdcdc;">Callable&lt;T&gt;&gt; tasks)
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">InterruptedException;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&lt;T&gt; List&lt;Future&lt;T&gt;&gt; invokeAll(
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Collection&lt;</span><span style="color:#569cd6;">? extends </span><span style="color:#dcdcdc;">Callable&lt;T&gt;&gt; tasks, </span><span style="color:#569cd6;">long </span><span style="color:#dcdcdc;">timeout, TimeUnit unit
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">) </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">InterruptedException;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&lt;T&gt; T invokeAny(Collection&lt;</span><span style="color:#569cd6;">? extends </span><span style="color:#dcdcdc;">Callable&lt;T&gt;&gt; tasks)
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">InterruptedException, ExecutionException;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&lt;T&gt; T invokeAny(
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Collection&lt;</span><span style="color:#569cd6;">? extends </span><span style="color:#dcdcdc;">Callable&lt;T&gt;&gt; tasks, </span><span style="color:#569cd6;">long </span><span style="color:#dcdcdc;">timeout, TimeUnit unit
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">) </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">InterruptedException, ExecutionException, TimeoutException;
+</span><span style="color:#dcdcdc;">}
 </span></pre>
 <p>添加的<code>ExecutorService</code>接口扩展了<code>Executor</code>接口的功能，提供了对任务执行的更多的控制。<code>ExecutorService</code>从功能上才能真正称为线程池。</p>
 <ul>
@@ -197,12 +157,12 @@ ExecutorService</h1>
 <p><code>shutdown()</code>方法和<code>shutdownNow()</code>方法被用来关闭线程池。区别在于<code>shutdown()</code>方法只是让线程池停止接受新的任务；而<code>shutdownNow()</code>方法除了设置停止接受新任务之外，还将线程池的等待队列中的任务也取消掉。</p>
 <p>具体地说，就是<code>shutdown()</code>方法会设置线程池为关闭状态，不再接受新的任务；原有的已经提交的任务不受影响，会继续执行直到结束；<code>shutdown()</code>方法调用后立即返回，并不会阻塞等待已提交任务的执行结束。<code>shutdownNow()</code>方法会设置线程池为关闭状态，不再接受新的任务；已经提交的任务但是未开始的任务会被取消；已经执行的任务会尝试去取消，但是不保证能取消成功；<code>shutdownNow()</code>方法的调用也是立即返回。</p>
 <p>因为<code>shutdown()</code>方法并不会阻塞，所以还有另外一个方法来阻塞等待任务结束：<code>awaitTermination()</code>。该方法有一个过期时间的参数，如果在给定的时间内线程池的任务结束，返回成功，否则返回失败。注意，<code>awaitTermination()</code>方法本身并不试图关闭线程池，往往用来配合<code>shutdown()</code>方法使用。</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">executorService.</span><span style="color:#bf616a;">shutdownNow</span><span style="color:#c0c5ce;">();
-</span><span style="color:#b48ead;">boolean</span><span style="color:#c0c5ce;"> re = executorService.</span><span style="color:#bf616a;">awaitTermination</span><span style="color:#c0c5ce;">(</span><span style="color:#d08770;">10</span><span style="color:#c0c5ce;">, </span><span style="color:#ebcb8b;">TimeUnit</span><span style="color:#c0c5ce;">.</span><span style="color:#d08770;">SECONDS</span><span style="color:#c0c5ce;">);
-</span><span style="color:#b48ead;">if </span><span style="color:#c0c5ce;">(!re) {
-</span><span style="color:#c0c5ce;">    </span><span style="color:#65737e;">// handle error
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">executorService.shutdownNow();
+</span><span style="color:#569cd6;">boolean</span><span style="color:#dcdcdc;"> re = executorService.awaitTermination(</span><span style="color:#b5cea8;">10</span><span style="color:#dcdcdc;">, TimeUnit.</span><span style="color:#b4cea8;">SECONDS</span><span style="color:#dcdcdc;">);
+</span><span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(</span><span style="color:#569cd6;">!</span><span style="color:#dcdcdc;">re) {
+</span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">// handle error
+</span><span style="color:#dcdcdc;">}
 </span></pre>
 <p><code>isShutdown()</code>方法和<code>isTerminated()</code>方法用来判断线程池是否已关闭和已结束。可以看出，线程池总是先关闭再结束。</p>
 <h2 id="you-fan-hui-zhi-de-ren-wu-submit"><a class="zola-anchor" href="#you-fan-hui-zhi-de-ren-wu-submit" aria-label="Anchor link for: you-fan-hui-zhi-de-ren-wu-submit">🔗</a>
@@ -218,85 +178,55 @@ Callable</a> 。</p>
 <h1 id="scheduledexecutorservice"><a class="zola-anchor" href="#scheduledexecutorservice" aria-label="Anchor link for: scheduledexecutorservice">🔗</a>
 ScheduledExecutorService</h1>
 <p>Java通过<code>ScheduledExecutorService</code>接口扩展了<code>ExecutorService</code>接口的功能，增加了延迟执行任务的功能。</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">public interface </span><span style="color:#ebcb8b;">ScheduledExecutorService </span><span style="color:#b48ead;">extends </span><span style="color:#a3be8c;">ExecutorService </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public </span><span style="color:#ebcb8b;">ScheduledFuture</span><span style="color:#eff1f5;">&lt;</span><span style="color:#c0c5ce;">?</span><span style="color:#eff1f5;">&gt; </span><span style="color:#8fa1b3;">schedule</span><span style="color:#eff1f5;">(
-</span><span style="color:#eff1f5;">        </span><span style="color:#ebcb8b;">Runnable </span><span style="color:#bf616a;">command</span><span style="color:#eff1f5;">, </span><span style="color:#b48ead;">long </span><span style="color:#bf616a;">delay</span><span style="color:#eff1f5;">, </span><span style="color:#ebcb8b;">TimeUnit </span><span style="color:#bf616a;">unit
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public </span><span style="color:#eff1f5;">&lt;</span><span style="color:#bf616a;">V</span><span style="color:#eff1f5;">&gt; </span><span style="color:#ebcb8b;">ScheduledFuture</span><span style="color:#eff1f5;">&lt;</span><span style="color:#ebcb8b;">V</span><span style="color:#eff1f5;">&gt; </span><span style="color:#8fa1b3;">schedule</span><span style="color:#eff1f5;">(
-</span><span style="color:#eff1f5;">        </span><span style="color:#ebcb8b;">Callable</span><span style="color:#eff1f5;">&lt;</span><span style="color:#ebcb8b;">V</span><span style="color:#eff1f5;">&gt; </span><span style="color:#bf616a;">callable</span><span style="color:#eff1f5;">, </span><span style="color:#b48ead;">long </span><span style="color:#bf616a;">delay</span><span style="color:#eff1f5;">, </span><span style="color:#ebcb8b;">TimeUnit </span><span style="color:#bf616a;">unit
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public </span><span style="color:#ebcb8b;">ScheduledFuture</span><span style="color:#eff1f5;">&lt;</span><span style="color:#c0c5ce;">?</span><span style="color:#eff1f5;">&gt; </span><span style="color:#8fa1b3;">scheduleAtFixedRate</span><span style="color:#eff1f5;">(
-</span><span style="color:#eff1f5;">        </span><span style="color:#ebcb8b;">Runnable </span><span style="color:#bf616a;">command</span><span style="color:#eff1f5;">, </span><span style="color:#b48ead;">long </span><span style="color:#bf616a;">initialDelay</span><span style="color:#eff1f5;">, </span><span style="color:#b48ead;">long </span><span style="color:#bf616a;">period</span><span style="color:#eff1f5;">, </span><span style="color:#ebcb8b;">TimeUnit </span><span style="color:#bf616a;">unit
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public </span><span style="color:#ebcb8b;">ScheduledFuture</span><span style="color:#eff1f5;">&lt;</span><span style="color:#c0c5ce;">?</span><span style="color:#eff1f5;">&gt; </span><span style="color:#8fa1b3;">scheduleWithFixedDelay</span><span style="color:#eff1f5;">(
-</span><span style="color:#eff1f5;">        </span><span style="color:#ebcb8b;">Runnable </span><span style="color:#bf616a;">command</span><span style="color:#eff1f5;">, </span><span style="color:#b48ead;">long </span><span style="color:#bf616a;">initialDelay</span><span style="color:#eff1f5;">, </span><span style="color:#b48ead;">long </span><span style="color:#bf616a;">delay</span><span style="color:#eff1f5;">, </span><span style="color:#ebcb8b;">TimeUnit </span><span style="color:#bf616a;">unit
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#569cd6;">public interface </span><span style="color:#dcdcdc;">ScheduledExecutorService </span><span style="color:#569cd6;">extends </span><span style="color:#4ec9b0;">ExecutorService </span><span style="color:#dcdcdc;">{
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">ScheduledFuture&lt;</span><span style="color:#569cd6;">?</span><span style="color:#dcdcdc;">&gt; schedule(
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Runnable command, </span><span style="color:#569cd6;">long </span><span style="color:#dcdcdc;">delay, TimeUnit unit
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">);
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">&lt;V&gt; ScheduledFuture&lt;V&gt; schedule(
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Callable&lt;V&gt; callable, </span><span style="color:#569cd6;">long </span><span style="color:#dcdcdc;">delay, TimeUnit unit
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">);
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">ScheduledFuture&lt;</span><span style="color:#569cd6;">?</span><span style="color:#dcdcdc;">&gt; scheduleAtFixedRate(
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Runnable command, </span><span style="color:#569cd6;">long </span><span style="color:#dcdcdc;">initialDelay, </span><span style="color:#569cd6;">long </span><span style="color:#dcdcdc;">period, TimeUnit unit
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">);
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">ScheduledFuture&lt;</span><span style="color:#569cd6;">?</span><span style="color:#dcdcdc;">&gt; scheduleWithFixedDelay(
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Runnable command, </span><span style="color:#569cd6;">long </span><span style="color:#dcdcdc;">initialDelay, </span><span style="color:#569cd6;">long </span><span style="color:#dcdcdc;">delay, TimeUnit unit
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">);
+</span><span style="color:#dcdcdc;">}
 </span></pre>
 <p><code>ScheduledExecutorService</code>接口内各方法的含义不言自明。需要注意的是<code>ScheduledFuture</code>接口。</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">public interface </span><span style="color:#ebcb8b;">ScheduledFuture</span><span style="color:#eff1f5;">&lt;</span><span style="color:#bf616a;">V</span><span style="color:#eff1f5;">&gt; </span><span style="color:#b48ead;">extends </span><span style="color:#a3be8c;">Delayed</span><span style="color:#c0c5ce;">, </span><span style="color:#ebcb8b;">Future</span><span style="color:#c0c5ce;">&lt;</span><span style="color:#ebcb8b;">V</span><span style="color:#c0c5ce;">&gt; {
-</span><span style="color:#c0c5ce;">}
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#b48ead;">public interface </span><span style="color:#ebcb8b;">Delayed </span><span style="color:#b48ead;">extends </span><span style="color:#a3be8c;">Comparable</span><span style="color:#eff1f5;">&lt;</span><span style="color:#ebcb8b;">Delayed</span><span style="color:#eff1f5;">&gt; {
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">long </span><span style="color:#8fa1b3;">getDelay</span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">TimeUnit </span><span style="color:#bf616a;">unit</span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#569cd6;">public interface </span><span style="color:#dcdcdc;">ScheduledFuture&lt;V&gt; </span><span style="color:#569cd6;">extends </span><span style="color:#4ec9b0;">Delayed</span><span style="color:#dcdcdc;">, Future&lt;V&gt; {
+</span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#569cd6;">public interface </span><span style="color:#dcdcdc;">Delayed </span><span style="color:#569cd6;">extends </span><span style="color:#4ec9b0;">Comparable</span><span style="color:#dcdcdc;">&lt;Delayed&gt; {
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">long </span><span style="color:#dcdcdc;">getDelay(TimeUnit unit);
+</span><span style="color:#dcdcdc;">}
 </span></pre>
 <p>可以发现<code>ScheduledFuture</code>接口是<code>Future</code>接口的扩展，增加了一个返回延迟时间的参数。</p>
 <p>Java线程池的几个重要接口就介绍到这里，具体的实现下次再说吧！</p>
 
-    </div>
-
-    
-    
-
-    <div class="post-footer">
-        
-            
-                <div class="post-tags">
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;java&#x2F;">#java</a>
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;concurrency&#x2F;">#concurrency</a>
-                    
-                </div>
-            
-            
-                <div class="post-nav">
-                    
-                        <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2016-04-13-learning-java-concurrency-futuretask-callable&#x2F;">‹ Learning Java Concurrency - FutureTask &amp; Callable</a>
-                    
-                    
-                        <a class="next" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2017-03-20-fast-into-graphviz&#x2F;">Fast into Graphviz ›</a>
-                    
-                    
-                    
-                </div>
-            
-
-        
-
-    </div>
-
-    
-    
-</article>
-
-
-                </div>
-            </main>
-
-            
-            
         </div>
+        
+    
+</div></div>
+            
+    <div class="pagination">
+        <div class="pagination__buttons">
+            </div>
+    </div>
+<footer class="footer">
+                    <div class="footer__inner"><div class="copyright">
+            <span>© 2019 <a href="https://github.com/ejmg/zerm">zerm</a> :: Powered by <a href="https://www.getzola.org/">Zola</a></span>
+            <span>:: Theme made by <a href="https://github.com/ejmg">ejmg</a></span>
+        </div>
+    <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;assets&#x2F;js&#x2F;main.js"></script>
+</div>
+                    
 
-      
-          <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
-      
+                </footer></div>
     </body>
-
 </html>

@@ -1,141 +1,102 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta http-equiv="content-type" content="text/html; charset=utf-8">
-
-      <!-- Enable responsiveness on mobile devices-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-      <title>wangbo’s home &amp; blog - Learning Java Concurrency - CountDownLatch</title>
-
-      
-
-      
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
-          
-      
-
-      
-          <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
-          
-      
-
-      
-      
-    </head>
-
-    <body>
-        <div class="container">
-
-            <div id="mobile-navbar" class="mobile-navbar">
-              <div class="mobile-header-logo">
-                <a href="/" class="logo">WB Prime</a>
-              </div>
-              <div class="mobile-navbar-icon icon-out">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            </div>
-
-            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
-              <ul class="mobile-menu-list">
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im">
-                            Home
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;categories">
-                            Categories
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;tags">
-                            Tags
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;about">
-                            About
-                        </a>
-                    </li>
-                
-                    <li class="mobile-menu-item">
-                        <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                            Github
-                        </a>
-                    </li>
-                
-              </ul>
-            </nav>
-
-            <header id="header">
-                <div class="logo"><a href="https:&#x2F;&#x2F;www.wangbo.im">WB Prime</a></div>
-                <nav class="menu">
-                    <ul>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im">
-                                    Home
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;categories">
-                                    Categories
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;tags">
-                                    Tags
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https://www.wangbo.im&#x2F;about">
-                                    About
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                                    Github
-                                </a>
-                            </li>
-                        
-                    </ul>
-                </nav>
-            </header>
-
-            <main>
-                <div class="content" id="mobile-panel">
-                    
-
-
-
-<article class="post">
+    <title>Learning Java Concurrency - CountDownLatch - Elvis Wang</title>
     
-    <header class="post__header">
-        <h1 class="post__title">
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="wangbo’s home &amp; blog"/>
+
+    <meta property="og:title" content="
+    wangbo’s home &amp; blog -&nbsp;Learning Java Concurrency - CountDownLatch" />
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2016-03-30-learning-java-concurrency-countdownlatch&#x2F;"/>
+    <meta property="og:description" content="&lt;p&gt;CountDownLatch 是一种比较有意思的线程同步方法，主要用于需要同步启动的环境中。&lt;&#x2F;p&gt;
+&lt;p&gt;举个栗子，部门进行聚餐要等到大家都到齐了才能开动。这个时候CountDownLatch可以理解为“还有多少人没有到”这个东西，来了一个，这个东西的值就会减1。一直到人都到齐了，这个东西的值变为了0,也就是可以开吃了。&lt;&#x2F;p&…"/>
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+<link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
+    <body>
+        <div class="container full">
+<header class="header">
+    <div class="header__inner">
+        <div class="header__logo">
+            <a href="&#x2F;">
+    <div class="logo">
+        WB Prime
+    </div>
+</a>
+        </div>
+        <div class="menu-trigger">menu</div>
+    </div>
+    
+    <nav class="menu">
+        <ul class="menu__inner menu__inner--desktop">
+            
+            
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+                    </li>
+                
+            </ul>
+
+        <ul class="menu__inner menu__inner--mobile">
+            
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+        </li>
+        </ul>
+    </nav>
+
+    </header>
+<div class="content"><div class="post">
+        <h1 class="post-title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2016-03-30-learning-java-concurrency-countdownlatch&#x2F;">Learning Java Concurrency - CountDownLatch</a>
         </h1>
-        <div class="post__meta">
-            <span class="post__time">2016-03-30</span>
-            
-        </div>
-    </header>
+        
+    <div class="post-meta">
+        <span class="post-date">2016.03.30
+                </span>
 
-    <div class="post-content">
-      <p>CountDownLatch 是一种比较有意思的线程同步方法，主要用于需要同步启动的环境中。</p>
+        <span class="post-author"></span>
+
+        
+
+    
+    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;learning-java-concurrency&#x2F;">Learning Java Concurrency</a>} 
+
+            
+    ::
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;java&#x2F;">java</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;concurrency&#x2F;">concurrency</a>
+        
+    
+            
+        
+    </div>
+
+
+
+        
+
+        <div class="post-content">
+            <p>CountDownLatch 是一种比较有意思的线程同步方法，主要用于需要同步启动的环境中。</p>
 <p>举个栗子，部门进行聚餐要等到大家都到齐了才能开动。这个时候CountDownLatch可以理解为“还有多少人没有到”这个东西，来了一个，这个东西的值就会减1。一直到人都到齐了，这个东西的值变为了0,也就是可以开吃了。</p>
 <p>举个栗子，通用的make进行多工程代码编译，必须所有工程编译完了才能结束。</p>
 <p>举个栗子，项目上线，各个模块都上线完了，leader说一句OK，大家才能走。</p>
@@ -163,87 +124,87 @@ n - 1。</li>
 查询n的值。</li>
 </ol>
 <p>CountDownLatch内部有一个静态类Sync。CountDownLatch的所有方法都委托到内部一个Sync实例。</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">private static final class </span><span style="color:#ebcb8b;">Sync </span><span style="color:#b48ead;">extends </span><span style="color:#a3be8c;">AbstractQueuedSynchronizer
+<pre style="background-color:#1e1e1e;">
+<span style="color:#569cd6;">private static final class </span><span style="color:#dcdcdc;">Sync </span><span style="color:#569cd6;">extends </span><span style="color:#4ec9b0;">AbstractQueuedSynchronizer
 </span></pre>
 <p>Sync可以理解为一个共享锁，主要使用AbstractQueuedSynchronizer的共享锁方面的功能。</p>
 <h1 id="shi-li-dai-ma"><a class="zola-anchor" href="#shi-li-dai-ma" aria-label="Anchor link for: shi-li-dai-ma">🔗</a>
 示例代码</h1>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">package </span><span style="color:#c0c5ce;">me.wbprime.showcase.concurrent;
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">java.util.</span><span style="color:#ebcb8b;">Random</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">java.util.concurrent.</span><span style="color:#ebcb8b;">CountDownLatch</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">java.util.concurrent.</span><span style="color:#ebcb8b;">ExecutorService</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">java.util.concurrent.</span><span style="color:#ebcb8b;">Executors</span><span style="color:#c0c5ce;">;
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#65737e;">/**
-</span><span style="color:#65737e;"> </span><span style="color:#65737e;">* Class: CountDownLatchCase
-</span><span style="color:#65737e;"> </span><span style="color:#65737e;">* Date: 2016/03/30 13:05
-</span><span style="color:#65737e;"> </span><span style="color:#65737e;">*/
-</span><span style="color:#b48ead;">public final class </span><span style="color:#ebcb8b;">CountDownLatchCase </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public static class </span><span style="color:#ebcb8b;">Module </span><span style="color:#b48ead;">implements </span><span style="color:#a3be8c;">Runnable </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">private </span><span style="color:#ebcb8b;">CountDownLatch </span><span style="color:#eff1f5;">latch;
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">private </span><span style="color:#ebcb8b;">String </span><span style="color:#eff1f5;">name;
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">public </span><span style="color:#8fa1b3;">Module</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">String </span><span style="color:#bf616a;">name</span><span style="color:#eff1f5;">, </span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">CountDownLatch </span><span style="color:#bf616a;">val</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.name </span><span style="color:#c0c5ce;">= </span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">null </span><span style="color:#c0c5ce;">!=</span><span style="color:#eff1f5;"> name) </span><span style="color:#c0c5ce;">?</span><span style="color:#eff1f5;"> name </span><span style="color:#c0c5ce;">: &quot;</span><span style="color:#a3be8c;">Anonymous</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">;
-</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.latch </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> val;
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">public void </span><span style="color:#8fa1b3;">run</span><span style="color:#eff1f5;">() {
-</span><span style="color:#eff1f5;">            </span><span style="color:#ebcb8b;">System</span><span style="color:#eff1f5;">.out.</span><span style="color:#bf616a;">println</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">Begin to deploy module: </span><span style="color:#c0c5ce;">&quot; +</span><span style="color:#eff1f5;"> name);
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">Random</span><span style="color:#eff1f5;"> rnd </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">Random</span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">System</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">currentTimeMillis</span><span style="color:#eff1f5;">());
-</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">final int</span><span style="color:#eff1f5;"> sleepTime </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> rnd.</span><span style="color:#bf616a;">nextInt</span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">1000</span><span style="color:#eff1f5;">) </span><span style="color:#c0c5ce;">+ </span><span style="color:#d08770;">1</span><span style="color:#eff1f5;">;
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">try </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">                </span><span style="color:#ebcb8b;">Thread</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">sleep</span><span style="color:#eff1f5;">(sleepTime);
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">} </span><span style="color:#b48ead;">catch </span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">InterruptedException </span><span style="color:#bf616a;">e</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">                </span><span style="color:#65737e;">// do nothing
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">            </span><span style="color:#ebcb8b;">System</span><span style="color:#eff1f5;">.out.</span><span style="color:#bf616a;">println</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">Finish deploying module: </span><span style="color:#c0c5ce;">&quot; +</span><span style="color:#eff1f5;"> name);
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">latch.</span><span style="color:#bf616a;">countDown</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public static class </span><span style="color:#ebcb8b;">Controller </span><span style="color:#b48ead;">implements </span><span style="color:#a3be8c;">Runnable </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">private </span><span style="color:#ebcb8b;">CountDownLatch </span><span style="color:#eff1f5;">latch;
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">public </span><span style="color:#8fa1b3;">Controller</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">CountDownLatch </span><span style="color:#bf616a;">val</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">.latch </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> val;
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">public void </span><span style="color:#8fa1b3;">run</span><span style="color:#eff1f5;">() {
-</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">try </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">                </span><span style="color:#eff1f5;">latch.</span><span style="color:#bf616a;">await</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">                </span><span style="color:#ebcb8b;">System</span><span style="color:#eff1f5;">.out.</span><span style="color:#bf616a;">println</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">Finish deploying all modules</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">} </span><span style="color:#b48ead;">catch </span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">InterruptedException </span><span style="color:#bf616a;">e</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">                </span><span style="color:#65737e;">// do nothing
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public static void </span><span style="color:#8fa1b3;">main</span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">String</span><span style="color:#b48ead;">[] </span><span style="color:#bf616a;">args</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">final int</span><span style="color:#eff1f5;"> moduleCount </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">20</span><span style="color:#eff1f5;">;
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">CountDownLatch</span><span style="color:#eff1f5;"> syncLatch </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">CountDownLatch</span><span style="color:#eff1f5;">(moduleCount);
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">ExecutorService</span><span style="color:#eff1f5;"> executorService </span><span style="color:#c0c5ce;">= </span><span style="color:#ebcb8b;">Executors</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">newFixedThreadPool</span><span style="color:#eff1f5;">(</span><span style="color:#d08770;">8</span><span style="color:#eff1f5;">);
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">executorService.</span><span style="color:#bf616a;">execute</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">Controller</span><span style="color:#eff1f5;">(syncLatch));
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">for </span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">int</span><span style="color:#eff1f5;"> i </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">0</span><span style="color:#eff1f5;">; i </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#eff1f5;"> moduleCount; i</span><span style="color:#c0c5ce;">++</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">            </span><span style="color:#eff1f5;">executorService.</span><span style="color:#bf616a;">execute</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">Module</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">Module </span><span style="color:#c0c5ce;">&quot; +</span><span style="color:#eff1f5;"> i, syncLatch));
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">
-</span><span style="color:#eff1f5;">        </span><span style="color:#eff1f5;">executorService.</span><span style="color:#bf616a;">shutdown</span><span style="color:#eff1f5;">();
-</span><span style="color:#eff1f5;">    </span><span style="color:#eff1f5;">}
-</span><span style="color:#eff1f5;">}
+<pre style="background-color:#1e1e1e;">
+<span style="color:#569cd6;">package </span><span style="color:#dcdcdc;">me.wbprime.showcase.concurrent;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">java.util.Random;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">java.util.concurrent.CountDownLatch;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">java.util.concurrent.ExecutorService;
+</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">java.util.concurrent.Executors;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#608b4e;">/**
+</span><span style="color:#608b4e;"> </span><span style="color:#608b4e;">* Class: CountDownLatchCase
+</span><span style="color:#608b4e;"> </span><span style="color:#608b4e;">* Date: 2016/03/30 13:05
+</span><span style="color:#608b4e;"> </span><span style="color:#608b4e;">*/
+</span><span style="color:#569cd6;">public final class </span><span style="color:#dcdcdc;">CountDownLatchCase {
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public static class </span><span style="color:#dcdcdc;">Module </span><span style="color:#569cd6;">implements </span><span style="color:#4ec9b0;">Runnable </span><span style="color:#dcdcdc;">{
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">CountDownLatch latch;
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">String name;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">Module(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">String name, </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">CountDownLatch val) {
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">this.name = (</span><span style="color:#569cd6;">null </span><span style="color:#dcdcdc;">!= name) </span><span style="color:#569cd6;">?</span><span style="color:#dcdcdc;"> name </span><span style="color:#569cd6;">: </span><span style="color:#d69d85;">&quot;Anonymous&quot;</span><span style="color:#dcdcdc;">;
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">this.latch = val;
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">run() {
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">System.out.println(</span><span style="color:#d69d85;">&quot;Begin to deploy module: &quot; </span><span style="color:#dcdcdc;">+ name);
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">Random rnd = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">Random(System.currentTimeMillis());
+</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">final int</span><span style="color:#dcdcdc;"> sleepTime = rnd.nextInt(</span><span style="color:#b5cea8;">1000</span><span style="color:#dcdcdc;">) + </span><span style="color:#b5cea8;">1</span><span style="color:#dcdcdc;">;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">try </span><span style="color:#dcdcdc;">{
+</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">Thread.sleep(sleepTime);
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">} </span><span style="color:#569cd6;">catch </span><span style="color:#dcdcdc;">(InterruptedException e) {
+</span><span style="color:#dcdcdc;">                </span><span style="color:#608b4e;">// do nothing
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">System.out.println(</span><span style="color:#d69d85;">&quot;Finish deploying module: &quot; </span><span style="color:#dcdcdc;">+ name);
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">latch.countDown();
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public static class </span><span style="color:#dcdcdc;">Controller </span><span style="color:#569cd6;">implements </span><span style="color:#4ec9b0;">Runnable </span><span style="color:#dcdcdc;">{
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">CountDownLatch latch;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">Controller(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">CountDownLatch val) {
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">this.latch = val;
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">run() {
+</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">try </span><span style="color:#dcdcdc;">{
+</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">latch.await();
+</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">System.out.println(</span><span style="color:#d69d85;">&quot;Finish deploying all modules&quot;</span><span style="color:#dcdcdc;">);
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">} </span><span style="color:#569cd6;">catch </span><span style="color:#dcdcdc;">(InterruptedException e) {
+</span><span style="color:#dcdcdc;">                </span><span style="color:#608b4e;">// do nothing
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public static void </span><span style="color:#dcdcdc;">main(String</span><span style="color:#569cd6;">[] </span><span style="color:#dcdcdc;">args) {
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">final int</span><span style="color:#dcdcdc;"> moduleCount = </span><span style="color:#b5cea8;">20</span><span style="color:#dcdcdc;">;
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">CountDownLatch syncLatch = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">CountDownLatch(moduleCount);
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">ExecutorService executorService = Executors.newFixedThreadPool(</span><span style="color:#b5cea8;">8</span><span style="color:#dcdcdc;">);
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">executorService.execute(</span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">Controller(syncLatch));
+</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">for </span><span style="color:#dcdcdc;">(</span><span style="color:#569cd6;">int</span><span style="color:#dcdcdc;"> i = </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">; i &lt; moduleCount; i</span><span style="color:#569cd6;">++</span><span style="color:#dcdcdc;">) {
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">executorService.execute(</span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">Module(</span><span style="color:#d69d85;">&quot;Module &quot; </span><span style="color:#dcdcdc;">+ i, syncLatch));
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">executorService.shutdown();
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
+</span><span style="color:#dcdcdc;">}
 </span></pre><h1 id="shi-li-dai-ma-shuo-ming"><a class="zola-anchor" href="#shi-li-dai-ma-shuo-ming" aria-label="Anchor link for: shi-li-dai-ma-shuo-ming">🔗</a>
 示例代码说明</h1>
 <ol>
@@ -266,54 +227,24 @@ n - 1。</li>
 <li><a href="https://www.wangbo.im/posts/2016-03-30-learning-java-concurrency-countdownlatch/CountDownLatchCase.java">CountDownLatchCase.java</a></li>
 </ol>
 
-    </div>
-
-    
-    
-
-    <div class="post-footer">
-        
-            
-                <div class="post-tags">
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;java&#x2F;">#java</a>
-                    
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;concurrency&#x2F;">#concurrency</a>
-                    
-                </div>
-            
-            
-                <div class="post-nav">
-                    
-                        <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2016-03-30-learning-java-concurrent-semaphore&#x2F;">‹ Learning Java Concurrency - Semaphore</a>
-                    
-                    
-                        <a class="next" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2016-03-30-learning-java-concurrency-cyclicbarrier&#x2F;">Learning Java Concurrency - CyclicBarrier ›</a>
-                    
-                    
-                    
-                </div>
-            
-
-        
-
-    </div>
-
-    
-    
-</article>
-
-
-                </div>
-            </main>
-
-            
-            
         </div>
+        
+    
+</div></div>
+            
+    <div class="pagination">
+        <div class="pagination__buttons">
+            </div>
+    </div>
+<footer class="footer">
+                    <div class="footer__inner"><div class="copyright">
+            <span>© 2019 <a href="https://github.com/ejmg/zerm">zerm</a> :: Powered by <a href="https://www.getzola.org/">Zola</a></span>
+            <span>:: Theme made by <a href="https://github.com/ejmg">ejmg</a></span>
+        </div>
+    <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;assets&#x2F;js&#x2F;main.js"></script>
+</div>
+                    
 
-      
-          <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
-      
+                </footer></div>
     </body>
-
 </html>
