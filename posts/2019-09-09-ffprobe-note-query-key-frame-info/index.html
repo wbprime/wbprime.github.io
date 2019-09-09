@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head><title>wangbo’s blog</title>
+    <head>
+    <title>Query Key-Frame Info from Video Stream using FFprobe - Elvis Wang</title>
+    
+    
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <meta name="description" content="wangbo’s home &amp; blog"/>
 
     <meta property="og:title" content="
-    wangbo’s blog -&nbsp;" />
+    wangbo’s blog -&nbsp;Query Key-Frame Info from Video Stream using FFprobe" />
     <meta property="og:type" content="website"/>
-    <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;"/>
-    <meta property="og:description" content=""/>
+    <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-09-ffprobe-note-query-key-frame-info&#x2F;"/>
+    <meta property="og:description" content="使用 ffprobe 获取视频中的关键帧信息命令如下：&#96;ffprobe -loglevel error -hide_banner -select_streams v -skip_frame nokey -show_frames -show_entries frame=pict_type -of json=compact=1 input.avi&#96;"/>
     <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
     <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
 <link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
@@ -61,51 +64,50 @@
 
     </header>
 <div class="content"><div class="post">
+        <h1 class="post-title">
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-09-ffprobe-note-query-key-frame-info&#x2F;">Query Key-Frame Info from Video Stream using FFprobe</a>
+        </h1>
+        
+    <div class="post-meta">
+        <span class="post-date">2019.09.09
+                </span>
 
-        <h1 class="post-title">{categories}</h1>
-        <ul><li class="tag-list">
-                    <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;c-c&#x2F;">{C&#x2F;C++}</a>
-                    (1 post)
-                </li>
-                <li class="tag-list">
-                    <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;causerie&#x2F;">{Causerie}</a>
-                    (15 posts)
-                </li>
-                <li class="tag-list">
-                    <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;learning-java-concurrency&#x2F;">{Learning Java Concurrency}</a>
-                    (11 posts)
-                </li>
-                <li class="tag-list">
-                    <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;mayday&#x2F;">{Mayday}</a>
-                    (19 posts)
-                </li>
-                <li class="tag-list">
-                    <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;notes&#x2F;">{Notes}</a>
-                    (21 posts)
-                </li>
-                <li class="tag-list">
-                    <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;practise&#x2F;">{Practise}</a>
-                    (8 posts)
-                </li>
-                <li class="tag-list">
-                    <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;spring&#x2F;">{Spring}</a>
-                    (4 posts)
-                </li>
-                <li class="tag-list">
-                    <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;spring-mvc-testing&#x2F;">{Spring MVC Testing}</a>
-                    (10 posts)
-                </li>
-                <li class="tag-list">
-                    <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;streaming&#x2F;">{Streaming}</a>
-                    (9 posts)
-                </li>
-                <li class="tag-list">
-                    <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;vertx&#x2F;">{Vertx}</a>
-                    (2 posts)
-                </li>
-                
-        </ul>
-    </div></div>
+        <span class="post-author"></span>
+
+        
+
+    
+    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;streaming&#x2F;">Streaming</a>} 
+
+            
+    ::
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;ffprobe&#x2F;">ffprobe</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;key-frame&#x2F;">key-frame</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;note&#x2F;">note</a>
+        
+    
+            
+        
+    </div>
+
+
+
+        
+
+        <div class="post-content">
+            <p>使用 <a href="https://ffmpeg.org/ffprobe.html">ffprobe</a> 获取视频中的关键帧信息命令如下：</p>
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">ffprobe -loglevel error -hide_banner -select_streams v -skip_frame nokey -show_frames -show_entries frame=pict_type -of json=compact=1 input.avi
+</span><span style="color:#dcdcdc;">ffprobe -loglevel error -hide_banner -select_streams v -show_format -show_frames -show_entries frame=pict_t ype:format=filename,duration,size:format_tags= -show_streams -of json=compact=1 input.mp4
+</span></pre>
+<p><a href="https://ffmpeg.org/ffprobe.html">ffprobe</a> 的更多用法请参考<a href="https://ffmpeg.org/ffprobe-all.html">其文档</a> 。</p>
+
+        </div>
+        
+    
+</div></div>
             
     <div class="pagination">
         <div class="pagination__buttons">

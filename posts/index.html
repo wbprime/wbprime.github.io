@@ -63,6 +63,136 @@
 <div class="content">
 <div class="posts"><div class="post on-list">
         <h1 class="post-title">
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-09-ffprobe-note-query-video-rotation-info&#x2F;">Query Video Rotation Info using FFprobe</a>
+        </h1>
+        
+        
+        
+    <div class="post-meta">
+        <span class="post-date">2019.09.09
+                </span>
+
+        <span class="post-author"></span>
+
+        
+
+    
+    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;streaming&#x2F;">Streaming</a>} 
+
+            
+    ::
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;ffprobe&#x2F;">ffprobe</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;rotation&#x2F;">rotation</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;note&#x2F;">note</a>
+        
+    
+            
+        
+    </div>
+
+        
+        
+        
+        
+
+        <div class="post-content">
+            使用 ffprobe 获取原视频中的旋转信息的命令如下：&#96;ffprobe -loglevel error -hide_banner -select_streams v -show_entries stream_tags=rotate -of json=compact=1 input.avi&#96;
+            
+            </div>
+        <div>
+            <a class="read-more button" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-09-ffprobe-note-query-video-rotation-info&#x2F;">More →</a>
+        </div>
+        </div>
+    <div class="post on-list">
+        <h1 class="post-title">
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-09-ffprobe-note-query-key-frame-info&#x2F;">Query Key-Frame Info from Video Stream using FFprobe</a>
+        </h1>
+        
+        
+        
+    <div class="post-meta">
+        <span class="post-date">2019.09.09
+                </span>
+
+        <span class="post-author"></span>
+
+        
+
+    
+    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;streaming&#x2F;">Streaming</a>} 
+
+            
+    ::
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;ffprobe&#x2F;">ffprobe</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;key-frame&#x2F;">key-frame</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;note&#x2F;">note</a>
+        
+    
+            
+        
+    </div>
+
+        
+        
+        
+        
+
+        <div class="post-content">
+            使用 ffprobe 获取视频中的关键帧信息命令如下：&#96;ffprobe -loglevel error -hide_banner -select_streams v -skip_frame nokey -show_frames -show_entries frame=pict_type -of json=compact=1 input.avi&#96;
+            
+            </div>
+        <div>
+            <a class="read-more button" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-09-ffprobe-note-query-key-frame-info&#x2F;">More →</a>
+        </div>
+        </div>
+    <div class="post on-list">
+        <h1 class="post-title">
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-09-ffmpeg-note-record-xorg-video&#x2F;">Record video from Xorg using FFmpeg</a>
+        </h1>
+        
+        
+        
+    <div class="post-meta">
+        <span class="post-date">2019.09.09
+                </span>
+
+        <span class="post-author"></span>
+
+        
+
+    
+    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;streaming&#x2F;">Streaming</a>} 
+
+            
+    ::
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;ffmpeg&#x2F;">ffmpeg</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;note&#x2F;">note</a>
+        
+    
+            
+        
+    </div>
+
+        
+        
+        
+        
+
+        <div class="post-content">
+            使用 ffmpeg 在 X 下进行录屏，可以使用如下命令：&#96;ffmpeg -f x11grab -video_size 1366x768 -framerate 24 -i :0.0+0,0 $(date +%Y%m%dT%H%M%S.%3N.avi)&#96;
+            
+            </div>
+        <div>
+            <a class="read-more button" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-09-ffmpeg-note-record-xorg-video&#x2F;">More →</a>
+        </div>
+        </div>
+    <div class="post on-list">
+        <h1 class="post-title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-08-31-slow-mysql-query-on-too-many-cas-updating-failure&#x2F;">一次由于线上 MySQL 并发抢占更新冲突引发的 BUG</a>
         </h1>
         
@@ -607,138 +737,6 @@
             </div>
         <div>
             <a class="read-more button" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-03-21-a-product-env-bug-misused-hashmap-nullability&#x2F;">More →</a>
-        </div>
-        </div>
-    <div class="post on-list">
-        <h1 class="post-title">
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-03-12-multiple-jwt-auth-handler-in-vertx&#x2F;">Multiple JWT Auth Handlers in Vert.x</a>
-        </h1>
-        
-        
-        
-    <div class="post-meta">
-        <span class="post-date">2019.03.12
-                </span>
-
-        <span class="post-author"></span>
-
-        
-
-    
-    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;vertx&#x2F;">Vertx</a>} 
-
-            
-    ::
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;vert-x&#x2F;">vert.x</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;jwt&#x2F;">jwt</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;auth&#x2F;">auth</a>
-        
-    
-            
-        
-    </div>
-
-        
-        
-        
-        
-
-        <div class="post-content">
-            在实际的项目中，遇到了一个支持多用户提供方的需求：项目的用户是从多个其他项目导入的；项目的逻辑比较简单，不想维护自己的用户信息数据和外部映射。比如，项目需要支持主站用户、视频网站等入口登录访问。正常情况下，只需要项目维护一套内部用户表、一个外部项目表以及内部用户和外部用户的映射表；在用户导入或用户绑定请求时，建立外部项目 ID 和外部项目用户 ID 与内部用户 ID 的对应关系；在登录请求时，根据外部项目 ID 和外部项目用户 ID 调用用户认证回调，通过后再寻找到内部用户的 ID 即可。实际在项目的设计和实现过程中，采用了一个比较好玩的方法：在内部用户表的基础上，对用户使用 JWT 的认证模型；用户登录时，根据外部项目 ID 和外部项目用户 ID 调用用户认证回调，发放 JWT token，在 token 中限定用户的访问权限。
-            
-            </div>
-        <div>
-            <a class="read-more button" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-03-12-multiple-jwt-auth-handler-in-vertx&#x2F;">More →</a>
-        </div>
-        </div>
-    <div class="post on-list">
-        <h1 class="post-title">
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-03-11-graphviz-note&#x2F;">Graphviz Dot Note</a>
-        </h1>
-        
-        
-        
-    <div class="post-meta">
-        <span class="post-date">2019.03.11
-                </span>
-
-        <span class="post-author"></span>
-
-        
-
-    
-    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;notes&#x2F;">Notes</a>} 
-
-            
-    ::
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;graphviz&#x2F;">graphviz</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;dot&#x2F;">dot</a>
-        
-    
-            
-        
-    </div>
-
-        
-        
-        
-        
-
-        <div class="post-content">
-            Graphviz Note 之 设置输出图片的大小。
-            
-            </div>
-        <div>
-            <a class="read-more button" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-03-11-graphviz-note&#x2F;">More →</a>
-        </div>
-        </div>
-    <div class="post on-list">
-        <h1 class="post-title">
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-03-11-a-online-issue-caused-by-dns-unavailability&#x2F;">一次由 DNS 解析服务失效引发的线上 DB 连接打满的事故经历</a>
-        </h1>
-        
-        
-        
-    <div class="post-meta">
-        <span class="post-date">2019.03.11
-                </span>
-
-        <span class="post-author"></span>
-
-        
-
-    
-    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;practise&#x2F;">Practise</a>} 
-
-            
-    ::
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;dns&#x2F;">dns</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;mysql&#x2F;">mysql</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;tomcat-dbcp&#x2F;">tomcat dbcp</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;connection-leak&#x2F;">connection leak</a>
-        
-    
-            
-        
-    </div>
-
-        
-        
-        
-        
-
-        <div class="post-content">
-            最近经历了一次由于线上 DNS 解析大范围失效引发的问题排查，并且由于应对不当导致的 MySQL 连接数打满。由于问题发上在周末，网络访问和内部沟通都不方便，整个问题的处理大概花费了 14 个小时（上午 10：00 左右到晚上 03：00）。事故的起因是由于网络 DNS 解析失效，导致服务里面的一段发送 UDP 消息的代码超时，导致接口访问时长增加，导致后续请求在任务队列中排队并超时。排查发现问题之后紧急上线，导致所有服务节点重启之后连接 MySQL 出现域名解析问题，在处理请求的过程中不断创建连接，在域名解析恢复之后把 MySQL 的服务器的连接打满导致部分请求超时。连接打满之后再创建新连接就会失败，触发了一个连接池的 BUG，导致连接池会不断地创建连接，重启也不能解决问题。
-            
-            </div>
-        <div>
-            <a class="read-more button" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-03-11-a-online-issue-caused-by-dns-unavailability&#x2F;">More →</a>
         </div>
         </div>
     

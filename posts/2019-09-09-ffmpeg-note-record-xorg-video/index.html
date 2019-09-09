@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head><title>wangbo’s blog</title>
+    <head>
+    <title>Record video from Xorg using FFmpeg - Elvis Wang</title>
+    
+    
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <meta name="description" content="wangbo’s home &amp; blog"/>
 
     <meta property="og:title" content="
-    wangbo’s blog -&nbsp;" />
+    wangbo’s blog -&nbsp;Record video from Xorg using FFmpeg" />
     <meta property="og:type" content="website"/>
-    <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;"/>
-    <meta property="og:description" content=""/>
+    <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-09-ffmpeg-note-record-xorg-video&#x2F;"/>
+    <meta property="og:description" content="使用 ffmpeg 在 X 下进行录屏，可以使用如下命令：&#96;ffmpeg -f x11grab -video_size 1366x768 -framerate 24 -i :0.0+0,0 $(date +%Y%m%dT%H%M%S.%3N.avi)&#96;"/>
     <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
     <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
 <link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
@@ -61,51 +64,48 @@
 
     </header>
 <div class="content"><div class="post">
+        <h1 class="post-title">
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-09-ffmpeg-note-record-xorg-video&#x2F;">Record video from Xorg using FFmpeg</a>
+        </h1>
+        
+    <div class="post-meta">
+        <span class="post-date">2019.09.09
+                </span>
 
-        <h1 class="post-title">{categories}</h1>
-        <ul><li class="tag-list">
-                    <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;c-c&#x2F;">{C&#x2F;C++}</a>
-                    (1 post)
-                </li>
-                <li class="tag-list">
-                    <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;causerie&#x2F;">{Causerie}</a>
-                    (15 posts)
-                </li>
-                <li class="tag-list">
-                    <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;learning-java-concurrency&#x2F;">{Learning Java Concurrency}</a>
-                    (11 posts)
-                </li>
-                <li class="tag-list">
-                    <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;mayday&#x2F;">{Mayday}</a>
-                    (19 posts)
-                </li>
-                <li class="tag-list">
-                    <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;notes&#x2F;">{Notes}</a>
-                    (21 posts)
-                </li>
-                <li class="tag-list">
-                    <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;practise&#x2F;">{Practise}</a>
-                    (8 posts)
-                </li>
-                <li class="tag-list">
-                    <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;spring&#x2F;">{Spring}</a>
-                    (4 posts)
-                </li>
-                <li class="tag-list">
-                    <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;spring-mvc-testing&#x2F;">{Spring MVC Testing}</a>
-                    (10 posts)
-                </li>
-                <li class="tag-list">
-                    <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;streaming&#x2F;">{Streaming}</a>
-                    (9 posts)
-                </li>
-                <li class="tag-list">
-                    <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;vertx&#x2F;">{Vertx}</a>
-                    (2 posts)
-                </li>
-                
-        </ul>
-    </div></div>
+        <span class="post-author"></span>
+
+        
+
+    
+    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;streaming&#x2F;">Streaming</a>} 
+
+            
+    ::
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;ffmpeg&#x2F;">ffmpeg</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;note&#x2F;">note</a>
+        
+    
+            
+        
+    </div>
+
+
+
+        
+
+        <div class="post-content">
+            <p>使用 <a href="https://ffmpeg.org/ffmpeg.html">ffmpeg</a> 在 X 下进行录屏，可以使用如下命令：</p>
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">ffmpeg -f x11grab -video_size 1366x768 -framerate 24 -i :0.0+0,0 $(date +%Y%m%dT%H%M%S.%</span><span style="color:#b5cea8;">3</span><span style="color:#dcdcdc;">N.avi)
+</span></pre>
+<p>使用了 <a href="https://ffmpeg.org/ffmpeg-devices.html#x11grab">x11grap</a> 解码器。</p>
+<p>参见 <a href="https://trac.ffmpeg.org/wiki/Capture/Desktop">Capturing your Desktop / Screen Recording</a></p>
+
+        </div>
+        
+    
+</div></div>
             
     <div class="pagination">
         <div class="pagination__buttons">

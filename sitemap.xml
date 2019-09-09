@@ -246,6 +246,27 @@
         </url>
     
         <url>
+            <loc>https://www.wangbo.im/posts/2019-09-09-ffmpeg-note-record-xorg-video/</loc>
+            
+                <lastmod>2019-09-09T09:43:41+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/2019-09-09-ffprobe-note-query-key-frame-info/</loc>
+            
+                <lastmod>2019-09-09T09:52:45+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/2019-09-09-ffprobe-note-query-video-rotation-info/</loc>
+            
+                <lastmod>2019-09-09T09:53:05+08:00</lastmod>
+            
+        </url>
+    
+        <url>
             <loc>https://www.wangbo.im/posts/acl-note/</loc>
             
                 <lastmod>2018-02-05T17:46:28+08:00</lastmod>
@@ -802,6 +823,10 @@
         </url>
         
         <url>
+            <loc>https://www.wangbo.im/tags/ffprobe/</loc>
+        </url>
+        
+        <url>
             <loc>https://www.wangbo.im/tags/fps/</loc>
         </url>
         
@@ -890,6 +915,10 @@
         </url>
         
         <url>
+            <loc>https://www.wangbo.im/tags/key-frame/</loc>
+        </url>
+        
+        <url>
             <loc>https://www.wangbo.im/tags/libevent/</loc>
         </url>
         
@@ -946,6 +975,10 @@
         </url>
         
         <url>
+            <loc>https://www.wangbo.im/tags/note/</loc>
+        </url>
+        
+        <url>
             <loc>https://www.wangbo.im/tags/null/</loc>
         </url>
         
@@ -963,6 +996,10 @@
         
         <url>
             <loc>https://www.wangbo.im/tags/rate-control/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/tags/rotation/</loc>
         </url>
         
         <url>

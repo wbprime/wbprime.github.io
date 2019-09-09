@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head><title>wangbo’s blog</title>
+    <head>
+    <title>Query Video Rotation Info using FFprobe - Elvis Wang</title>
+    
+    
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <meta name="description" content="wangbo’s home &amp; blog"/>
 
     <meta property="og:title" content="
-    wangbo’s blog -&nbsp;" />
+    wangbo’s blog -&nbsp;Query Video Rotation Info using FFprobe" />
     <meta property="og:type" content="website"/>
-    <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;"/>
-    <meta property="og:description" content=""/>
+    <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-09-ffprobe-note-query-video-rotation-info&#x2F;"/>
+    <meta property="og:description" content="使用 ffprobe 获取原视频中的旋转信息的命令如下：&#96;ffprobe -loglevel error -hide_banner -select_streams v -show_entries stream_tags=rotate -of json=compact=1 input.avi&#96;"/>
     <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
     <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
 <link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
@@ -61,51 +64,53 @@
 
     </header>
 <div class="content"><div class="post">
+        <h1 class="post-title">
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-09-ffprobe-note-query-video-rotation-info&#x2F;">Query Video Rotation Info using FFprobe</a>
+        </h1>
+        
+    <div class="post-meta">
+        <span class="post-date">2019.09.09
+                </span>
 
-        <h1 class="post-title">{categories}</h1>
-        <ul><li class="tag-list">
-                    <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;c-c&#x2F;">{C&#x2F;C++}</a>
-                    (1 post)
-                </li>
-                <li class="tag-list">
-                    <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;causerie&#x2F;">{Causerie}</a>
-                    (15 posts)
-                </li>
-                <li class="tag-list">
-                    <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;learning-java-concurrency&#x2F;">{Learning Java Concurrency}</a>
-                    (11 posts)
-                </li>
-                <li class="tag-list">
-                    <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;mayday&#x2F;">{Mayday}</a>
-                    (19 posts)
-                </li>
-                <li class="tag-list">
-                    <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;notes&#x2F;">{Notes}</a>
-                    (21 posts)
-                </li>
-                <li class="tag-list">
-                    <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;practise&#x2F;">{Practise}</a>
-                    (8 posts)
-                </li>
-                <li class="tag-list">
-                    <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;spring&#x2F;">{Spring}</a>
-                    (4 posts)
-                </li>
-                <li class="tag-list">
-                    <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;spring-mvc-testing&#x2F;">{Spring MVC Testing}</a>
-                    (10 posts)
-                </li>
-                <li class="tag-list">
-                    <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;streaming&#x2F;">{Streaming}</a>
-                    (9 posts)
-                </li>
-                <li class="tag-list">
-                    <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;vertx&#x2F;">{Vertx}</a>
-                    (2 posts)
-                </li>
-                
-        </ul>
-    </div></div>
+        <span class="post-author"></span>
+
+        
+
+    
+    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;streaming&#x2F;">Streaming</a>} 
+
+            
+    ::
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;ffprobe&#x2F;">ffprobe</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;rotation&#x2F;">rotation</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;note&#x2F;">note</a>
+        
+    
+            
+        
+    </div>
+
+
+
+        
+
+        <div class="post-content">
+            <p>有一些通过手持设备录制的视频会把视频的旋转信息作为一个额外的字段放入视频的元数据中（比如 iOS）；在对
+这些视频进行处理的时候，其元数据中的宽高信息就需要使用旋转信息进行修正。</p>
+<p>使用 <a href="https://ffmpeg.org/ffprobe.html">ffprobe</a> 获取原视频中的旋转信息的命令如下：</p>
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">ffprobe -loglevel error -hide_banner -select_streams v -show_entries stream_tags=rotate -of json=compact=1 input.avi
+</span></pre>
+<p>查询得到的视频旋转信息是一个整型的旋转角度值（而不是弧度）；取值范围为 [0, 360]，常见的取值有
+90/180/270 。</p>
+<p>假定一个原视频通过 <a href="https://ffmpeg.org/ffprobe.html">ffprobe</a> 提取的宽高信息为 800x600，若旋转信息为 90，则实际的视频宽高为 600x800。</p>
+
+        </div>
+        
+    
+</div></div>
             
     <div class="pagination">
         <div class="pagination__buttons">
