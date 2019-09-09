@@ -77,11 +77,13 @@
         
 
     
-    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;notes&#x2F;">Notes</a>} 
+    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;nginx&#x2F;">Nginx</a>} 
 
             
     ::
     #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;nginx&#x2F;">nginx</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;note&#x2F;">note</a>
         
     
             
@@ -137,7 +139,7 @@ Nginx 配置信息的解析流程</h1>
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_conf_set_flag_slot,
 </span><span style="color:#dcdcdc;">    </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">,
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">offsetof(ngx_core_conf_t, daemon),
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">NULL 
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">NULL
 </span><span style="color:#dcdcdc;">},
 </span></pre>
 <p>而如果我在配置文件内加入如下配置内容：</p>
@@ -283,17 +285,17 @@ Nginx 配置信息的解析流程</h1>
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_str_t        *value;
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_flag_t       *fp;
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_conf_post_t  *post;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">/* 解析出来的对应值存放的内存位置 */
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">fp = (ngx_flag_t *) (p + cmd-&gt;offset);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">/* 该内存位置已有值，故知配置指令重复 */
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">if (*fp != NGX_CONF_UNSET) {
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">return &quot;is duplicate&quot;;
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">/* cf-&gt;args存放的是与当前处理配置项相关的各个token，
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">比如解析daemon配置指令时， 
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">比如解析daemon配置指令时，
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">cf-&gt;args内的数据详细如下，以便于理解（通过gdb调试获得的结果）：
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">(gdb) p *cf-&gt;args
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">$1 = {elts = 0x9a0c798, nelts = 2, size = 8, nalloc = 10, pool = 0x9a0bf00}
@@ -302,9 +304,9 @@ Nginx 配置信息的解析流程</h1>
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">(gdb) p *(((ngx_str_t*)(cf-&gt;args-&gt;elts)+1))
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">$3 = {len = 3, data = 0x9a0c7f0 &quot;off&quot;}
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">*/
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">value = cf-&gt;args-&gt;elts;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">/* 解析，布尔值的配置很好解析，&quot;on&quot;转为nginx内的1，&quot;off&quot;转为0。*/
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">if (ngx_strcasecmp(value[1].data, (u_char *) &quot;on&quot;) == 0) {
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">*fp = 1;
@@ -317,7 +319,7 @@ Nginx 配置信息的解析流程</h1>
 </span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">value[1].data, cmd-&gt;name.data);
 </span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">return NGX_CONF_ERROR;
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">/* 其它处理函数，
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">对于daemon配置指令来说为NULL，
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">但是对于其它指令，比如optimize_server_names则还需调用自定义的处理。
@@ -326,7 +328,7 @@ Nginx 配置信息的解析流程</h1>
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">post = cmd-&gt;post;
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">return post-&gt;post_handler(cf, post, fp);
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">return NGX_CONF_OK;
 </span><span style="color:#dcdcdc;">}
 </span></pre>
