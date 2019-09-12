@@ -267,6 +267,13 @@
         </url>
     
         <url>
+            <loc>https://www.wangbo.im/posts/2019-09-12-vboxmanage-note-change-host-key-for-vboxsdl/</loc>
+            
+                <lastmod>2019-09-12T17:39:15+08:00</lastmod>
+            
+        </url>
+    
+        <url>
             <loc>https://www.wangbo.im/posts/acl-note/</loc>
             
                 <lastmod>2018-02-05T17:46:28+08:00</lastmod>
@@ -774,6 +781,10 @@
             <loc>https://www.wangbo.im/categories/vertx/</loc>
         </url>
         
+        <url>
+            <loc>https://www.wangbo.im/categories/virtualbox/</loc>
+        </url>
+        
     
         
         <url>
@@ -926,6 +937,10 @@
         
         <url>
             <loc>https://www.wangbo.im/tags/hls/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/tags/host-key/</loc>
         </url>
         
         <url>
@@ -1137,6 +1152,10 @@
         </url>
         
         <url>
+            <loc>https://www.wangbo.im/tags/vboxsdl/</loc>
+        </url>
+        
+        <url>
             <loc>https://www.wangbo.im/tags/vbr/</loc>
         </url>
         
@@ -1146,6 +1165,10 @@
         
         <url>
             <loc>https://www.wangbo.im/tags/vert-x/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/tags/virtualbox/</loc>
         </url>
         
         <url>
