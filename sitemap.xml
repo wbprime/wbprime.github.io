@@ -274,6 +274,13 @@
         </url>
     
         <url>
+            <loc>https://www.wangbo.im/posts/2019-09-17-spring-cloud-gateway-load-testing-using-wrk/</loc>
+            
+                <lastmod>2019-09-17T16:20:48+08:00</lastmod>
+            
+        </url>
+    
+        <url>
             <loc>https://www.wangbo.im/posts/2019-09-17-usage-of-benchmarking-tool-wrk-and-wrk2/</loc>
             
                 <lastmod>2019-09-17T09:27:06+08:00</lastmod>

@@ -401,6 +401,7 @@ Coordinated Omission</h2>
 </ol>
 <p>综上，如果需要在相同并发度下使用不同的吞吐量QPS对 HTTP 服务进行压测，又或者需要获取更精确的 TP999/TP9999 百分位数据，可以考虑使用 <a href="https://github.com/giltene/wrk2" title="A constant throughput, correct latency recording variant of wrk">wrk2</a> 代替 <a href="https://github.com/wg/wrk" title="Modern HTTP benchmarking tool">wrk</a> 进行性能测试。</p>
 <p>我的一个性能测试实践是先使用 <a href="https://github.com/wg/wrk" title="Modern HTTP benchmarking tool">wrk</a> 找到一个符合基本要求的并发读（<code>-c</code> 选项）和对应的QPS，然后以这个QPS为上限使用 <a href="https://github.com/giltene/wrk2" title="A constant throughput, correct latency recording variant of wrk">wrk2</a> 在相同并发度的基础上测试不同吞吐量（<code>-R</code> 选项）下的请求延时。</p>
+<hr />
 <p>以上。</p>
 
         </div>
