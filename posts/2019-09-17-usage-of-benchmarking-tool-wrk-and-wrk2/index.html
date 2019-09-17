@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <title>Usage of Benchmarking Tool WRK and WRK2 - Elvis Wang</title>
+    
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="wangbo’s home &amp; blog"/>
+
+    <meta property="og:title" content="
+    wangbo’s blog -&nbsp;Usage of Benchmarking Tool WRK and WRK2" />
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-17-usage-of-benchmarking-tool-wrk-and-wrk2&#x2F;"/>
+    <meta property="og:description" content="&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;wg&#x2F;wrk&quot; title=&quot;Modern HTTP benchmarking tool&quot;&gt;wrk&lt;&#x2F;a&gt; 是一款短小精悍又备受赞誉的开源性能测试工具，能够用来对 HTTP 服务进行压测；&lt;a href=&…"/>
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+<link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
+    <body>
+        <div class="container full">
+<header class="header">
+    <div class="header__inner">
+        <div class="header__logo">
+            <a href="&#x2F;">
+    <div class="logo">
+        WB Prime
+    </div>
+</a>
+        </div>
+        <div class="menu-trigger">menu</div>
+    </div>
+    
+    <nav class="menu">
+        <ul class="menu__inner menu__inner--desktop">
+            
+            
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+                    </li>
+                
+            </ul>
+
+        <ul class="menu__inner menu__inner--mobile">
+            
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+        </li>
+        </ul>
+    </nav>
+
+    </header>
+<div class="content"><div class="post">
+        <h1 class="post-title">
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-17-usage-of-benchmarking-tool-wrk-and-wrk2&#x2F;">Usage of Benchmarking Tool WRK and WRK2</a>
+        </h1>
+        
+    <div class="post-meta">
+        <span class="post-date">2019.09.17
+                </span>
+
+        <span class="post-author"></span>
+
+        
+
+    
+    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;utils&#x2F;">Utils</a>} 
+
+            
+    ::
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;benchmark&#x2F;">benchmark</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;testing&#x2F;">testing</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;load-test&#x2F;">load-test</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;wrk&#x2F;">wrk</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;wrk2&#x2F;">wrk2</a>
+        
+    
+            
+        
+    </div>
+
+
+
+        
+
+        <div class="post-content">
+            <p><a href="https://github.com/wg/wrk" title="Modern HTTP benchmarking tool">wrk</a> 是一款短小精悍又备受赞誉的开源性能测试工具，能够用来对 HTTP 服务进行压测；<a href="https://github.com/giltene/wrk2" title="A constant throughput, correct latency recording variant of wrk">wrk2</a> 是
+对 <a href="https://github.com/wg/wrk" title="Modern HTTP benchmarking tool">wrk</a> 的改进，增加了压测结果的直方图输出。</p>
+<p>网路上有不少介绍 <a href="https://github.com/wg/wrk" title="Modern HTTP benchmarking tool">wrk</a> 或 <a href="https://github.com/giltene/wrk2" title="A constant throughput, correct latency recording variant of wrk">wrk2</a> 的文章，但大多泛泛而谈，对于压测的结果输出项的解释也是云
+里雾里或者简单跳过，殊为遗憾。</p>
+<p>本文主要介绍 <a href="https://github.com/wg/wrk" title="Modern HTTP benchmarking tool">wrk</a> 和 <a href="https://github.com/giltene/wrk2" title="A constant throughput, correct latency recording variant of wrk">wrk2</a> 的使用，并在阅读源码的基础上对输出结果的项进行解释。</p>
+<p><a name="continue-reading"></a></p>
+<h1 id="wrk"><a class="zola-anchor" href="#wrk" aria-label="Anchor link for: wrk">🔗</a>
+WRK</h1>
+<p>来自官方 <a href="https://github.com/wg/wrk" title="Modern HTTP benchmarking tool">wrk</a> 的介绍：</p>
+<blockquote>
+<p>wrk is a modern HTTP benchmarking tool capable of generating significant load when run on a single
+multi-core CPU. It combines a multithreaded design with scalable event notification systems such as
+epoll and kqueue.</p>
+</blockquote>
+<p>简单说，<a href="https://github.com/wg/wrk" title="Modern HTTP benchmarking tool">wrk</a> 是一个用来对 HTTP 服务进行压测的工具，能够有效利用 epoll/kqueue 技术在普通的 PC
+上模拟较大的一个请求负载。</p>
+<h2 id="ji-ben-yong-fa"><a class="zola-anchor" href="#ji-ben-yong-fa" aria-label="Anchor link for: ji-ben-yong-fa">🔗</a>
+基本用法</h2>
+<p><a href="https://github.com/wg/wrk" title="Modern HTTP benchmarking tool">wrk</a> 的安装非常简单，最直接的方式就是从 <a href="https://github.com/wg/wrk" title="Modern HTTP benchmarking tool">Github</a> 上下载源代码然后 <code>make -j8</code>。</p>
+<p>其单独无选项和参数运行的输出如下：</p>
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">Usage: wrk &lt;options&gt; &lt;url&gt;
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">Options:
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">-c, --connections &lt;N&gt;  Connections to keep open
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">-d, --duration    &lt;T&gt;  Duration of test
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">-t, --threads     &lt;N&gt;  Number of threads to use
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">-s, --script      &lt;S&gt;  Load Lua script file
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">-H, --header      &lt;H&gt;  Add header to request
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">--latency          Print latency statistics
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">--timeout     &lt;T&gt;  Socket/request timeout
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">-v, --version          Print version details
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">Numeric arguments may include a SI unit (1k, 1M, 1G)
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">Time arguments may include a time unit (2s, 2m, 2h)
+</span></pre>
+<ol>
+<li><code>-c</code> 选项。同时保持打开的连接数，就是字面意思。</li>
+<li><code>-d</code> 选项。测试的时长；wrk 在开始执行指定的测试计划之后，会启动一个或多个工作线程分别开始在连接上发送请求接收响应，主线程会等待工作线程固定的时间，这个时间就是测试的时长 <code>-d</code>。</li>
+<li><code>-t</code> 选项。测试的并发线程数；wrk 在开始执行指定的测试计划之后，会启动指定数量的工作线程分别开始在连接上发送请求接收响应，每个工作线程会非阻塞地在多个连接上工作固定的时间；每个线程的连接数由 <code>-c</code> 指定的值除以并发线程数确定；每个线程的工作时长由 <code>-d</code> 指定的值确定。</li>
+<li><code>-s</code> 选项。可以使用 <a href="https://www.lua.org/">Lua</a> 来扩展测试计划，这需要了解 wrk 的 Lua 扩展点。</li>
+<li><code>-H</code> 选项。可以在每一个 HTTP 请求中添加上自定义的请求头，比如 <code>&quot;Host: a.b.c.org&quot;</code>。</li>
+<li><code>--latency</code> 选项。不填加此选项，则压测的结果会比较简单；添加此选项之后，压测的结果中会包含请求延时百分位信息。</li>
+<li><code>--timeout</code> 选项。每个请求的超时设置。</li>
+<li><code>-v</code> 选项。输出当前 wrk 的版本信息并退出。</li>
+</ol>
+<p>综上，常用的 <a href="https://github.com/wg/wrk" title="Modern HTTP benchmarking tool">wrk</a> 命令行如下：</p>
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">./wrk -c 100 -d 60s -t 16 --latency http://127.0.0.1:1993/instant
+</span></pre><h2 id="shu-chu-jie-guo"><a class="zola-anchor" href="#shu-chu-jie-guo" aria-label="Anchor link for: shu-chu-jie-guo">🔗</a>
+输出结果</h2>
+<p>命令 <code>./wrk -c 1700 -d 60s -t 16 --latency http://127.0.0.1:1993/instant</code> 的典型输出结果如下：</p>
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">(01) Running 1m test @ http://127.0.0.1:1993/instant
+</span><span style="color:#dcdcdc;">(02)   16 threads and 1700 connections
+</span><span style="color:#dcdcdc;">(03)   Thread Stats   Avg      Stdev     Max   +/- Stdev
+</span><span style="color:#dcdcdc;">(04)     Latency    28.51ms   11.92ms 688.79ms   96.20%
+</span><span style="color:#dcdcdc;">(05)     Req/Sec     3.65k   542.74    14.77k    87.77%
+</span><span style="color:#dcdcdc;">(06)   Latency Distribution
+</span><span style="color:#dcdcdc;">(07)      50%   27.86ms
+</span><span style="color:#dcdcdc;">(08)      75%   29.95ms
+</span><span style="color:#dcdcdc;">(09)      90%   32.71ms
+</span><span style="color:#dcdcdc;">(10)      99%   46.93ms
+</span><span style="color:#dcdcdc;">(11)   3491898 requests in 1.00m, 272.70MB read
+</span><span style="color:#dcdcdc;">(12)   Socket errors: connect 0, read 0, write 0, timeout 435
+</span><span style="color:#dcdcdc;">(13) Requests/sec:  58184.19
+</span><span style="color:#dcdcdc;">(14) Transfer/sec:      4.54MB
+</span></pre>
+<ol>
+<li>第 1 行和第 2 行简要说明了测试计划的情况和参数选项信息。</li>
+<li>第 3/4/5 行是线程级别的测试统计结果，包括请求延时（从请求发出到收到响应的耗时）的平均值、标准差、最大值、平均值上下一倍标准差范围内的请求占比和每秒请求数（QPS）的对应值。</li>
+<li>第 6/7/8/9/10 行是请求延时的百分位统计，分别有 TP50/TP75/TP90/TP99。</li>
+<li>第 11/12 行是测试结果的总体信息，如果有的话还会包含 HTTP 的响应不是 <code>20x</code> 的返回码的数据。</li>
+<li>第 13 行是总的 QPS。</li>
+<li>第 14 行是总的传输数据量。</li>
+</ol>
+<p>比较重要的部分是 <code>Thread Stats</code> &amp; <code>Latency Distribution</code> &amp; <code>Socket errors</code>。</p>
+<h3 id="thread-stats"><a class="zola-anchor" href="#thread-stats" aria-label="Anchor link for: thread-stats">🔗</a>
+Thread Stats</h3>
+<p>线程级别的统计输出了请求延时和每秒请求数的平均值、最大值和标准差等信息。</p>
+<pre style="background-color:#1e1e1e;">
+<span style="color:#569cd6;">typedef struct </span><span style="color:#dcdcdc;">{
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">uint64_t count;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">uint64_t limit;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">uint64_t min;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">uint64_t max;
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">uint64_t data[];
+</span><span style="color:#dcdcdc;">} </span><span style="color:#4ec9b0;">stats</span><span style="color:#dcdcdc;">;
+</span></pre>
+<p>统计采样数据存储在一个巨大的数组 <code>data</code> 来存放统计数据。每得到一个采样数据之后，该采样数据被放入数组中，对 <code>count</code> 加一，并且同步更新 <code>min</code> 和 <code>max</code> 的值。由于采样是在多个线程并发进行，所以对上述数据值的更新都是采用了原子操作保护的。</p>
+<p>数组的索引是采样值（请求延时即微秒数，请求数即每100毫秒请求数的1000倍），值是相同采样值重复的次数。</p>
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">-------------------------------------------------
+</span><span style="color:#dcdcdc;">| 0 | ... |  101 | ... | 135 | ... |  501 | ... |
+</span><span style="color:#dcdcdc;">-------------------------------------------------
+</span><span style="color:#dcdcdc;">| 0 | ... | 2050 | ... |  71 | ... | 1049 | ... |
+</span><span style="color:#dcdcdc;">-------------------------------------------------
+</span></pre>
+<p>上述的数组第一行是索引，第二行是数值。可能表示的是请求延时的采样，延时为 101us 的请求数有 2050 次，135us 的 71 次，501us 的 1049 次。</p>
+<p>在程序初始化时，请求延时对应的采样数组被初始化为请求超时时长的毫秒数（<code>--timeout</code> 选项指定值，或 2000s 的默认值），请求数对应初始化为 10000000。</p>
+<p>所以，<code>Latency</code> 行和 <code>Req/Sec</code> 行的数据分别通过计算上述数据结构的对应值（均值、标准差等）得到。</p>
+<h3 id="latency-distribution"><a class="zola-anchor" href="#latency-distribution" aria-label="Anchor link for: latency-distribution">🔗</a>
+Latency Distribution</h3>
+<p>延时分布即请求延时的百分位 <a href="https://en.wikipedia.org/wiki/Percentile">Percentile</a> 信息，包括 TP50/TP75/TP90/TP99。</p>
+<p>关于为什么需要在性能测试中关注百分位，可以参考 <a href="https://coolshell.cn/articles/17381.html">性能测试应该怎么做？</a> 。</p>
+<h3 id="socket-errors"><a class="zola-anchor" href="#socket-errors" aria-label="Anchor link for: socket-errors">🔗</a>
+Socket Errors</h3>
+<p>做性能测试时，需要得到的是在 HTTP 服务返回正确数据的情况下的极限能力；所以，每一次性能测试需要关注请求错误，包括连接失败、读失败、写失败、请求超时、返回码不符合预期等。</p>
+<h3 id="req-sec-vs-requests-sec"><a class="zola-anchor" href="#req-sec-vs-requests-sec" aria-label="Anchor link for: req-sec-vs-requests-sec">🔗</a>
+"Req/Sec" VS "Requests/sec"</h3>
+<p>在 <a href="https://github.com/wg/wrk" title="Modern HTTP benchmarking tool">wrk</a> 的输出中，有两个地方显示的是压测的 QPS: 第 5 行 &quot;Req/Sec&quot; 和 第 13 行 &quot;Requests/sec&quot;。</p>
+<p><a href="https://www.wangbo.im/posts/2019-09-17-usage-of-benchmarking-tool-wrk-and-wrk2/#thread-stats">如上所述</a>，&quot;Req/Sec&quot; 是线程采样数据的统计结果：多个线程分别每 100ms 收集一次累积的请求响应数，该值乘以 1000 放入统计数组中参与最终的统计；假若程序总的 1s 中的请求响应数是 1000，线程数是 4，则统计数组中会出现 <code>4 x 10 = 40</code> 个采样，&quot;Req/Sec&quot; 是这 40 个采样的统计结果（如均值）。</p>
+<p>而 &quot;Requests/sec&quot; 是简单地将所有的请求响应数除以测试时长，按前一段的描述应该得到 1000。</p>
+<p>所以，基本上 &quot;Req/Sec&quot; 的值是 &quot;Requests/sec&quot; 值除以线程数；但由于采样误差和<a href="https://github.com/wg/wrk/issues/259">其他原因</a>，二者的值会有一个差值存在，不是严格相等。</p>
+<h1 id="wrk2-ji-ben-yong-fa"><a class="zola-anchor" href="#wrk2-ji-ben-yong-fa" aria-label="Anchor link for: wrk2-ji-ben-yong-fa">🔗</a>
+WRK2 基本用法</h1>
+<p>大牛 <a href="https://www.linkedin.com/in/giltene">Gil Tene</a> 发现了 <a href="https://github.com/wg/wrk" title="Modern HTTP benchmarking tool">wrk</a> 在进行性能测试采样和衡量时存在一些误解和不足，于 2014 年 fork 了 <a href="https://github.com/wg/wrk" title="Modern HTTP benchmarking tool">wrk</a> 并添加了基于 <a href="http://hdrhistogram.org/">HDR 直方图</a> 的更详细的延时分布和对 Coordinated Omission 进行修正的延时统计，还有固定吞吐量模式支持，这就是 <a href="https://github.com/giltene/wrk2" title="A constant throughput, correct latency recording variant of wrk">wrk2</a>。</p>
+<blockquote>
+<p>wrk2 is wrk modifed to produce a constant throughput load, and accurate latency details to the high 9s (i.e. can produce accurate 99.9999%'ile when run long enough). In addition to wrk's arguments, wrk2 takes a throughput argument (in total requests per second) via either the --rate or -R parameters (default is 1000).</p>
+</blockquote>
+<h2 id="coordinated-omission"><a class="zola-anchor" href="#coordinated-omission" aria-label="Anchor link for: coordinated-omission">🔗</a>
+Coordinated Omission</h2>
+<p>Coordinated Omission 是性能测试中的一个陷阱，在 <a href="http://highscalability.com/blog/2015/10/5/your-load-generator-is-probably-lying-to-you-take-the-red-pi.html">Your Load Generator is Probably Lying to You - Take the Red Pill and Find Out Why</a> 和 <a href="https://blog.csdn.net/minxihou/article/details/97318121">七层网络性能基准测试中的协调遗漏问题--Coordinated Omission</a> 中有详细介绍。</p>
+<p>简单地说，在性能测试中会有两种情况造成测试得到的请求延时数据不能反应真实的情况。</p>
+<ol>
+<li>当测试计划中请求的间隔小于单次请求耗时时，会造成后续的请求会等待被发送。由于 HTTP 是请求响应模型，同一个连接内只有当前一个请求的响应收到之后才能继续发送新的请求，所以如果计划 1s 之内要发送 10 个请求，也就是请求 1 被发送之后 100ms 就需要发送请求 2；但是请求 1 对应的响应 1 过了 150ms 才收到，所以实际上请求 2 在第 150ms 才被发出去；如果再过 150ms 之后请求 2 的响应才收到，则参与统计的采样是请求 1 对应的延时 150ms 和 请求 2 对应的延时 150ms；这看上去很合理，但是如果考虑到实际上请求 2 等待了 50ms 才发送请求的话，请求 2 的延时应该是 200ms。距离来说的话，就是你去麦当劳排队买东西，你买东西的耗时应该是你排队的时间加上店员处理你的订单的时间；如果排队超过 10 分钟，你可能就会不耐烦，尽管有可能店员给你拿一个汉堡你再付钱总共不超过 30s。</li>
+<li>当测试计划被其他因素影响，导致请求的延时中包含了其他部分的耗时，比如进程调度或作业挂起等导致的睡眠时间。</li>
+</ol>
+<p><a href="https://github.com/wg/wrk/commit/ef6a836b7d41cdbe8dae27d81d43f2d03a1665ef">wrk</a> 已经于 2015 年添加了对 Coordinated Omission 的修正。</p>
+<h2 id="ji-ben-yong-fa-1"><a class="zola-anchor" href="#ji-ben-yong-fa-1" aria-label="Anchor link for: ji-ben-yong-fa-1">🔗</a>
+基本用法</h2>
+<p><a href="https://github.com/giltene/wrk2" title="A constant throughput, correct latency recording variant of wrk">wrk2</a> 的安装也非常简单，最直接的方式就是从 <a href="https://github.com/giltene/wrk2" title="A constant throughput, correct latency recording variant of wrk">Github</a> 上下载源代码然后 <code>make -j8</code>，其编译出来的二进制程序名，如果不特别指定的话，也是 <code>wrk</code>。</p>
+<p>其单独无选项和参数运行的输出如下：</p>
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">Usage: wrk &lt;options&gt; &lt;url&gt;
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">Options:
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">-c, --connections &lt;N&gt;  Connections to keep open
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">-d, --duration    &lt;T&gt;  Duration of test
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">-t, --threads     &lt;N&gt;  Number of threads to use
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">-s, --script      &lt;S&gt;  Load Lua script file
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">-H, --header      &lt;H&gt;  Add header to request
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">-L  --latency          Print latency statistics
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">-U  --u_latency        Print uncorrected latency statistics
+</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">--timeout     &lt;T&gt;  Socket/request timeout
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">-B, --batch_latency    Measure latency of whole
+</span><span style="color:#dcdcdc;">                           </span><span style="color:#dcdcdc;">batches of pipelined ops
+</span><span style="color:#dcdcdc;">                           </span><span style="color:#dcdcdc;">(as opposed to each op)
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">-v, --version          Print version details
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">-R, --rate        &lt;T&gt;  work rate (throughput)
+</span><span style="color:#dcdcdc;">                           </span><span style="color:#dcdcdc;">in requests/sec (total)
+</span><span style="color:#dcdcdc;">                           </span><span style="color:#dcdcdc;">[Required Parameter]
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">Numeric arguments may include a SI unit (1k, 1M, 1G)
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">Time arguments may include a time unit (2s, 2m, 2h)
+</span></pre>
+<p>参数选项基本同 <a href="https://github.com/wg/wrk" title="Modern HTTP benchmarking tool">wrk</a>。</p>
+<ol>
+<li><code>-L</code> 选项。输出经 HDR 直方图增强后的延时分布信息。</li>
+<li><code>-U</code> 选项。输出经 HDR 直方图增强后的延时分布信息，与 <code>-L</code> 选项不同的是输出未修正 Coordinated Omission 的延时数据。</li>
+<li><code>-R</code> 选项。设置测试计划的预期负载。</li>
+</ol>
+<p>与 <a href="https://github.com/wg/wrk" title="Modern HTTP benchmarking tool">wrk</a> 不同的是，<a href="https://github.com/giltene/wrk2" title="A constant throughput, correct latency recording variant of wrk">wrk2</a> 在执行测试计划时需要指定期望的负载，而不是尽全力产生最大的负载。</p>
+<h2 id="shu-chu-jie-guo-1"><a class="zola-anchor" href="#shu-chu-jie-guo-1" aria-label="Anchor link for: shu-chu-jie-guo-1">🔗</a>
+输出结果</h2>
+<p>命令 <code>./wrk -c 300 -d 60s -t 16 -R 1200 --latency http://127.0.0.1:1993/instant</code> 的典型输出结果如下：</p>
+<pre style="background-color:#1e1e1e;">
+<span style="color:#dcdcdc;">Running 1m test @ http://10.145.67.20:8080/entry/rest0
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">16 threads and 300 connections
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">Thread calibration: mean lat.: 1.816ms, rate sampling interval: 10ms
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">Thread calibration: mean lat.: 1.759ms, rate sampling interval: 10ms
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">Thread calibration: mean lat.: 1.794ms, rate sampling interval: 10ms
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">Thread calibration: mean lat.: 1.802ms, rate sampling interval: 10ms
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">Thread calibration: mean lat.: 1.804ms, rate sampling interval: 10ms
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">Thread calibration: mean lat.: 1.814ms, rate sampling interval: 10ms
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">Thread calibration: mean lat.: 1.788ms, rate sampling interval: 10ms
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">Thread calibration: mean lat.: 1.775ms, rate sampling interval: 10ms
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">Thread calibration: mean lat.: 1.794ms, rate sampling interval: 10ms
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">Thread calibration: mean lat.: 1.808ms, rate sampling interval: 10ms
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">Thread calibration: mean lat.: 1.804ms, rate sampling interval: 10ms
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">Thread calibration: mean lat.: 1.807ms, rate sampling interval: 10ms
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">Thread calibration: mean lat.: 1.816ms, rate sampling interval: 10ms
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">Thread calibration: mean lat.: 1.796ms, rate sampling interval: 10ms
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">Thread calibration: mean lat.: 1.771ms, rate sampling interval: 10ms
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">Thread calibration: mean lat.: 1.741ms, rate sampling interval: 10ms
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">Thread Stats   Avg      Stdev     Max   +/- Stdev
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">Latency     1.84ms    1.24ms  43.68ms   98.54%
+</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">Req/Sec    77.48    100.86   777.00     66.65%
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">Latency Distribution (HdrHistogram - Recorded Latency)
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">50.000%    1.73ms
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">75.000%    2.01ms
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">90.000%    2.32ms
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">99.000%    3.86ms
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">99.900%   20.09ms
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">99.990%   29.93ms
+</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">99.999%   40.51ms
+</span><span style="color:#dcdcdc;">100.000%   43.71ms
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">Detailed Percentile spectrum:
+</span><span style="color:#dcdcdc;">       </span><span style="color:#dcdcdc;">Value   Percentile   TotalCount 1/(1-Percentile)
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">       </span><span style="color:#dcdcdc;">0.813     0.000000            1         1.00
+</span><span style="color:#dcdcdc;">       </span><span style="color:#dcdcdc;">1.192     0.100000         5995         1.11
+</span><span style="color:#dcdcdc;">       </span><span style="color:#dcdcdc;">1.356     0.200000        11983         1.25
+</span><span style="color:#dcdcdc;">       </span><span style="color:#dcdcdc;">1.493     0.300000        18014         1.43
+</span><span style="color:#dcdcdc;">       </span><span style="color:#dcdcdc;">1.616     0.400000        23995         1.67
+</span><span style="color:#dcdcdc;">       </span><span style="color:#dcdcdc;">1.734     0.500000        29979         2.00
+</span><span style="color:#dcdcdc;">       </span><span style="color:#dcdcdc;">1.789     0.550000        32932         2.22
+</span><span style="color:#dcdcdc;">       </span><span style="color:#dcdcdc;">1.847     0.600000        35990         2.50
+</span><span style="color:#dcdcdc;">       </span><span style="color:#dcdcdc;">1.899     0.650000        38931         2.86
+</span><span style="color:#dcdcdc;">       </span><span style="color:#dcdcdc;">1.954     0.700000        41939         3.33
+</span><span style="color:#dcdcdc;">       </span><span style="color:#dcdcdc;">2.013     0.750000        44904         4.00
+</span><span style="color:#dcdcdc;">       </span><span style="color:#dcdcdc;">2.049     0.775000        46407         4.44
+</span><span style="color:#dcdcdc;">       </span><span style="color:#dcdcdc;">2.089     0.800000        47925         5.00
+</span><span style="color:#dcdcdc;">       </span><span style="color:#dcdcdc;">2.135     0.825000        49438         5.71
+</span><span style="color:#dcdcdc;">       </span><span style="color:#dcdcdc;">2.185     0.850000        50902         6.67
+</span><span style="color:#dcdcdc;">       </span><span style="color:#dcdcdc;">2.247     0.875000        52424         8.00
+</span><span style="color:#dcdcdc;">       </span><span style="color:#dcdcdc;">2.279     0.887500        53144         8.89
+</span><span style="color:#dcdcdc;">       </span><span style="color:#dcdcdc;">2.317     0.900000        53888        10.00
+</span><span style="color:#dcdcdc;">       </span><span style="color:#dcdcdc;">2.361     0.912500        54648        11.43
+</span><span style="color:#dcdcdc;">       </span><span style="color:#dcdcdc;">2.407     0.925000        55396        13.33
+</span><span style="color:#dcdcdc;">       </span><span style="color:#dcdcdc;">2.463     0.937500        56132        16.00
+</span><span style="color:#dcdcdc;">       </span><span style="color:#dcdcdc;">2.499     0.943750        56512        17.78
+</span><span style="color:#dcdcdc;">       </span><span style="color:#dcdcdc;">2.535     0.950000        56888        20.00
+</span><span style="color:#dcdcdc;">       </span><span style="color:#dcdcdc;">2.579     0.956250        57263        22.86
+</span><span style="color:#dcdcdc;">       </span><span style="color:#dcdcdc;">2.629     0.962500        57636        26.67
+</span><span style="color:#dcdcdc;">       </span><span style="color:#dcdcdc;">2.691     0.968750        58010        32.00
+</span><span style="color:#dcdcdc;">       </span><span style="color:#dcdcdc;">2.727     0.971875        58195        35.56
+</span><span style="color:#dcdcdc;">       </span><span style="color:#dcdcdc;">2.769     0.975000        58377        40.00
+</span><span style="color:#dcdcdc;">       </span><span style="color:#dcdcdc;">2.821     0.978125        58563        45.71
+</span><span style="color:#dcdcdc;">       </span><span style="color:#dcdcdc;">2.891     0.981250        58752        53.33
+</span><span style="color:#dcdcdc;">       </span><span style="color:#dcdcdc;">3.013     0.984375        58940        64.00
+</span><span style="color:#dcdcdc;">       </span><span style="color:#dcdcdc;">3.119     0.985938        59032        71.11
+</span><span style="color:#dcdcdc;">       </span><span style="color:#dcdcdc;">3.279     0.987500        59125        80.00
+</span><span style="color:#dcdcdc;">       </span><span style="color:#dcdcdc;">3.621     0.989062        59219        91.43
+</span><span style="color:#dcdcdc;">       </span><span style="color:#dcdcdc;">4.123     0.990625        59311       106.67
+</span><span style="color:#dcdcdc;">       </span><span style="color:#dcdcdc;">5.139     0.992188        59405       128.00
+</span><span style="color:#dcdcdc;">       </span><span style="color:#dcdcdc;">5.947     0.992969        59453       142.22
+</span><span style="color:#dcdcdc;">       </span><span style="color:#dcdcdc;">7.071     0.993750        59498       160.00
+</span><span style="color:#dcdcdc;">       </span><span style="color:#dcdcdc;">8.367     0.994531        59545       182.86
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">10.527     0.995313        59592       213.33
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">12.343     0.996094        59639       256.00
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">12.999     0.996484        59662       284.44
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">13.879     0.996875        59685       320.00
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">14.839     0.997266        59710       365.71
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">15.943     0.997656        59733       426.67
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">17.007     0.998047        59757       512.00
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">17.519     0.998242        59767       568.89
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">17.999     0.998437        59779       640.00
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">18.511     0.998633        59792       731.43
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">19.279     0.998828        59802       853.33
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">20.367     0.999023        59814      1024.00
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">20.687     0.999121        59820      1137.78
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">21.215     0.999219        59826      1280.00
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">22.751     0.999316        59832      1462.86
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">23.583     0.999414        59837      1706.67
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">24.095     0.999512        59843      2048.00
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">25.231     0.999561        59846      2275.56
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">26.159     0.999609        59849      2560.00
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">26.527     0.999658        59852      2925.71
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">26.895     0.999707        59855      3413.33
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">27.343     0.999756        59858      4096.00
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">27.791     0.999780        59859      4551.11
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">28.767     0.999805        59861      5120.00
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">28.895     0.999829        59862      5851.43
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">29.439     0.999854        59864      6826.67
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">29.519     0.999878        59865      8192.00
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">29.935     0.999890        59866      9102.22
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">33.567     0.999902        59867     10240.00
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">33.567     0.999915        59867     11702.86
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">36.991     0.999927        59868     13653.33
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">38.047     0.999939        59869     16384.00
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">38.047     0.999945        59869     18204.44
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">39.871     0.999951        59870     20480.00
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">39.871     0.999957        59870     23405.71
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">39.871     0.999963        59870     27306.67
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">40.511     0.999969        59871     32768.00
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">40.511     0.999973        59871     36408.89
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">40.511     0.999976        59871     40960.00
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">40.511     0.999979        59871     46811.43
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">40.511     0.999982        59871     54613.33
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">43.711     0.999985        59872     65536.00
+</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">43.711     1.000000        59872          inf
+</span><span style="color:#dcdcdc;">#[Mean    =        1.836, StdDeviation   =        1.244]
+</span><span style="color:#dcdcdc;">#[Max     =       43.680, Total count    =        59872]
+</span><span style="color:#dcdcdc;">#[Buckets =           27, SubBuckets     =         2048]
+</span><span style="color:#dcdcdc;">----------------------------------------------------------
+</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">72016 requests in 1.00m, 5.62MB read
+</span><span style="color:#dcdcdc;">Requests/sec:   1200.22
+</span><span style="color:#dcdcdc;">Transfer/sec:     95.91KB
+</span></pre>
+<p>与 <a href="https://github.com/wg/wrk" title="Modern HTTP benchmarking tool">wrk</a> 的输出相比，<a href="https://github.com/giltene/wrk2" title="A constant throughput, correct latency recording variant of wrk">wrk2</a> 的输出多了一些内容：</p>
+<ol>
+<li>&quot;Thread calibration&quot; 显示了 10s 的线程预热/修正的数据。</li>
+<li>&quot;Latency Distribution&quot; 部分多了 TP999/TP9999/TP99999/TP100 的数据。</li>
+<li>&quot;Detailed Percentile spectrum&quot; 显示了详细的百分位图谱。</li>
+</ol>
+<p>综上，如果需要在相同并发度下使用不同的吞吐量QPS对 HTTP 服务进行压测，又或者需要获取更精确的 TP999/TP9999 百分位数据，可以考虑使用 <a href="https://github.com/giltene/wrk2" title="A constant throughput, correct latency recording variant of wrk">wrk2</a> 代替 <a href="https://github.com/wg/wrk" title="Modern HTTP benchmarking tool">wrk</a> 进行性能测试。</p>
+<p>我的一个性能测试实践是先使用 <a href="https://github.com/wg/wrk" title="Modern HTTP benchmarking tool">wrk</a> 找到一个符合基本要求的并发读（<code>-c</code> 选项）和对应的QPS，然后以这个QPS为上限使用 <a href="https://github.com/giltene/wrk2" title="A constant throughput, correct latency recording variant of wrk">wrk2</a> 在相同并发度的基础上测试不同吞吐量（<code>-R</code> 选项）下的请求延时。</p>
+<p>以上。</p>
+
+        </div>
+        
+    
+</div></div>
+            
+    <div class="pagination">
+        <div class="pagination__buttons">
+            </div>
+    </div>
+<footer class="footer">
+                    <div class="footer__inner"><div class="copyright copyright--user"><span>© 2019 <a href="https://www.wangbo.im">wangbo&apos; blog</a> :: <a href="https://github.wangbo.im">Github</a> :: Powered by <a href="https://www.getzola.org/">Zola</a></span></div>
+    <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;assets&#x2F;js&#x2F;main.js"></script>
+</div>
+                    
+
+                </footer></div>
+    </body>
+</html>

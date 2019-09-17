@@ -81,7 +81,7 @@
 
             
     ::
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;spring-mvc&#x2F;">Spring MVC</a>
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;spring-mvc&#x2F;">spring-mvc</a>
         
     #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;testing&#x2F;">testing</a>
         
@@ -188,39 +188,39 @@ GET <code>Todo</code>项列表的接口</h2>
 <pre style="background-color:#1e1e1e;">
 <span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.stereotype.Controller;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.web.bind.annotation.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">java.util.ArrayList;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">java.util.List;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">@Controller
 </span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">TodoController {
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">TodoService service;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@RequestMapping(value = </span><span style="color:#d69d85;">&quot;/api/todo&quot;</span><span style="color:#dcdcdc;">, method = RequestMethod.</span><span style="color:#b4cea8;">GET</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@ResponseBody
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">List&lt;TodoDTO&gt; findAll() {
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">List&lt;Todo&gt; models = service.findAll();
 </span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">createDTOs(models);
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">List&lt;TodoDTO&gt; createDTOs(List&lt;Todo&gt; models) {
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">List&lt;TodoDTO&gt; dtos = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">ArrayList&lt;&gt;();
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">for </span><span style="color:#dcdcdc;">(Todo model</span><span style="color:#569cd6;">:</span><span style="color:#dcdcdc;"> models) {
 </span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">dtos.add(createDTO(model));
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> dtos;
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">TodoDTO createDTO(Todo model) {
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">TodoDTO dto = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">TodoDTO();
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">dto.setId(model.getId());
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">dto.setDescription(model.getDescription());
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">dto.setTitle(model.getTitle());
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> dto;
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
 </span><span style="color:#dcdcdc;">}
@@ -263,28 +263,28 @@ GET <code>Todo</code>项列表的接口</h2>
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.context.web.WebAppConfiguration;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.MockMvc;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">java.util.Arrays;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.hamcrest.Matchers.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.mockito.Mockito.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.request.MockMvcRequestBuilders.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.result.MockMvcResultMatchers.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">@RunWith(SpringJUnit4ClassRunner.class)
 </span><span style="color:#dcdcdc;">@ContextConfiguration(classes = {TestContext.class, WebAppContext.class})
 </span><span style="color:#dcdcdc;">@WebAppConfiguration
 </span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">TodoControllerTest {
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">MockMvc mockMvc;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Autowired
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">TodoService todoServiceMock;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Add WebApplicationContext field here.
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//The setUp() method is omitted.
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Test
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">findAll_TodosFound_ShouldReturnFoundTodoEntries() </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">Exception {
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Todo first = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">TodoBuilder()
@@ -297,9 +297,9 @@ GET <code>Todo</code>项列表的接口</h2>
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.description(</span><span style="color:#d69d85;">&quot;Lorem ipsum&quot;</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.title(</span><span style="color:#d69d85;">&quot;Bar&quot;</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.build();
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">when(todoServiceMock.findAll()).thenReturn(Arrays.asList(first, second));
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">mockMvc.perform(get(</span><span style="color:#d69d85;">&quot;/api/todo&quot;</span><span style="color:#dcdcdc;">))
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(status().isOk())
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(content().contentType(TestUtil.</span><span style="color:#b4cea8;">APPLICATION_JSON_UTF8</span><span style="color:#dcdcdc;">))
@@ -310,7 +310,7 @@ GET <code>Todo</code>项列表的接口</h2>
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(jsonPath(</span><span style="color:#d69d85;">&quot;$[1].id&quot;</span><span style="color:#dcdcdc;">, is(</span><span style="color:#b5cea8;">2</span><span style="color:#dcdcdc;">)))
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(jsonPath(</span><span style="color:#d69d85;">&quot;$[1].description&quot;</span><span style="color:#dcdcdc;">, is(</span><span style="color:#d69d85;">&quot;Lorem ipsum&quot;</span><span style="color:#dcdcdc;">)))
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(jsonPath(</span><span style="color:#d69d85;">&quot;$[1].title&quot;</span><span style="color:#dcdcdc;">, is(</span><span style="color:#d69d85;">&quot;Bar&quot;</span><span style="color:#dcdcdc;">)));
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">verify(todoServiceMock, times(</span><span style="color:#b5cea8;">1</span><span style="color:#dcdcdc;">)).findAll();
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">verifyNoMoreInteractions(todoServiceMock);
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
@@ -319,11 +319,11 @@ GET <code>Todo</code>项列表的接口</h2>
 <p>代码中使用的<code>TestUtil.APPLICATION_JSON_UTF8</code>的定义如下：</p>
 <pre style="background-color:#1e1e1e;">
 <span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">TestUtil {
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public static final </span><span style="color:#dcdcdc;">MediaType APPLICATION_JSON_UTF8 = 
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public static final </span><span style="color:#dcdcdc;">MediaType APPLICATION_JSON_UTF8 =
 </span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">MediaType(
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">MediaType.</span><span style="color:#b4cea8;">APPLICATION_JSON</span><span style="color:#dcdcdc;">.getType(),
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">MediaType.</span><span style="color:#b4cea8;">APPLICATION_JSON</span><span style="color:#dcdcdc;">.getSubtype, 
+</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">MediaType.</span><span style="color:#b4cea8;">APPLICATION_JSON</span><span style="color:#dcdcdc;">.getSubtype,
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">Charset.forName(</span><span style="color:#d69d85;">&quot;utf8&quot;</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">);
 </span><span style="color:#dcdcdc;">}
@@ -343,26 +343,26 @@ GET <code>Todo</code>项的接口</h2>
 <pre style="background-color:#1e1e1e;">
 <span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.stereotype.Controller;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.web.bind.annotation.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">@Controller
 </span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">TodoController {
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">TodoService service;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@RequestMapping(value = </span><span style="color:#d69d85;">&quot;/api/todo/{id}&quot;</span><span style="color:#dcdcdc;">, method = RequestMethod.</span><span style="color:#b4cea8;">GET</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@ResponseBody
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">TodoDTO findById(@PathVariable(</span><span style="color:#d69d85;">&quot;id&quot;</span><span style="color:#dcdcdc;">) Long id) </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">TodoNotFoundException {
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Todo found = service.findById(id);
 </span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">createDTO(found);
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">TodoDTO createDTO(Todo model) {
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">TodoDTO dto = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">TodoDTO();
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">dto.setId(model.getId());
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">dto.setDescription(model.getDescription());
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">dto.setTitle(model.getTitle());
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> dto;
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
 </span><span style="color:#dcdcdc;">}
@@ -379,12 +379,12 @@ GET <code>Todo</code>项的接口</h2>
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.web.bind.annotation.ControllerAdvice;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.web.bind.annotation.ExceptionHandler;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.web.bind.annotation.ResponseStatus;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">@ControllerAdvice
 </span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">RestErrorHandler {
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private static final </span><span style="color:#dcdcdc;">Logger LOGGER = LoggerFactory.getLogger(RestErrorHandler.class);
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@ExceptionHandler(TodoNotFoundException.class)
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@ResponseStatus(HttpStatus.</span><span style="color:#b4cea8;">NOT_FOUND</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">handleTodoNotFoundException(TodoNotFoundException ex) {
@@ -412,32 +412,32 @@ GET <code>Todo</code>项的接口</h2>
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.context.web.WebAppConfiguration;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.MockMvc;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.mockito.Mockito.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.request.MockMvcRequestBuilders.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.result.MockMvcResultMatchers.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">@RunWith(SpringJUnit4ClassRunner.class)
 </span><span style="color:#dcdcdc;">@ContextConfiguration(classes = {TestContext.class, WebAppContext.class})
 </span><span style="color:#dcdcdc;">@WebAppConfiguration
 </span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">TodoControllerTest {
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">MockMvc mockMvc;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Autowired
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">TodoService todoServiceMock;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Add WebApplicationContext field here.
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//The setUp() method is omitted.
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Test
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">findById_TodoEntryNotFound_ShouldReturnHttpStatusCode404() </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">Exception {
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">when(todoServiceMock.findById(</span><span style="color:#b5cea8;">1</span><span style="color:#569cd6;">L</span><span style="color:#dcdcdc;">)).thenThrow(</span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">TodoNotFoundException(</span><span style="color:#d69d85;">&quot;&quot;</span><span style="color:#dcdcdc;">));
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">mockMvc.perform(get(</span><span style="color:#d69d85;">&quot;/api/todo/{id}&quot;</span><span style="color:#dcdcdc;">, </span><span style="color:#b5cea8;">1</span><span style="color:#569cd6;">L</span><span style="color:#dcdcdc;">))
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(status().isNotFound());
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">verify(todoServiceMock, times(</span><span style="color:#b5cea8;">1</span><span style="color:#dcdcdc;">)).findById(</span><span style="color:#b5cea8;">1</span><span style="color:#569cd6;">L</span><span style="color:#dcdcdc;">);
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">verifyNoMoreInteractions(todoServiceMock);
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
@@ -464,27 +464,27 @@ GET <code>Todo</code>项的接口</h2>
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.context.web.WebAppConfiguration;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.MockMvc;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.hamcrest.Matchers.is;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.mockito.Mockito.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.request.MockMvcRequestBuilders.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.result.MockMvcResultMatchers.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">@RunWith(SpringJUnit4ClassRunner.class)
 </span><span style="color:#dcdcdc;">@ContextConfiguration(classes = {TestContext.class, WebAppContext.class})
 </span><span style="color:#dcdcdc;">@WebAppConfiguration
 </span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">TodoControllerTest {
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">MockMvc mockMvc;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Autowired
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">TodoService todoServiceMock;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Add WebApplicationContext field here.
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//The setUp() method is omitted.
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Test
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">findById_TodoEntryFound_ShouldReturnFoundTodoEntry() </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">Exception {
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Todo found = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">TodoBuilder()
@@ -492,16 +492,16 @@ GET <code>Todo</code>项的接口</h2>
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.description(</span><span style="color:#d69d85;">&quot;Lorem ipsum&quot;</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.title(</span><span style="color:#d69d85;">&quot;Foo&quot;</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.build();
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">when(todoServiceMock.findById(</span><span style="color:#b5cea8;">1</span><span style="color:#569cd6;">L</span><span style="color:#dcdcdc;">)).thenReturn(found);
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">mockMvc.perform(get(</span><span style="color:#d69d85;">&quot;/api/todo/{id}&quot;</span><span style="color:#dcdcdc;">, </span><span style="color:#b5cea8;">1</span><span style="color:#569cd6;">L</span><span style="color:#dcdcdc;">))
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(status().isOk())
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(content().contentType(TestUtil.</span><span style="color:#b4cea8;">APPLICATION_JSON_UTF8</span><span style="color:#dcdcdc;">))
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(jsonPath(</span><span style="color:#d69d85;">&quot;$.id&quot;</span><span style="color:#dcdcdc;">, is(</span><span style="color:#b5cea8;">1</span><span style="color:#dcdcdc;">)))
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(jsonPath(</span><span style="color:#d69d85;">&quot;$.description&quot;</span><span style="color:#dcdcdc;">, is(</span><span style="color:#d69d85;">&quot;Lorem ipsum&quot;</span><span style="color:#dcdcdc;">)))
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(jsonPath(</span><span style="color:#d69d85;">&quot;$.title&quot;</span><span style="color:#dcdcdc;">, is(</span><span style="color:#d69d85;">&quot;Foo&quot;</span><span style="color:#dcdcdc;">)));
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">verify(todoServiceMock, times(</span><span style="color:#b5cea8;">1</span><span style="color:#dcdcdc;">)).findById(</span><span style="color:#b5cea8;">1</span><span style="color:#569cd6;">L</span><span style="color:#dcdcdc;">);
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">verifyNoMoreInteractions(todoServiceMock);
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
@@ -523,28 +523,28 @@ POST <code>Todo</code>项的接口</h2>
 <pre style="background-color:#1e1e1e;">
 <span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.stereotype.Controller;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.web.bind.annotation.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">javax.validation.Valid;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">@Controller
 </span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">TodoController {
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">TodoService service;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@RequestMapping(value = </span><span style="color:#d69d85;">&quot;/api/todo&quot;</span><span style="color:#dcdcdc;">, method = RequestMethod.</span><span style="color:#b4cea8;">POST</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@ResponseBody
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">TodoDTO add(@Valid @RequestBody TodoDTO dto) {
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Todo added = service.add(dto);
 </span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">createDTO(added);
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">TodoDTO createDTO(Todo model) {
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">TodoDTO dto = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">TodoDTO();
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">dto.setId(model.getId());
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">dto.setDescription(model.getDescription());
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">dto.setTitle(model.getTitle());
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> dto;
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
 </span><span style="color:#dcdcdc;">}
@@ -553,18 +553,18 @@ POST <code>Todo</code>项的接口</h2>
 <pre style="background-color:#1e1e1e;">
 <span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.hibernate.validator.constraints.Length;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.hibernate.validator.constraints.NotEmpty;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">TodoDTO {
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">Long id;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Length(max = </span><span style="color:#b5cea8;">500</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">String description;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@NotEmpty
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Length(max = </span><span style="color:#b5cea8;">100</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">String title;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Constructor and other methods are omitted.
 </span><span style="color:#dcdcdc;">}
 </span></pre>
@@ -618,40 +618,40 @@ POST <code>Todo</code>项的接口</h2>
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.context.web.WebAppConfiguration;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.MockMvc;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.hamcrest.Matchers.containsInAnyOrder;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.hamcrest.Matchers.hasSize;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.mockito.Mockito.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.request.MockMvcRequestBuilders.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.result.MockMvcResultMatchers.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">@RunWith(SpringJUnit4ClassRunner.class)
 </span><span style="color:#dcdcdc;">@ContextConfiguration(classes = {TestContext.class, WebAppContext.class})
 </span><span style="color:#dcdcdc;">@WebAppConfiguration
 </span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">TodoControllerTest {
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">MockMvc mockMvc;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Autowired
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">TodoService todoServiceMock;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Add WebApplicationContext field here.
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//The setUp() method is omitted.
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Test
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void 
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">add_TitleAndDescriptionAreTooLong_ShouldReturnValidationErrorsForTitleAndDescription()
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">Exception {
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">String title = TestUtil.createStringWithLength(</span><span style="color:#b5cea8;">101</span><span style="color:#dcdcdc;">);
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">String description = TestUtil.createStringWithLength(</span><span style="color:#b5cea8;">501</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">TodoDTO dto = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">TodoDTOBuilder()
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.description(description)
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.title(title)
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.build();
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">mockMvc.perform(post(</span><span style="color:#d69d85;">&quot;/api/todo&quot;</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.contentType(TestUtil.</span><span style="color:#b4cea8;">APPLICATION_JSON_UTF8</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.content(TestUtil.convertObjectToJsonBytes(dto))
@@ -668,7 +668,7 @@ POST <code>Todo</code>项的接口</h2>
 </span><span style="color:#dcdcdc;">                        </span><span style="color:#d69d85;">&quot;The maximum length of the description is 500 characters.&quot;</span><span style="color:#dcdcdc;">,
 </span><span style="color:#dcdcdc;">                        </span><span style="color:#d69d85;">&quot;The maximum length of the title is 100 characters.&quot;
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">)));
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">verifyZeroInteractions(todoServiceMock);
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
 </span><span style="color:#dcdcdc;">}
@@ -678,32 +678,32 @@ POST <code>Todo</code>项的接口</h2>
 <span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">com.fasterxml.jackson.annotation.JsonInclude;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">com.fasterxml.jackson.databind.ObjectMapper;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.http.MediaType;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">java.io.IOException;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">java.nio.charset.Charset;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">TestUtil {
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public static final </span><span style="color:#dcdcdc;">MediaType APPLICATION_JSON_UTF8 = 
+</span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public static final </span><span style="color:#dcdcdc;">MediaType APPLICATION_JSON_UTF8 =
 </span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">MediaType(
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">MediaType.</span><span style="color:#b4cea8;">APPLICATION_JSON</span><span style="color:#dcdcdc;">.getType(), 
+</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">MediaType.</span><span style="color:#b4cea8;">APPLICATION_JSON</span><span style="color:#dcdcdc;">.getType(),
 </span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">MediaType.</span><span style="color:#b4cea8;">APPLICATION_JSON</span><span style="color:#dcdcdc;">.getSubtype(),
 </span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">Charset.forName(</span><span style="color:#d69d85;">&quot;utf8&quot;</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public static byte[] </span><span style="color:#dcdcdc;">convertObjectToJsonBytes(Object object) </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">IOException {
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">ObjectMapper mapper = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">ObjectMapper();
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">mapper.setSerializationInclusion(JsonInclude.Include.</span><span style="color:#b4cea8;">NON_NULL</span><span style="color:#dcdcdc;">);
 </span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> mapper.writeValueAsBytes(object);
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public static </span><span style="color:#dcdcdc;">String createStringWithLength(</span><span style="color:#569cd6;">int </span><span style="color:#dcdcdc;">length) {
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">StringBuilder builder = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">StringBuilder();
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">for </span><span style="color:#dcdcdc;">(</span><span style="color:#569cd6;">int</span><span style="color:#dcdcdc;"> index = </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">; index &lt; length; index</span><span style="color:#569cd6;">++</span><span style="color:#dcdcdc;">) {
 </span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">builder.append(</span><span style="color:#d69d85;">&quot;a&quot;</span><span style="color:#dcdcdc;">);
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> builder.toString();
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
 </span><span style="color:#dcdcdc;">}
@@ -728,7 +728,7 @@ POST <code>Todo</code>项的接口</h2>
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.context.web.WebAppConfiguration;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.MockMvc;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">junit.framework.Assert.assertNull;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.hamcrest.Matchers.is;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.junit.Assert.assertThat;
@@ -736,37 +736,37 @@ POST <code>Todo</code>项的接口</h2>
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.request.MockMvcRequestBuilders.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.result.MockMvcResultMatchers.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">@RunWith(SpringJUnit4ClassRunner.class)
 </span><span style="color:#dcdcdc;">@ContextConfiguration(classes = {TestContext.class, WebAppContext.class})
 </span><span style="color:#dcdcdc;">@WebAppConfiguration
 </span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">TodoControllerTest {
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">MockMvc mockMvc;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Autowired
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">TodoService todoServiceMock;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Add WebApplicationContext field here.
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//The setUp() method is omitted.
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Test
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void 
+</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">add_NewTodoEntry_ShouldAddTodoEntryAndReturnAddedEntry() </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">Exception {
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">TodoDTO dto = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">TodoDTOBuilder()
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.description(</span><span style="color:#d69d85;">&quot;description&quot;</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.title(</span><span style="color:#d69d85;">&quot;title&quot;</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.build();
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Todo added = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">TodoBuilder()
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.id(</span><span style="color:#b5cea8;">1</span><span style="color:#569cd6;">L</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.description(</span><span style="color:#d69d85;">&quot;description&quot;</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.title(</span><span style="color:#d69d85;">&quot;title&quot;</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.build();
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">when(todoServiceMock.add(any(TodoDTO.class))).thenReturn(added);
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">mockMvc.perform(post(</span><span style="color:#d69d85;">&quot;/api/todo&quot;</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.contentType(TestUtil.</span><span style="color:#b4cea8;">APPLICATION_JSON_UTF8</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.content(TestUtil.convertObjectToJsonBytes(dto))
@@ -776,11 +776,11 @@ POST <code>Todo</code>项的接口</h2>
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(jsonPath(</span><span style="color:#d69d85;">&quot;$.id&quot;</span><span style="color:#dcdcdc;">, is(</span><span style="color:#b5cea8;">1</span><span style="color:#dcdcdc;">)))
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(jsonPath(</span><span style="color:#d69d85;">&quot;$.description&quot;</span><span style="color:#dcdcdc;">, is(</span><span style="color:#d69d85;">&quot;description&quot;</span><span style="color:#dcdcdc;">)))
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(jsonPath(</span><span style="color:#d69d85;">&quot;$.title&quot;</span><span style="color:#dcdcdc;">, is(</span><span style="color:#d69d85;">&quot;title&quot;</span><span style="color:#dcdcdc;">)));
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">ArgumentCaptor&lt;TodoDTO&gt; dtoCaptor = ArgumentCaptor.forClass(TodoDTO.class);
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">verify(todoServiceMock, times(</span><span style="color:#b5cea8;">1</span><span style="color:#dcdcdc;">)).add(dtoCaptor.capture());
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">verifyNoMoreInteractions(todoServiceMock);
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">TodoDTO dtoArgument = dtoCaptor.getValue();
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">assertNull(dtoArgument.getId());
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">assertThat(dtoArgument.getDescription(), is(</span><span style="color:#d69d85;">&quot;description&quot;</span><span style="color:#dcdcdc;">));

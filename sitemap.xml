@@ -274,6 +274,13 @@
         </url>
     
         <url>
+            <loc>https://www.wangbo.im/posts/2019-09-17-usage-of-benchmarking-tool-wrk-and-wrk2/</loc>
+            
+                <lastmod>2019-09-17T09:27:06+08:00</lastmod>
+            
+        </url>
+    
+        <url>
             <loc>https://www.wangbo.im/posts/acl-note/</loc>
             
                 <lastmod>2018-02-05T17:46:28+08:00</lastmod>
@@ -734,15 +741,7 @@
         </url>
         
         <url>
-            <loc>https://www.wangbo.im/categories/c-c/</loc>
-        </url>
-        
-        <url>
             <loc>https://www.wangbo.im/categories/causerie/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/graphviz/</loc>
         </url>
         
         <url>
@@ -778,11 +777,11 @@
         </url>
         
         <url>
-            <loc>https://www.wangbo.im/categories/vertx/</loc>
+            <loc>https://www.wangbo.im/categories/utils/</loc>
         </url>
         
         <url>
-            <loc>https://www.wangbo.im/categories/virtualbox/</loc>
+            <loc>https://www.wangbo.im/categories/vertx/</loc>
         </url>
         
     
@@ -821,6 +820,10 @@
         
         <url>
             <loc>https://www.wangbo.im/tags/awk/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/tags/benchmark/</loc>
         </url>
         
         <url>
@@ -1004,6 +1007,10 @@
         </url>
         
         <url>
+            <loc>https://www.wangbo.im/tags/load-test/</loc>
+        </url>
+        
+        <url>
             <loc>https://www.wangbo.im/tags/lock/</loc>
         </url>
         
@@ -1089,6 +1096,10 @@
         
         <url>
             <loc>https://www.wangbo.im/tags/snapshoting/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/tags/spring-cloud-gateway/</loc>
         </url>
         
         <url>
@@ -1185,6 +1196,14 @@
         
         <url>
             <loc>https://www.wangbo.im/tags/wechat/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/tags/wrk/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/tags/wrk2/</loc>
         </url>
         
         <url>

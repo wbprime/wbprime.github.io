@@ -63,6 +63,50 @@
 <div class="content">
 <div class="posts"><div class="post on-list">
         <h1 class="post-title">
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-03-12-combine-vertx-and-guice-dependency-injection&#x2F;">在 Vert.x 项目中集成使用 Guice 依赖注入</a>
+        </h1>
+        
+        
+        
+    <div class="post-meta">
+        <span class="post-date">2019.03.31
+                </span>
+
+        <span class="post-author"></span>
+
+        
+
+    
+    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;vertx&#x2F;">Vertx</a>} 
+
+            
+    ::
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;vert-x&#x2F;">vert.x</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;guice&#x2F;">guice</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;jsr303&#x2F;">jsr303</a>
+        
+    
+            
+        
+    </div>
+
+        
+        
+        
+        
+
+        <div class="post-content">
+            本文介绍了项目中在基于 Eclipse Vert.x 的 Verticle 中使用 Google Guice 进行依赖注入的实践，主要的思路是在 &#96;io.vertx.core.Verticle#start&#96; 方法中主动创建 &#96;com.google.inject.Injector&#96; 注入器实例并实行注入操作，在注入操作成功结束之后再进行后续的操作。在开发结束后的某一天，通过万能的搜索发现已经有人提供了基于 Google Guice 的 Eclipse Vert.x 扩展: Vert.x Guice Extension。Vert.x Guice Extension 扩展了 Vert.x 内置的 &#96;io.vertx.core.spi.VerticleFactory&#96; 机制，能够使用 SPI 的方式加载需要的 Guice 依赖。本文总结一下自己的实现思路，然后分析 Vert.x Guice Extension 的实现细节，希望能提高自己的代码水平。
+            
+            </div>
+        <div>
+            <a class="read-more button" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-03-12-combine-vertx-and-guice-dependency-injection&#x2F;">More →</a>
+        </div>
+        </div>
+    <div class="post on-list">
+        <h1 class="post-title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-03-21-a-product-env-bug-misused-hashmap-nullability&#x2F;">一次由于误用 HashMap 值的 null 特性的 BUG</a>
         </h1>
         
@@ -167,7 +211,7 @@
         
 
     
-    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;graphviz&#x2F;">Graphviz</a>} 
+    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;utils&#x2F;">Utils</a>} 
 
             
     ::
@@ -219,9 +263,9 @@
         
     #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;mysql&#x2F;">mysql</a>
         
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;tomcat-dbcp&#x2F;">tomcat dbcp</a>
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;tomcat-dbcp&#x2F;">tomcat-dbcp</a>
         
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;connection-leak&#x2F;">connection leak</a>
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;connection-leak&#x2F;">connection-leak</a>
         
     
             
@@ -267,7 +311,7 @@
         
     #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;tcp&#x2F;">tcp</a>
         
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;fast-retransmit&#x2F;">fast retransmit</a>
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;fast-retransmit&#x2F;">fast-retransmit</a>
         
     #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;congistion&#x2F;">congistion</a>
         
@@ -665,46 +709,6 @@
             </div>
         <div>
             <a class="read-more button" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;spring-mvc-note&#x2F;">More →</a>
-        </div>
-        </div>
-    <div class="post on-list">
-        <h1 class="post-title">
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;mybatis-note&#x2F;">Mybatis Note</a>
-        </h1>
-        
-        
-        
-    <div class="post-meta">
-        <span class="post-date">2018.02.06
-                </span>
-
-        <span class="post-author"></span>
-
-        
-
-    
-    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;notes&#x2F;">Notes</a>} 
-
-            
-    ::
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;mybatis&#x2F;">mybatis</a>
-        
-    
-            
-        
-    </div>
-
-        
-        
-        
-        
-
-        <div class="post-content">
-            Note on mybatis
-            
-            </div>
-        <div>
-            <a class="read-more button" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;mybatis-note&#x2F;">More →</a>
         </div>
         </div>
     

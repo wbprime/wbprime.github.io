@@ -81,7 +81,7 @@
 
             
     ::
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;spring-mvc&#x2F;">Spring MVC</a>
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;spring-mvc&#x2F;">spring-mvc</a>
         
     #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;testing&#x2F;">testing</a>
         
@@ -116,7 +116,7 @@ Domain 层</h2>
 <pre style="background-color:#1e1e1e;">
 <span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.hibernate.annotations.Type;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.joda.time.DateTime;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">javax.persistence.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
 </span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">@Entity
@@ -162,15 +162,15 @@ Service 层</h2>
 <p>代码如下：</p>
 <pre style="background-color:#1e1e1e;">
 <span style="color:#569cd6;">public interface </span><span style="color:#dcdcdc;">TodoService {
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">Todo deleteById(Long id) </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">TodoNotFoundException;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">List&lt;Todo&gt; findAll();
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">Todo findById(Long id) </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">TodoNotFoundException;
 </span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">Todo add(TodoDTO added);
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">Todo update(TodoDTO updated) </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">TodoNotFoundException;
 </span><span style="color:#dcdcdc;">}
 </span></pre><h2 id="controller-ceng"><a class="zola-anchor" href="#controller-ceng" aria-label="Anchor link for: controller-ceng">🔗</a>
@@ -185,20 +185,20 @@ Controller 层</h2>
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.validation.FieldError;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.validation.Validator;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.web.bind.annotation.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">javax.annotation.Resource;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">java.util.List;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">java.util.Locale;
 </span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">@Controller
 </span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">TodoController {
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Resource
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">TodoService service;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Resource
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">LocaleContextHolderWrapper localeHolderWrapper;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Resource
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">MessageSource messageSource;
 </span><span style="color:#dcdcdc;">
@@ -208,78 +208,78 @@ Controller 层</h2>
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Todo deleted = service.deleteById(id);
 </span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">createDTO(deleted);
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@RequestMapping(value = </span><span style="color:#d69d85;">&quot;/api/todo&quot;</span><span style="color:#dcdcdc;">, method = RequestMethod.</span><span style="color:#b4cea8;">GET</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@ResponseBody
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">List&lt;TodoDTO&gt; findAll() {
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">List&lt;Todo&gt; models = service.findAll();
 </span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">createDTOs(models);
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">List&lt;TodoDTO&gt; createDTOs(List&lt;Todo&gt; models) {
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">List&lt;TodoDTO&gt; dtos = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">ArrayList&lt;TodoDTO&gt;();
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">for </span><span style="color:#dcdcdc;">(Todo model</span><span style="color:#569cd6;">:</span><span style="color:#dcdcdc;"> models) {
 </span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">dtos.add(createDTO(model));
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> dtos;
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@RequestMapping(value = </span><span style="color:#d69d85;">&quot;/api/todo/{id}&quot;</span><span style="color:#dcdcdc;">, method = RequestMethod.</span><span style="color:#b4cea8;">GET</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@ResponseBody
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">TodoDTO findById(@PathVariable(</span><span style="color:#d69d85;">&quot;id&quot;</span><span style="color:#dcdcdc;">) Long id) </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">TodoNotFoundException {
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Todo found = service.findById(id);
 </span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">createDTO(found);
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@RequestMapping(value = </span><span style="color:#d69d85;">&quot;/api/todo&quot;</span><span style="color:#dcdcdc;">, method = RequestMethod.</span><span style="color:#b4cea8;">POST</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@ResponseBody
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">TodoDTO add(@Valid @RequestBody TodoDTO dto) </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">FormValidationError {
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">validate(</span><span style="color:#d69d85;">&quot;todo&quot;</span><span style="color:#dcdcdc;">, dto);
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Todo added = service.add(dto);
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">createDTO(added);
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@RequestMapping(value = </span><span style="color:#d69d85;">&quot;/api/todo/{id}&quot;</span><span style="color:#dcdcdc;">, method = RequestMethod.</span><span style="color:#b4cea8;">PUT</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@ResponseBody
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">TodoDTO update(
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">@Valid @RequestBody TodoDTO dto,
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">@PathVariable(</span><span style="color:#d69d85;">&quot;id&quot;</span><span style="color:#dcdcdc;">) Long todoId
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">) </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">TodoNotFoundException, FormValidationError {
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Todo updated = service.update(dto);
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">createDTO(updated);
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">TodoDTO createDTO(Todo model) {
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">TodoDTO dto = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">TodoDTO();
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">dto.setId(model.getId());
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">dto.setDescription(model.getDescription());
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">dto.setTitle(model.getTitle());
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> dto;
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@ExceptionHandler(FormValidationError.class)
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@ResponseBody
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@ResponseStatus(HttpStatus.</span><span style="color:#b4cea8;">BAD_REQUEST</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">FormValidationErrorDTO handleFormValidationError(FormValidationError validationError) {
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Locale current = localeHolderWrapper.getCurrentLocale();
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">List&lt;FieldError&gt; fieldErrors = validationError.getFieldErrors();
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">FormValidationErrorDTO dto = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">FormValidationErrorDTO();
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">for </span><span style="color:#dcdcdc;">(FieldError fieldError</span><span style="color:#569cd6;">:</span><span style="color:#dcdcdc;"> fieldErrors) {
 </span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">String</span><span style="color:#569cd6;">[]</span><span style="color:#dcdcdc;"> fieldErrorCodes = fieldError.getCodes();
 </span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">for </span><span style="color:#dcdcdc;">(</span><span style="color:#569cd6;">int</span><span style="color:#dcdcdc;"> index = </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">; index &lt; fieldErrorCodes.length; index</span><span style="color:#569cd6;">++</span><span style="color:#dcdcdc;">) {
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">String fieldErrorCode = fieldErrorCodes[index];
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">String localizedError = messageSource.getMessage(fieldErrorCode, fieldError.getArguments(), current);
 </span><span style="color:#dcdcdc;">                </span><span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(localizedError != </span><span style="color:#569cd6;">null &amp;&amp; !</span><span style="color:#dcdcdc;">localizedError.equals(fieldErrorCode)) {
 </span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">dto.addFieldError(fieldError.getField(), localizedError);
@@ -292,14 +292,14 @@ Controller 层</h2>
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">}
 </span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">}
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> dto;
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private boolean </span><span style="color:#dcdcdc;">isLastFieldErrorCode(</span><span style="color:#569cd6;">int </span><span style="color:#dcdcdc;">index, String</span><span style="color:#569cd6;">[] </span><span style="color:#dcdcdc;">fieldErrorCodes) {
 </span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> index == fieldErrorCodes.length - </span><span style="color:#b5cea8;">1</span><span style="color:#dcdcdc;">;
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@ExceptionHandler(TodoNotFoundException.class)
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@ResponseStatus(HttpStatus.</span><span style="color:#b4cea8;">NOT_FOUND</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">handleTodoNotFoundException(TodoNotFoundException ex) {
@@ -319,22 +319,22 @@ TodoDTO</h3>
 <pre style="background-color:#1e1e1e;">
 <span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.hibernate.validator.constraints.Length;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.hibernate.validator.constraints.NotEmpty;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">TodoDTO {
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">Long id;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Length(max = </span><span style="color:#b5cea8;">500</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">String description;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@NotEmpty
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Length(max = </span><span style="color:#b5cea8;">100</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">String title;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">TodoDTO() {
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Getters and setters
 </span><span style="color:#dcdcdc;">}
 </span></pre><h3 id="fieldvalidationerrordto"><a class="zola-anchor" href="#fieldvalidationerrordto" aria-label="Anchor link for: fieldvalidationerrordto">🔗</a>
@@ -342,15 +342,15 @@ FieldValidationErrorDTO</h3>
 <p>代码如下：</p>
 <pre style="background-color:#1e1e1e;">
 <span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">FieldValidationErrorDTO {
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">String path;
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">String message;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">FieldValidationErrorDTO(String path, String message) {
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">this.path = path;
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">this.message = message;
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Getters
 </span><span style="color:#dcdcdc;">}
 </span></pre><h3 id="formvalidationerrordto"><a class="zola-anchor" href="#formvalidationerrordto" aria-label="Anchor link for: formvalidationerrordto">🔗</a>
@@ -358,18 +358,18 @@ FormValidationErrorDTO</h3>
 <p>代码如下：</p>
 <pre style="background-color:#1e1e1e;">
 <span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">FormValidationErrorDTO {
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">List&lt;FieldValidationErrorDTO&gt; fieldErrors = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">ArrayList&lt;FieldValidationErrorDTO&gt;();
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">FormValidationErrorDTO() {
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">addFieldError(String path, String message) {
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">FieldValidationErrorDTO fieldError = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">FieldValidationErrorDTO(path, message);
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">fieldErrors.add(fieldError);
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Getter
 </span><span style="color:#dcdcdc;">}
 </span></pre><h2 id="exceptions"><a class="zola-anchor" href="#exceptions" aria-label="Anchor link for: exceptions">🔗</a>
@@ -384,13 +384,13 @@ Exceptions</h2>
 </span><span style="color:#dcdcdc;">}
 </span><span style="color:#dcdcdc;">
 </span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">FormValidationError </span><span style="color:#569cd6;">extends </span><span style="color:#4ec9b0;">Exception </span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">List&lt;FieldError&gt; fieldErrors;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">FormValidationError(List&lt;FieldError&gt; fieldErrors) {
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">this.fieldErrors = fieldErrors;
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Getter
 </span><span style="color:#dcdcdc;">}
 </span></pre><h1 id="bian-xie-ce-shi-yong-li"><a class="zola-anchor" href="#bian-xie-ce-shi-yong-li" aria-label="Anchor link for: bian-xie-ce-shi-yong-li">🔗</a>
@@ -420,11 +420,11 @@ GET 获取Todo项列表</h2>
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.server.MockMvc;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.server.samples.context.WebContextLoader;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.server.request.MockMvcRequestBuilders.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.server.result.MockMvcResultMatchers.content;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.server.result.MockMvcResultMatchers.status;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">@RunWith(SpringJUnit4ClassRunner.class)
 </span><span style="color:#dcdcdc;">@ContextConfiguration(loader = WebContextLoader.class, classes = {ExampleApplicationContext.class})
 </span><span style="color:#dcdcdc;">@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
@@ -433,13 +433,13 @@ GET 获取Todo项列表</h2>
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">DbUnitTestExecutionListener.class })
 </span><span style="color:#dcdcdc;">@DatabaseSetup(</span><span style="color:#d69d85;">&quot;toDoData.xml&quot;</span><span style="color:#dcdcdc;">)
 </span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">ITTodoControllerTest {
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Add web application context here
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">MockMvc mockMvc;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Add setUp() method here
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Test
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@ExpectedDatabase(</span><span style="color:#d69d85;">&quot;toDoData.xml&quot;</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">findAll() </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">Exception {
@@ -495,11 +495,11 @@ GET 获取单个Todo项</h2>
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.server.MockMvc;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.server.samples.context.WebContextLoader;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.server.request.MockMvcRequestBuilders.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.server.result.MockMvcResultMatchers.content;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.server.result.MockMvcResultMatchers.status;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">@RunWith(SpringJUnit4ClassRunner.class)
 </span><span style="color:#dcdcdc;">@ContextConfiguration(loader = WebContextLoader.class, classes = {ExampleApplicationContext.class})
 </span><span style="color:#dcdcdc;">@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
@@ -508,13 +508,13 @@ GET 获取单个Todo项</h2>
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">DbUnitTestExecutionListener.class })
 </span><span style="color:#dcdcdc;">@DatabaseSetup(</span><span style="color:#d69d85;">&quot;toDoData.xml&quot;</span><span style="color:#dcdcdc;">)
 </span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">ITTodoControllerTest {
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Add web application context here
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">MockMvc mockMvc;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Add setUp() method here
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Test
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@ExpectedDatabase(</span><span style="color:#d69d85;">&quot;toDoData.xml&quot;</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">findById() </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">Exception {
@@ -549,10 +549,10 @@ GET 获取单个Todo项</h2>
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.server.MockMvc;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.server.samples.context.WebContextLoader;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.server.request.MockMvcRequestBuilders.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.server.result.MockMvcResultMatchers.status;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">@RunWith(SpringJUnit4ClassRunner.class)
 </span><span style="color:#dcdcdc;">@ContextConfiguration(loader = WebContextLoader.class, classes = {ExampleApplicationContext.class})
 </span><span style="color:#dcdcdc;">@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
@@ -561,13 +561,13 @@ GET 获取单个Todo项</h2>
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">DbUnitTestExecutionListener.class })
 </span><span style="color:#dcdcdc;">@DatabaseSetup(</span><span style="color:#d69d85;">&quot;toDoData.xml&quot;</span><span style="color:#dcdcdc;">)
 </span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">ITTodoControllerTest {
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Add web application context here
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">MockMvc mockMvc;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Add setUp() method here
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Test
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@ExpectedDatabase(</span><span style="color:#d69d85;">&quot;toDoData.xml&quot;</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">findByIdWhenTodoIsNotFound() </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">Exception {
@@ -608,11 +608,11 @@ DELETE 删除指定的Todo项</h2>
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.server.MockMvc;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.server.samples.context.WebContextLoader;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.server.request.MockMvcRequestBuilders.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.server.result.MockMvcResultMatchers.content;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.server.result.MockMvcResultMatchers.status;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">@RunWith(SpringJUnit4ClassRunner.class)
 </span><span style="color:#dcdcdc;">@ContextConfiguration(loader = WebContextLoader.class, classes = {ExampleApplicationContext.class})
 </span><span style="color:#dcdcdc;">@TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
@@ -621,13 +621,13 @@ DELETE 删除指定的Todo项</h2>
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">DbUnitTestExecutionListener.class})
 </span><span style="color:#dcdcdc;">@DatabaseSetup(</span><span style="color:#d69d85;">&quot;toDoData.xml&quot;</span><span style="color:#dcdcdc;">)
 </span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">ITTodoControllerTest {
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Add web application context here
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">MockMvc mockMvc;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Add setUp() method here
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Test
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@ExpectedDatabase(</span><span style="color:#d69d85;">&quot;toDoData-delete-expected.xml&quot;</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">deleteById() </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">Exception {
@@ -668,10 +668,10 @@ DELETE 删除指定的Todo项</h2>
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.server.MockMvc;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.server.samples.context.WebContextLoader;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.server.request.MockMvcRequestBuilders.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.server.result.MockMvcResultMatchers.status;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">@RunWith(SpringJUnit4ClassRunner.class)
 </span><span style="color:#dcdcdc;">@ContextConfiguration(loader = WebContextLoader.class, classes = {ExampleApplicationContext.class})
 </span><span style="color:#dcdcdc;">@TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
@@ -680,13 +680,13 @@ DELETE 删除指定的Todo项</h2>
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">DbUnitTestExecutionListener.class})
 </span><span style="color:#dcdcdc;">@DatabaseSetup(</span><span style="color:#d69d85;">&quot;toDoData.xml&quot;</span><span style="color:#dcdcdc;">)
 </span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">ITTodoControllerTest {
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Add web application context here
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">MockMvc mockMvc;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Add setUp() method here
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Test
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@ExpectedDatabase(</span><span style="color:#d69d85;">&quot;toDoData.xml&quot;</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">deleteByIdWhenTodoIsNotFound() </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">Exception {
@@ -728,11 +728,11 @@ POST 添加Todo项</h2>
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.server.MockMvc;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.server.samples.context.WebContextLoader;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.server.request.MockMvcRequestBuilders.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.server.result.MockMvcResultMatchers.content;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.server.result.MockMvcResultMatchers.status;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">@RunWith(SpringJUnit4ClassRunner.class)
 </span><span style="color:#dcdcdc;">@ContextConfiguration(loader = WebContextLoader.class, classes = {ExampleApplicationContext.class})
 </span><span style="color:#dcdcdc;">@TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
@@ -741,13 +741,13 @@ POST 添加Todo项</h2>
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">DbUnitTestExecutionListener.class})
 </span><span style="color:#dcdcdc;">@DatabaseSetup(toDoData.xml)
 </span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">ITTodoControllerTest {
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Add web application context here
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">MockMvc mockMvc;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Add setUp() method here
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Test
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@ExpectedDatabase(</span><span style="color:#d69d85;">&quot;toDoData.xml&quot;</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">addEmptyTodo() </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">Exception {
@@ -786,12 +786,12 @@ POST 添加Todo项</h2>
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.server.MockMvc;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.server.samples.context.WebContextLoader;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.hamcrest.Matchers.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.server.request.MockMvcRequestBuilders.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.server.result.MockMvcResultMatchers.content;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.server.result.MockMvcResultMatchers.status;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">@RunWith(SpringJUnit4ClassRunner.class)
 </span><span style="color:#dcdcdc;">@ContextConfiguration(loader = WebContextLoader.class, classes = {ExampleApplicationContext.class})
 </span><span style="color:#dcdcdc;">@TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
@@ -800,20 +800,20 @@ POST 添加Todo项</h2>
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">DbUnitTestExecutionListener.class})
 </span><span style="color:#dcdcdc;">@DatabaseSetup(</span><span style="color:#d69d85;">&quot;toDoData.xml&quot;</span><span style="color:#dcdcdc;">)
 </span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">ITTodoControllerTest {
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Add web application context here
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">MockMvc mockMvc;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Add setUp() method here
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Test
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@ExpectedDatabase(</span><span style="color:#d69d85;">&quot;toDoData.xml&quot;</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">addTodoWhenTitleAndDescriptionAreTooLong() </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">Exception {
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">String title = TodoTestUtil.createStringWithLength(</span><span style="color:#b5cea8;">101</span><span style="color:#dcdcdc;">);
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">String description = TodoTestUtil.createStringWithLength(</span><span style="color:#b5cea8;">501</span><span style="color:#dcdcdc;">);
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">TodoDTO added = TodoTestUtil.createDTO(</span><span style="color:#569cd6;">null</span><span style="color:#dcdcdc;">, description, title);
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">mockMvc.perform(post(</span><span style="color:#d69d85;">&quot;/api/todo&quot;</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.contentType(IntegrationTestUtil.</span><span style="color:#b4cea8;">APPLICATION_JSON_UTF8</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.body(IntegrationTestUtil.convertObjectToJsonBytes(added))
@@ -858,11 +858,11 @@ POST 添加Todo项</h2>
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.server.MockMvc;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.server.samples.context.WebContextLoader;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.server.request.MockMvcRequestBuilders.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.server.result.MockMvcResultMatchers.content;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.server.result.MockMvcResultMatchers.status;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">@RunWith(SpringJUnit4ClassRunner.class)
 </span><span style="color:#dcdcdc;">@ContextConfiguration(loader = WebContextLoader.class, classes = {ExampleApplicationContext.class})
 </span><span style="color:#dcdcdc;">@TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
@@ -871,13 +871,13 @@ POST 添加Todo项</h2>
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">DbUnitTestExecutionListener.class})
 </span><span style="color:#dcdcdc;">@DatabaseSetup(</span><span style="color:#d69d85;">&quot;toDoData.xml&quot;</span><span style="color:#dcdcdc;">)
 </span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">ITTodoControllerTest {
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Add web application context here
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">MockMvc mockMvc;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Add setUp() method here
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Test
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@ExpectedDatabase(value=</span><span style="color:#d69d85;">&quot;toDoData-add-expected.xml&quot;</span><span style="color:#dcdcdc;">, assertionMode = DatabaseAssertionMode.</span><span style="color:#b4cea8;">NON_STRICT</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">add() </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">Exception {
@@ -937,11 +937,11 @@ PUT 修改Todo项</h2>
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.server.MockMvc;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.server.samples.context.WebContextLoader;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.server.request.MockMvcRequestBuilders.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.server.result.MockMvcResultMatchers.content;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.server.result.MockMvcResultMatchers.status;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">@RunWith(SpringJUnit4ClassRunner.class)
 </span><span style="color:#dcdcdc;">@ContextConfiguration(loader = WebContextLoader.class, classes = {ExampleApplicationContext.class})
 </span><span style="color:#dcdcdc;">@TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
@@ -950,18 +950,18 @@ PUT 修改Todo项</h2>
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">DbUnitTestExecutionListener.class})
 </span><span style="color:#dcdcdc;">@DatabaseSetup(</span><span style="color:#d69d85;">&quot;toDoData.xml&quot;</span><span style="color:#dcdcdc;">)
 </span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">ITTodoControllerTest {
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Add web application context here
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">MockMvc mockMvc;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Add setUp() method here
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Test
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@ExpectedDatabase(</span><span style="color:#d69d85;">&quot;toDoData.xml&quot;</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">updateEmptyTodo() </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">Exception {
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">TodoDTO updated = TodoTestUtil.createDTO(</span><span style="color:#b5cea8;">1</span><span style="color:#569cd6;">L</span><span style="color:#dcdcdc;">, </span><span style="color:#d69d85;">&quot;&quot;</span><span style="color:#dcdcdc;">, </span><span style="color:#d69d85;">&quot;&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">mockMvc.perform(put(</span><span style="color:#d69d85;">&quot;/api/todo/{id}&quot;</span><span style="color:#dcdcdc;">, </span><span style="color:#b5cea8;">1</span><span style="color:#569cd6;">L</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.contentType(IntegrationTestUtil.</span><span style="color:#b4cea8;">APPLICATION_JSON_UTF8</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.body(IntegrationTestUtil.convertObjectToJsonBytes(updated))
@@ -997,12 +997,12 @@ PUT 修改Todo项</h2>
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.server.MockMvc;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.server.samples.context.WebContextLoader;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.hamcrest.Matchers.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.server.request.MockMvcRequestBuilders.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.server.result.MockMvcResultMatchers.content;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.server.result.MockMvcResultMatchers.status;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">@RunWith(SpringJUnit4ClassRunner.class)
 </span><span style="color:#dcdcdc;">@ContextConfiguration(loader = WebContextLoader.class, classes = {ExampleApplicationContext.class})
 </span><span style="color:#dcdcdc;">@TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
@@ -1011,21 +1011,21 @@ PUT 修改Todo项</h2>
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">DbUnitTestExecutionListener.class})
 </span><span style="color:#dcdcdc;">@DatabaseSetup(</span><span style="color:#d69d85;">&quot;toDoData.xml&quot;</span><span style="color:#dcdcdc;">)
 </span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">ITTodoControllerTest {
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Add web application context here
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">MockMvc mockMvc;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Add setUp() method here
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Test
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@ExpectedDatabase(</span><span style="color:#d69d85;">&quot;toDoData.xml&quot;</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">updateTodoWhenTitleAndDescriptionAreTooLong() </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">Exception {
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">String title = TodoTestUtil.createStringWithLength(</span><span style="color:#b5cea8;">101</span><span style="color:#dcdcdc;">);
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">String description = TodoTestUtil.createStringWithLength(</span><span style="color:#b5cea8;">501</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">TodoDTO updated = TodoTestUtil.createDTO(</span><span style="color:#b5cea8;">1</span><span style="color:#569cd6;">L</span><span style="color:#dcdcdc;">, description, title);
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">mockMvc.perform(put(</span><span style="color:#d69d85;">&quot;/api/todo/{id}&quot;</span><span style="color:#dcdcdc;">, </span><span style="color:#b5cea8;">1</span><span style="color:#569cd6;">L</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.contentType(IntegrationTestUtil.</span><span style="color:#b4cea8;">APPLICATION_JSON_UTF8</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.body(IntegrationTestUtil.convertObjectToJsonBytes(updated))
@@ -1063,10 +1063,10 @@ PUT 修改Todo项</h2>
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.server.MockMvc;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.server.samples.context.WebContextLoader;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.server.request.MockMvcRequestBuilders.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.server.result.MockMvcResultMatchers.status;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">@RunWith(SpringJUnit4ClassRunner.class)
 </span><span style="color:#dcdcdc;">@ContextConfiguration(loader = WebContextLoader.class, classes = {ExampleApplicationContext.class})
 </span><span style="color:#dcdcdc;">@TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
@@ -1075,18 +1075,18 @@ PUT 修改Todo项</h2>
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">DbUnitTestExecutionListener.class})
 </span><span style="color:#dcdcdc;">@DatabaseSetup(</span><span style="color:#d69d85;">&quot;toDoData.xml&quot;</span><span style="color:#dcdcdc;">)
 </span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">ITTodoControllerTest {
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Add web application context here
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">MockMvc mockMvc;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Add setUp() method here
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Test
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@ExpectedDatabase(</span><span style="color:#d69d85;">&quot;toDoData.xml&quot;</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">updateTodoWhenTodoIsNotFound() </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">Exception {
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">TodoDTO updated = TodoTestUtil.createDTO(</span><span style="color:#b5cea8;">3</span><span style="color:#569cd6;">L</span><span style="color:#dcdcdc;">, </span><span style="color:#d69d85;">&quot;description&quot;</span><span style="color:#dcdcdc;">, </span><span style="color:#d69d85;">&quot;title&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">mockMvc.perform(put(</span><span style="color:#d69d85;">&quot;/api/todo/{id}&quot;</span><span style="color:#dcdcdc;">, </span><span style="color:#b5cea8;">3</span><span style="color:#569cd6;">L</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.contentType(IntegrationTestUtil.</span><span style="color:#b4cea8;">APPLICATION_JSON_UTF8</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.body(IntegrationTestUtil.convertObjectToJsonBytes(updated))
@@ -1120,11 +1120,11 @@ PUT 修改Todo项</h2>
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.server.MockMvc;
 </span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.server.samples.context.WebContextLoader;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.server.request.MockMvcRequestBuilders.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.server.result.MockMvcResultMatchers.content;
 </span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.server.result.MockMvcResultMatchers.status;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">@RunWith(SpringJUnit4ClassRunner.class)
 </span><span style="color:#dcdcdc;">@ContextConfiguration(loader = WebContextLoader.class, classes = {ExampleApplicationContext.class})
 </span><span style="color:#dcdcdc;">@TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
@@ -1133,18 +1133,18 @@ PUT 修改Todo项</h2>
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">DbUnitTestExecutionListener.class})
 </span><span style="color:#dcdcdc;">@DatabaseSetup(</span><span style="color:#d69d85;">&quot;toDoData.xml&quot;</span><span style="color:#dcdcdc;">)
 </span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">ITTodoControllerTest {
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Add web application context here
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">MockMvc mockMvc;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Add setUp() method here
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Test
 </span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@ExpectedDatabase(value=</span><span style="color:#d69d85;">&quot;toDoData-update-expected.xml&quot;</span><span style="color:#dcdcdc;">, assertionMode = DatabaseAssertionMode.</span><span style="color:#b4cea8;">NON_STRICT</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">update() </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">Exception {
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">TodoDTO updated = TodoTestUtil.createDTO(</span><span style="color:#b5cea8;">1</span><span style="color:#569cd6;">L</span><span style="color:#dcdcdc;">, </span><span style="color:#d69d85;">&quot;description&quot;</span><span style="color:#dcdcdc;">, </span><span style="color:#d69d85;">&quot;title&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">
+</span><span style="color:#dcdcdc;">
 </span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">mockMvc.perform(put(</span><span style="color:#d69d85;">&quot;/api/todo/{id}&quot;</span><span style="color:#dcdcdc;">, </span><span style="color:#b5cea8;">1</span><span style="color:#569cd6;">L</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.contentType(IntegrationTestUtil.</span><span style="color:#b4cea8;">APPLICATION_JSON_UTF8</span><span style="color:#dcdcdc;">)
 </span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.body(IntegrationTestUtil.convertObjectToJsonBytes(updated))
