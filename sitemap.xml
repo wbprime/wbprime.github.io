@@ -288,6 +288,13 @@
         </url>
     
         <url>
+            <loc>https://www.wangbo.im/posts/2019-09-28-google-autovalue-usecases/</loc>
+            
+                <lastmod>2019-09-28T11:29:53+08:00</lastmod>
+            
+        </url>
+    
+        <url>
             <loc>https://www.wangbo.im/posts/acl-note/</loc>
             
                 <lastmod>2018-02-05T17:46:28+08:00</lastmod>
@@ -752,6 +759,10 @@
         </url>
         
         <url>
+            <loc>https://www.wangbo.im/categories/java/</loc>
+        </url>
+        
+        <url>
             <loc>https://www.wangbo.im/categories/learning-java-concurrency/</loc>
         </url>
         
@@ -814,6 +825,10 @@
         </url>
         
         <url>
+            <loc>https://www.wangbo.im/tags/apt/</loc>
+        </url>
+        
+        <url>
             <loc>https://www.wangbo.im/tags/archlinux/</loc>
         </url>
         
@@ -823,6 +838,10 @@
         
         <url>
             <loc>https://www.wangbo.im/tags/auth/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/tags/auto-value/</loc>
         </url>
         
         <url>
@@ -919,6 +938,10 @@
         
         <url>
             <loc>https://www.wangbo.im/tags/gif/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/tags/google/</loc>
         </url>
         
         <url>
