@@ -14,7 +14,7 @@
     <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-03-12-combine-vertx-and-guice-dependency-injection&#x2F;"/>
     <meta property="og:description" content="&lt;p&gt;本文介绍了项目中在基于 &lt;a href=&quot;https:&#x2F;&#x2F;vertx.io&quot; title=&quot;Eclipse Vert.x&quot;&gt;Eclipse Vert.x&lt;&#x2F;a&gt; 的 Verticle 中使用 &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x…"/>
     <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
-    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;red.css">
 <link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
     <body>
         <div class="container full">
@@ -105,100 +105,100 @@ Guice 依赖。</p>
 <h1 id="wo-de-fang-an"><a class="zola-anchor" href="#wo-de-fang-an" aria-label="Anchor link for: wo-de-fang-an">🔗</a>
 我的方案</h1>
 <p>我的方案很直接很粗暴：把 Verticle 的启动方法作为程序的入口，在入口方法里面创建 Guice Injector 实例并对启动的 Verticle 实例进行主动注入。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">public class MainVerticle extends AbstractVerticle {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">private static final Logger LOGGER = LoggerFactory.getLogger(MainVerticle.class);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Inject
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Named(Constants.KEY_HTTP_LISTEN_HOST)
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">private String listenIp;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Inject
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Named(Constants.KEY_HTTP_LISTEN_PORT)
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">private Integer listenPort = 8001;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Inject
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@RegularRouter
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">private Set&lt;Controller&gt; regularControllers;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Inject
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">private Set&lt;Runnable&gt; warmUps;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Override
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">public void start(final Future&lt;Void&gt; future) throws Exception {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">final Injector injector = Guice.createInjector(new MainModule(vertx, config()));
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">injector.injectMembers(this);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">final Router router = Router.router(vertx);
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">router.exceptionHandler(ex -&gt; LOGGER.warn(&quot;Uncaught exception&quot;, ex));
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">regularControllers.stream().sorted().forEach(c -&gt; {
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">LOGGER.debug(&quot;Registered regular Controller \&quot;{}\&quot;&quot;, c);
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">c.accept(router);
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">});
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Completable.fromRunnable(() -&gt; warmUps.parallelStream().forEach(Runnable::run))
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">.subscribeOn(RxHelper.blockingScheduler(vertx))
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">.subscribe(
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">() -&gt; {
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">LOGGER.info(&quot;Warm up finished, try to start HTTP listening on {}:{} ...&quot;, listenIp, listenPort);
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">vertx.createHttpServer()
-</span><span style="color:#dcdcdc;">                        </span><span style="color:#dcdcdc;">.requestHandler(router::accept)
-</span><span style="color:#dcdcdc;">                        </span><span style="color:#dcdcdc;">.listen(listenPort, listenIp, e -&gt; {
-</span><span style="color:#dcdcdc;">                            </span><span style="color:#dcdcdc;">if (e.succeeded()) {
-</span><span style="color:#dcdcdc;">                                </span><span style="color:#dcdcdc;">future.complete();
-</span><span style="color:#dcdcdc;">                            </span><span style="color:#dcdcdc;">} else {
-</span><span style="color:#dcdcdc;">                                </span><span style="color:#dcdcdc;">future.fail(e.cause());
-</span><span style="color:#dcdcdc;">                            </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">                        </span><span style="color:#dcdcdc;">});
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">},
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">ex -&gt; {
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">LOGGER.error(&quot;Warmup failed, disable HTTP listening&quot;, ex);
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">future.fail(ex);
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">public class MainVerticle extends AbstractVerticle {
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">private static final Logger LOGGER = LoggerFactory.getLogger(MainVerticle.class);
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@Inject
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@Named(Constants.KEY_HTTP_LISTEN_HOST)
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">private String listenIp;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@Inject
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@Named(Constants.KEY_HTTP_LISTEN_PORT)
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">private Integer listenPort = 8001;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@Inject
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@RegularRouter
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">private Set&lt;Controller&gt; regularControllers;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@Inject
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">private Set&lt;Runnable&gt; warmUps;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@Override
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">public void start(final Future&lt;Void&gt; future) throws Exception {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">final Injector injector = Guice.createInjector(new MainModule(vertx, config()));
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">injector.injectMembers(this);
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">final Router router = Router.router(vertx);
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">router.exceptionHandler(ex -&gt; LOGGER.warn(&quot;Uncaught exception&quot;, ex));
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">regularControllers.stream().sorted().forEach(c -&gt; {
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">LOGGER.debug(&quot;Registered regular Controller \&quot;{}\&quot;&quot;, c);
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">c.accept(router);
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">});
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">Completable.fromRunnable(() -&gt; warmUps.parallelStream().forEach(Runnable::run))
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">.subscribeOn(RxHelper.blockingScheduler(vertx))
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">.subscribe(
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">() -&gt; {
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">LOGGER.info(&quot;Warm up finished, try to start HTTP listening on {}:{} ...&quot;, listenIp, listenPort);
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">vertx.createHttpServer()
+</span><span style="color:#fdf4c1aa;">                        </span><span style="color:#fdf4c1aa;">.requestHandler(router::accept)
+</span><span style="color:#fdf4c1aa;">                        </span><span style="color:#fdf4c1aa;">.listen(listenPort, listenIp, e -&gt; {
+</span><span style="color:#fdf4c1aa;">                            </span><span style="color:#fdf4c1aa;">if (e.succeeded()) {
+</span><span style="color:#fdf4c1aa;">                                </span><span style="color:#fdf4c1aa;">future.complete();
+</span><span style="color:#fdf4c1aa;">                            </span><span style="color:#fdf4c1aa;">} else {
+</span><span style="color:#fdf4c1aa;">                                </span><span style="color:#fdf4c1aa;">future.fail(e.cause());
+</span><span style="color:#fdf4c1aa;">                            </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">                        </span><span style="color:#fdf4c1aa;">});
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">},
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">ex -&gt; {
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">LOGGER.error(&quot;Warmup failed, disable HTTP listening&quot;, ex);
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">future.fail(ex);
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">);
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>代码很简洁明了。</p>
 <p>服务中需要启动一个 HttpServer 监听，监听的 host 和端口需要在服务外部通过配置的方式传进来。这些配置是通过 Guice 配置并注入的。</p>
 <p>构造的 HttpServer 需要为不同的 Endpoint (path &amp; method) 设置不同的响应代码 (Handler)，我将其抽象为一系列的 Controller：其实就是 JDK8 的 Consumer 接口，实现了支持为 Router 添加 Handler 的 <code>accept</code> 方法以及添加了能够实现优先级的 <code>order</code> 方法。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">java.util.function.Consumer;
-</span><span style="color:#569cd6;">public interface </span><span style="color:#dcdcdc;">Controller </span><span style="color:#569cd6;">extends </span><span style="color:#4ec9b0;">Consumer</span><span style="color:#dcdcdc;">&lt;Router&gt;, Comparable&lt;Controller&gt; {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">default long </span><span style="color:#dcdcdc;">order() {</span><span style="color:#569cd6;">return </span><span style="color:#b5cea8;">0</span><span style="color:#569cd6;">L</span><span style="color:#dcdcdc;">;}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Override
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">default int </span><span style="color:#dcdcdc;">compareTo(final Controller o) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">Long.compare(order(), o.order());
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Override
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">default</span><span style="color:#dcdcdc;"> void accept(final Router r) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">r.route(</span><span style="color:#d69d85;">&quot;/&quot;</span><span style="color:#dcdcdc;">).handler(ctx </span><span style="color:#569cd6;">-&gt; </span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">JsonObject msg = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">JsonObject();
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">msg.put(</span><span style="color:#d69d85;">&quot;Hello&quot;</span><span style="color:#dcdcdc;">, </span><span style="color:#d69d85;">&quot;World&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">ctx.response().end(msg.encode());
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">});
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">java</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">util</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">function</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Consumer</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">public interface </span><span style="color:#8ec07c;">Controller </span><span style="color:#fa5c4b;">extends </span><span style="color:#8ec07c;">Consumer</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Router</span><span style="color:#fdf4c1aa;">&gt;, </span><span style="color:#8ec07c;">Comparable</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Controller</span><span style="color:#fdf4c1aa;">&gt; {
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">default long </span><span style="color:#fdf4c1;">order() </span><span style="color:#fdf4c1aa;">{</span><span style="color:#fa5c4b;">return </span><span style="color:#d3869b;">0</span><span style="color:#fa5c4b;">L</span><span style="color:#fdf4c1aa;">;}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">default int </span><span style="color:#fdf4c1;">compareTo(final </span><span style="color:#8ec07c;">Controller</span><span style="color:#fdf4c1;"> o) </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return </span><span style="color:#8ec07c;">Long</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">compare(order(), o.order())</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">default</span><span style="color:#fdf4c1aa;"> void </span><span style="color:#fdf4c1;">accept(final </span><span style="color:#8ec07c;">Router</span><span style="color:#fdf4c1;"> r) </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">r.</span><span style="color:#fdf4c1;">route(</span><span style="color:#b8bb26;">&quot;/&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">handler(ctx </span><span style="color:#fa5c4b;">-&gt; </span><span style="color:#fdf4c1;">{
+</span><span style="color:#fdf4c1;">            </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">JsonObject</span><span style="color:#fdf4c1;"> msg </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">JsonObject</span><span style="color:#fdf4c1;">();
+</span><span style="color:#fdf4c1;">            </span><span style="color:#fdf4c1;">msg.put(</span><span style="color:#b8bb26;">&quot;Hello&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#b8bb26;">&quot;World&quot;</span><span style="color:#fdf4c1;">);
+</span><span style="color:#fdf4c1;">
+</span><span style="color:#fdf4c1;">            </span><span style="color:#fdf4c1;">ctx.response().end(msg.encode());
+</span><span style="color:#fdf4c1;">        </span><span style="color:#fdf4c1;">})</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>添加了 <code>order</code> 方法的 Controller 的多个实现类可以通过 <a href="https://github.com/google/guice/wiki/Multibindings" title="Google Guice MultiBindings Extension">com.google.inject.extensions:guice-multibindings</a> 提供的 <code>com.google.inject.multibindings.Multibinder</code> 来提供注入为 <code>java.util.Set</code> 的支持。不同的 Controller 实现类可以处于多个包中，分别通过以下代码提供：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">Multibinder&lt;Controller&gt; binder =
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Multibinder.newSetBinder(binder(), Controller.class, RegularRouter.class);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">binder.addBinding().to(FastController.class).in(Scopes.</span><span style="color:#b4cea8;">SINGLETON</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">binder.addBinding().to(SlowController.class).in(Scopes.</span><span style="color:#b4cea8;">SINGLETON</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Multibinder</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Controller</span><span style="color:#fdf4c1aa;">&gt; binder </span><span style="color:#fe8019;">=
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">Multibinder</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">newSetBinder(binder(), </span><span style="color:#8ec07c;">Controller</span><span style="color:#fdf4c1;">.class, </span><span style="color:#8ec07c;">RegularRouter</span><span style="color:#fdf4c1;">.class)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">binder.</span><span style="color:#fdf4c1;">addBinding()</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">to(</span><span style="color:#8ec07c;">FastController</span><span style="color:#fdf4c1;">.class)</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">in(</span><span style="color:#8ec07c;">Scopes</span><span style="color:#fdf4c1;">.SINGLETON)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">binder.</span><span style="color:#fdf4c1;">addBinding()</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">to(</span><span style="color:#8ec07c;">SlowController</span><span style="color:#fdf4c1;">.class)</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">in(</span><span style="color:#8ec07c;">Scopes</span><span style="color:#fdf4c1;">.SINGLETON)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>同样，可以添加对实现了 <code>java.lang.Runnable</code> 的类型注入支持，模拟生命周期管理。</p>
 <p>最关键的依赖注入的执行代码在 <code>start</code> 方法的最开始：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">Injector injector = Guice.createInjector(</span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">MainModule(vertx, config()));
-</span><span style="color:#dcdcdc;">injector.injectMembers(this); </span><span style="color:#608b4e;">// On-demand Injection via injectMembers
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Injector</span><span style="color:#fdf4c1aa;"> injector </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">Guice</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">createInjector(</span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">MainModule</span><span style="color:#fdf4c1;">(vertx, config()))</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">injector.</span><span style="color:#fdf4c1;">injectMembers(this)</span><span style="color:#fdf4c1aa;">; </span><span style="font-style:italic;color:#928374;">// On-demand Injection via injectMembers
 </span></pre>
 <p>代码从依赖提供者 <code>MainModule</code> 创建注入器，成功之后再对当前的 <code>MainVerticle</code> 执行 <a href="https://github.com/google/guice/wiki/Injections" title="Google Guice injectMembers">On-demand Injection</a>。此行代码执行之后，类中所需的依赖就应该会注入完毕。</p>
 <p>可以看出，我对 Guice 和 Vert.x 的结合使用需要修改业务代码以插入注入代码，和项目耦合很深，不能很简单地应用到别的项目中。理想的情况下，在 Vert.x 的项目中嵌入 Guice，最好能：</p>
@@ -213,101 +213,101 @@ Vert.x Guice Extension</h1>
 <h2 id="usecase"><a class="zola-anchor" href="#usecase" aria-label="Anchor link for: usecase">🔗</a>
 UseCase</h2>
 <p>使用了 <a href="https://github.com/ef-labs/vertx-guice" title="Google Guice">Vert.x Guice Extension</a> 的项目中需要添加以下依赖：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#808080;">&lt;</span><span style="color:#569cd6;">dependency</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">  </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">groupId</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">com.englishtown.vertx</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">groupId</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">  </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">artifactId</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">vertx-guice</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">artifactId</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">  </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">version</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">2.3.1</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">version</span><span style="color:#808080;">&gt;
-</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">dependency</span><span style="color:#808080;">&gt;
+<pre style="background-color:#282828;">
+<span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">com.englishtown.vertx</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">vertx-guice</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">2.3.1</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;
+</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
 </span></pre>
 <p>然后正常实现所需要的 Verticle，不需要添加 Guice 相关代码（@Inject 等注解除外）。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">public class TheVerticle extends AbstractVerticle {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">private static final Logger LOGGER = LoggerFactory.getLogger(TheVerticle.class);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Inject
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Named(Constants.KEY_HTTP_LISTEN_HOST)
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">private String listenIp;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Inject
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Named(Constants.KEY_HTTP_LISTEN_PORT)
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">private Integer listenPort = 8001;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Inject
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@RegularRouter
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">private Set&lt;Controller&gt; regularControllers;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Inject
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">private Set&lt;Runnable&gt; warmUps;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Override
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">public void start(final Future&lt;Void&gt; future) throws Exception {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">// Not needed
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">// final Injector injector = Guice.createInjector(new TheModule(vertx, config()));
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">// injector.injectMembers(this);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">final Router router = Router.router(vertx);
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">router.exceptionHandler(ex -&gt; LOGGER.warn(&quot;Uncaught exception&quot;, ex));
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">regularControllers.stream().sorted().forEach(c -&gt; {
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">LOGGER.debug(&quot;Registered regular Controller \&quot;{}\&quot;&quot;, c);
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">c.accept(router);
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">});
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Completable.fromRunnable(() -&gt; warmUps.parallelStream().forEach(Runnable::run))
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">.subscribeOn(RxHelper.blockingScheduler(vertx))
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">.subscribe(
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">() -&gt; {
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">LOGGER.info(&quot;Warm up finished, try to start HTTP listening on {}:{} ...&quot;, listenIp, listenPort);
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">vertx.createHttpServer()
-</span><span style="color:#dcdcdc;">                        </span><span style="color:#dcdcdc;">.requestHandler(router::accept)
-</span><span style="color:#dcdcdc;">                        </span><span style="color:#dcdcdc;">.listen(listenPort, listenIp, e -&gt; {
-</span><span style="color:#dcdcdc;">                            </span><span style="color:#dcdcdc;">if (e.succeeded()) {
-</span><span style="color:#dcdcdc;">                                </span><span style="color:#dcdcdc;">future.complete();
-</span><span style="color:#dcdcdc;">                            </span><span style="color:#dcdcdc;">} else {
-</span><span style="color:#dcdcdc;">                                </span><span style="color:#dcdcdc;">future.fail(e.cause());
-</span><span style="color:#dcdcdc;">                            </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">                        </span><span style="color:#dcdcdc;">});
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">},
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">ex -&gt; {
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">LOGGER.error(&quot;Warmup failed, disable HTTP listening&quot;, ex);
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">future.fail(ex);
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">public class TheVerticle extends AbstractVerticle {
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">private static final Logger LOGGER = LoggerFactory.getLogger(TheVerticle.class);
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@Inject
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@Named(Constants.KEY_HTTP_LISTEN_HOST)
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">private String listenIp;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@Inject
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@Named(Constants.KEY_HTTP_LISTEN_PORT)
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">private Integer listenPort = 8001;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@Inject
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@RegularRouter
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">private Set&lt;Controller&gt; regularControllers;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@Inject
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">private Set&lt;Runnable&gt; warmUps;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@Override
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">public void start(final Future&lt;Void&gt; future) throws Exception {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">// Not needed
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">// final Injector injector = Guice.createInjector(new TheModule(vertx, config()));
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">// injector.injectMembers(this);
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">final Router router = Router.router(vertx);
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">router.exceptionHandler(ex -&gt; LOGGER.warn(&quot;Uncaught exception&quot;, ex));
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">regularControllers.stream().sorted().forEach(c -&gt; {
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">LOGGER.debug(&quot;Registered regular Controller \&quot;{}\&quot;&quot;, c);
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">c.accept(router);
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">});
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">Completable.fromRunnable(() -&gt; warmUps.parallelStream().forEach(Runnable::run))
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">.subscribeOn(RxHelper.blockingScheduler(vertx))
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">.subscribe(
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">() -&gt; {
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">LOGGER.info(&quot;Warm up finished, try to start HTTP listening on {}:{} ...&quot;, listenIp, listenPort);
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">vertx.createHttpServer()
+</span><span style="color:#fdf4c1aa;">                        </span><span style="color:#fdf4c1aa;">.requestHandler(router::accept)
+</span><span style="color:#fdf4c1aa;">                        </span><span style="color:#fdf4c1aa;">.listen(listenPort, listenIp, e -&gt; {
+</span><span style="color:#fdf4c1aa;">                            </span><span style="color:#fdf4c1aa;">if (e.succeeded()) {
+</span><span style="color:#fdf4c1aa;">                                </span><span style="color:#fdf4c1aa;">future.complete();
+</span><span style="color:#fdf4c1aa;">                            </span><span style="color:#fdf4c1aa;">} else {
+</span><span style="color:#fdf4c1aa;">                                </span><span style="color:#fdf4c1aa;">future.fail(e.cause());
+</span><span style="color:#fdf4c1aa;">                            </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">                        </span><span style="color:#fdf4c1aa;">});
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">},
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">ex -&gt; {
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">LOGGER.error(&quot;Warmup failed, disable HTTP listening&quot;, ex);
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">future.fail(ex);
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">);
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>提供服务中所需的依赖：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">class </span><span style="color:#dcdcdc;">TheModule </span><span style="color:#569cd6;">extends </span><span style="color:#4ec9b0;">AbstractModule </span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Override
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">protected void </span><span style="color:#dcdcdc;">configure() {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">install(</span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">RestModule());
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">install(</span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">AuthModule());
-</span><span style="color:#dcdcdc;">        </span><span style="color:#608b4e;">// And more ...
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">bind(MyService.class).to(MyServiceImpl.class);
-</span><span style="color:#dcdcdc;">        </span><span style="color:#608b4e;">// And more ...
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Provides
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Singleton
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">OtherService providesOtherService(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">MyService s) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return new </span><span style="color:#dcdcdc;">OtherServiceImpl(s);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">class </span><span style="color:#8ec07c;">TheModule </span><span style="color:#fa5c4b;">extends </span><span style="color:#8ec07c;">AbstractModule </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">protected void </span><span style="color:#8ec07c;">configure</span><span style="color:#fdf4c1aa;">() {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">install(</span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">RestModule</span><span style="color:#fdf4c1;">())</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">install(</span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">AuthModule</span><span style="color:#fdf4c1;">())</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="font-style:italic;color:#928374;">// And more ...
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">bind(</span><span style="color:#8ec07c;">MyService</span><span style="color:#fdf4c1;">.class)</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">to(</span><span style="color:#8ec07c;">MyServiceImpl</span><span style="color:#fdf4c1;">.class)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="font-style:italic;color:#928374;">// And more ...
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Provides
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Singleton
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">OtherService providesOtherService</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">MyService </span><span style="color:#fdf4c1;">s</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return new </span><span style="color:#8ec07c;">OtherServiceImpl</span><span style="color:#fdf4c1aa;">(s);
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>TheVerticle 和 TheModule 的结合代码由 <a href="https://github.com/ef-labs/vertx-guice" title="Google Guice">Vert.x Guice Extension</a> 提供，使用者只需要修改 Verticle 的部署代码为：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">Vertx.vertx().deployVerticle(
-</span><span style="color:#dcdcdc;">    </span><span style="color:#d69d85;">&quot;java-guice:&quot; </span><span style="color:#dcdcdc;">+ TheVerticle.class.getName(),
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">DeploymentOptions()
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">.setConfig(</span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">JsonObject().put(</span><span style="color:#d69d85;">&quot;guice_binder&quot;</span><span style="color:#dcdcdc;">, TheModule.class.getName()))
-</span><span style="color:#dcdcdc;">);
+<pre style="background-color:#282828;">
+<span style="color:#8ec07c;">Vertx</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">vertx()</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">deployVerticle(
+</span><span style="color:#fdf4c1;">    </span><span style="color:#b8bb26;">&quot;java-guice:&quot; </span><span style="color:#fe8019;">+ </span><span style="color:#8ec07c;">TheVerticle</span><span style="color:#fdf4c1;">.class.getName(),
+</span><span style="color:#fdf4c1;">    </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">DeploymentOptions</span><span style="color:#fdf4c1;">()
+</span><span style="color:#fdf4c1;">    </span><span style="color:#fdf4c1;">.setConfig(</span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">JsonObject</span><span style="color:#fdf4c1;">().put(</span><span style="color:#b8bb26;">&quot;guice_binder&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#8ec07c;">TheModule</span><span style="color:#fdf4c1;">.class.getName()))
+</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
 </span></pre>
 <p>作为对比，之前的部署代码为：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">Vertx.vertx().deployVerticle(TheVerticle.class.getName());
+<pre style="background-color:#282828;">
+<span style="color:#8ec07c;">Vertx</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">vertx()</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">deployVerticle(</span><span style="color:#8ec07c;">TheVerticle</span><span style="color:#fdf4c1;">.class.getName())</span><span style="color:#fdf4c1aa;">;
 </span></pre>
 <p>变化之处有两点：</p>
 <ol>
@@ -330,102 +330,102 @@ VerticleFactory</h2>
 <h2 id="guiceverticlefactory"><a class="zola-anchor" href="#guiceverticlefactory" aria-label="Anchor link for: guiceverticlefactory">🔗</a>
 GuiceVerticleFactory</h2>
 <p>在 <a href="https://github.com/ef-labs/vertx-guice" title="Google Guice">Vert.x Guice Extension</a> 中，提供了一个 <code>io.vertx.core.spi.VerticleFactory</code> 的实现类 <code>com.englishtown.vertx.guice.GuiceVerticleFactory</code>，提供对于 &quot;java-guice:&quot; 前缀名称的创建支持。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">GuiceVerticleFactory </span><span style="color:#569cd6;">implements </span><span style="color:#4ec9b0;">VerticleFactory </span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public static final </span><span style="color:#dcdcdc;">String PREFIX = </span><span style="color:#d69d85;">&quot;java-guice&quot;</span><span style="color:#dcdcdc;">;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Override
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">String prefix() {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return </span><span style="color:#b4cea8;">PREFIX</span><span style="color:#dcdcdc;">;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Override
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">Verticle createVerticle(String verticleName, ClassLoader classLoader) </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">Exception {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">verticleName = VerticleFactory.removePrefix(verticleName);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#608b4e;">// Use the provided class loader to create an instance of GuiceVerticleLoader.  This is necessary when working with vert.x IsolatingClassLoader
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">@SuppressWarnings(</span><span style="color:#d69d85;">&quot;unchecked&quot;</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Class&lt;Verticle&gt; loader = (Class&lt;Verticle&gt;) classLoader.loadClass(GuiceVerticleLoader.class.getName());
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Constructor&lt;Verticle&gt; ctor = loader.getConstructor(String.class, ClassLoader.class, Injector.class);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(ctor == </span><span style="color:#569cd6;">null</span><span style="color:#dcdcdc;">) {
-</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">throw new </span><span style="color:#dcdcdc;">IllegalStateException(</span><span style="color:#d69d85;">&quot;Could not find GuiceVerticleLoader constructor&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> ctor.newInstance(verticleName, classLoader, getInjector());
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public class </span><span style="color:#8ec07c;">GuiceVerticleFactory </span><span style="color:#fa5c4b;">implements </span><span style="color:#8ec07c;">VerticleFactory </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public static final </span><span style="color:#8ec07c;">String PREFIX </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&quot;java-guice&quot;</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">String prefix</span><span style="color:#fdf4c1aa;">() {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return </span><span style="color:#fdf4c1;">PREFIX</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">Verticle createVerticle</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">verticleName</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">ClassLoader </span><span style="color:#fdf4c1;">classLoader</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">Exception </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">verticleName </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">VerticleFactory</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">removePrefix(verticleName)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="font-style:italic;color:#928374;">// Use the provided class loader to create an instance of GuiceVerticleLoader.  This is necessary when working with vert.x IsolatingClassLoader
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">SuppressWarnings</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;unchecked&quot;</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">Class</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Verticle</span><span style="color:#fdf4c1aa;">&gt; loader </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">Class</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Verticle</span><span style="color:#fdf4c1aa;">&gt;) classLoader.</span><span style="color:#fdf4c1;">loadClass(</span><span style="color:#8ec07c;">GuiceVerticleLoader</span><span style="color:#fdf4c1;">.class.getName())</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">Constructor</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Verticle</span><span style="color:#fdf4c1aa;">&gt; ctor </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> loader.</span><span style="color:#fdf4c1;">getConstructor(</span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1;">.class, </span><span style="color:#8ec07c;">ClassLoader</span><span style="color:#fdf4c1;">.class, </span><span style="color:#8ec07c;">Injector</span><span style="color:#fdf4c1;">.class)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">(ctor </span><span style="color:#fe8019;">== </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">throw new </span><span style="color:#8ec07c;">IllegalStateException</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;Could not find GuiceVerticleLoader constructor&quot;</span><span style="color:#fdf4c1aa;">);
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> ctor.</span><span style="color:#fdf4c1;">newInstance(verticleName, classLoader, getInjector())</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>在 GuiceVerticleFactory 的 <code>createVerticle</code> 实现中，使用了 <code>com.englishtown.vertx.guice.GuiceVertileLoader</code> 类。该类是 Verticle 的一个实现，用来辅助创建目标 Verticle 并代理目标 Verticle 的生命周期管理。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">GuiceVerticleLoader </span><span style="color:#569cd6;">extends </span><span style="color:#4ec9b0;">AbstractVerticle </span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public static final </span><span style="color:#dcdcdc;">String CONFIG_BOOTSTRAP_BINDER_NAME = </span><span style="color:#d69d85;">&quot;guice_binder&quot;</span><span style="color:#dcdcdc;">;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public static final </span><span style="color:#dcdcdc;">String BOOTSTRAP_BINDER_NAME = </span><span style="color:#d69d85;">&quot;com.englishtown.vertx.guice.BootstrapBinder&quot;</span><span style="color:#dcdcdc;">;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">Verticle realVerticle;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Override
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">init(Vertx vertx, Context context) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">super.init(vertx, context);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#608b4e;">// Create the real verticle and init
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">realVerticle = createRealVerticle();
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">realVerticle.init(vertx, context);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Override
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">start(Future&lt;Void&gt; startedResult) </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">Exception {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#608b4e;">// Start the real verticle
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">realVerticle.start(startedResult);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Override
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">stop(Future&lt;Void&gt; stopFuture) </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">Exception {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#608b4e;">// Stop the real verticle
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(realVerticle != </span><span style="color:#569cd6;">null</span><span style="color:#dcdcdc;">) {
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">realVerticle.stop(stopFuture);
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">realVerticle = </span><span style="color:#569cd6;">null</span><span style="color:#dcdcdc;">;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">Verticle createRealVerticle(Class&lt;</span><span style="color:#569cd6;">?</span><span style="color:#dcdcdc;">&gt; clazz) </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">Exception {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#608b4e;">// i.e., &quot;guice_binder&quot;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Object field = config.getValue(</span><span style="color:#b4cea8;">CONFIG_BOOTSTRAP_BINDER_NAME</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">jsonArray bootstrapNames;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(field </span><span style="color:#569cd6;">instanceof </span><span style="color:#dcdcdc;">JsonArray) {
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">bootstrapNames = (JsonArray) field;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">} </span><span style="color:#569cd6;">else </span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">            </span><span style="color:#608b4e;">// i.e., &quot;com.englishtown.vertx.guice.BootstrapBinder&quot;
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">bootstrapNames = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">JsonArray().add((field == </span><span style="color:#569cd6;">null ? </span><span style="color:#b4cea8;">BOOTSTRAP_BINDER_NAME </span><span style="color:#569cd6;">:</span><span style="color:#dcdcdc;"> field));
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">List&lt;Module&gt; bootstraps = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">ArrayList&lt;&gt;();
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">for </span><span style="color:#dcdcdc;">(</span><span style="color:#569cd6;">int</span><span style="color:#dcdcdc;"> i = </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">; i &lt; bootstrapNames.size(); i</span><span style="color:#569cd6;">++</span><span style="color:#dcdcdc;">) {
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">String bootstrapName = bootstrapNames.getString(i);
-</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">try </span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">Class bootstrapClass = classLoader.loadClass(bootstrapName);
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">Object obj = bootstrapClass.newInstance();
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">                </span><span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(obj </span><span style="color:#569cd6;">instanceof </span><span style="color:#dcdcdc;">Module) {
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">bootstraps.add((Module) obj);
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">} </span><span style="color:#569cd6;">else </span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">logger.error(</span><span style="color:#d69d85;">&quot;Class &quot; </span><span style="color:#dcdcdc;">+ bootstrapName
-</span><span style="color:#dcdcdc;">                            </span><span style="color:#dcdcdc;">+ </span><span style="color:#d69d85;">&quot; does not implement Module.&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">} </span><span style="color:#569cd6;">catch </span><span style="color:#dcdcdc;">(ClassNotFoundException e) {
-</span><span style="color:#dcdcdc;">                </span><span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(parent == </span><span style="color:#569cd6;">null</span><span style="color:#dcdcdc;">) {
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">logger.warn(</span><span style="color:#d69d85;">&quot;Guice bootstrap binder class &quot; </span><span style="color:#dcdcdc;">+ bootstrapName
-</span><span style="color:#dcdcdc;">                            </span><span style="color:#dcdcdc;">+ </span><span style="color:#d69d85;">&quot; was not found.  Are you missing injection bindings?&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Injector injector = parent == </span><span style="color:#569cd6;">null ? </span><span style="color:#dcdcdc;">Guice.createInjector(bootstraps) </span><span style="color:#569cd6;">:</span><span style="color:#dcdcdc;"> parent.createChildInjector(bootstraps);
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">(Verticle) injector.getInstance(clazz);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public class </span><span style="color:#8ec07c;">GuiceVerticleLoader </span><span style="color:#fa5c4b;">extends </span><span style="color:#8ec07c;">AbstractVerticle </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public static final </span><span style="color:#8ec07c;">String CONFIG_BOOTSTRAP_BINDER_NAME </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&quot;guice_binder&quot;</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public static final </span><span style="color:#8ec07c;">String BOOTSTRAP_BINDER_NAME </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&quot;com.englishtown.vertx.guice.BootstrapBinder&quot;</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">Verticle </span><span style="color:#fdf4c1aa;">realVerticle;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public void </span><span style="color:#8ec07c;">init</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">Vertx </span><span style="color:#fdf4c1;">vertx</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">Context </span><span style="color:#fdf4c1;">context</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">super</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">init(vertx, context)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="font-style:italic;color:#928374;">// Create the real verticle and init
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">realVerticle </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">createRealVerticle()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">realVerticle.</span><span style="color:#fdf4c1;">init(vertx, context)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public void </span><span style="color:#8ec07c;">start</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">Future</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Void</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">startedResult</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">Exception </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">        </span><span style="font-style:italic;color:#928374;">// Start the real verticle
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">realVerticle.</span><span style="color:#fdf4c1;">start(startedResult)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public void </span><span style="color:#8ec07c;">stop</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">Future</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Void</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">stopFuture</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">Exception </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">        </span><span style="font-style:italic;color:#928374;">// Stop the real verticle
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">(realVerticle </span><span style="color:#fe8019;">!= </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">realVerticle.</span><span style="color:#fdf4c1;">stop(stopFuture)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">realVerticle </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">Verticle createRealVerticle</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">Class</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fe8019;">?</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">clazz</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">Exception </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">        </span><span style="font-style:italic;color:#928374;">// i.e., &quot;guice_binder&quot;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">Object</span><span style="color:#fdf4c1aa;"> field </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> config.</span><span style="color:#fdf4c1;">getValue(CONFIG_BOOTSTRAP_BINDER_NAME)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">jsonArray bootstrapNames;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">(field </span><span style="color:#fe8019;">instanceof </span><span style="color:#8ec07c;">JsonArray</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">bootstrapNames </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">JsonArray</span><span style="color:#fdf4c1aa;">) field;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">} </span><span style="color:#fa5c4b;">else </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">            </span><span style="font-style:italic;color:#928374;">// i.e., &quot;com.englishtown.vertx.guice.BootstrapBinder&quot;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">bootstrapNames </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">JsonArray</span><span style="color:#fdf4c1aa;">().</span><span style="color:#fdf4c1;">add((field </span><span style="color:#fe8019;">== </span><span style="color:#d3869b;">null </span><span style="color:#fe8019;">? </span><span style="color:#fdf4c1;">BOOTSTRAP_BINDER_NAME </span><span style="color:#fe8019;">:</span><span style="color:#fdf4c1;"> field))</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">List</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Module</span><span style="color:#fdf4c1aa;">&gt; bootstraps </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">ArrayList</span><span style="color:#fdf4c1aa;">&lt;&gt;();
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">for </span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">int</span><span style="color:#fdf4c1aa;"> i </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">0</span><span style="color:#fdf4c1aa;">; i </span><span style="color:#fe8019;">&lt;</span><span style="color:#fdf4c1aa;"> bootstrapNames.</span><span style="color:#fdf4c1;">size()</span><span style="color:#fdf4c1aa;">; i</span><span style="color:#fe8019;">++</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;"> bootstrapName </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> bootstrapNames.</span><span style="color:#fdf4c1;">getString(i)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">try </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#8ec07c;">Class</span><span style="color:#fdf4c1aa;"> bootstrapClass </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> classLoader.</span><span style="color:#fdf4c1;">loadClass(bootstrapName)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#8ec07c;">Object</span><span style="color:#fdf4c1aa;"> obj </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> bootstrapClass.</span><span style="color:#fdf4c1;">newInstance()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">(obj </span><span style="color:#fe8019;">instanceof </span><span style="color:#8ec07c;">Module</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">bootstraps.</span><span style="color:#fdf4c1;">add((</span><span style="color:#8ec07c;">Module</span><span style="color:#fdf4c1;">) obj)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">} </span><span style="color:#fa5c4b;">else </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">logger.</span><span style="color:#fdf4c1;">error(</span><span style="color:#b8bb26;">&quot;Class &quot; </span><span style="color:#fe8019;">+</span><span style="color:#fdf4c1;"> bootstrapName
+</span><span style="color:#fdf4c1;">                            </span><span style="color:#fe8019;">+ </span><span style="color:#b8bb26;">&quot; does not implement Module.&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">} </span><span style="color:#fa5c4b;">catch </span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">ClassNotFoundException </span><span style="color:#fdf4c1;">e</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">(parent </span><span style="color:#fe8019;">== </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">logger.</span><span style="color:#fdf4c1;">warn(</span><span style="color:#b8bb26;">&quot;Guice bootstrap binder class &quot; </span><span style="color:#fe8019;">+</span><span style="color:#fdf4c1;"> bootstrapName
+</span><span style="color:#fdf4c1;">                            </span><span style="color:#fe8019;">+ </span><span style="color:#b8bb26;">&quot; was not found.  Are you missing injection bindings?&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">Injector</span><span style="color:#fdf4c1aa;"> injector </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> parent </span><span style="color:#fe8019;">== </span><span style="color:#d3869b;">null </span><span style="color:#fe8019;">? </span><span style="color:#8ec07c;">Guice</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">createInjector(bootstraps) </span><span style="color:#fe8019;">:</span><span style="color:#fdf4c1aa;"> parent.</span><span style="color:#fdf4c1;">createChildInjector(bootstraps)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return </span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">Verticle</span><span style="color:#fdf4c1aa;">) injector.</span><span style="color:#fdf4c1;">getInstance(clazz)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>在 Verticle 的创建逻辑中，会首先尝试获取键 &quot;guice_binder&quot; 对应的配置项值，该配置项的值可以是全类名字符串或者全类名字符串数组；如果不配置的话，则会默认使用 &quot;com.englishtown.vertx.guice.BootstrapBinder&quot; 作为配置项的值。之后使用该值使用反射创建类实例；再然后使用该实例创建注入器；再然后从注入器中请求目标类名的 Verticle 注入结果实例并返回。</p>
 <p>所以只需要把所有的依赖以及指定名称的 Verticle 实现的提供者（<code>com.google.inject.Module</code> 实现类）的全类名作为值，以 &quot;guice_binder&quot; 为键放入到部署参数配置里面，就可以自动生成一个注入器了。或者，在不提供该键值对的情况下，将依赖提供者实现命名为 &quot;com.englishtown.vertx.guice.BootstrapBinder&quot; 也可以达到相同的效果。</p>

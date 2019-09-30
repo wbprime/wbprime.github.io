@@ -14,7 +14,7 @@
     <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;acl-note&#x2F;"/>
     <meta property="og:description" content="Note on access control list (ACL) for file system"/>
     <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
-    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;red.css">
 <link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
     <body>
         <div class="container full">
@@ -111,44 +111,44 @@ Commands</h2>
 ACL</h2>
 <h3 id="permission"><a class="zola-anchor" href="#permission" aria-label="Anchor link for: permission">🔗</a>
 Permission</h3>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">- Comma separated entry.
-</span><span style="color:#dcdcdc;">- Each entry consists of type, value and permissions, separated by colon.
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">- type is one of `u` (user), `g` (group), `o` (other), `m` (mask)
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">- value is the user name or uid for `u`, group name or gid for `g`, nothing for `o`
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">- permissions is the combination of `r` (read), `w` (write) and `e` (execute)
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">- if value is empty, then means all users/groups
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">- if no read permission is to granted, the replace `r` with `-` for read char
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">- if no write permission is to granted, the replace `w` with `-` for read char
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">- if no execute permission is to granted, the replace `x` with `-` for read char
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">- `-` in value can be ommited, if at least one of `r`, `w` and `x` is
-</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">present: `r-x` =&gt; `rx`
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">- at least one `-` in value must be present if none of `r`, `w` and `x`
-</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">is present: `---` =&gt; `-`
-</span><span style="color:#dcdcdc;">- e.g., `u:wb:rwx`, `u::rwx`
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">- Comma separated entry.
+</span><span style="color:#fdf4c1aa;">- Each entry consists of type, value and permissions, separated by colon.
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">- type is one of `u` (user), `g` (group), `o` (other), `m` (mask)
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">- value is the user name or uid for `u`, group name or gid for `g`, nothing for `o`
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">- permissions is the combination of `r` (read), `w` (write) and `e` (execute)
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">- if value is empty, then means all users/groups
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">- if no read permission is to granted, the replace `r` with `-` for read char
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">- if no write permission is to granted, the replace `w` with `-` for read char
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">- if no execute permission is to granted, the replace `x` with `-` for read char
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">- `-` in value can be ommited, if at least one of `r`, `w` and `x` is
+</span><span style="color:#fdf4c1aa;">      </span><span style="color:#fdf4c1aa;">present: `r-x` =&gt; `rx`
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">- at least one `-` in value must be present if none of `r`, `w` and `x`
+</span><span style="color:#fdf4c1aa;">      </span><span style="color:#fdf4c1aa;">is present: `---` =&gt; `-`
+</span><span style="color:#fdf4c1aa;">- e.g., `u:wb:rwx`, `u::rwx`
 </span></pre><h3 id="file-directory-acl"><a class="zola-anchor" href="#file-directory-acl" aria-label="Anchor link for: file-directory-acl">🔗</a>
 File & Directory ACL</h3>
 <h4 id="user-acl"><a class="zola-anchor" href="#user-acl" aria-label="Anchor link for: user-acl">🔗</a>
 User ACL</h4>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">- For all users: `u::rwx`
-</span><span style="color:#dcdcdc;">- For user with username &#39;aaa&#39;: `u:aaa:rwx`
-</span><span style="color:#dcdcdc;">- For user with uid &#39;2000&#39;: `u:2000:rwx`
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">- For all users: `u::rwx`
+</span><span style="color:#fdf4c1aa;">- For user with username &#39;aaa&#39;: `u:aaa:rwx`
+</span><span style="color:#fdf4c1aa;">- For user with uid &#39;2000&#39;: `u:2000:rwx`
 </span></pre><h4 id="group-acl"><a class="zola-anchor" href="#group-acl" aria-label="Anchor link for: group-acl">🔗</a>
 Group ACL</h4>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">- For all groups: `g::rwx`
-</span><span style="color:#dcdcdc;">- For group with group name &#39;aaa&#39;: `g:aaa:rwx`
-</span><span style="color:#dcdcdc;">- For group with group id &#39;2000&#39;: `g:2000:rwx`
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">- For all groups: `g::rwx`
+</span><span style="color:#fdf4c1aa;">- For group with group name &#39;aaa&#39;: `g:aaa:rwx`
+</span><span style="color:#fdf4c1aa;">- For group with group id &#39;2000&#39;: `g:2000:rwx`
 </span></pre><h4 id="other-acl"><a class="zola-anchor" href="#other-acl" aria-label="Anchor link for: other-acl">🔗</a>
 Other ACL</h4>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">- For other users: `o::rwx`
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">- For other users: `o::rwx`
 </span></pre><h4 id="mask-acl"><a class="zola-anchor" href="#mask-acl" aria-label="Anchor link for: mask-acl">🔗</a>
 Mask acl</h4>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">- The effective acl is the intersection of given acl and mask acl
-</span><span style="color:#dcdcdc;">- e.g., if `m::r-x` and `u:wb:rwx`, the the effective acl for wb is `u:wb:r-x`
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">- The effective acl is the intersection of given acl and mask acl
+</span><span style="color:#fdf4c1aa;">- e.g., if `m::r-x` and `u:wb:rwx`, the the effective acl for wb is `u:wb:r-x`
 </span></pre><h3 id="default-acl"><a class="zola-anchor" href="#default-acl" aria-label="Anchor link for: default-acl">🔗</a>
 Default acl</h3>
 <p>For directory, newly create files can inherited from the parent directory if
@@ -157,32 +157,32 @@ default acl set for the parent directory.</p>
 Set ACL - setfacl</h2>
 <h3 id="add-acl-entry"><a class="zola-anchor" href="#add-acl-entry" aria-label="Anchor link for: add-acl-entry">🔗</a>
 Add ACL Entry</h3>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">setfacl -m &#39;u:wb:rwx,g:wb:r-x&#39; a.file
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">setfacl -m &#39;u:wb:rwx,g:wb:r-x&#39; a.file
 </span></pre><h3 id="remove-acl-entry"><a class="zola-anchor" href="#remove-acl-entry" aria-label="Anchor link for: remove-acl-entry">🔗</a>
 Remove ACL Entry</h3>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">setfacl -x &#39;u:wb:rwx,g:wb:r-x&#39; a.file
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">setfacl -x &#39;u:wb:rwx,g:wb:r-x&#39; a.file
 </span></pre><h3 id="override-existing-acl-entries"><a class="zola-anchor" href="#override-existing-acl-entries" aria-label="Anchor link for: override-existing-acl-entries">🔗</a>
 Override Existing ACL Entries</h3>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">setfacl --set &#39;u:wb:rwx,g:wb:r-x:o::r--&#39; a.file
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">setfacl --set &#39;u:wb:rwx,g:wb:r-x:o::r--&#39; a.file
 </span></pre><h3 id="clear-acl-entries"><a class="zola-anchor" href="#clear-acl-entries" aria-label="Anchor link for: clear-acl-entries">🔗</a>
 Clear ACL Entries</h3>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">setfacl -b a.file
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">setfacl -b a.file
 </span></pre><h3 id="apply-acl-recursively"><a class="zola-anchor" href="#apply-acl-recursively" aria-label="Anchor link for: apply-acl-recursively">🔗</a>
 Apply ACL Recursively</h3>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">setfacl -R -m &#39;u:wb:rwx,g:wb:r-x&#39; a.file
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">setfacl -R -m &#39;u:wb:rwx,g:wb:r-x&#39; a.file
 </span></pre><h3 id="change-default-acl"><a class="zola-anchor" href="#change-default-acl" aria-label="Anchor link for: change-default-acl">🔗</a>
 Change Default ACL</h3>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">setfacl -d -m &#39;u:wb:rwx,g:wb:r-x&#39; a.file
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">setfacl -d -m &#39;u:wb:rwx,g:wb:r-x&#39; a.file
 </span></pre><h2 id="get-acl-getfacl"><a class="zola-anchor" href="#get-acl-getfacl" aria-label="Anchor link for: get-acl-getfacl">🔗</a>
 Get ACL - getfacl</h2>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">getfacl a.file
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">getfacl a.file
 </span></pre>
         </div>
         

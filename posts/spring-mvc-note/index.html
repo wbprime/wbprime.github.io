@@ -14,7 +14,7 @@
     <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;spring-mvc-note&#x2F;"/>
     <meta property="og:description" content="Spring Mvc: ApplicationContext within&#x2F;without Servlet Container"/>
     <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
-    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;red.css">
 <link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
     <body>
         <div class="container full">
@@ -98,10 +98,10 @@
             <h1 id="scenario-1"><a class="zola-anchor" href="#scenario-1" aria-label="Anchor link for: scenario-1">🔗</a>
 Scenario 1</h1>
 <p>In client application (application is not web application, e.g may be swing app)</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">private static ApplicationContext context = new  ClassPathXmlApplicationContext(&quot;test-client.xml&quot;);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">context.getBean(name);
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">private static ApplicationContext context = new  ClassPathXmlApplicationContext(&quot;test-client.xml&quot;);
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">context.getBean(name);
 </span></pre>
 <p>No need of web.xml. ApplicationContext as container for getting bean service. No need for web server container. In test-client.xml there can be Simple bean with no remoting, bean with remoting.</p>
 <p>Conclusion: In Scenario 1 applicationContext and DispatcherServlet are not related.</p>
@@ -109,18 +109,18 @@ Scenario 1</h1>
 Scenario 2</h1>
 <p>In a server application (application deployed in server e.g Tomcat). Accessed service via remoting from client program (e.g swing app)</p>
 <p>Define listener in web.xml</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">&lt;listener&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;
-</span><span style="color:#dcdcdc;">&lt;/listener&gt;
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">&lt;listener&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">&lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;
+</span><span style="color:#fdf4c1aa;">&lt;/listener&gt;
 </span></pre>
 <p>At server startup ContextLoaderListener instantiates beans defined in applicationcontext.xml.</p>
 <p>Assuming you have defined the following in applicationcontext.xml:</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">&lt;import resource=&quot;test1.xml&quot; /&gt;
-</span><span style="color:#dcdcdc;">&lt;import resource=&quot;test2.xml&quot; /&gt;
-</span><span style="color:#dcdcdc;">&lt;import resource=&quot;test3.xml&quot; /&gt;
-</span><span style="color:#dcdcdc;">&lt;import resource=&quot;test4.xml&quot; /&gt;
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">&lt;import resource=&quot;test1.xml&quot; /&gt;
+</span><span style="color:#fdf4c1aa;">&lt;import resource=&quot;test2.xml&quot; /&gt;
+</span><span style="color:#fdf4c1aa;">&lt;import resource=&quot;test3.xml&quot; /&gt;
+</span><span style="color:#fdf4c1aa;">&lt;import resource=&quot;test4.xml&quot; /&gt;
 </span></pre>
 <p>The beans are instantiated from all four configuration files test1.xml, test2.xml, test3.xml, test4.xml.</p>
 <p>Conclusion: In Scenario 2 applicationContext and DispatcherServlet are not related.</p>
@@ -128,16 +128,16 @@ Scenario 2</h1>
 Scenario 3</h1>
 <p>In a web application with spring MVC.</p>
 <p>In web.xml define:</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">&lt;servlet&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&lt;servlet-name&gt;springweb&lt;/servlet-name&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
-</span><span style="color:#dcdcdc;">&lt;/servlet&gt;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">&lt;servlet-mapping&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&lt;servlet-name&gt;springweb&lt;/servlet-name&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&lt;url-pattern&gt;*.action&lt;/url-pattern&gt;
-</span><span style="color:#dcdcdc;">&lt;/servlet-mapping&gt;
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">&lt;servlet&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">&lt;servlet-name&gt;springweb&lt;/servlet-name&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">&lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+</span><span style="color:#fdf4c1aa;">&lt;/servlet&gt;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">&lt;servlet-mapping&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">&lt;servlet-name&gt;springweb&lt;/servlet-name&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">&lt;url-pattern&gt;*.action&lt;/url-pattern&gt;
+</span><span style="color:#fdf4c1aa;">&lt;/servlet-mapping&gt;
 </span></pre>
 <p>When tomcat starts, beans defined in springweb-servlet.xml are instantiated. DispatcherServlet extends FrameworkServlet. In FrameworkServlet bean instantiation takes place for springweb . In our case springweb is FrameworkServlet.</p>
 <p>Conclusion: In Scenario 3 applicationContext and DispatcherServlet are not related.</p>
@@ -145,28 +145,28 @@ Scenario 3</h1>
 Scenario 4</h1>
 <p>In web application with spring MVC. springweb-servlet.xml for servlet and applicationcontext.xml for accessing the business service within the server program or for accessing DB service in another server program.</p>
 <p>In web.xml the following are defined:</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">&lt;listener&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;
-</span><span style="color:#dcdcdc;">&lt;/listener&gt;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">&lt;servlet&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&lt;servlet-name&gt;springweb&lt;/servlet-name&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">&lt;/servlet&gt;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">&lt;servlet-mapping&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&lt;servlet-name&gt;springweb&lt;/servlet-name&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&lt;url-pattern&gt;*.action&lt;/url-pattern&gt;
-</span><span style="color:#dcdcdc;">&lt;/servlet-mapping&gt;
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">&lt;listener&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">&lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;
+</span><span style="color:#fdf4c1aa;">&lt;/listener&gt;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">&lt;servlet&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">&lt;servlet-name&gt;springweb&lt;/servlet-name&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">&lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">&lt;/servlet&gt;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">&lt;servlet-mapping&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">&lt;servlet-name&gt;springweb&lt;/servlet-name&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">&lt;url-pattern&gt;*.action&lt;/url-pattern&gt;
+</span><span style="color:#fdf4c1aa;">&lt;/servlet-mapping&gt;
 </span></pre>
 <p>At server startup, ContextLoaderListener instantiates beans defined in applicationcontext.xml; assuming you have declared herein:</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">&lt;import resource=&quot;test1.xml&quot; /&gt;
-</span><span style="color:#dcdcdc;">&lt;import resource=&quot;test2.xml&quot; /&gt;
-</span><span style="color:#dcdcdc;">&lt;import resource=&quot;test3.xml&quot; /&gt;
-</span><span style="color:#dcdcdc;">&lt;import resource=&quot;test4.xml&quot; /&gt;
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">&lt;import resource=&quot;test1.xml&quot; /&gt;
+</span><span style="color:#fdf4c1aa;">&lt;import resource=&quot;test2.xml&quot; /&gt;
+</span><span style="color:#fdf4c1aa;">&lt;import resource=&quot;test3.xml&quot; /&gt;
+</span><span style="color:#fdf4c1aa;">&lt;import resource=&quot;test4.xml&quot; /&gt;
 </span></pre>
 <p>The beans are all instantiated from all four test1.xml, test2.xml, test3.xml, test4.xml. After the completion of bean instantiation defined in applicationcontext.xml then beans defined in springweb-servlet.xml are instantiated.</p>
 <p>So instantiation order is root is application context, then FrameworkServlet.</p>

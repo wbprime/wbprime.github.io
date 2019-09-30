@@ -14,7 +14,7 @@
     <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;mybatis-note&#x2F;"/>
     <meta property="og:description" content="Note on mybatis"/>
     <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
-    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;red.css">
 <link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
     <body>
         <div class="container full">
@@ -95,19 +95,19 @@
         <div class="post-content">
             <h1 id="select"><a class="zola-anchor" href="#select" aria-label="Anchor link for: select">🔗</a>
 "select"</h1>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">&lt;select
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">id=&quot;selectPerson&quot;
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">parameterType=&quot;int&quot;
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">parameterMap=&quot;deprecated&quot;
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">resultType=&quot;hashmap&quot;
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">resultMap=&quot;personResultMap&quot;
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">flushCache=&quot;false&quot;
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">useCache=&quot;true&quot;
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">timeout=&quot;10000&quot;
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">fetchSize=&quot;256&quot;
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">statementType=&quot;PREPARED&quot;
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">resultSetType=&quot;FORWARD_ONLY&quot;&gt;
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">&lt;select
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">id=&quot;selectPerson&quot;
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">parameterType=&quot;int&quot;
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">parameterMap=&quot;deprecated&quot;
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">resultType=&quot;hashmap&quot;
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">resultMap=&quot;personResultMap&quot;
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">flushCache=&quot;false&quot;
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">useCache=&quot;true&quot;
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">timeout=&quot;10000&quot;
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">fetchSize=&quot;256&quot;
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">statementType=&quot;PREPARED&quot;
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">resultSetType=&quot;FORWARD_ONLY&quot;&gt;
 </span></pre><table><thead><tr><th> 属性          </th><th> 描述                                                                                                                                                                                                                                                                                          </th></tr></thead><tbody>
 <tr><td> id            </td><td> 在命名空间中唯一的标识符，可以被用来引用这条语句。                                                                                                                                                                                                                                            </td></tr>
 <tr><td> parameterType </td><td> 将会传入这条语句的参数类的完全限定名或别名。这个属性是可选的，因为 MyBatis 可以通过 TypeHandler 推断出具体传入语句的参数，默认值为 unset。                                                                                                                                              </td></tr>
@@ -126,12 +126,12 @@
 </tbody></table>
 <h1 id="selectkey"><a class="zola-anchor" href="#selectkey" aria-label="Anchor link for: selectkey">🔗</a>
 "selectKey"</h1>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">&lt;selectKey
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">keyProperty=&quot;id&quot;
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">resultType=&quot;int&quot;
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">order=&quot;BEFORE&quot;
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">statementType=&quot;PREPARED&quot;&gt;
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">&lt;selectKey
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">keyProperty=&quot;id&quot;
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">resultType=&quot;int&quot;
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">order=&quot;BEFORE&quot;
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">statementType=&quot;PREPARED&quot;&gt;
 </span></pre><table><thead><tr><th> 属性          </th><th> 描述                                                                                                                                                                                                                                                         </th></tr></thead><tbody>
 <tr><td> keyProperty   </td><td> selectKey 语句结果应该被设置的目标属性。如果希望得到多个生成的列，也可以是逗号分隔的属性名称列表。                                                                                                                                                           </td></tr>
 <tr><td> keyColumn     </td><td> 匹配属性的返回结果集中的列名称。如果希望得到多个生成的列，也可以是逗号分隔的属性名称列表。                                                                                                                                                                   </td></tr>
@@ -141,28 +141,28 @@
 </tbody></table>
 <h1 id="insert"><a class="zola-anchor" href="#insert" aria-label="Anchor link for: insert">🔗</a>
 "insert"</h1>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">&lt;insert id=&quot;insertAuthor&quot;&gt;
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">&lt;selectKey keyProperty=&quot;id&quot; resultType=&quot;int&quot; order=&quot;BEFORE&quot;&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">select CAST(RANDOM()*1000000 as INTEGER) a from SYSIBM.SYSDUMMY1
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">&lt;/selectKey&gt;
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">insert into Author
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">(id, username, password, email,bio, favourite_section)
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">values
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">(#{id}, #{username}, #{password}, #{email}, #{bio}, #{favouriteSection,jdbcType=VARCHAR})
-</span><span style="color:#dcdcdc;">&lt;/insert&gt;
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">&lt;insert id=&quot;insertAuthor&quot;&gt;
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">&lt;selectKey keyProperty=&quot;id&quot; resultType=&quot;int&quot; order=&quot;BEFORE&quot;&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">select CAST(RANDOM()*1000000 as INTEGER) a from SYSIBM.SYSDUMMY1
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">&lt;/selectKey&gt;
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">insert into Author
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">(id, username, password, email,bio, favourite_section)
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">values
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">(#{id}, #{username}, #{password}, #{email}, #{bio}, #{favouriteSection,jdbcType=VARCHAR})
+</span><span style="color:#fdf4c1aa;">&lt;/insert&gt;
 </span></pre>
 <p>Or</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">&lt;insert
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">id=&quot;insertAuthor&quot;
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">parameterType=&quot;domain.blog.Author&quot;
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">flushCache=&quot;true&quot;
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">statementType=&quot;PREPARED&quot;
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">keyProperty=&quot;&quot;
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">keyColumn=&quot;&quot;
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">useGeneratedKeys=&quot;&quot;
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">timeout=&quot;20&quot;&gt;
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">&lt;insert
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">id=&quot;insertAuthor&quot;
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">parameterType=&quot;domain.blog.Author&quot;
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">flushCache=&quot;true&quot;
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">statementType=&quot;PREPARED&quot;
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">keyProperty=&quot;&quot;
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">keyColumn=&quot;&quot;
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">useGeneratedKeys=&quot;&quot;
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">timeout=&quot;20&quot;&gt;
 </span></pre><table><thead><tr><th> 属性             </th><th> 描述                                                                                                                                                                                                                                                                                                    </th></tr></thead><tbody>
 <tr><td> id               </td><td> 命名空间中的唯一标识符，可被用来代表这条语句。                                                                                                                                                                                                                                                          </td></tr>
 <tr><td> parameterType    </td><td> 将要传入语句的参数的完全限定类名或别名。这个属性是可选的，因为 MyBatis 可以通过 TypeHandler 推断出具体传入语句的参数，默认值为 unset。                                                                                                                                                        </td></tr>
@@ -177,13 +177,13 @@
 </tbody></table>
 <h1 id="update"><a class="zola-anchor" href="#update" aria-label="Anchor link for: update">🔗</a>
 "update"</h1>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">&lt;update
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">id=&quot;updateAuthor&quot;
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">parameterType=&quot;domain.blog.Author&quot;
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">flushCache=&quot;true&quot;
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">statementType=&quot;PREPARED&quot;
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">timeout=&quot;20&quot;&gt;
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">&lt;update
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">id=&quot;updateAuthor&quot;
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">parameterType=&quot;domain.blog.Author&quot;
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">flushCache=&quot;true&quot;
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">statementType=&quot;PREPARED&quot;
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">timeout=&quot;20&quot;&gt;
 </span></pre><table><thead><tr><th> 属性             </th><th> 描述                                                                                                                                                                                                                                                                                                    </th></tr></thead><tbody>
 <tr><td> id               </td><td> 命名空间中的唯一标识符，可被用来代表这条语句。                                                                                                                                                                                                                                                          </td></tr>
 <tr><td> parameterType    </td><td> 将要传入语句的参数的完全限定类名或别名。这个属性是可选的，因为 MyBatis 可以通过 TypeHandler 推断出具体传入语句的参数，默认值为 unset。                                                                                                                                                        </td></tr>
@@ -198,13 +198,13 @@
 </tbody></table>
 <h1 id="delete"><a class="zola-anchor" href="#delete" aria-label="Anchor link for: delete">🔗</a>
 "delete"</h1>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">&lt;delete
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">id=&quot;deleteAuthor&quot;
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">parameterType=&quot;domain.blog.Author&quot;
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">flushCache=&quot;true&quot;
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">statementType=&quot;PREPARED&quot;
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">timeout=&quot;20&quot;&gt;
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">&lt;delete
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">id=&quot;deleteAuthor&quot;
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">parameterType=&quot;domain.blog.Author&quot;
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">flushCache=&quot;true&quot;
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">statementType=&quot;PREPARED&quot;
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">timeout=&quot;20&quot;&gt;
 </span></pre><table><thead><tr><th> 属性             </th><th> 描述                                                                                                                                                                                                                                                                                                    </th></tr></thead><tbody>
 <tr><td> id               </td><td> 命名空间中的唯一标识符，可被用来代表这条语句。                                                                                                                                                                                                                                                          </td></tr>
 <tr><td> parameterType    </td><td> 将要传入语句的参数的完全限定类名或别名。这个属性是可选的，因为 MyBatis 可以通过 TypeHandler 推断出具体传入语句的参数，默认值为 unset。                                                                                                                                                        </td></tr>

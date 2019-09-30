@@ -14,7 +14,7 @@
     <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-17-spring-cloud-gateway-load-testing-using-wrk&#x2F;"/>
     <meta property="og:description" content="&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;spring.io&#x2F;projects&#x2F;spring-cloud-gateway&quot; title=&quot;Spring Cloud Gateway&quot;&gt;Spring Cloud Gateway&lt;&#x2F;a&gt; 是 &lt;a href=&quot;htt…"/>
     <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
-    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;red.css">
 <link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
     <body>
         <div class="container full">
@@ -166,8 +166,8 @@ Round0</h1>
 <li>2900</li>
 </ul>
 <p>对所有组进行压测。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">wrk -t 16 -d 60s --latency -c ${each_c} ${endpoint}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1;">wrk -t 16 -d 60s --latency -c ${each_c} ${endpoint}
 </span></pre>
 <p>得到结论：</p>
 <ul>
@@ -196,8 +196,8 @@ Round1</h1>
 <li>30000</li>
 </ul>
 <p>对所有组进行压测。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">wrk -t 16 -d 60s --latency -c ${each_c} -R ${each_r} ${endpoint}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1;">wrk -t 16 -d 60s --latency -c ${each_c} -R ${each_r} ${endpoint}
 </span></pre>
 <p>得到结论：</p>
 <ul>
@@ -226,8 +226,8 @@ Round2</h1>
 <li>2600</li>
 </ul>
 <p>对 <code>api800</code> 组进行压测。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">wrk -t 16 -d 60s --latency -c ${each_c} -R ${each_r} ${endpoint}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1;">wrk -t 16 -d 60s --latency -c ${each_c} -R ${each_r} ${endpoint}
 </span></pre>
 <p>得到结论：</p>
 <ul>
@@ -261,8 +261,8 @@ Round3</h1>
 <li>13000</li>
 </ul>
 <p>对 <code>api0</code> 组进行压测。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">wrk -t 16 -d 60s --latency -c ${each_c} -R ${each_r} ${endpoint}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1;">wrk -t 16 -d 60s --latency -c ${each_c} -R ${each_r} ${endpoint}
 </span></pre>
 <p>得到结论：</p>
 <ul>
@@ -277,8 +277,8 @@ Round4</h1>
 <li>11100</li>
 </ul>
 <p>对 <code>api0</code> 组进行重复的 3 次压测。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">wrk -t 16 -d 60s --latency -c 300 -R ${each_r} ${endpoint}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1;">wrk -t 16 -d 60s --latency -c 300 -R ${each_r} ${endpoint}
 </span></pre>
 <p>得到请求延时结果如下：</p>
 <table><thead><tr><th> KEY       </th><th> QPS      </th><th> TP90    </th><th> TP99     </th><th> TP999    </th><th> MEAN    </th><th> STDEV   </th></tr></thead><tbody>
@@ -301,8 +301,8 @@ Round5</h1>
 <li>2100</li>
 </ul>
 <p>对 <code>api800</code> 组进行重复的 3 次压测。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">wrk -t 16 -d 60s --latency -c 300 -R ${each_r} ${endpoint}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1;">wrk -t 16 -d 60s --latency -c 300 -R ${each_r} ${endpoint}
 </span></pre>
 <p>得到请求延时结果如下：</p>
 <table><thead><tr><th> KEY      </th><th> QPS     </th><th> TP90    </th><th> TP99    </th><th> TP999    </th><th> MEAN     </th><th> STDEV    </th></tr></thead><tbody>
@@ -325,8 +325,8 @@ Round X</h1>
 <li>10000</li>
 </ul>
 <p>对所有组进行压测。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">wrk -t 16 -d 60s --latency -c 100 -R ${each_r} ${endpoint}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1;">wrk -t 16 -d 60s --latency -c 100 -R ${each_r} ${endpoint}
 </span></pre><table><thead><tr><th> KEY          </th><th> QPS     </th><th> TP90    </th><th> TP99    </th><th> TP999   </th><th> MEAN   </th><th> STDEV    </th></tr></thead><tbody>
 <tr><td> 100.direct   </td><td> 100.64  </td><td> 1.54ms  </td><td> 1.91ms  </td><td> 2.17ms  </td><td> 0.97ms </td><td> 410.39us </td></tr>
 <tr><td> 100.api0     </td><td> 100.74  </td><td> 2.32ms  </td><td> 31.85ms </td><td> 51.97ms </td><td> 2.20ms </td><td> 4.35ms   </td></tr>

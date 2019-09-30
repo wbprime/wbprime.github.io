@@ -14,7 +14,7 @@
     <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2017-06-01-awk-tips-md5&#x2F;"/>
     <meta property="og:description" content="Awk Tips: md5"/>
     <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
-    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;red.css">
 <link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
     <body>
         <div class="container full">
@@ -103,49 +103,49 @@ Awk 之 md5</h1>
 用例</h2>
 <p>有这么一个需求：文本文件中每一行是用户名和密码，现在需要对文件进行变换，输出用户名和对应的密码的md5值。</p>
 <p>原始文件(&quot;input.txt&quot;)如下：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">user1 user1_password
-</span><span style="color:#dcdcdc;">user2 user2_password
-</span><span style="color:#dcdcdc;">user3 user3_password
-</span><span style="color:#dcdcdc;">user4 user4_password
-</span><span style="color:#dcdcdc;">user5 user5_password
-</span><span style="color:#dcdcdc;">user6 user6_password
-</span><span style="color:#dcdcdc;">user7 user7_password
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">user1 user1_password
+</span><span style="color:#fdf4c1aa;">user2 user2_password
+</span><span style="color:#fdf4c1aa;">user3 user3_password
+</span><span style="color:#fdf4c1aa;">user4 user4_password
+</span><span style="color:#fdf4c1aa;">user5 user5_password
+</span><span style="color:#fdf4c1aa;">user6 user6_password
+</span><span style="color:#fdf4c1aa;">user7 user7_password
 </span></pre><h2 id="jie-jue"><a class="zola-anchor" href="#jie-jue" aria-label="Anchor link for: jie-jue">🔗</a>
 解决</h2>
 <p>可以使用支持GNU扩展特性的awk来完成这个任务。</p>
 <p>awk 脚本如下:</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">#!/usr/bin/awk -f
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">BEGIN {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">md5cmd = &quot;md5sum&quot;;
-</span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">printf $2 |&amp; md5cmd;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">close(md5cmd, &quot;to&quot;);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">md5cmd |&amp; getline md5result;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">close(md5cmd);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">print $1, substr(md5result, 1, 32);
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">#!/usr/bin/awk -f
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">BEGIN {
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">md5cmd = &quot;md5sum&quot;;
+</span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">printf $2 |&amp; md5cmd;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">close(md5cmd, &quot;to&quot;);
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">md5cmd |&amp; getline md5result;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">close(md5cmd);
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">print $1, substr(md5result, 1, 32);
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>脚本另存为 &quot;md5.awk&quot; 。</p>
 <p>在终端中输入:</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">&gt; awk -f md5.awk input.txt
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">&gt; awk -f md5.awk input.txt
 </span></pre>
 <p>输出结果如下：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">user1 b4ca6e90dcef1196a20930c2d9ecfbc0
-</span><span style="color:#dcdcdc;">user2 049914ab3268e59eb90526f64a5322d9
-</span><span style="color:#dcdcdc;">user3 99675fb0c81fdf505a95318e4c72b685
-</span><span style="color:#dcdcdc;">user4 5f3cca1f85aa649323c336546b3c7cc0
-</span><span style="color:#dcdcdc;">user5 41a87fa27533b238ed77824267259837
-</span><span style="color:#dcdcdc;">user6 758b093168f255636ad83f5f076213e6
-</span><span style="color:#dcdcdc;">user7 c1293b0e2400acb1461d25dbe4c6e75c
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">user1 b4ca6e90dcef1196a20930c2d9ecfbc0
+</span><span style="color:#fdf4c1aa;">user2 049914ab3268e59eb90526f64a5322d9
+</span><span style="color:#fdf4c1aa;">user3 99675fb0c81fdf505a95318e4c72b685
+</span><span style="color:#fdf4c1aa;">user4 5f3cca1f85aa649323c336546b3c7cc0
+</span><span style="color:#fdf4c1aa;">user5 41a87fa27533b238ed77824267259837
+</span><span style="color:#fdf4c1aa;">user6 758b093168f255636ad83f5f076213e6
+</span><span style="color:#fdf4c1aa;">user7 c1293b0e2400acb1461d25dbe4c6e75c
 </span></pre><h2 id="shi-yi"><a class="zola-anchor" href="#shi-yi" aria-label="Anchor link for: shi-yi">🔗</a>
 释义</h2>
 <p>解决方案使用了GNU awk扩展的协程功能，详解参见 [Two-Way Communications with Another Process](https://www.gnu.org/software/gawk/manual/html_node/Two_002dway-I_002fO.html#Two_002dway-I_002fO）。</p>

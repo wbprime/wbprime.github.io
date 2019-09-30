@@ -14,7 +14,7 @@
     <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-09-ffmpeg-note-record-xorg-video&#x2F;"/>
     <meta property="og:description" content="使用 ffmpeg 在 X 下进行录屏，可以使用如下命令：&#96;ffmpeg -f x11grab -video_size 1366x768 -framerate 24 -i :0.0+0,0 $(date +%Y%m%dT%H%M%S.%3N.avi)&#96;"/>
     <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
-    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;red.css">
 <link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
     <body>
         <div class="container full">
@@ -96,8 +96,8 @@
 
         <div class="post-content">
             <p>使用 <a href="https://ffmpeg.org/ffmpeg.html">ffmpeg</a> 在 X 下进行录屏，可以使用如下命令：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">ffmpeg -f x11grab -video_size 1366x768 -framerate 24 -i :0.0+0,0 $(date +%Y%m%dT%H%M%S.%</span><span style="color:#b5cea8;">3</span><span style="color:#dcdcdc;">N.avi)
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1;">ffmpeg -f x11grab -video_size 1366x768 -framerate 24 -i :0.0+0,0 $(date +%Y%m%dT%H%M%S.%</span><span style="color:#d3869b;">3</span><span style="color:#fdf4c1;">N.avi)
 </span></pre>
 <p>使用了 <a href="https://ffmpeg.org/ffmpeg-devices.html#x11grab">x11grap</a> 解码器。</p>
 <p>参见 <a href="https://trac.ffmpeg.org/wiki/Capture/Desktop">Capturing your Desktop / Screen Recording</a></p>

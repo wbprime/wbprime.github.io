@@ -15,7 +15,7 @@
     <meta property="og:description" content="&lt;p&gt;本文基于在部门内的一次分享修改而成，主要介绍 &lt;a href=&quot;https:&#x2F;&#x2F;spring.io&#x2F;projects&#x2F;spring-cloud-gateway&quot;&gt;Spring Cloud Gateway&lt;&#x2F;a&gt; 的请求处理流程和装配流程。&lt;&#x2F;p&gt;
 &lt;p&gt;…"/>
     <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
-    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;red.css">
 <link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
     <body>
         <div class="container full">
@@ -119,31 +119,31 @@ Spring Cloud Gateway</h2>
 <p>文档地址：<a href="https://cloud.spring.io/spring-cloud-static/spring-cloud-gateway/2.1.0.RELEASE/">Documentation 2.1.0 Current GA</a></p>
 <h2 id="pom"><a class="zola-anchor" href="#pom" aria-label="Anchor link for: pom">🔗</a>
 pom</h2>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#808080;">&lt;</span><span style="color:#569cd6;">dependencies</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">dependency</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">      </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">groupId</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">org.springframework.cloud</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">groupId</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">      </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">artifactId</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">spring-cloud-starter-gateway</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">artifactId</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">dependency</span><span style="color:#808080;">&gt;
-</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">dependencies</span><span style="color:#808080;">&gt;
-</span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">dependencyManagement</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">dependencies</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">      </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">dependency</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">groupId</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">org.springframework.boot</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">groupId</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">artifactId</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">spring-boot-dependencies</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">artifactId</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">version</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">${spring-boot.version}</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">version</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">type</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">pom</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">type</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">scope</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">import</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">scope</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">      </span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">dependency</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">      </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">dependency</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">groupId</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">org.springframework.cloud</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">groupId</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">artifactId</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">spring-cloud-dependencies</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">artifactId</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">version</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">${spring-cloud.version}</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">version</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">type</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">pom</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">type</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">scope</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">import</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">scope</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">      </span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">dependency</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">dependencies</span><span style="color:#808080;">&gt;
-</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">dependencyManagement</span><span style="color:#808080;">&gt;
+<pre style="background-color:#282828;">
+<span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">dependencies</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">      </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">org.springframework.cloud</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">      </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">spring-cloud-starter-gateway</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
+</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">dependencies</span><span style="color:#83a598;">&gt;
+</span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">dependencyManagement</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">dependencies</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">      </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">org.springframework.boot</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">spring-boot-dependencies</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">${spring-boot.version}</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">type</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">pom</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">type</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">scope</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">import</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">scope</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">      </span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">      </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">org.springframework.cloud</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">spring-cloud-dependencies</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">${spring-cloud.version}</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">type</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">pom</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">type</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">scope</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">import</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">scope</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">      </span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">dependencies</span><span style="color:#83a598;">&gt;
+</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">dependencyManagement</span><span style="color:#83a598;">&gt;
 </span></pre><h2 id="spring-reactor"><a class="zola-anchor" href="#spring-reactor" aria-label="Anchor link for: spring-reactor">🔗</a>
 Spring Reactor</h2>
 <p><a href="https://projectreactor.io/">Project Reactor</a> 是 <a href="https://spring.io/projects/spring-cloud-gateway" title="Spring Cloud Gateway">Spring Gateway</a> 的底层技术。其号称是一个
@@ -158,65 +158,65 @@ Spring Reactor</h2>
 <h3 id="mono"><a class="zola-anchor" href="#mono" aria-label="Anchor link for: mono">🔗</a>
 Mono</h3>
 <p><em>First</em> 构建</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">Mono&lt;Void&gt; mono = Mono.fromRunnable(() </span><span style="color:#569cd6;">-&gt;</span><span style="color:#dcdcdc;"> dao.update(user));
+<pre style="background-color:#282828;">
+<span style="color:#8ec07c;">Mono</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Void</span><span style="color:#fdf4c1aa;">&gt; mono </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">Mono</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">fromRunnable(() </span><span style="color:#fa5c4b;">-&gt;</span><span style="color:#fdf4c1;"> dao.update(user))</span><span style="color:#fdf4c1aa;">;
 </span></pre>
 <p>or</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">Mono&lt;User&gt; mono = Mono.fromCallable(() </span><span style="color:#569cd6;">-&gt;</span><span style="color:#dcdcdc;"> dao.findById(</span><span style="color:#b5cea8;">1000</span><span style="color:#569cd6;">L</span><span style="color:#dcdcdc;">)</span><span style="color:#ff3333;">;
+<pre style="background-color:#282828;">
+<span style="color:#8ec07c;">Mono</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">User</span><span style="color:#fdf4c1aa;">&gt; mono </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">Mono</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">fromCallable(() </span><span style="color:#fa5c4b;">-&gt;</span><span style="color:#fdf4c1;"> dao.findById(</span><span style="color:#d3869b;">1000</span><span style="color:#fa5c4b;">L</span><span style="color:#fdf4c1;">)</span><span style="background-color:#932b1e;color:#fdf4c1;">;</span><span style="color:#fdf4c1aa;">
 </span></pre>
 <p><em>Then</em> 拼接与转换</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">mono.map(user </span><span style="color:#569cd6;">-&gt;</span><span style="color:#dcdcdc;"> user.getId());
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">mono.</span><span style="color:#fdf4c1;">map(user </span><span style="color:#fa5c4b;">-&gt;</span><span style="color:#fdf4c1;"> user.getId())</span><span style="color:#fdf4c1aa;">;
 </span></pre>
 <p>or</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">mono.flatMap(user </span><span style="color:#569cd6;">-&gt;</span><span style="color:#dcdcdc;"> userDao.deleteById(user.getId())</span><span style="color:#ff3333;">;
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">mono.</span><span style="color:#fdf4c1;">flatMap(user </span><span style="color:#fa5c4b;">-&gt;</span><span style="color:#fdf4c1;"> userDao.deleteById(user.getId())</span><span style="background-color:#932b1e;color:#fdf4c1;">;</span><span style="color:#fdf4c1aa;">
 </span></pre>
 <p><em>Finally</em> 异步处理结果</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">mono.subscribe(
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">value </span><span style="color:#569cd6;">-&gt; </span><span style="color:#dcdcdc;">System.out.println(value),
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ex </span><span style="color:#569cd6;">-&gt;</span><span style="color:#dcdcdc;"> ex.printStackTrace(),
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">() </span><span style="color:#569cd6;">-&gt; </span><span style="color:#dcdcdc;">System.out.println(</span><span style="color:#d69d85;">&quot;No data&quot;</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">);
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">mono.</span><span style="color:#fdf4c1;">subscribe(
+</span><span style="color:#fdf4c1;">    </span><span style="color:#fdf4c1;">value </span><span style="color:#fa5c4b;">-&gt; </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1;">.out.println(value),
+</span><span style="color:#fdf4c1;">    </span><span style="color:#fdf4c1;">ex </span><span style="color:#fa5c4b;">-&gt;</span><span style="color:#fdf4c1;"> ex.printStackTrace(),
+</span><span style="color:#fdf4c1;">    </span><span style="color:#fdf4c1;">() </span><span style="color:#fa5c4b;">-&gt; </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1;">.out.println(</span><span style="color:#b8bb26;">&quot;No data&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
 </span></pre><h3 id="flux"><a class="zola-anchor" href="#flux" aria-label="Anchor link for: flux">🔗</a>
 Flux</h3>
 <p><em>First</em> 构建</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">Flux&lt;User&gt; flux = Flux.create(sink </span><span style="color:#569cd6;">-&gt; </span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">User</span><span style="color:#569cd6;">[]</span><span style="color:#dcdcdc;"> users = userDao.findByName(name);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(users != </span><span style="color:#569cd6;">null</span><span style="color:#dcdcdc;">) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">for </span><span style="color:#dcdcdc;">(User user </span><span style="color:#569cd6;">:</span><span style="color:#dcdcdc;"> users) {
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">sink.next(user);
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">sink.complete();
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">} </span><span style="color:#569cd6;">else </span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">sink.error(
-</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">IllegalStateException(
-</span><span style="color:#dcdcdc;">                </span><span style="color:#d69d85;">&quot;Invalid name: &quot; </span><span style="color:#dcdcdc;">+ name));
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">});
+<pre style="background-color:#282828;">
+<span style="color:#8ec07c;">Flux</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">User</span><span style="color:#fdf4c1aa;">&gt; flux </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">Flux</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">create(sink </span><span style="color:#fa5c4b;">-&gt; </span><span style="color:#fdf4c1;">{
+</span><span style="color:#fdf4c1;">    </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">User</span><span style="color:#fa5c4b;">[]</span><span style="color:#fdf4c1;"> users </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1;"> userDao.findByName(name);
+</span><span style="color:#fdf4c1;">    </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1;">(users </span><span style="color:#fe8019;">!= </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1;">) {
+</span><span style="color:#fdf4c1;">        </span><span style="color:#fa5c4b;">for </span><span style="color:#fdf4c1;">(</span><span style="color:#8ec07c;">User</span><span style="color:#fdf4c1;"> user </span><span style="color:#fe8019;">:</span><span style="color:#fdf4c1;"> users) {
+</span><span style="color:#fdf4c1;">            </span><span style="color:#fdf4c1;">sink.next(user);
+</span><span style="color:#fdf4c1;">        </span><span style="color:#fdf4c1;">}
+</span><span style="color:#fdf4c1;">        </span><span style="color:#fdf4c1;">sink.complete();
+</span><span style="color:#fdf4c1;">    </span><span style="color:#fdf4c1;">} </span><span style="color:#fa5c4b;">else </span><span style="color:#fdf4c1;">{
+</span><span style="color:#fdf4c1;">        </span><span style="color:#fdf4c1;">sink.error(
+</span><span style="color:#fdf4c1;">            </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">IllegalStateException</span><span style="color:#fdf4c1;">(
+</span><span style="color:#fdf4c1;">                </span><span style="color:#b8bb26;">&quot;Invalid name: &quot; </span><span style="color:#fe8019;">+</span><span style="color:#fdf4c1;"> name));
+</span><span style="color:#fdf4c1;">    </span><span style="color:#fdf4c1;">}
+</span><span style="color:#fdf4c1;">})</span><span style="color:#fdf4c1aa;">;
 </span></pre>
 <p>or</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">Flux&lt;String&gt; flux = Flux.just(</span><span style="color:#d69d85;">&quot;123&quot;</span><span style="color:#dcdcdc;">, </span><span style="color:#d69d85;">&quot;456&quot;</span><span style="color:#dcdcdc;">, </span><span style="color:#d69d85;">&quot;789&quot;</span><span style="color:#dcdcdc;">);
+<pre style="background-color:#282828;">
+<span style="color:#8ec07c;">Flux</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">&gt; flux </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">Flux</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">just(</span><span style="color:#b8bb26;">&quot;123&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#b8bb26;">&quot;456&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#b8bb26;">&quot;789&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
 </span></pre>
 <p><em>Then</em> 拼接与转换</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">flux.map(str </span><span style="color:#569cd6;">-&gt; </span><span style="color:#dcdcdc;">Longs.tryParse(str));
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">flux.</span><span style="color:#fdf4c1;">map(str </span><span style="color:#fa5c4b;">-&gt; </span><span style="color:#8ec07c;">Longs</span><span style="color:#fdf4c1;">.tryParse(str))</span><span style="color:#fdf4c1aa;">;
 </span></pre>
 <p>or</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">flux.flatMap(user </span><span style="color:#569cd6;">-&gt;</span><span style="color:#dcdcdc;"> userDao.deleteById(user.getId()));
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">flux.</span><span style="color:#fdf4c1;">flatMap(user </span><span style="color:#fa5c4b;">-&gt;</span><span style="color:#fdf4c1;"> userDao.deleteById(user.getId()))</span><span style="color:#fdf4c1aa;">;
 </span></pre>
 <p><em>Finally</em> 异步处理结果</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">mono.subscribe(
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">value </span><span style="color:#569cd6;">-&gt; </span><span style="color:#dcdcdc;">System.out.println(value),
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ex </span><span style="color:#569cd6;">-&gt;</span><span style="color:#dcdcdc;"> ex.printStackTrace(),
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">() </span><span style="color:#569cd6;">-&gt; </span><span style="color:#dcdcdc;">System.out.println(</span><span style="color:#d69d85;">&quot;No data&quot;</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">);
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">mono.</span><span style="color:#fdf4c1;">subscribe(
+</span><span style="color:#fdf4c1;">    </span><span style="color:#fdf4c1;">value </span><span style="color:#fa5c4b;">-&gt; </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1;">.out.println(value),
+</span><span style="color:#fdf4c1;">    </span><span style="color:#fdf4c1;">ex </span><span style="color:#fa5c4b;">-&gt;</span><span style="color:#fdf4c1;"> ex.printStackTrace(),
+</span><span style="color:#fdf4c1;">    </span><span style="color:#fdf4c1;">() </span><span style="color:#fa5c4b;">-&gt; </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1;">.out.println(</span><span style="color:#b8bb26;">&quot;No data&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
 </span></pre><h2 id="webflux"><a class="zola-anchor" href="#webflux" aria-label="Anchor link for: webflux">🔗</a>
 WebFlux</h2>
 <p><a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html" title="WebFlux - Web on Reactive Stack">Spring WebFlux - Web on Reactive Stack</a> 是 <a href="https://spring.io/">Spring</a> 推出的基于 <a href="https://projectreactor.io/">Project Reactor</a> 的 HTTP 网络开发框架，相似者是 <a href="https://vertx.io/docs/vertx-web/java/">Vert.x-Web</a>。</p>
@@ -234,15 +234,15 @@ WebFlux</h2>
 <p>二者的关系：</p>
 <p><img src="https://www.wangbo.im/posts/2019-08-28-intro-to-spring-cloud-gateway-slide/spring-mvc-vs-webflux.png" alt="spring-webflux-vs-webmvc" /></p>
 <p><a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html" title="WebFlux - Web on Reactive Stack">WebFlux</a> 的典型代码：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">@RequestMapping(</span><span style="color:#d69d85;">&quot;/root&quot;</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">@RestController
-</span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">WebFluxTestController {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@GetMapping(</span><span style="color:#d69d85;">&quot;/user/{id}&quot;</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">Mono&lt;UserDto&gt; getUser(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">String id) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">Mono.just(</span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">Foobar());
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">RequestMapping</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;/root&quot;</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">RestController
+</span><span style="color:#fa5c4b;">public class </span><span style="color:#8ec07c;">WebFluxTestController </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">GetMapping</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;/user/{id}&quot;</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">Mono</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">UserDto</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">getUser</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">id</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return </span><span style="color:#8ec07c;">Mono</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">just(</span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">Foobar</span><span style="color:#fdf4c1;">())</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
 </span></pre><h1 id="gateway"><a class="zola-anchor" href="#gateway" aria-label="Anchor link for: gateway">🔗</a>
 Gateway</h1>
 <h2 id="workflow"><a class="zola-anchor" href="#workflow" aria-label="Anchor link for: workflow">🔗</a>
@@ -265,183 +265,183 @@ Assembly - HttpHandlerAutoConfiguration</h2>
 <h2 id="assembly-httphandlerautoconfiguration-1"><a class="zola-anchor" href="#assembly-httphandlerautoconfiguration-1" aria-label="Anchor link for: assembly-httphandlerautoconfiguration-1">🔗</a>
 Assembly - HttpHandlerAutoConfiguration</h2>
 <p>然后根据 Spring boot 启动逻辑找到 <code>HttpHandler</code> 的实现类。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">@Configuration
-</span><span style="color:#dcdcdc;">@ConditionalOnClass({ DispatcherHandler.class, HttpHandler.class })
-</span><span style="color:#dcdcdc;">@ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.</span><span style="color:#b4cea8;">REACTIVE</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">@ConditionalOnMissingBean(HttpHandler.class)
-</span><span style="color:#dcdcdc;">@AutoConfigureAfter({ WebFluxAutoConfiguration.class })
-</span><span style="color:#dcdcdc;">@AutoConfigureOrder(Ordered.</span><span style="color:#b4cea8;">HIGHEST_PRECEDENCE </span><span style="color:#dcdcdc;">+ </span><span style="color:#b5cea8;">10</span><span style="color:#dcdcdc;">)
-</span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">HttpHandlerAutoConfiguration {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Configuration
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public static class </span><span style="color:#dcdcdc;">AnnotationConfig {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">ApplicationContext applicationContext;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">AnnotationConfig(ApplicationContext applicationContext) {
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">this.applicationContext = applicationContext;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">@Bean
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">HttpHandler httpHandler() {
-</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">WebHttpHandlerBuilder.applicationContext(this.applicationContext).build();
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Configuration
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">ConditionalOnClass</span><span style="color:#fdf4c1aa;">({ </span><span style="color:#8ec07c;">DispatcherHandler</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">class</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">HttpHandler</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">class </span><span style="color:#fdf4c1aa;">})
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">ConditionalOnWebApplication</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">type </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">ConditionalOnWebApplication</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Type</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">REACTIVE</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">ConditionalOnMissingBean</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">HttpHandler</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">class</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">AutoConfigureAfter</span><span style="color:#fdf4c1aa;">({ </span><span style="color:#8ec07c;">WebFluxAutoConfiguration</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">class </span><span style="color:#fdf4c1aa;">})
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">AutoConfigureOrder</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">Ordered</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">HIGHEST_PRECEDENCE </span><span style="color:#fe8019;">+ </span><span style="color:#d3869b;">10</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fa5c4b;">public class </span><span style="color:#8ec07c;">HttpHandlerAutoConfiguration </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Configuration
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public static class </span><span style="color:#8ec07c;">AnnotationConfig </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">ApplicationContext </span><span style="color:#fdf4c1aa;">applicationContext;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">AnnotationConfig</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">ApplicationContext </span><span style="color:#fdf4c1;">applicationContext</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.applicationContext </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> applicationContext;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Bean
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">HttpHandler httpHandler</span><span style="color:#fdf4c1aa;">() {
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">return </span><span style="color:#8ec07c;">WebHttpHandlerBuilder</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">applicationContext(this.applicationContext)</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">build()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>定位到 <code>WebHttpHandlerBuilder</code> 类，下一步需要去看看其 <code>build()</code> 方法里面的代码。</p>
 <h2 id="assembly-webhttphandlerbuilder"><a class="zola-anchor" href="#assembly-webhttphandlerbuilder" aria-label="Anchor link for: assembly-webhttphandlerbuilder">🔗</a>
 Assembly - WebHttpHandlerBuilder</h2>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">public static final </span><span style="color:#dcdcdc;">String </span><span style="color:#b4cea8;">WEB_HANDLER_BEAN_NAME </span><span style="color:#dcdcdc;">= </span><span style="color:#d69d85;">&quot;webHandler&quot;</span><span style="color:#dcdcdc;">;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">WebHttpHandlerBuilder(WebHandler webHandler, @Nullable ApplicationContext applicationContext) {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">this.webHandler = webHandler; </span><span style="color:#608b4e;">// HERE
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">this.applicationContext = applicationContext;
-</span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#569cd6;">public static </span><span style="color:#dcdcdc;">WebHttpHandlerBuilder applicationContext(ApplicationContext context) {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">WebHttpHandlerBuilder builder = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">WebHttpHandlerBuilder(
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">context.getBean(</span><span style="color:#b4cea8;">WEB_HANDLER_BEAN_NAME</span><span style="color:#dcdcdc;">, WebHandler.class), context); </span><span style="color:#608b4e;">// HERE
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">// ...
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> builder;
-</span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">HttpHandler build() {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">WebHandler decorated = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">FilteringWebHandler(this.webHandler, this.filters); </span><span style="color:#608b4e;">// HERE
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">decorated = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">ExceptionHandlingWebHandler(decorated,  this.exceptionHandlers); </span><span style="color:#608b4e;">// HERE
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">HttpWebHandlerAdapter adapted = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">HttpWebHandlerAdapter(decorated); </span><span style="color:#608b4e;">//HERE
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">// ...
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> adapted;
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public static final </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">WEB_HANDLER_BEAN_NAME </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&quot;webHandler&quot;</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fa5c4b;">private </span><span style="color:#fdf4c1;">WebHttpHandlerBuilder(</span><span style="color:#8ec07c;">WebHandler</span><span style="color:#fdf4c1;"> webHandler, @</span><span style="color:#8ec07c;">Nullable ApplicationContext</span><span style="color:#fdf4c1;"> applicationContext) </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.webHandler </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> webHandler; </span><span style="font-style:italic;color:#928374;">// HERE
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.applicationContext </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> applicationContext;
+</span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fa5c4b;">public static </span><span style="color:#8ec07c;">WebHttpHandlerBuilder </span><span style="color:#fdf4c1;">applicationContext(</span><span style="color:#8ec07c;">ApplicationContext</span><span style="color:#fdf4c1;"> context) </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">WebHttpHandlerBuilder</span><span style="color:#fdf4c1aa;"> builder </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">WebHttpHandlerBuilder</span><span style="color:#fdf4c1aa;">(
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">context.</span><span style="color:#fdf4c1;">getBean(WEB_HANDLER_BEAN_NAME, </span><span style="color:#8ec07c;">WebHandler</span><span style="color:#fdf4c1;">.class)</span><span style="color:#fdf4c1aa;">, context); </span><span style="font-style:italic;color:#928374;">// HERE
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="font-style:italic;color:#928374;">// ...
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> builder;
+</span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">HttpHandler </span><span style="color:#fdf4c1;">build() </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">WebHandler</span><span style="color:#fdf4c1aa;"> decorated </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">FilteringWebHandler</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.webHandler, </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.filters); </span><span style="font-style:italic;color:#928374;">// HERE
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">decorated </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">ExceptionHandlingWebHandler</span><span style="color:#fdf4c1aa;">(decorated,  </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.exceptionHandlers); </span><span style="font-style:italic;color:#928374;">// HERE
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">HttpWebHandlerAdapter</span><span style="color:#fdf4c1aa;"> adapted </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">HttpWebHandlerAdapter</span><span style="color:#fdf4c1aa;">(decorated); </span><span style="font-style:italic;color:#928374;">//HERE
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="font-style:italic;color:#928374;">// ...
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> adapted;
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>找到了比较关键的 <code>HttpWebHandlerAdapter</code> 类和 <code>FilteringWebHandler</code> 类。</p>
 <h2 id="assembly-httpwebhandleradapter"><a class="zola-anchor" href="#assembly-httpwebhandleradapter" aria-label="Anchor link for: assembly-httpwebhandleradapter">🔗</a>
 Assembly - HttpWebHandlerAdapter</h2>
 <p>发现 <code>HttpWebHandlerAdapter</code> 类的逻辑就是把请求转给了 <code>FilteringWebHandler</code> 类。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">Mono&lt;Void&gt; handle(ServerHttpRequest request, ServerHttpResponse response) {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">// ...
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">getDelegate().handle(exchange) </span><span style="color:#608b4e;">// HERE
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">.doOnSuccess(aVoid </span><span style="color:#569cd6;">-&gt; </span><span style="color:#dcdcdc;">logResponse(exchange))
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">.onErrorResume(ex </span><span style="color:#569cd6;">-&gt; </span><span style="color:#dcdcdc;">handleUnresolvedError(exchange, ex))
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">.then(Mono.defer(response::setComplete));
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">Mono</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Void</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">handle(</span><span style="color:#8ec07c;">ServerHttpRequest</span><span style="color:#fdf4c1;"> request, </span><span style="color:#8ec07c;">ServerHttpResponse</span><span style="color:#fdf4c1;"> response) </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="font-style:italic;color:#928374;">// ...
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">return </span><span style="color:#fdf4c1;">getDelegate()</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">handle(exchange) </span><span style="font-style:italic;color:#928374;">// HERE
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">doOnSuccess(aVoid </span><span style="color:#fa5c4b;">-&gt; </span><span style="color:#fdf4c1;">logResponse(exchange))
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">onErrorResume(ex </span><span style="color:#fa5c4b;">-&gt; </span><span style="color:#fdf4c1;">handleUnresolvedError(exchange, ex))
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">then(</span><span style="color:#8ec07c;">Mono</span><span style="color:#fdf4c1;">.defer(response::setComplete))</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">}
 </span></pre><h2 id="assembly-exceptionhandlingwebhandler"><a class="zola-anchor" href="#assembly-exceptionhandlingwebhandler" aria-label="Anchor link for: assembly-exceptionhandlingwebhandler">🔗</a>
 Assembly - ExceptionHandlingWebHandler</h2>
 <p>这是 <code>WebHttpHandlerBuilder#build()</code> 里面发现的 <code>ExceptionHandlingWebHandler</code> 类，可以不用重点关注。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">@Override
-</span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">Mono&lt;Void&gt; handle(ServerWebExchange exchange) {
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">Mono&lt;Void&gt; completion;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">try </span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">completion = super.handle(exchange); </span><span style="color:#608b4e;">// HERE
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">} </span><span style="color:#569cd6;">catch </span><span style="color:#dcdcdc;">(Throwable ex) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">completion = Mono.error(ex);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> completion;
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
+</span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">Mono</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Void</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">handle(</span><span style="color:#8ec07c;">ServerWebExchange</span><span style="color:#fdf4c1;"> exchange) </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">Mono</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Void</span><span style="color:#fdf4c1aa;">&gt; completion;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">try </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">completion </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">super</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">handle(exchange)</span><span style="color:#fdf4c1aa;">; </span><span style="font-style:italic;color:#928374;">// HERE
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">} </span><span style="color:#fa5c4b;">catch </span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">Throwable </span><span style="color:#fdf4c1;">ex</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">completion </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">Mono</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">error(ex)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> completion;
+</span><span style="color:#fdf4c1aa;">}
 </span></pre><h2 id="assembly-filteringwebhandler"><a class="zola-anchor" href="#assembly-filteringwebhandler" aria-label="Anchor link for: assembly-filteringwebhandler">🔗</a>
 Assembly - FilteringWebHandler</h2>
 <p>重点看一下 <code>FilteringWebHandler</code> 类的实现。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">this.chain = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">DefaultWebFilterChain(handler, filters); </span><span style="color:#608b4e;">// HERE
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">@Override
-</span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">Mono&lt;Void&gt; handle(ServerWebExchange exchange) {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">this.chain.filter(exchange);
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.chain </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">DefaultWebFilterChain</span><span style="color:#fdf4c1aa;">(handler, filters); </span><span style="font-style:italic;color:#928374;">// HERE
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
+</span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">Mono</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Void</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">handle(</span><span style="color:#8ec07c;">ServerWebExchange</span><span style="color:#fdf4c1;"> exchange) </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">return </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.chain.</span><span style="color:#fdf4c1;">filter(exchange)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>里面把请求转给了 <code>DefaultWebFilterChain</code> 类，这个类一听就是一个类似责任链的设计。</p>
 <h2 id="assembly-defaultwebfilterchain"><a class="zola-anchor" href="#assembly-defaultwebfilterchain" aria-label="Anchor link for: assembly-defaultwebfilterchain">🔗</a>
 Assembly - DefaultWebFilterChain</h2>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">@Override
-</span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">Mono&lt;Void&gt; filter(ServerWebExchange exchange) {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">Mono.defer(() </span><span style="color:#569cd6;">-&gt;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">this.currentFilter != </span><span style="color:#569cd6;">null &amp;&amp; </span><span style="color:#dcdcdc;">this.next != </span><span style="color:#569cd6;">null ?
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">this.currentFilter.filter(exchange, this.next) </span><span style="color:#569cd6;">:
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">this.handler.handle(exchange));
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
+</span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">Mono</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Void</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">filter(</span><span style="color:#8ec07c;">ServerWebExchange</span><span style="color:#fdf4c1;"> exchange) </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">return </span><span style="color:#8ec07c;">Mono</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">defer(() </span><span style="color:#fa5c4b;">-&gt;
+</span><span style="color:#fdf4c1;">        </span><span style="color:#fdf4c1;">this.currentFilter </span><span style="color:#fe8019;">!= </span><span style="color:#d3869b;">null </span><span style="color:#fe8019;">&amp;&amp; </span><span style="color:#fdf4c1;">this.next </span><span style="color:#fe8019;">!= </span><span style="color:#d3869b;">null </span><span style="color:#fe8019;">?
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">this.currentFilter.filter(exchange, this.next) </span><span style="color:#fe8019;">:
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">this.handler.handle(exchange))</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>这里面又做了一层封装，会调用到 <code>DispatcherHandler</code> 类的实现逻辑。</p>
 <h2 id="assembly-webfluxconfigurationsupport"><a class="zola-anchor" href="#assembly-webfluxconfigurationsupport" aria-label="Anchor link for: assembly-webfluxconfigurationsupport">🔗</a>
 Assembly - WebFluxConfigurationSupport</h2>
 <p><code>DispatcherHandler</code> 类在 <code>org.springframework.web.reactive.config.WebFluxConfigurationSupport</code> 中被
 自动注册。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">@Bean
-</span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">DispatcherHandler webHandler() {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">return new </span><span style="color:#dcdcdc;">DispatcherHandler();
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Bean
+</span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">DispatcherHandler </span><span style="color:#fdf4c1;">webHandler() </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">return new </span><span style="color:#8ec07c;">DispatcherHandler</span><span style="color:#fdf4c1aa;">();
+</span><span style="color:#fdf4c1aa;">}
 </span></pre><h2 id="assembly-dispatcherhandler"><a class="zola-anchor" href="#assembly-dispatcherhandler" aria-label="Anchor link for: assembly-dispatcherhandler">🔗</a>
 Assembly - DispatcherHandler</h2>
 <p>这个 <code>org.springframework.web.reactive.DispatcherHandler</code> 又做了一层封装，底下是一系列的
 <code>HandlerMapping</code> 类的实现。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">protected</span><span style="color:#dcdcdc;"> void initStrategies(ApplicationContext context) {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">Map&lt;String, HandlerMapping&gt; mappingBeans = BeanFactoryUtils.beansOfTypeIncludingAncestors(
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">context, HandlerMapping.class, </span><span style="color:#569cd6;">true</span><span style="color:#dcdcdc;">, </span><span style="color:#569cd6;">false</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ArrayList&lt;HandlerMapping&gt; mappings = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">ArrayList&lt;&gt;(mappingBeans.values());
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">AnnotationAwareOrderComparator.sort(mappings);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">this.handlerMappings = Collections.unmodifiableList(mappings);
-</span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">@Override
-</span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">Mono&lt;Void&gt; handle(ServerWebExchange exchange) {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(this.handlerMappings == </span><span style="color:#569cd6;">null</span><span style="color:#dcdcdc;">) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">createNotFoundError();
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">Flux.fromIterable(this.handlerMappings)
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">.concatMap(mapping </span><span style="color:#569cd6;">-&gt;</span><span style="color:#dcdcdc;"> mapping.getHandler(exchange))
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">.next()
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">.switchIfEmpty(createNotFoundError())
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">.flatMap(handler </span><span style="color:#569cd6;">-&gt; </span><span style="color:#dcdcdc;">invokeHandler(exchange, handler))
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">.flatMap(result </span><span style="color:#569cd6;">-&gt; </span><span style="color:#dcdcdc;">handleResult(exchange, result));
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">protected</span><span style="color:#fdf4c1aa;"> void </span><span style="color:#fdf4c1;">initStrategies(</span><span style="color:#8ec07c;">ApplicationContext</span><span style="color:#fdf4c1;"> context) </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">Map</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">HandlerMapping</span><span style="color:#fdf4c1aa;">&gt; mappingBeans </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">BeanFactoryUtils</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">beansOfTypeIncludingAncestors(
+</span><span style="color:#fdf4c1;">            </span><span style="color:#fdf4c1;">context, </span><span style="color:#8ec07c;">HandlerMapping</span><span style="color:#fdf4c1;">.class, </span><span style="color:#d3869b;">true</span><span style="color:#fdf4c1;">, </span><span style="color:#d3869b;">false</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">ArrayList</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">HandlerMapping</span><span style="color:#fdf4c1aa;">&gt; mappings </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">ArrayList</span><span style="color:#fdf4c1aa;">&lt;&gt;(mappingBeans.</span><span style="color:#fdf4c1;">values()</span><span style="color:#fdf4c1aa;">);
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">AnnotationAwareOrderComparator</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">sort(mappings)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.handlerMappings </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">Collections</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">unmodifiableList(mappings)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
+</span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">Mono</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Void</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">handle(</span><span style="color:#8ec07c;">ServerWebExchange</span><span style="color:#fdf4c1;"> exchange) </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.handlerMappings </span><span style="color:#fe8019;">== </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return </span><span style="color:#fdf4c1;">createNotFoundError()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">return </span><span style="color:#8ec07c;">Flux</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">fromIterable(this.handlerMappings)
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">concatMap(mapping </span><span style="color:#fa5c4b;">-&gt;</span><span style="color:#fdf4c1;"> mapping.getHandler(exchange))
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">next()
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">switchIfEmpty(createNotFoundError())
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">flatMap(handler </span><span style="color:#fa5c4b;">-&gt; </span><span style="color:#fdf4c1;">invokeHandler(exchange, handler))
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">flatMap(result </span><span style="color:#fa5c4b;">-&gt; </span><span style="color:#fdf4c1;">handleResult(exchange, result))</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">}
 </span></pre><h2 id="assembly-routepredicatehandlermapping"><a class="zola-anchor" href="#assembly-routepredicatehandlermapping" aria-label="Anchor link for: assembly-routepredicatehandlermapping">🔗</a>
 Assembly - RoutePredicateHandlerMapping</h2>
 <p><code>HandlerMapping</code> 也是通过 Spring 自动管理的，其实现类是 <code>org.springframework.cloud.gateway.handler.RoutePredicateHandlerMapping</code>。</p>
 <p>装配代码在 <code>org.springframework.cloud.gateway.config.GatewayAutoConfiguration</code> 中。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">@Configuration
-</span><span style="color:#dcdcdc;">@ConditionalOnProperty(name = </span><span style="color:#d69d85;">&quot;spring.cloud.gateway.enabled&quot;</span><span style="color:#dcdcdc;">, matchIfMissing = </span><span style="color:#569cd6;">true</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">@EnableConfigurationProperties
-</span><span style="color:#dcdcdc;">@AutoConfigureBefore({ HttpHandlerAutoConfiguration.class,
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">WebFluxAutoConfiguration.class })
-</span><span style="color:#dcdcdc;">@AutoConfigureAfter({ GatewayLoadBalancerClientAutoConfiguration.class,
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">GatewayClassPathWarningAutoConfiguration.class })
-</span><span style="color:#dcdcdc;">@ConditionalOnClass(DispatcherHandler.class)
-</span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">GatewayAutoConfiguration {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Bean
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">RoutePredicateHandlerMapping routePredicateHandlerMapping(
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">FilteringWebHandler webHandler, RouteLocator routeLocator,
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">GlobalCorsProperties globalCorsProperties, Environment environment) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return new </span><span style="color:#dcdcdc;">RoutePredicateHandlerMapping(webHandler, routeLocator,
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">globalCorsProperties, environment);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Bean
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Primary
-</span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">// TODO: property to disable composite?
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">RouteLocator cachedCompositeRouteLocator(List&lt;RouteLocator&gt; routeLocators) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return new </span><span style="color:#dcdcdc;">CachingRouteLocator(
-</span><span style="color:#dcdcdc;">                </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">CompositeRouteLocator(Flux.fromIterable(routeLocators)));
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Bean
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">FilteringWebHandler filteringWebHandler(List&lt;GlobalFilter&gt; globalFilters) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return new </span><span style="color:#dcdcdc;">FilteringWebHandler(globalFilters);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Configuration
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">ConditionalOnProperty</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">name </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&quot;spring.cloud.gateway.enabled&quot;</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fdf4c1;">matchIfMissing </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">true</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">EnableConfigurationProperties
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">AutoConfigureBefore</span><span style="color:#fdf4c1aa;">({ </span><span style="color:#8ec07c;">HttpHandlerAutoConfiguration</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">class</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">WebFluxAutoConfiguration</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">class </span><span style="color:#fdf4c1aa;">})
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">AutoConfigureAfter</span><span style="color:#fdf4c1aa;">({ </span><span style="color:#8ec07c;">GatewayLoadBalancerClientAutoConfiguration</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">class</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">GatewayClassPathWarningAutoConfiguration</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">class </span><span style="color:#fdf4c1aa;">})
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">ConditionalOnClass</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">DispatcherHandler</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">class</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fa5c4b;">public class </span><span style="color:#8ec07c;">GatewayAutoConfiguration </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Bean
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">RoutePredicateHandlerMapping routePredicateHandlerMapping</span><span style="color:#fdf4c1aa;">(
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#8ec07c;">FilteringWebHandler </span><span style="color:#fdf4c1;">webHandler</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">RouteLocator </span><span style="color:#fdf4c1;">routeLocator</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#8ec07c;">GlobalCorsProperties </span><span style="color:#fdf4c1;">globalCorsProperties</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">Environment </span><span style="color:#fdf4c1;">environment</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return new </span><span style="color:#8ec07c;">RoutePredicateHandlerMapping</span><span style="color:#fdf4c1aa;">(webHandler, routeLocator,
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">globalCorsProperties, environment);
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Bean
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Primary
+</span><span style="color:#fdf4c1aa;">    </span><span style="font-style:italic;color:#928374;">// TODO: property to disable composite?
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">RouteLocator cachedCompositeRouteLocator</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">List</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">RouteLocator</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">routeLocators</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return new </span><span style="color:#8ec07c;">CachingRouteLocator</span><span style="color:#fdf4c1aa;">(
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">CompositeRouteLocator</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">Flux</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">fromIterable(routeLocators)</span><span style="color:#fdf4c1aa;">));
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Bean
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">FilteringWebHandler filteringWebHandler</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">List</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">GlobalFilter</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">globalFilters</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return new </span><span style="color:#8ec07c;">FilteringWebHandler</span><span style="color:#fdf4c1aa;">(globalFilters);
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p><code>GatewayAutoConfiguration</code> 这个装配类里面还提供了 <code>RouteLocator</code> 和 <code>FilteringWebHandler</code> 的实现，这
 个后面会用到。</p>
@@ -449,54 +449,54 @@ Assembly - RoutePredicateHandlerMapping</h2>
 Runtime - RoutePredicateHandlerMapping</h2>
 <p><code>RoutePredicateHandlerMapping</code> 中首先从 <code>org.springframework.cloud.gateway.route.RouteLocator</code> 中去
 获取当前所有可用的 <code>Route</code> 实例并找到第一个能匹配当前请求的 <code>Route</code> 放到请求的上下文中，然后调用 <code>org.springframework.cloud.gateway.handler.FilteringWebHandler</code> 里面的代码。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">protected </span><span style="color:#dcdcdc;">Mono&lt;Route&gt; lookupRoute(ServerWebExchange exchange) {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">this.routeLocator.getRoutes()
-</span><span style="color:#dcdcdc;">        </span><span style="color:#608b4e;">// individually filter routes so that filterWhen error delaying is not a
-</span><span style="color:#dcdcdc;">        </span><span style="color:#608b4e;">// problem
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">.concatMap(route </span><span style="color:#569cd6;">-&gt; </span><span style="color:#dcdcdc;">Mono.just(route).filterWhen(r </span><span style="color:#569cd6;">-&gt; </span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">            </span><span style="color:#608b4e;">// add the current route we are testing
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">exchange.getAttributes().put(</span><span style="color:#b4cea8;">GATEWAY_PREDICATE_ROUTE_ATTR</span><span style="color:#dcdcdc;">, r.getId());
-</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> r.getPredicate().apply(exchange);
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">})
-</span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">// ...
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">protected </span><span style="color:#8ec07c;">Mono</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Route</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">lookupRoute(</span><span style="color:#8ec07c;">ServerWebExchange</span><span style="color:#fdf4c1;"> exchange) </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">return </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.routeLocator.</span><span style="color:#fdf4c1;">getRoutes()
+</span><span style="color:#fdf4c1aa;">        </span><span style="font-style:italic;color:#928374;">// individually filter routes so that filterWhen error delaying is not a
+</span><span style="color:#fdf4c1aa;">        </span><span style="font-style:italic;color:#928374;">// problem
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">concatMap(route </span><span style="color:#fa5c4b;">-&gt; </span><span style="color:#8ec07c;">Mono</span><span style="color:#fdf4c1;">.just(route).filterWhen(r </span><span style="color:#fa5c4b;">-&gt; </span><span style="color:#fdf4c1;">{
+</span><span style="color:#fdf4c1;">            </span><span style="font-style:italic;color:#928374;">// add the current route we are testing
+</span><span style="color:#fdf4c1;">            </span><span style="color:#fdf4c1;">exchange.getAttributes().put(GATEWAY_PREDICATE_ROUTE_ATTR, r.getId());
+</span><span style="color:#fdf4c1;">            </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1;"> r.getPredicate().apply(exchange);
+</span><span style="color:#fdf4c1;">        </span><span style="color:#fdf4c1;">})
+</span><span style="color:#fdf4c1;">    </span><span style="font-style:italic;color:#928374;">// ...
+</span><span style="color:#fdf4c1;">}
 </span></pre>
 <p><code>RouteLocator</code> 的逻辑后面再讲，先看看 <code>FilteringWebHandler</code> 的逻辑。</p>
 <h2 id="runtime-filteringwebhandler"><a class="zola-anchor" href="#runtime-filteringwebhandler" aria-label="Anchor link for: runtime-filteringwebhandler">🔗</a>
 Runtime - FilteringWebHandler</h2>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">Mono&lt;Void&gt; handle(ServerWebExchange exchange) {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">Route route = exchange.getRequiredAttribute(</span><span style="color:#b4cea8;">GATEWAY_ROUTE_ATTR</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">List&lt;GatewayFilter&gt; gatewayFilters = route.getFilters();
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">List&lt;GatewayFilter&gt; combined = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">ArrayList&lt;&gt;(this.globalFilters);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">combined.addAll(gatewayFilters);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">AnnotationAwareOrderComparator.sort(combined);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">return new </span><span style="color:#dcdcdc;">DefaultGatewayFilterChain(combined).filter(exchange);
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">Mono</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Void</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">handle(</span><span style="color:#8ec07c;">ServerWebExchange</span><span style="color:#fdf4c1;"> exchange) </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">Route</span><span style="color:#fdf4c1aa;"> route </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> exchange.</span><span style="color:#fdf4c1;">getRequiredAttribute(GATEWAY_ROUTE_ATTR)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">List</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">GatewayFilter</span><span style="color:#fdf4c1aa;">&gt; gatewayFilters </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> route.</span><span style="color:#fdf4c1;">getFilters()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">List</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">GatewayFilter</span><span style="color:#fdf4c1aa;">&gt; combined </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">ArrayList</span><span style="color:#fdf4c1aa;">&lt;&gt;(</span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.globalFilters);
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">combined.</span><span style="color:#fdf4c1;">addAll(gatewayFilters)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">AnnotationAwareOrderComparator</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">sort(combined)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">return new </span><span style="color:#8ec07c;">DefaultGatewayFilterChain</span><span style="color:#fdf4c1aa;">(combined).</span><span style="color:#fdf4c1;">filter(exchange)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p><code>FilteringWebHandler</code> 中首先从请求的上下文中取出匹配到的 <code>Route</code> 实例，将实例里面的 <code>GatewayFilter</code>
 列表和全局的 <code>GlobalFilter</code> 列表合并排序后放入 <code>DefaultGatewayFilterChain</code> （又是一个责任链）中进行
 链式处理。</p>
 <h2 id="runtime-defaultwebfilterchain"><a class="zola-anchor" href="#runtime-defaultwebfilterchain" aria-label="Anchor link for: runtime-defaultwebfilterchain">🔗</a>
 Runtime - DefaultWebFilterChain</h2>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">Mono&lt;Void&gt; filter(ServerWebExchange exchange) {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">Mono.defer(() </span><span style="color:#569cd6;">-&gt; </span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(this.index &lt; filters.size()) {
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">GatewayFilter filter = filters.get(this.index);
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">DefaultGatewayFilterChain chain = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">DefaultGatewayFilterChain(this,
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">this.index + </span><span style="color:#b5cea8;">1</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> filter.filter(exchange, chain);
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">else </span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">Mono.empty(); </span><span style="color:#608b4e;">// complete
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">});
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">Mono</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Void</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">filter(</span><span style="color:#8ec07c;">ServerWebExchange</span><span style="color:#fdf4c1;"> exchange) </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">return </span><span style="color:#8ec07c;">Mono</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">defer(() </span><span style="color:#fa5c4b;">-&gt; </span><span style="color:#fdf4c1;">{
+</span><span style="color:#fdf4c1;">        </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1;">(this.index </span><span style="color:#fe8019;">&lt;</span><span style="color:#fdf4c1;"> filters.size()) {
+</span><span style="color:#fdf4c1;">            </span><span style="color:#8ec07c;">GatewayFilter</span><span style="color:#fdf4c1;"> filter </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1;"> filters.get(this.index);
+</span><span style="color:#fdf4c1;">            </span><span style="color:#8ec07c;">DefaultGatewayFilterChain</span><span style="color:#fdf4c1;"> chain </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">DefaultGatewayFilterChain</span><span style="color:#fdf4c1;">(this,
+</span><span style="color:#fdf4c1;">                    </span><span style="color:#fdf4c1;">this.index </span><span style="color:#fe8019;">+ </span><span style="color:#d3869b;">1</span><span style="color:#fdf4c1;">);
+</span><span style="color:#fdf4c1;">            </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1;"> filter.filter(exchange, chain);
+</span><span style="color:#fdf4c1;">        </span><span style="color:#fdf4c1;">}
+</span><span style="color:#fdf4c1;">        </span><span style="color:#fa5c4b;">else </span><span style="color:#fdf4c1;">{
+</span><span style="color:#fdf4c1;">            </span><span style="color:#fa5c4b;">return </span><span style="color:#8ec07c;">Mono</span><span style="color:#fdf4c1;">.empty(); </span><span style="font-style:italic;color:#928374;">// complete
+</span><span style="color:#fdf4c1;">        </span><span style="color:#fdf4c1;">}
+</span><span style="color:#fdf4c1;">    </span><span style="color:#fdf4c1;">})</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p><code>DefaultGatewayFilterChain</code> 里面维护了一个 <code>GatewayFilter</code> 的集合和一个标识当前正在处理的元素的索引
 ，每次调用到一个 <code>GatewayFilter</code> 元素的处理逻辑时创建一个新的指向循成额元素的链，以不可变性保证线程
@@ -510,21 +510,21 @@ Class Route</h2>
 <p>Route 类的全称是 <code>org.springframework.cloud.gateway.route.Route</code>，是 <a href="https://spring.io/projects/spring-cloud-gateway" title="Spring Cloud Gateway">Spring Gateway</a> 暴露
 出来的处理请求的基本单元。</p>
 <p>结构如下：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">Route </span><span style="color:#569cd6;">implements </span><span style="color:#4ec9b0;">Ordered </span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private final </span><span style="color:#dcdcdc;">String id;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private final </span><span style="color:#dcdcdc;">URI uri;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private final int </span><span style="color:#dcdcdc;">order;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private final </span><span style="color:#dcdcdc;">AsyncPredicate&lt;ServerWebExchange&gt; predicate;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private final </span><span style="color:#dcdcdc;">List&lt;GatewayFilter&gt; gatewayFilters;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">// ...
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public class </span><span style="color:#8ec07c;">Route </span><span style="color:#fa5c4b;">implements </span><span style="color:#8ec07c;">Ordered </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private final </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1aa;">id;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private final </span><span style="color:#8ec07c;">URI </span><span style="color:#fdf4c1aa;">uri;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private final int </span><span style="color:#fdf4c1aa;">order;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private final </span><span style="color:#8ec07c;">AsyncPredicate</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">ServerWebExchange</span><span style="color:#fdf4c1aa;">&gt; predicate;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private final </span><span style="color:#8ec07c;">List</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">GatewayFilter</span><span style="color:#fdf4c1aa;">&gt; gatewayFilters;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="font-style:italic;color:#928374;">// ...
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>主要成员是一个请求的判定器 <code>predicate</code>、多个处理器 <code>gatewayFilters</code>、一个后端访问地址 <code>uri</code>，以及一
 个唯一标识和序号。</p>
@@ -532,10 +532,10 @@ Class Route</h2>
 Interface RouteLocator</h2>
 <p><a href="https://spring.io/projects/spring-cloud-gateway" title="Spring Cloud Gateway">Spring Gateway</a> 通过 <code>org.springframework.cloud.gateway.route.RouteLocator</code> 来进行所有路由
 对象的加载。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">public interface </span><span style="color:#dcdcdc;">RouteLocator {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">Flux&lt;Route&gt; getRoutes();
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public interface </span><span style="color:#8ec07c;">RouteLocator </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">Flux</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Route</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">getRoutes</span><span style="color:#fdf4c1aa;">();
+</span><span style="color:#fdf4c1aa;">}
 </span></pre><h2 id="routelocator-implementations"><a class="zola-anchor" href="#routelocator-implementations" aria-label="Anchor link for: routelocator-implementations">🔗</a>
 RouteLocator Implementations</h2>
 <p><code>RouteLocator</code> 接口有以下自带实现：</p>
@@ -549,28 +549,28 @@ RouteLocator Implementations</h2>
 <h2 id="routedefinitionroutelocator"><a class="zola-anchor" href="#routedefinitionroutelocator" aria-label="Anchor link for: routedefinitionroutelocator">🔗</a>
 RouteDefinitionRouteLocator</h2>
 <p><code>RouteDefinitionLocator</code> 用来管理反序列化生成的路由。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">@Override
-</span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">Flux&lt;Route&gt; getRoutes() {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">this.routeDefinitionLocator.getRouteDefinitions().map(this::convertToRoute)
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">.map(route </span><span style="color:#569cd6;">-&gt; </span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">                </span><span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(logger.isDebugEnabled()) {
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">logger.debug(</span><span style="color:#d69d85;">&quot;RouteDefinition matched: &quot; </span><span style="color:#dcdcdc;">+ route.getId());
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">                </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> route;
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">});
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
+</span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">Flux</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Route</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">getRoutes() </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">return </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.routeDefinitionLocator.</span><span style="color:#fdf4c1;">getRouteDefinitions()</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">map(this::convertToRoute)
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">map(route </span><span style="color:#fa5c4b;">-&gt; </span><span style="color:#fdf4c1;">{
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1;">(logger.isDebugEnabled()) {
+</span><span style="color:#fdf4c1;">                    </span><span style="color:#fdf4c1;">logger.debug(</span><span style="color:#b8bb26;">&quot;RouteDefinition matched: &quot; </span><span style="color:#fe8019;">+</span><span style="color:#fdf4c1;"> route.getId());
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">}
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1;"> route;
+</span><span style="color:#fdf4c1;">            </span><span style="color:#fdf4c1;">})</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>可以看到，其使用了 <code>RouteDefinitionLocator</code> 来管理路由的定义对象，并提供了路由定义对象到路由对象的转
 换。</p>
 <p><code>RouteDefinitionLocator</code> 的设计模式与 <code>RouteLocator</code> 相似。</p>
 <h2 id="routedefinitionlocator-and-implementations"><a class="zola-anchor" href="#routedefinitionlocator-and-implementations" aria-label="Anchor link for: routedefinitionlocator-and-implementations">🔗</a>
 RouteDefinitionLocator and Implementations</h2>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">package </span><span style="color:#dcdcdc;">org.springframework.cloud.gateway.route;
-</span><span style="color:#569cd6;">public interface </span><span style="color:#dcdcdc;">RouteDefinitionLocator {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">Flux&lt;RouteDefinition&gt; getRouteDefinitions();
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">package </span><span style="color:#8ec07c;">org.springframework.cloud.gateway.route</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">public interface </span><span style="color:#8ec07c;">RouteDefinitionLocator </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">Flux</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">RouteDefinition</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">getRouteDefinitions</span><span style="color:#fdf4c1aa;">();
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p><code>RouteDefinitionLocator</code> 的实现类有：</p>
 <ul>
@@ -581,39 +581,39 @@ RouteDefinitionLocator and Implementations</h2>
 <h2 id="routedefinitionlocator-loading"><a class="zola-anchor" href="#routedefinitionlocator-loading" aria-label="Anchor link for: routedefinitionlocator-loading">🔗</a>
 RouteDefinitionLocator Loading</h2>
 <p>类似地，在 <code>GatewayAutoConfiguration</code> 中可以找到 <code>RouteDefinitionLocator</code> 被加载使用的逻辑。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">@Bean
-</span><span style="color:#dcdcdc;">@Primary
-</span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">RouteDefinitionLocator routeDefinitionLocator(
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">List&lt;RouteDefinitionLocator&gt; routeDefinitionLocators) {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">return new </span><span style="color:#dcdcdc;">CompositeRouteDefinitionLocator(
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">Flux.fromIterable(routeDefinitionLocators));
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Bean
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Primary
+</span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">RouteDefinitionLocator </span><span style="color:#fdf4c1;">routeDefinitionLocator(
+</span><span style="color:#fdf4c1;">        </span><span style="color:#8ec07c;">List</span><span style="color:#fdf4c1;">&lt;</span><span style="color:#8ec07c;">RouteDefinitionLocator</span><span style="color:#fdf4c1;">&gt; routeDefinitionLocators) </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">return new </span><span style="color:#8ec07c;">CompositeRouteDefinitionLocator</span><span style="color:#fdf4c1aa;">(
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#8ec07c;">Flux</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">fromIterable(routeDefinitionLocators)</span><span style="color:#fdf4c1aa;">);
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p><strong>所有</strong> 能被 Spring 感知到的 <code>org.springframework.cloud.gateway.route.RouteDefinitionLocator</code> bean 实例都会被默认收集被 <code>CompositeRouteDefinitionLocator</code> 管理。</p>
 <h2 id="routedefinition"><a class="zola-anchor" href="#routedefinition" aria-label="Anchor link for: routedefinition">🔗</a>
 RouteDefinition</h2>
 <p><code>RouteDefinition</code> 是 <code>Route</code> 路由对象的序列化对象；一个合法的 <code>RouteDefinition</code> 对象可以被构造为一个
 路由对象。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">RouteDefinition {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@NotEmpty
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">String id = UUID.randomUUID().toString();
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@NotEmpty
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Valid
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">List&lt;PredicateDefinition&gt; predicates = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">ArrayList&lt;&gt;();
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Valid
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">List&lt;FilterDefinition&gt; filters = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">ArrayList&lt;&gt;();
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@NotNull
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">URI uri;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private int </span><span style="color:#dcdcdc;">order = </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">// ...
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public class </span><span style="color:#8ec07c;">RouteDefinition </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">NotEmpty
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1aa;">id </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">UUID</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">randomUUID()</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">toString()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">NotEmpty
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Valid
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">List</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">PredicateDefinition</span><span style="color:#fdf4c1aa;">&gt; predicates </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">ArrayList</span><span style="color:#fdf4c1aa;">&lt;&gt;();
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Valid
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">List</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">FilterDefinition</span><span style="color:#fdf4c1aa;">&gt; filters </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">ArrayList</span><span style="color:#fdf4c1aa;">&lt;&gt;();
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">NotNull
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">URI </span><span style="color:#fdf4c1aa;">uri;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private int </span><span style="color:#fdf4c1aa;">order </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">0</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="font-style:italic;color:#928374;">// ...
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>与 <code>Route</code> 类似，<code>RouteDefinition</code> 的主要成员是多个请求的判定器定义对象 <code>predicates</code>、多个处理器定义对象 <code>filters</code>、一个后端访问地址 <code>uri</code>，以及一个唯一标识和序号。</p>
 <h2 id="route-construction"><a class="zola-anchor" href="#route-construction" aria-label="Anchor link for: route-construction">🔗</a>
@@ -622,70 +622,70 @@ Route Construction</h2>
 <h3 id="via-routelocatorbuilder-in-java"><a class="zola-anchor" href="#via-routelocatorbuilder-in-java" aria-label="Anchor link for: via-routelocatorbuilder-in-java">🔗</a>
 Via RouteLocatorBuilder in Java</h3>
 <p><code>RouteLocatorBuilder</code> 可以很容易地被用来构建路由对象。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">@Bean
-</span><span style="color:#dcdcdc;">RouteLocator constantRouteLocator(final RouteLocatorBuilder builder) {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> builder.routes()
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">.route(</span><span style="color:#d69d85;">&quot;demo_lb&quot;</span><span style="color:#dcdcdc;">, r </span><span style="color:#569cd6;">-&gt;</span><span style="color:#dcdcdc;"> r.header(</span><span style="color:#d69d85;">&quot;XHOST&quot;</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">.filters(f </span><span style="color:#569cd6;">-&gt;</span><span style="color:#dcdcdc;"> f.prefixPath(</span><span style="color:#d69d85;">&quot;/search&quot;</span><span style="color:#dcdcdc;">))
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">.uri(</span><span style="color:#d69d85;">&quot;lb://httpbin.org&quot;</span><span style="color:#dcdcdc;">))
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">.build();
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Bean
+</span><span style="color:#8ec07c;">RouteLocator </span><span style="color:#fdf4c1;">constantRouteLocator(final </span><span style="color:#8ec07c;">RouteLocatorBuilder</span><span style="color:#fdf4c1;"> builder) </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> builder.</span><span style="color:#fdf4c1;">routes()
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">route(</span><span style="color:#b8bb26;">&quot;demo_lb&quot;</span><span style="color:#fdf4c1;">, r </span><span style="color:#fa5c4b;">-&gt;</span><span style="color:#fdf4c1;"> r.header(</span><span style="color:#b8bb26;">&quot;XHOST&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1;">            </span><span style="color:#fdf4c1;">.filters(f </span><span style="color:#fa5c4b;">-&gt;</span><span style="color:#fdf4c1;"> f.prefixPath(</span><span style="color:#b8bb26;">&quot;/search&quot;</span><span style="color:#fdf4c1;">))
+</span><span style="color:#fdf4c1;">            </span><span style="color:#fdf4c1;">.uri(</span><span style="color:#b8bb26;">&quot;lb://httpbin.org&quot;</span><span style="color:#fdf4c1;">))
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">build()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">}
 </span></pre><h3 id="via-routedefinition-in-yaml-properties"><a class="zola-anchor" href="#via-routedefinition-in-yaml-properties" aria-label="Anchor link for: via-routedefinition-in-yaml-properties">🔗</a>
 Via RouteDefinition in YAML/Properties</h3>
 <p><code>RouteDefinition</code> 可以很容易地被用来从外部配置文件 (YAML/Properties) 构建路由对象。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="background-color:#282828;color:#569cd6;">spring</span><span style="color:#dcdcdc;">:
-</span><span style="color:#dcdcdc;">    </span><span style="background-color:#282828;color:#569cd6;">cloud</span><span style="color:#dcdcdc;">:
-</span><span style="color:#dcdcdc;">        </span><span style="background-color:#282828;color:#569cd6;">gateway</span><span style="color:#dcdcdc;">:
-</span><span style="color:#dcdcdc;">            </span><span style="background-color:#282828;color:#569cd6;">routes</span><span style="color:#dcdcdc;">:
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">- </span><span style="background-color:#282828;color:#569cd6;">id</span><span style="color:#dcdcdc;">: </span><span style="background-color:#282828;color:#d69d85;">r1</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">                  </span><span style="background-color:#282828;color:#569cd6;">order</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">2
-</span><span style="color:#dcdcdc;">                  </span><span style="background-color:#282828;color:#569cd6;">uri</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;https://a.com&quot;
-</span><span style="color:#dcdcdc;">                  </span><span style="background-color:#282828;color:#569cd6;">predicates</span><span style="color:#dcdcdc;">:
-</span><span style="color:#dcdcdc;">                      </span><span style="color:#dcdcdc;">- </span><span style="background-color:#282828;color:#d69d85;">host=a.org</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">                  </span><span style="background-color:#282828;color:#569cd6;">filters</span><span style="color:#dcdcdc;">:
-</span><span style="color:#dcdcdc;">                      </span><span style="color:#dcdcdc;">- </span><span style="background-color:#282828;color:#d69d85;">AddRequestHeader=XHOST,my.a.org</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">- </span><span style="background-color:#282828;color:#569cd6;">id</span><span style="color:#dcdcdc;">: </span><span style="background-color:#282828;color:#d69d85;">r2</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">                  </span><span style="background-color:#282828;color:#569cd6;">order</span><span style="color:#dcdcdc;">: </span><span style="color:#b5cea8;">1
-</span><span style="color:#dcdcdc;">                  </span><span style="background-color:#282828;color:#569cd6;">uri</span><span style="color:#dcdcdc;">: </span><span style="color:#d69d85;">&quot;https://b.com&quot;
-</span><span style="color:#dcdcdc;">                  </span><span style="background-color:#282828;color:#569cd6;">predicates</span><span style="color:#dcdcdc;">:
-</span><span style="color:#dcdcdc;">                      </span><span style="color:#dcdcdc;">- </span><span style="background-color:#282828;color:#d69d85;">Host=b.org</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">                  </span><span style="background-color:#282828;color:#569cd6;">filters</span><span style="color:#dcdcdc;">:
-</span><span style="color:#dcdcdc;">                      </span><span style="color:#dcdcdc;">- </span><span style="background-color:#282828;color:#d69d85;">AddRequestHeader=XHOST,my.b.org</span><span style="color:#dcdcdc;">
+<pre style="background-color:#282828;">
+<span style="font-weight:bold;color:#8ec07c;">spring</span><span style="color:#fdf4c1aa;">:
+</span><span style="color:#fdf4c1aa;">    </span><span style="font-weight:bold;color:#8ec07c;">cloud</span><span style="color:#fdf4c1aa;">:
+</span><span style="color:#fdf4c1aa;">        </span><span style="font-weight:bold;color:#8ec07c;">gateway</span><span style="color:#fdf4c1aa;">:
+</span><span style="color:#fdf4c1aa;">            </span><span style="font-weight:bold;color:#8ec07c;">routes</span><span style="color:#fdf4c1aa;">:
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">- </span><span style="font-weight:bold;color:#8ec07c;">id</span><span style="color:#fdf4c1aa;">: </span><span style="color:#b8bb26;">r1
+</span><span style="color:#fdf4c1aa;">                  </span><span style="font-weight:bold;color:#8ec07c;">order</span><span style="color:#fdf4c1aa;">: </span><span style="color:#d3869b;">2
+</span><span style="color:#fdf4c1aa;">                  </span><span style="font-weight:bold;color:#8ec07c;">uri</span><span style="color:#fdf4c1aa;">: </span><span style="color:#b8bb26;">&quot;https://a.com&quot;
+</span><span style="color:#fdf4c1aa;">                  </span><span style="font-weight:bold;color:#8ec07c;">predicates</span><span style="color:#fdf4c1aa;">:
+</span><span style="color:#fdf4c1aa;">                      </span><span style="color:#fdf4c1aa;">- </span><span style="color:#b8bb26;">host=a.org
+</span><span style="color:#fdf4c1aa;">                  </span><span style="font-weight:bold;color:#8ec07c;">filters</span><span style="color:#fdf4c1aa;">:
+</span><span style="color:#fdf4c1aa;">                      </span><span style="color:#fdf4c1aa;">- </span><span style="color:#b8bb26;">AddRequestHeader=XHOST,my.a.org
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">- </span><span style="font-weight:bold;color:#8ec07c;">id</span><span style="color:#fdf4c1aa;">: </span><span style="color:#b8bb26;">r2
+</span><span style="color:#fdf4c1aa;">                  </span><span style="font-weight:bold;color:#8ec07c;">order</span><span style="color:#fdf4c1aa;">: </span><span style="color:#d3869b;">1
+</span><span style="color:#fdf4c1aa;">                  </span><span style="font-weight:bold;color:#8ec07c;">uri</span><span style="color:#fdf4c1aa;">: </span><span style="color:#b8bb26;">&quot;https://b.com&quot;
+</span><span style="color:#fdf4c1aa;">                  </span><span style="font-weight:bold;color:#8ec07c;">predicates</span><span style="color:#fdf4c1aa;">:
+</span><span style="color:#fdf4c1aa;">                      </span><span style="color:#fdf4c1aa;">- </span><span style="color:#b8bb26;">Host=b.org
+</span><span style="color:#fdf4c1aa;">                  </span><span style="font-weight:bold;color:#8ec07c;">filters</span><span style="color:#fdf4c1aa;">:
+</span><span style="color:#fdf4c1aa;">                      </span><span style="color:#fdf4c1aa;">- </span><span style="color:#b8bb26;">AddRequestHeader=XHOST,my.b.org
 </span></pre><h1 id="predicate"><a class="zola-anchor" href="#predicate" aria-label="Anchor link for: predicate">🔗</a>
 Predicate</h1>
 <p>谓词对象即路由对象里面的判定条件。</p>
 <h2 id="asyncpredicate"><a class="zola-anchor" href="#asyncpredicate" aria-label="Anchor link for: asyncpredicate">🔗</a>
 AsyncPredicate</h2>
 <p><code>Route</code> 类里面的谓词对象的类型是 <code>AsyncPredicate</code>。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">Route </span><span style="color:#569cd6;">implements </span><span style="color:#4ec9b0;">Ordered </span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private final </span><span style="color:#dcdcdc;">String id;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private final </span><span style="color:#dcdcdc;">URI uri;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private final int </span><span style="color:#dcdcdc;">order;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private final </span><span style="color:#dcdcdc;">AsyncPredicate&lt;ServerWebExchange&gt; predicate; </span><span style="color:#608b4e;">// HERE
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private final </span><span style="color:#dcdcdc;">List&lt;GatewayFilter&gt; gatewayFilters;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">// ...
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public class </span><span style="color:#8ec07c;">Route </span><span style="color:#fa5c4b;">implements </span><span style="color:#8ec07c;">Ordered </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private final </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1aa;">id;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private final </span><span style="color:#8ec07c;">URI </span><span style="color:#fdf4c1aa;">uri;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private final int </span><span style="color:#fdf4c1aa;">order;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private final </span><span style="color:#8ec07c;">AsyncPredicate</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">ServerWebExchange</span><span style="color:#fdf4c1aa;">&gt; predicate; </span><span style="font-style:italic;color:#928374;">// HERE
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private final </span><span style="color:#8ec07c;">List</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">GatewayFilter</span><span style="color:#fdf4c1aa;">&gt; gatewayFilters;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="font-style:italic;color:#928374;">// ...
+</span><span style="color:#fdf4c1aa;">}
 </span></pre><h2 id="predicatedefinition"><a class="zola-anchor" href="#predicatedefinition" aria-label="Anchor link for: predicatedefinition">🔗</a>
 PredicateDefinition</h2>
 <p>相比 <code>AsyncPredicate</code> 类，我们更关心其对应的定义类 <code>PredicateDefinition</code>。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">PredicateDefinition {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@NotNull
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">String name;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">Map&lt;String, String&gt; args = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">LinkedHashMap&lt;&gt;();
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">// ...
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public class </span><span style="color:#8ec07c;">PredicateDefinition </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">NotNull
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1aa;">name;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">Map</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">&gt; args </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">LinkedHashMap</span><span style="color:#fdf4c1aa;">&lt;&gt;();
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="font-style:italic;color:#928374;">// ...
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>为了保持代码简单，其定义被设计为一个类型标识名和一个 K-V 的映射表。</p>
 <h2 id="predicatedefinition-to-asyncpredicate"><a class="zola-anchor" href="#predicatedefinition-to-asyncpredicate" aria-label="Anchor link for: predicatedefinition-to-asyncpredicate">🔗</a>
@@ -697,12 +697,12 @@ PredicateDefinition to AsyncPredicate</h2>
 RoutePredicateFactory</h2>
 <p>该类全称 <code>org.springframework.cloud.gateway.handler.predicate.RoutePredicateFactory&lt;C&gt;</code>，提供了一个
 统一的基于 Spring 通用反射模式的谓词构造工厂类。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">public interface </span><span style="color:#dcdcdc;">RoutePredicateFactory&lt;C&gt; </span><span style="color:#569cd6;">extends </span><span style="color:#4ec9b0;">ShortcutConfigurable</span><span style="color:#dcdcdc;">, Configurable&lt;C&gt; {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">AsyncPredicate&lt;ServerWebExchange&gt; applyAsync(Consumer&lt;C&gt; consumer);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">Class&lt;C&gt; getConfigClass();
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public interface </span><span style="color:#8ec07c;">RoutePredicateFactory</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fdf4c1;">C</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fa5c4b;">extends </span><span style="color:#8ec07c;">ShortcutConfigurable</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">Configurable</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">C</span><span style="color:#fdf4c1aa;">&gt; {
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">AsyncPredicate</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">ServerWebExchange</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">applyAsync(</span><span style="color:#8ec07c;">Consumer</span><span style="color:#fdf4c1;">&lt;</span><span style="color:#8ec07c;">C</span><span style="color:#fdf4c1;">&gt; consumer)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">Class</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">C</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">getConfigClass()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">}
 </span></pre><h2 id="builtin-predicate-factories"><a class="zola-anchor" href="#builtin-predicate-factories" aria-label="Anchor link for: builtin-predicate-factories">🔗</a>
 Builtin Predicate Factories</h2>
 <p>官方默认提供了以下谓词构造工厂的实现类，可以实现多种不同的请求匹配能力。</p>
@@ -724,24 +724,24 @@ Filter</h1>
 <h2 id="gatewayfilter"><a class="zola-anchor" href="#gatewayfilter" aria-label="Anchor link for: gatewayfilter">🔗</a>
 GatewayFilter</h2>
 <p><code>Route</code> 类里面的过滤器对象的类型是 <code>GatewayFilter</code>。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">public interface </span><span style="color:#dcdcdc;">GatewayFilter </span><span style="color:#569cd6;">extends </span><span style="color:#4ec9b0;">ShortcutConfigurable </span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">Mono&lt;Void&gt; filter(ServerWebExchange exchange, GatewayFilterChain chain);
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public interface </span><span style="color:#8ec07c;">GatewayFilter </span><span style="color:#fa5c4b;">extends </span><span style="color:#8ec07c;">ShortcutConfigurable </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">Mono</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Void</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">filter</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">ServerWebExchange </span><span style="color:#fdf4c1;">exchange</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">GatewayFilterChain </span><span style="color:#fdf4c1;">chain</span><span style="color:#fdf4c1aa;">);
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>该类与之前的 <code>DefaultGatewayFilterChain</code> 类结合起来，组成了一个链式的请求处理流程。</p>
 <h2 id="filterdefinition"><a class="zola-anchor" href="#filterdefinition" aria-label="Anchor link for: filterdefinition">🔗</a>
 FilterDefinition</h2>
 <p>相比 <code>FilterDefinition</code> 类，我们更关心其对应的定义类 <code>FilterDefinition</code>。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">FilterDefinition {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@NotNull
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">String name;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">Map&lt;String, String&gt; args = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">LinkedHashMap&lt;&gt;();
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">// ...
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public class </span><span style="color:#8ec07c;">FilterDefinition </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">NotNull
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1aa;">name;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">Map</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">&gt; args </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">LinkedHashMap</span><span style="color:#fdf4c1aa;">&lt;&gt;();
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="font-style:italic;color:#928374;">// ...
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>为了保持代码简单，其定义被设计为一个类型标识名和一个 K-V 的映射表。</p>
 <h2 id="filterdefinition-to-gatewayfilter"><a class="zola-anchor" href="#filterdefinition-to-gatewayfilter" aria-label="Anchor link for: filterdefinition-to-gatewayfilter">🔗</a>
@@ -751,18 +751,18 @@ FilterDefinition to GatewayFilter</h2>
 GatewayFilterFactory</h2>
 <p><code>org.springframework.cloud.gateway.filter.factory.GatewayFilterFactory&lt;T&gt;</code> 的设计模式和使用方式同
 <code>RoutePredicateFactory</code> 。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">public interface </span><span style="color:#dcdcdc;">GatewayFilterFactory&lt;C&gt; </span><span style="color:#569cd6;">extends </span><span style="color:#4ec9b0;">ShortcutConfigurable</span><span style="color:#dcdcdc;">, Configurable&lt;C&gt; {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">default </span><span style="color:#dcdcdc;">GatewayFilter apply(Consumer&lt;C&gt; consumer) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">C config = newConfig();
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">consumer.accept(config);
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">apply(config);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">default </span><span style="color:#dcdcdc;">Class&lt;C&gt; getConfigClass() {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">throw new </span><span style="color:#dcdcdc;">UnsupportedOperationException(</span><span style="color:#d69d85;">&quot;getConfigClass() not implemented&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public interface </span><span style="color:#8ec07c;">GatewayFilterFactory</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fdf4c1;">C</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fa5c4b;">extends </span><span style="color:#8ec07c;">ShortcutConfigurable</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">Configurable</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">C</span><span style="color:#fdf4c1aa;">&gt; {
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">default </span><span style="color:#8ec07c;">GatewayFilter </span><span style="color:#fdf4c1;">apply(</span><span style="color:#8ec07c;">Consumer</span><span style="color:#fdf4c1;">&lt;</span><span style="color:#8ec07c;">C</span><span style="color:#fdf4c1;">&gt; consumer) </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">C</span><span style="color:#fdf4c1aa;"> config </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">newConfig()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">consumer.</span><span style="color:#fdf4c1;">accept(config)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return </span><span style="color:#fdf4c1;">apply(config)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">default </span><span style="color:#8ec07c;">Class</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">C</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">getConfigClass() </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">throw new </span><span style="color:#8ec07c;">UnsupportedOperationException</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;getConfigClass() not implemented&quot;</span><span style="color:#fdf4c1aa;">);
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
 </span></pre><h2 id="builtin-filter-factories"><a class="zola-anchor" href="#builtin-filter-factories" aria-label="Anchor link for: builtin-filter-factories">🔗</a>
 Builtin Filter Factories</h2>
 <p>官方默认提供了以下过滤器构造工厂的实现类，可以实现多种不同的请求处理能力。</p>

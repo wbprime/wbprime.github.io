@@ -15,7 +15,7 @@
     <meta property="og:description" content="&lt;p&gt;JDK 8 引入了 Optional 的概念，以解决 &lt;code&gt;null&lt;&#x2F;code&gt; 可能引发的可能的 BUG。新的类型 &lt;code&gt;java.util.Optional&amp;lt;T&amp;gt;&lt;&#x2F;code&gt;,
 &lt;code&gt;java.util.OptionalDouble&lt;&#x2…"/>
     <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
-    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;red.css">
 <link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
     <body>
         <div class="container full">
@@ -103,41 +103,41 @@
 <code>null</code> 值的使用，强制使用者去处理 <code>absent &amp; present</code> 的不同情况。</p>
 <p><a name="continue-reading"></a></p>
 <p>比如，去数据库中查询一条指定名称的记录之 ID 的方法可能设计为：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">@Nullable
-</span><span style="color:#dcdcdc;">Long findByName(final String name);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#608b4e;">// or
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">OptionalLong findByName(final String name);
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Nullable
+</span><span style="color:#8ec07c;">Long </span><span style="color:#fdf4c1;">findByName(final </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1;"> name)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="font-style:italic;color:#928374;">// or
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#8ec07c;">OptionalLong </span><span style="color:#fdf4c1;">findByName(final </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1;"> name)</span><span style="color:#fdf4c1aa;">;
 </span></pre>
 <p>前者设计为：如果能找到对应的 ID，则返回之；否则返回 <code>null</code>。后者设计为：如果能找到对应的记录，则返
 回 <code>Optional.of(id)</code>；否则返回 <code>Optional.empty()</code>。</p>
 <p>则被调用时，前者会倾向于以下代码：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">Long id = service.findByName(</span><span style="color:#d69d85;">&quot;name&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(</span><span style="color:#569cd6;">null </span><span style="color:#dcdcdc;">!= id) { </span><span style="color:#608b4e;">// 1
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">System.out.println(</span><span style="color:#d69d85;">&quot;&quot; </span><span style="color:#dcdcdc;">+ (id + </span><span style="color:#b5cea8;">1</span><span style="color:#569cd6;">L</span><span style="color:#dcdcdc;">));
-</span><span style="color:#dcdcdc;">} </span><span style="color:#569cd6;">else </span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">System.out.println(</span><span style="color:#d69d85;">&quot;-1&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Long</span><span style="color:#fdf4c1aa;"> id </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> service.</span><span style="color:#fdf4c1;">findByName(</span><span style="color:#b8bb26;">&quot;name&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">(</span><span style="color:#d3869b;">null </span><span style="color:#fe8019;">!=</span><span style="color:#fdf4c1aa;"> id) { </span><span style="font-style:italic;color:#928374;">// 1
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(</span><span style="color:#b8bb26;">&quot;&quot; </span><span style="color:#fe8019;">+ </span><span style="color:#fdf4c1;">(id </span><span style="color:#fe8019;">+ </span><span style="color:#d3869b;">1</span><span style="color:#fa5c4b;">L</span><span style="color:#fdf4c1;">))</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">} </span><span style="color:#fa5c4b;">else </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(</span><span style="color:#b8bb26;">&quot;-1&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>后者会倾向于以下代码：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">OptionalLong opt = service.findByName(</span><span style="color:#d69d85;">&quot;name&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(opt.isPresent()) { </span><span style="color:#608b4e;">// 2
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">System.out.println(</span><span style="color:#d69d85;">&quot;&quot; </span><span style="color:#dcdcdc;">+ (opt.getAsLong() + </span><span style="color:#b5cea8;">1</span><span style="color:#569cd6;">L</span><span style="color:#dcdcdc;">));
-</span><span style="color:#dcdcdc;">} </span><span style="color:#569cd6;">else </span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">System.out.println(</span><span style="color:#d69d85;">&quot;-1&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">OptionalLong</span><span style="color:#fdf4c1aa;"> opt </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> service.</span><span style="color:#fdf4c1;">findByName(</span><span style="color:#b8bb26;">&quot;name&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">(opt.</span><span style="color:#fdf4c1;">isPresent()</span><span style="color:#fdf4c1aa;">) { </span><span style="font-style:italic;color:#928374;">// 2
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(</span><span style="color:#b8bb26;">&quot;&quot; </span><span style="color:#fe8019;">+ </span><span style="color:#fdf4c1;">(opt.getAsLong() </span><span style="color:#fe8019;">+ </span><span style="color:#d3869b;">1</span><span style="color:#fa5c4b;">L</span><span style="color:#fdf4c1;">))</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">} </span><span style="color:#fa5c4b;">else </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(</span><span style="color:#b8bb26;">&quot;-1&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>在实际项目中，<code>// 1</code> 处的代码很容易被忽略，从而引发 NPE 导致潜在的 BUG；而 <code>// 2</code> 处的代码基本上不会
 被无意的忽略掉。</p>
 <p>由于以上的优点，以及 Optional 系类型对于函数型用法的支持，我在绝大多数的代码中都会使用 Optional 系的
 类型代替可能的 <code>null</code> 型值，上面的代码可以简化为：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">OptionalLong opt = service.findByName(</span><span style="color:#d69d85;">&quot;name&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">System.out.println(opt.map(n </span><span style="color:#569cd6;">-&gt;</span><span style="color:#dcdcdc;"> n + </span><span style="color:#b5cea8;">1</span><span style="color:#569cd6;">L</span><span style="color:#dcdcdc;">).map(String::valueOf).orElse(</span><span style="color:#d69d85;">&quot;-1&quot;</span><span style="color:#dcdcdc;">));
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">OptionalLong</span><span style="color:#fdf4c1aa;"> opt </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> service.</span><span style="color:#fdf4c1;">findByName(</span><span style="color:#b8bb26;">&quot;name&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(opt.map(n </span><span style="color:#fa5c4b;">-&gt;</span><span style="color:#fdf4c1;"> n </span><span style="color:#fe8019;">+ </span><span style="color:#d3869b;">1</span><span style="color:#fa5c4b;">L</span><span style="color:#fdf4c1;">).map(</span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1;">::valueOf).orElse(</span><span style="color:#b8bb26;">&quot;-1&quot;</span><span style="color:#fdf4c1;">))</span><span style="color:#fdf4c1aa;">;
 </span></pre>
 <p>可以看出，<code>OptionalLong#map</code> 与 <code>OptionalLong#orElse</code> 组合使用能够在编写代码的时候带来巨大的快感。</p>
 <p>然而，滥用 <code>OptionalLong#orElse</code> 也可能会导致 BUG。</p>
@@ -146,23 +146,23 @@
 <p>在项目中有段查询的逻辑：查找多个队列中最大的一个任务 ID （select max(id) from the_table where
 queue in (1, 2, 3);），数据库中存储的是 <code>int</code> 类型的队列编号，而查询的条件里面给出的是队列名称。队列
 名称到队列编号的映射关系在数据库外部维护。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">interface </span><span style="color:#dcdcdc;">TaskService {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">OptionalLong findByQueues(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">List&lt;String&gt; queues);
-</span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#569cd6;">interface </span><span style="color:#dcdcdc;">QueueService {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">OptionalLong indexFor(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">String name);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">long </span><span style="color:#dcdcdc;">fallbackIndex();
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">interface </span><span style="color:#8ec07c;">TaskService </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">OptionalLong findByQueues</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">List</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">queues</span><span style="color:#fdf4c1aa;">);
+</span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fa5c4b;">interface </span><span style="color:#8ec07c;">QueueService </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">OptionalLong indexFor</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">name</span><span style="color:#fdf4c1aa;">);
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">long </span><span style="color:#8ec07c;">fallbackIndex</span><span style="color:#fdf4c1aa;">();
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>服务的逻辑里面，一个任务必定属于一个队列；一个给定的队列名称可能没有对应的编号（该队列名可能不存在），所以通过名称查询编号的方法返回的是 <code>OptionalLong</code>；存在一个默认队列（fallback 队列）。</p>
 <p>在 <code>findByQueues</code> 的实现中，会首先根据队列的名称和编号的映射关系确定需要查询的队列编号集合，然后生成对应的查询条件查找结果并返回。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">Set&lt;Long&gt; queueIds = queues.stream()
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">.map(name </span><span style="color:#569cd6;">-&gt;</span><span style="color:#dcdcdc;"> queueService.indexFor(name).orElse(queueService.fallbackIndex()))
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">.collect(Collectors.toSet());
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Set</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Long</span><span style="color:#fdf4c1aa;">&gt; queueIds </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> queues.</span><span style="color:#fdf4c1;">stream()
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">map(name </span><span style="color:#fa5c4b;">-&gt;</span><span style="color:#fdf4c1;"> queueService.indexFor(name).orElse(queueService.fallbackIndex()))
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">collect(</span><span style="color:#8ec07c;">Collectors</span><span style="color:#fdf4c1;">.toSet())</span><span style="color:#fdf4c1aa;">;
 </span></pre><h1 id="bug-fen-xi"><a class="zola-anchor" href="#bug-fen-xi" aria-label="Anchor link for: bug-fen-xi">🔗</a>
 BUG 分析</h1>
 <p>线上服务在运行中，有一个增加队列的需求。当增加了队列的映射之后，发现线上服务会不按照限定的队列集合获取任务，查询到的任务有时候会来自于默认队列。因为线上服务对于不同队列的任务可能会有不同的逻辑，获取到的默认队列的任务的处理就出现问题，服务开始报警。</p>
@@ -171,12 +171,12 @@ BUG 分析</h1>
 <h1 id="fix"><a class="zola-anchor" href="#fix" aria-label="Anchor link for: fix">🔗</a>
 Fix</h1>
 <p>问题代码修改为：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">Set&lt;Long&gt; queueIds = queues.stream()
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">.map(name </span><span style="color:#569cd6;">-&gt;</span><span style="color:#dcdcdc;"> queueService.indexFor(name))
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">.filter(OptionalLong::isPresent)
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">.map(OptionalLong::getAsLong)
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">.collect(Collectors.toSet());
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Set</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Long</span><span style="color:#fdf4c1aa;">&gt; queueIds </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> queues.</span><span style="color:#fdf4c1;">stream()
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">map(name </span><span style="color:#fa5c4b;">-&gt;</span><span style="color:#fdf4c1;"> queueService.indexFor(name))
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">filter(</span><span style="color:#8ec07c;">OptionalLong</span><span style="color:#fdf4c1;">::isPresent)
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">map(</span><span style="color:#8ec07c;">OptionalLong</span><span style="color:#fdf4c1;">::getAsLong)
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">collect(</span><span style="color:#8ec07c;">Collectors</span><span style="color:#fdf4c1;">.toSet())</span><span style="color:#fdf4c1aa;">;
 </span></pre><h1 id="zong-jie"><a class="zola-anchor" href="#zong-jie" aria-label="Anchor link for: zong-jie">🔗</a>
 总结</h1>
 <p>根据分析，其实这一次的 BUG 并不是 <code>OptionalLong</code> 的锅，而是由与无脑使用 <code>OptionalLong</code> 导致的，是滥

@@ -14,7 +14,7 @@
     <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-03-12-multiple-jwt-auth-handler-in-vertx&#x2F;"/>
     <meta property="og:description" content="&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;vertx.io&quot;&gt;Vert.x&lt;&#x2F;a&gt; 的官方 Web 开发包 &lt;a href=&quot;https:&#x2F;&#x2F;vertx.io&#x2F;docs&#x2F;vertx-web&#x2F;java&#x2F;&quot;&gt;Vert.x-Web…"/>
     <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
-    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;red.css">
 <link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
     <body>
         <div class="container full">
@@ -122,14 +122,14 @@ AuthZ</a> 。</p>
 <ol>
 <li>确定 JWT 的算法和密钥</li>
 </ol>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">WTAuthOptions authConfig = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">JWTAuthOptions()
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">.setKeyStore(</span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">KeyStoreOptions()
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">.setType(</span><span style="color:#d69d85;">&quot;jceks&quot;</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">.setPath(</span><span style="color:#d69d85;">&quot;keystore.jceks&quot;</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">.setPassword(</span><span style="color:#d69d85;">&quot;secret&quot;</span><span style="color:#dcdcdc;">));
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">JWTAuth authProvider = JWTAuth.create(vertx, authConfig);
+<pre style="background-color:#282828;">
+<span style="color:#8ec07c;">WTAuthOptions</span><span style="color:#fdf4c1aa;"> authConfig </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">JWTAuthOptions</span><span style="color:#fdf4c1aa;">()
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">setKeyStore(</span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">KeyStoreOptions</span><span style="color:#fdf4c1;">()
+</span><span style="color:#fdf4c1;">    </span><span style="color:#fdf4c1;">.setType(</span><span style="color:#b8bb26;">&quot;jceks&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1;">    </span><span style="color:#fdf4c1;">.setPath(</span><span style="color:#b8bb26;">&quot;keystore.jceks&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1;">    </span><span style="color:#fdf4c1;">.setPassword(</span><span style="color:#b8bb26;">&quot;secret&quot;</span><span style="color:#fdf4c1;">))</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#8ec07c;">JWTAuth</span><span style="color:#fdf4c1aa;"> authProvider </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">JWTAuth</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">create(vertx, authConfig)</span><span style="color:#fdf4c1aa;">;
 </span></pre>
 <p>JWTAuth 是 Vert.x 的 AuthProvider 的一个实现；AuthProvider 主要提供根据一个 JSON 的用户信息对象进行用户认证的能力；JWTAuth 则通过校验一个 JWT 型的 JSON token 来验权，同时扩展加上了生成 JWT token 的方法。</p>
 <p>JWT 算法和结构相关参见 <a href="https://jwt.io">JWT</a> 。</p>
@@ -137,41 +137,41 @@ AuthZ</a> 。</p>
 <li>生成并发放 Token</li>
 </ol>
 <p>这一步一般在登录时进行。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">router.route(&quot;/login&quot;).handler(this::login);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">private void login(final RoutingContext ctx) {
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">if (&quot;paulo&quot;.equals(ctx.request().getParam(&quot;username&quot;)) &amp;&amp; &quot;secret&quot;.equals(ctx.request().getParam(&quot;password&quot;))) {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ctx.response().end(authProvider.generateToken(new JsonObject().put(&quot;sub&quot;, &quot;paulo&quot;), new JWTOptions()));
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">} else {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ctx.fail(401);
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">router.route(&quot;/login&quot;).handler(this::login);
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">private void login(final RoutingContext ctx) {
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">if (&quot;paulo&quot;.equals(ctx.request().getParam(&quot;username&quot;)) &amp;&amp; &quot;secret&quot;.equals(ctx.request().getParam(&quot;password&quot;))) {
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ctx.response().end(authProvider.generateToken(new JsonObject().put(&quot;sub&quot;, &quot;paulo&quot;), new JWTOptions()));
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">} else {
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ctx.fail(401);
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <ol start="3">
 <li>验证 Token</li>
 </ol>
 <p>这一步一般以拦截器的形式实现，用于在访问需要权限控制的接口时，提前通过 JWT 验权来确定是否放行。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">router.route().handler(JWTAuthHandler.create(authProvider));
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">router.get().handler(this::findById);
-</span><span style="color:#dcdcdc;">router.post().handler(this::add);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">private void findById(final RoutingContext ctx) {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">final User user = ctx.getUser();
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">if (null != user) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">// Authenticated
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">// TODO
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">private void add(final RoutingContext ctx) {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">final User user = ctx.getUser();
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">if (null != user) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">// Authenticated
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">// TODO
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">router.route().handler(JWTAuthHandler.create(authProvider));
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">router.get().handler(this::findById);
+</span><span style="color:#fdf4c1aa;">router.post().handler(this::add);
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">private void findById(final RoutingContext ctx) {
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">final User user = ctx.getUser();
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">if (null != user) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">// Authenticated
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">// TODO
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">private void add(final RoutingContext ctx) {
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">final User user = ctx.getUser();
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">if (null != user) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">// Authenticated
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">// TODO
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
 </span></pre><h1 id="ji-yu-tong-yong-liu-cheng-de-gai-zao"><a class="zola-anchor" href="#ji-yu-tong-yong-liu-cheng-de-gai-zao" aria-label="Anchor link for: ji-yu-tong-yong-liu-cheng-de-gai-zao">🔗</a>
 基于通用流程的改造</h1>
 <p>因为需要增加对多用户源的支持，所以需要扩充实现 JWT 验证的流程，使得能够：1. 不同用户源的用户需要使用不同的密钥和有效期等基本配置；2. 不同数据源的用户的登录接口参数可以不一样（如用户源 A 通过 username/password，用户源 B 通过 uid/token）</p>
@@ -179,201 +179,201 @@ AuthZ</a> 。</p>
 官方的 JWT Auth Provider，提供多源的分发验证。</p>
 <h2 id="yong-hu-yuan-de-chou-xiang-userrealm"><a class="zola-anchor" href="#yong-hu-yuan-de-chou-xiang-userrealm" aria-label="Anchor link for: yong-hu-yuan-de-chou-xiang-userrealm">🔗</a>
 用户源的抽象 UserRealm</h2>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">public interface </span><span style="color:#dcdcdc;">RxUserRealm {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">Set&lt;String&gt; supportedRealms();
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">Single&lt;Boolean&gt; isUserAvailable(String uid);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">Single&lt;String&gt; getJwtSecret();
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">Single&lt;JwtTokenDto&gt; authenticate(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">LoginDto login);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">Single&lt;Boolean&gt; authorize(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">PrincipalDto pricipal, </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">PermissionDto permission);
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public interface </span><span style="color:#8ec07c;">RxUserRealm </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">Set</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">supportedRealms</span><span style="color:#fdf4c1aa;">();
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">Single</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Boolean</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">isUserAvailable</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">uid</span><span style="color:#fdf4c1aa;">);
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">Single</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">getJwtSecret</span><span style="color:#fdf4c1aa;">();
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">Single</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">JwtTokenDto</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">authenticate</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">LoginDto </span><span style="color:#fdf4c1;">login</span><span style="color:#fdf4c1aa;">);
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">Single</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Boolean</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">authorize</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">PrincipalDto </span><span style="color:#fdf4c1;">pricipal</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">PermissionDto </span><span style="color:#fdf4c1;">permission</span><span style="color:#fdf4c1aa;">);
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>其中，supportedRealms 说明自身的用户源集合；isUserAvailable 提供根据用户ID或用户名查询用户是否存在的功能；getJwtSecret 提供查询用户源相关的 JWT 密钥的功能；authenticate &amp; authorize 提供各用户源的用户认证和授权管理的功能。</p>
 <p>接口的返回使用 <a href="https://github.com/ReactiveX/RxJava">RxJava 2</a> 的类型，主要原因是这些接口可以是远程调用的，可以利用RxJava 的异步响应机制来封装差异。</p>
 <p>作为示例，服务提供了一个 DemoUserRealm，用以提供无数据源用户体验服务的能力。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">@AutoService(RxUserRealm.class)
-</span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">DemoUserRealm </span><span style="color:#569cd6;">implements </span><span style="color:#4ec9b0;">RxUserRealm </span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private static final </span><span style="color:#dcdcdc;">String UID_PREFIX = </span><span style="color:#d69d85;">&quot;demo&quot;</span><span style="color:#dcdcdc;">;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private static final </span><span style="color:#dcdcdc;">String JWT_SECRET = </span><span style="color:#d69d85;">&quot;demo&quot;</span><span style="color:#dcdcdc;">;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Override
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">Set&lt;String&gt; supportedRealms() {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">ImmutableSet.of(</span><span style="color:#d69d85;">&quot;demo&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Override
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">Single&lt;Boolean&gt; isUserAvailable(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">String uid) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">Single.just(uid.startsWith(</span><span style="color:#b4cea8;">UID_PREFIX</span><span style="color:#dcdcdc;">));
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Override
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">Single&lt;String&gt; getJwtSecret() {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">Single.just(</span><span style="color:#b4cea8;">JWT_SECRET</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Override
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">Single&lt;JwtTokenDto&gt; authenticate(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">LoginDto login) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">String pw = login.claims().get(</span><span style="color:#d69d85;">&quot;password&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#608b4e;">// Omitted
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">Single.just(JwtTokenDto.create()); </span><span style="color:#608b4e;">// Omitted
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Override
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">Single&lt;Boolean&gt; authorize(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">PrincipalDto principal, </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">PermissionDto permission) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">switch </span><span style="color:#dcdcdc;">(permission.category()) {
-</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">case </span><span style="color:#b4cea8;">READ</span><span style="color:#569cd6;">:
-</span><span style="color:#dcdcdc;">                </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">Single.just(Boolean.</span><span style="color:#b4cea8;">TRUE</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">case </span><span style="color:#b4cea8;">WRITE</span><span style="color:#569cd6;">:
-</span><span style="color:#dcdcdc;">                </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">Single.just(Boolean.</span><span style="color:#b4cea8;">FALSE</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">default:
-</span><span style="color:#dcdcdc;">                </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">Single.just(Boolean.</span><span style="color:#b4cea8;">FALSE</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">AutoService</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">RxUserRealm</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">class</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fa5c4b;">public class </span><span style="color:#8ec07c;">DemoUserRealm </span><span style="color:#fa5c4b;">implements </span><span style="color:#8ec07c;">RxUserRealm </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private static final </span><span style="color:#8ec07c;">String UID_PREFIX </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&quot;demo&quot;</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private static final </span><span style="color:#8ec07c;">String JWT_SECRET </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&quot;demo&quot;</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">Set</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">supportedRealms</span><span style="color:#fdf4c1aa;">() {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return </span><span style="color:#8ec07c;">ImmutableSet</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">of(</span><span style="color:#b8bb26;">&quot;demo&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">Single</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Boolean</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">isUserAvailable</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">uid</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return </span><span style="color:#8ec07c;">Single</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">just(uid.startsWith(UID_PREFIX))</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">Single</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">getJwtSecret</span><span style="color:#fdf4c1aa;">() {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return </span><span style="color:#8ec07c;">Single</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">just(JWT_SECRET)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">Single</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">JwtTokenDto</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">authenticate</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">LoginDto </span><span style="color:#fdf4c1;">login</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;"> pw </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> login.</span><span style="color:#fdf4c1;">claims()</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">get(</span><span style="color:#b8bb26;">&quot;password&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="font-style:italic;color:#928374;">// Omitted
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return </span><span style="color:#8ec07c;">Single</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">just(</span><span style="color:#8ec07c;">JwtTokenDto</span><span style="color:#fdf4c1;">.create())</span><span style="color:#fdf4c1aa;">; </span><span style="font-style:italic;color:#928374;">// Omitted
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">Single</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Boolean</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">authorize</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">PrincipalDto </span><span style="color:#fdf4c1;">principal</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">PermissionDto </span><span style="color:#fdf4c1;">permission</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">switch </span><span style="color:#fdf4c1aa;">(permission.</span><span style="color:#fdf4c1;">category()</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">case </span><span style="color:#fdf4c1;">READ</span><span style="color:#fe8019;">:
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fa5c4b;">return </span><span style="color:#8ec07c;">Single</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">just(</span><span style="color:#8ec07c;">Boolean</span><span style="color:#fdf4c1;">.TRUE)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">case </span><span style="color:#fdf4c1;">WRITE</span><span style="color:#fe8019;">:
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fa5c4b;">return </span><span style="color:#8ec07c;">Single</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">just(</span><span style="color:#8ec07c;">Boolean</span><span style="color:#fdf4c1;">.FALSE)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">default</span><span style="color:#fe8019;">:
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fa5c4b;">return </span><span style="color:#8ec07c;">Single</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">just(</span><span style="color:#8ec07c;">Boolean</span><span style="color:#fdf4c1;">.FALSE)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p><code>@AutoService</code> 注解是 Google Auto-Service 包的一部分，用来辅助实现 Java 基于 <code>java.util.ServiceLoader</code> 的 SPI 机制。</p>
 <h2 id="spibaseduserrealmservice"><a class="zola-anchor" href="#spibaseduserrealmservice" aria-label="Anchor link for: spibaseduserrealmservice">🔗</a>
 SpiBasedUserRealmService</h2>
 <p>为了提高扩展性，可以使用 Java ServiceLoader (<code>java.util.ServiceLoader</code>) 来进行 UserRealm 的管理。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">class </span><span style="color:#dcdcdc;">SpiBasedUserRealmService {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">Map&lt;String, RxUserRealm&gt; mappedRealms;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">SpiBasedUserRealmService() {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">Map&lt;String, RxUserRealm&gt; map = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">HashMap();
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">ServiceLoader&lt;RxUserRealm&gt; realms = ServiceLoader.load(RxUserRealm.class);
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">for </span><span style="color:#dcdcdc;">(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">RxUserRealm r</span><span style="color:#569cd6;">:</span><span style="color:#dcdcdc;"> realms) {
-</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">Set&lt;String&gt; types = r.supportedRealms();
-</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(types.isEmpty()) </span><span style="color:#569cd6;">continue</span><span style="color:#dcdcdc;">;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">for </span><span style="color:#dcdcdc;">(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">String type</span><span style="color:#569cd6;">:</span><span style="color:#dcdcdc;"> types) {
-</span><span style="color:#dcdcdc;">                </span><span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(map.containsKey(type)) </span><span style="color:#569cd6;">continue</span><span style="color:#dcdcdc;">;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">map.put(type, r);
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#608b4e;">// Guava utils
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">mappedRealms = ImmutableMap.copyOf(map);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">Optional&lt;RxUserRealm&gt; findRealm(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">String realm) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">Optional.ofNullable(mappedRealms.get(type));
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">class </span><span style="color:#8ec07c;">SpiBasedUserRealmService </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">Map</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">RxUserRealm</span><span style="color:#fdf4c1aa;">&gt; mappedRealms;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">SpiBasedUserRealmService</span><span style="color:#fdf4c1aa;">() {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Map</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">RxUserRealm</span><span style="color:#fdf4c1aa;">&gt; map </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">HashMap</span><span style="color:#fdf4c1aa;">();
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">ServiceLoader</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">RxUserRealm</span><span style="color:#fdf4c1aa;">&gt; realms </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">ServiceLoader</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">load(</span><span style="color:#8ec07c;">RxUserRealm</span><span style="color:#fdf4c1;">.class)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">for </span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">RxUserRealm</span><span style="color:#fdf4c1aa;"> r</span><span style="color:#fe8019;">:</span><span style="color:#fdf4c1aa;"> realms) {
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Set</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">&gt; types </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> r.</span><span style="color:#fdf4c1;">supportedRealms()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">(types.</span><span style="color:#fdf4c1;">isEmpty()</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">continue</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">for </span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;"> type</span><span style="color:#fe8019;">:</span><span style="color:#fdf4c1aa;"> types) {
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">(map.</span><span style="color:#fdf4c1;">containsKey(type)</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">continue</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">map.</span><span style="color:#fdf4c1;">put(type, r)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="font-style:italic;color:#928374;">// Guava utils
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">mappedRealms </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">ImmutableMap</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">copyOf(map)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">Optional</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">RxUserRealm</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">findRealm</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">realm</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return </span><span style="color:#8ec07c;">Optional</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">ofNullable(mappedRealms.get(type))</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
 </span></pre><h2 id="jwt-auth-provider"><a class="zola-anchor" href="#jwt-auth-provider" aria-label="Anchor link for: jwt-auth-provider">🔗</a>
 JWT Auth Provider</h2>
 <p>主要的逻辑在 <code>CustomJwtAuthProvider</code> 中。该类实现 Vert.x 内置的 JWTAuth 接口，以能够和 vert.x-web 模块无缝结合。</p>
 <p>在 authenticate 的实现中，首先对 JWT 的 token 串进行只解码不验证，从解码出的 JSON 中可以获得对应的用户源类型，解码 JWT token 可以使用<a href="https://github.com/auth0/java-jwt">这个</a>；可以通过用户源类型找到可用的 RxUserRealm 实例，查询对应的 JWT 配置；之后再使用配置创建原生的 JWTAuth 实例进行 authenticate。</p>
 <p>在 generateToken 的实现中，首先根据用户源类型查询到可用的 RxUserRealm 实例，然后使用该实例的 JWT 配置创建原生的 JWTAuth 实例进行 generateToken。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">class </span><span style="color:#dcdcdc;">CustomJwtAuthProvider </span><span style="color:#569cd6;">implements </span><span style="color:#4ec9b0;">JWTAuth </span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private final </span><span style="color:#dcdcdc;">Scheduler workingScheduler;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private final </span><span style="color:#dcdcdc;">Vertx vertx;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private final </span><span style="color:#dcdcdc;">SpiBasedUserRealmService realmService;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">// ...
-</span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">// init code omited
-</span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">// ...
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Override
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">authenticate(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">JsonObject authInfo, </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">Handler&lt;AsyncResult&lt;User&gt;&gt; resultHandler) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">final </span><span style="color:#b4cea8;">JWT</span><span style="color:#dcdcdc;"> decode;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">try </span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">String jwtStr = authInfo.getString(</span><span style="color:#d69d85;">&quot;jwt&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">decode = </span><span style="color:#b4cea8;">JWT</span><span style="color:#dcdcdc;">.decode(jwtStr);
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">} </span><span style="color:#569cd6;">catch </span><span style="color:#dcdcdc;">(RuntimeException ex) {
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">resultHandler.handle(Future.failedFuture(ex));
-</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;">;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">String realm = firstAudience(decode);
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">authProviderByRealm(Strings.nullToEmpty(realm))
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">.subscribeOn(workingScheduler)
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">.subscribe(
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">jwt </span><span style="color:#569cd6;">-&gt;</span><span style="color:#dcdcdc;"> jwt.authenticate(authInfo, re </span><span style="color:#569cd6;">-&gt; </span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(re.failed()) {
-</span><span style="color:#dcdcdc;">                        </span><span style="color:#b4cea8;">LOG</span><span style="color:#dcdcdc;">.warn(</span><span style="color:#d69d85;">&quot;JWT auth failed for realm </span><span style="color:#e3bbab;">\&quot;</span><span style="color:#d69d85;">{}</span><span style="color:#e3bbab;">\&quot;</span><span style="color:#d69d85;">&quot;</span><span style="color:#dcdcdc;">, realm, re.cause());
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">} </span><span style="color:#569cd6;">else </span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">                        </span><span style="color:#b4cea8;">LOG</span><span style="color:#dcdcdc;">.debug(</span><span style="color:#d69d85;">&quot;JWT auth succeed for realm </span><span style="color:#e3bbab;">\&quot;</span><span style="color:#d69d85;">{}</span><span style="color:#e3bbab;">\&quot;</span><span style="color:#d69d85;">&quot;</span><span style="color:#dcdcdc;">, realm);
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">resultHandler.handle(re);
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">}),
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">ex </span><span style="color:#569cd6;">-&gt; </span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#b4cea8;">LOG</span><span style="color:#dcdcdc;">.warn(</span><span style="color:#d69d85;">&quot;JWT auth exception for realm </span><span style="color:#e3bbab;">\&quot;</span><span style="color:#d69d85;">{}</span><span style="color:#e3bbab;">\&quot;</span><span style="color:#d69d85;">&quot;</span><span style="color:#dcdcdc;">, realm, ex);
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">resultHandler.handle(Future.failedFuture(ex));
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">String firstAudience(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">Payload payload) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">List&lt;String&gt; audience = payload.getAudience();
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">(</span><span style="color:#569cd6;">null </span><span style="color:#dcdcdc;">!= audience </span><span style="color:#569cd6;">&amp;&amp; !</span><span style="color:#dcdcdc;"> audience.isEmpty()) </span><span style="color:#569cd6;">?</span><span style="color:#dcdcdc;"> audience.get(</span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">) </span><span style="color:#569cd6;">: </span><span style="color:#d69d85;">&quot;&quot;</span><span style="color:#dcdcdc;">;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Override
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">String generateToken(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">JsonObject claims, </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">JWTOptions options) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">String realm = claims.getString(</span><span style="color:#d69d85;">&quot;aud&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">authProviderByRealm(Strings.nullToEmpty(realm))
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">.map(jwt </span><span style="color:#569cd6;">-&gt;</span><span style="color:#dcdcdc;"> jwt.generateToken(claims, options))
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">.blockingGet();
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">Single&lt;JWTAuth&gt; authProviderByRealm(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">String realm) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">Optional&lt;RxUserRealm&gt; opt = realmService.findRealm(realm);
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(</span><span style="color:#569cd6;">!</span><span style="color:#dcdcdc;"> opt.isPresent())
-</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">Single.error(</span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">IllegalStateException(</span><span style="color:#d69d85;">&quot;Realm not supported: &quot; </span><span style="color:#dcdcdc;">+ realm));
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> opt.get().findJwtSecret(realm).map(this::jwtAuth);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">JWTAuth jwtAuth(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">String key) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">JWTAuth.create(vertx, </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">JWTAuthOptions()
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">.addPubSecKey(</span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">PubSecKeyOptions()
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.setAlgorithm(</span><span style="color:#d69d85;">&quot;HS256&quot;</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.setPublicKey(key)
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.setSymmetric(</span><span style="color:#569cd6;">true</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">class </span><span style="color:#8ec07c;">CustomJwtAuthProvider </span><span style="color:#fa5c4b;">implements </span><span style="color:#8ec07c;">JWTAuth </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private final </span><span style="color:#8ec07c;">Scheduler </span><span style="color:#fdf4c1aa;">workingScheduler;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private final </span><span style="color:#8ec07c;">Vertx </span><span style="color:#fdf4c1aa;">vertx;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private final </span><span style="color:#8ec07c;">SpiBasedUserRealmService </span><span style="color:#fdf4c1aa;">realmService;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="font-style:italic;color:#928374;">// ...
+</span><span style="color:#fdf4c1aa;">    </span><span style="font-style:italic;color:#928374;">// init code omited
+</span><span style="color:#fdf4c1aa;">    </span><span style="font-style:italic;color:#928374;">// ...
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public void </span><span style="color:#8ec07c;">authenticate</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">JsonObject </span><span style="color:#fdf4c1;">authInfo</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Handler</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">AsyncResult</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">User</span><span style="color:#fdf4c1aa;">&gt;&gt; </span><span style="color:#fdf4c1;">resultHandler</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">final </span><span style="color:#fdf4c1;">JWT</span><span style="color:#fdf4c1aa;"> decode;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">try </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;"> jwtStr </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> authInfo.</span><span style="color:#fdf4c1;">getString(</span><span style="color:#b8bb26;">&quot;jwt&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">decode </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">JWT</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">decode(jwtStr)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">} </span><span style="color:#fa5c4b;">catch </span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">RuntimeException </span><span style="color:#fdf4c1;">ex</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">resultHandler.</span><span style="color:#fdf4c1;">handle(</span><span style="color:#8ec07c;">Future</span><span style="color:#fdf4c1;">.failedFuture(ex))</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;"> realm </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">firstAudience(decode)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">authProviderByRealm(</span><span style="color:#8ec07c;">Strings</span><span style="color:#fdf4c1;">.nullToEmpty(realm))
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">subscribeOn(workingScheduler)
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">subscribe(
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">jwt </span><span style="color:#fa5c4b;">-&gt;</span><span style="color:#fdf4c1;"> jwt.authenticate(authInfo, re </span><span style="color:#fa5c4b;">-&gt; </span><span style="color:#fdf4c1;">{
+</span><span style="color:#fdf4c1;">                    </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1;">(re.failed()) {
+</span><span style="color:#fdf4c1;">                        </span><span style="color:#fdf4c1;">LOG.warn(</span><span style="color:#b8bb26;">&quot;JWT auth failed for realm \&quot;{}\&quot;&quot;</span><span style="color:#fdf4c1;">, realm, re.cause());
+</span><span style="color:#fdf4c1;">                    </span><span style="color:#fdf4c1;">} </span><span style="color:#fa5c4b;">else </span><span style="color:#fdf4c1;">{
+</span><span style="color:#fdf4c1;">                        </span><span style="color:#fdf4c1;">LOG.debug(</span><span style="color:#b8bb26;">&quot;JWT auth succeed for realm \&quot;{}\&quot;&quot;</span><span style="color:#fdf4c1;">, realm);
+</span><span style="color:#fdf4c1;">                    </span><span style="color:#fdf4c1;">}
+</span><span style="color:#fdf4c1;">                    </span><span style="color:#fdf4c1;">resultHandler.handle(re);
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">}),
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">ex </span><span style="color:#fa5c4b;">-&gt; </span><span style="color:#fdf4c1;">{
+</span><span style="color:#fdf4c1;">                    </span><span style="color:#fdf4c1;">LOG.warn(</span><span style="color:#b8bb26;">&quot;JWT auth exception for realm \&quot;{}\&quot;&quot;</span><span style="color:#fdf4c1;">, realm, ex);
+</span><span style="color:#fdf4c1;">                    </span><span style="color:#fdf4c1;">resultHandler.handle(</span><span style="color:#8ec07c;">Future</span><span style="color:#fdf4c1;">.failedFuture(ex));
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">}
+</span><span style="color:#fdf4c1;">            </span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">String firstAudience</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Payload </span><span style="color:#fdf4c1;">payload</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">List</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">&gt; audience </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> payload.</span><span style="color:#fdf4c1;">getAudience()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return </span><span style="color:#fdf4c1aa;">(</span><span style="color:#d3869b;">null </span><span style="color:#fe8019;">!=</span><span style="color:#fdf4c1aa;"> audience </span><span style="color:#fe8019;">&amp;&amp; !</span><span style="color:#fdf4c1aa;"> audience.</span><span style="color:#fdf4c1;">isEmpty()</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fe8019;">?</span><span style="color:#fdf4c1aa;"> audience.</span><span style="color:#fdf4c1;">get(</span><span style="color:#d3869b;">0</span><span style="color:#fdf4c1;">) </span><span style="color:#fe8019;">: </span><span style="color:#b8bb26;">&quot;&quot;</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">String generateToken</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">JsonObject </span><span style="color:#fdf4c1;">claims</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">JWTOptions </span><span style="color:#fdf4c1;">options</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;"> realm </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> claims.</span><span style="color:#fdf4c1;">getString(</span><span style="color:#b8bb26;">&quot;aud&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return </span><span style="color:#fdf4c1;">authProviderByRealm(</span><span style="color:#8ec07c;">Strings</span><span style="color:#fdf4c1;">.nullToEmpty(realm))
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">map(jwt </span><span style="color:#fa5c4b;">-&gt;</span><span style="color:#fdf4c1;"> jwt.generateToken(claims, options))
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">blockingGet()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">Single</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">JWTAuth</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">authProviderByRealm</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">realm</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Optional</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">RxUserRealm</span><span style="color:#fdf4c1aa;">&gt; opt </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> realmService.</span><span style="color:#fdf4c1;">findRealm(realm)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">(</span><span style="color:#fe8019;">!</span><span style="color:#fdf4c1aa;"> opt.</span><span style="color:#fdf4c1;">isPresent()</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">return </span><span style="color:#8ec07c;">Single</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">error(</span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">IllegalStateException</span><span style="color:#fdf4c1;">(</span><span style="color:#b8bb26;">&quot;Realm not supported: &quot; </span><span style="color:#fe8019;">+</span><span style="color:#fdf4c1;"> realm))</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> opt.</span><span style="color:#fdf4c1;">get()</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">findJwtSecret(realm)</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">map(this::jwtAuth)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">JWTAuth jwtAuth</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">key</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return </span><span style="color:#8ec07c;">JWTAuth</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">create(vertx, </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">JWTAuthOptions</span><span style="color:#fdf4c1;">()
+</span><span style="color:#fdf4c1;">            </span><span style="color:#fdf4c1;">.addPubSecKey(</span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">PubSecKeyOptions</span><span style="color:#fdf4c1;">()
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">.setAlgorithm(</span><span style="color:#b8bb26;">&quot;HS256&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">.setPublicKey(key)
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">.setSymmetric(</span><span style="color:#d3869b;">true</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1;">            </span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1;">        </span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
 </span></pre><h2 id="auth-handler"><a class="zola-anchor" href="#auth-handler" aria-label="Anchor link for: auth-handler">🔗</a>
 Auth Handler</h2>
 <p>对于需要用户认证和验权保护的接口，正常使用 vert.x-web 模块提供的 JWTAuthHandler 机制。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#608b4e;">// ...
-</span><span style="color:#608b4e;">// omited
-</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">JWTAuth jwtAuth = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">CustomJwtAuthProvider();
-</span><span style="color:#dcdcdc;">router.route().handler(JWTAuthHandler.create(jwtAuth)</span><span style="color:#ff3333;">;
-</span><span style="color:#608b4e;">// omited
-</span><span style="color:#608b4e;">// ...
+<pre style="background-color:#282828;">
+<span style="font-style:italic;color:#928374;">// ...
+</span><span style="font-style:italic;color:#928374;">// omited
+</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">JWTAuth</span><span style="color:#fdf4c1aa;"> jwtAuth </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">CustomJwtAuthProvider</span><span style="color:#fdf4c1aa;">();
+</span><span style="color:#fdf4c1aa;">router.</span><span style="color:#fdf4c1;">route()</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">handler(</span><span style="color:#8ec07c;">JWTAuthHandler</span><span style="color:#fdf4c1;">.create(jwtAuth)</span><span style="background-color:#932b1e;color:#fdf4c1;">;</span><span style="color:#fdf4c1aa;">
+</span><span style="font-style:italic;color:#928374;">// omited
+</span><span style="font-style:italic;color:#928374;">// ...
 </span></pre><h2 id="login-controller"><a class="zola-anchor" href="#login-controller" aria-label="Anchor link for: login-controller">🔗</a>
 Login Controller</h2>
 <p>最后一步是在 HTTP 的 handler 里面使用 CustomJwtAuthProvider 生成 JWT token 并返回给调用方使用。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#608b4e;">// ...
-</span><span style="color:#608b4e;">// omited
-</span><span style="color:#dcdcdc;">router.post(</span><span style="color:#d69d85;">&quot;/login&quot;</span><span style="color:#dcdcdc;">).handler(this::login);
-</span><span style="color:#608b4e;">// omited
-</span><span style="color:#608b4e;">// ...
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">JWTAuth jwtAuth; </span><span style="color:#608b4e;">// formerly inited
-</span><span style="color:#569cd6;">private</span><span style="color:#dcdcdc;"> void login(final RoutingContext ctx) {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">// Generate JWT token
-</span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">// final String token = jwtAuth.generateToken(...);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">String token = </span><span style="color:#d69d85;">&quot;generated token&quot;</span><span style="color:#dcdcdc;">;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ctx.response().end(token);
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="font-style:italic;color:#928374;">// ...
+</span><span style="font-style:italic;color:#928374;">// omited
+</span><span style="color:#fdf4c1aa;">router.</span><span style="color:#fdf4c1;">post(</span><span style="color:#b8bb26;">&quot;/login&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">handler(this::login)</span><span style="color:#fdf4c1aa;">;
+</span><span style="font-style:italic;color:#928374;">// omited
+</span><span style="font-style:italic;color:#928374;">// ...
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#8ec07c;">JWTAuth</span><span style="color:#fdf4c1aa;"> jwtAuth; </span><span style="font-style:italic;color:#928374;">// formerly inited
+</span><span style="color:#fa5c4b;">private</span><span style="color:#fdf4c1aa;"> void </span><span style="color:#fdf4c1;">login(final </span><span style="color:#8ec07c;">RoutingContext</span><span style="color:#fdf4c1;"> ctx) </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="font-style:italic;color:#928374;">// Generate JWT token
+</span><span style="color:#fdf4c1aa;">    </span><span style="font-style:italic;color:#928374;">// final String token = jwtAuth.generateToken(...);
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;"> token </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&quot;generated token&quot;</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ctx.</span><span style="color:#fdf4c1;">response()</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">end(token)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">}
 </span></pre><h1 id="zong-jie"><a class="zola-anchor" href="#zong-jie" aria-label="Anchor link for: zong-jie">🔗</a>
 总结</h1>
 <p>整个设计的基本思路就是基于内置的 JWTAuth 实现类

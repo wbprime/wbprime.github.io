@@ -14,7 +14,7 @@
     <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-09-ffprobe-note-query-video-rotation-info&#x2F;"/>
     <meta property="og:description" content="使用 ffprobe 获取原视频中的旋转信息的命令如下：&#96;ffprobe -loglevel error -hide_banner -select_streams v -show_entries stream_tags=rotate -of json=compact=1 input.avi&#96;"/>
     <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
-    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;red.css">
 <link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
     <body>
         <div class="container full">
@@ -100,8 +100,8 @@
             <p>有一些通过手持设备录制的视频会把视频的旋转信息作为一个额外的字段放入视频的元数据中（比如 iOS）；在对
 这些视频进行处理的时候，其元数据中的宽高信息就需要使用旋转信息进行修正。</p>
 <p>使用 <a href="https://ffmpeg.org/ffprobe.html">ffprobe</a> 获取原视频中的旋转信息的命令如下：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">ffprobe -loglevel error -hide_banner -select_streams v -show_entries stream_tags=rotate -of json=compact=1 input.avi
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1;">ffprobe -loglevel error -hide_banner -select_streams v -show_entries stream_tags=rotate -of json=compact=1 input.avi
 </span></pre>
 <p>查询得到的视频旋转信息是一个整型的旋转角度值（而不是弧度）；取值范围为 [0, 360]，常见的取值有
 90/180/270 。</p>

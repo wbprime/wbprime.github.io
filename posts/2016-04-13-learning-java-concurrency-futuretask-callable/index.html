@@ -15,7 +15,7 @@
     <meta property="og:description" content="&lt;p&gt;Java的&lt;code&gt;java.util.concurrent&lt;&#x2F;code&gt;包里面提供了多线程并发和同步的支持。&lt;&#x2F;p&gt;
 &lt;p&gt;最开始的时候，多线程被认为是执行任务的手段，也就是说，我启动一个新线程来执行代码，至于资源共享、线程同步等可以用锁、同步器等解决。所以&lt;code&gt;Thread&lt;&#x2…"/>
     <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
-    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;red.css">
 <link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
     <body>
         <div class="container full">
@@ -104,16 +104,16 @@
 Callable</h1>
 <p><code>Callable</code>接口和<code>Runnable</code>接口很接近，有多接近呢？对比一下代码就知道了。</p>
 <p>这是<code>Runnable</code>的代码：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">public interface </span><span style="color:#dcdcdc;">Runnable {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public abstract void </span><span style="color:#dcdcdc;">run();
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public interface </span><span style="color:#8ec07c;">Runnable </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public abstract void </span><span style="color:#8ec07c;">run</span><span style="color:#fdf4c1aa;">();
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>这是<code>Callable</code>的接口：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">public interface </span><span style="color:#dcdcdc;">Callable&lt;V&gt; {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">V call() </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">Exception;
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public interface </span><span style="color:#8ec07c;">Callable</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fdf4c1;">V</span><span style="color:#fdf4c1aa;">&gt; {
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">V call</span><span style="color:#fdf4c1aa;">() </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">Exception</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>可以看到，<code>Callable</code>接口比<code>Runnable</code>接口多了两个功能：</p>
 <ul>
@@ -126,19 +126,19 @@ Callable</h1>
 Future</h1>
 <p><code>Future</code>接口封装了异步计算的结果，用于在异步任务完成之后获取结果。</p>
 <p>接口的方法如下：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">public interface </span><span style="color:#dcdcdc;">Future&lt;V&gt; {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">boolean </span><span style="color:#dcdcdc;">cancel(</span><span style="color:#569cd6;">boolean </span><span style="color:#dcdcdc;">mayInterruptIfRunning);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">boolean </span><span style="color:#dcdcdc;">isCancelled();
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">boolean </span><span style="color:#dcdcdc;">isDone();
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">V get() </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">InterruptedException, ExecutionException;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">V get(</span><span style="color:#569cd6;">long </span><span style="color:#dcdcdc;">timeout, TimeUnit unit)
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">InterruptedException, ExecutionException, TimeoutException;
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public interface </span><span style="color:#8ec07c;">Future</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fdf4c1;">V</span><span style="color:#fdf4c1aa;">&gt; {
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">boolean </span><span style="color:#8ec07c;">cancel</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">boolean </span><span style="color:#fdf4c1;">mayInterruptIfRunning</span><span style="color:#fdf4c1aa;">);
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">boolean </span><span style="color:#8ec07c;">isCancelled</span><span style="color:#fdf4c1aa;">();
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">boolean </span><span style="color:#8ec07c;">isDone</span><span style="color:#fdf4c1aa;">();
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">V get</span><span style="color:#fdf4c1aa;">() </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">InterruptedException</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">ExecutionException</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">V get</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">long </span><span style="color:#fdf4c1;">timeout</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">TimeUnit </span><span style="color:#fdf4c1;">unit</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">InterruptedException</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">ExecutionException</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">TimeoutException</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p><code>get()</code>方法用于获取异步任务的结果。如果异步任务还没有结束，该方法的调用会被阻塞，一直到异步任务运行结束（正常结束或者抛出异常），或者异步任务线程被中断。如果异步任务线程被中断，该方法抛出<code>InterruptedException</code>异常；如果异步任务执行抛出异常，该方法抛出<code>ExecutionException</code>异常。</p>
 <p><code>get(long, TimeUnit)</code>方法同上，添加了过期时间的设置：当在指定时间内异步任务没有执行完毕，该方法抛出<code>TimeoutException</code>异常。</p>
@@ -149,57 +149,57 @@ Future</h1>
 <h1 id="callable-future-de-shi-yong"><a class="zola-anchor" href="#callable-future-de-shi-yong" aria-label="Anchor link for: callable-future-de-shi-yong">🔗</a>
 Callable & Future 的使用</h1>
 <p>因为<code>Thread</code>类并不支持直接使用<code>Callable</code>接口，所以JUC在<code>ExecutorService</code>框架中提供了使用<code>Callable</code>和<code>Future</code>的入口。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">&lt;T&gt; Future&lt;T&gt; submit(Callable&lt;T&gt; task);
+<pre style="background-color:#282828;">
+<span style="color:#fe8019;">&lt;</span><span style="color:#8ec07c;">T</span><span style="color:#fe8019;">&gt; </span><span style="color:#8ec07c;">Future</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">T</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">submit(</span><span style="color:#8ec07c;">Callable</span><span style="color:#fdf4c1;">&lt;</span><span style="color:#8ec07c;">T</span><span style="color:#fdf4c1;">&gt; task)</span><span style="color:#fdf4c1aa;">;
 </span></pre>
 <p>使用方法很简单：自定义一个<code>Callable</code>接口的实现，然后提交给<code>ExecutorService</code>实例，然后调用<code>Future.get()</code>等待异步任务运行结束并获取结果就好了。当然，如果任务运行期间等不及的话，也可以取消任务。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">CallableFutureCase {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private static class </span><span style="color:#dcdcdc;">SumupTask </span><span style="color:#569cd6;">implements </span><span style="color:#4ec9b0;">Callable</span><span style="color:#dcdcdc;">&lt;Long&gt; {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">private final int </span><span style="color:#dcdcdc;">val_;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">SumupTask(</span><span style="color:#569cd6;">final int </span><span style="color:#dcdcdc;">val) {
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">this.val_ = val;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">Long call() </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">Exception {
-</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">long</span><span style="color:#dcdcdc;"> result = </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">;
-</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">for </span><span style="color:#dcdcdc;">(</span><span style="color:#569cd6;">int</span><span style="color:#dcdcdc;"> i = </span><span style="color:#b5cea8;">1</span><span style="color:#dcdcdc;">; i &lt;= val_; i</span><span style="color:#569cd6;">++</span><span style="color:#dcdcdc;">) {
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">result = result + i;
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">Long.valueOf(result);
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public static void </span><span style="color:#dcdcdc;">main(String </span><span style="color:#569cd6;">[] </span><span style="color:#dcdcdc;">_args) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">ExecutorService executor = Executors.newCachedThreadPool();
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">Future&lt;Long&gt; result = executor.submit(</span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">SumupTask(</span><span style="color:#b5cea8;">10000</span><span style="color:#dcdcdc;">));
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">System.out.println(</span><span style="color:#d69d85;">&quot;Main thread started!&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">try </span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">Long longResult = result.get();
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">System.out.println(</span><span style="color:#d69d85;">&quot;Result is &quot; </span><span style="color:#dcdcdc;">+ longResult);
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">} </span><span style="color:#569cd6;">catch </span><span style="color:#dcdcdc;">(InterruptedException e) {
-</span><span style="color:#dcdcdc;">            </span><span style="color:#608b4e;">// do nothing
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">} </span><span style="color:#569cd6;">catch </span><span style="color:#dcdcdc;">(ExecutionException e) {
-</span><span style="color:#dcdcdc;">            </span><span style="color:#608b4e;">// do nothing
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">System.out.println(</span><span style="color:#d69d85;">&quot;Main thread finished!&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">executor.shutdown();
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public class </span><span style="color:#8ec07c;">CallableFutureCase </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private static class </span><span style="color:#8ec07c;">SumupTask </span><span style="color:#fa5c4b;">implements </span><span style="color:#8ec07c;">Callable</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Long</span><span style="color:#fdf4c1aa;">&gt; {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">private final int </span><span style="color:#fdf4c1aa;">val_;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">SumupTask</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final int </span><span style="color:#fdf4c1;">val</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.val_ </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> val;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">Long call</span><span style="color:#fdf4c1aa;">() </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">Exception </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">long</span><span style="color:#fdf4c1aa;"> result </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">0</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">for </span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">int</span><span style="color:#fdf4c1aa;"> i </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">1</span><span style="color:#fdf4c1aa;">; i </span><span style="color:#fe8019;">&lt;=</span><span style="color:#fdf4c1aa;"> val_; i</span><span style="color:#fe8019;">++</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">result </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> result </span><span style="color:#fe8019;">+</span><span style="color:#fdf4c1aa;"> i;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">return </span><span style="color:#8ec07c;">Long</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">valueOf(result)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public static void </span><span style="color:#8ec07c;">main</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">String </span><span style="color:#fa5c4b;">[] </span><span style="color:#fdf4c1;">_args</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">ExecutorService</span><span style="color:#fdf4c1aa;"> executor </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">Executors</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">newCachedThreadPool()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Future</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Long</span><span style="color:#fdf4c1aa;">&gt; result </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> executor.</span><span style="color:#fdf4c1;">submit(</span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">SumupTask</span><span style="color:#fdf4c1;">(</span><span style="color:#d3869b;">10000</span><span style="color:#fdf4c1;">))</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(</span><span style="color:#b8bb26;">&quot;Main thread started!&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">try </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Long</span><span style="color:#fdf4c1aa;"> longResult </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> result.</span><span style="color:#fdf4c1;">get()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(</span><span style="color:#b8bb26;">&quot;Result is &quot; </span><span style="color:#fe8019;">+</span><span style="color:#fdf4c1;"> longResult)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">} </span><span style="color:#fa5c4b;">catch </span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">InterruptedException </span><span style="color:#fdf4c1;">e</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">            </span><span style="font-style:italic;color:#928374;">// do nothing
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">} </span><span style="color:#fa5c4b;">catch </span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">ExecutionException </span><span style="color:#fdf4c1;">e</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">            </span><span style="font-style:italic;color:#928374;">// do nothing
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(</span><span style="color:#b8bb26;">&quot;Main thread finished!&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">executor.</span><span style="color:#fdf4c1;">shutdown()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
 </span></pre><h1 id="futuretask"><a class="zola-anchor" href="#futuretask" aria-label="Anchor link for: futuretask">🔗</a>
 FutureTask</h1>
 <p>然而，既然已经设计了<code>Callable</code>接口和<code>Future</code>接口，却不能直接与<code>Thread</code>类一起使用，感觉有点心里不是滋味。所以有人设计了一个<code>FutureTask</code>类。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">FutureTask&lt;V&gt; </span><span style="color:#569cd6;">implements </span><span style="color:#4ec9b0;">RunnableFuture</span><span style="color:#dcdcdc;">&lt;V&gt; {}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#569cd6;">public interface </span><span style="color:#dcdcdc;">RunnableFuture&lt;V&gt; </span><span style="color:#569cd6;">extends </span><span style="color:#4ec9b0;">Runnable</span><span style="color:#dcdcdc;">, Future&lt;V&gt; {}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public class </span><span style="color:#8ec07c;">FutureTask</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fdf4c1;">V</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fa5c4b;">implements </span><span style="color:#8ec07c;">RunnableFuture</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">V</span><span style="color:#fdf4c1aa;">&gt; {}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fa5c4b;">public interface </span><span style="color:#8ec07c;">RunnableFuture</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fdf4c1;">V</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fa5c4b;">extends </span><span style="color:#8ec07c;">Runnable</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">Future</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">V</span><span style="color:#fdf4c1aa;">&gt; {}
 </span></pre>
 <p>因为<code>FutureTask</code>实现了<code>Runnable</code>接口，所以可以与<code>Thread</code>类配合使用；又因为<code>FutureTask</code>实现了<code>Future</code>接口，所以可以控制任务的状态以及获取任务执行结果。</p>
 <p><code>FutureTask</code>类有两个构造方法：</p>
@@ -210,164 +210,164 @@ FutureTask</h1>
 <p>可以通过实例来看一下<code>FutureTask</code>类实际使用。</p>
 <h2 id="futuretask-by-callable"><a class="zola-anchor" href="#futuretask-by-callable" aria-label="Anchor link for: futuretask-by-callable">🔗</a>
 FutureTask by Callable</h2>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">FutureTaskCase {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private static class </span><span style="color:#dcdcdc;">CallableMax </span><span style="color:#569cd6;">implements </span><span style="color:#4ec9b0;">Callable</span><span style="color:#dcdcdc;">&lt;Integer&gt; {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">private final </span><span style="color:#dcdcdc;">List&lt;Integer&gt; list_;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">CallableMax(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">List&lt;Integer&gt; list) {
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">this.list_ = list;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">Integer call() </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">Exception {
-</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(</span><span style="color:#569cd6;">null </span><span style="color:#dcdcdc;">!= list_ </span><span style="color:#569cd6;">&amp;&amp; !</span><span style="color:#dcdcdc;">list_.isEmpty()) {
-</span><span style="color:#dcdcdc;">                </span><span style="color:#569cd6;">int</span><span style="color:#dcdcdc;"> result = list_.get(</span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">).intValue();
-</span><span style="color:#dcdcdc;">                </span><span style="color:#569cd6;">for </span><span style="color:#dcdcdc;">(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">Integer val</span><span style="color:#569cd6;">:</span><span style="color:#dcdcdc;"> list_) {
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(result &lt; val.intValue()) {
-</span><span style="color:#dcdcdc;">                        </span><span style="color:#dcdcdc;">result = val.intValue();
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#569cd6;">try </span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">                        </span><span style="color:#dcdcdc;">Thread.sleep(</span><span style="color:#b5cea8;">100</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">} </span><span style="color:#569cd6;">catch </span><span style="color:#dcdcdc;">(InterruptedException e) {
-</span><span style="color:#dcdcdc;">                        </span><span style="color:#608b4e;">// do nothing
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">                </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">Integer.valueOf(result);
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">} </span><span style="color:#569cd6;">else </span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">                </span><span style="color:#569cd6;">return null</span><span style="color:#dcdcdc;">;
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public static void </span><span style="color:#dcdcdc;">main(String </span><span style="color:#569cd6;">[] </span><span style="color:#dcdcdc;">_args) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">List&lt;Integer&gt; list = ImmutableList.of(
-</span><span style="color:#dcdcdc;">            </span><span style="color:#b5cea8;">1</span><span style="color:#dcdcdc;">, </span><span style="color:#b5cea8;">199</span><span style="color:#dcdcdc;">, </span><span style="color:#b5cea8;">6</span><span style="color:#dcdcdc;">, </span><span style="color:#b5cea8;">3</span><span style="color:#dcdcdc;">, </span><span style="color:#b5cea8;">56</span><span style="color:#dcdcdc;">, </span><span style="color:#b5cea8;">299</span><span style="color:#dcdcdc;">, </span><span style="color:#b5cea8;">199</span><span style="color:#dcdcdc;">, </span><span style="color:#b5cea8;">28</span><span style="color:#dcdcdc;">, </span><span style="color:#b5cea8;">10</span><span style="color:#dcdcdc;">, </span><span style="color:#b5cea8;">234
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">FutureTask&lt;Integer&gt; task1 = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">FutureTask(</span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">CallableMax(list));
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">Thread task1Thread = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">Thread(task1);
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">task1Thread.start();
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">System.out.println(</span><span style="color:#d69d85;">&quot;Main thread started!&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">try </span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">Integer re1 = task1.get();
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">System.out.println(</span><span style="color:#d69d85;">&quot;Result is &quot; </span><span style="color:#dcdcdc;">+ re1);
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">} </span><span style="color:#569cd6;">catch </span><span style="color:#dcdcdc;">(InterruptedException e) {
-</span><span style="color:#dcdcdc;">            </span><span style="color:#608b4e;">// do nothing
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">} </span><span style="color:#569cd6;">catch </span><span style="color:#dcdcdc;">(ExecutionException e) {
-</span><span style="color:#dcdcdc;">            </span><span style="color:#608b4e;">// do nothing
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">System.out.println(</span><span style="color:#d69d85;">&quot;Main thread finished!&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public class </span><span style="color:#8ec07c;">FutureTaskCase </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private static class </span><span style="color:#8ec07c;">CallableMax </span><span style="color:#fa5c4b;">implements </span><span style="color:#8ec07c;">Callable</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Integer</span><span style="color:#fdf4c1aa;">&gt; {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">private final </span><span style="color:#8ec07c;">List</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Integer</span><span style="color:#fdf4c1aa;">&gt; list_;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">CallableMax</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">List</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Integer</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">list</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.list_ </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> list;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">Integer call</span><span style="color:#fdf4c1aa;">() </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">Exception </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">(</span><span style="color:#d3869b;">null </span><span style="color:#fe8019;">!=</span><span style="color:#fdf4c1aa;"> list_ </span><span style="color:#fe8019;">&amp;&amp; !</span><span style="color:#fdf4c1aa;">list_.</span><span style="color:#fdf4c1;">isEmpty()</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fa5c4b;">int</span><span style="color:#fdf4c1aa;"> result </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> list_.</span><span style="color:#fdf4c1;">get(</span><span style="color:#d3869b;">0</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">intValue()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fa5c4b;">for </span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Integer</span><span style="color:#fdf4c1aa;"> val</span><span style="color:#fe8019;">:</span><span style="color:#fdf4c1aa;"> list_) {
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">(result </span><span style="color:#fe8019;">&lt;</span><span style="color:#fdf4c1aa;"> val.</span><span style="color:#fdf4c1;">intValue()</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">                        </span><span style="color:#fdf4c1aa;">result </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> val.</span><span style="color:#fdf4c1;">intValue()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fa5c4b;">try </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">                        </span><span style="color:#8ec07c;">Thread</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">sleep(</span><span style="color:#d3869b;">100</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">} </span><span style="color:#fa5c4b;">catch </span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">InterruptedException </span><span style="color:#fdf4c1;">e</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">                        </span><span style="font-style:italic;color:#928374;">// do nothing
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fa5c4b;">return </span><span style="color:#8ec07c;">Integer</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">valueOf(result)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">} </span><span style="color:#fa5c4b;">else </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fa5c4b;">return </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public static void </span><span style="color:#8ec07c;">main</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">String </span><span style="color:#fa5c4b;">[] </span><span style="color:#fdf4c1;">_args</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">List</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Integer</span><span style="color:#fdf4c1aa;">&gt; list </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">ImmutableList</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">of(
+</span><span style="color:#fdf4c1;">            </span><span style="color:#d3869b;">1</span><span style="color:#fdf4c1;">, </span><span style="color:#d3869b;">199</span><span style="color:#fdf4c1;">, </span><span style="color:#d3869b;">6</span><span style="color:#fdf4c1;">, </span><span style="color:#d3869b;">3</span><span style="color:#fdf4c1;">, </span><span style="color:#d3869b;">56</span><span style="color:#fdf4c1;">, </span><span style="color:#d3869b;">299</span><span style="color:#fdf4c1;">, </span><span style="color:#d3869b;">199</span><span style="color:#fdf4c1;">, </span><span style="color:#d3869b;">28</span><span style="color:#fdf4c1;">, </span><span style="color:#d3869b;">10</span><span style="color:#fdf4c1;">, </span><span style="color:#d3869b;">234
+</span><span style="color:#fdf4c1;">        </span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">FutureTask</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Integer</span><span style="color:#fdf4c1aa;">&gt; task1 </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">FutureTask</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">CallableMax</span><span style="color:#fdf4c1aa;">(list));
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Thread</span><span style="color:#fdf4c1aa;"> task1Thread </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">Thread</span><span style="color:#fdf4c1aa;">(task1);
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">task1Thread.</span><span style="color:#fdf4c1;">start()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(</span><span style="color:#b8bb26;">&quot;Main thread started!&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">try </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Integer</span><span style="color:#fdf4c1aa;"> re1 </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> task1.</span><span style="color:#fdf4c1;">get()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(</span><span style="color:#b8bb26;">&quot;Result is &quot; </span><span style="color:#fe8019;">+</span><span style="color:#fdf4c1;"> re1)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">} </span><span style="color:#fa5c4b;">catch </span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">InterruptedException </span><span style="color:#fdf4c1;">e</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">            </span><span style="font-style:italic;color:#928374;">// do nothing
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">} </span><span style="color:#fa5c4b;">catch </span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">ExecutionException </span><span style="color:#fdf4c1;">e</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">            </span><span style="font-style:italic;color:#928374;">// do nothing
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(</span><span style="color:#b8bb26;">&quot;Main thread finished!&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>使用<code>Callable</code>实例去构造<code>FutureTask</code>类实例时，因为结果是<code>call()</code>方法直接返回的，所以用法比较简单。但是使用<code>Runnable</code>实例去构造<code>FutureTask</code>实例时，因为<code>run()</code>方法不能返回结果，所以要提供一个共享变量用来作为容器接受<code>run()</code>方法处理的结果，同时传递结果给调用线程。注意，使用<code>Runnable</code>方式时，共享的变量需要是一个可变的对象，不可遍对象类如<code>String</code>、<code>Integer</code>等需要提供一个包装类。</p>
 <h2 id="futuretask-by-runnable"><a class="zola-anchor" href="#futuretask-by-runnable" aria-label="Anchor link for: futuretask-by-runnable">🔗</a>
 FutureTask by Runnable</h2>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">FutureTaskCase {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private static class </span><span style="color:#dcdcdc;">ValueHolder {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Integer value;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private static class </span><span style="color:#dcdcdc;">RunnableMax </span><span style="color:#569cd6;">implements </span><span style="color:#4ec9b0;">Runnable </span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">private final </span><span style="color:#dcdcdc;">List&lt;Integer&gt; list_;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">private final </span><span style="color:#dcdcdc;">ValueHolder holder;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">RunnableMax(
-</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">List&lt;Integer&gt; list, </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">ValueHolder valueHolder
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">) {
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">this.list_ = list;
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">this.holder = valueHolder;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">run() {
-</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(</span><span style="color:#569cd6;">null </span><span style="color:#dcdcdc;">== holder) </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(</span><span style="color:#569cd6;">null </span><span style="color:#dcdcdc;">!= list_ </span><span style="color:#569cd6;">&amp;&amp; !</span><span style="color:#dcdcdc;">list_.isEmpty()) {
-</span><span style="color:#dcdcdc;">                </span><span style="color:#569cd6;">int</span><span style="color:#dcdcdc;"> result = list_.get(</span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">).intValue();
-</span><span style="color:#dcdcdc;">                </span><span style="color:#569cd6;">for </span><span style="color:#dcdcdc;">(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">Integer val </span><span style="color:#569cd6;">:</span><span style="color:#dcdcdc;"> list_) {
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(result &lt; val.intValue()) {
-</span><span style="color:#dcdcdc;">                        </span><span style="color:#dcdcdc;">result = val.intValue();
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#569cd6;">try </span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">                        </span><span style="color:#dcdcdc;">Thread.sleep(</span><span style="color:#b5cea8;">100</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">} </span><span style="color:#569cd6;">catch </span><span style="color:#dcdcdc;">(InterruptedException e) {
-</span><span style="color:#dcdcdc;">                        </span><span style="color:#608b4e;">// do nothing
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">holder.value = Integer.valueOf(result);
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">} </span><span style="color:#569cd6;">else </span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">holder.value = </span><span style="color:#569cd6;">null</span><span style="color:#dcdcdc;">;
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public static void </span><span style="color:#dcdcdc;">main(String </span><span style="color:#569cd6;">[] </span><span style="color:#dcdcdc;">_args) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">List&lt;Integer&gt; list = ImmutableList.of(
-</span><span style="color:#dcdcdc;">            </span><span style="color:#b5cea8;">1</span><span style="color:#dcdcdc;">, </span><span style="color:#b5cea8;">199</span><span style="color:#dcdcdc;">, </span><span style="color:#b5cea8;">6</span><span style="color:#dcdcdc;">, </span><span style="color:#b5cea8;">3</span><span style="color:#dcdcdc;">, </span><span style="color:#b5cea8;">56</span><span style="color:#dcdcdc;">, </span><span style="color:#b5cea8;">299</span><span style="color:#dcdcdc;">, </span><span style="color:#b5cea8;">199</span><span style="color:#dcdcdc;">, </span><span style="color:#b5cea8;">28</span><span style="color:#dcdcdc;">, </span><span style="color:#b5cea8;">10</span><span style="color:#dcdcdc;">, </span><span style="color:#b5cea8;">234
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">ValueHolder holder = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">ValueHolder();
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">FutureTask&lt;ValueHolder&gt; task2 = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">FutureTask(
-</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">RunnableMax(list, holder),
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">holder
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">Thread task2Thread = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">Thread(task2);
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">task2Thread.start();
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">System.out.println(</span><span style="color:#d69d85;">&quot;Main thread started!&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">try </span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">ValueHolder re2 = task2.get();
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">System.out.println(</span><span style="color:#d69d85;">&quot;Result is &quot; </span><span style="color:#dcdcdc;">+ re2.value);
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">} </span><span style="color:#569cd6;">catch </span><span style="color:#dcdcdc;">(InterruptedException e) {
-</span><span style="color:#dcdcdc;">            </span><span style="color:#608b4e;">// do nothing
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">} </span><span style="color:#569cd6;">catch </span><span style="color:#dcdcdc;">(ExecutionException e) {
-</span><span style="color:#dcdcdc;">            </span><span style="color:#608b4e;">// do nothing
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">System.out.println(</span><span style="color:#d69d85;">&quot;Main thread finished!&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public class </span><span style="color:#8ec07c;">FutureTaskCase </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private static class </span><span style="color:#8ec07c;">ValueHolder </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">Integer </span><span style="color:#fdf4c1aa;">value;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private static class </span><span style="color:#8ec07c;">RunnableMax </span><span style="color:#fa5c4b;">implements </span><span style="color:#8ec07c;">Runnable </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">private final </span><span style="color:#8ec07c;">List</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Integer</span><span style="color:#fdf4c1aa;">&gt; list_;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">private final </span><span style="color:#8ec07c;">ValueHolder </span><span style="color:#fdf4c1aa;">holder;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">RunnableMax</span><span style="color:#fdf4c1aa;">(
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">List</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Integer</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">list</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">ValueHolder </span><span style="color:#fdf4c1;">valueHolder
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.list_ </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> list;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.holder </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> valueHolder;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">public void </span><span style="color:#8ec07c;">run</span><span style="color:#fdf4c1aa;">() {
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">(</span><span style="color:#d3869b;">null </span><span style="color:#fe8019;">==</span><span style="color:#fdf4c1aa;"> holder) </span><span style="color:#fa5c4b;">return </span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">(</span><span style="color:#d3869b;">null </span><span style="color:#fe8019;">!=</span><span style="color:#fdf4c1aa;"> list_ </span><span style="color:#fe8019;">&amp;&amp; !</span><span style="color:#fdf4c1aa;">list_.</span><span style="color:#fdf4c1;">isEmpty()</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fa5c4b;">int</span><span style="color:#fdf4c1aa;"> result </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> list_.</span><span style="color:#fdf4c1;">get(</span><span style="color:#d3869b;">0</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">intValue()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fa5c4b;">for </span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Integer</span><span style="color:#fdf4c1aa;"> val </span><span style="color:#fe8019;">:</span><span style="color:#fdf4c1aa;"> list_) {
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">(result </span><span style="color:#fe8019;">&lt;</span><span style="color:#fdf4c1aa;"> val.</span><span style="color:#fdf4c1;">intValue()</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">                        </span><span style="color:#fdf4c1aa;">result </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> val.</span><span style="color:#fdf4c1;">intValue()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fa5c4b;">try </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">                        </span><span style="color:#8ec07c;">Thread</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">sleep(</span><span style="color:#d3869b;">100</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">} </span><span style="color:#fa5c4b;">catch </span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">InterruptedException </span><span style="color:#fdf4c1;">e</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">                        </span><span style="font-style:italic;color:#928374;">// do nothing
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">holder.value </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">Integer</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">valueOf(result)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">} </span><span style="color:#fa5c4b;">else </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">holder.value </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public static void </span><span style="color:#8ec07c;">main</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">String </span><span style="color:#fa5c4b;">[] </span><span style="color:#fdf4c1;">_args</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">List</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Integer</span><span style="color:#fdf4c1aa;">&gt; list </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">ImmutableList</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">of(
+</span><span style="color:#fdf4c1;">            </span><span style="color:#d3869b;">1</span><span style="color:#fdf4c1;">, </span><span style="color:#d3869b;">199</span><span style="color:#fdf4c1;">, </span><span style="color:#d3869b;">6</span><span style="color:#fdf4c1;">, </span><span style="color:#d3869b;">3</span><span style="color:#fdf4c1;">, </span><span style="color:#d3869b;">56</span><span style="color:#fdf4c1;">, </span><span style="color:#d3869b;">299</span><span style="color:#fdf4c1;">, </span><span style="color:#d3869b;">199</span><span style="color:#fdf4c1;">, </span><span style="color:#d3869b;">28</span><span style="color:#fdf4c1;">, </span><span style="color:#d3869b;">10</span><span style="color:#fdf4c1;">, </span><span style="color:#d3869b;">234
+</span><span style="color:#fdf4c1;">        </span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">ValueHolder</span><span style="color:#fdf4c1aa;"> holder </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">ValueHolder</span><span style="color:#fdf4c1aa;">();
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">FutureTask</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">ValueHolder</span><span style="color:#fdf4c1aa;">&gt; task2 </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">FutureTask</span><span style="color:#fdf4c1aa;">(
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">RunnableMax</span><span style="color:#fdf4c1aa;">(list, holder),
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">holder
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">);
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Thread</span><span style="color:#fdf4c1aa;"> task2Thread </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">Thread</span><span style="color:#fdf4c1aa;">(task2);
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">task2Thread.</span><span style="color:#fdf4c1;">start()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(</span><span style="color:#b8bb26;">&quot;Main thread started!&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">try </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">ValueHolder</span><span style="color:#fdf4c1aa;"> re2 </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> task2.</span><span style="color:#fdf4c1;">get()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(</span><span style="color:#b8bb26;">&quot;Result is &quot; </span><span style="color:#fe8019;">+</span><span style="color:#fdf4c1;"> re2.value)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">} </span><span style="color:#fa5c4b;">catch </span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">InterruptedException </span><span style="color:#fdf4c1;">e</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">            </span><span style="font-style:italic;color:#928374;">// do nothing
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">} </span><span style="color:#fa5c4b;">catch </span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">ExecutionException </span><span style="color:#fdf4c1;">e</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">            </span><span style="font-style:italic;color:#928374;">// do nothing
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(</span><span style="color:#b8bb26;">&quot;Main thread finished!&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>代码中使用了<code>ValueHolder</code>来保存<code>run()</code>计算的结果并传递给<code>Future.get()</code>返回调用线程。</p>
 <p>为什么要使用这种方式呢？我们来看一下<code>FutureTask</code>的对应代码。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">FutureTask(Runnable runnable, V result) {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">this.callable = Executors.callable(runnable, result);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">this.state = </span><span style="color:#b4cea8;">NEW</span><span style="color:#dcdcdc;">;       </span><span style="color:#608b4e;">// ensure visibility of callable
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public </span><span style="color:#fdf4c1;">FutureTask(</span><span style="color:#8ec07c;">Runnable</span><span style="color:#fdf4c1;"> runnable, </span><span style="color:#8ec07c;">V</span><span style="color:#fdf4c1;"> result) </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.callable </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">Executors</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">callable(runnable, result)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.state </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">NEW</span><span style="color:#fdf4c1aa;">;       </span><span style="font-style:italic;color:#928374;">// ensure visibility of callable
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>该构造器调用了<code>Executors.callable()</code>方法。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">public static </span><span style="color:#dcdcdc;">&lt;T&gt; Callable&lt;T&gt; callable(Runnable task, T result) {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(task == </span><span style="color:#569cd6;">null</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">throw new </span><span style="color:#dcdcdc;">NullPointerException();
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">return new </span><span style="color:#dcdcdc;">RunnableAdapter&lt;T&gt;(task, result);
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public static </span><span style="color:#fe8019;">&lt;</span><span style="color:#8ec07c;">T</span><span style="color:#fe8019;">&gt; </span><span style="color:#8ec07c;">Callable</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">T</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">callable(</span><span style="color:#8ec07c;">Runnable</span><span style="color:#fdf4c1;"> task, </span><span style="color:#8ec07c;">T</span><span style="color:#fdf4c1;"> result) </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">(task </span><span style="color:#fe8019;">== </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">throw new </span><span style="color:#8ec07c;">NullPointerException</span><span style="color:#fdf4c1aa;">();
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">return new </span><span style="color:#8ec07c;">RunnableAdapter</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">T</span><span style="color:#fdf4c1aa;">&gt;(task, result);
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p><code>Executors.callable()</code>方法用一个<code>RunnableAdapter</code>类对传入的参数进行了包装。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">static final class </span><span style="color:#dcdcdc;">RunnableAdapter&lt;T&gt; </span><span style="color:#569cd6;">implements </span><span style="color:#4ec9b0;">Callable</span><span style="color:#dcdcdc;">&lt;T&gt; {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">Runnable task;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">T result;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">RunnableAdapter(Runnable task, T result) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">this.task = task;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">this.result = result;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">T call() {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">task.run();
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> result;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">static final class </span><span style="color:#8ec07c;">RunnableAdapter</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fdf4c1;">T</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fa5c4b;">implements </span><span style="color:#8ec07c;">Callable</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">T</span><span style="color:#fdf4c1aa;">&gt; {
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Runnable </span><span style="color:#fdf4c1aa;">task;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">T </span><span style="color:#fdf4c1aa;">result;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">RunnableAdapter</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">Runnable </span><span style="color:#fdf4c1;">task</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">T </span><span style="color:#fdf4c1;">result</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.task </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> task;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.result </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> result;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">T call</span><span style="color:#fdf4c1aa;">() {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">task.</span><span style="color:#fdf4c1;">run()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> result;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>在包装类<code>RunnableAdapter</code>内部简单地保存了<code>Runnable</code>实例和目标类型对象。可以理解为，<code>T</code>类型的对象负责记录任务结果，而<code>Runnable</code>实例的<code>run()</code>方法在执行过程中修改该对象的值。如果<code>T</code>是一个不可变对象，则<code>run()</code>方法中的修改传递不到外部来。</p>
 <p>既然这么复杂，那么还是尽量使用带<code>Callable</code>构造器的版本吧！</p>

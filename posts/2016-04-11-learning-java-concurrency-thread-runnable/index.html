@@ -14,7 +14,7 @@
     <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2016-04-11-learning-java-concurrency-thread-runnable&#x2F;"/>
     <meta property="og:description" content="&lt;p&gt;Java并发多线程的第一课，应该就是&lt;code&gt;Thread&lt;&#x2F;code&gt;了。顾名思义，&lt;code&gt;Thread&lt;&#x2F;code&gt;就是一个线程。线程是很底层的一个概念，在不同的操作系统上实现的模型和细节并不相同，甚至于可以说天差地别；但是总体来说，线程是比进程更细粒度的操作系统调度的单位，线程有自己的运行栈，但是同一…"/>
     <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
-    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;red.css">
 <link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
     <body>
         <div class="container full">
@@ -98,46 +98,46 @@
             <p>Java并发多线程的第一课，应该就是<code>Thread</code>了。顾名思义，<code>Thread</code>就是一个线程。线程是很底层的一个概念，在不同的操作系统上实现的模型和细节并不相同，甚至于可以说天差地别；但是总体来说，线程是比进程更细粒度的操作系统调度的单位，线程有自己的运行栈，但是同一个进程的线程共享方法区和堆区数据。</p>
 <p>对于进程和线程的差别，有一种说法是：线程是操作系统调度的基本单位，而进程是操作系统分配运行资源的基本单位。</p>
 <p>Java中对线程作了很好的封装：<code>Thread</code>类。<code>Thread</code>类的使用非常简单。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">ThreadCase {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private static class </span><span style="color:#dcdcdc;">EchoThread </span><span style="color:#569cd6;">extends </span><span style="color:#4ec9b0;">Thread </span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">private final </span><span style="color:#dcdcdc;">String word;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">EchoThread(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">String word) {
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">this.word = word;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">@Override
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">run() {
-</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">for </span><span style="color:#dcdcdc;">(</span><span style="color:#569cd6;">int</span><span style="color:#dcdcdc;"> i = </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">; i &lt; </span><span style="color:#b5cea8;">1000</span><span style="color:#dcdcdc;">; i</span><span style="color:#569cd6;">++</span><span style="color:#dcdcdc;">) {
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">System.out.println(this.getName() + </span><span style="color:#d69d85;">&quot; echos &quot; </span><span style="color:#dcdcdc;">+ word);
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public static void </span><span style="color:#dcdcdc;">main(String </span><span style="color:#569cd6;">[] </span><span style="color:#dcdcdc;">_args) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">Thread echo1 = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">EchoThread(</span><span style="color:#d69d85;">&quot;First&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">Thread echo2 = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">EchoThread(</span><span style="color:#d69d85;">&quot;Second&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">System.out.println(</span><span style="color:#d69d85;">&quot;Main thread started!&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">echo1.start();
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">echo2.start();
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">joinThread(echo1);
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">joinThread(echo2);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">System.out.println(</span><span style="color:#d69d85;">&quot;Main thread finished!&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private static void </span><span style="color:#dcdcdc;">joinThread(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">Thread th) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">try </span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">th.join();
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">} </span><span style="color:#569cd6;">catch </span><span style="color:#dcdcdc;">(InterruptedException e) {
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">System.out.println(th.getName() + </span><span style="color:#d69d85;">&quot; interrupted!&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public class </span><span style="color:#8ec07c;">ThreadCase </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private static class </span><span style="color:#8ec07c;">EchoThread </span><span style="color:#fa5c4b;">extends </span><span style="color:#8ec07c;">Thread </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">private final </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1aa;">word;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">EchoThread</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">word</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.word </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> word;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">public void </span><span style="color:#8ec07c;">run</span><span style="color:#fdf4c1aa;">() {
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">for </span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">int</span><span style="color:#fdf4c1aa;"> i </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">0</span><span style="color:#fdf4c1aa;">; i </span><span style="color:#fe8019;">&lt; </span><span style="color:#d3869b;">1000</span><span style="color:#fdf4c1aa;">; i</span><span style="color:#fe8019;">++</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(this.getName() </span><span style="color:#fe8019;">+ </span><span style="color:#b8bb26;">&quot; echos &quot; </span><span style="color:#fe8019;">+</span><span style="color:#fdf4c1;"> word)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public static void </span><span style="color:#8ec07c;">main</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">String </span><span style="color:#fa5c4b;">[] </span><span style="color:#fdf4c1;">_args</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Thread</span><span style="color:#fdf4c1aa;"> echo1 </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">EchoThread</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;First&quot;</span><span style="color:#fdf4c1aa;">);
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Thread</span><span style="color:#fdf4c1aa;"> echo2 </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">EchoThread</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;Second&quot;</span><span style="color:#fdf4c1aa;">);
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(</span><span style="color:#b8bb26;">&quot;Main thread started!&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">echo1.</span><span style="color:#fdf4c1;">start()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">echo2.</span><span style="color:#fdf4c1;">start()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">joinThread(echo1)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">joinThread(echo2)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(</span><span style="color:#b8bb26;">&quot;Main thread finished!&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private static void </span><span style="color:#8ec07c;">joinThread</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Thread </span><span style="color:#fdf4c1;">th</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">try </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">th.</span><span style="color:#fdf4c1;">join()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">} </span><span style="color:#fa5c4b;">catch </span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">InterruptedException </span><span style="color:#fdf4c1;">e</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(th.getName() </span><span style="color:#fe8019;">+ </span><span style="color:#b8bb26;">&quot; interrupted!&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>可以很明显地发现：</p>
 <ul>
@@ -206,26 +206,26 @@ API 列表</h2>
 线程的生命周期</h2>
 <p>当前线程创建了<code>Thread</code>对象，实际的线程还没有被创建，线程对象处于<code>NEW</code>状态。</p>
 <p>根据<code>Thread</code>的api说明，一个<code>Thread</code>对象会有6种状态，同一时间该对象只可能处于一种状态。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">public enum </span><span style="color:#dcdcdc;">State {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#b4cea8;">NEW</span><span style="color:#dcdcdc;">,			</span><span style="color:#608b4e;">// 新建状态
-</span><span style="color:#dcdcdc;">    </span><span style="color:#b4cea8;">RUNNABLE</span><span style="color:#dcdcdc;">, 		</span><span style="color:#608b4e;">// 运行状态
-</span><span style="color:#dcdcdc;">    </span><span style="color:#b4cea8;">BLOCKED</span><span style="color:#dcdcdc;">,		</span><span style="color:#608b4e;">// 阻塞状态
-</span><span style="color:#dcdcdc;">    </span><span style="color:#b4cea8;">WAITING</span><span style="color:#dcdcdc;">,		</span><span style="color:#608b4e;">// 无条件的等待状态
-</span><span style="color:#dcdcdc;">    </span><span style="color:#b4cea8;">TIMED_WAITING</span><span style="color:#dcdcdc;">, 	</span><span style="color:#608b4e;">// 有条件的等待状态
-</span><span style="color:#dcdcdc;">    </span><span style="color:#b4cea8;">TERMINATED</span><span style="color:#dcdcdc;">; 	</span><span style="color:#608b4e;">// 终止状态
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public enum </span><span style="color:#8ec07c;">State </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1;">NEW</span><span style="color:#fdf4c1aa;">,			</span><span style="font-style:italic;color:#928374;">// 新建状态
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1;">RUNNABLE</span><span style="color:#fdf4c1aa;">, 		</span><span style="font-style:italic;color:#928374;">// 运行状态
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1;">BLOCKED</span><span style="color:#fdf4c1aa;">,		</span><span style="font-style:italic;color:#928374;">// 阻塞状态
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1;">WAITING</span><span style="color:#fdf4c1aa;">,		</span><span style="font-style:italic;color:#928374;">// 无条件的等待状态
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1;">TIMED_WAITING</span><span style="color:#fdf4c1aa;">, 	</span><span style="font-style:italic;color:#928374;">// 有条件的等待状态
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1;">TERMINATED</span><span style="color:#fdf4c1aa;">; 	</span><span style="font-style:italic;color:#928374;">// 终止状态
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>新建状态表明线程对象还未运行；运行状态表明线程对象正在运行一个线程；阻塞状态表明本线程对象在等待一个锁或同步器；无条件等待状态表明本线程对象在无限期地等待一个条件，比如调用了无过期时间的<code>Object.wait()</code>、<code>Thread.join()</code>等方法；有条件等待状态表明本线程对象在有条件地等待一个条件，是无条件等待状态的过期时间版本（timeout）；终止状态表明本线程对象代表的线程已经结束运行。</p>
 <h2 id="zi-ding-yi-xian-cheng-xing-wei"><a class="zola-anchor" href="#zi-ding-yi-xian-cheng-xing-wei" aria-label="Anchor link for: zi-ding-yi-xian-cheng-xing-wei">🔗</a>
 自定义线程行为</h2>
 <p>前面已经说到，线程执行的任务在<code>run()</code>方法里面。所以，自定义线程就需要自定义该方法。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">public</span><span style="color:#dcdcdc;"> void run() {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(target != </span><span style="color:#569cd6;">null</span><span style="color:#dcdcdc;">) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">target.run();
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public</span><span style="color:#fdf4c1aa;"> void </span><span style="color:#fdf4c1;">run() </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">(target </span><span style="color:#fe8019;">!= </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">target.</span><span style="color:#fdf4c1;">run()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p><code>run()</code>方法的默认实现是去执行构造器里面提供的<code>Runnable</code>对象的<code>run()</code>方法。</p>
 <p>所以，有两种方法可以自定义线程。</p>
@@ -250,20 +250,20 @@ API 列表</h2>
 <h2 id="yi-chang-chu-li"><a class="zola-anchor" href="#yi-chang-chu-li" aria-label="Anchor link for: yi-chang-chu-li">🔗</a>
 异常处理</h2>
 <p>线程执行<code>run()</code>方法的过程中，有可能会遇到未捕获的异常。Java规范规定，JVM在执行线程过程中遇到了未捕获的异常，会主动去寻找该线程对象的未捕获异常处理器，如果没找到就去该线程对象的<code>ThreadGroup</code>对象里找，如果还是没有找到就去找<code>Thread</code>类的静态的未捕获异常处理器。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">public interface </span><span style="color:#dcdcdc;">UncaughtExceptionHandler {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">void </span><span style="color:#dcdcdc;">uncaughtException(Thread t, Throwable e);
-</span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#569cd6;">private volatile </span><span style="color:#dcdcdc;">UncaughtExceptionHandler uncaughtExceptionHandler;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#569cd6;">private static volatile </span><span style="color:#dcdcdc;">UncaughtExceptionHandler defaultUncaughtExceptionHandler;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#569cd6;">public static</span><span style="color:#dcdcdc;"> void setDefaultUncaughtExceptionHandler(UncaughtExceptionHandler eh) ;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#569cd6;">public static </span><span style="color:#dcdcdc;">UncaughtExceptionHandler getDefaultUncaughtExceptionHandler()
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">UncaughtExceptionHandler getUncaughtExceptionHandler();
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public interface </span><span style="color:#8ec07c;">UncaughtExceptionHandler </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">void </span><span style="color:#8ec07c;">uncaughtException</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">Thread </span><span style="color:#fdf4c1;">t</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">Throwable </span><span style="color:#fdf4c1;">e</span><span style="color:#fdf4c1aa;">);
+</span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fa5c4b;">private volatile </span><span style="color:#8ec07c;">UncaughtExceptionHandler</span><span style="color:#fdf4c1aa;"> uncaughtExceptionHandler;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fa5c4b;">private static volatile </span><span style="color:#8ec07c;">UncaughtExceptionHandler</span><span style="color:#fdf4c1aa;"> defaultUncaughtExceptionHandler;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fa5c4b;">public static</span><span style="color:#fdf4c1aa;"> void </span><span style="color:#fdf4c1;">setDefaultUncaughtExceptionHandler(</span><span style="color:#8ec07c;">UncaughtExceptionHandler</span><span style="color:#fdf4c1;"> eh) </span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fa5c4b;">public static </span><span style="color:#8ec07c;">UncaughtExceptionHandler </span><span style="color:#fdf4c1;">getDefaultUncaughtExceptionHandler()
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">UncaughtExceptionHandler </span><span style="color:#fdf4c1;">getUncaughtExceptionHandler()</span><span style="color:#fdf4c1aa;">;
 </span></pre>
 <p>可以通过上面的方法自定义未捕获异常的处理行为。</p>
 <h1 id="threadgroup"><a class="zola-anchor" href="#threadgroup" aria-label="Anchor link for: threadgroup">🔗</a>
@@ -284,54 +284,54 @@ ThreadGroup</h1>
 <h1 id="runnable"><a class="zola-anchor" href="#runnable" aria-label="Anchor link for: runnable">🔗</a>
 Runnable</h1>
 <p><code>Runnable</code>接口很简单。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">public interface </span><span style="color:#dcdcdc;">Runnable {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public abstract void </span><span style="color:#dcdcdc;">run();
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public interface </span><span style="color:#8ec07c;">Runnable </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public abstract void </span><span style="color:#8ec07c;">run</span><span style="color:#fdf4c1aa;">();
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>实际使用中使用<code>Runnable</code>的方式经常是使用匿名内部类。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">public final class </span><span style="color:#dcdcdc;">RunnableCase {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public static void </span><span style="color:#dcdcdc;">main(String </span><span style="color:#569cd6;">[] </span><span style="color:#dcdcdc;">_args) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">Thread echo1 =  </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">Thread(
-</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">Runnable() {
-</span><span style="color:#dcdcdc;">                </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">run() {
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#569cd6;">for </span><span style="color:#dcdcdc;">(</span><span style="color:#569cd6;">int</span><span style="color:#dcdcdc;"> i = </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">; i &lt; </span><span style="color:#b5cea8;">1000</span><span style="color:#dcdcdc;">; i</span><span style="color:#569cd6;">++</span><span style="color:#dcdcdc;">) {
-</span><span style="color:#dcdcdc;">                        </span><span style="color:#dcdcdc;">System.out.println(Thread.currentThread().getName() + </span><span style="color:#d69d85;">&quot; echos first&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">Thread echo2 =  </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">Thread(
-</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">Runnable() {
-</span><span style="color:#dcdcdc;">                </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">run() {
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#569cd6;">for </span><span style="color:#dcdcdc;">(</span><span style="color:#569cd6;">int</span><span style="color:#dcdcdc;"> i = </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">; i &lt; </span><span style="color:#b5cea8;">1000</span><span style="color:#dcdcdc;">; i</span><span style="color:#569cd6;">++</span><span style="color:#dcdcdc;">) {
-</span><span style="color:#dcdcdc;">                        </span><span style="color:#dcdcdc;">System.out.println(Thread.currentThread().getName() + </span><span style="color:#d69d85;">&quot; echos second&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">System.out.println(</span><span style="color:#d69d85;">&quot;Main thread started!&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">echo1.start();
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">echo2.start();
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">joinThread(echo1);
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">joinThread(echo2);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">System.out.println(</span><span style="color:#d69d85;">&quot;Main thread finished!&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private static void </span><span style="color:#dcdcdc;">joinThread(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">Thread th) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">try </span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">th.join();
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">} </span><span style="color:#569cd6;">catch </span><span style="color:#dcdcdc;">(InterruptedException e) {
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">System.out.println(th.getName() + </span><span style="color:#d69d85;">&quot; interrupted!&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public final class </span><span style="color:#8ec07c;">RunnableCase </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public static void </span><span style="color:#8ec07c;">main</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">String </span><span style="color:#fa5c4b;">[] </span><span style="color:#fdf4c1;">_args</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Thread</span><span style="color:#fdf4c1aa;"> echo1 </span><span style="color:#fe8019;">=  </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">Thread</span><span style="color:#fdf4c1aa;">(
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">Runnable</span><span style="color:#fdf4c1aa;">() {
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fa5c4b;">public void </span><span style="color:#8ec07c;">run</span><span style="color:#fdf4c1aa;">() {
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fa5c4b;">for </span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">int</span><span style="color:#fdf4c1aa;"> i </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">0</span><span style="color:#fdf4c1aa;">; i </span><span style="color:#fe8019;">&lt; </span><span style="color:#d3869b;">1000</span><span style="color:#fdf4c1aa;">; i</span><span style="color:#fe8019;">++</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">                        </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(</span><span style="color:#8ec07c;">Thread</span><span style="color:#fdf4c1;">.currentThread().getName() </span><span style="color:#fe8019;">+ </span><span style="color:#b8bb26;">&quot; echos first&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">);
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Thread</span><span style="color:#fdf4c1aa;"> echo2 </span><span style="color:#fe8019;">=  </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">Thread</span><span style="color:#fdf4c1aa;">(
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">Runnable</span><span style="color:#fdf4c1aa;">() {
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fa5c4b;">public void </span><span style="color:#8ec07c;">run</span><span style="color:#fdf4c1aa;">() {
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fa5c4b;">for </span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">int</span><span style="color:#fdf4c1aa;"> i </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">0</span><span style="color:#fdf4c1aa;">; i </span><span style="color:#fe8019;">&lt; </span><span style="color:#d3869b;">1000</span><span style="color:#fdf4c1aa;">; i</span><span style="color:#fe8019;">++</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">                        </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(</span><span style="color:#8ec07c;">Thread</span><span style="color:#fdf4c1;">.currentThread().getName() </span><span style="color:#fe8019;">+ </span><span style="color:#b8bb26;">&quot; echos second&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">);
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(</span><span style="color:#b8bb26;">&quot;Main thread started!&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">echo1.</span><span style="color:#fdf4c1;">start()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">echo2.</span><span style="color:#fdf4c1;">start()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">joinThread(echo1)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">joinThread(echo2)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(</span><span style="color:#b8bb26;">&quot;Main thread finished!&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private static void </span><span style="color:#8ec07c;">joinThread</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Thread </span><span style="color:#fdf4c1;">th</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">try </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">th.</span><span style="color:#fdf4c1;">join()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">} </span><span style="color:#fa5c4b;">catch </span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">InterruptedException </span><span style="color:#fdf4c1;">e</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(th.getName() </span><span style="color:#fe8019;">+ </span><span style="color:#b8bb26;">&quot; interrupted!&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
 </span></pre><h1 id="dai-ma-xia-zai"><a class="zola-anchor" href="#dai-ma-xia-zai" aria-label="Anchor link for: dai-ma-xia-zai">🔗</a>
 代码下载</h1>
 <p><a href="https://www.wangbo.im/posts/2016-04-11-learning-java-concurrency-thread-runnable/RunnableCase.java">RunnableCase.java</a>

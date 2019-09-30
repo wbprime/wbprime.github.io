@@ -14,7 +14,7 @@
     <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;nginx-note-signal-handling&#x2F;"/>
     <meta property="og:description" content="Note of signal handling for Nginx"/>
     <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
-    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;red.css">
 <link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
     <body>
         <div class="container full">
@@ -101,165 +101,165 @@ Nginx 的信号管理</h1>
 <p>这一系列的文章还是在09年写的，存在电脑里很久了，现在贴出来。顺序也不记得了，看到那个就发那个吧，最近都会发上来。欢迎转载，但请保留链接：http://lenky.info/ ，谢谢。</p>
 <p>Nginx对所有发往其自身的信号进行了统一管理，这部分相关实现代码不多，而且十分清晰易懂，下面来逐步解析。</p>
 <p>首先，Nginx对一种信号以及该信号的处理封装了一个对应的名为<code>ngx_signal_t</code>的结构体：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">typedef struct {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">int     signo;              // 信号值
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">char   *signame;            // 信号名
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">char   *name;               // 名称，和信号名不一样，名称表明该信号的自定义作用
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">void  (*handler)(int signo);// 信号处理函数指针
-</span><span style="color:#dcdcdc;">} ngx_signal_t;
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">typedef struct {
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">int     signo;              // 信号值
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">char   *signame;            // 信号名
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">char   *name;               // 名称，和信号名不一样，名称表明该信号的自定义作用
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">void  (*handler)(int signo);// 信号处理函数指针
+</span><span style="color:#fdf4c1aa;">} ngx_signal_t;
 </span></pre>
 <p>接着，Nginx定义了一个<code>ngx_signal_t</code>类型的全局数组变量<code>signals</code>，该变量内包含了Nginx所有要处理的信号，如下：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">ngx_signal_t  signals[] = {
-</span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_signal_value(NGX_RECONFIGURE_SIGNAL),     //SIGHUP
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&quot;SIG&quot; ngx_value(NGX_RECONFIGURE_SIGNAL),      //&quot;SIGHUP&quot;，这里带了引号
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&quot;reload&quot;,                                     //表示SIGHUP用户重新加载Nginx，也就是reload configure
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_signal_handler },                         //信号处理函数，重点
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">{ ngx_signal_value(NGX_REOPEN_SIGNAL),
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&quot;SIG&quot; ngx_value(NGX_REOPEN_SIGNAL),
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&quot;reopen&quot;,
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_signal_handler },
-</span><span style="color:#dcdcdc;">                                                  </span><span style="color:#dcdcdc;">// ...
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">{ SIGPIPE, &quot;SIGPIPE, SIG_IGN&quot;, &quot;&quot;, SIG_IGN }, //忽略信号也是一种处理方式
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">{ 0, NULL, &quot;&quot;, NULL }                         //数组结束哨兵元素，很多地方都这么用
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">ngx_signal_t  signals[] = {
+</span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ngx_signal_value(NGX_RECONFIGURE_SIGNAL),     //SIGHUP
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">&quot;SIG&quot; ngx_value(NGX_RECONFIGURE_SIGNAL),      //&quot;SIGHUP&quot;，这里带了引号
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">&quot;reload&quot;,                                     //表示SIGHUP用户重新加载Nginx，也就是reload configure
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ngx_signal_handler },                         //信号处理函数，重点
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">{ ngx_signal_value(NGX_REOPEN_SIGNAL),
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">&quot;SIG&quot; ngx_value(NGX_REOPEN_SIGNAL),
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">&quot;reopen&quot;,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ngx_signal_handler },
+</span><span style="color:#fdf4c1aa;">                                                  </span><span style="color:#fdf4c1aa;">// ...
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">{ SIGPIPE, &quot;SIGPIPE, SIG_IGN&quot;, &quot;&quot;, SIG_IGN }, //忽略信号也是一种处理方式
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">{ 0, NULL, &quot;&quot;, NULL }                         //数组结束哨兵元素，很多地方都这么用
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p><code>ngx_signal_value</code>、<code>NGX_RECONFIGURE_SIGNAL</code>、<code>ngx_value</code>都是一些宏，扩展开来就容易看懂，而<code>ngx_signal_handler</code>为一个函数指针，用来处理接收到的信号。</p>
 <p>上面只是准备工作，还需调用类似于<code>signal</code>、<code>sigaction</code>这些系统函数来进行信号安插设置，已告诉系统当Nginx进程收到其关注的信号时调用Nginx自定义的信号处理函数。顺着Nginx的<code>main</code>函数往下寻找，可以看到一个<code>ngx_init_signals</code>函数调用，跟进该函数内部，了了几行代码，实现的正好就是信号安插设置功能，很容易看懂：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">ngx_int_t
-</span><span style="color:#dcdcdc;">ngx_init_signals(ngx_log_t *log)
-</span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_signal_t      *sig;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">struct sigaction   sa;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">for (sig = signals; sig-&gt;signo != 0; sig++) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">ngx_memzero(&amp;sa, sizeof(struct sigaction));
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">sa.sa_handler = sig-&gt;handler;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">sigemptyset(&amp;sa.sa_mask);
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">if (sigaction(sig-&gt;signo, &amp;sa, NULL) == -1) {
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">ngx_log_error(NGX_LOG_EMERG, log, ngx_errno,
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">&quot;sigaction(%s) failed&quot;, sig-&gt;signame);
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">return NGX_ERROR;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">return NGX_OK;
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">ngx_int_t
+</span><span style="color:#fdf4c1aa;">ngx_init_signals(ngx_log_t *log)
+</span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ngx_signal_t      *sig;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">struct sigaction   sa;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">for (sig = signals; sig-&gt;signo != 0; sig++) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">ngx_memzero(&amp;sa, sizeof(struct sigaction));
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">sa.sa_handler = sig-&gt;handler;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">sigemptyset(&amp;sa.sa_mask);
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">if (sigaction(sig-&gt;signo, &amp;sa, NULL) == -1) {
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">ngx_log_error(NGX_LOG_EMERG, log, ngx_errno,
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">&quot;sigaction(%s) failed&quot;, sig-&gt;signame);
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">return NGX_ERROR;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">return NGX_OK;
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>当Nginx进程收到其关注的信号时就会执行相应的回调函数<code>ngx_signal_handler</code>，该函数内的实现逻辑也很简单，仅仅只是根据其收到的信号对相应的全局变量进行置位操作，这符合信号处理函数简单快速的一般特点。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">void
-</span><span style="color:#dcdcdc;">ngx_signal_handler(int signo)
-</span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">char            *action;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_int_t        ignore;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_err_t        err;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_signal_t    *sig;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ignore = 0;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">err = ngx_errno;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">for (sig = signals; sig-&gt;signo != 0; sig++) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">if (sig-&gt;signo == signo) {
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">break;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_time_update(0, 0);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">action = &quot;&quot;;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">switch (ngx_process) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">case NGX_PROCESS_MASTER:
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">case NGX_PROCESS_SINGLE:
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">switch (signo) {
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">case ngx_signal_value(NGX_SHUTDOWN_SIGNAL):
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">ngx_quit = 1;
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">action = &quot;, shutting down&quot;;
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">break;
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">case ngx_signal_value(NGX_TERMINATE_SIGNAL):
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">case SIGINT:
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">ngx_terminate = 1;
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">action = &quot;, exiting&quot;;
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">break;
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">case ngx_signal_value(NGX_NOACCEPT_SIGNAL):
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">ngx_noaccept = 1;
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">action = &quot;, stop accepting connections&quot;;
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">break;
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">case ngx_signal_value(NGX_RECONFIGURE_SIGNAL):
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">ngx_reconfigure = 1;
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">action = &quot;, reconfiguring&quot;;
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">break;
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">case ngx_signal_value(NGX_REOPEN_SIGNAL):
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">ngx_reopen = 1;
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">action = &quot;, reopening logs&quot;;
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">break;
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">case ngx_signal_value(NGX_CHANGEBIN_SIGNAL):
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">if (getppid() &gt; 1 || ngx_new_binary &gt; 0) {
-</span><span style="color:#dcdcdc;">                        </span><span style="color:#dcdcdc;">/*
-</span><span style="color:#dcdcdc;">                        </span><span style="color:#dcdcdc;">* Ignore the signal in the new binary if its parent is
-</span><span style="color:#dcdcdc;">                        </span><span style="color:#dcdcdc;">* not the init process, i.e. the old binary’s process
-</span><span style="color:#dcdcdc;">                        </span><span style="color:#dcdcdc;">* is still running.  Or ignore the signal in the old binary’s
-</span><span style="color:#dcdcdc;">                        </span><span style="color:#dcdcdc;">* process if the new binary’s process is already running.
-</span><span style="color:#dcdcdc;">                        </span><span style="color:#dcdcdc;">*/
-</span><span style="color:#dcdcdc;">                        </span><span style="color:#dcdcdc;">action = &quot;, ignoring&quot;;
-</span><span style="color:#dcdcdc;">                        </span><span style="color:#dcdcdc;">ignore = 1;
-</span><span style="color:#dcdcdc;">                        </span><span style="color:#dcdcdc;">break;
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">ngx_change_binary = 1;
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">action = &quot;, changing binary&quot;;
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">break;
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">case SIGALRM:
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">ngx_sigalrm = 1;
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">break;
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">case SIGIO:
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">ngx_sigio = 1;
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">break;
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">case SIGCHLD:
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">ngx_reap = 1;
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">break;
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">break;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">case NGX_PROCESS_WORKER:
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">case NGX_PROCESS_HELPER:
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">switch (signo) {
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">case ngx_signal_value(NGX_NOACCEPT_SIGNAL):
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">ngx_debug_quit = 1;
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">case ngx_signal_value(NGX_SHUTDOWN_SIGNAL):
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">ngx_quit = 1;
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">action = &quot;, shutting down&quot;;
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">break;
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">case ngx_signal_value(NGX_TERMINATE_SIGNAL):
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">case SIGINT:
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">ngx_terminate = 1;
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">action = &quot;, exiting&quot;;
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">break;
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">case ngx_signal_value(NGX_REOPEN_SIGNAL):
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">ngx_reopen = 1;
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">action = &quot;, reopening logs&quot;;
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">break;
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">case ngx_signal_value(NGX_RECONFIGURE_SIGNAL):
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">case ngx_signal_value(NGX_CHANGEBIN_SIGNAL):
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">case SIGIO:
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">action = &quot;, ignoring&quot;;
-</span><span style="color:#dcdcdc;">                    </span><span style="color:#dcdcdc;">break;
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">break;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_log_error(NGX_LOG_NOTICE, ngx_cycle-&gt;log, 0,
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">&quot;signal %d (%s) received%s&quot;, signo, sig-&gt;signame, action);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">if (ignore) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">ngx_log_error(NGX_LOG_CRIT, ngx_cycle-&gt;log, 0,
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">&quot;the changing binary signal is ignored: &quot;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">&quot;you should shutdown or terminate &quot;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">&quot;before either old or new binary’s process&quot;);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">if (signo == SIGCHLD) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">ngx_process_get_status();
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_set_errno(err);
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">void
+</span><span style="color:#fdf4c1aa;">ngx_signal_handler(int signo)
+</span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">char            *action;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ngx_int_t        ignore;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ngx_err_t        err;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ngx_signal_t    *sig;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ignore = 0;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">err = ngx_errno;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">for (sig = signals; sig-&gt;signo != 0; sig++) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">if (sig-&gt;signo == signo) {
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">break;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ngx_time_update(0, 0);
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">action = &quot;&quot;;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">switch (ngx_process) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">case NGX_PROCESS_MASTER:
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">case NGX_PROCESS_SINGLE:
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">switch (signo) {
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">case ngx_signal_value(NGX_SHUTDOWN_SIGNAL):
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">ngx_quit = 1;
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">action = &quot;, shutting down&quot;;
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">break;
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">case ngx_signal_value(NGX_TERMINATE_SIGNAL):
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">case SIGINT:
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">ngx_terminate = 1;
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">action = &quot;, exiting&quot;;
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">break;
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">case ngx_signal_value(NGX_NOACCEPT_SIGNAL):
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">ngx_noaccept = 1;
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">action = &quot;, stop accepting connections&quot;;
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">break;
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">case ngx_signal_value(NGX_RECONFIGURE_SIGNAL):
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">ngx_reconfigure = 1;
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">action = &quot;, reconfiguring&quot;;
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">break;
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">case ngx_signal_value(NGX_REOPEN_SIGNAL):
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">ngx_reopen = 1;
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">action = &quot;, reopening logs&quot;;
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">break;
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">case ngx_signal_value(NGX_CHANGEBIN_SIGNAL):
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">if (getppid() &gt; 1 || ngx_new_binary &gt; 0) {
+</span><span style="color:#fdf4c1aa;">                        </span><span style="color:#fdf4c1aa;">/*
+</span><span style="color:#fdf4c1aa;">                        </span><span style="color:#fdf4c1aa;">* Ignore the signal in the new binary if its parent is
+</span><span style="color:#fdf4c1aa;">                        </span><span style="color:#fdf4c1aa;">* not the init process, i.e. the old binary’s process
+</span><span style="color:#fdf4c1aa;">                        </span><span style="color:#fdf4c1aa;">* is still running.  Or ignore the signal in the old binary’s
+</span><span style="color:#fdf4c1aa;">                        </span><span style="color:#fdf4c1aa;">* process if the new binary’s process is already running.
+</span><span style="color:#fdf4c1aa;">                        </span><span style="color:#fdf4c1aa;">*/
+</span><span style="color:#fdf4c1aa;">                        </span><span style="color:#fdf4c1aa;">action = &quot;, ignoring&quot;;
+</span><span style="color:#fdf4c1aa;">                        </span><span style="color:#fdf4c1aa;">ignore = 1;
+</span><span style="color:#fdf4c1aa;">                        </span><span style="color:#fdf4c1aa;">break;
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">ngx_change_binary = 1;
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">action = &quot;, changing binary&quot;;
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">break;
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">case SIGALRM:
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">ngx_sigalrm = 1;
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">break;
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">case SIGIO:
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">ngx_sigio = 1;
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">break;
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">case SIGCHLD:
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">ngx_reap = 1;
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">break;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">break;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">case NGX_PROCESS_WORKER:
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">case NGX_PROCESS_HELPER:
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">switch (signo) {
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">case ngx_signal_value(NGX_NOACCEPT_SIGNAL):
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">ngx_debug_quit = 1;
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">case ngx_signal_value(NGX_SHUTDOWN_SIGNAL):
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">ngx_quit = 1;
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">action = &quot;, shutting down&quot;;
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">break;
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">case ngx_signal_value(NGX_TERMINATE_SIGNAL):
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">case SIGINT:
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">ngx_terminate = 1;
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">action = &quot;, exiting&quot;;
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">break;
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">case ngx_signal_value(NGX_REOPEN_SIGNAL):
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">ngx_reopen = 1;
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">action = &quot;, reopening logs&quot;;
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">break;
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">case ngx_signal_value(NGX_RECONFIGURE_SIGNAL):
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">case ngx_signal_value(NGX_CHANGEBIN_SIGNAL):
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">case SIGIO:
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">action = &quot;, ignoring&quot;;
+</span><span style="color:#fdf4c1aa;">                    </span><span style="color:#fdf4c1aa;">break;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">break;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ngx_log_error(NGX_LOG_NOTICE, ngx_cycle-&gt;log, 0,
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">&quot;signal %d (%s) received%s&quot;, signo, sig-&gt;signame, action);
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">if (ignore) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">ngx_log_error(NGX_LOG_CRIT, ngx_cycle-&gt;log, 0,
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">&quot;the changing binary signal is ignored: &quot;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">&quot;you should shutdown or terminate &quot;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">&quot;before either old or new binary’s process&quot;);
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">if (signo == SIGCHLD) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">ngx_process_get_status();
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ngx_set_errno(err);
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>转载请保留地址：http://www.lenky.info/archives/2011/09/60 或 http://lenky.info/?p=60</p>
 <p>备注：如无特殊说明，文章内容均出自Lenky个人的真实理解而并非存心妄自揣测来故意愚人耳目。由于个人水平有限，虽力求内容正确无误，但仍然难免出错，请勿见怪，如果可以则请留言告之，并欢迎来信讨论。另外值得说明的是，Lenky的部分文章以及部分内容参考借鉴了网络上各位网友的热心分享，特别是一些带有完全参考的文章，其后附带的链接内容也许更直接、更丰富，而我只是做了一下归纳&amp;转述，在此也一并表示感谢。关于本站的所有技术文章，欢迎转载，但请遵从CC创作共享协议，而一些私人性质较强的心情随笔，建议不要转载。</p>

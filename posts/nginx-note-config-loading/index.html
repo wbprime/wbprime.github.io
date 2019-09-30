@@ -14,7 +14,7 @@
     <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;nginx-note-config-loading&#x2F;"/>
     <meta property="og:description" content="Note of config parsing and loading for Nginx"/>
     <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
-    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;red.css">
 <link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
     <body>
         <div class="container full">
@@ -107,56 +107,56 @@ Nginx 配置信息的解析流程</h1>
 <p><code>error_page 404 /404.html;</code></p>
 <p>其项目值就包含有两个token，分别为 &quot;404&quot; 和 &quot;/404.html&quot; 。</p>
 <p>对于复杂配置项：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">location /www {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">index    index.html index.htm index.php;
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">location /www {
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">index    index.html index.htm index.php;
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>其项目名 <code>location</code> 为一个token，项目值是一个token(&quot;/www&quot;)和多条简单配置项组成的复合结构。</p>
 <p>前面将token解释为一个配置文件字符串内容中被空格、引号、括号，比如 '{' 等分割开来的字符子串，那么很明显，上面例子中的taken是被空格分割出来，事实上下面这样的配置也是正确的：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">&quot;daemon&quot; &quot;off&quot;;
-</span><span style="color:#dcdcdc;">&#39;daemon&#39; &#39;off&#39;;
-</span><span style="color:#dcdcdc;">daemon &#39;off&#39;;
-</span><span style="color:#dcdcdc;">&quot;daemon&quot; off;
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">&quot;daemon&quot; &quot;off&quot;;
+</span><span style="color:#fdf4c1aa;">&#39;daemon&#39; &#39;off&#39;;
+</span><span style="color:#fdf4c1aa;">daemon &#39;off&#39;;
+</span><span style="color:#fdf4c1aa;">&quot;daemon&quot; off;
 </span></pre>
 <p>当然，一般情况下没必要这样费事去加些引号，除非我们需要在token内包含空格而又不想使用转义字符('')的话就可以利用引号，比如：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">log_format   main &#39;$remote_addr – $remote_user [$time_local]  $status &#39;
-</span><span style="color:#dcdcdc;">&#39;&quot;$request&quot; $body_bytes_sent &quot;$http_referer&quot; &#39;
-</span><span style="color:#dcdcdc;">&#39;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#39;;
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">log_format   main &#39;$remote_addr – $remote_user [$time_local]  $status &#39;
+</span><span style="color:#fdf4c1aa;">&#39;&quot;$request&quot; $body_bytes_sent &quot;$http_referer&quot; &#39;
+</span><span style="color:#fdf4c1aa;">&#39;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#39;;
 </span></pre>
 <p>但是像下面这种格式就会有问题，这对于我们来说很容易理解，不多详叙：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">&quot;daemon &quot;off&quot;;
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">&quot;daemon &quot;off&quot;;
 </span></pre>
 <p>对于如此多的配置项，Nginx怎样去解析它们呢？在什么时候去解析呢？事实上，对于Nginx所有可能出现的配置项(通过项目名即指令Directive去判断)，Nginx都会提供有对应的代码去解析它，如果配置文件内出现了Nginx无法解析的配置项，那么Nginx将报错并直接退出程序。</p>
 <p>举例来说，对于配置项 <code>daemon</code> ，在模块 <code>ngx_core_module</code> 的命令解析数组内的第一项就是保存的对该配置项进行解析所需要的信息，比如 <code>daemon</code> 配置项的类型，执行实际解析操作的回调函数，解析出来的配置项值所存放的地址等：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_string(</span><span style="color:#d69d85;">&quot;daemon&quot;</span><span style="color:#dcdcdc;">),
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">NGX_MAIN_CONF|NGX_DIRECT_CONF|NGX_CONF_FLAG,
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_conf_set_flag_slot,
-</span><span style="color:#dcdcdc;">    </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">,
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">offsetof(ngx_core_conf_t, daemon),
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">NULL
-</span><span style="color:#dcdcdc;">},
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1;">ngx_string(</span><span style="color:#b8bb26;">&quot;daemon&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">NGX_MAIN_CONF</span><span style="color:#fe8019;">|</span><span style="color:#fdf4c1aa;">NGX_DIRECT_CONF</span><span style="color:#fe8019;">|</span><span style="color:#fdf4c1aa;">NGX_CONF_FLAG,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ngx_conf_set_flag_slot,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#d3869b;">0</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1;">offsetof(ngx_core_conf_t, daemon)</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">NULL
+</span><span style="color:#fdf4c1aa;">},
 </span></pre>
 <p>而如果我在配置文件内加入如下配置内容：</p>
 <p><code>lenky on;</code></p>
 <p>启动 Nginx，直接返回错误，这是因为对于 <code>lenky</code> 指令，Nginx 没有对应的代码去解析它：</p>
 <p><code>[emerg]: unknown directive &quot;lenky&quot; in /usr/local/nginx/conf/nginx.conf:2</code></p>
 <p>上面给出的解析 <code>daemon</code> 配置项的数据类型为 <code>ngx_command_s</code> 结构体类型，该结构体类型对所有的 Nginx 配置项进行了统一的描述：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">typedef struct ngx_command_s     ngx_command_t;
-</span><span style="color:#dcdcdc;">struct ngx_command_s {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_str_t             name;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_uint_t            type;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">char               *(*set)(ngx_conf_t *cf, ngx_command_t *cmd, void *conf);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_uint_t            conf;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_uint_t            offset;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">void                 *post;
-</span><span style="color:#dcdcdc;">};
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">typedef struct ngx_command_s     ngx_command_t;
+</span><span style="color:#fdf4c1aa;">struct ngx_command_s {
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ngx_str_t             name;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ngx_uint_t            type;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">char               *(*set)(ngx_conf_t *cf, ngx_command_t *cmd, void *conf);
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ngx_uint_t            conf;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ngx_uint_t            offset;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">void                 *post;
+</span><span style="color:#fdf4c1aa;">};
 </span></pre>
 <p>一个 <code>ngx_command_s</code> 结构体类型的元素用于解析并获取一项Nginx配置，其中字段 <code>name</code> 指定获取的配置项目名称，字段 <code>set</code> 指向一个回调函数，该函数执行解析并获取配置项值的操作；而 <code>type</code> 指定该配置项的相关信息，比如：</p>
 <ol>
@@ -188,40 +188,40 @@ Nginx 配置信息的解析流程</h1>
 <p>假设我们以命令：</p>
 <p><code>nginx -c /usr/local/nginx/conf/nginx.conf</code></p>
 <p>启动Nginx，而配置文件 &quot;nginx.conf&quot; 也比较简单，如下所示：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">worker_processes  2;
-</span><span style="color:#dcdcdc;">error_log  logs/error.log debug;
-</span><span style="color:#dcdcdc;">events {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">use epoll;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">worker_connections  1024;
-</span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">http {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">include       mime.types;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">default_type  application/octet-stream;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">server {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">listen       8888;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">server_name  localhost;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">location / {
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">root   html;
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">index  index.html index.htm;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">error_page  404              /404.html;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">error_page   500 502 503 504  /50x.html;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">location = /50x.html {
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">root   html;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">worker_processes  2;
+</span><span style="color:#fdf4c1aa;">error_log  logs/error.log debug;
+</span><span style="color:#fdf4c1aa;">events {
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">use epoll;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">worker_connections  1024;
+</span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">http {
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">include       mime.types;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">default_type  application/octet-stream;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">server {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">listen       8888;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">server_name  localhost;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">location / {
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">root   html;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">index  index.html index.htm;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">error_page  404              /404.html;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">error_page   500 502 503 504  /50x.html;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">location = /50x.html {
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">root   html;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>下面就来描述Nginx是如何将这些配置信息转化为Nginx内各对应变量的值以控制Nginx工作的。</p>
 <p>首先，抹掉一些细节，我们跟着Nginx的启动流程进入到与配置信息相关的函数调用处：</p>
 <p>(main–&gt;ngx_init_cycle–&gt;ngx_conf_parse)</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(ngx_conf_parse(</span><span style="color:#569cd6;">&amp;</span><span style="color:#dcdcdc;">conf, </span><span style="color:#569cd6;">&amp;</span><span style="color:#dcdcdc;">cycle-&gt;conf_file) != NGX_CONF_OK) {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">environ = senv;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_destroy_cycle_pools(</span><span style="color:#569cd6;">&amp;</span><span style="color:#dcdcdc;">conf);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">return NULL</span><span style="color:#dcdcdc;">;
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">ngx_conf_parse(</span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1;">conf, </span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1;">cycle-&gt;conf_file) </span><span style="color:#fe8019;">!=</span><span style="color:#fdf4c1aa;"> NGX_CONF_OK) {
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">environ </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> senv;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1;">ngx_destroy_cycle_pools(</span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1;">conf)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">return </span><span style="color:#d3869b;">NULL</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>此处调用 <code>ngx_conf_parse</code> 传入了两个参数，第一个参数为 <code>ngx_conf_s</code> 变量，而第二个参数就是保存的配置文件路径字符串 &quot;/usr/local/nginx/conf/nginx.conf&quot;。 <code>ngx_conf_parse</code> 函数是执行配置解析的关键函数，其原型如下：</p>
 <p><code>char * ngx_conf_parse(ngx_conf_t *cf, ngx_str_t *filename)</code></p>
@@ -277,60 +277,60 @@ Nginx 配置信息的解析流程</h1>
 <p>下面来看一个set回调函数的例子，以对配置指令 <code>daemon</code> 的解析函数为例，根据前面给出的指令 <code>daemon</code> 对应的 <code>ngx_command_s</code> 结构体可以看到，其 <code>set</code> 回调函数指向的是函数 <code>ngx_conf_set_flag_slot</code> ，该函数的原型如下：</p>
 <p><code>char * ngx_conf_set_flag_slot(ngx_conf_t *cf, ngx_command_t *cmd, void *conf);</code></p>
 <p>这是一个公共的解析函数，即它并不是单独为解析 <code>daemon</code> 配置指令而存在，而是对于所有 <code>NGX_CONF_FLAG</code> 类型的配置项都是用的该函数来进行解析。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">char *
-</span><span style="color:#dcdcdc;">ngx_conf_set_flag_slot(ngx_conf_t *cf, ngx_command_t *cmd, void *conf)
-</span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">char  *p = conf;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_str_t        *value;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_flag_t       *fp;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_conf_post_t  *post;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">/* 解析出来的对应值存放的内存位置 */
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">fp = (ngx_flag_t *) (p + cmd-&gt;offset);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">/* 该内存位置已有值，故知配置指令重复 */
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">if (*fp != NGX_CONF_UNSET) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">return &quot;is duplicate&quot;;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">/* cf-&gt;args存放的是与当前处理配置项相关的各个token，
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">比如解析daemon配置指令时，
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">cf-&gt;args内的数据详细如下，以便于理解（通过gdb调试获得的结果）：
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">(gdb) p *cf-&gt;args
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">$1 = {elts = 0x9a0c798, nelts = 2, size = 8, nalloc = 10, pool = 0x9a0bf00}
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">(gdb) p *(ngx_str_t*)(cf-&gt;args-&gt;elts)
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">$2 = {len = 6, data = 0x9a0c7e8 &quot;daemon&quot;}
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">(gdb) p *(((ngx_str_t*)(cf-&gt;args-&gt;elts)+1))
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">$3 = {len = 3, data = 0x9a0c7f0 &quot;off&quot;}
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">*/
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">value = cf-&gt;args-&gt;elts;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">/* 解析，布尔值的配置很好解析，&quot;on&quot;转为nginx内的1，&quot;off&quot;转为0。*/
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">if (ngx_strcasecmp(value[1].data, (u_char *) &quot;on&quot;) == 0) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">*fp = 1;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">} else if (ngx_strcasecmp(value[1].data, (u_char *) &quot;off&quot;) == 0) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">*fp = 0;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">} else {   /* 出错提示 */
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">ngx_conf_log_error(NGX_LOG_EMERG, cf, 0,
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">&quot;invalid value \&quot;%s\&quot; in \&quot;%s\&quot; directive, &quot;
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">&quot;it must be \&quot;on\&quot; or \&quot;off\&quot;&quot;,
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">value[1].data, cmd-&gt;name.data);
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">return NGX_CONF_ERROR;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">/* 其它处理函数，
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">对于daemon配置指令来说为NULL，
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">但是对于其它指令，比如optimize_server_names则还需调用自定义的处理。
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">*/
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">if (cmd-&gt;post) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">post = cmd-&gt;post;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">return post-&gt;post_handler(cf, post, fp);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">return NGX_CONF_OK;
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">char *
+</span><span style="color:#fdf4c1aa;">ngx_conf_set_flag_slot(ngx_conf_t *cf, ngx_command_t *cmd, void *conf)
+</span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">char  *p = conf;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ngx_str_t        *value;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ngx_flag_t       *fp;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ngx_conf_post_t  *post;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">/* 解析出来的对应值存放的内存位置 */
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">fp = (ngx_flag_t *) (p + cmd-&gt;offset);
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">/* 该内存位置已有值，故知配置指令重复 */
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">if (*fp != NGX_CONF_UNSET) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">return &quot;is duplicate&quot;;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">/* cf-&gt;args存放的是与当前处理配置项相关的各个token，
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">比如解析daemon配置指令时，
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">cf-&gt;args内的数据详细如下，以便于理解（通过gdb调试获得的结果）：
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">(gdb) p *cf-&gt;args
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">$1 = {elts = 0x9a0c798, nelts = 2, size = 8, nalloc = 10, pool = 0x9a0bf00}
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">(gdb) p *(ngx_str_t*)(cf-&gt;args-&gt;elts)
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">$2 = {len = 6, data = 0x9a0c7e8 &quot;daemon&quot;}
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">(gdb) p *(((ngx_str_t*)(cf-&gt;args-&gt;elts)+1))
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">$3 = {len = 3, data = 0x9a0c7f0 &quot;off&quot;}
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">*/
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">value = cf-&gt;args-&gt;elts;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">/* 解析，布尔值的配置很好解析，&quot;on&quot;转为nginx内的1，&quot;off&quot;转为0。*/
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">if (ngx_strcasecmp(value[1].data, (u_char *) &quot;on&quot;) == 0) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">*fp = 1;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">} else if (ngx_strcasecmp(value[1].data, (u_char *) &quot;off&quot;) == 0) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">*fp = 0;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">} else {   /* 出错提示 */
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">ngx_conf_log_error(NGX_LOG_EMERG, cf, 0,
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">&quot;invalid value \&quot;%s\&quot; in \&quot;%s\&quot; directive, &quot;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">&quot;it must be \&quot;on\&quot; or \&quot;off\&quot;&quot;,
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">value[1].data, cmd-&gt;name.data);
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">return NGX_CONF_ERROR;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">/* 其它处理函数，
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">对于daemon配置指令来说为NULL，
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">但是对于其它指令，比如optimize_server_names则还需调用自定义的处理。
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">*/
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">if (cmd-&gt;post) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">post = cmd-&gt;post;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">return post-&gt;post_handler(cf, post, fp);
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">return NGX_CONF_OK;
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>对于Nginx配置文件的解析流程基本就是如此，上面的介绍忽略了很多细节，前面也说过，事实上对于配置信息解析的代码(即各种各样的回调函数 <code>cmd-&gt;set</code> 的具体实现)占去了Nginx大幅的源代码，而我们这里并没有做过多的分析，仅例举了 <code>daemon</code> 配置指令的解析过程，因为对于不同的配置项，解析代码完全是根据自身应用而不同的，当然，除了一些可公共出来的代码以外。最后，看一个Nginx配置文件解析的流程图，如下：</p>
 <p><img src="/2018-02-06-nginx-note.dir/nginx_config_parsing_procedure_07.png" alt="流程图" /></p>

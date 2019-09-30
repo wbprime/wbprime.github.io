@@ -14,7 +14,7 @@
     <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-09-ffprobe-note-query-key-frame-info&#x2F;"/>
     <meta property="og:description" content="使用 ffprobe 获取视频中的关键帧信息命令如下：&#96;ffprobe -loglevel error -hide_banner -select_streams v -skip_frame nokey -show_frames -show_entries frame=pict_type -of json=compact=1 input.avi&#96;"/>
     <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
-    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;red.css">
 <link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
     <body>
         <div class="container full">
@@ -98,9 +98,9 @@
 
         <div class="post-content">
             <p>使用 <a href="https://ffmpeg.org/ffprobe.html">ffprobe</a> 获取视频中的关键帧信息命令如下：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">ffprobe -loglevel error -hide_banner -select_streams v -skip_frame nokey -show_frames -show_entries frame=pict_type -of json=compact=1 input.avi
-</span><span style="color:#dcdcdc;">ffprobe -loglevel error -hide_banner -select_streams v -show_format -show_frames -show_entries frame=pict_t ype:format=filename,duration,size:format_tags= -show_streams -of json=compact=1 input.mp4
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1;">ffprobe -loglevel error -hide_banner -select_streams v -skip_frame nokey -show_frames -show_entries frame=pict_type -of json=compact=1 input.avi
+</span><span style="color:#fdf4c1;">ffprobe -loglevel error -hide_banner -select_streams v -show_format -show_frames -show_entries frame=pict_t ype:format=filename,duration,size:format_tags= -show_streams -of json=compact=1 input.mp4
 </span></pre>
 <p><a href="https://ffmpeg.org/ffprobe.html">ffprobe</a> 的更多用法请参考<a href="https://ffmpeg.org/ffprobe-all.html">其文档</a> 。</p>
 <hr />

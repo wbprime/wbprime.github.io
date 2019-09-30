@@ -14,7 +14,7 @@
     <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about&#x2F;"/>
     <meta property="og:description" content="wangbo’s home &amp; blog"/>
     <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
-    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;red.css">
 <link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
     <body>
         <div class="container full">
@@ -88,142 +88,142 @@
 <p>Email: <a href="mailto:mail@wangbo.im">mail@wangbo.im</a></p>
 <h1 id="live-in-code">Live in Code</h1>
 <h2 id="c-version">C++ version</h2>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">class </span><span style="color:#dcdcdc;">Person {
-</span><span style="color:#569cd6;">private</span><span style="color:#dcdcdc;">:
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">string name_;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">string gender_;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">string location_;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">string from_;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">string currentCompany_;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">string email_;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">volatile bool</span><span style="color:#dcdcdc;"> isPersonAlive;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#569cd6;">public</span><span style="color:#dcdcdc;">:
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">Person(string </span><span style="color:#569cd6;">&amp;</span><span style="color:#dcdcdc;">n, string </span><span style="color:#569cd6;">&amp;</span><span style="color:#dcdcdc;">g) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">name_ = n;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">gender_ = g;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">isPersonAlive = </span><span style="color:#569cd6;">true</span><span style="color:#dcdcdc;">;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">~Person() {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#608b4e;">// todo
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#569cd6;">public</span><span style="color:#dcdcdc;">:
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">Person </span><span style="color:#569cd6;">&amp; </span><span style="color:#dcdcdc;">location(</span><span style="color:#569cd6;">const</span><span style="color:#dcdcdc;"> string </span><span style="color:#569cd6;">&amp;</span><span style="color:#dcdcdc;">val){
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">this-&gt;location_ = val;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return *</span><span style="color:#dcdcdc;">this;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">Person </span><span style="color:#569cd6;">&amp; </span><span style="color:#dcdcdc;">from(</span><span style="color:#569cd6;">const</span><span style="color:#dcdcdc;"> string </span><span style="color:#569cd6;">&amp;</span><span style="color:#dcdcdc;">val){
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">this-&gt;from_ = val;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return *</span><span style="color:#dcdcdc;">this;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">Person </span><span style="color:#569cd6;">&amp; </span><span style="color:#dcdcdc;">workFor(</span><span style="color:#569cd6;">const</span><span style="color:#dcdcdc;"> string </span><span style="color:#569cd6;">&amp;</span><span style="color:#dcdcdc;">val){
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">this-&gt;currentCompany_ = val;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return *</span><span style="color:#dcdcdc;">this;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">Person </span><span style="color:#569cd6;">&amp; </span><span style="color:#dcdcdc;">email(</span><span style="color:#569cd6;">const</span><span style="color:#dcdcdc;"> string </span><span style="color:#569cd6;">&amp;</span><span style="color:#dcdcdc;">val){
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">this-&gt;email_ = val;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return *</span><span style="color:#dcdcdc;">this;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">void </span><span style="color:#dcdcdc;">live() {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#608b4e;">// Struggle to live
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">bool </span><span style="color:#dcdcdc;">isAlive() {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> isPersonAlive;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#569cd6;">private</span><span style="color:#dcdcdc;">:
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">Person(</span><span style="color:#569cd6;">const</span><span style="color:#dcdcdc;"> Person </span><span style="color:#569cd6;">&amp;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">Person </span><span style="color:#569cd6;">&amp;</span><span style="color:#dcdcdc;">operator=(</span><span style="color:#569cd6;">const</span><span style="color:#dcdcdc;"> Person </span><span style="color:#569cd6;">&amp;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#569cd6;">int </span><span style="color:#dcdcdc;">main(</span><span style="color:#569cd6;">int </span><span style="color:#dcdcdc;">argc, </span><span style="color:#569cd6;">char *</span><span style="color:#dcdcdc;">argv[]) {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">Person elvisWang(</span><span style="color:#d69d85;">&quot;Elvis Wang&quot;</span><span style="color:#dcdcdc;">, </span><span style="color:#d69d85;">&quot;Male&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">elvisWang.workFor(</span><span style="color:#d69d85;">&quot;58.com&quot;</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">             </span><span style="color:#dcdcdc;">.location(</span><span style="color:#d69d85;">&quot;Beijing, Beijing, P.R. China&quot;</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">             </span><span style="color:#dcdcdc;">.from(</span><span style="color:#d69d85;">&quot;Anqing, Anhui, P.R. China&quot;</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">             </span><span style="color:#dcdcdc;">.email(</span><span style="color:#d69d85;">&quot;mail@wangbo.im&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">while </span><span style="color:#dcdcdc;">(elvisWang.isAlive()) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">elvisWang.live();
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">class </span><span style="color:#8ec07c;">Person </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fa5c4b;">private</span><span style="color:#fdf4c1aa;">:
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">string name_;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">string gender_;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">string location_;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">string from_;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">string currentCompany_;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">string email_;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">volatile bool</span><span style="color:#fdf4c1aa;"> isPersonAlive;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fa5c4b;">public</span><span style="color:#fdf4c1aa;">:
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">Person</span><span style="color:#fdf4c1aa;">(string </span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1;">n</span><span style="color:#fdf4c1aa;">, string </span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1;">g</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">name_ </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> n;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">gender_ </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> g;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">isPersonAlive </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">true</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">~Person</span><span style="color:#fdf4c1aa;">() {
+</span><span style="color:#fdf4c1aa;">        </span><span style="font-style:italic;color:#928374;">// todo
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fa5c4b;">public</span><span style="color:#fdf4c1aa;">:
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">Person </span><span style="color:#fe8019;">&amp; </span><span style="color:#8ec07c;">location</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">const</span><span style="color:#fdf4c1aa;"> string </span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1;">val</span><span style="color:#fdf4c1aa;">){
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">-&gt;</span><span style="color:#fdf4c1;">location_ </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> val;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return </span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">Person </span><span style="color:#fe8019;">&amp; </span><span style="color:#8ec07c;">from</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">const</span><span style="color:#fdf4c1aa;"> string </span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1;">val</span><span style="color:#fdf4c1aa;">){
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">-&gt;</span><span style="color:#fdf4c1;">from_ </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> val;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return </span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">Person </span><span style="color:#fe8019;">&amp; </span><span style="color:#8ec07c;">workFor</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">const</span><span style="color:#fdf4c1aa;"> string </span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1;">val</span><span style="color:#fdf4c1aa;">){
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">-&gt;</span><span style="color:#fdf4c1;">currentCompany_ </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> val;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return </span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">Person </span><span style="color:#fe8019;">&amp; </span><span style="color:#8ec07c;">email</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">const</span><span style="color:#fdf4c1aa;"> string </span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1;">val</span><span style="color:#fdf4c1aa;">){
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">-&gt;</span><span style="color:#fdf4c1;">email_ </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> val;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return </span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">void </span><span style="color:#8ec07c;">live</span><span style="color:#fdf4c1aa;">() {
+</span><span style="color:#fdf4c1aa;">        </span><span style="font-style:italic;color:#928374;">// Struggle to live
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">bool </span><span style="color:#8ec07c;">isAlive</span><span style="color:#fdf4c1aa;">() {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> isPersonAlive;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fa5c4b;">private</span><span style="color:#fdf4c1aa;">:
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">Person</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">const</span><span style="color:#fdf4c1aa;"> Person </span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1aa;">);
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">Person </span><span style="color:#fe8019;">&amp;</span><span style="color:#8ec07c;">operator=</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">const</span><span style="color:#fdf4c1aa;"> Person </span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1aa;">);
+</span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fa5c4b;">int </span><span style="color:#8ec07c;">main</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">int </span><span style="color:#fdf4c1;">argc</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fa5c4b;">char </span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1;">argv</span><span style="color:#fdf4c1aa;">[]) {
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">Person </span><span style="color:#fdf4c1;">elvisWang(</span><span style="color:#b8bb26;">&quot;Elvis Wang&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#b8bb26;">&quot;Male&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">elvisWang.</span><span style="color:#fdf4c1;">workFor</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;58.com&quot;</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fdf4c1aa;">             </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">location</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;Beijing, Beijing, P.R. China&quot;</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fdf4c1aa;">             </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">from</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;Anqing, Anhui, P.R. China&quot;</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fdf4c1aa;">             </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">email</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;mail@wangbo.im&quot;</span><span style="color:#fdf4c1aa;">);
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">while </span><span style="color:#fdf4c1aa;">(elvisWang.</span><span style="color:#fdf4c1;">isAlive</span><span style="color:#fdf4c1aa;">()) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">elvisWang.</span><span style="color:#fdf4c1;">live</span><span style="color:#fdf4c1aa;">();
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
 </span></pre><h2 id="java-version">Java version</h2>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">public final class </span><span style="color:#dcdcdc;">Person {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private final </span><span style="color:#dcdcdc;">String name_;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private final </span><span style="color:#dcdcdc;">String gender_;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">String location_;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">String from_;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">String currentCompany_;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">String email_;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private volatile boolean </span><span style="color:#dcdcdc;">isPersonAlive;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">Person(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">String name, </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">String gender) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">this.name_ = name;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">this.gender_ = gender;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">this.location_ = </span><span style="color:#d69d85;">&quot;&quot;</span><span style="color:#dcdcdc;">;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">this.from_ = </span><span style="color:#d69d85;">&quot;&quot;</span><span style="color:#dcdcdc;">;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">this.currentCompany_ = </span><span style="color:#d69d85;">&quot;&quot;</span><span style="color:#dcdcdc;">;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">this.email_ = </span><span style="color:#d69d85;">&quot;&quot;</span><span style="color:#dcdcdc;">;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">this.isPersonAlive = </span><span style="color:#569cd6;">true</span><span style="color:#dcdcdc;">;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">Person location(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">String val) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">this.location_ = val;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">this;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">Person from(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">String val) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">this.from_ = val;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">this;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">Person workFor(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">String val) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">this.currentCompany_ = val;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">this;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">Person email(</span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">String val) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">this.email_ = val;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">this;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">live() {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#608b4e;">// Struggle to live
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public boolean </span><span style="color:#dcdcdc;">isAlive() {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> isPersonAlive;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public static void </span><span style="color:#dcdcdc;">main(String </span><span style="color:#569cd6;">[] </span><span style="color:#dcdcdc;">_args) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">final </span><span style="color:#dcdcdc;">Person elvisWang = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">Person(</span><span style="color:#d69d85;">&quot;Elvis Wang&quot;</span><span style="color:#dcdcdc;">, </span><span style="color:#d69d85;">&quot;Male&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">elvisWang.workFor(</span><span style="color:#d69d85;">&quot;58.com&quot;</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">                 </span><span style="color:#dcdcdc;">.location(</span><span style="color:#d69d85;">&quot;Beijing, Beijing, P.R. China&quot;</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">                 </span><span style="color:#dcdcdc;">.from(</span><span style="color:#d69d85;">&quot;Anqing, Anhui, P.R. China&quot;</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">                 </span><span style="color:#dcdcdc;">.email(</span><span style="color:#d69d85;">&quot;mail@wangbo.im&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">while </span><span style="color:#dcdcdc;">(elvisWang.isAlive()) {
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">elvisWang.live();
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public final class </span><span style="color:#8ec07c;">Person </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private final </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1aa;">name_;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private final </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1aa;">gender_;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1aa;">location_;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1aa;">from_;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1aa;">currentCompany_;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1aa;">email_;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private volatile boolean </span><span style="color:#fdf4c1aa;">isPersonAlive;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">Person</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">name</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">gender</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.name_ </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> name;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.gender_ </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> gender;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.location_ </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&quot;&quot;</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.from_ </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&quot;&quot;</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.currentCompany_ </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&quot;&quot;</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.email_ </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&quot;&quot;</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.isPersonAlive </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">true</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">Person location</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">val</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.location_ </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> val;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">Person from</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">val</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.from_ </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> val;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">Person workFor</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">val</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.currentCompany_ </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> val;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">Person email</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">val</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.email_ </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> val;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public void </span><span style="color:#8ec07c;">live</span><span style="color:#fdf4c1aa;">() {
+</span><span style="color:#fdf4c1aa;">        </span><span style="font-style:italic;color:#928374;">// Struggle to live
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public boolean </span><span style="color:#8ec07c;">isAlive</span><span style="color:#fdf4c1aa;">() {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> isPersonAlive;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public static void </span><span style="color:#8ec07c;">main</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">String </span><span style="color:#fa5c4b;">[] </span><span style="color:#fdf4c1;">_args</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Person</span><span style="color:#fdf4c1aa;"> elvisWang </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">Person</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;Elvis Wang&quot;</span><span style="color:#fdf4c1aa;">, </span><span style="color:#b8bb26;">&quot;Male&quot;</span><span style="color:#fdf4c1aa;">);
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">elvisWang.</span><span style="color:#fdf4c1;">workFor(</span><span style="color:#b8bb26;">&quot;58.com&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1aa;">                 </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">location(</span><span style="color:#b8bb26;">&quot;Beijing, Beijing, P.R. China&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1aa;">                 </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">from(</span><span style="color:#b8bb26;">&quot;Anqing, Anhui, P.R. China&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1aa;">                 </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">email(</span><span style="color:#b8bb26;">&quot;mail@wangbo.im&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">while </span><span style="color:#fdf4c1aa;">(elvisWang.</span><span style="color:#fdf4c1;">isAlive()</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">elvisWang.</span><span style="color:#fdf4c1;">live()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
         </div>
         

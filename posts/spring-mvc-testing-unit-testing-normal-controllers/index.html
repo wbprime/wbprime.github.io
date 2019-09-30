@@ -14,7 +14,7 @@
     <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;spring-mvc-testing-unit-testing-normal-controllers&#x2F;"/>
     <meta property="og:description" content="&lt;p&gt;本文是 &lt;a href=&quot;https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;spring-mvc-testing-content&#x2F;&quot;&gt;Spring MVC Testing&lt;&#x2F;a&gt; 单元测试系列的第2篇，原文链接：&lt;a href=&quot;http:&#x2F;&#…"/>
     <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
-    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;red.css">
 <link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
     <body>
         <div class="container full">
@@ -118,49 +118,49 @@
 <li>Spring Test 3.2.3.RELEASE</li>
 </ul>
 <p>生成的pom.xml文件的片段如下：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#808080;">&lt;</span><span style="color:#569cd6;">dependency</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">groupId</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">com.fasterxml.jackson.core</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">groupId</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">artifactId</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">jackson-core</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">artifactId</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">version</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">2.2.1</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">version</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">scope</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">test</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">scope</span><span style="color:#808080;">&gt;
-</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">dependency</span><span style="color:#808080;">&gt;
-</span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">dependency</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">groupId</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">com.fasterxml.jackson.core</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">groupId</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">artifactId</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">jackson-databind</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">artifactId</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">version</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">2.2.1</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">version</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">scope</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">test</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">scope</span><span style="color:#808080;">&gt;
-</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">dependency</span><span style="color:#808080;">&gt;
-</span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">dependency</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">groupId</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">org.hamcrest</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">groupId</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">artifactId</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">hamcrest-all</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">artifactId</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">version</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">1.3</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">version</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">scope</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">test</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">scope</span><span style="color:#808080;">&gt;
-</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">dependency</span><span style="color:#808080;">&gt;
-</span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">dependency</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">groupId</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">junit</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">groupId</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">artifactId</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">junit</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">artifactId</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">version</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">4.11</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">version</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">scope</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">test</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">scope</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">exclusions</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">exclusion</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">            </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">artifactId</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">hamcrest-core</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">artifactId</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">            </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">groupId</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">org.hamcrest</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">groupId</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">exclusion</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">exclusions</span><span style="color:#808080;">&gt;
-</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">dependency</span><span style="color:#808080;">&gt;
-</span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">dependency</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">groupId</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">org.mockito</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">groupId</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">artifactId</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">mockito-core</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">artifactId</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">version</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">1.9.5</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">version</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">scope</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">test</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">scope</span><span style="color:#808080;">&gt;
-</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">dependency</span><span style="color:#808080;">&gt;
-</span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">dependency</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">groupId</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">org.springframework</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">groupId</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">artifactId</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">spring-test</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">artifactId</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">version</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">3.2.3.RELEASE</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">version</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">scope</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">test</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">scope</span><span style="color:#808080;">&gt;
-</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">dependency</span><span style="color:#808080;">&gt;
+<pre style="background-color:#282828;">
+<span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">com.fasterxml.jackson.core</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">jackson-core</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">2.2.1</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">scope</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">test</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">scope</span><span style="color:#83a598;">&gt;
+</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
+</span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">com.fasterxml.jackson.core</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">jackson-databind</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">2.2.1</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">scope</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">test</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">scope</span><span style="color:#83a598;">&gt;
+</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
+</span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">org.hamcrest</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">hamcrest-all</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">1.3</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">scope</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">test</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">scope</span><span style="color:#83a598;">&gt;
+</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
+</span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">junit</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">junit</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">4.11</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">scope</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">test</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">scope</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">exclusions</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">exclusion</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">hamcrest-core</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">org.hamcrest</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">exclusion</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">exclusions</span><span style="color:#83a598;">&gt;
+</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
+</span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">org.mockito</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">mockito-core</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">1.9.5</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">scope</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">test</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">scope</span><span style="color:#83a598;">&gt;
+</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
+</span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">org.springframework</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">spring-test</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">3.2.3.RELEASE</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">scope</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">test</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">scope</span><span style="color:#83a598;">&gt;
+</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
 </span></pre>
 <p>然后可以开始编写测试用例了。</p>
 <h1 id="ce-shi-yong-li-lei"><a class="zola-anchor" href="#ce-shi-yong-li-lei" aria-label="Anchor link for: ce-shi-yong-li-lei">🔗</a>
@@ -195,23 +195,23 @@
 <li>返回对应的view名称</li>
 </ol>
 <p><code>TodoController</code>类内的相关代码如下：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.stereotype.Controller;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.ui.Model;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.web.bind.annotation.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">java.util.List;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">@Controller
-</span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">TodoController {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private final </span><span style="color:#dcdcdc;">TodoService service;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@RequestMapping(value = </span><span style="color:#d69d85;">&quot;/&quot;</span><span style="color:#dcdcdc;">, method = RequestMethod.</span><span style="color:#b4cea8;">GET</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">String findAll(Model model) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">List&lt;Todo&gt; models = service.findAll();
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">model.addAttribute(</span><span style="color:#d69d85;">&quot;todos&quot;</span><span style="color:#dcdcdc;">, models);
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return </span><span style="color:#d69d85;">&quot;todo/list&quot;</span><span style="color:#dcdcdc;">;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">stereotype</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Controller</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">ui</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Model</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">web</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">bind</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">annotation</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">java</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">util</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">List</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Controller
+</span><span style="color:#fa5c4b;">public class </span><span style="color:#8ec07c;">TodoController </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private final </span><span style="color:#8ec07c;">TodoService </span><span style="color:#fdf4c1aa;">service;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">RequestMapping</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">value </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&quot;/&quot;</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fdf4c1;">method </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">RequestMethod</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">GET</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">String findAll</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">Model </span><span style="color:#fdf4c1;">model</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">List</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Todo</span><span style="color:#fdf4c1aa;">&gt; models </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> service.</span><span style="color:#fdf4c1;">findAll()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">model.</span><span style="color:#fdf4c1;">addAttribute(</span><span style="color:#b8bb26;">&quot;todos&quot;</span><span style="color:#fdf4c1;">, models)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return </span><span style="color:#b8bb26;">&quot;todo/list&quot;</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>接下来可以开始编写测试用例了。</p>
 <h3 id="ce-shi-yong-li-todolie-biao-ye-jie-kou"><a class="zola-anchor" href="#ce-shi-yong-li-todolie-biao-ye-jie-kou" aria-label="Anchor link for: ce-shi-yong-li-todolie-biao-ye-jie-kou">🔗</a>
@@ -230,83 +230,83 @@
 <li>检查请求执行过程中mock的<code>TodoService</code>实例未执行其他方法</li>
 </ol>
 <p>相关代码如下：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.junit.Before;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.junit.Test;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.junit.runner.RunWith;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.mockito.Mockito;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.beans.factory.annotation.Autowired;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.context.ContextConfiguration;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.context.web.WebAppConfiguration;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.MockMvc;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.setup.MockMvcBuilders;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.web.context.WebApplicationContext;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">java.util.Arrays;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.hamcrest.Matchers.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
-</span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.hamcrest.Matchers.is;
-</span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.mockito.Mockito.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
-</span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-</span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.result.MockMvcResultMatchers.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
-</span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">@RunWith(SpringJUnit4ClassRunner.class)
-</span><span style="color:#dcdcdc;">@ContextConfiguration(classes = {TestContext.class, WebAppContext.class})
-</span><span style="color:#dcdcdc;">@WebAppConfiguration
-</span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">TodoControllerTest {
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">MockMvc mockMvc;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Autowired
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">TodoService todoServiceMock;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Add WebApplicationContext field here
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//The setUp() method is omitted.
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Test
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">findAll_ShouldAddTodoEntriesToModelAndRenderTodoListView() </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">Exception {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Todo first = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">TodoBuilder()
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.id(</span><span style="color:#b5cea8;">1</span><span style="color:#569cd6;">L</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.description(</span><span style="color:#d69d85;">&quot;Lorem ipsum&quot;</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.title(</span><span style="color:#d69d85;">&quot;Foo&quot;</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.build();
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Todo second = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">TodoBuilder()
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.id(</span><span style="color:#b5cea8;">2</span><span style="color:#569cd6;">L</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.description(</span><span style="color:#d69d85;">&quot;Lorem ipsum&quot;</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.title(</span><span style="color:#d69d85;">&quot;Bar&quot;</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.build();
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">when(todoServiceMock.findAll()).thenReturn(Arrays.asList(first, second));
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">mockMvc.perform(get(</span><span style="color:#d69d85;">&quot;/&quot;</span><span style="color:#dcdcdc;">))
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(status().isOk())
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(view().name(</span><span style="color:#d69d85;">&quot;todo/list&quot;</span><span style="color:#dcdcdc;">))
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(forwardedUrl(</span><span style="color:#d69d85;">&quot;/WEB-INF/jsp/todo/list.jsp&quot;</span><span style="color:#dcdcdc;">))
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(model().attribute(</span><span style="color:#d69d85;">&quot;todos&quot;</span><span style="color:#dcdcdc;">, hasSize(</span><span style="color:#b5cea8;">2</span><span style="color:#dcdcdc;">)))
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(model().attribute(</span><span style="color:#d69d85;">&quot;todos&quot;</span><span style="color:#dcdcdc;">, hasItem(
-</span><span style="color:#dcdcdc;">                        </span><span style="color:#dcdcdc;">allOf(
-</span><span style="color:#dcdcdc;">                                </span><span style="color:#dcdcdc;">hasProperty(</span><span style="color:#d69d85;">&quot;id&quot;</span><span style="color:#dcdcdc;">, is(</span><span style="color:#b5cea8;">1</span><span style="color:#569cd6;">L</span><span style="color:#dcdcdc;">)),
-</span><span style="color:#dcdcdc;">                                </span><span style="color:#dcdcdc;">hasProperty(</span><span style="color:#d69d85;">&quot;description&quot;</span><span style="color:#dcdcdc;">, is(</span><span style="color:#d69d85;">&quot;Lorem ipsum&quot;</span><span style="color:#dcdcdc;">)),
-</span><span style="color:#dcdcdc;">                                </span><span style="color:#dcdcdc;">hasProperty(</span><span style="color:#d69d85;">&quot;title&quot;</span><span style="color:#dcdcdc;">, is(</span><span style="color:#d69d85;">&quot;Foo&quot;</span><span style="color:#dcdcdc;">))
-</span><span style="color:#dcdcdc;">                        </span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">)))
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(model().attribute(</span><span style="color:#d69d85;">&quot;todos&quot;</span><span style="color:#dcdcdc;">, hasItem(
-</span><span style="color:#dcdcdc;">                        </span><span style="color:#dcdcdc;">allOf(
-</span><span style="color:#dcdcdc;">                                </span><span style="color:#dcdcdc;">hasProperty(</span><span style="color:#d69d85;">&quot;id&quot;</span><span style="color:#dcdcdc;">, is(</span><span style="color:#b5cea8;">2</span><span style="color:#569cd6;">L</span><span style="color:#dcdcdc;">)),
-</span><span style="color:#dcdcdc;">                                </span><span style="color:#dcdcdc;">hasProperty(</span><span style="color:#d69d85;">&quot;description&quot;</span><span style="color:#dcdcdc;">, is(</span><span style="color:#d69d85;">&quot;Lorem ipsum&quot;</span><span style="color:#dcdcdc;">)),
-</span><span style="color:#dcdcdc;">                                </span><span style="color:#dcdcdc;">hasProperty(</span><span style="color:#d69d85;">&quot;title&quot;</span><span style="color:#dcdcdc;">, is(</span><span style="color:#d69d85;">&quot;Bar&quot;</span><span style="color:#dcdcdc;">))
-</span><span style="color:#dcdcdc;">                        </span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">)));
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">verify(todoServiceMock, times(</span><span style="color:#b5cea8;">1</span><span style="color:#dcdcdc;">)).findAll();
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">verifyNoMoreInteractions(todoServiceMock);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">junit</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Before</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">junit</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Test</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">junit</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">runner</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">RunWith</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">mockito</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Mockito</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">beans</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">factory</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">annotation</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Autowired</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">test</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">context</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">ContextConfiguration</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">test</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">context</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">junit4</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">SpringJUnit4ClassRunner</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">test</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">context</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">web</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">WebAppConfiguration</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">test</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">web</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">servlet</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">MockMvc</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">test</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">web</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">servlet</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">setup</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">MockMvcBuilders</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">web</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">context</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">WebApplicationContext</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">java</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">util</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Arrays</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fa5c4b;">import static </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">hamcrest</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Matchers</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import static </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">hamcrest</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Matchers</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">is</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import static </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">mockito</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Mockito</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import static </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">test</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">web</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">servlet</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">request</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">MockMvcRequestBuilders</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">get</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import static </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">test</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">web</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">servlet</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">result</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">MockMvcResultMatchers</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import static </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">test</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">web</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">servlet</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">result</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">MockMvcResultMatchers</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">model</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">RunWith</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">SpringJUnit4ClassRunner</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">class</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">ContextConfiguration</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">classes </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1aa;">{</span><span style="color:#8ec07c;">TestContext</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">class</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">WebAppContext</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">class</span><span style="color:#fdf4c1aa;">})
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">WebAppConfiguration
+</span><span style="color:#fa5c4b;">public class </span><span style="color:#8ec07c;">TodoControllerTest </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">MockMvc </span><span style="color:#fdf4c1aa;">mockMvc;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Autowired
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">TodoService </span><span style="color:#fdf4c1aa;">todoServiceMock;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="font-style:italic;color:#928374;">//Add WebApplicationContext field here
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="font-style:italic;color:#928374;">//The setUp() method is omitted.
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Test
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public void
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">findAll_ShouldAddTodoEntriesToModelAndRenderTodoListView</span><span style="color:#fdf4c1aa;">() </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">Exception </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">Todo</span><span style="color:#fdf4c1aa;"> first </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">TodoBuilder</span><span style="color:#fdf4c1aa;">()
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">id(</span><span style="color:#d3869b;">1</span><span style="color:#fa5c4b;">L</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">description(</span><span style="color:#b8bb26;">&quot;Lorem ipsum&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">title(</span><span style="color:#b8bb26;">&quot;Foo&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">build()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">Todo</span><span style="color:#fdf4c1aa;"> second </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">TodoBuilder</span><span style="color:#fdf4c1aa;">()
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">id(</span><span style="color:#d3869b;">2</span><span style="color:#fa5c4b;">L</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">description(</span><span style="color:#b8bb26;">&quot;Lorem ipsum&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">title(</span><span style="color:#b8bb26;">&quot;Bar&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">build()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">when(todoServiceMock.findAll())</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">thenReturn(</span><span style="color:#8ec07c;">Arrays</span><span style="color:#fdf4c1;">.asList(first, second))</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">mockMvc.</span><span style="color:#fdf4c1;">perform(get(</span><span style="color:#b8bb26;">&quot;/&quot;</span><span style="color:#fdf4c1;">))
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">andExpect(status().isOk())
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">andExpect(view().name(</span><span style="color:#b8bb26;">&quot;todo/list&quot;</span><span style="color:#fdf4c1;">))
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">andExpect(forwardedUrl(</span><span style="color:#b8bb26;">&quot;/WEB-INF/jsp/todo/list.jsp&quot;</span><span style="color:#fdf4c1;">))
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">andExpect(model().attribute(</span><span style="color:#b8bb26;">&quot;todos&quot;</span><span style="color:#fdf4c1;">, hasSize(</span><span style="color:#d3869b;">2</span><span style="color:#fdf4c1;">)))
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">andExpect(model().attribute(</span><span style="color:#b8bb26;">&quot;todos&quot;</span><span style="color:#fdf4c1;">, hasItem(
+</span><span style="color:#fdf4c1;">                        </span><span style="color:#fdf4c1;">allOf(
+</span><span style="color:#fdf4c1;">                                </span><span style="color:#fdf4c1;">hasProperty(</span><span style="color:#b8bb26;">&quot;id&quot;</span><span style="color:#fdf4c1;">, is(</span><span style="color:#d3869b;">1</span><span style="color:#fa5c4b;">L</span><span style="color:#fdf4c1;">)),
+</span><span style="color:#fdf4c1;">                                </span><span style="color:#fdf4c1;">hasProperty(</span><span style="color:#b8bb26;">&quot;description&quot;</span><span style="color:#fdf4c1;">, is(</span><span style="color:#b8bb26;">&quot;Lorem ipsum&quot;</span><span style="color:#fdf4c1;">)),
+</span><span style="color:#fdf4c1;">                                </span><span style="color:#fdf4c1;">hasProperty(</span><span style="color:#b8bb26;">&quot;title&quot;</span><span style="color:#fdf4c1;">, is(</span><span style="color:#b8bb26;">&quot;Foo&quot;</span><span style="color:#fdf4c1;">))
+</span><span style="color:#fdf4c1;">                        </span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">)))
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">andExpect(model().attribute(</span><span style="color:#b8bb26;">&quot;todos&quot;</span><span style="color:#fdf4c1;">, hasItem(
+</span><span style="color:#fdf4c1;">                        </span><span style="color:#fdf4c1;">allOf(
+</span><span style="color:#fdf4c1;">                                </span><span style="color:#fdf4c1;">hasProperty(</span><span style="color:#b8bb26;">&quot;id&quot;</span><span style="color:#fdf4c1;">, is(</span><span style="color:#d3869b;">2</span><span style="color:#fa5c4b;">L</span><span style="color:#fdf4c1;">)),
+</span><span style="color:#fdf4c1;">                                </span><span style="color:#fdf4c1;">hasProperty(</span><span style="color:#b8bb26;">&quot;description&quot;</span><span style="color:#fdf4c1;">, is(</span><span style="color:#b8bb26;">&quot;Lorem ipsum&quot;</span><span style="color:#fdf4c1;">)),
+</span><span style="color:#fdf4c1;">                                </span><span style="color:#fdf4c1;">hasProperty(</span><span style="color:#b8bb26;">&quot;title&quot;</span><span style="color:#fdf4c1;">, is(</span><span style="color:#b8bb26;">&quot;Bar&quot;</span><span style="color:#fdf4c1;">))
+</span><span style="color:#fdf4c1;">                        </span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">)))</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">verify(todoServiceMock, times(</span><span style="color:#d3869b;">1</span><span style="color:#fdf4c1;">))</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">findAll()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">verifyNoMoreInteractions(todoServiceMock)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
 </span></pre><h2 id="todoxiang-xiang-qing-ye-jie-kou"><a class="zola-anchor" href="#todoxiang-xiang-qing-ye-jie-kou" aria-label="Anchor link for: todoxiang-xiang-qing-ye-jie-kou">🔗</a>
 <code>Todo</code>项详情页接口</h2>
 <p>首先看一下该接口的实现代码。</p>
@@ -320,43 +320,43 @@
 <li>返回对应的view名称</li>
 </ol>
 <p><code>TodoController</code>类内的相关代码如下：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">@RequestMapping(value = </span><span style="color:#d69d85;">&quot;/todo/{id}&quot;</span><span style="color:#dcdcdc;">, method = RequestMethod.</span><span style="color:#b4cea8;">GET</span><span style="color:#dcdcdc;">)
-</span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">String findById(@PathVariable(</span><span style="color:#d69d85;">&quot;id&quot;</span><span style="color:#dcdcdc;">) Long id, Model model) throws TodoNotFoundException {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">Todo found = service.findById(id);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">model.addAttribute(</span><span style="color:#d69d85;">&quot;todo&quot;</span><span style="color:#dcdcdc;">, found);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">return </span><span style="color:#d69d85;">&quot;todo/view&quot;</span><span style="color:#dcdcdc;">;
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">RequestMapping</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">value </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&quot;/todo/{id}&quot;</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fdf4c1;">method </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">RequestMethod</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">GET</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">findById(@PathVariable(</span><span style="color:#b8bb26;">&quot;id&quot;</span><span style="color:#fdf4c1;">) </span><span style="color:#8ec07c;">Long</span><span style="color:#fdf4c1;"> id, </span><span style="color:#8ec07c;">Model</span><span style="color:#fdf4c1;"> model)</span><span style="color:#fdf4c1aa;"> throws </span><span style="color:#8ec07c;">TodoNotFoundException </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">Todo</span><span style="color:#fdf4c1aa;"> found </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> service.</span><span style="color:#fdf4c1;">findById(id)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">model.</span><span style="color:#fdf4c1;">addAttribute(</span><span style="color:#b8bb26;">&quot;todo&quot;</span><span style="color:#fdf4c1;">, found)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">return </span><span style="color:#b8bb26;">&quot;todo/view&quot;</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <blockquote>
 <p>如果抛出了<code>TodoNotFoundException</code>，Spring Mvc是怎么处理的呢？</p>
 </blockquote>
 <p>在本系列的前一篇中，我们在webapp的配置中注册了一个<code>exceptionResolver()</code>：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">@Bean
-</span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">SimpleMappingExceptionResolver exceptionResolver() {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">SimpleMappingExceptionResolver exceptionResolver = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">SimpleMappingExceptionResolver();
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">Properties exceptionMappings = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">Properties();
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">exceptionMappings.put(
-</span><span style="color:#dcdcdc;">        </span><span style="color:#d69d85;">&quot;net.petrikainulainen.spring.testmvc.todo.exception.TodoNotFoundException&quot;</span><span style="color:#dcdcdc;">,
-</span><span style="color:#dcdcdc;">        </span><span style="color:#d69d85;">&quot;error/404&quot;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">exceptionMappings.put(</span><span style="color:#d69d85;">&quot;java.lang.Exception&quot;</span><span style="color:#dcdcdc;">, </span><span style="color:#d69d85;">&quot;error/error&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">exceptionMappings.put(</span><span style="color:#d69d85;">&quot;java.lang.RuntimeException&quot;</span><span style="color:#dcdcdc;">, </span><span style="color:#d69d85;">&quot;error/error&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">exceptionResolver.setExceptionMappings(exceptionMappings);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">Properties statusCodes = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">Properties();
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">statusCodes.put(</span><span style="color:#d69d85;">&quot;error/404&quot;</span><span style="color:#dcdcdc;">, </span><span style="color:#d69d85;">&quot;404&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">statusCodes.put(</span><span style="color:#d69d85;">&quot;error/error&quot;</span><span style="color:#dcdcdc;">, </span><span style="color:#d69d85;">&quot;500&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">exceptionResolver.setStatusCodes(statusCodes);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> exceptionResolver;
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Bean
+</span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">SimpleMappingExceptionResolver </span><span style="color:#fdf4c1;">exceptionResolver() </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">SimpleMappingExceptionResolver</span><span style="color:#fdf4c1aa;"> exceptionResolver </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">SimpleMappingExceptionResolver</span><span style="color:#fdf4c1aa;">();
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">Properties</span><span style="color:#fdf4c1aa;"> exceptionMappings </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">Properties</span><span style="color:#fdf4c1aa;">();
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">exceptionMappings.</span><span style="color:#fdf4c1;">put(
+</span><span style="color:#fdf4c1;">        </span><span style="color:#b8bb26;">&quot;net.petrikainulainen.spring.testmvc.todo.exception.TodoNotFoundException&quot;</span><span style="color:#fdf4c1;">,
+</span><span style="color:#fdf4c1;">        </span><span style="color:#b8bb26;">&quot;error/404&quot;
+</span><span style="color:#fdf4c1;">    </span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">exceptionMappings.</span><span style="color:#fdf4c1;">put(</span><span style="color:#b8bb26;">&quot;java.lang.Exception&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#b8bb26;">&quot;error/error&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">exceptionMappings.</span><span style="color:#fdf4c1;">put(</span><span style="color:#b8bb26;">&quot;java.lang.RuntimeException&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#b8bb26;">&quot;error/error&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">exceptionResolver.</span><span style="color:#fdf4c1;">setExceptionMappings(exceptionMappings)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">Properties</span><span style="color:#fdf4c1aa;"> statusCodes </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">Properties</span><span style="color:#fdf4c1aa;">();
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">statusCodes.</span><span style="color:#fdf4c1;">put(</span><span style="color:#b8bb26;">&quot;error/404&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#b8bb26;">&quot;404&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">statusCodes.</span><span style="color:#fdf4c1;">put(</span><span style="color:#b8bb26;">&quot;error/error&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#b8bb26;">&quot;500&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">exceptionResolver.</span><span style="color:#fdf4c1;">setStatusCodes(statusCodes)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> exceptionResolver;
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>所以，当抛出<code>TodoNotFoundException</code>异常时，会返回'error/404'的页面。</p>
 <p>所以我们的测试用例要测试两种情况：</p>
@@ -378,50 +378,50 @@
 <li>检查请求执行过程中mock的<code>TodoService</code>实例未执行其他方法</li>
 </ol>
 <p>代码如下：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.junit.Before;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.junit.Test;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.junit.runner.RunWith;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.mockito.Mockito;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.beans.factory.annotation.Autowired;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.context.ContextConfiguration;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.context.web.WebAppConfiguration;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.MockMvc;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.setup.MockMvcBuilders;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.web.context.WebApplicationContext;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.mockito.Mockito.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
-</span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-</span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.result.MockMvcResultMatchers.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">@RunWith(SpringJUnit4ClassRunner.class)
-</span><span style="color:#dcdcdc;">@ContextConfiguration(classes = {TestContext.class, WebAppContext.class})
-</span><span style="color:#dcdcdc;">@WebAppConfiguration
-</span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">TodoControllerTest {
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">MockMvc mockMvc;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Autowired
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">TodoService todoServiceMock;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Add WebApplicationContext field here
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//The setUp() method is omitted.
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Test
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">findById_TodoEntryNotFound_ShouldRender404View() </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">Exception {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">when(todoServiceMock.findById(</span><span style="color:#b5cea8;">1</span><span style="color:#569cd6;">L</span><span style="color:#dcdcdc;">)).thenThrow(</span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">TodoNotFoundException(</span><span style="color:#d69d85;">&quot;&quot;</span><span style="color:#dcdcdc;">));
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">mockMvc.perform(get(</span><span style="color:#d69d85;">&quot;/todo/{id}&quot;</span><span style="color:#dcdcdc;">, </span><span style="color:#b5cea8;">1</span><span style="color:#569cd6;">L</span><span style="color:#dcdcdc;">))
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(status().isNotFound())
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(view().name(</span><span style="color:#d69d85;">&quot;error/404&quot;</span><span style="color:#dcdcdc;">))
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(forwardedUrl(</span><span style="color:#d69d85;">&quot;/WEB-INF/jsp/error/404.jsp&quot;</span><span style="color:#dcdcdc;">));
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">verify(todoServiceMock, times(</span><span style="color:#b5cea8;">1</span><span style="color:#dcdcdc;">)).findById(</span><span style="color:#b5cea8;">1</span><span style="color:#569cd6;">L</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">verifyZeroInteractions(todoServiceMock);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">junit</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Before</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">junit</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Test</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">junit</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">runner</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">RunWith</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">mockito</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Mockito</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">beans</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">factory</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">annotation</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Autowired</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">test</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">context</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">ContextConfiguration</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">test</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">context</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">junit4</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">SpringJUnit4ClassRunner</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">test</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">context</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">web</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">WebAppConfiguration</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">test</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">web</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">servlet</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">MockMvc</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">test</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">web</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">servlet</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">setup</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">MockMvcBuilders</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">web</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">context</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">WebApplicationContext</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fa5c4b;">import static </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">mockito</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Mockito</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import static </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">test</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">web</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">servlet</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">request</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">MockMvcRequestBuilders</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">get</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import static </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">test</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">web</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">servlet</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">result</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">MockMvcResultMatchers</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">RunWith</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">SpringJUnit4ClassRunner</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">class</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">ContextConfiguration</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">classes </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1aa;">{</span><span style="color:#8ec07c;">TestContext</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">class</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">WebAppContext</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">class</span><span style="color:#fdf4c1aa;">})
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">WebAppConfiguration
+</span><span style="color:#fa5c4b;">public class </span><span style="color:#8ec07c;">TodoControllerTest </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">MockMvc </span><span style="color:#fdf4c1aa;">mockMvc;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Autowired
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">TodoService </span><span style="color:#fdf4c1aa;">todoServiceMock;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="font-style:italic;color:#928374;">//Add WebApplicationContext field here
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="font-style:italic;color:#928374;">//The setUp() method is omitted.
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Test
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public void </span><span style="color:#8ec07c;">findById_TodoEntryNotFound_ShouldRender404View</span><span style="color:#fdf4c1aa;">() </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">Exception </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">when(todoServiceMock.findById(</span><span style="color:#d3869b;">1</span><span style="color:#fa5c4b;">L</span><span style="color:#fdf4c1;">))</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">thenThrow(</span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">TodoNotFoundException</span><span style="color:#fdf4c1;">(</span><span style="color:#b8bb26;">&quot;&quot;</span><span style="color:#fdf4c1;">))</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">mockMvc.</span><span style="color:#fdf4c1;">perform(get(</span><span style="color:#b8bb26;">&quot;/todo/{id}&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#d3869b;">1</span><span style="color:#fa5c4b;">L</span><span style="color:#fdf4c1;">))
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">andExpect(status().isNotFound())
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">andExpect(view().name(</span><span style="color:#b8bb26;">&quot;error/404&quot;</span><span style="color:#fdf4c1;">))
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">andExpect(forwardedUrl(</span><span style="color:#b8bb26;">&quot;/WEB-INF/jsp/error/404.jsp&quot;</span><span style="color:#fdf4c1;">))</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">verify(todoServiceMock, times(</span><span style="color:#d3869b;">1</span><span style="color:#fdf4c1;">))</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">findById(</span><span style="color:#d3869b;">1</span><span style="color:#fa5c4b;">L</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">verifyZeroInteractions(todoServiceMock)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
 </span></pre><h3 id="ce-shi-yong-li-todoxiang-bei-zhao-dao"><a class="zola-anchor" href="#ce-shi-yong-li-todoxiang-bei-zhao-dao" aria-label="Anchor link for: ce-shi-yong-li-todoxiang-bei-zhao-dao">🔗</a>
 测试用例：<code>Todo</code>项被找到</h3>
 <p>该测试用例主要工作如下：</p>
@@ -437,62 +437,62 @@
 <li>检查请求执行过程中mock的<code>TodoService</code>实例未执行其他方法</li>
 </ol>
 <p>代码如下：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.junit.Before;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.junit.Test;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.junit.runner.RunWith;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.mockito.Mockito;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.beans.factory.annotation.Autowired;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.context.ContextConfiguration;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.context.web.WebAppConfiguration;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.MockMvc;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.setup.MockMvcBuilders;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.web.context.WebApplicationContext;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.hamcrest.Matchers.hasProperty;
-</span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.hamcrest.Matchers.is;
-</span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.mockito.Mockito.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
-</span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-</span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.result.MockMvcResultMatchers.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">@RunWith(SpringJUnit4ClassRunner.class)
-</span><span style="color:#dcdcdc;">@ContextConfiguration(classes = {TestContext.class, WebAppContext.class})
-</span><span style="color:#dcdcdc;">@WebAppConfiguration
-</span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">TodoControllerTest {
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">MockMvc mockMvc;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Autowired
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">TodoService todoServiceMock;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Add WebApplicationContext field here
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//The setUp() method is omitted.
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Test
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">findById_TodoEntryFound_ShouldAddTodoEntryToModelAndRenderViewTodoEntryView() </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">Exception {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Todo found = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">TodoBuilder()
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.id(</span><span style="color:#b5cea8;">1</span><span style="color:#569cd6;">L</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.description(</span><span style="color:#d69d85;">&quot;Lorem ipsum&quot;</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.title(</span><span style="color:#d69d85;">&quot;Foo&quot;</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.build();
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">when(todoServiceMock.findById(</span><span style="color:#b5cea8;">1</span><span style="color:#569cd6;">L</span><span style="color:#dcdcdc;">)).thenReturn(found);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">mockMvc.perform(get(</span><span style="color:#d69d85;">&quot;/todo/{id}&quot;</span><span style="color:#dcdcdc;">, </span><span style="color:#b5cea8;">1</span><span style="color:#569cd6;">L</span><span style="color:#dcdcdc;">))
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(status().isOk())
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(view().name(</span><span style="color:#d69d85;">&quot;todo/view&quot;</span><span style="color:#dcdcdc;">))
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(forwardedUrl(</span><span style="color:#d69d85;">&quot;/WEB-INF/jsp/todo/view.jsp&quot;</span><span style="color:#dcdcdc;">))
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(model().attribute(</span><span style="color:#d69d85;">&quot;todo&quot;</span><span style="color:#dcdcdc;">, hasProperty(</span><span style="color:#d69d85;">&quot;id&quot;</span><span style="color:#dcdcdc;">, is(</span><span style="color:#b5cea8;">1</span><span style="color:#569cd6;">L</span><span style="color:#dcdcdc;">))))
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(model().attribute(</span><span style="color:#d69d85;">&quot;todo&quot;</span><span style="color:#dcdcdc;">, hasProperty(</span><span style="color:#d69d85;">&quot;description&quot;</span><span style="color:#dcdcdc;">, is(</span><span style="color:#d69d85;">&quot;Lorem ipsum&quot;</span><span style="color:#dcdcdc;">))))
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(model().attribute(</span><span style="color:#d69d85;">&quot;todo&quot;</span><span style="color:#dcdcdc;">, hasProperty(</span><span style="color:#d69d85;">&quot;title&quot;</span><span style="color:#dcdcdc;">, is(</span><span style="color:#d69d85;">&quot;Foo&quot;</span><span style="color:#dcdcdc;">))));
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">verify(todoServiceMock, times(</span><span style="color:#b5cea8;">1</span><span style="color:#dcdcdc;">)).findById(</span><span style="color:#b5cea8;">1</span><span style="color:#569cd6;">L</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">verifyNoMoreInteractions(todoServiceMock);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">junit</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Before</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">junit</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Test</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">junit</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">runner</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">RunWith</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">mockito</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Mockito</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">beans</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">factory</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">annotation</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Autowired</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">test</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">context</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">ContextConfiguration</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">test</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">context</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">junit4</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">SpringJUnit4ClassRunner</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">test</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">context</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">web</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">WebAppConfiguration</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">test</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">web</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">servlet</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">MockMvc</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">test</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">web</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">servlet</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">setup</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">MockMvcBuilders</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">web</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">context</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">WebApplicationContext</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fa5c4b;">import static </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">hamcrest</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Matchers</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">hasProperty</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import static </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">hamcrest</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Matchers</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">is</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import static </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">mockito</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Mockito</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import static </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">test</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">web</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">servlet</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">request</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">MockMvcRequestBuilders</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">get</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import static </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">test</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">web</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">servlet</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">result</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">MockMvcResultMatchers</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">RunWith</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">SpringJUnit4ClassRunner</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">class</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">ContextConfiguration</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">classes </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1aa;">{</span><span style="color:#8ec07c;">TestContext</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">class</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">WebAppContext</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">class</span><span style="color:#fdf4c1aa;">})
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">WebAppConfiguration
+</span><span style="color:#fa5c4b;">public class </span><span style="color:#8ec07c;">TodoControllerTest </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">MockMvc </span><span style="color:#fdf4c1aa;">mockMvc;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Autowired
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">TodoService </span><span style="color:#fdf4c1aa;">todoServiceMock;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="font-style:italic;color:#928374;">//Add WebApplicationContext field here
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="font-style:italic;color:#928374;">//The setUp() method is omitted.
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Test
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public void
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">findById_TodoEntryFound_ShouldAddTodoEntryToModelAndRenderViewTodoEntryView</span><span style="color:#fdf4c1aa;">() </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">Exception </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">Todo</span><span style="color:#fdf4c1aa;"> found </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">TodoBuilder</span><span style="color:#fdf4c1aa;">()
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">id(</span><span style="color:#d3869b;">1</span><span style="color:#fa5c4b;">L</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">description(</span><span style="color:#b8bb26;">&quot;Lorem ipsum&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">title(</span><span style="color:#b8bb26;">&quot;Foo&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">build()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">when(todoServiceMock.findById(</span><span style="color:#d3869b;">1</span><span style="color:#fa5c4b;">L</span><span style="color:#fdf4c1;">))</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">thenReturn(found)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">mockMvc.</span><span style="color:#fdf4c1;">perform(get(</span><span style="color:#b8bb26;">&quot;/todo/{id}&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#d3869b;">1</span><span style="color:#fa5c4b;">L</span><span style="color:#fdf4c1;">))
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">andExpect(status().isOk())
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">andExpect(view().name(</span><span style="color:#b8bb26;">&quot;todo/view&quot;</span><span style="color:#fdf4c1;">))
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">andExpect(forwardedUrl(</span><span style="color:#b8bb26;">&quot;/WEB-INF/jsp/todo/view.jsp&quot;</span><span style="color:#fdf4c1;">))
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">andExpect(model().attribute(</span><span style="color:#b8bb26;">&quot;todo&quot;</span><span style="color:#fdf4c1;">, hasProperty(</span><span style="color:#b8bb26;">&quot;id&quot;</span><span style="color:#fdf4c1;">, is(</span><span style="color:#d3869b;">1</span><span style="color:#fa5c4b;">L</span><span style="color:#fdf4c1;">))))
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">andExpect(model().attribute(</span><span style="color:#b8bb26;">&quot;todo&quot;</span><span style="color:#fdf4c1;">, hasProperty(</span><span style="color:#b8bb26;">&quot;description&quot;</span><span style="color:#fdf4c1;">, is(</span><span style="color:#b8bb26;">&quot;Lorem ipsum&quot;</span><span style="color:#fdf4c1;">))))
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">andExpect(model().attribute(</span><span style="color:#b8bb26;">&quot;todo&quot;</span><span style="color:#fdf4c1;">, hasProperty(</span><span style="color:#b8bb26;">&quot;title&quot;</span><span style="color:#fdf4c1;">, is(</span><span style="color:#b8bb26;">&quot;Foo&quot;</span><span style="color:#fdf4c1;">))))</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">verify(todoServiceMock, times(</span><span style="color:#d3869b;">1</span><span style="color:#fdf4c1;">))</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">findById(</span><span style="color:#d3869b;">1</span><span style="color:#fa5c4b;">L</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">verifyNoMoreInteractions(todoServiceMock)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
 </span></pre><h2 id="todoxiang-chuang-jian-biao-dan-qing-qiu-jie-kou"><a class="zola-anchor" href="#todoxiang-chuang-jian-biao-dan-qing-qiu-jie-kou" aria-label="Anchor link for: todoxiang-chuang-jian-biao-dan-qing-qiu-jie-kou">🔗</a>
 <code>Todo</code>项创建表单请求接口</h2>
 <p>首先看一下该接口的实现代码。</p>
@@ -507,83 +507,83 @@
 <li>返回重定向的view名称</li>
 </ol>
 <p><code>TodoController</code>类内的相关代码如下：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.context.MessageSource;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.context.i18n.LocaleContextHolder;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.stereotype.Controller;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.validation.BindingResult;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.web.bind.annotation.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.web.servlet.mvc.support.RedirectAttributes;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">javax.validation.Valid;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">java.util.Locale;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">@Controller
-</span><span style="color:#dcdcdc;">@SessionAttributes(</span><span style="color:#d69d85;">&quot;todo&quot;</span><span style="color:#dcdcdc;">)
-</span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">TodoController {
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private final </span><span style="color:#dcdcdc;">TodoService service;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private final </span><span style="color:#dcdcdc;">MessageSource messageSource;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@RequestMapping(value = </span><span style="color:#d69d85;">&quot;/todo/add&quot;</span><span style="color:#dcdcdc;">, method = RequestMethod.</span><span style="color:#b4cea8;">POST</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public </span><span style="color:#dcdcdc;">String add(
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">@Valid @ModelAttribute(</span><span style="color:#d69d85;">&quot;todo&quot;</span><span style="color:#dcdcdc;">) TodoDTO dto,
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">BindingResult result,
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">RedirectAttributes attributes
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">if </span><span style="color:#dcdcdc;">(result.hasErrors()) {
-</span><span style="color:#dcdcdc;">            </span><span style="color:#569cd6;">return </span><span style="color:#d69d85;">&quot;todo/add&quot;</span><span style="color:#dcdcdc;">;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Todo added = service.add(dto);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">addFeedbackMessage(attributes, </span><span style="color:#d69d85;">&quot;feedback.message.todo.added&quot;</span><span style="color:#dcdcdc;">, added.getTitle());
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">attributes.addAttribute(</span><span style="color:#d69d85;">&quot;id&quot;</span><span style="color:#dcdcdc;">, added.getId());
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return </span><span style="color:#dcdcdc;">createRedirectViewPath(</span><span style="color:#d69d85;">&quot;todo/view&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private void </span><span style="color:#dcdcdc;">addFeedbackMessage(
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">RedirectAttributes attributes,
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">String messageCode,
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Object</span><span style="color:#569cd6;">... </span><span style="color:#dcdcdc;">messageParameters
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">String localizedFeedbackMessage = getMessage(messageCode, messageParameters);
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">attributes.addFlashAttribute(</span><span style="color:#d69d85;">&quot;feedbackMessage&quot;</span><span style="color:#dcdcdc;">, localizedFeedbackMessage);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">String getMessage(String messageCode, Object</span><span style="color:#569cd6;">... </span><span style="color:#dcdcdc;">messageParameters) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Locale current = LocaleContextHolder.getLocale();
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> messageSource.getMessage(messageCode, messageParameters, current);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">String createRedirectViewPath(String requestMapping) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">StringBuilder redirectViewPath = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">StringBuilder();
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">redirectViewPath.append(</span><span style="color:#d69d85;">&quot;redirect:&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">redirectViewPath.append(requestMapping);
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> redirectViewPath.toString();
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">context</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">MessageSource</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">context</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">i18n</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">LocaleContextHolder</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">stereotype</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Controller</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">validation</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">BindingResult</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">web</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">bind</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">annotation</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">web</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">servlet</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">mvc</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">support</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">RedirectAttributes</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">javax</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">validation</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Valid</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">java</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">util</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Locale</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Controller
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">SessionAttributes</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;todo&quot;</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fa5c4b;">public class </span><span style="color:#8ec07c;">TodoController </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private final </span><span style="color:#8ec07c;">TodoService </span><span style="color:#fdf4c1aa;">service;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private final </span><span style="color:#8ec07c;">MessageSource </span><span style="color:#fdf4c1aa;">messageSource;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">RequestMapping</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">value </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&quot;/todo/add&quot;</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fdf4c1;">method </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">RequestMethod</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">POST</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">String add</span><span style="color:#fdf4c1aa;">(
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Valid </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">ModelAttribute</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;todo&quot;</span><span style="color:#fdf4c1aa;">) </span><span style="color:#8ec07c;">TodoDTO </span><span style="color:#fdf4c1;">dto</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">BindingResult </span><span style="color:#fdf4c1;">result</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">RedirectAttributes </span><span style="color:#fdf4c1;">attributes
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">(result.</span><span style="color:#fdf4c1;">hasErrors()</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">return </span><span style="color:#b8bb26;">&quot;todo/add&quot;</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">Todo</span><span style="color:#fdf4c1aa;"> added </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> service.</span><span style="color:#fdf4c1;">add(dto)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">addFeedbackMessage(attributes, </span><span style="color:#b8bb26;">&quot;feedback.message.todo.added&quot;</span><span style="color:#fdf4c1;">, added.getTitle())</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">attributes.</span><span style="color:#fdf4c1;">addAttribute(</span><span style="color:#b8bb26;">&quot;id&quot;</span><span style="color:#fdf4c1;">, added.getId())</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return </span><span style="color:#fdf4c1;">createRedirectViewPath(</span><span style="color:#b8bb26;">&quot;todo/view&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private void </span><span style="color:#8ec07c;">addFeedbackMessage</span><span style="color:#fdf4c1aa;">(
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">RedirectAttributes </span><span style="color:#fdf4c1;">attributes</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">messageCode</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">Object</span><span style="color:#fe8019;">... </span><span style="color:#fdf4c1;">messageParameters
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;"> localizedFeedbackMessage </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">getMessage(messageCode, messageParameters)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">attributes.</span><span style="color:#fdf4c1;">addFlashAttribute(</span><span style="color:#b8bb26;">&quot;feedbackMessage&quot;</span><span style="color:#fdf4c1;">, localizedFeedbackMessage)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">String getMessage</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">messageCode</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">Object</span><span style="color:#fe8019;">... </span><span style="color:#fdf4c1;">messageParameters</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">Locale</span><span style="color:#fdf4c1aa;"> current </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">LocaleContextHolder</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">getLocale()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> messageSource.</span><span style="color:#fdf4c1;">getMessage(messageCode, messageParameters, current)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">String createRedirectViewPath</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">requestMapping</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">StringBuilder</span><span style="color:#fdf4c1aa;"> redirectViewPath </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">StringBuilder</span><span style="color:#fdf4c1aa;">();
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">redirectViewPath.</span><span style="color:#fdf4c1;">append(</span><span style="color:#b8bb26;">&quot;redirect:&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">redirectViewPath.</span><span style="color:#fdf4c1;">append(requestMapping)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> redirectViewPath.</span><span style="color:#fdf4c1;">toString()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>我们使用了<code>TodoDTO</code>类来封装<code>Todo</code>项的创建信息，代码如下：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.hibernate.validator.constraints.Length;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.hibernate.validator.constraints.NotEmpty;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">TodoDTO {
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">Long id;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Length(max = </span><span style="color:#b5cea8;">500</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">String description;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@NotEmpty
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Length(max = </span><span style="color:#b5cea8;">100</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">String title;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Constructor and other methods are omitted.
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">hibernate</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">validator</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">constraints</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Length</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">hibernate</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">validator</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">constraints</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">NotEmpty</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fa5c4b;">public class </span><span style="color:#8ec07c;">TodoDTO </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">Long </span><span style="color:#fdf4c1aa;">id;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Length</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">max </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">500</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1aa;">description;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">NotEmpty
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Length</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">max </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">100</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1aa;">title;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="font-style:italic;color:#928374;">//Constructor and other methods are omitted.
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p><code>TodoDTO</code>类里面有一些校验规则，如果不满足规则，Spring在接口的<code>BindingResult</code>参数里面会显示错误。</p>
 <p>所以，我们的测试用例需要考虑两种情况：</p>
@@ -604,88 +604,88 @@
 <li>对响应作断言：请求拿到的是'/WEB-INF/jsp/todo/add.jsp'页面</li>
 </ol>
 <p>代码如下：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.junit.Before;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.junit.Test;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.junit.runner.RunWith;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.mockito.Mockito;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.beans.factory.annotation.Autowired;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.http.MediaType;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.context.ContextConfiguration;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.context.web.WebAppConfiguration;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.MockMvc;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.setup.MockMvcBuilders;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.web.context.WebApplicationContext;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.hamcrest.Matchers.hasProperty;
-</span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.hamcrest.Matchers.is;
-</span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.hamcrest.Matchers.nullValue;
-</span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.mockito.Mockito.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
-</span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-</span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.result.MockMvcResultMatchers.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">@RunWith(SpringJUnit4ClassRunner.class)
-</span><span style="color:#dcdcdc;">@ContextConfiguration(classes = {TestContext.class, WebAppContext.class})
-</span><span style="color:#dcdcdc;">@WebAppConfiguration
-</span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">TodoControllerTest {
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">MockMvc mockMvc;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Autowired
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">TodoService todoServiceMock;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Add WebApplicationContext field here
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//The setUp() method is omitted.
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Test
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">add_DescriptionAndTitleAreTooLong_ShouldRenderFormViewAndReturnValidationErrorsForTitleAndDescription()
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">Exception {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">String title = TestUtil.createStringWithLength(</span><span style="color:#b5cea8;">101</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">String description = TestUtil.createStringWithLength(</span><span style="color:#b5cea8;">501</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">mockMvc.perform(post(</span><span style="color:#d69d85;">&quot;/todo/add&quot;</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.contentType(MediaType.</span><span style="color:#b4cea8;">APPLICATION_FORM_URLENCODED</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.param(</span><span style="color:#d69d85;">&quot;description&quot;</span><span style="color:#dcdcdc;">, description)
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.param(</span><span style="color:#d69d85;">&quot;title&quot;</span><span style="color:#dcdcdc;">, title)
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.sessionAttr(</span><span style="color:#d69d85;">&quot;todo&quot;</span><span style="color:#dcdcdc;">, </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">TodoDTO())
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(status().isOk())
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(view().name(</span><span style="color:#d69d85;">&quot;todo/add&quot;</span><span style="color:#dcdcdc;">))
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(forwardedUrl(</span><span style="color:#d69d85;">&quot;/WEB-INF/jsp/todo/add.jsp&quot;</span><span style="color:#dcdcdc;">))
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(model().attributeHasFieldErrors(</span><span style="color:#d69d85;">&quot;todo&quot;</span><span style="color:#dcdcdc;">, </span><span style="color:#d69d85;">&quot;title&quot;</span><span style="color:#dcdcdc;">))
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(model().attributeHasFieldErrors(</span><span style="color:#d69d85;">&quot;todo&quot;</span><span style="color:#dcdcdc;">, </span><span style="color:#d69d85;">&quot;description&quot;</span><span style="color:#dcdcdc;">))
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(model().attribute(</span><span style="color:#d69d85;">&quot;todo&quot;</span><span style="color:#dcdcdc;">, hasProperty(</span><span style="color:#d69d85;">&quot;id&quot;</span><span style="color:#dcdcdc;">, nullValue())))
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(model().attribute(</span><span style="color:#d69d85;">&quot;todo&quot;</span><span style="color:#dcdcdc;">, hasProperty(</span><span style="color:#d69d85;">&quot;description&quot;</span><span style="color:#dcdcdc;">, is(description))))
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(model().attribute(</span><span style="color:#d69d85;">&quot;todo&quot;</span><span style="color:#dcdcdc;">, hasProperty(</span><span style="color:#d69d85;">&quot;title&quot;</span><span style="color:#dcdcdc;">, is(title))));
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">verifyZeroInteractions(todoServiceMock);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">junit</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Before</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">junit</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Test</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">junit</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">runner</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">RunWith</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">mockito</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Mockito</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">beans</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">factory</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">annotation</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Autowired</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">http</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">MediaType</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">test</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">context</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">ContextConfiguration</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">test</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">context</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">junit4</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">SpringJUnit4ClassRunner</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">test</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">context</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">web</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">WebAppConfiguration</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">test</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">web</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">servlet</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">MockMvc</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">test</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">web</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">servlet</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">setup</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">MockMvcBuilders</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">web</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">context</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">WebApplicationContext</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fa5c4b;">import static </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">hamcrest</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Matchers</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">hasProperty</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import static </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">hamcrest</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Matchers</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">is</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import static </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">hamcrest</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Matchers</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">nullValue</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import static </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">mockito</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Mockito</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import static </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">test</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">web</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">servlet</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">request</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">MockMvcRequestBuilders</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">post</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import static </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">test</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">web</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">servlet</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">result</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">MockMvcResultMatchers</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">RunWith</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">SpringJUnit4ClassRunner</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">class</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">ContextConfiguration</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">classes </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1aa;">{</span><span style="color:#8ec07c;">TestContext</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">class</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">WebAppContext</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">class</span><span style="color:#fdf4c1aa;">})
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">WebAppConfiguration
+</span><span style="color:#fa5c4b;">public class </span><span style="color:#8ec07c;">TodoControllerTest </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">MockMvc </span><span style="color:#fdf4c1aa;">mockMvc;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Autowired
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">TodoService </span><span style="color:#fdf4c1aa;">todoServiceMock;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="font-style:italic;color:#928374;">//Add WebApplicationContext field here
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="font-style:italic;color:#928374;">//The setUp() method is omitted.
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Test
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public void
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">add_DescriptionAndTitleAreTooLong_ShouldRenderFormViewAndReturnValidationErrorsForTitleAndDescription</span><span style="color:#fdf4c1aa;">()
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">Exception </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;"> title </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">TestUtil</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">createStringWithLength(</span><span style="color:#d3869b;">101</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;"> description </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">TestUtil</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">createStringWithLength(</span><span style="color:#d3869b;">501</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">mockMvc.</span><span style="color:#fdf4c1;">perform(post(</span><span style="color:#b8bb26;">&quot;/todo/add&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">.contentType(</span><span style="color:#8ec07c;">MediaType</span><span style="color:#fdf4c1;">.APPLICATION_FORM_URLENCODED)
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">.param(</span><span style="color:#b8bb26;">&quot;description&quot;</span><span style="color:#fdf4c1;">, description)
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">.param(</span><span style="color:#b8bb26;">&quot;title&quot;</span><span style="color:#fdf4c1;">, title)
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">.sessionAttr(</span><span style="color:#b8bb26;">&quot;todo&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">TodoDTO</span><span style="color:#fdf4c1;">())
+</span><span style="color:#fdf4c1;">        </span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">andExpect(status().isOk())
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">andExpect(view().name(</span><span style="color:#b8bb26;">&quot;todo/add&quot;</span><span style="color:#fdf4c1;">))
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">andExpect(forwardedUrl(</span><span style="color:#b8bb26;">&quot;/WEB-INF/jsp/todo/add.jsp&quot;</span><span style="color:#fdf4c1;">))
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">andExpect(model().attributeHasFieldErrors(</span><span style="color:#b8bb26;">&quot;todo&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#b8bb26;">&quot;title&quot;</span><span style="color:#fdf4c1;">))
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">andExpect(model().attributeHasFieldErrors(</span><span style="color:#b8bb26;">&quot;todo&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#b8bb26;">&quot;description&quot;</span><span style="color:#fdf4c1;">))
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">andExpect(model().attribute(</span><span style="color:#b8bb26;">&quot;todo&quot;</span><span style="color:#fdf4c1;">, hasProperty(</span><span style="color:#b8bb26;">&quot;id&quot;</span><span style="color:#fdf4c1;">, nullValue())))
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">andExpect(model().attribute(</span><span style="color:#b8bb26;">&quot;todo&quot;</span><span style="color:#fdf4c1;">, hasProperty(</span><span style="color:#b8bb26;">&quot;description&quot;</span><span style="color:#fdf4c1;">, is(description))))
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">andExpect(model().attribute(</span><span style="color:#b8bb26;">&quot;todo&quot;</span><span style="color:#fdf4c1;">, hasProperty(</span><span style="color:#b8bb26;">&quot;title&quot;</span><span style="color:#fdf4c1;">, is(title))))</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">verifyZeroInteractions(todoServiceMock)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>为了简化代码，我们新建了一个新的类<code>TestUtil</code>，用来生成固定长度的字符串。<code>TestUtil</code>类代码如下：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">com.fasterxml.jackson.annotation.JsonInclude;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">com.fasterxml.jackson.databind.ObjectMapper;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">java.util.Iterator;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">java.util.Map;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">java.util.Set;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">TestUtil {
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public static </span><span style="color:#dcdcdc;">String createStringWithLength(</span><span style="color:#569cd6;">int </span><span style="color:#dcdcdc;">length) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">StringBuilder builder = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">StringBuilder();
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">for </span><span style="color:#dcdcdc;">(</span><span style="color:#569cd6;">int</span><span style="color:#dcdcdc;"> index = </span><span style="color:#b5cea8;">0</span><span style="color:#dcdcdc;">; index &lt; length; index</span><span style="color:#569cd6;">++</span><span style="color:#dcdcdc;">) {
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">builder.append(</span><span style="color:#d69d85;">&quot;a&quot;</span><span style="color:#dcdcdc;">);
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> builder.toString();
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">com</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">fasterxml</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">jackson</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">annotation</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">JsonInclude</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">com</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">fasterxml</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">jackson</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">databind</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">ObjectMapper</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">java</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">util</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Iterator</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">java</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">util</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Map</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">java</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">util</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Set</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fa5c4b;">public class </span><span style="color:#8ec07c;">TestUtil </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public static </span><span style="color:#8ec07c;">String createStringWithLength</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">int </span><span style="color:#fdf4c1;">length</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">StringBuilder</span><span style="color:#fdf4c1aa;"> builder </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">StringBuilder</span><span style="color:#fdf4c1aa;">();
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">for </span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">int</span><span style="color:#fdf4c1aa;"> index </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">0</span><span style="color:#fdf4c1aa;">; index </span><span style="color:#fe8019;">&lt;</span><span style="color:#fdf4c1aa;"> length; index</span><span style="color:#fe8019;">++</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">builder.</span><span style="color:#fdf4c1;">append(</span><span style="color:#b8bb26;">&quot;a&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> builder.</span><span style="color:#fdf4c1;">toString()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
 </span></pre><h3 id="ce-shi-yong-li-tododtocan-shu-xiao-yan-tong-guo"><a class="zola-anchor" href="#ce-shi-yong-li-tododtocan-shu-xiao-yan-tong-guo" aria-label="Anchor link for: ce-shi-yong-li-tododtocan-shu-xiao-yan-tong-guo">🔗</a>
 测试用例：<code>TodoDTO</code>参数校验通过</h3>
 <p>该测试用例主要工作如下：</p>
@@ -700,76 +700,76 @@
 <li>检查请求执行过程中mock的<code>TodoService</code>实例未执行其他方法</li>
 </ol>
 <p>代码如下：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.junit.Before;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.junit.Test;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.junit.runner.RunWith;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.mockito.ArgumentCaptor;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.mockito.Mockito;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.beans.factory.annotation.Autowired;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.http.MediaType;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.context.ContextConfiguration;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.context.web.WebAppConfiguration;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.MockMvc;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.setup.MockMvcBuilders;
-</span><span style="color:#9b9b9b;">import </span><span style="color:#dcdcdc;">org.springframework.web.context.WebApplicationContext;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.hamcrest.Matchers.is;
-</span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.junit.Assert.assertNull;
-</span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.junit.Assert.assertThat;
-</span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.mockito.Matchers.isA;
-</span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.mockito.Mockito.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
-</span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-</span><span style="color:#9b9b9b;">import static </span><span style="color:#dcdcdc;">org.springframework.test.web.servlet.result.MockMvcResultMatchers.</span><span style="color:#569cd6;">*</span><span style="color:#dcdcdc;">;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">@RunWith(SpringJUnit4ClassRunner.class)
-</span><span style="color:#dcdcdc;">@ContextConfiguration(classes = {TestContext.class, WebAppContext.class})
-</span><span style="color:#dcdcdc;">@WebAppConfiguration
-</span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">TodoControllerTest {
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">MockMvc mockMvc;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Autowired
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">TodoService todoServiceMock;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//Add WebApplicationContext field here
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">//The setUp() method is omitted.
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Test
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">add_NewTodoEntry_ShouldAddTodoEntryAndRenderViewTodoEntryView() </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">Exception {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Todo added = </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">TodoBuilder()
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.id(</span><span style="color:#b5cea8;">1</span><span style="color:#569cd6;">L</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.description(</span><span style="color:#d69d85;">&quot;description&quot;</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.title(</span><span style="color:#d69d85;">&quot;title&quot;</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.build();
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">when(todoServiceMock.add(isA(TodoDTO.class))).thenReturn(added);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">mockMvc.perform(post(</span><span style="color:#d69d85;">&quot;/todo/add&quot;</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.contentType(MediaType.</span><span style="color:#b4cea8;">APPLICATION_FORM_URLENCODED</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.param(</span><span style="color:#d69d85;">&quot;description&quot;</span><span style="color:#dcdcdc;">, </span><span style="color:#d69d85;">&quot;description&quot;</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.param(</span><span style="color:#d69d85;">&quot;title&quot;</span><span style="color:#dcdcdc;">, </span><span style="color:#d69d85;">&quot;title&quot;</span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.sessionAttr(</span><span style="color:#d69d85;">&quot;todo&quot;</span><span style="color:#dcdcdc;">, </span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">TodoDTO())
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">)
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(status().isMovedTemporarily())
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(view().name(</span><span style="color:#d69d85;">&quot;redirect:todo/{id}&quot;</span><span style="color:#dcdcdc;">))
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(redirectedUrl(</span><span style="color:#d69d85;">&quot;/todo/1&quot;</span><span style="color:#dcdcdc;">))
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(model().attribute(</span><span style="color:#d69d85;">&quot;id&quot;</span><span style="color:#dcdcdc;">, is(</span><span style="color:#d69d85;">&quot;1&quot;</span><span style="color:#dcdcdc;">)))
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">.andExpect(flash().attribute(</span><span style="color:#d69d85;">&quot;feedbackMessage&quot;</span><span style="color:#dcdcdc;">, is(</span><span style="color:#d69d85;">&quot;Todo entry: title was added.&quot;</span><span style="color:#dcdcdc;">)));
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">ArgumentCaptor&lt;TodoDTO&gt; formObjectArgument = ArgumentCaptor.forClass(TodoDTO.class);
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">verify(todoServiceMock, times(</span><span style="color:#b5cea8;">1</span><span style="color:#dcdcdc;">)).add(formObjectArgument.capture());
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">verifyNoMoreInteractions(todoServiceMock);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">TodoDTO formObject = formObjectArgument.getValue();
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">assertThat(formObject.getDescription(), is(</span><span style="color:#d69d85;">&quot;description&quot;</span><span style="color:#dcdcdc;">));
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">assertNull(formObject.getId());
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">assertThat(formObject.getTitle(), is(</span><span style="color:#d69d85;">&quot;title&quot;</span><span style="color:#dcdcdc;">));
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">junit</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Before</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">junit</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Test</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">junit</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">runner</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">RunWith</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">mockito</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">ArgumentCaptor</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">mockito</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Mockito</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">beans</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">factory</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">annotation</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Autowired</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">http</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">MediaType</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">test</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">context</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">ContextConfiguration</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">test</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">context</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">junit4</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">SpringJUnit4ClassRunner</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">test</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">context</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">web</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">WebAppConfiguration</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">test</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">web</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">servlet</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">MockMvc</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">test</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">web</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">servlet</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">setup</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">MockMvcBuilders</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">web</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">context</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">WebApplicationContext</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fa5c4b;">import static </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">hamcrest</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Matchers</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">is</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import static </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">junit</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Assert</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">assertNull</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import static </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">junit</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Assert</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">assertThat</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import static </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">mockito</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Matchers</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">isA</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import static </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">mockito</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Mockito</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import static </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">test</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">web</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">servlet</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">request</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">MockMvcRequestBuilders</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">post</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import static </span><span style="color:#fabd2f;">org</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">springframework</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">test</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">web</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">servlet</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">result</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">MockMvcResultMatchers</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">RunWith</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">SpringJUnit4ClassRunner</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">class</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">ContextConfiguration</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">classes </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1aa;">{</span><span style="color:#8ec07c;">TestContext</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">class</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">WebAppContext</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">class</span><span style="color:#fdf4c1aa;">})
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">WebAppConfiguration
+</span><span style="color:#fa5c4b;">public class </span><span style="color:#8ec07c;">TodoControllerTest </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">MockMvc </span><span style="color:#fdf4c1aa;">mockMvc;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Autowired
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">TodoService </span><span style="color:#fdf4c1aa;">todoServiceMock;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="font-style:italic;color:#928374;">//Add WebApplicationContext field here
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="font-style:italic;color:#928374;">//The setUp() method is omitted.
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Test
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public void </span><span style="color:#8ec07c;">add_NewTodoEntry_ShouldAddTodoEntryAndRenderViewTodoEntryView</span><span style="color:#fdf4c1aa;">() </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">Exception </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">Todo</span><span style="color:#fdf4c1aa;"> added </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">TodoBuilder</span><span style="color:#fdf4c1aa;">()
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">id(</span><span style="color:#d3869b;">1</span><span style="color:#fa5c4b;">L</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">description(</span><span style="color:#b8bb26;">&quot;description&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">title(</span><span style="color:#b8bb26;">&quot;title&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">build()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">when(todoServiceMock.add(isA(</span><span style="color:#8ec07c;">TodoDTO</span><span style="color:#fdf4c1;">.class)))</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">thenReturn(added)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">mockMvc.</span><span style="color:#fdf4c1;">perform(post(</span><span style="color:#b8bb26;">&quot;/todo/add&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">.contentType(</span><span style="color:#8ec07c;">MediaType</span><span style="color:#fdf4c1;">.APPLICATION_FORM_URLENCODED)
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">.param(</span><span style="color:#b8bb26;">&quot;description&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#b8bb26;">&quot;description&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">.param(</span><span style="color:#b8bb26;">&quot;title&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#b8bb26;">&quot;title&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">.sessionAttr(</span><span style="color:#b8bb26;">&quot;todo&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">TodoDTO</span><span style="color:#fdf4c1;">())
+</span><span style="color:#fdf4c1;">        </span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">andExpect(status().isMovedTemporarily())
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">andExpect(view().name(</span><span style="color:#b8bb26;">&quot;redirect:todo/{id}&quot;</span><span style="color:#fdf4c1;">))
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">andExpect(redirectedUrl(</span><span style="color:#b8bb26;">&quot;/todo/1&quot;</span><span style="color:#fdf4c1;">))
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">andExpect(model().attribute(</span><span style="color:#b8bb26;">&quot;id&quot;</span><span style="color:#fdf4c1;">, is(</span><span style="color:#b8bb26;">&quot;1&quot;</span><span style="color:#fdf4c1;">)))
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">andExpect(flash().attribute(</span><span style="color:#b8bb26;">&quot;feedbackMessage&quot;</span><span style="color:#fdf4c1;">, is(</span><span style="color:#b8bb26;">&quot;Todo entry: title was added.&quot;</span><span style="color:#fdf4c1;">)))</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">ArgumentCaptor</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">TodoDTO</span><span style="color:#fdf4c1aa;">&gt; formObjectArgument </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">ArgumentCaptor</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">forClass(</span><span style="color:#8ec07c;">TodoDTO</span><span style="color:#fdf4c1;">.class)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">verify(todoServiceMock, times(</span><span style="color:#d3869b;">1</span><span style="color:#fdf4c1;">))</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">add(formObjectArgument.capture())</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">verifyNoMoreInteractions(todoServiceMock)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">TodoDTO</span><span style="color:#fdf4c1aa;"> formObject </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> formObjectArgument.</span><span style="color:#fdf4c1;">getValue()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">assertThat(formObject.getDescription(), is(</span><span style="color:#b8bb26;">&quot;description&quot;</span><span style="color:#fdf4c1;">))</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">assertNull(formObject.getId())</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">assertThat(formObject.getTitle(), is(</span><span style="color:#b8bb26;">&quot;title&quot;</span><span style="color:#fdf4c1;">))</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
 </span></pre><h1 id="zong-jie"><a class="zola-anchor" href="#zong-jie" aria-label="Anchor link for: zong-jie">🔗</a>
 总结</h1>
 <p>本文主要介绍了如何使用Spring MVC Test来对标准controller进行单元测试，主要内容如下：</p>

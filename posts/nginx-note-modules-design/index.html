@@ -14,7 +14,7 @@
     <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;nginx-note-modules-design&#x2F;"/>
     <meta property="og:description" content="Note of modules designing for Nginx"/>
     <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
-    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;red.css">
 <link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
     <body>
         <div class="container full">
@@ -102,55 +102,55 @@ Nginx 的模块统一架构</h1>
 <p>当我们configure配置 Nginx 后，将在一个名为objs的文件夹里找一个 <code>ngx_modules.c</code> 源文件，该文件内就包含了我们待编译生成的 Nginx 程序即将包含的模块。</p>
 <p>Nginx 的模块可以简单点分为 <code>core</code>, <code>conf</code>, <code>event</code>, <code>http</code> 和 <code>mail</code> 五种类型，这从 Nginx 源码的目录结构也可以依稀看出。</p>
 <p>封装 Nginx 模块的结构体为 <code>ngx_module_s</code>，定义如下：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">typedef struct ngx_module_s      ngx_module_t;
-</span><span style="color:#dcdcdc;">struct ngx_module_s {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">//存储当前模块在同类模块中的排号。
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_uint_t            ctx_index;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">//存储当前模块在所有模块中的排号。
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_uint_t            index;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">//以下四字段留作备用，用于将来扩展。
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_uint_t            spare0;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_uint_t            spare1;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_uint_t            spare2;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_uint_t            spare3;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">//记录模块版本号
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_uint_t            version;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">//指向模块特有的数据，因为指向的数据类型不确定，所以是个void类型指针。
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">void                 *ctx;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">//指向一个ngx_command_t类型的数组，具体后面会讲解到。
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_command_t        *commands;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">//取值为NGX_CORE_MODULE、NGX_EVENT_MODULE、
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">//NGX_HTTP_MODULE、NGX_MAIL_MODULE、NGX_CONF_MODULE
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">//之一，用于标识当前模块属于哪种类型。
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_uint_t            type;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">//以下7个字段为函数指针，可以给它们赋上合适的回调函数，则nginx会在
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">//相应的时机调用它们，如果模块不关心（比如不用做初始化或销毁）则直接
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">//赋值为NULL即可。
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">//回调函数，master初始化时调用。
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_int_t           (*init_master)(ngx_log_t *log);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">//回调函数，模块初始化时调用。
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_int_t           (*init_module)(ngx_cycle_t *cycle);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">//回调函数，工作进程初始化时调用。
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_int_t           (*init_process)(ngx_cycle_t *cycle);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">//回调函数，线程初始化时调用。
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_int_t           (*init_thread)(ngx_cycle_t *cycle);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">//回调函数，线程退出时调用。
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">void                (*exit_thread)(ngx_cycle_t *cycle);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">//回调函数，工作进程退出时调用。
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">void                (*exit_process)(ngx_cycle_t *cycle);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">//回调函数，master退出时调用。
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">void                (*exit_master)(ngx_cycle_t *cycle);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">//同之前的spare0~ spare4字段一样，下面这八个字段留作备用。
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">uintptr_t             spare_hook0;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">uintptr_t             spare_hook1;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">uintptr_t             spare_hook2;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">uintptr_t             spare_hook3;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">uintptr_t             spare_hook4;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">uintptr_t             spare_hook5;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">uintptr_t             spare_hook6;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">uintptr_t             spare_hook7;
-</span><span style="color:#dcdcdc;">};
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">typedef struct ngx_module_s      ngx_module_t;
+</span><span style="color:#fdf4c1aa;">struct ngx_module_s {
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">//存储当前模块在同类模块中的排号。
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ngx_uint_t            ctx_index;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">//存储当前模块在所有模块中的排号。
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ngx_uint_t            index;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">//以下四字段留作备用，用于将来扩展。
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ngx_uint_t            spare0;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ngx_uint_t            spare1;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ngx_uint_t            spare2;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ngx_uint_t            spare3;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">//记录模块版本号
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ngx_uint_t            version;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">//指向模块特有的数据，因为指向的数据类型不确定，所以是个void类型指针。
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">void                 *ctx;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">//指向一个ngx_command_t类型的数组，具体后面会讲解到。
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ngx_command_t        *commands;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">//取值为NGX_CORE_MODULE、NGX_EVENT_MODULE、
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">//NGX_HTTP_MODULE、NGX_MAIL_MODULE、NGX_CONF_MODULE
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">//之一，用于标识当前模块属于哪种类型。
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ngx_uint_t            type;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">//以下7个字段为函数指针，可以给它们赋上合适的回调函数，则nginx会在
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">//相应的时机调用它们，如果模块不关心（比如不用做初始化或销毁）则直接
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">//赋值为NULL即可。
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">//回调函数，master初始化时调用。
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ngx_int_t           (*init_master)(ngx_log_t *log);
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">//回调函数，模块初始化时调用。
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ngx_int_t           (*init_module)(ngx_cycle_t *cycle);
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">//回调函数，工作进程初始化时调用。
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ngx_int_t           (*init_process)(ngx_cycle_t *cycle);
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">//回调函数，线程初始化时调用。
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ngx_int_t           (*init_thread)(ngx_cycle_t *cycle);
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">//回调函数，线程退出时调用。
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">void                (*exit_thread)(ngx_cycle_t *cycle);
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">//回调函数，工作进程退出时调用。
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">void                (*exit_process)(ngx_cycle_t *cycle);
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">//回调函数，master退出时调用。
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">void                (*exit_master)(ngx_cycle_t *cycle);
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">//同之前的spare0~ spare4字段一样，下面这八个字段留作备用。
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">uintptr_t             spare_hook0;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">uintptr_t             spare_hook1;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">uintptr_t             spare_hook2;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">uintptr_t             spare_hook3;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">uintptr_t             spare_hook4;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">uintptr_t             spare_hook5;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">uintptr_t             spare_hook6;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">uintptr_t             spare_hook7;
+</span><span style="color:#fdf4c1aa;">};
 </span></pre>
 <p>众览Nginx各模块对应的 <code>ngx_module_t</code>
 结构体变量，可以看到上面介绍的各字段基本都为 <code>NULL</code> 或 <code>0</code>，而只有几个字段
@@ -164,23 +164,23 @@ Nginx 的模块统一架构</h1>
 <ol>
 <li>NGX_CORE_MODULE</li>
 </ol>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">typedef struct {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_str_t           name;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">void               *(*create_conf)(ngx_cycle_t *cycle);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">char               *(*init_conf)(ngx_cycle_t *cycle, void *conf);
-</span><span style="color:#dcdcdc;">} ngx_core_module_t;
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">typedef struct {
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ngx_str_t           name;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">void               *(*create_conf)(ngx_cycle_t *cycle);
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">char               *(*init_conf)(ngx_cycle_t *cycle, void *conf);
+</span><span style="color:#fdf4c1aa;">} ngx_core_module_t;
 </span></pre>
 <ol start="2">
 <li>NGX_EVENT_MODULE</li>
 </ol>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">typedef struct {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_str_t            *name;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">void                 *(*create_conf)(ngx_cycle_t *cycle);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">char                 *(*init_conf)(ngx_cycle_t *cycle, void *conf);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_event_actions_t   actions;
-</span><span style="color:#dcdcdc;">} ngx_event_module_t;
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">typedef struct {
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ngx_str_t            *name;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">void                 *(*create_conf)(ngx_cycle_t *cycle);
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">char                 *(*init_conf)(ngx_cycle_t *cycle, void *conf);
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ngx_event_actions_t   actions;
+</span><span style="color:#fdf4c1aa;">} ngx_event_module_t;
 </span></pre>
 <ol start="3">
 <li>NGX_CONF_MODULE</li>
@@ -189,29 +189,29 @@ Nginx 的模块统一架构</h1>
 <ol start="4">
 <li>NGX_HTTP_MODULE</li>
 </ol>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">typedef struct {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_int_t   (*preconfiguration)(ngx_conf_t *cf);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_int_t   (*postconfiguration)(ngx_conf_t *cf);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">void       *(*create_main_conf)(ngx_conf_t *cf);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">char       *(*init_main_conf)(ngx_conf_t *cf, void *conf);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">void       *(*create_srv_conf)(ngx_conf_t *cf);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">char       *(*merge_srv_conf)(ngx_conf_t *cf, void *prev, void *conf);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">void       *(*create_loc_conf)(ngx_conf_t *cf);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">char       *(*merge_loc_conf)(ngx_conf_t *cf, void *prev, void *conf);
-</span><span style="color:#dcdcdc;">} ngx_http_module_t;
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">typedef struct {
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ngx_int_t   (*preconfiguration)(ngx_conf_t *cf);
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ngx_int_t   (*postconfiguration)(ngx_conf_t *cf);
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">void       *(*create_main_conf)(ngx_conf_t *cf);
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">char       *(*init_main_conf)(ngx_conf_t *cf, void *conf);
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">void       *(*create_srv_conf)(ngx_conf_t *cf);
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">char       *(*merge_srv_conf)(ngx_conf_t *cf, void *prev, void *conf);
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">void       *(*create_loc_conf)(ngx_conf_t *cf);
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">char       *(*merge_loc_conf)(ngx_conf_t *cf, void *prev, void *conf);
+</span><span style="color:#fdf4c1aa;">} ngx_http_module_t;
 </span></pre>
 <ol start="5">
 <li>NGX_MAIL_MODULE</li>
 </ol>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">typedef struct {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">ngx_mail_protocol_t *protocol;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">void                *(*create_main_conf)(ngx_conf_t *cf);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">char                *(*init_main_conf)(ngx_conf_t *cf, void *conf);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">void                *(*create_srv_conf)(ngx_conf_t *cf);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">char                *(*merge_srv_conf)(ngx_conf_t *cf, void *prev, void *conf);
-</span><span style="color:#dcdcdc;">} ngx_mail_module_t;
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">typedef struct {
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">ngx_mail_protocol_t *protocol;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">void                *(*create_main_conf)(ngx_conf_t *cf);
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">char                *(*init_main_conf)(ngx_conf_t *cf, void *conf);
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">void                *(*create_srv_conf)(ngx_conf_t *cf);
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">char                *(*merge_srv_conf)(ngx_conf_t *cf, void *prev, void *conf);
+</span><span style="color:#fdf4c1aa;">} ngx_mail_module_t;
 </span></pre>
 <p>可以看到 <code>ctx</code>
 字段指向的数据基本都是一些由回调函数组成的结构体类型，这些回调函数会在进行模块的配置信息解析的恰当时候被调用，主要用来创建存储模块配置信息所需的空间、配置信息的初始化、合并等。而字段

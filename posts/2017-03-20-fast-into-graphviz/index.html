@@ -14,7 +14,7 @@
     <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2017-03-20-fast-into-graphviz&#x2F;"/>
     <meta property="og:description" content="&lt;p&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.graphviz.org&quot;&gt;Graphviz - Graph Visualization Software&lt;&#x2F;a&gt; 由 AT&amp;amp;T 出品， 是一种结构化信息的可视化方式，也是一套开放源代码软件，可以被广泛地使用于网络拓扑、软件工程、数据库设计、机器学习等…"/>
     <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
-    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;red.css">
 <link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
     <body>
         <div class="container full">
@@ -106,11 +106,11 @@ Demos</h1>
 <h2 id="hello-world"><a class="zola-anchor" href="#hello-world" aria-label="Anchor link for: hello-world">🔗</a>
 Hello world</h2>
 <p>新建一个文本文件 <code>a.dot</code> 。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">graph start {
-</span><span style="color:#dcdcdc;">   </span><span style="color:#dcdcdc;">hello -- {graphviz world};
-</span><span style="color:#dcdcdc;">   </span><span style="color:#dcdcdc;">graphviz -- world
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">graph start {
+</span><span style="color:#fdf4c1aa;">   </span><span style="color:#fdf4c1aa;">hello -- {graphviz world};
+</span><span style="color:#fdf4c1aa;">   </span><span style="color:#fdf4c1aa;">graphviz -- world
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p><del>运行 <code>dot -Tpng a.dot -o a.png</code></del></p>
 <p>运行 <code>dot -Tsvg a.dot -o a.svg</code></p>
@@ -119,32 +119,32 @@ Hello world</h2>
 <h2 id="cheng-xu-diao-yong"><a class="zola-anchor" href="#cheng-xu-diao-yong" aria-label="Anchor link for: cheng-xu-diao-yong">🔗</a>
 程序调用</h2>
 <p>新建一个文本文件 <code>b.dot</code> 。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">digraph Invoke {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">size = &quot;4, 4&quot;;// 图片大小
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">main[shape=box];/* 形状 */
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">main-&gt;parse;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">parse-&gt;execute;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">main-&gt;init[style = dotted];// 虚线
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">main-&gt;cleanup;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">execute-&gt;{make_string; printf}// 连接两个
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">init-&gt;make_string;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">edge[color = red]; // 连接线的颜色
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">main-&gt;printf[style=bold, label=&quot;100 times&quot;];// 线的 label
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">make_string[label = &quot;make a\nstring&quot;]// \n, 这个node的label，注意和上一行的区别
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">node[shape = box, style = filled, color = &quot;.7.3 1.0&quot;];// 一个node的属性
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">execute-&gt;compare;
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">digraph Invoke {
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">size = &quot;4, 4&quot;;// 图片大小
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">main[shape=box];/* 形状 */
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">main-&gt;parse;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">parse-&gt;execute;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">main-&gt;init[style = dotted];// 虚线
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">main-&gt;cleanup;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">execute-&gt;{make_string; printf}// 连接两个
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">init-&gt;make_string;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">edge[color = red]; // 连接线的颜色
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">main-&gt;printf[style=bold, label=&quot;100 times&quot;];// 线的 label
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">make_string[label = &quot;make a\nstring&quot;]// \n, 这个node的label，注意和上一行的区别
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">node[shape = box, style = filled, color = &quot;.7.3 1.0&quot;];// 一个node的属性
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">execute-&gt;compare;
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p><del>运行 <code>dot -Tpng b.dot -o b.png</code></del></p>
 <p>运行 <code>dot -Tsvg b.dot -o b.svg</code></p>
@@ -153,21 +153,21 @@ Hello world</h2>
 <h2 id="jie-dian-xing-zhuang"><a class="zola-anchor" href="#jie-dian-xing-zhuang" aria-label="Anchor link for: jie-dian-xing-zhuang">🔗</a>
 节点形状</h2>
 <p>新建一个文本文件 <code>c.dot</code> 。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">digraph node_shape {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">size = &quot;4, 4&quot;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">a-&gt;b-&gt;c;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">b-&gt;d;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">a[shape = polygon, sides = 5, peripheries=3, color = lightblue, style = filled];
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">c[shape = polygon, sides = 4, skew= 0.4, lable = &quot;hello world&quot;];
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">d[shape = rect];
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">e[shape = polygon, side = 4, distortion = .7];
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">digraph node_shape {
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">size = &quot;4, 4&quot;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">a-&gt;b-&gt;c;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">b-&gt;d;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">a[shape = polygon, sides = 5, peripheries=3, color = lightblue, style = filled];
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">c[shape = polygon, sides = 4, skew= 0.4, lable = &quot;hello world&quot;];
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">d[shape = rect];
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">e[shape = polygon, side = 4, distortion = .7];
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p><del>运行 <code>dot -Tpng c.dot -o c.png</code></del></p>
 <p>运行 <code>dot -Tsvg c.dot -o c.svg</code></p>
@@ -176,29 +176,29 @@ Hello world</h2>
 <h2 id="shu-ju-jie-gou"><a class="zola-anchor" href="#shu-ju-jie-gou" aria-label="Anchor link for: shu-ju-jie-gou">🔗</a>
 数据结构</h2>
 <p>新建一个文本文件 <code>d.dot</code> 。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">digraph data_struct {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">node [shape = record, height=.1]; // 全局样式;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">node0[label = &quot;&lt;f0&gt; |&lt;f1&gt; G|&lt;f2&gt; &quot;];
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">node1[label = &quot;&lt;f0&gt; |&lt;f1&gt; E|&lt;f2&gt; &quot;];
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">node2[label = &quot;&lt;f0&gt; |&lt;f1&gt; B|&lt;f2&gt; &quot;];
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">node3[label = &quot;&lt;f0&gt; |&lt;f1&gt; F|&lt;f2&gt; &quot;];
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">node4[label = &quot;&lt;f0&gt; |&lt;f1&gt; R|&lt;f2&gt; &quot;];
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">node5[label = &quot;&lt;f0&gt; |&lt;f1&gt; H|&lt;f2&gt; &quot;];
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">node6[label = &quot;&lt;f0&gt; |&lt;f1&gt; Y|&lt;f2&gt; &quot;];
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">node7[label = &quot;&lt;f0&gt; |&lt;f1&gt; A|&lt;f2&gt; &quot;];
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">node8[label = &quot;&lt;f0&gt; |&lt;f1&gt; C|&lt;f2&gt; &quot;];
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&quot;node0&quot;:f2 -&gt; &quot;node4&quot;:f1;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&quot;node0&quot;:f0 -&gt; &quot;node1&quot;:f1;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&quot;node1&quot;:f0 -&gt; &quot;node2&quot;:f1;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&quot;node1&quot;:f2 -&gt; &quot;node3&quot;:f1;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&quot;node2&quot;:f2 -&gt; &quot;node8&quot;:f1;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&quot;node2&quot;:f0 -&gt; &quot;node7&quot;:f1;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&quot;node4&quot;:f2 -&gt; &quot;node6&quot;:f1;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&quot;node4&quot;:f0 -&gt; &quot;node5&quot;:f1;
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">digraph data_struct {
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">node [shape = record, height=.1]; // 全局样式;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">node0[label = &quot;&lt;f0&gt; |&lt;f1&gt; G|&lt;f2&gt; &quot;];
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">node1[label = &quot;&lt;f0&gt; |&lt;f1&gt; E|&lt;f2&gt; &quot;];
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">node2[label = &quot;&lt;f0&gt; |&lt;f1&gt; B|&lt;f2&gt; &quot;];
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">node3[label = &quot;&lt;f0&gt; |&lt;f1&gt; F|&lt;f2&gt; &quot;];
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">node4[label = &quot;&lt;f0&gt; |&lt;f1&gt; R|&lt;f2&gt; &quot;];
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">node5[label = &quot;&lt;f0&gt; |&lt;f1&gt; H|&lt;f2&gt; &quot;];
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">node6[label = &quot;&lt;f0&gt; |&lt;f1&gt; Y|&lt;f2&gt; &quot;];
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">node7[label = &quot;&lt;f0&gt; |&lt;f1&gt; A|&lt;f2&gt; &quot;];
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">node8[label = &quot;&lt;f0&gt; |&lt;f1&gt; C|&lt;f2&gt; &quot;];
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">&quot;node0&quot;:f2 -&gt; &quot;node4&quot;:f1;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">&quot;node0&quot;:f0 -&gt; &quot;node1&quot;:f1;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">&quot;node1&quot;:f0 -&gt; &quot;node2&quot;:f1;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">&quot;node1&quot;:f2 -&gt; &quot;node3&quot;:f1;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">&quot;node2&quot;:f2 -&gt; &quot;node8&quot;:f1;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">&quot;node2&quot;:f0 -&gt; &quot;node7&quot;:f1;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">&quot;node4&quot;:f2 -&gt; &quot;node6&quot;:f1;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">&quot;node4&quot;:f0 -&gt; &quot;node5&quot;:f1;
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p><del>运行 <code>dot -Tpng d.dot -o d.png</code></del></p>
 <p>运行 <code>dot -Tsvg d.dot -o d.svg</code></p>
@@ -207,33 +207,33 @@ Hello world</h2>
 <h2 id="hash-table"><a class="zola-anchor" href="#hash-table" aria-label="Anchor link for: hash-table">🔗</a>
 Hash table</h2>
 <p>新建一个文本文件 <code>e.dot</code> 。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">digraph hash_table {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">nodesep = .05;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">rankdir = LR;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">node[shape = record, width = .1, height = .1];
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">node0[label = &quot;&lt;f0&gt; |&lt;f1&gt; |&lt;f2&gt; |&lt;f3&gt; |&lt;f4&gt; |&lt;f5&gt; |&lt;f6&gt; |&quot;, height = 2.5];
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">node [width = 1.5];
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">node1[label = &quot;{&lt;n&gt; n14 | 719 |&lt;p&gt;}&quot;];
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">node2[label = &quot;{&lt;n&gt; a1 | 719 |&lt;p&gt;}&quot;];
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">node3[label = &quot;{&lt;n&gt; i9 | 512 |&lt;p&gt;}&quot;];
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">node4[label = &quot;{&lt;n&gt; e5 | 632 |&lt;p&gt;}&quot;];
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">node5[label = &quot;{&lt;n&gt; t20 | 959 |&lt;p&gt;}&quot;];
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">node6[label = &quot;{&lt;n&gt; o15 | 794 |&lt;p&gt;}&quot;];
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">node7[label = &quot;{&lt;n&gt; s19 | 659 |&lt;p&gt;}&quot;];
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">node0:f0 -&gt; node1:n;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">node0:f1 -&gt; node2:n;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">node0:f2 -&gt; node3:n;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">node0:f5 -&gt; node4:n;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">node0:f6 -&gt; node5:n;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">node2:p  -&gt; node6:n;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">node4:p  -&gt; node7:n;
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">digraph hash_table {
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">nodesep = .05;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">rankdir = LR;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">node[shape = record, width = .1, height = .1];
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">node0[label = &quot;&lt;f0&gt; |&lt;f1&gt; |&lt;f2&gt; |&lt;f3&gt; |&lt;f4&gt; |&lt;f5&gt; |&lt;f6&gt; |&quot;, height = 2.5];
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">node [width = 1.5];
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">node1[label = &quot;{&lt;n&gt; n14 | 719 |&lt;p&gt;}&quot;];
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">node2[label = &quot;{&lt;n&gt; a1 | 719 |&lt;p&gt;}&quot;];
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">node3[label = &quot;{&lt;n&gt; i9 | 512 |&lt;p&gt;}&quot;];
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">node4[label = &quot;{&lt;n&gt; e5 | 632 |&lt;p&gt;}&quot;];
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">node5[label = &quot;{&lt;n&gt; t20 | 959 |&lt;p&gt;}&quot;];
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">node6[label = &quot;{&lt;n&gt; o15 | 794 |&lt;p&gt;}&quot;];
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">node7[label = &quot;{&lt;n&gt; s19 | 659 |&lt;p&gt;}&quot;];
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">node0:f0 -&gt; node1:n;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">node0:f1 -&gt; node2:n;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">node0:f2 -&gt; node3:n;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">node0:f5 -&gt; node4:n;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">node0:f6 -&gt; node5:n;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">node2:p  -&gt; node6:n;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">node4:p  -&gt; node7:n;
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p><del>运行 <code>dot -Tpng e.dot -o e.png</code></del></p>
 <p>运行 <code>dot -Tsvg e.dot -o e.svg</code></p>
@@ -242,37 +242,37 @@ Hash table</h2>
 <h2 id="liu-cheng-tu"><a class="zola-anchor" href="#liu-cheng-tu" aria-label="Anchor link for: liu-cheng-tu">🔗</a>
 流程图</h2>
 <p>新建一个文本文件 <code>f.dot</code> 。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">digraph work_flow {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">subgraph cluster0 {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">node[style = filled, color = white];
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">style = filled;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">color = lightgrey;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">a0-&gt;a1-&gt;a2-&gt;a3;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">label = &quot;prcess #1&quot;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">subgraph cluster1 {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">node[style = filled];
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">b0-&gt;b1-&gt;b2-&gt;b3;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">label = &quot;process #2&quot;;
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">color = blue;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">start-&gt;a0;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">start-&gt;b0;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">a1-&gt;b3;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">b2-&gt;a3;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">a3-&gt;end;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">b3-&gt;end;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">start[shape=Mdiamond];
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">end[shape=Msquare];
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">digraph work_flow {
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">subgraph cluster0 {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">node[style = filled, color = white];
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">style = filled;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">color = lightgrey;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">a0-&gt;a1-&gt;a2-&gt;a3;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">label = &quot;prcess #1&quot;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">subgraph cluster1 {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">node[style = filled];
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">b0-&gt;b1-&gt;b2-&gt;b3;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">label = &quot;process #2&quot;;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">color = blue;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">start-&gt;a0;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">start-&gt;b0;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">a1-&gt;b3;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">b2-&gt;a3;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">a3-&gt;end;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">b3-&gt;end;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">start[shape=Mdiamond];
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">end[shape=Msquare];
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>~运行 <code>dot -Tpng f.dot -o f.png</code>~
 运行 <code>dot -Tsvg f.dot -o f.svg</code></p>
@@ -314,20 +314,20 @@ DOT Language</h1>
 <h2 id="abstract-grammar-definition"><a class="zola-anchor" href="#abstract-grammar-definition" aria-label="Anchor link for: abstract-grammar-definition">🔗</a>
 Abstract Grammar Definition</h2>
 <p>官方对DOT语言的语法的描述如下：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">     </span><span style="color:#dcdcdc;">graph: [ strict ] (graph | digraph) [ ID ] &#39;{&#39; stmt_list &#39;}&#39;
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">stmt_list: [ stmt [ &#39;;&#39; ] stmt_list ]
-</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">stmt: node_stmt |	edge_stmt |	attr_stmt |	ID &#39;=&#39; ID |	subgraph
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">attr_stmt: (graph | node | edge) attr_list
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">attr_list: &#39;[&#39; [ a_list ] &#39;]&#39; [ attr_list ]
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">a_list: ID &#39;=&#39; ID [ (&#39;;&#39; | &#39;,&#39;) ] [ a_list ]
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">edge_stmt: (node_id | subgraph) edgeRHS [ attr_list ]
-</span><span style="color:#dcdcdc;">   </span><span style="color:#dcdcdc;">edgeRHS: edgeop (node_id | subgraph) [ edgeRHS ]
-</span><span style="color:#dcdcdc;"> </span><span style="color:#dcdcdc;">node_stmt: node_id [ attr_list ]
-</span><span style="color:#dcdcdc;">   </span><span style="color:#dcdcdc;">node_id: ID [ port ]
-</span><span style="color:#dcdcdc;">      </span><span style="color:#dcdcdc;">port: &#39;: &#39; ID [ &#39;:&#39; compass_pt ] |	&#39;:      &#39; compass_pt
-</span><span style="color:#dcdcdc;">  </span><span style="color:#dcdcdc;">subgraph: [ subgraph [ ID ] ] &#39;{&#39; stmt_list &#39;}&#39;
-</span><span style="color:#dcdcdc;">compass_pt: (n | ne | e | se | s | sw | w | nw | c | _)
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">graph: [ strict ] (graph | digraph) [ ID ] &#39;{&#39; stmt_list &#39;}&#39;
+</span><span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">stmt_list: [ stmt [ &#39;;&#39; ] stmt_list ]
+</span><span style="color:#fdf4c1aa;">      </span><span style="color:#fdf4c1aa;">stmt: node_stmt |	edge_stmt |	attr_stmt |	ID &#39;=&#39; ID |	subgraph
+</span><span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">attr_stmt: (graph | node | edge) attr_list
+</span><span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">attr_list: &#39;[&#39; [ a_list ] &#39;]&#39; [ attr_list ]
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">a_list: ID &#39;=&#39; ID [ (&#39;;&#39; | &#39;,&#39;) ] [ a_list ]
+</span><span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">edge_stmt: (node_id | subgraph) edgeRHS [ attr_list ]
+</span><span style="color:#fdf4c1aa;">   </span><span style="color:#fdf4c1aa;">edgeRHS: edgeop (node_id | subgraph) [ edgeRHS ]
+</span><span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">node_stmt: node_id [ attr_list ]
+</span><span style="color:#fdf4c1aa;">   </span><span style="color:#fdf4c1aa;">node_id: ID [ port ]
+</span><span style="color:#fdf4c1aa;">      </span><span style="color:#fdf4c1aa;">port: &#39;: &#39; ID [ &#39;:&#39; compass_pt ] |	&#39;:      &#39; compass_pt
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fdf4c1aa;">subgraph: [ subgraph [ ID ] ] &#39;{&#39; stmt_list &#39;}&#39;
+</span><span style="color:#fdf4c1aa;">compass_pt: (n | ne | e | se | s | sw | w | nw | c | _)
 </span></pre>
 <p>具体说明，参见 <a href="http://www.graphviz.org/content/dot-language">The DOT Language</a>
 。</p>
@@ -349,14 +349,14 @@ ID</h2>
 <h2 id="subgraph"><a class="zola-anchor" href="#subgraph" aria-label="Anchor link for: subgraph">🔗</a>
 <code>subgraph</code></h2>
 <p>子图可以用来对节点和边进行分组。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">A -&gt; {B C}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">A -&gt; {B C}
 </span></pre>
 <p>子图也可以用来批量设置属性。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">subgraph {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">rank = same; A; B; C;
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">subgraph {
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">rank = same; A; B; C;
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>子图也可以用来指定布局引擎。如果子图ID以 &quot;cluster&quot;
 开始，则该子图会被布局引擎作为特殊的集聚图来对待。</p>

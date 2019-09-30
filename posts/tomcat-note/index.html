@@ -14,7 +14,7 @@
     <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;tomcat-note&#x2F;"/>
     <meta property="og:description" content="Note of apache tomcat architecture"/>
     <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
-    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;red.css">
 <link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
     <body>
         <div class="container full">
@@ -100,32 +100,32 @@
 部分</a>.</p>
 <h1 id="tomcat-architecture"><a class="zola-anchor" href="#tomcat-architecture" aria-label="Anchor link for: tomcat-architecture">🔗</a>
 Tomcat Architecture</h1>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">---------------------------------------------
-</span><span style="color:#dcdcdc;">| Server                                    |
-</span><span style="color:#dcdcdc;">| - Service                                 |
-</span><span style="color:#dcdcdc;">|   - Connector Coyote                      |
-</span><span style="color:#dcdcdc;">|   - Connector Coyote                      |
-</span><span style="color:#dcdcdc;">|   - Connector Coyote                      |
-</span><span style="color:#dcdcdc;">|   - Connector Coyote                      |
-</span><span style="color:#dcdcdc;">|   - ...                                   |
-</span><span style="color:#dcdcdc;">|   - Container Catalina                    |
-</span><span style="color:#dcdcdc;">|   - Session                               |
-</span><span style="color:#dcdcdc;">|   - Jasper                                |
-</span><span style="color:#dcdcdc;">|   - Naming                                |
-</span><span style="color:#dcdcdc;">|   - Logging                               |
-</span><span style="color:#dcdcdc;">|   - JMX                                   |
-</span><span style="color:#dcdcdc;">---------------------------------------------
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">---------------------------------------------
+</span><span style="color:#fdf4c1aa;">| Server                                    |
+</span><span style="color:#fdf4c1aa;">| - Service                                 |
+</span><span style="color:#fdf4c1aa;">|   - Connector Coyote                      |
+</span><span style="color:#fdf4c1aa;">|   - Connector Coyote                      |
+</span><span style="color:#fdf4c1aa;">|   - Connector Coyote                      |
+</span><span style="color:#fdf4c1aa;">|   - Connector Coyote                      |
+</span><span style="color:#fdf4c1aa;">|   - ...                                   |
+</span><span style="color:#fdf4c1aa;">|   - Container Catalina                    |
+</span><span style="color:#fdf4c1aa;">|   - Session                               |
+</span><span style="color:#fdf4c1aa;">|   - Jasper                                |
+</span><span style="color:#fdf4c1aa;">|   - Naming                                |
+</span><span style="color:#fdf4c1aa;">|   - Logging                               |
+</span><span style="color:#fdf4c1aa;">|   - JMX                                   |
+</span><span style="color:#fdf4c1aa;">---------------------------------------------
 </span></pre><h1 id="structures"><a class="zola-anchor" href="#structures" aria-label="Anchor link for: structures">🔗</a>
 Structures</h1>
 <h2 id="lifecycle"><a class="zola-anchor" href="#lifecycle" aria-label="Anchor link for: lifecycle">🔗</a>
 LifeCycle</h2>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">void addLifecycleListner(...)
-</span><span style="color:#dcdcdc;">void removeLifecycleListener(...)
-</span><span style="color:#dcdcdc;">LifecycleListeners findLifecycleListeners()
-</span><span style="color:#dcdcdc;">void start()
-</span><span style="color:#dcdcdc;">void stop()
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">void addLifecycleListner(...)
+</span><span style="color:#fdf4c1aa;">void removeLifecycleListener(...)
+</span><span style="color:#fdf4c1aa;">LifecycleListeners findLifecycleListeners()
+</span><span style="color:#fdf4c1aa;">void start()
+</span><span style="color:#fdf4c1aa;">void stop()
 </span></pre><h2 id="server"><a class="zola-anchor" href="#server" aria-label="Anchor link for: server">🔗</a>
 Server</h2>
 <p>A &quot;Server&quot; is a manager of a collection of &quot;Service&quot;.</p>
@@ -144,28 +144,28 @@ Processor</h2>
 <h2 id="container"><a class="zola-anchor" href="#container" aria-label="Anchor link for: container">🔗</a>
 Container</h2>
 <p>A &quot;Container&quot; is a role, including &quot;Wrapper&quot;, &quot;Context&quot;, &quot;Host&quot; and &quot;Engine&quot;.</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">Engine
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">|- Host 0
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">|- Context
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">|- Wrapper
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">|- Host 1
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">|- Context
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">|- Wrapper
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">Engine
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">|- Host 0
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">|- Context
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">|- Wrapper
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">|- Host 1
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">|- Context
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">|- Wrapper
 </span></pre><h2 id="engine"><a class="zola-anchor" href="#engine" aria-label="Anchor link for: engine">🔗</a>
 Engine</h2>
 <p>An &quot;Engine&quot; has no parent.</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">Engine interface
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">- String get DefaultHost()
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">- void setDefaultHost(String)
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">- String getJvmRoute()
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">- void setJvmRoute(String)
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">- Service getService()
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">- void setService(Service)
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">- void addDefaultContext(DefaultContext)
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">- DefaultContext getDefaultContext()
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">- void importDefaultContext()
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">Engine interface
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">- String get DefaultHost()
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">- void setDefaultHost(String)
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">- String getJvmRoute()
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">- void setJvmRoute(String)
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">- Service getService()
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">- void setService(Service)
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">- void addDefaultContext(DefaultContext)
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">- DefaultContext getDefaultContext()
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">- void importDefaultContext()
 </span></pre>
 <p>StandardEngine implements Engine.</p>
 <ul>

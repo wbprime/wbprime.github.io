@@ -15,7 +15,7 @@
     <meta property="og:description" content="&lt;p&gt;负责的服务在线上环境出现了丢弃请求的现象。经排查是由于请求队列中的若干请求处理时间过长，导致队列之后的请求等待以致超时，而在队列中超时的请求会被框架直接抛弃掉。&lt;&#x2F;p&gt;
 &lt;p&gt;排查服务日志，发现访问 Cache 超时的量有明显增加；较多的 Cache 超时导致更多的不必要 DB 访问，以致请求的响应时间变长；同时，更多的 DB 访问压力也会对 D…"/>
     <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
-    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;red.css">
 <link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
     <body>
         <div class="container full">
@@ -134,16 +134,16 @@ Cache 客户端</h2>
 <p>一个单独的 write 线程用来将请求发送给选中的服务端。</p>
 <p>write 线程轮循请求的全局阻塞队列，将序列化好的请求通过在 Server 所维护的任一个 Socket 发送至服务端。</p>
 <p>此过程是顺序、单线程的。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">loop {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">session = sessionsQueue.poll(1000L, TimeUnit.MILLISECONDS) // blocking here
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">lock(socket) {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">buf = session.bytes()
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">while (buf.hasRemaining()) {
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">socket.write(buf) // non-blocking
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">loop {
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">session = sessionsQueue.poll(1000L, TimeUnit.MILLISECONDS) // blocking here
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">lock(socket) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">buf = session.bytes()
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">while (buf.hasRemaining()) {
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">socket.write(buf) // non-blocking
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <blockquote>
 <p>由于 write 操作是非阻塞的，单个会话字节流的发送需要放在一个循环中，这个过程可以优化为处理 Selector
@@ -155,20 +155,20 @@ Cache 客户端</h2>
 <p>一个单独的 read 线程用来处理服务端返回的响应。</p>
 <p>read 线程阻塞于 NIO Selector 之 select 方法。一旦有读事件就绪，就会处理该事件：读取字节流并反序列化为 sessionId，通过该 sessionId 找到对应的会话并唤醒该会话对应的请求线程（通过 <code>CountdownLatch</code>）。</p>
 <p>此过程是顺序、单线程的。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">loop {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">Selector.select(); // blocking here
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">foreach selectionKey in Selector.selectedKeys() {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">if (selectionKey.readyOps() &amp; READ) {
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">selectionKey.channel().read(buf)
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">sessions = Decoder.decode(buf)
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">foreach session in sessions {
-</span><span style="color:#dcdcdc;">                </span><span style="color:#dcdcdc;">notify(session) // non-blocking
-</span><span style="color:#dcdcdc;">            </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">loop {
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">Selector.select(); // blocking here
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">foreach selectionKey in Selector.selectedKeys() {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">if (selectionKey.readyOps() &amp; READ) {
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">selectionKey.channel().read(buf)
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">sessions = Decoder.decode(buf)
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">foreach session in sessions {
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fdf4c1aa;">notify(session) // non-blocking
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <blockquote>
 <p>感觉本过程可以优化为：每一个 Socket 对应一个 read worker，而不是现在的所有的 Socket 对应同一个
@@ -183,9 +183,9 @@ read worker。目前的逻辑，在 Server 的负载非常大的时候可能会�
 部署机器</h2>
 <p>服务部署与公司内部的私有云（docker based）上，设置的单实例限制为 CPU 8 核；实例所在的物理机为 40 核。</p>
 <p>在服务实例内部通过 <code>top</code> 查看服务器的 CPU 使用情况如下（这个应该是物理机的数据）：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">load average: 15.51, 16.54, 16.28
-</span><span style="color:#dcdcdc;">Cpu(s): 29.4%us,  6.0%sy,  0.0%ni, 60.3%id,  0.1%wa,  0.0%hi,  4.3%si,  0.0%st
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">load average: 15.51, 16.54, 16.28
+</span><span style="color:#fdf4c1aa;">Cpu(s): 29.4%us,  6.0%sy,  0.0%ni, 60.3%id,  0.1%wa,  0.0%hi,  4.3%si,  0.0%st
 </span></pre>
 <p>服务进程的 CPU 使用率为 273%；read worker 和 write worker 线程的 CPU 占用率分别为 14.6% 和 21.9%。从数据上看 Cache 客户端读写的压力不大，应该不会存在由于负载过高导致的请求延时。</p>
 <p>私有云实例分配的网卡限制为入流量最大 40M/s，初流量最大 40M/s，通过监控可以看到每分钟流量平均值的最大值：入流量为 9.1 M/s，出流量为 5.76 M/s。流量上也没有瓶颈。</p>
@@ -193,8 +193,8 @@ read worker。目前的逻辑，在 Server 的负载非常大的时候可能会�
 网络抓包</h2>
 <p>从应用层和服务器硬件层暂时看不出来问题，考虑进行网络抓包分析。</p>
 <p>使用 <code>tcpdump</code> 进行抓包，同时监控服务日志，确保能抓取到 Cache 超时的网络包数据。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">sudo tcpdump -i any host x.x.x.x -w cache.$(date +%Y%m%dT%H%M%S).pcap
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">sudo tcpdump -i any host x.x.x.x -w cache.$(date +%Y%m%dT%H%M%S).pcap
 </span></pre>
 <p>抓取到的网络包文件下载到本地，使用 <code>wireshark</code> 进行分析。由于 Cache 底层使用的 memcache 的协议，可以直接使用 <code>wireshark</code> 分析 memcache 的报文，因为 <code>wireshark</code> 内建了对 memcache 的支持。</p>
 <p>对抓取到的网络包进行过滤，使用过滤器 “memcache.opaque”：memcache 的请求报文里面有一个特殊字段 opaque，可以用来进行会话跟踪；如果某个请求中包含了 opaque 值，则对应的响应中也会包含相同的 opaque 值。对于超时的 Cache 请求，服务日志中会打印出相应的 opaque 值。这样，在服务日志中找到超时请求的 opaque 值，在 <code>wireshark</code> 中找到对应的包，可以很方便地进行分析。</p>

@@ -14,7 +14,7 @@
     <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-12-vboxmanage-note-change-host-key-for-vboxsdl&#x2F;"/>
     <meta property="og:description" content="如果平时使用 Linux，偶尔会有使用 Windows 软件（如 WPS&#x2F;QQ 等）的需求场景时，最好的解决方案就是使用虚拟机了。如果使用了 VirtualBox 的话，那么可以了解一下其除了基于 Qt 的虚拟机运行界面之外还额外提供了一个基于 SDL 的虚拟机运行界面。如果需要修改 SDL 界面下的 host 键，可以使用参数 &#96;--hostkey&#96;。"/>
     <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
-    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;red.css">
 <link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
     <body>
         <div class="container full">
@@ -99,21 +99,21 @@
         <div class="post-content">
             <p>如果平时使用 Linux，偶尔会有使用 Windows 软件（如 WPS/QQ 等）的需求场景时，最好的解决方案就是使用虚拟机了。如果使用了 <a href="https://www.virtualbox.org/">Virtual Box</a> 的话，那么可以了解一下其除了基于 <a href="https://www.qt.io/">Qt</a> 的虚拟机运行界面之外还额外提供了一个基于 <a href="https://www.libsdl.org/">SDL</a> 的虚拟机运行界面。</p>
 <p>我在使用 virtualbox 的管理界面创建配置好一个基于 Windows 7 的虚拟机 &quot;se7en&quot; 之后，可以直接在终端运行：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">${VBOXSDL} --startvm se7en
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1;">${VBOXSDL} --startvm se7en
 </span></pre>
 <p>界面非常简洁，不依赖 <a href="https://www.qt.io/">Qt</a> 。</p>
 <p><code>${VBOXSDL}</code> 是 vboxsdl 的可执行文件名；根据 VirtualBox 的安装方式不同，可能会是 &quot;VBoxSDL&quot; 或 &quot;vboxsdl&quot;。</p>
 <p>如果需要修改 SDL 界面下的 host 键，可以使用参数 &quot;--hostkey&quot;。</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#608b4e;"># Set Host key for vboxsdl
-</span><span style="color:#608b4e;"># LSHIFT = 304 1
-</span><span style="color:#608b4e;"># RSHIFT = 303 2
-</span><span style="color:#608b4e;"># LCTRL = 301 8192
-</span><span style="color:#608b4e;"># RCTRL = 305 128
-</span><span style="color:#608b4e;"># LALT = 308 256
-</span><span style="color:#608b4e;"># RALT = 27 0
-</span><span style="color:#dcdcdc;">${VBOXSDL} --hostkey 308 256 --startvm se7en
+<pre style="background-color:#282828;">
+<span style="font-style:italic;color:#928374;"># Set Host key for vboxsdl
+</span><span style="font-style:italic;color:#928374;"># LSHIFT = 304 1
+</span><span style="font-style:italic;color:#928374;"># RSHIFT = 303 2
+</span><span style="font-style:italic;color:#928374;"># LCTRL = 301 8192
+</span><span style="font-style:italic;color:#928374;"># RCTRL = 305 128
+</span><span style="font-style:italic;color:#928374;"># LALT = 308 256
+</span><span style="font-style:italic;color:#928374;"># RALT = 27 0
+</span><span style="color:#fdf4c1;">${VBOXSDL} --hostkey 308 256 --startvm se7en
 </span></pre>
 <p>该命令会设置 host 键为 左-Alt 键并启动虚拟机。</p>
 <hr />

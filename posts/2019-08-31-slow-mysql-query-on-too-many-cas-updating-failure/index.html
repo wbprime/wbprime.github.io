@@ -16,7 +16,7 @@
 &lt;p&gt;一图胜千言。&lt;&#x2F;p&gt;
 &lt;p&gt;&lt;img src=&quot;https:&#x2F;&#…"/>
     <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
-    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;red.css">
 <link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
     <body>
         <div class="container full">
@@ -155,15 +155,15 @@
 <h2 id="atomiclong"><a class="zola-anchor" href="#atomiclong" aria-label="Anchor link for: atomiclong">🔗</a>
 AtomicLong</h2>
 <p>JDK 的 <code>AtomicLong</code> 类里面大量使用了 CAS 的技巧，如：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#569cd6;">public final long </span><span style="color:#dcdcdc;">getAndUpdate(LongUnaryOperator updateFunction) {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">long</span><span style="color:#dcdcdc;"> prev, next;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">do </span><span style="color:#dcdcdc;">{
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">prev = get();
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">next = updateFunction.applyAsLong(prev);
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">} </span><span style="color:#569cd6;">while </span><span style="color:#dcdcdc;">(</span><span style="color:#569cd6;">!</span><span style="color:#dcdcdc;">compareAndSet(prev, next));
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">return</span><span style="color:#dcdcdc;"> prev;
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public final long </span><span style="color:#fdf4c1;">getAndUpdate(</span><span style="color:#8ec07c;">LongUnaryOperator</span><span style="color:#fdf4c1;"> updateFunction) </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">long</span><span style="color:#fdf4c1aa;"> prev, next;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">do </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">prev </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">get()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">next </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> updateFunction.</span><span style="color:#fdf4c1;">applyAsLong(prev)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">} </span><span style="color:#fa5c4b;">while </span><span style="color:#fdf4c1aa;">(</span><span style="color:#fe8019;">!</span><span style="color:#fdf4c1;">compareAndSet(prev, next)</span><span style="color:#fdf4c1aa;">);
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> prev;
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>在多线程环境中使用该方法，也会遇到类似的 CAS 冲突的问题：多个线程自旋地竞争同一个资源，都无法顺利地实现自己的更新逻辑。</p>
 <p>一个比较好的替代是 JDK 1.8 以后的 <code>LongAdded</code> 类，其使用了空间换时间的思路，使用一个额外的数组空间来存储附加值，使得在多线程竞争发生时把不同线程的修改分散到不同的数组元素上，从而避免空自旋。</p>

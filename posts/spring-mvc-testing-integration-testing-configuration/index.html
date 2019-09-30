@@ -14,7 +14,7 @@
     <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;spring-mvc-testing-integration-testing-configuration&#x2F;"/>
     <meta property="og:description" content="&lt;p&gt;本文是 &lt;a href=&quot;https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;spring-mvc-testing-content&#x2F;&quot;&gt;Spring MVC Testing&lt;&#x2F;a&gt; 集成测试系列的第1篇，原文链接：&lt;a href=&quot;http:&#x2F;&#…"/>
     <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
-    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;red.css">
 <link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
     <body>
         <div class="container full">
@@ -118,13 +118,13 @@
 通过Maven获取依赖</h1>
 <p>译者注：原文写作的时候是基于Spring Framework 3.1.2，当时Spring-test-mvc还是作为一个独立的项目进行开发和发布。在Spring Framework 3.2以后，该项目被合并到Spring Framework中去了。现在Spring Framework已经发布了4.X系列，很少有人在使用3.2以下的版本，为了减少混淆，直接将原文的pom文件加以修改。特此说明。</p>
 <p>生成的pom.xml文件如下：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#808080;">&lt;</span><span style="color:#569cd6;">dependency</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">groupId</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">org.springframework</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">groupId</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">artifactId</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">spring-test</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">artifactId</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">version</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">3.2</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">version</span><span style="color:#808080;">&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#808080;">&lt;</span><span style="color:#569cd6;">scope</span><span style="color:#808080;">&gt;</span><span style="color:#dcdcdc;">test</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">scope</span><span style="color:#808080;">&gt;
-</span><span style="color:#808080;">&lt;/</span><span style="color:#569cd6;">dependency</span><span style="color:#808080;">&gt;
+<pre style="background-color:#282828;">
+<span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">org.springframework</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">spring-test</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">3.2</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">scope</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">test</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">scope</span><span style="color:#83a598;">&gt;
+</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
 </span></pre><h1 id="mockmvc-pei-zhi"><a class="zola-anchor" href="#mockmvc-pei-zhi" aria-label="Anchor link for: mockmvc-pei-zhi">🔗</a>
 MockMvc 配置</h1>
 <p>Spring MVC Test框架提供了<code>MockMvc</code>类体系来辅助编写基于Spring MVC开发的web应用的测试代码。我们需要做的就是使用<code>MockMvcBuilder</code>接口的实际实现来生成<code>MockMvc</code>实例。<code>MockMvcBuilders</code>工厂类提供了两个工厂方法创建<code>MockMvcBuilder</code>实例：</p>
@@ -136,14 +136,14 @@ MockMvc 配置</h1>
 <h2 id="standalonesetup"><a class="zola-anchor" href="#standalonesetup" aria-label="Anchor link for: standalonesetup">🔗</a>
 standaloneSetup</h2>
 <p>如果要测试的类是<code>HomeController</code>，我们可以用如下的方式创建一个<code>MockMvc</code>实例：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">MockMvc mockMvc = MockMvcBuilders.standaloneSetup(</span><span style="color:#569cd6;">new </span><span style="color:#dcdcdc;">HomeController()).build();
+<pre style="background-color:#282828;">
+<span style="color:#8ec07c;">MockMvc</span><span style="color:#fdf4c1aa;"> mockMvc </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">MockMvcBuilders</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">standaloneSetup(</span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">HomeController</span><span style="color:#fdf4c1;">())</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">build()</span><span style="color:#fdf4c1aa;">;
 </span></pre><h2 id="webappcontextsetup"><a class="zola-anchor" href="#webappcontextsetup" aria-label="Anchor link for: webappcontextsetup">🔗</a>
 webAppContextSetup</h2>
 <p>这种方式我们要先初始化一个配置好的<code>WebApplicationContext</code>实例，然后通过如下代码创建一个<code>MockMvc</code>实例：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">WebApplicationContext wac ;
-</span><span style="color:#dcdcdc;">MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
+<pre style="background-color:#282828;">
+<span style="color:#8ec07c;">WebApplicationContext</span><span style="color:#fdf4c1aa;"> wac ;
+</span><span style="color:#8ec07c;">MockMvc</span><span style="color:#fdf4c1aa;"> mockMvc </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">MockMvcBuilders</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">webAppContextSetup(wac)</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">build()</span><span style="color:#fdf4c1aa;">;
 </span></pre><h1 id="ce-shi-yong-li-lei-de-pei-zhi"><a class="zola-anchor" href="#ce-shi-yong-li-lei-de-pei-zhi" aria-label="Anchor link for: ce-shi-yong-li-lei-de-pei-zhi">🔗</a>
 测试用例类的配置</h1>
 <p>在集成测试中我们应该使用webAppContextSetup方式的<code>MockMvc</code>配置方式，这样可以最大化地共用Spring配置代码。</p>
@@ -156,26 +156,26 @@ webAppContextSetup</h2>
 <li>测试用例类中添加一个<code>setUp()</code>方法并用<code>@Before</code>注解，调用<code>MockMvcBuilders</code>的静态方法<code>webAppContextSetup()</code>创建并配置好<code>MockMvc</code>类型的成员</li>
 </ol>
 <p>完成后的测试用例类大概长成这个样子：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">@RunWith(SpringJUnit4ClassRunner.class)
-</span><span style="color:#dcdcdc;">@ContextConfiguration(locations = {</span><span style="color:#d69d85;">&quot;classpath:testContext.xml&quot;</span><span style="color:#dcdcdc;">, </span><span style="color:#d69d85;">&quot;classpath:webMvcContext.xml&quot;</span><span style="color:#dcdcdc;">})
-</span><span style="color:#608b4e;">//@ContextConfiguration(classes = {TestContext.class, WebMvcContext.class})
-</span><span style="color:#dcdcdc;">@WebAppConfiguration
-</span><span style="color:#569cd6;">public class </span><span style="color:#dcdcdc;">TodoControllerTest_WebAppContext {
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">MockMvc mockMvc;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Autowired
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">private </span><span style="color:#dcdcdc;">WebApplicationContext webApplicationContext;
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">@Before
-</span><span style="color:#dcdcdc;">    </span><span style="color:#569cd6;">public void </span><span style="color:#dcdcdc;">setUp() </span><span style="color:#569cd6;">throws </span><span style="color:#dcdcdc;">Exception {
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">Mockito.reset(mockedTodoService);
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">        </span><span style="color:#dcdcdc;">mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">}
-</span><span style="color:#dcdcdc;">
-</span><span style="color:#dcdcdc;">    </span><span style="color:#608b4e;">// Add tests here
-</span><span style="color:#dcdcdc;">}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">RunWith</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">SpringJUnit4ClassRunner</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">class</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">ContextConfiguration</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">locations </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1aa;">{</span><span style="color:#b8bb26;">&quot;classpath:testContext.xml&quot;</span><span style="color:#fdf4c1aa;">, </span><span style="color:#b8bb26;">&quot;classpath:webMvcContext.xml&quot;</span><span style="color:#fdf4c1aa;">})
+</span><span style="font-style:italic;color:#928374;">//@ContextConfiguration(classes = {TestContext.class, WebMvcContext.class})
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">WebAppConfiguration
+</span><span style="color:#fa5c4b;">public class </span><span style="color:#8ec07c;">TodoControllerTest_WebAppContext </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">MockMvc </span><span style="color:#fdf4c1aa;">mockMvc;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Autowired
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">WebApplicationContext </span><span style="color:#fdf4c1aa;">webApplicationContext;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Before
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public void </span><span style="color:#8ec07c;">setUp</span><span style="color:#fdf4c1aa;">() </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">Exception </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">Mockito</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">reset(mockedTodoService)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">mockMvc </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">MockMvcBuilders</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">webAppContextSetup(webApplicationContext)</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">build()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="font-style:italic;color:#928374;">// Add tests here
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>本文使用的代码被放在了 <a href="https://github.com/pkainulainen/spring-mvc-test-examples/tree/master/configuration">Github</a> 上。使用Maven进行集成测试的方法可以参见我的另外一篇文章 <a href="http://www.petrikainulainen.net/programming/maven/integration-testing-with-maven/">Integration Testing with Maven</a>。</p>
 <h1 id="zong-jie"><a class="zola-anchor" href="#zong-jie" aria-label="Anchor link for: zong-jie">🔗</a>

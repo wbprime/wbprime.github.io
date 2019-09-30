@@ -15,7 +15,7 @@
     <meta property="og:description" content="&lt;p&gt;最近经历了一次由于线上 DNS 解析大范围失效引发的问题排查，并且由于应对不当导致的 MySQL 连接数打满。由于问题发上在周末，网络访问和内部沟通都不方便，整个问题的处理大概花费了 14 个小时（上午 10：00 左右到晚上 03：00）。&lt;&#x2F;p&gt;
 &lt;p&gt;事故的起因是由于网络 DNS 解析失效，导致服务里面的一段发送 UDP 消息的代码超时，导…"/>
     <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
-    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;blue.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;red.css">
 <link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
     <body>
         <div class="container full">
@@ -111,12 +111,12 @@
 <h1 id="shu-ju-ku-lian-jie-chi"><a class="zola-anchor" href="#shu-ju-ku-lian-jie-chi" aria-label="Anchor link for: shu-ju-ku-lian-jie-chi">🔗</a>
 数据库连接池</h1>
 <p>服务通过 tomcat dbcp 连接池控制数据库访问，A 服务所使用的数据库连接池版本为：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">&lt;dependency&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&lt;groupId&gt;org.apache.tomcat&lt;/groupId&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&lt;artifactId&gt;tomcat-dhcp&lt;/artifactId&gt;
-</span><span style="color:#dcdcdc;">    </span><span style="color:#dcdcdc;">&lt;version&gt;7.0.52&lt;/version&gt;
-</span><span style="color:#dcdcdc;">&lt;/dependency&gt;
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">&lt;dependency&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">&lt;groupId&gt;org.apache.tomcat&lt;/groupId&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">&lt;artifactId&gt;tomcat-dhcp&lt;/artifactId&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">&lt;version&gt;7.0.52&lt;/version&gt;
+</span><span style="color:#fdf4c1aa;">&lt;/dependency&gt;
 </span></pre>
 <p>A 服务的数据库访问模型如：</p>
 <p><img src="https://www.wangbo.im/posts/2019-03-11-a-online-issue-caused-by-dns-unavailability/access_model_of_mysql.png" alt="数据库访问模型" /></p>
@@ -127,12 +127,12 @@
 <li>对于 A 服务的实例来说，会有 16*m 个与数据库的连接</li>
 </ol>
 <p>A 服务使用的连接池配置如下：</p>
-<pre style="background-color:#1e1e1e;">
-<span style="color:#dcdcdc;">&lt;initialSize&gt;10&lt;/initialSize&gt;
-</span><span style="color:#dcdcdc;">&lt;maxActive&gt;20&lt;/maxActive&gt;
-</span><span style="color:#dcdcdc;">&lt;maxWait&gt;4000&lt;/maxWait&gt;
-</span><span style="color:#dcdcdc;">&lt;minIdle&gt;10&lt;/minIdle&gt;
-</span><span style="color:#dcdcdc;">&lt;maxIdle&gt;20&lt;/maxIdle&gt;
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">&lt;initialSize&gt;10&lt;/initialSize&gt;
+</span><span style="color:#fdf4c1aa;">&lt;maxActive&gt;20&lt;/maxActive&gt;
+</span><span style="color:#fdf4c1aa;">&lt;maxWait&gt;4000&lt;/maxWait&gt;
+</span><span style="color:#fdf4c1aa;">&lt;minIdle&gt;10&lt;/minIdle&gt;
+</span><span style="color:#fdf4c1aa;">&lt;maxIdle&gt;20&lt;/maxIdle&gt;
 </span></pre><h1 id="shi-gu-hui-gu"><a class="zola-anchor" href="#shi-gu-hui-gu" aria-label="Anchor link for: shi-gu-hui-gu">🔗</a>
 事故回顾</h1>
 <h2 id="kai-shi-chu-xian-fu-wu-pao-qi-liang-10-30"><a class="zola-anchor" href="#kai-shi-chu-xian-fu-wu-pao-qi-liang-10-30" aria-label="Anchor link for: kai-shi-chu-xian-fu-wu-pao-qi-liang-10-30">🔗</a>

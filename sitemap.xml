@@ -295,6 +295,13 @@
         </url>
     
         <url>
+            <loc>https://www.wangbo.im/posts/2019-09-30-freebuilder-usecases/</loc>
+            
+                <lastmod>2019-09-30T09:38:54+08:00</lastmod>
+            
+        </url>
+    
+        <url>
             <loc>https://www.wangbo.im/posts/acl-note/</loc>
             
                 <lastmod>2018-02-05T17:46:28+08:00</lastmod>
@@ -922,6 +929,10 @@
         
         <url>
             <loc>https://www.wangbo.im/tags/fps/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/tags/freebuilder/</loc>
         </url>
         
         <url>
