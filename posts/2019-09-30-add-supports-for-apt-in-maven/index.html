@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <title>在 Maven 中支持 Java 的注解处理器 APT - Elvis Wang</title>
+    
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="wangbo’s home &amp; blog"/>
+
+    <meta property="og:title" content="
+    wangbo’s blog -&nbsp;在 Maven 中支持 Java 的注解处理器 APT" />
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-30-add-supports-for-apt-in-maven&#x2F;"/>
+    <meta property="og:description" content="&lt;p&gt;Java 中有很多基于 &lt;a href=&quot;https:&#x2F;&#x2F;docs.oracle.com&#x2F;javase&#x2F;7&#x2F;docs&#x2F;technotes&#x2F;guides&#x2F;apt&#x2F;&quot; title=&quot;Annotation Processing Tool (apt)&quot;&…"/>
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;red.css">
+<link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
+    <body>
+        <div class="container full">
+<header class="header">
+    <div class="header__inner">
+        <div class="header__logo">
+            <a href="&#x2F;">
+    <div class="logo">
+        WB Prime
+    </div>
+</a>
+        </div>
+        <div class="menu-trigger">menu</div>
+    </div>
+    
+    <nav class="menu">
+        <ul class="menu__inner menu__inner--desktop">
+            
+            
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+                    </li>
+                
+            </ul>
+
+        <ul class="menu__inner menu__inner--mobile">
+            
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+        </li>
+        </ul>
+    </nav>
+
+    </header>
+<div class="content"><div class="post">
+        <h1 class="post-title">
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-30-add-supports-for-apt-in-maven&#x2F;">在 Maven 中支持 Java 的注解处理器 APT</a>
+        </h1>
+        
+    <div class="post-meta">
+        <span class="post-date">2019.09.30
+                </span>
+
+        <span class="post-author"></span>
+
+        
+
+    
+    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;java&#x2F;">Java</a>} 
+
+            
+    ::
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;java&#x2F;">java</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;apt&#x2F;">apt</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;maven&#x2F;">maven</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;annotationprocessorpaths&#x2F;">annotationProcessorPaths</a>
+        
+    
+            
+        
+    </div>
+
+
+
+        
+
+        <div class="post-content">
+            <p>Java 中有很多基于 <a href="https://docs.oracle.com/javase/7/docs/technotes/guides/apt/" title="Annotation Processing Tool (apt)">注解处理器 APT (Annotation Processing Tool)</a> 技术的类库，如 <a href="https://github.com/google/auto/tree/master/value" title="AutoValue - Immutable value-type code generation for Java 1.6+.">AutoValue</a> 和 <a href="https://freebuilder.inferred.org/" title="Automatic generation of the Builder pattern for Java">FreeBuilder</a> 等。</p>
+<p>在 <a href="https://maven.apache.org/">Maven</a> 中支持 <a href="https://www.wangbo.im/posts/2019-09-30-add-supports-for-apt-in-maven/apt">APT</a> ，需要在 <a href="https://maven.apache.org/plugins/maven-compiler-plugin/">Apache Maven Compiler Plugin</a> 的配置部分添加 <a href="https://maven.apache.org/plugins/maven-compiler-plugin/compile-mojo.html#annotationProcessorPaths">annotationProcessorPaths</a> 的配置，如下：</p>
+<pre style="background-color:#282828;">
+<span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">plugin</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">org.apache.maven.plugins</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">maven-compiler-plugin</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">3.6.1</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">configuration</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">source</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">1.8</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">source</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">target</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">1.8</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">target</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">testSource</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">1.8</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">testSource</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">testTarget</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">1.8</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">testTarget</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">encoding</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">UTF-8</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">encoding</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">optimize</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">true</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">optimize</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="font-style:italic;color:#928374;">&lt;!-- Slightly faster builds, see https://issues.apache.org/jira/browse/MCOMPILER-209 --&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">useIncrementalCompilation</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">false</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">useIncrementalCompilation</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">annotationProcessorPaths</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">path</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">com.google.auto.value</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">auto-value</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">${auto-value.version}</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">path</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">annotationProcessorPaths</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">configuration</span><span style="color:#83a598;">&gt;
+</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">plugin</span><span style="color:#83a598;">&gt;
+</span></pre>
+<p>上述配置对于 <a href="https://maven.apache.org/">Maven</a> <code>3.5</code> 以上版本有效。</p>
+<p>对于低于 <code>3.5</code> 的版本，可以在 <code>dependencies</code> 块中添加依赖项，并设置 <code>optional</code> 属性。</p>
+<pre style="background-color:#282828;">
+<span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">org.inferred</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">freebuilder</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">${freebuilder_version}</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">optional</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">true</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">optional</span><span style="color:#83a598;">&gt;
+</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
+</span></pre>
+<p>如果是可执行的工程，也可以设置 <code>scope</code> 为 <code>provided</code> 。</p>
+<pre style="background-color:#282828;">
+<span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">org.inferred</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">freebuilder</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">${freebuilder_version}</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">scope</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">provided</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">scope</span><span style="color:#83a598;">&gt;
+</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
+</span></pre><p><a name="continue-reading"></a></p>
+<blockquote>
+<p>If specified, the compiler will detect annotation processors only in those classpath elements. If
+omitted, the default classpath is used to detect annotation processors.</p>
+</blockquote>
+<p>根据 <a href="https://maven.apache.org/plugins/maven-compiler-plugin/compile-mojo.html#annotationProcessorPaths">官方文档</a> 的说明，如果同时配置了 <code>annotationProcessorPaths</code> 和 <code>dependencies</code>，只有 <code>annotationProcessorPaths</code>
+中的注解处理器会被加载使用。</p>
+<hr />
+<p>以上。</p>
+
+        </div>
+        
+    
+</div></div>
+            
+    <div class="pagination">
+        <div class="pagination__buttons">
+            </div>
+    </div>
+<footer class="footer">
+                    <div class="footer__inner"><div class="copyright copyright--user"><span>© 2019 <a href="https://www.wangbo.im">wangbo&apos; blog</a> :: <a href="https://github.wangbo.im">Github</a> :: Powered by <a href="https://www.getzola.org/">Zola</a></span></div>
+    <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;assets&#x2F;js&#x2F;main.js"></script>
+</div>
+                    
+
+                </footer></div>
+    </body>
+</html>
