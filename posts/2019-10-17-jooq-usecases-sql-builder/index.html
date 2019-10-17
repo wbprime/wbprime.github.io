@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <title>JOOQ 的使用 - 生成 SQL 命令语句 - Elvis Wang</title>
+    
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="wangbo’s home &amp; blog"/>
+
+    <meta property="og:title" content="
+    wangbo’s blog -&nbsp;JOOQ 的使用 - 生成 SQL 命令语句" />
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-10-17-jooq-usecases-sql-builder&#x2F;"/>
+    <meta property="og:description" content="&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.jooq.org&#x2F;&quot; title=&quot;jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.&quot;&gt;j…"/>
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;red.css">
+<link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
+    <body>
+        <div class="container full">
+<header class="header">
+    <div class="header__inner">
+        <div class="header__logo">
+            <a href="&#x2F;">
+    <div class="logo">
+        WB Prime
+    </div>
+</a>
+        </div>
+        <div class="menu-trigger">menu</div>
+    </div>
+    
+    <nav class="menu">
+        <ul class="menu__inner menu__inner--desktop">
+            
+            
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+                    </li>
+                
+                    <li>
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+                    </li>
+                
+            </ul>
+
+        <ul class="menu__inner menu__inner--mobile">
+            
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
+        </li>
+        <li>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
+        </li>
+        </ul>
+    </nav>
+
+    </header>
+<div class="content"><div class="post">
+        <h1 class="post-title">
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-10-17-jooq-usecases-sql-builder&#x2F;">JOOQ 的使用 - 生成 SQL 命令语句</a>
+        </h1>
+        
+    <div class="post-meta">
+        <span class="post-date">2019.10.17
+                </span>
+
+        <span class="post-author"></span>
+
+        
+
+    
+    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;java&#x2F;">Java</a>} 
+
+            
+    ::
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;jdbc&#x2F;">jdbc</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;sql&#x2F;">sql</a>
+        
+    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;jooq&#x2F;">jooq</a>
+        
+    
+            
+        
+    </div>
+
+
+
+        
+
+        <div class="post-content">
+            <p><a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 是基于 JDBC 之上的一个抽象层，提供了多种多样的模型来与关系型数据库进行互操作；其使用与 <a href="https://mybatis.org/mybatis-3/">mybatis</a> 和 <a href="http://hibernate.org/orm/">Hibernate ORM</a> 不同的思路来实现 <a href="https://en.wikipedia.org/wiki/Object-relational_mapping">对象关系映射 ORM</a> 。</p>
+<p>本篇主要介绍基于 <a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 的 SQL 命令语句生成。</p>
+<p><a name="continue-reading"></a></p>
+<p>不同的关系型数据库提供方对 SQL 的支持程度不完全一致，形成了不同的 SQL 方言。不同的 SQL 方言在语法的细节、支持的数据类型等方面存在差别；想要手写可移植的 SQL 简直是难于上青天。</p>
+<p><a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 可以用来帮助构建 SQL 语句，忽略不同 SQL 方言的存在。</p>
+<p>以下所有的 SQL 生成用例都使用了 <a href="https://junit.org/junit5/">JUnit 5</a> 的参数化测试能力，参数化的数据为 6 种不同的关系型数据库方言。</p>
+<p>公共代码：</p>
+<pre style="background-color:#282828;">
+<span style="font-style:italic;color:#928374;">// junit 5 parameterized test data source
+</span><span style="color:#fa5c4b;">static </span><span style="color:#8ec07c;">Stream</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Arguments</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">dslContexts() </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">return </span><span style="color:#8ec07c;">Stream</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">of(
+</span><span style="color:#fdf4c1;">        </span><span style="color:#8ec07c;">Arguments</span><span style="color:#fdf4c1;">.of(</span><span style="color:#8ec07c;">SQLDialect</span><span style="color:#fdf4c1;">.DEFAULT),
+</span><span style="color:#fdf4c1;">        </span><span style="color:#8ec07c;">Arguments</span><span style="color:#fdf4c1;">.of(</span><span style="color:#8ec07c;">SQLDialect</span><span style="color:#fdf4c1;">.H2),
+</span><span style="color:#fdf4c1;">        </span><span style="color:#8ec07c;">Arguments</span><span style="color:#fdf4c1;">.of(</span><span style="color:#8ec07c;">SQLDialect</span><span style="color:#fdf4c1;">.HSQLDB),
+</span><span style="color:#fdf4c1;">        </span><span style="color:#8ec07c;">Arguments</span><span style="color:#fdf4c1;">.of(</span><span style="color:#8ec07c;">SQLDialect</span><span style="color:#fdf4c1;">.POSTGRES),
+</span><span style="color:#fdf4c1;">        </span><span style="color:#8ec07c;">Arguments</span><span style="color:#fdf4c1;">.of(</span><span style="color:#8ec07c;">SQLDialect</span><span style="color:#fdf4c1;">.MYSQL)
+</span><span style="color:#fdf4c1;">    </span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">}
+</span></pre><h1 id="create-table"><a class="zola-anchor" href="#create-table" aria-label="Anchor link for: create-table">🔗</a>
+create table</h1>
+<p>使用 <a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 来生成 <code>create table</code> 的 SQL：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">ParameterizedTest
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">MethodSource</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;dslContexts&quot;</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fdf4c1aa;">void </span><span style="color:#fdf4c1;">test_buildCreateTable(final </span><span style="color:#8ec07c;">SQLDialect</span><span style="color:#fdf4c1;"> dialect) </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">DSLContext</span><span style="color:#fdf4c1aa;"> dsl </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">DSL</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">using(dialect)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;"> sql </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> dsl
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">createTable(</span><span style="color:#b8bb26;">&quot;user&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">column(</span><span style="color:#b8bb26;">&quot;id&quot;</span><span style="color:#fdf4c1;">,
+</span><span style="color:#fdf4c1;">            </span><span style="color:#8ec07c;">DefaultDataType</span><span style="color:#fdf4c1;">.getDataType(dialect, </span><span style="color:#8ec07c;">Long</span><span style="color:#fdf4c1;">.class)
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">.identity(</span><span style="color:#d3869b;">true</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">.nullable(</span><span style="color:#d3869b;">false</span><span style="color:#fdf4c1;">))
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">column(</span><span style="color:#b8bb26;">&quot;name&quot;</span><span style="color:#fdf4c1;">,
+</span><span style="color:#fdf4c1;">            </span><span style="color:#8ec07c;">DefaultDataType</span><span style="color:#fdf4c1;">.getDataType(dialect, </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1;">.class)
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">.nullable(</span><span style="color:#d3869b;">false</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">.length(</span><span style="color:#d3869b;">100</span><span style="color:#fdf4c1;">))
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">column(</span><span style="color:#b8bb26;">&quot;created_at&quot;</span><span style="color:#fdf4c1;">,
+</span><span style="color:#fdf4c1;">            </span><span style="color:#8ec07c;">DefaultDataType</span><span style="color:#fdf4c1;">.getDataType(dialect, </span><span style="color:#8ec07c;">LocalDateTime</span><span style="color:#fdf4c1;">.class)
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">.nullable(</span><span style="color:#d3869b;">false</span><span style="color:#fdf4c1;">))
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">constraint(DSL.primaryKey(</span><span style="color:#b8bb26;">&quot;id&quot;</span><span style="color:#fdf4c1;">))
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">getSQL(</span><span style="color:#8ec07c;">ParamType</span><span style="color:#fdf4c1;">.INLINED)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(dialect.getName() </span><span style="color:#fe8019;">+ </span><span style="color:#b8bb26;">&quot; =&gt; &quot; </span><span style="color:#fe8019;">+</span><span style="color:#fdf4c1;"> sql)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">}
+</span></pre>
+<p>生成的 <code>create table</code> 语句简单对比如下：</p>
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/SQL:1999" title="SQL:1999">SQL:1999</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">create table</span><span style="color:#fdf4c1aa;"> &quot;</span><span style="color:#8ec07c;">user</span><span style="color:#fdf4c1aa;">&quot;(
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#b8bb26;">&quot;id&quot; </span><span style="color:#fa5c4b;">bigint not null</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#b8bb26;">&quot;name&quot; </span><span style="color:#fa5c4b;">varchar</span><span style="color:#fdf4c1aa;">(</span><span style="color:#d3869b;">100</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">not null</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#b8bb26;">&quot;created_at&quot; </span><span style="color:#fa5c4b;">timestamp not null</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">primary key</span><span style="color:#fdf4c1aa;"> (</span><span style="color:#b8bb26;">&quot;id&quot;</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fdf4c1aa;">)
+</span></pre></li>
+<li>
+<p><a href="http://www.h2database.com/html/main.html" title="H2 Database Engine">H2</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">create table</span><span style="color:#fdf4c1aa;"> &quot;</span><span style="color:#8ec07c;">user</span><span style="color:#fdf4c1aa;">&quot;(
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#b8bb26;">&quot;id&quot; </span><span style="color:#fa5c4b;">bigint not null</span><span style="color:#fdf4c1aa;"> auto_increment,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#b8bb26;">&quot;name&quot; </span><span style="color:#fa5c4b;">varchar</span><span style="color:#fdf4c1aa;">(</span><span style="color:#d3869b;">100</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">not null</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#b8bb26;">&quot;created_at&quot; </span><span style="color:#fa5c4b;">timestamp not null</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">primary key</span><span style="color:#fdf4c1aa;"> (</span><span style="color:#b8bb26;">&quot;id&quot;</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fdf4c1aa;">)
+</span></pre></li>
+<li>
+<p><a href="http://hsqldb.org" title="HSQLDB - 100% Java Database">HSQLDB</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">create table</span><span style="color:#fdf4c1aa;"> &quot;</span><span style="color:#8ec07c;">user</span><span style="color:#fdf4c1aa;">&quot;(
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#b8bb26;">&quot;id&quot; </span><span style="color:#fa5c4b;">bigint</span><span style="color:#fdf4c1aa;"> generated by </span><span style="color:#fa5c4b;">default as</span><span style="color:#fdf4c1aa;"> identity(start </span><span style="color:#fa5c4b;">with </span><span style="color:#d3869b;">1</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">not null</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#b8bb26;">&quot;name&quot; </span><span style="color:#fa5c4b;">varchar</span><span style="color:#fdf4c1aa;">(</span><span style="color:#d3869b;">100</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">not null</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#b8bb26;">&quot;created_at&quot; </span><span style="color:#fa5c4b;">timestamp not null</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">primary key</span><span style="color:#fdf4c1aa;"> (</span><span style="color:#b8bb26;">&quot;id&quot;</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fdf4c1aa;">)
+</span></pre></li>
+<li>
+<p><a href="http://www.mysql.com" title="The world's most popular open source database">MySQL</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">create table</span><span style="color:#fdf4c1aa;"> `</span><span style="color:#8ec07c;">user</span><span style="color:#fdf4c1aa;">`(
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#b8bb26;">`id` </span><span style="color:#fa5c4b;">bigint not null</span><span style="color:#fdf4c1aa;"> auto_increment,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#b8bb26;">`name` </span><span style="color:#fa5c4b;">varchar</span><span style="color:#fdf4c1aa;">(</span><span style="color:#d3869b;">100</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">not null</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#b8bb26;">`created_at` </span><span style="color:#fa5c4b;">timestamp not null</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">primary key</span><span style="color:#fdf4c1aa;"> (</span><span style="color:#b8bb26;">`id`</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fdf4c1aa;">)
+</span></pre></li>
+<li>
+<p><a href="https://www.postgresql.org" title="PostgreSQL: The World's Most Advanced Open Source Relational Database">Postgres</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">create table</span><span style="color:#fdf4c1aa;"> &quot;</span><span style="color:#8ec07c;">user</span><span style="color:#fdf4c1aa;">&quot;(
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#b8bb26;">&quot;id&quot;</span><span style="color:#fdf4c1aa;"> serial8 </span><span style="color:#fa5c4b;">not null</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#b8bb26;">&quot;name&quot; </span><span style="color:#fa5c4b;">varchar</span><span style="color:#fdf4c1aa;">(</span><span style="color:#d3869b;">100</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">not null</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#b8bb26;">&quot;created_at&quot; </span><span style="color:#fa5c4b;">timestamp not null</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">primary key</span><span style="color:#fdf4c1aa;"> (</span><span style="color:#b8bb26;">&quot;id&quot;</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fdf4c1aa;">)
+</span></pre></li>
+</ul>
+<h1 id="select"><a class="zola-anchor" href="#select" aria-label="Anchor link for: select">🔗</a>
+select</h1>
+<p>使用 <a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 来生成 <code>select</code> 的 SQL：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">ParameterizedTest
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">MethodSource</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;dslContexts&quot;</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fdf4c1aa;">void </span><span style="color:#fdf4c1;">test_buildSelect(final </span><span style="color:#8ec07c;">SQLDialect</span><span style="color:#fdf4c1;"> dialect) </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">DSLContext</span><span style="color:#fdf4c1aa;"> dsl </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">DSL</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">using(dialect)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;"> sql </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> dsl
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">select(DSL.field(</span><span style="color:#b8bb26;">&quot;u.id&quot;</span><span style="color:#fdf4c1;">), DSL.field(</span><span style="color:#b8bb26;">&quot;u.name&quot;</span><span style="color:#fdf4c1;">), DSL.field(</span><span style="color:#b8bb26;">&quot;b.book_name&quot;</span><span style="color:#fdf4c1;">))
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">from(DSL.table(</span><span style="color:#b8bb26;">&quot;user&quot;</span><span style="color:#fdf4c1;">).as(</span><span style="color:#b8bb26;">&quot;u&quot;</span><span style="color:#fdf4c1;">))
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">join(DSL.table(</span><span style="color:#b8bb26;">&quot;book&quot;</span><span style="color:#fdf4c1;">).as(</span><span style="color:#b8bb26;">&quot;b&quot;</span><span style="color:#fdf4c1;">))
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">on(DSL.field(</span><span style="color:#b8bb26;">&quot;u.id&quot;</span><span style="color:#fdf4c1;">).eq(DSL.field(</span><span style="color:#b8bb26;">&quot;b.author_id&quot;</span><span style="color:#fdf4c1;">)))
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">where(DSL.field(</span><span style="color:#b8bb26;">&quot;u.name&quot;</span><span style="color:#fdf4c1;">).eq(</span><span style="color:#b8bb26;">&quot;Elvis Wang&quot;</span><span style="color:#fdf4c1;">))
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">getSQL(</span><span style="color:#8ec07c;">ParamType</span><span style="color:#fdf4c1;">.INLINED)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(dialect.getName() </span><span style="color:#fe8019;">+ </span><span style="color:#b8bb26;">&quot; =&gt; &quot; </span><span style="color:#fe8019;">+</span><span style="color:#fdf4c1;"> sql)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">}
+</span></pre>
+<p>生成的 <code>select</code> 语句简单对比如下：</p>
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/SQL:1999" title="SQL:1999">SQL:1999</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">select </span><span style="color:#b8bb26;">u</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">id</span><span style="color:#fdf4c1aa;">, </span><span style="color:#b8bb26;">u</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">name</span><span style="color:#fdf4c1aa;">, </span><span style="color:#b8bb26;">b</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">book_name
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">from</span><span style="color:#fdf4c1aa;"> user </span><span style="color:#b8bb26;">&quot;u&quot;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">join</span><span style="color:#fdf4c1aa;"> book </span><span style="color:#b8bb26;">&quot;b&quot;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">on </span><span style="color:#b8bb26;">u</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">id </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">b</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">author_id
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">where </span><span style="color:#b8bb26;">u</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">name </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&#39;Elvis Wang&#39;
+</span></pre></li>
+<li>
+<p><a href="http://www.h2database.com/html/main.html" title="H2 Database Engine">H2</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">select </span><span style="color:#b8bb26;">u</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">id</span><span style="color:#fdf4c1aa;">, </span><span style="color:#b8bb26;">u</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">name</span><span style="color:#fdf4c1aa;">, </span><span style="color:#b8bb26;">b</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">book_name
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">from</span><span style="color:#fdf4c1aa;"> user </span><span style="color:#b8bb26;">&quot;u&quot;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">join</span><span style="color:#fdf4c1aa;"> book </span><span style="color:#b8bb26;">&quot;b&quot;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">on </span><span style="color:#b8bb26;">u</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">id </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">b</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">author_id
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">where </span><span style="color:#b8bb26;">u</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">name </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&#39;Elvis Wang&#39;
+</span></pre></li>
+<li>
+<p><a href="http://hsqldb.org" title="HSQLDB - 100% Java Database">HSQLDB</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">select </span><span style="color:#b8bb26;">u</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">id</span><span style="color:#fdf4c1aa;">, </span><span style="color:#b8bb26;">u</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">name</span><span style="color:#fdf4c1aa;">, </span><span style="color:#b8bb26;">b</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">book_name
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">from</span><span style="color:#fdf4c1aa;"> user </span><span style="color:#fa5c4b;">as </span><span style="color:#b8bb26;">&quot;u&quot;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">join</span><span style="color:#fdf4c1aa;"> book </span><span style="color:#fa5c4b;">as </span><span style="color:#b8bb26;">&quot;b&quot;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">on </span><span style="color:#b8bb26;">u</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">id </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">b</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">author_id
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">where </span><span style="color:#b8bb26;">u</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">name </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&#39;Elvis Wang&#39;
+</span></pre></li>
+<li>
+<p><a href="http://www.mysql.com" title="The world's most popular open source database">MySQL</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">select </span><span style="color:#b8bb26;">u</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">id</span><span style="color:#fdf4c1aa;">, </span><span style="color:#b8bb26;">u</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">name</span><span style="color:#fdf4c1aa;">, </span><span style="color:#b8bb26;">b</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">book_name
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">from</span><span style="color:#fdf4c1aa;"> user </span><span style="color:#fa5c4b;">as</span><span style="color:#fdf4c1aa;"> \</span><span style="color:#b8bb26;">`u\`
+</span><span style="color:#b8bb26;">    </span><span style="color:#b8bb26;">join book as \`b\`
+</span><span style="color:#b8bb26;">    </span><span style="color:#b8bb26;">on u.id = b.author_id
+</span><span style="color:#b8bb26;">    </span><span style="color:#b8bb26;">where u.name = &#39;Elvis Wang&#39;
+</span></pre></li>
+<li>
+<p><a href="https://www.postgresql.org" title="PostgreSQL: The World's Most Advanced Open Source Relational Database">Postgres</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">select </span><span style="color:#b8bb26;">u</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">id</span><span style="color:#fdf4c1aa;">, </span><span style="color:#b8bb26;">u</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">name</span><span style="color:#fdf4c1aa;">, </span><span style="color:#b8bb26;">b</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">book_name
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">from</span><span style="color:#fdf4c1aa;"> user </span><span style="color:#fa5c4b;">as </span><span style="color:#b8bb26;">&quot;u&quot;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">join</span><span style="color:#fdf4c1aa;"> book </span><span style="color:#fa5c4b;">as </span><span style="color:#b8bb26;">&quot;b&quot;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">on </span><span style="color:#b8bb26;">u</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">id </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">b</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">author_id
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">where </span><span style="color:#b8bb26;">u</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">name </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&#39;Elvis Wang&#39;
+</span></pre></li>
+</ul>
+<h1 id="insert"><a class="zola-anchor" href="#insert" aria-label="Anchor link for: insert">🔗</a>
+insert</h1>
+<p>使用 <a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 来生成 <code>insert</code> 的 SQL：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">ParameterizedTest
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">MethodSource</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;dslContexts&quot;</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fdf4c1aa;">void </span><span style="color:#fdf4c1;">test_buildInsert(final </span><span style="color:#8ec07c;">SQLDialect</span><span style="color:#fdf4c1;"> dialect) </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">DSLContext</span><span style="color:#fdf4c1aa;"> dsl </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">DSL</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">using(dialect)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;"> sql </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> dsl
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">insertInto(DSL.table(</span><span style="color:#b8bb26;">&quot;user&quot;</span><span style="color:#fdf4c1;">))
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">columns(DSL.field(</span><span style="color:#b8bb26;">&quot;name&quot;</span><span style="color:#fdf4c1;">), DSL.field(</span><span style="color:#b8bb26;">&quot;created_at&quot;</span><span style="color:#fdf4c1;">))
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">values(DSL.value(</span><span style="color:#b8bb26;">&quot;Elvis Wang&quot;</span><span style="color:#fdf4c1;">), DSL.value(</span><span style="color:#8ec07c;">LocalDateTime</span><span style="color:#fdf4c1;">.now()))
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">getSQL(</span><span style="color:#8ec07c;">ParamType</span><span style="color:#fdf4c1;">.INLINED)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(dialect.getName() </span><span style="color:#fe8019;">+ </span><span style="color:#b8bb26;">&quot; =&gt; &quot; </span><span style="color:#fe8019;">+</span><span style="color:#fdf4c1;"> sql)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">}
+</span></pre>
+<p>生成的 <code>insert</code> 语句简单对比如下：</p>
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/SQL:1999" title="SQL:1999">SQL:1999</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">insert into</span><span style="color:#fdf4c1aa;"> user (name, created_at)
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">values</span><span style="color:#fdf4c1aa;"> (
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#b8bb26;">&#39;Elvis Wang&#39;</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">timestamp </span><span style="color:#b8bb26;">&#39;2019-10-17 18:28:29.305&#39;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">)
+</span></pre></li>
+<li>
+<p><a href="http://www.h2database.com/html/main.html" title="H2 Database Engine">H2</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">insert into</span><span style="color:#fdf4c1aa;"> user (name, created_at)
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">values</span><span style="color:#fdf4c1aa;"> (
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#b8bb26;">&#39;Elvis Wang&#39;</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">timestamp </span><span style="color:#b8bb26;">&#39;2019-10-17 18:28:29.332&#39;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">)
+</span></pre></li>
+<li>
+<p><a href="http://hsqldb.org" title="HSQLDB - 100% Java Database">HSQLDB</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">insert into</span><span style="color:#fdf4c1aa;"> user (name, created_at)
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">values</span><span style="color:#fdf4c1aa;"> (
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#b8bb26;">&#39;Elvis Wang&#39;</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">timestamp </span><span style="color:#b8bb26;">&#39;2019-10-17 18:28:29.335&#39;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">)
+</span></pre></li>
+<li>
+<p><a href="http://www.mysql.com" title="The world's most popular open source database">MySQL</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">insert into</span><span style="color:#fdf4c1aa;"> user (name, created_at)
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">values</span><span style="color:#fdf4c1aa;"> (
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#b8bb26;">&#39;Elvis Wang&#39;</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">{ts </span><span style="color:#b8bb26;">&#39;2019-10-17 18:28:29.338&#39;</span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">)
+</span></pre></li>
+<li>
+<p><a href="https://www.postgresql.org" title="PostgreSQL: The World's Most Advanced Open Source Relational Database">Postgres</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">insert into</span><span style="color:#fdf4c1aa;"> user (name, created_at)
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">values</span><span style="color:#fdf4c1aa;"> (
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#b8bb26;">&#39;Elvis Wang&#39;</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">timestamp </span><span style="color:#b8bb26;">&#39;2019-10-17 18:28:29.341&#39;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">)
+</span></pre></li>
+</ul>
+<h1 id="update"><a class="zola-anchor" href="#update" aria-label="Anchor link for: update">🔗</a>
+update</h1>
+<p>使用 <a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 来生成 <code>update</code> 的 SQL：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">ParameterizedTest
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">MethodSource</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;dslContexts&quot;</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fdf4c1aa;">void </span><span style="color:#fdf4c1;">test_buildUpdate(final </span><span style="color:#8ec07c;">SQLDialect</span><span style="color:#fdf4c1;"> dialect) </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">DSLContext</span><span style="color:#fdf4c1aa;"> dsl </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">DSL</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">using(dialect)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;"> sql </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> dsl
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">update(DSL.table(</span><span style="color:#b8bb26;">&quot;user&quot;</span><span style="color:#fdf4c1;">))
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">set(DSL.field(</span><span style="color:#b8bb26;">&quot;name&quot;</span><span style="color:#fdf4c1;">), </span><span style="color:#b8bb26;">&quot;Elvis Wang&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">set(DSL.field(</span><span style="color:#b8bb26;">&quot;created_at&quot;</span><span style="color:#fdf4c1;">), </span><span style="color:#8ec07c;">LocalDateTime</span><span style="color:#fdf4c1;">.now())
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">where(DSL.field(</span><span style="color:#b8bb26;">&quot;id&quot;</span><span style="color:#fdf4c1;">).eq(</span><span style="color:#d3869b;">1993</span><span style="color:#fa5c4b;">L</span><span style="color:#fdf4c1;">))
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">getSQL(</span><span style="color:#8ec07c;">ParamType</span><span style="color:#fdf4c1;">.INLINED)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(dialect.getName() </span><span style="color:#fe8019;">+ </span><span style="color:#b8bb26;">&quot; =&gt; &quot; </span><span style="color:#fe8019;">+</span><span style="color:#fdf4c1;"> sql)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">}
+</span></pre>
+<p>生成的 <code>update</code> 语句简单对比如下：</p>
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/SQL:1999" title="SQL:1999">SQL:1999</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">update</span><span style="color:#fdf4c1aa;"> user
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">set</span><span style="color:#fdf4c1aa;"> name </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&#39;Elvis Wang&#39;</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">created_at </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">timestamp </span><span style="color:#b8bb26;">&#39;2019-10-17 19:46:58.42&#39;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">where</span><span style="color:#fdf4c1aa;"> id </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">1993
+</span></pre></li>
+<li>
+<p><a href="http://www.h2database.com/html/main.html" title="H2 Database Engine">H2</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">update</span><span style="color:#fdf4c1aa;"> user
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">set</span><span style="color:#fdf4c1aa;"> name </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&#39;Elvis Wang&#39;</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">created_at </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">timestamp </span><span style="color:#b8bb26;">&#39;2019-10-17 19:46:58.456&#39;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">where</span><span style="color:#fdf4c1aa;"> id </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">1993
+</span></pre></li>
+<li>
+<p><a href="http://hsqldb.org" title="HSQLDB - 100% Java Database">HSQLDB</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">update</span><span style="color:#fdf4c1aa;"> user
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">set</span><span style="color:#fdf4c1aa;"> name </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&#39;Elvis Wang&#39;</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">created_at </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">timestamp </span><span style="color:#b8bb26;">&#39;2019-10-17 19:46:58.46&#39;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">where</span><span style="color:#fdf4c1aa;"> id </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">1993
+</span></pre></li>
+<li>
+<p><a href="http://www.mysql.com" title="The world's most popular open source database">MySQL</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">update</span><span style="color:#fdf4c1aa;"> user
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">set</span><span style="color:#fdf4c1aa;"> name </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&#39;Elvis Wang&#39;</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">created_at </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> {ts </span><span style="color:#b8bb26;">&#39;2019-10-17 19:46:58.462&#39;</span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">where</span><span style="color:#fdf4c1aa;"> id </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">1993
+</span></pre></li>
+<li>
+<p><a href="https://www.postgresql.org" title="PostgreSQL: The World's Most Advanced Open Source Relational Database">Postgres</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">update</span><span style="color:#fdf4c1aa;"> user
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">set</span><span style="color:#fdf4c1aa;"> name </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&#39;Elvis Wang&#39;</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">created_at </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">timestamp </span><span style="color:#b8bb26;">&#39;2019-10-17 19:46:58.465&#39;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">where</span><span style="color:#fdf4c1aa;"> id </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">1993
+</span></pre></li>
+</ul>
+<h1 id="delete"><a class="zola-anchor" href="#delete" aria-label="Anchor link for: delete">🔗</a>
+delete</h1>
+<p>使用 <a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 来生成 <code>delete</code> 的 SQL：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">ParameterizedTest
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">MethodSource</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;dslContexts&quot;</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fdf4c1aa;">void </span><span style="color:#fdf4c1;">test_buildDelete(final </span><span style="color:#8ec07c;">SQLDialect</span><span style="color:#fdf4c1;"> dialect) </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">DSLContext</span><span style="color:#fdf4c1aa;"> dsl </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">DSL</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">using(dialect)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;"> sql </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> dsl
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">delete(DSL.table(</span><span style="color:#b8bb26;">&quot;user&quot;</span><span style="color:#fdf4c1;">))
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">where(DSL.field(</span><span style="color:#b8bb26;">&quot;id&quot;</span><span style="color:#fdf4c1;">).eq(</span><span style="color:#d3869b;">1993</span><span style="color:#fa5c4b;">L</span><span style="color:#fdf4c1;">))
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">getSQL(</span><span style="color:#8ec07c;">ParamType</span><span style="color:#fdf4c1;">.INLINED)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(dialect.getName() </span><span style="color:#fe8019;">+ </span><span style="color:#b8bb26;">&quot; =&gt; &quot; </span><span style="color:#fe8019;">+</span><span style="color:#fdf4c1;"> sql)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">}
+</span></pre>
+<p>生成的 <code>delete</code> 语句简单对比如下：</p>
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/SQL:1999" title="SQL:1999">SQL:1999</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">delete from</span><span style="color:#fdf4c1aa;"> user </span><span style="color:#fa5c4b;">where</span><span style="color:#fdf4c1aa;"> id </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">1993
+</span></pre></li>
+<li>
+<p><a href="http://www.h2database.com/html/main.html" title="H2 Database Engine">H2</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">delete from</span><span style="color:#fdf4c1aa;"> user </span><span style="color:#fa5c4b;">where</span><span style="color:#fdf4c1aa;"> id </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">1993
+</span></pre></li>
+<li>
+<p><a href="http://hsqldb.org" title="HSQLDB - 100% Java Database">HSQLDB</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">delete from</span><span style="color:#fdf4c1aa;"> user </span><span style="color:#fa5c4b;">where</span><span style="color:#fdf4c1aa;"> id </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">1993
+</span></pre></li>
+<li>
+<p><a href="http://www.mysql.com" title="The world's most popular open source database">MySQL</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">delete from</span><span style="color:#fdf4c1aa;"> user </span><span style="color:#fa5c4b;">where</span><span style="color:#fdf4c1aa;"> id </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">1993
+</span></pre></li>
+<li>
+<p><a href="https://www.postgresql.org" title="PostgreSQL: The World's Most Advanced Open Source Relational Database">Postgres</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">delete from</span><span style="color:#fdf4c1aa;"> user </span><span style="color:#fa5c4b;">where</span><span style="color:#fdf4c1aa;"> id </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">1993
+</span></pre></li>
+</ul>
+<hr />
+<p>完整的示例代码可以参见 <a href="https://github.com/wbprime/java-mods/tree/master/jooq-usecases">jOOQ Usecases</a> 。</p>
+<p>想了解更多的 <a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 用法，可以阅读 <a href="https://www.jooq.org/learn/" title="jOOQ Documentation">官方文档</a> 。</p>
+<hr />
+<p>以上。</p>
+
+        </div>
+        
+    
+</div></div>
+            
+    <div class="pagination">
+        <div class="pagination__buttons">
+            </div>
+    </div>
+<footer class="footer">
+                    <div class="footer__inner"><div class="copyright copyright--user"><span>© 2019 <a href="https://www.wangbo.im">wangbo&apos; blog</a> :: <a href="https://github.wangbo.im">Github</a> :: Powered by <a href="https://www.getzola.org/">Zola</a></span></div>
+    <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;assets&#x2F;js&#x2F;main.js"></script>
+</div>
+                    
+
+                </footer></div>
+    </body>
+</html>
