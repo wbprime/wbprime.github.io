@@ -1,105 +1,129 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
-    <title>一次由于线上 MySQL 并发抢占更新冲突引发的 BUG - Elvis Wang</title>
-    
-    
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <meta name="description" content="wangbo’s home &amp; blog"/>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
-    <meta property="og:title" content="
-    wangbo’s blog -&nbsp;一次由于线上 MySQL 并发抢占更新冲突引发的 BUG" />
-    <meta property="og:type" content="website"/>
-    <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-08-31-slow-mysql-query-on-too-many-cas-updating-failure&#x2F;"/>
-    <meta property="og:description" content="&lt;p&gt;前几天在处理线上问题的时候，发现了一个由于多客户端并发使用 CAS 去更新相同记录而导致的锁冲突，引发了数据库管理系统的慢查询累积报警。慢查询导致连接数增加，并引起插入和更新操作被堵塞，引起少量的业务堆积。&lt;&#x2F;p&gt;
-&lt;p&gt;一图胜千言。&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#…"/>
-    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
-    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;red.css">
-<link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>wangbo’s blog - 一次由于线上 MySQL 并发抢占更新冲突引发的 BUG</title>
+
+      
+
+      
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
+          
+      
+
+      
+          <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
+          
+      
+
+      
+      
+    </head>
+
     <body>
-        <div class="container full">
-<header class="header">
-    <div class="header__inner">
-        <div class="header__logo">
-            <a href="&#x2F;">
-    <div class="logo">
-        WB Prime
-    </div>
-</a>
-        </div>
-        <div class="menu-trigger">menu</div>
-    </div>
+        <div class="container">
+
+            <div id="mobile-navbar" class="mobile-navbar">
+              <div class="mobile-header-logo">
+                <a href="/" class="logo">WB Prime</a>
+              </div>
+              <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+
+            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
+              <ul class="mobile-menu-list">
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im&#x2F;categories">
+                            Categories
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im&#x2F;tags">
+                            Tags
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im&#x2F;about">
+                            About
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https:&#x2F;&#x2F;github.wangbo.im">
+                            Github
+                        </a>
+                    </li>
+                
+              </ul>
+            </nav>
+
+            <header id="header">
+                <div class="logo"><a href="https:&#x2F;&#x2F;www.wangbo.im">WB Prime</a></div>
+                <nav class="menu">
+                    <ul>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im&#x2F;categories">
+                                    Categories
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im&#x2F;tags">
+                                    Tags
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im&#x2F;about">
+                                    About
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https:&#x2F;&#x2F;github.wangbo.im">
+                                    Github
+                                </a>
+                            </li>
+                        
+                    </ul>
+                </nav>
+            </header>
+
+            <main>
+                <div class="content" id="mobile-panel">
+                    
+
+
+
+<article class="post">
     
-    <nav class="menu">
-        <ul class="menu__inner menu__inner--desktop">
-            
-            
-                    <li>
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
-                    </li>
-                
-                    <li>
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
-                    </li>
-                
-                    <li>
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
-                    </li>
-                
-            </ul>
-
-        <ul class="menu__inner menu__inner--mobile">
-            
-        <li>
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
-        </li>
-        <li>
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
-        </li>
-        <li>
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
-        </li>
-        </ul>
-    </nav>
-
-    </header>
-<div class="content"><div class="post">
-        <h1 class="post-title">
+    <header class="post__header">
+        <h1 class="post__title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-08-31-slow-mysql-query-on-too-many-cas-updating-failure&#x2F;">一次由于线上 MySQL 并发抢占更新冲突引发的 BUG</a>
         </h1>
-        
-    <div class="post-meta">
-        <span class="post-date">2019.08.31
-                </span>
-
-        <span class="post-author"></span>
-
-        
-
-    
-    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;practise&#x2F;">Practise</a>} 
-
+        <div class="post__meta">
+            <span class="post__time">2019-08-31</span>
             
-    ::
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;mysql&#x2F;">mysql</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;cas&#x2F;">cas</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;lock&#x2F;">lock</a>
-        
-    
-            
-        
-    </div>
+        </div>
+    </header>
 
-
-
-        
-
-        <div class="post-content">
-            <p>前几天在处理线上问题的时候，发现了一个由于多客户端并发使用 CAS 去更新相同记录而导致的锁冲突，引发了数据库管理系统的慢查询累积报警。慢查询导致连接数增加，并引起插入和更新操作被堵塞，引起少量的业务堆积。</p>
+    <div class="post-content">
+      <p>前几天在处理线上问题的时候，发现了一个由于多客户端并发使用 CAS 去更新相同记录而导致的锁冲突，引发了数据库管理系统的慢查询累积报警。慢查询导致连接数增加，并引起插入和更新操作被堵塞，引起少量的业务堆积。</p>
 <p>一图胜千言。</p>
 <p><img src="https://www.wangbo.im/posts/2019-08-31-slow-mysql-query-on-too-many-cas-updating-failure/mysql.all.png" alt="mysql_stats.all" /></p>
 <p>虽然定位并解决了问题，但还是需要事后总结一下，以资后鉴。</p>
@@ -187,21 +211,56 @@ AtomicLong</h2>
 <hr />
 <p>以上。</p>
 
-        </div>
-        
-    
-</div></div>
-            
-    <div class="pagination">
-        <div class="pagination__buttons">
-            </div>
     </div>
-<footer class="footer">
-                    <div class="footer__inner"><div class="copyright copyright--user"><span>© 2019 <a href="https://www.wangbo.im">wangbo&apos; blog</a> :: <a href="https://github.wangbo.im">Github</a> :: Powered by <a href="https://www.getzola.org/">Zola</a></span></div>
-    <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;assets&#x2F;js&#x2F;main.js"></script>
-</div>
-                    
 
-                </footer></div>
+    
+    
+
+    <div class="post-footer">
+        
+            
+                <div class="post-tags">
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;mysql&#x2F;">#mysql</a>
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;cas&#x2F;">#cas</a>
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;lock&#x2F;">#lock</a>
+                    
+                </div>
+            
+            
+                <div class="post-nav">
+                    
+                        <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-08-28-intro-to-spring-cloud-gateway-slide&#x2F;">‹ Intro to Spring Cloud Gateway</a>
+                    
+                    
+                        <a class="next" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-09-ffmpeg-note-record-xorg-video&#x2F;">Record video from Xorg using FFmpeg ›</a>
+                    
+                    
+                    
+                </div>
+            
+
+        
+
+    </div>
+
+    
+    
+</article>
+
+
+                </div>
+            </main>
+
+            
+            
+        </div>
+
+      
+          <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
+      
     </body>
+
 </html>

@@ -330,6 +330,13 @@
         </url>
     
         <url>
+            <loc>https://www.wangbo.im/posts/2019-10-21-jooq-usecases-code-generating/</loc>
+            
+                <lastmod>2019-10-21T11:04:07+08:00</lastmod>
+            
+        </url>
+    
+        <url>
             <loc>https://www.wangbo.im/posts/acl-note/</loc>
             
                 <lastmod>2018-02-05T17:46:28+08:00</lastmod>
@@ -783,60 +790,6 @@
             <loc>https://www.wangbo.im/posts/</loc>
         </url>
     
-    
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/causerie/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/java/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/learning-java-concurrency/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/mayday/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/nginx/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/notes/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/practise/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/spring-mvc-testing/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/spring/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/streaming/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/utils/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/vertx/</loc>
-        </url>
-        
     
         
         <url>
@@ -1305,6 +1258,60 @@
         
         <url>
             <loc>https://www.wangbo.im/tags/youtube/</loc>
+        </url>
+        
+    
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/causerie/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/java/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/learning-java-concurrency/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/mayday/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/nginx/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/notes/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/practise/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/spring-mvc-testing/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/spring/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/streaming/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/utils/</loc>
+        </url>
+        
+        <url>
+            <loc>https://www.wangbo.im/categories/vertx/</loc>
         </url>
         
     

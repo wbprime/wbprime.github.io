@@ -1,99 +1,129 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
-    <title>Tomcat Note - Elvis Wang</title>
-    
-    
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <meta name="description" content="wangbo’s home &amp; blog"/>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
-    <meta property="og:title" content="
-    wangbo’s blog -&nbsp;Tomcat Note" />
-    <meta property="og:type" content="website"/>
-    <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;tomcat-note&#x2F;"/>
-    <meta property="og:description" content="Note of apache tomcat architecture"/>
-    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
-    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;red.css">
-<link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>wangbo’s blog - Tomcat Note</title>
+
+      
+
+      
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
+          
+      
+
+      
+          <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
+          
+      
+
+      
+      
+    </head>
+
     <body>
-        <div class="container full">
-<header class="header">
-    <div class="header__inner">
-        <div class="header__logo">
-            <a href="&#x2F;">
-    <div class="logo">
-        WB Prime
-    </div>
-</a>
-        </div>
-        <div class="menu-trigger">menu</div>
-    </div>
+        <div class="container">
+
+            <div id="mobile-navbar" class="mobile-navbar">
+              <div class="mobile-header-logo">
+                <a href="/" class="logo">WB Prime</a>
+              </div>
+              <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+
+            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
+              <ul class="mobile-menu-list">
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im&#x2F;categories">
+                            Categories
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im&#x2F;tags">
+                            Tags
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im&#x2F;about">
+                            About
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https:&#x2F;&#x2F;github.wangbo.im">
+                            Github
+                        </a>
+                    </li>
+                
+              </ul>
+            </nav>
+
+            <header id="header">
+                <div class="logo"><a href="https:&#x2F;&#x2F;www.wangbo.im">WB Prime</a></div>
+                <nav class="menu">
+                    <ul>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im&#x2F;categories">
+                                    Categories
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im&#x2F;tags">
+                                    Tags
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im&#x2F;about">
+                                    About
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https:&#x2F;&#x2F;github.wangbo.im">
+                                    Github
+                                </a>
+                            </li>
+                        
+                    </ul>
+                </nav>
+            </header>
+
+            <main>
+                <div class="content" id="mobile-panel">
+                    
+
+
+
+<article class="post">
     
-    <nav class="menu">
-        <ul class="menu__inner menu__inner--desktop">
-            
-            
-                    <li>
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
-                    </li>
-                
-                    <li>
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
-                    </li>
-                
-                    <li>
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
-                    </li>
-                
-            </ul>
-
-        <ul class="menu__inner menu__inner--mobile">
-            
-        <li>
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
-        </li>
-        <li>
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
-        </li>
-        <li>
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
-        </li>
-        </ul>
-    </nav>
-
-    </header>
-<div class="content"><div class="post">
-        <h1 class="post-title">
+    <header class="post__header">
+        <h1 class="post__title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;tomcat-note&#x2F;">Tomcat Note</a>
         </h1>
-        
-    <div class="post-meta">
-        <span class="post-date">2018.02.06
-                </span>
-
-        <span class="post-author"></span>
-
-        
-
-    
-    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;notes&#x2F;">Notes</a>} 
-
+        <div class="post__meta">
+            <span class="post__time">2018-02-06</span>
             
-    ::
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;tomcat&#x2F;">tomcat</a>
-        
-    
-            
-        
-    </div>
+        </div>
+    </header>
 
-
-
-        
-
-        <div class="post-content">
-            <p>Notes of
+    <div class="post-content">
+      <p>Notes of
 <a href="https://www.ibm.com/developerworks/cn/java/j-lo-tomcat1/index.html">Tomcat 系统架构与设计模式，第 1
 部分</a> and
 <a href="https://www.ibm.com/developerworks/cn/java/j-lo-tomcat2/">Tomcat 系统架构与设计模式，第 2
@@ -226,21 +256,52 @@ Pipeline and Valve</h2>
 <li><code>org.apache.catalina.core.StandardWrapperValve</code></li>
 </ul>
 
-        </div>
-        
-    
-</div></div>
-            
-    <div class="pagination">
-        <div class="pagination__buttons">
-            </div>
     </div>
-<footer class="footer">
-                    <div class="footer__inner"><div class="copyright copyright--user"><span>© 2019 <a href="https://www.wangbo.im">wangbo&apos; blog</a> :: <a href="https://github.wangbo.im">Github</a> :: Powered by <a href="https://www.getzola.org/">Zola</a></span></div>
-    <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;assets&#x2F;js&#x2F;main.js"></script>
-</div>
-                    
 
-                </footer></div>
+    
+    
+
+    <div class="post-footer">
+        
+            
+                <div class="post-tags">
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;tomcat&#x2F;">#tomcat</a>
+                    
+                </div>
+            
+            
+                <div class="post-nav">
+                    
+                        <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2018-02-06-thrift-note&#x2F;">‹ Thrift Note</a>
+                    
+                    
+                        <a class="next" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;nginx-note-modules-design&#x2F;">Nginx Note - Modules Design ›</a>
+                    
+                    
+                    
+                </div>
+            
+
+        
+
+    </div>
+
+    
+    
+</article>
+
+
+                </div>
+            </main>
+
+            
+            
+        </div>
+
+      
+          <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
+      
     </body>
+
 </html>

@@ -1,765 +1,622 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
-    <head><title>wangbo’s blog</title>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <meta name="description" content="wangbo’s home &amp; blog"/>
+    <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
-    <meta property="og:title" content="
-    wangbo’s blog -&nbsp;wangbo’s home &amp; blog" />
-    <meta property="og:type" content="website"/>
-    <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;"/>
-    <meta property="og:description" content="wangbo’s home &amp; blog"/>
-    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
-    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;red.css">
-<link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>wangbo’s blog</title>
+
+      
+
+      
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
+          
+      
+
+      
+          <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
+          
+      
+
+      
+      
+    </head>
+
     <body>
-        <div class="container full">
-<header class="header">
-    <div class="header__inner">
-        <div class="header__logo">
-            <a href="&#x2F;">
-    <div class="logo">
-        WB Prime
-    </div>
-</a>
+        <div class="container">
+
+            <div id="mobile-navbar" class="mobile-navbar">
+              <div class="mobile-header-logo">
+                <a href="/" class="logo">WB Prime</a>
+              </div>
+              <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+
+            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
+              <ul class="mobile-menu-list">
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im&#x2F;categories">
+                            Categories
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im&#x2F;tags">
+                            Tags
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im&#x2F;about">
+                            About
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https:&#x2F;&#x2F;github.wangbo.im">
+                            Github
+                        </a>
+                    </li>
+                
+              </ul>
+            </nav>
+
+            <header id="header">
+                <div class="logo"><a href="https:&#x2F;&#x2F;www.wangbo.im">WB Prime</a></div>
+                <nav class="menu">
+                    <ul>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im&#x2F;categories">
+                                    Categories
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im&#x2F;tags">
+                                    Tags
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im&#x2F;about">
+                                    About
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https:&#x2F;&#x2F;github.wangbo.im">
+                                    Github
+                                </a>
+                            </li>
+                        
+                    </ul>
+                </nav>
+            </header>
+
+            <main>
+                <div class="content" id="mobile-panel">
+                    
+                        <div class="posts">
+                            
+                                <article class="post">
+                                    
+    <header class="post__header">
+        <h1 class="post__title">
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-10-21-jooq-usecases-code-generating&#x2F;">JOOQ 的使用 - 代码生成配置 (PostgreSQL &amp; DDL)</a>
+        </h1>
+        <div class="post__meta">
+            <span class="post__time">2019-10-21</span>
+            
         </div>
-        <div class="menu-trigger">menu</div>
-    </div>
-    
-    <nav class="menu">
-        <ul class="menu__inner menu__inner--desktop">
-            
-            
-                    <li>
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
-                    </li>
-                
-                    <li>
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
-                    </li>
-                
-                    <li>
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
-                    </li>
-                
-            </ul>
-
-        <ul class="menu__inner menu__inner--mobile">
-            
-        <li>
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
-        </li>
-        <li>
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
-        </li>
-        <li>
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
-        </li>
-        </ul>
-    </nav>
-
     </header>
-<div class="content">
-<div class="posts"><div class="post on-list">
-        <h1 class="post-title">
+
+                                    <div class="post__summary">
+                                        <p><a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 是基于 JDBC 之上的一个抽象层，提供了多种多样的模型来与关系型数据库进行互操作；其使用与 <a href="https://mybatis.org/mybatis-3/">mybatis</a> 和 <a href="http://hibernate.org/orm/">Hibernate ORM</a> 不同的思路来实现 <a href="https://en.wikipedia.org/wiki/Object-relational_mapping">对象关系映射 ORM</a> 。</p>
+<p><a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 的一个最主要的特性就是基于代码生成的类型安全 SQL。其主要是从已有的数据库配置信息中收集
+到足够的表结构、字段结构和索引等信息，生成对应的 Java 类型；业务使用生成的 Java 类型来进行 SQL 操作
+，可以得到足够的类型安全保证。同时，由于代码生成避免了基于反射的对象关系映射，在调试时会有更好的表现
+。</p>
+<p>截止到版本 <code>3.12.1</code>, <a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 支持从以下数据库配置源生成代码：</p>
+<ol>
+<li>关系数据库实例，包括(注：免费版本的 jOOQ 可能不支持特定的数据库提供商的产品)：
+<ul>
+<li>Aurora MySQL Edition</li>
+<li>Aurora PostgreSQL Edition</li>
+<li>Azure SQL Data Warehouse</li>
+<li>Azure SQL Database</li>
+<li>CUBRID</li>
+<li>DB2 LUW</li>
+<li>Derby</li>
+<li>Firebird</li>
+<li>H2</li>
+<li>HANA</li>
+<li>HSQLDB</li>
+<li>Informix</li>
+<li>Ingres</li>
+<li>MariaDB</li>
+<li>Microsoft Access</li>
+<li>MySQL</li>
+<li>Oracle</li>
+<li>PostgreSQL</li>
+<li>Redshift</li>
+<li>SQL Server</li>
+<li>SQLite</li>
+<li>Sybase Adaptive Server Enterprise</li>
+<li>Sybase SQL Anywhere</li>
+<li>Teradata</li>
+<li>Vertica</li>
+</ul>
+</li>
+<li><a href="https://en.wikipedia.org/wiki/Java_Persistence_API">Java Persistence API (JPA)</a> 相关的实体类型（带注解）</li>
+<li>符合约定条件的描述表结构信息等的 XML 文件</li>
+<li>符合标准的用于创建表结构等的 SQL DDL 语句文件</li>
+</ol>
+<p>本篇主要介绍基于 <a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 的数据库实例和 SQL DDL 文件驱动的代码生成实践。</p>
+
+                                    </div>
+                                    <div class="read-more">
+                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-10-21-jooq-usecases-code-generating&#x2F;">Read more...</a>
+                                    </div>
+                                </article>
+                            
+                                <article class="post">
+                                    
+    <header class="post__header">
+        <h1 class="post__title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-10-17-jooq-usecases-sql-executor&#x2F;">JOOQ 的使用 - 执行 SQL 命令语句</a>
         </h1>
-        
-        
-        
-    <div class="post-meta">
-        <span class="post-date">2019.10.17
-                </span>
-
-        <span class="post-author"></span>
-
-        
-
-    
-    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;java&#x2F;">Java</a>} 
-
+        <div class="post__meta">
+            <span class="post__time">2019-10-17</span>
             
-    ::
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;jdbc&#x2F;">jdbc</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;sql&#x2F;">sql</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;jooq&#x2F;">jooq</a>
-        
-    
-            
-        
-    </div>
-
-        
-        
-        
-        
-
-        <div class="post-content">
-            jOOQ 是基于 JDBC 之上的一个抽象层，提供了多种多样的模型来与关系型数据库进行互操作；其使用与 mybatis 和 Hibernate ORM 不同的思路来实现对象关系映射(ORM) 。本篇主要介绍基于 jOOQ 的 SQL 命令语句执行。
-            
-            </div>
-        <div>
-            <a class="read-more button" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-10-17-jooq-usecases-sql-executor&#x2F;">More →</a>
         </div>
-        </div>
-    <div class="post on-list">
-        <h1 class="post-title">
+    </header>
+
+                                    <div class="post__summary">
+                                        <p><a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 是基于 JDBC 之上的一个抽象层，提供了多种多样的模型来与关系型数据库进行互操作；其使用与 <a href="https://mybatis.org/mybatis-3/">mybatis</a> 和 <a href="http://hibernate.org/orm/">Hibernate ORM</a> 不同的思路来实现 <a href="https://en.wikipedia.org/wiki/Object-relational_mapping">对象关系映射 ORM</a> 。</p>
+<p>本篇主要介绍基于 <a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 的 SQL 命令语句执行。</p>
+
+                                    </div>
+                                    <div class="read-more">
+                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-10-17-jooq-usecases-sql-executor&#x2F;">Read more...</a>
+                                    </div>
+                                </article>
+                            
+                                <article class="post">
+                                    
+    <header class="post__header">
+        <h1 class="post__title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-10-17-jooq-usecases-sql-builder&#x2F;">JOOQ 的使用 - 生成 SQL 命令语句</a>
         </h1>
-        
-        
-        
-    <div class="post-meta">
-        <span class="post-date">2019.10.17
-                </span>
-
-        <span class="post-author"></span>
-
-        
-
-    
-    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;java&#x2F;">Java</a>} 
-
+        <div class="post__meta">
+            <span class="post__time">2019-10-17</span>
             
-    ::
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;jdbc&#x2F;">jdbc</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;sql&#x2F;">sql</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;jooq&#x2F;">jooq</a>
-        
-    
-            
-        
-    </div>
-
-        
-        
-        
-        
-
-        <div class="post-content">
-            jOOQ 是基于 JDBC 之上的一个抽象层，提供了多种多样的模型来与关系型数据库进行互操作；其使用与 mybatis 和 Hibernate ORM 不同的思路来实现对象关系映射(ORM) 。本篇主要介绍基于 jOOQ 的 SQL 命令语句生成。
-            
-            </div>
-        <div>
-            <a class="read-more button" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-10-17-jooq-usecases-sql-builder&#x2F;">More →</a>
         </div>
-        </div>
-    <div class="post on-list">
-        <h1 class="post-title">
+    </header>
+
+                                    <div class="post__summary">
+                                        <p><a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 是基于 JDBC 之上的一个抽象层，提供了多种多样的模型来与关系型数据库进行互操作；其使用与 <a href="https://mybatis.org/mybatis-3/">mybatis</a> 和 <a href="http://hibernate.org/orm/">Hibernate ORM</a> 不同的思路来实现 <a href="https://en.wikipedia.org/wiki/Object-relational_mapping">对象关系映射 ORM</a> 。</p>
+<p>本篇主要介绍基于 <a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 的 SQL 命令语句生成。</p>
+
+                                    </div>
+                                    <div class="read-more">
+                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-10-17-jooq-usecases-sql-builder&#x2F;">Read more...</a>
+                                    </div>
+                                </article>
+                            
+                                <article class="post">
+                                    
+    <header class="post__header">
+        <h1 class="post__title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-10-16-mapstruct-usecases&#x2F;">Mapper Classes Generated by MapStruct</a>
         </h1>
-        
-        
-        
-    <div class="post-meta">
-        <span class="post-date">2019.10.16
-                </span>
-
-        <span class="post-author"></span>
-
-        
-
-    
-    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;java&#x2F;">Java</a>} 
-
+        <div class="post__meta">
+            <span class="post__time">2019-10-16</span>
             
-    ::
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;java&#x2F;">java</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;apt&#x2F;">apt</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;mapstruct&#x2F;">mapstruct</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;autovalue&#x2F;">autovalue</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;freebuilder&#x2F;">freebuilder</a>
-        
-    
-            
-        
-    </div>
-
-        
-        
-        
-        
-
-        <div class="post-content">
-            对象实体转换操作在分层应用中很常见，比如数据库层的对象实体和表现层的实体很可能具有不同的属性集，需要在互操作时进行属性的映射（或拷贝）。 MapStruct 是一个辅助进行 Java 实体类之间相互转换的类库，与其他具有相似功能的工具库之间的最大区别在于其使用了 Java 注解处理器 APT 技术而不是常见的反射来实现对象实体间属性的映射。
-            
-            </div>
-        <div>
-            <a class="read-more button" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-10-16-mapstruct-usecases&#x2F;">More →</a>
         </div>
-        </div>
-    <div class="post on-list">
-        <h1 class="post-title">
+    </header>
+
+                                    <div class="post__summary">
+                                        <p>对象实体转换操作在分层应用中很常见，比如数据库层的对象实体和表现层的实体很可能具有不同的属性集，需要在互操作时进行属性的映射（或拷贝）。</p>
+<p><a href="https://mapstruct.org/" title="Java bean mappings, the easy way!">MapStruct</a> 是一个辅助进行 Java 实体类之间相互转换的类库，与其他具有相似功能的工具库之间的最大区别在于其使用了 <a href="https://docs.oracle.com/javase/7/docs/technotes/guides/apt/" title="Annotation Processing Tool (apt)">Java 注解处理器 APT</a> 来实现实体间属性的映射而不是使用反射技术。</p>
+
+                                    </div>
+                                    <div class="read-more">
+                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-10-16-mapstruct-usecases&#x2F;">Read more...</a>
+                                    </div>
+                                </article>
+                            
+                                <article class="post">
+                                    
+    <header class="post__header">
+        <h1 class="post__title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-30-add-supports-for-apt-in-maven&#x2F;">在 Maven 中支持 Java 的注解处理器 APT</a>
         </h1>
-        
-        
-        
-    <div class="post-meta">
-        <span class="post-date">2019.09.30
-                </span>
-
-        <span class="post-author"></span>
-
-        
-
-    
-    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;java&#x2F;">Java</a>} 
-
+        <div class="post__meta">
+            <span class="post__time">2019-09-30</span>
             
-    ::
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;java&#x2F;">java</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;apt&#x2F;">apt</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;maven&#x2F;">maven</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;annotationprocessorpaths&#x2F;">annotationProcessorPaths</a>
-        
-    
-            
-        
-    </div>
-
-        
-        
-        
-        
-
-        <div class="post-content">
-            Java 中有很多基于 APT 代码生成技术的类库。在 Maven 中启用对 APT 的支持，需要配置 annotationProcessorPaths 或添加 optional 的依赖。
-            
-            </div>
-        <div>
-            <a class="read-more button" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-30-add-supports-for-apt-in-maven&#x2F;">More →</a>
         </div>
-        </div>
-    <div class="post on-list">
-        <h1 class="post-title">
+    </header>
+
+                                    <div class="post__summary">
+                                        <p>Java 中有很多基于 <a href="https://docs.oracle.com/javase/7/docs/technotes/guides/apt/" title="Annotation Processing Tool (apt)">注解处理器 APT (Annotation Processing Tool)</a> 技术的类库，如 <a href="https://github.com/google/auto/tree/master/value" title="AutoValue - Immutable value-type code generation for Java 1.6+.">AutoValue</a> 和 <a href="https://freebuilder.inferred.org/" title="Automatic generation of the Builder pattern for Java">FreeBuilder</a> 等。</p>
+<p>在 <a href="https://maven.apache.org/">Maven</a> 中支持 <a href="https://www.wangbo.im/posts/2019-09-30-add-supports-for-apt-in-maven/apt">APT</a> ，需要在 <a href="https://maven.apache.org/plugins/maven-compiler-plugin/">Apache Maven Compiler Plugin</a> 的配置部分添加 <a href="https://maven.apache.org/plugins/maven-compiler-plugin/compile-mojo.html#annotationProcessorPaths">annotationProcessorPaths</a> 的配置，如下：</p>
+<pre style="background-color:#282828;">
+<span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">plugin</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">org.apache.maven.plugins</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">maven-compiler-plugin</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">3.6.1</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">configuration</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">source</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">1.8</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">source</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">target</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">1.8</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">target</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">testSource</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">1.8</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">testSource</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">testTarget</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">1.8</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">testTarget</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">encoding</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">UTF-8</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">encoding</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">optimize</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">true</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">optimize</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="font-style:italic;color:#928374;">&lt;!-- Slightly faster builds, see https://issues.apache.org/jira/browse/MCOMPILER-209 --&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">useIncrementalCompilation</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">false</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">useIncrementalCompilation</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">annotationProcessorPaths</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">path</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">com.google.auto.value</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">auto-value</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">${auto-value.version}</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">path</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">annotationProcessorPaths</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">configuration</span><span style="color:#83a598;">&gt;
+</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">plugin</span><span style="color:#83a598;">&gt;
+</span></pre>
+<p>上述配置对于 <a href="https://maven.apache.org/">Maven</a> <code>3.5</code> 以上版本有效。</p>
+<p>对于低于 <code>3.5</code> 的版本，可以在 <code>dependencies</code> 块中添加依赖项，并设置 <code>optional</code> 属性。</p>
+<pre style="background-color:#282828;">
+<span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">org.inferred</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">freebuilder</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">${freebuilder_version}</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">optional</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">true</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">optional</span><span style="color:#83a598;">&gt;
+</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
+</span></pre>
+<p>如果是可执行的工程，也可以设置 <code>scope</code> 为 <code>provided</code> 。</p>
+<pre style="background-color:#282828;">
+<span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">org.inferred</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">freebuilder</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">${freebuilder_version}</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">scope</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">provided</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">scope</span><span style="color:#83a598;">&gt;
+</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
+</span></pre>
+                                    </div>
+                                    <div class="read-more">
+                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-30-add-supports-for-apt-in-maven&#x2F;">Read more...</a>
+                                    </div>
+                                </article>
+                            
+                                <article class="post">
+                                    
+    <header class="post__header">
+        <h1 class="post__title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-30-freebuilder-usecases&#x2F;">Value Class Generated by FreeBuilder</a>
         </h1>
-        
-        
-        
-    <div class="post-meta">
-        <span class="post-date">2019.09.30
-                </span>
-
-        <span class="post-author"></span>
-
-        
-
-    
-    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;java&#x2F;">Java</a>} 
-
+        <div class="post__meta">
+            <span class="post__time">2019-09-30</span>
             
-    ::
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;java&#x2F;">java</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;apt&#x2F;">apt</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;freebuilder&#x2F;">freebuilder</a>
-        
-    
-            
-        
-    </div>
-
-        
-        
-        
-        
-
-        <div class="post-content">
-            FreeBuilder 是 AutoValue 之外的另一个利用 Java 的注解处理器扩展技术来自动生成代码的类库，提供了更加丰富的 API，完全可以用来替代 AutoValue。
-            
-            </div>
-        <div>
-            <a class="read-more button" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-30-freebuilder-usecases&#x2F;">More →</a>
         </div>
-        </div>
-    <div class="post on-list">
-        <h1 class="post-title">
+    </header>
+
+                                    <div class="post__summary">
+                                        <p><a href="https://freebuilder.inferred.org/" title="Automatic generation of the Builder pattern for Java">FreeBuilder</a> 是一个非常好用的基于 JAVA <a href="https://docs.oracle.com/javase/7/docs/technotes/guides/apt/" title="Annotation Processing Tool (apt)">注解处理器 APT (Annotation Processing Tool)</a> 技术的数据实体类生成器，可以
+通过简单的注解来生成 Builder 模式的实体类。<a href="https://github.com/google/auto/tree/master/value" title="AutoValue - Immutable value-type code generation for Java 1.6+.">AutoValue</a> 是另一个非常好用的基于 <a href="https://docs.oracle.com/javase/7/docs/technotes/guides/apt/" title="Annotation Processing Tool (apt)">APT</a> 的类库，参见 <a href="@/posts/2019-09-28-google-autovalue-usecases/index.md">Value Class Generated by Google AutoValue</a>。二者的区别在于：</p>
+<ol>
+<li><a href="https://github.com/google/auto/tree/master/value" title="AutoValue - Immutable value-type code generation for Java 1.6+.">AutoValue</a> 根据开发者提供的一个 Builder 接口来实现具体的 Builder 类；<a href="https://freebuilder.inferred.org/" title="Automatic generation of the Builder pattern for Java">FreeBuilder</a> 则对给定的数据实体类生成符合固定规则的 Builder 类。前者可以控制生成的 Builder 类的方法列表，后者无法控制生成的 Builder 类的方法列表，但是可以通过继承生成的 Builder 类限制对外暴露的方法列表。</li>
+<li><a href="https://github.com/google/auto/tree/master/value" title="AutoValue - Immutable value-type code generation for Java 1.6+.">AutoValue</a> 需要数据实体类是一个抽象类；<a href="https://freebuilder.inferred.org/" title="Automatic generation of the Builder pattern for Java">FreeBuilder</a> 则同时支持抽象类和接口。</li>
+</ol>
+<p>详细对比可以参考 <a href="https://github.com/inferred/FreeBuilder#alternatives">FreeBuilder
+Alternatives</a> 。</p>
+
+                                    </div>
+                                    <div class="read-more">
+                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-30-freebuilder-usecases&#x2F;">Read more...</a>
+                                    </div>
+                                </article>
+                            
+                                <article class="post">
+                                    
+    <header class="post__header">
+        <h1 class="post__title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-28-google-autovalue-usecases&#x2F;">Value Class Generated by Google AutoValue</a>
         </h1>
-        
-        
-        
-    <div class="post-meta">
-        <span class="post-date">2019.09.28
-                </span>
-
-        <span class="post-author"></span>
-
-        
-
-    
-    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;java&#x2F;">Java</a>} 
-
+        <div class="post__meta">
+            <span class="post__time">2019-09-28</span>
             
-    ::
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;java&#x2F;">java</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;apt&#x2F;">apt</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;google&#x2F;">google</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;auto-value&#x2F;">auto-value</a>
-        
-    
-            
-        
-    </div>
-
-        
-        
-        
-        
-
-        <div class="post-content">
-            Google AutoValue 利用 Java 的注解处理器扩展技术来自动生成代码，极大地提高了 POJO 类需求的使用体验。
-            
-            </div>
-        <div>
-            <a class="read-more button" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-28-google-autovalue-usecases&#x2F;">More →</a>
         </div>
-        </div>
-    <div class="post on-list">
-        <h1 class="post-title">
+    </header>
+
+                                    <div class="post__summary">
+                                        <p>Java 中组织数据对象的方式中，最简单也是最通用的是所谓的 POJO (Plain Ordinary Java Object) 即
+Java 简单对象。POJO 大法好，好就好在简单实用：只需用遵循简单的命名约定和构造规则，就可以满足数据实体
+的需求，而且大多数的序列化方案和持久化方案都能提供 POJO 的支持；如果追求代码精简的话，使用 POJO 可以
+和反射方案一起极大地简化重复代码。</p>
+<p>POJO 的好处吾等皆非常清楚，然而本文却在讲 <a href="https://github.com/google/auto/tree/master/value" title="AutoValue - Immutable value-type code generation for Java 1.6+.">AutoValue</a>，因为：</p>
+<ol>
+<li>人是善变的。吾等吃够了鸡蛋牛奶，也会想要尝尝豆浆油条。</li>
+<li><code>equals</code> <code>toString</code> <code>hash</code> 。此三种样板代码，即使是有 IDE 的协助，维护起来仍会非常痛苦。</li>
+<li><a href="http://www.dalnefre.com/wp/2011/11/high-availability-for-mutable-shared-state/comment-page-1/">Mutable shared state is the root of all evil in concurrent
+systems</a>
+。可变性在并发系统中的共享是所有 BUG 的源头，不可变性是救赎之道；而 POJO 不能满足不可变性约束。</li>
+<li>Google 大法好。<a href="https://github.com/google/auto/tree/master/value" title="AutoValue - Immutable value-type code generation for Java 1.6+.">AutoValue</a> 是 Google Java 团队的作品。</li>
+</ol>
+<p><a href="https://www.wangbo.im/posts/2019-09-28-google-autovalue-usecases/autovalue">AutoValue</a> 是一个基于 Java <a href="https://docs.oracle.com/javase/7/docs/technotes/guides/apt/" title="Annotation Processing Tool (apt)">注解处理器 APT
+(Annotation Processing Tool)</a> 的代码生成库，网络上关于 <a href="https://github.com/google/auto/tree/master/value" title="AutoValue - Immutable value-type code generation for Java 1.6+.">AutoValue</a> 的介绍不要太少，毋庸再讲；其理念和实际用法可见
+<a href="https://github.com/google/auto/blob/master/value/userguide/index.md">官网文档</a>，十分钟入门，老少咸
+宜。</p>
+<p>本文对于 <a href="https://github.com/google/auto/tree/master/value" title="AutoValue - Immutable value-type code generation for Java 1.6+.">AutoValue</a> 的用法做一个简单汇总，并引申介绍一下基于 <a href="https://github.com/google/auto/tree/master/value" title="AutoValue - Immutable value-type code generation for Java 1.6+.">AutoValue</a> 的对
+象 JSON 序列化方案。</p>
+
+                                    </div>
+                                    <div class="read-more">
+                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-28-google-autovalue-usecases&#x2F;">Read more...</a>
+                                    </div>
+                                </article>
+                            
+                                <article class="post">
+                                    
+    <header class="post__header">
+        <h1 class="post__title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-17-spring-cloud-gateway-load-testing-using-wrk&#x2F;">Spring Cloud Gateway Load Testing using Wrk</a>
         </h1>
-        
-        
-        
-    <div class="post-meta">
-        <span class="post-date">2019.09.17
-                </span>
-
-        <span class="post-author"></span>
-
-        
-
-    
-    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;spring&#x2F;">Spring</a>} 
-
+        <div class="post__meta">
+            <span class="post__time">2019-09-17</span>
             
-    ::
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;spring-cloud-gateway&#x2F;">spring-cloud-gateway</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;gateway&#x2F;">gateway</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;testing&#x2F;">testing</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;load-test&#x2F;">load-test</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;wrk&#x2F;">wrk</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;wrk2&#x2F;">wrk2</a>
-        
-    
-            
-        
-    </div>
-
-        
-        
-        
-        
-
-        <div class="post-content">
-            Spring Cloud Gateway 作为微服务网关被大家广泛接受，但是其性能的测试数据并没有很完备。本文详述了一轮多组的基于 wrk &amp; wrk2 的性能测试，同时分别测试了匹配链中第一个和第八百个匹配的性能差异。发现 Spring Cloud Gateway 网关在匹配到前几位的路由时性能还可以接受，当需要经过较多次的路由匹配时，性能下降明显。
-            
-            </div>
-        <div>
-            <a class="read-more button" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-17-spring-cloud-gateway-load-testing-using-wrk&#x2F;">More →</a>
         </div>
-        </div>
-    <div class="post on-list">
-        <h1 class="post-title">
+    </header>
+
+                                    <div class="post__summary">
+                                        <p><a href="https://spring.io/projects/spring-cloud-gateway" title="Spring Cloud Gateway">Spring Cloud Gateway</a> 是 <a href="https://spring.io/" title="Spring">Spring</a> 官方为了完善 <a href="https://spring.io/projects/spring-cloud" title="Spring Cloud">Spring Cloud</a> 的版图
+而推出的网关服务组件，使用了非阻塞式网络模式和目前流行的响应式编程模型，吸引了很多公司和开发者的注意
+力。</p>
+<p>网络上有一些现成的对 <a href="https://spring.io/projects/spring-cloud-gateway" title="Spring Cloud Gateway">Spring Cloud Gateway</a> 的性能测试的案例，比如 <a href="https://www.jianshu.com/p/a19e24a6a747">纠错帖：Zuul &amp; Spring Cloud Gateway &amp; Linkerd性能对比</a>。根据 <a href="https://github.com/spencergibb/spring-cloud-gateway-bench">Simple benchmark comparing zuul and spring cloud gateway </a> 的数据，<a href="https://spring.io/projects/spring-cloud-gateway" title="Spring Cloud Gateway">Spring Cloud Gateway</a> 的性能测试结果参考如下：</p>
+<table><thead><tr><th> Proxy    </th><th> Avg Latency </th><th> Avg Req/Sec/Thread </th></tr></thead><tbody>
+<tr><td> gateway  </td><td> 6.61ms      </td><td> 3.24k              </td></tr>
+<tr><td> linkered </td><td> 7.62ms      </td><td> 2.82k              </td></tr>
+<tr><td> zuul     </td><td> 12.56ms     </td><td> 2.09k              </td></tr>
+<tr><td> none     </td><td> 2.09ms      </td><td> 11.77k             </td></tr>
+</tbody></table>
+<p>但是，由于：</p>
+<ol>
+<li>上述测试只是简单的对后端反向代理测试，而我们知道 <a href="https://spring.io/projects/spring-cloud-gateway" title="Spring Cloud Gateway">Spring Cloud Gateway</a> 对于路由的匹配是顺序的，匹配链后面的路由的性能并没有被关注到。</li>
+<li>测试数据被进行了简化，测试的细节被（有意地）忽略了。</li>
+</ol>
+<p>所以，在根据 <a href="https://spring.io/projects/spring-cloud-gateway" title="Spring Cloud Gateway">Spring Cloud Gateway</a> 改造出了初版的公司网关系统之后，我使用 <a href="https://github.com/wg/wrk" title="Modern HTTP benchmarking tool">wrk</a> 和 <a href="https://github.com/giltene/wrk2" title="A constant throughput, correct latency recording variant of wrk">wrk2</a> 对网关进行了多轮的压测，测试结果汇总为本文。</p>
+
+                                    </div>
+                                    <div class="read-more">
+                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-17-spring-cloud-gateway-load-testing-using-wrk&#x2F;">Read more...</a>
+                                    </div>
+                                </article>
+                            
+                                <article class="post">
+                                    
+    <header class="post__header">
+        <h1 class="post__title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-17-usage-of-benchmarking-tool-wrk-and-wrk2&#x2F;">Usage of Benchmarking Tool WRK and WRK2</a>
         </h1>
-        
-        
-        
-    <div class="post-meta">
-        <span class="post-date">2019.09.17
-                </span>
-
-        <span class="post-author"></span>
-
-        
-
-    
-    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;utils&#x2F;">Utils</a>} 
-
+        <div class="post__meta">
+            <span class="post__time">2019-09-17</span>
             
-    ::
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;benchmark&#x2F;">benchmark</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;testing&#x2F;">testing</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;load-test&#x2F;">load-test</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;wrk&#x2F;">wrk</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;wrk2&#x2F;">wrk2</a>
-        
-    
-            
-        
-    </div>
-
-        
-        
-        
-        
-
-        <div class="post-content">
-            wrk 是一款短小精悍又备受赞誉的开源性能测试工具，能够用来对 HTTP 服务进行压测；wrk2 是 对 wrk 的改进，增加了压测结果的直方图输出。网路上有不少介绍 wrk 或 wrk2 的文章，但大多泛泛而谈，对于压测的结果输出项的解释也是云里雾里或者简单跳过，殊为遗憾。本文主要介绍 wrk 和 wrk2 的使用，并在阅读源码的基础上对输出结果的项进行解释。
-            
-            </div>
-        <div>
-            <a class="read-more button" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-17-usage-of-benchmarking-tool-wrk-and-wrk2&#x2F;">More →</a>
         </div>
-        </div>
-    <div class="post on-list">
-        <h1 class="post-title">
+    </header>
+
+                                    <div class="post__summary">
+                                        <p><a href="https://github.com/wg/wrk" title="Modern HTTP benchmarking tool">wrk</a> 是一款短小精悍又备受赞誉的开源性能测试工具，能够用来对 HTTP 服务进行压测；<a href="https://github.com/giltene/wrk2" title="A constant throughput, correct latency recording variant of wrk">wrk2</a> 是
+对 <a href="https://github.com/wg/wrk" title="Modern HTTP benchmarking tool">wrk</a> 的改进，增加了压测结果的直方图输出。</p>
+<p>网路上有不少介绍 <a href="https://github.com/wg/wrk" title="Modern HTTP benchmarking tool">wrk</a> 或 <a href="https://github.com/giltene/wrk2" title="A constant throughput, correct latency recording variant of wrk">wrk2</a> 的文章，但大多泛泛而谈，对于压测的结果输出项的解释也是云
+里雾里或者简单跳过，殊为遗憾。</p>
+<p>本文主要介绍 <a href="https://github.com/wg/wrk" title="Modern HTTP benchmarking tool">wrk</a> 和 <a href="https://github.com/giltene/wrk2" title="A constant throughput, correct latency recording variant of wrk">wrk2</a> 的使用，并在阅读源码的基础上对输出结果的项进行解释。</p>
+
+                                    </div>
+                                    <div class="read-more">
+                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-17-usage-of-benchmarking-tool-wrk-and-wrk2&#x2F;">Read more...</a>
+                                    </div>
+                                </article>
+                            
+                                <article class="post">
+                                    
+    <header class="post__header">
+        <h1 class="post__title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-12-vboxmanage-note-change-host-key-for-vboxsdl&#x2F;">Change Host Key for VBOXSDL</a>
         </h1>
-        
-        
-        
-    <div class="post-meta">
-        <span class="post-date">2019.09.12
-                </span>
-
-        <span class="post-author"></span>
-
-        
-
-    
-    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;utils&#x2F;">Utils</a>} 
-
+        <div class="post__meta">
+            <span class="post__time">2019-09-12</span>
             
-    ::
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;virtualbox&#x2F;">virtualbox</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;vboxsdl&#x2F;">vboxsdl</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;host-key&#x2F;">host-key</a>
-        
-    
-            
-        
-    </div>
-
-        
-        
-        
-        
-
-        <div class="post-content">
-            如果平时使用 Linux，偶尔会有使用 Windows 软件（如 WPS&#x2F;QQ 等）的需求场景时，最好的解决方案就是使用虚拟机了。如果使用了 VirtualBox 的话，那么可以了解一下其除了基于 Qt 的虚拟机运行界面之外还额外提供了一个基于 SDL 的虚拟机运行界面。如果需要修改 SDL 界面下的 host 键，可以使用参数 &#96;--hostkey&#96;。
-            
-            </div>
-        <div>
-            <a class="read-more button" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-12-vboxmanage-note-change-host-key-for-vboxsdl&#x2F;">More →</a>
         </div>
-        </div>
-    <div class="post on-list">
-        <h1 class="post-title">
+    </header>
+
+                                    <div class="post__summary">
+                                        <p>如果平时使用 Linux，偶尔会有使用 Windows 软件（如 WPS/QQ 等）的需求场景时，最好的解决方案就是使用虚拟机了。如果使用了 <a href="https://www.virtualbox.org/">Virtual Box</a> 的话，那么可以了解一下其除了基于 <a href="https://www.qt.io/">Qt</a> 的虚拟机运行界面之外还额外提供了一个基于 <a href="https://www.libsdl.org/">SDL</a> 的虚拟机运行界面。</p>
+<p>我在使用 virtualbox 的管理界面创建配置好一个基于 Windows 7 的虚拟机 &quot;se7en&quot; 之后，可以直接在终端运行：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1;">${VBOXSDL} --startvm se7en
+</span></pre>
+<p>界面非常简洁，不依赖 <a href="https://www.qt.io/">Qt</a> 。</p>
+<p><code>${VBOXSDL}</code> 是 vboxsdl 的可执行文件名；根据 VirtualBox 的安装方式不同，可能会是 &quot;VBoxSDL&quot; 或 &quot;vboxsdl&quot;。</p>
+<p>如果需要修改 SDL 界面下的 host 键，可以使用参数 &quot;--hostkey&quot;。</p>
+<pre style="background-color:#282828;">
+<span style="font-style:italic;color:#928374;"># Set Host key for vboxsdl
+</span><span style="font-style:italic;color:#928374;"># LSHIFT = 304 1
+</span><span style="font-style:italic;color:#928374;"># RSHIFT = 303 2
+</span><span style="font-style:italic;color:#928374;"># LCTRL = 301 8192
+</span><span style="font-style:italic;color:#928374;"># RCTRL = 305 128
+</span><span style="font-style:italic;color:#928374;"># LALT = 308 256
+</span><span style="font-style:italic;color:#928374;"># RALT = 27 0
+</span><span style="color:#fdf4c1;">${VBOXSDL} --hostkey 308 256 --startvm se7en
+</span></pre>
+<p>该命令会设置 host 键为 左-Alt 键并启动虚拟机。</p>
+
+                                    </div>
+                                    <div class="read-more">
+                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-12-vboxmanage-note-change-host-key-for-vboxsdl&#x2F;">Read more...</a>
+                                    </div>
+                                </article>
+                            
+                                <article class="post">
+                                    
+    <header class="post__header">
+        <h1 class="post__title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-09-ffprobe-note-query-video-rotation-info&#x2F;">Query Video Rotation Info using FFprobe</a>
         </h1>
-        
-        
-        
-    <div class="post-meta">
-        <span class="post-date">2019.09.09
-                </span>
-
-        <span class="post-author"></span>
-
-        
-
-    
-    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;streaming&#x2F;">Streaming</a>} 
-
+        <div class="post__meta">
+            <span class="post__time">2019-09-09</span>
             
-    ::
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;ffprobe&#x2F;">ffprobe</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;rotation&#x2F;">rotation</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;note&#x2F;">note</a>
-        
-    
-            
-        
-    </div>
-
-        
-        
-        
-        
-
-        <div class="post-content">
-            使用 ffprobe 获取原视频中的旋转信息的命令如下：&#96;ffprobe -loglevel error -hide_banner -select_streams v -show_entries stream_tags=rotate -of json=compact=1 input.avi&#96;
-            
-            </div>
-        <div>
-            <a class="read-more button" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-09-ffprobe-note-query-video-rotation-info&#x2F;">More →</a>
         </div>
-        </div>
-    <div class="post on-list">
-        <h1 class="post-title">
+    </header>
+
+                                    <div class="post__summary">
+                                        <p>有一些通过手持设备录制的视频会把视频的旋转信息作为一个额外的字段放入视频的元数据中（比如 iOS）；在对
+这些视频进行处理的时候，其元数据中的宽高信息就需要使用旋转信息进行修正。</p>
+<p>使用 <a href="https://ffmpeg.org/ffprobe.html">ffprobe</a> 获取原视频中的旋转信息的命令如下：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1;">ffprobe -loglevel error -hide_banner -select_streams v -show_entries stream_tags=rotate -of json=compact=1 input.avi
+</span></pre>
+<p>查询得到的视频旋转信息是一个整型的旋转角度值（而不是弧度）；取值范围为 [0, 360]，常见的取值有
+90/180/270 。</p>
+<p>假定一个原视频通过 <a href="https://ffmpeg.org/ffprobe.html">ffprobe</a> 提取的宽高信息为 800x600，若旋转信息为 90，则实际的视频宽高为 600x800。</p>
+
+                                    </div>
+                                    <div class="read-more">
+                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-09-ffprobe-note-query-video-rotation-info&#x2F;">Read more...</a>
+                                    </div>
+                                </article>
+                            
+                                <article class="post">
+                                    
+    <header class="post__header">
+        <h1 class="post__title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-09-ffprobe-note-query-key-frame-info&#x2F;">Query Key-Frame Info from Video Stream using FFprobe</a>
         </h1>
-        
-        
-        
-    <div class="post-meta">
-        <span class="post-date">2019.09.09
-                </span>
-
-        <span class="post-author"></span>
-
-        
-
-    
-    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;streaming&#x2F;">Streaming</a>} 
-
+        <div class="post__meta">
+            <span class="post__time">2019-09-09</span>
             
-    ::
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;ffprobe&#x2F;">ffprobe</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;key-frame&#x2F;">key-frame</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;note&#x2F;">note</a>
-        
-    
-            
-        
-    </div>
-
-        
-        
-        
-        
-
-        <div class="post-content">
-            使用 ffprobe 获取视频中的关键帧信息命令如下：&#96;ffprobe -loglevel error -hide_banner -select_streams v -skip_frame nokey -show_frames -show_entries frame=pict_type -of json=compact=1 input.avi&#96;
-            
-            </div>
-        <div>
-            <a class="read-more button" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-09-ffprobe-note-query-key-frame-info&#x2F;">More →</a>
         </div>
-        </div>
-    <div class="post on-list">
-        <h1 class="post-title">
+    </header>
+
+                                    <div class="post__summary">
+                                        <p>使用 <a href="https://ffmpeg.org/ffprobe.html">ffprobe</a> 获取视频中的关键帧信息命令如下：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1;">ffprobe -loglevel error -hide_banner -select_streams v -skip_frame nokey -show_frames -show_entries frame=pict_type -of json=compact=1 input.avi
+</span><span style="color:#fdf4c1;">ffprobe -loglevel error -hide_banner -select_streams v -show_format -show_frames -show_entries frame=pict_t ype:format=filename,duration,size:format_tags= -show_streams -of json=compact=1 input.mp4
+</span></pre>
+<p><a href="https://ffmpeg.org/ffprobe.html">ffprobe</a> 的更多用法请参考<a href="https://ffmpeg.org/ffprobe-all.html">其文档</a> 。</p>
+
+                                    </div>
+                                    <div class="read-more">
+                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-09-ffprobe-note-query-key-frame-info&#x2F;">Read more...</a>
+                                    </div>
+                                </article>
+                            
+                                <article class="post">
+                                    
+    <header class="post__header">
+        <h1 class="post__title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-09-ffmpeg-note-record-xorg-video&#x2F;">Record video from Xorg using FFmpeg</a>
         </h1>
-        
-        
-        
-    <div class="post-meta">
-        <span class="post-date">2019.09.09
-                </span>
-
-        <span class="post-author"></span>
-
-        
-
-    
-    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;streaming&#x2F;">Streaming</a>} 
-
+        <div class="post__meta">
+            <span class="post__time">2019-09-09</span>
             
-    ::
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;ffmpeg&#x2F;">ffmpeg</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;note&#x2F;">note</a>
-        
-    
-            
-        
-    </div>
-
-        
-        
-        
-        
-
-        <div class="post-content">
-            使用 ffmpeg 在 X 下进行录屏，可以使用如下命令：&#96;ffmpeg -f x11grab -video_size 1366x768 -framerate 24 -i :0.0+0,0 $(date +%Y%m%dT%H%M%S.%3N.avi)&#96;
-            
-            </div>
-        <div>
-            <a class="read-more button" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-09-ffmpeg-note-record-xorg-video&#x2F;">More →</a>
         </div>
-        </div>
-    <div class="post on-list">
-        <h1 class="post-title">
+    </header>
+
+                                    <div class="post__summary">
+                                        <p>使用 <a href="https://ffmpeg.org/ffmpeg.html">ffmpeg</a> 在 X 下进行录屏，可以使用如下命令：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1;">ffmpeg -f x11grab -video_size 1366x768 -framerate 24 -i :0.0+0,0 $(date +%Y%m%dT%H%M%S.%</span><span style="color:#d3869b;">3</span><span style="color:#fdf4c1;">N.avi)
+</span></pre>
+<p>使用了 <a href="https://ffmpeg.org/ffmpeg-devices.html#x11grab">x11grap</a> 解码器。</p>
+<p>参见 <a href="https://trac.ffmpeg.org/wiki/Capture/Desktop">Capturing your Desktop / Screen Recording</a></p>
+
+                                    </div>
+                                    <div class="read-more">
+                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-09-ffmpeg-note-record-xorg-video&#x2F;">Read more...</a>
+                                    </div>
+                                </article>
+                            
+                                <article class="post">
+                                    
+    <header class="post__header">
+        <h1 class="post__title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-08-31-slow-mysql-query-on-too-many-cas-updating-failure&#x2F;">一次由于线上 MySQL 并发抢占更新冲突引发的 BUG</a>
         </h1>
-        
-        
-        
-    <div class="post-meta">
-        <span class="post-date">2019.08.31
-                </span>
-
-        <span class="post-author"></span>
-
-        
-
-    
-    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;practise&#x2F;">Practise</a>} 
-
+        <div class="post__meta">
+            <span class="post__time">2019-08-31</span>
             
-    ::
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;mysql&#x2F;">mysql</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;cas&#x2F;">cas</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;lock&#x2F;">lock</a>
-        
-    
-            
-        
-    </div>
-
-        
-        
-        
-        
-
-        <div class="post-content">
-            前几天在处理线上问题的时候，发现了一个由于多客户端并发使用 CAS 去更新相同记录而导致的锁冲突，引发了数据库管理系统的慢查询累积报警。慢查询导致连接数增加，并引起插入和更新操作被堵塞，引起少量的业务堆积。
-            
-            </div>
-        <div>
-            <a class="read-more button" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-08-31-slow-mysql-query-on-too-many-cas-updating-failure&#x2F;">More →</a>
         </div>
-        </div>
-    <div class="post on-list">
-        <h1 class="post-title">
+    </header>
+
+                                    <div class="post__summary">
+                                        <p>前几天在处理线上问题的时候，发现了一个由于多客户端并发使用 CAS 去更新相同记录而导致的锁冲突，引发了数据库管理系统的慢查询累积报警。慢查询导致连接数增加，并引起插入和更新操作被堵塞，引起少量的业务堆积。</p>
+<p>一图胜千言。</p>
+<p><img src="https://www.wangbo.im/posts/2019-08-31-slow-mysql-query-on-too-many-cas-updating-failure/mysql.all.png" alt="mysql_stats.all" /></p>
+<p>虽然定位并解决了问题，但还是需要事后总结一下，以资后鉴。</p>
+
+                                    </div>
+                                    <div class="read-more">
+                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-08-31-slow-mysql-query-on-too-many-cas-updating-failure&#x2F;">Read more...</a>
+                                    </div>
+                                </article>
+                            
+                                <article class="post">
+                                    
+    <header class="post__header">
+        <h1 class="post__title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-08-28-intro-to-spring-cloud-gateway-slide&#x2F;">Intro to Spring Cloud Gateway</a>
         </h1>
-        
-        
-        
-    <div class="post-meta">
-        <span class="post-date">2019.08.28
-                </span>
-
-        <span class="post-author"></span>
-
-        
-
-    
-    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;spring&#x2F;">Spring</a>} 
-
+        <div class="post__meta">
+            <span class="post__time">2019-08-28</span>
             
-    ::
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;gateway&#x2F;">gateway</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;spring-cloud&#x2F;">spring-cloud</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;spring-cloud-gateway&#x2F;">spring-cloud-gateway</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;route&#x2F;">route</a>
-        
-    
-            
-        
-    </div>
-
-        
-        
-        
-        
-
-        <div class="post-content">
-            本文基于在部门内的一次分享修改而成，主要介绍 Spring Cloud Gateway 的请求处理流程和装配流程。
-            
-            </div>
-        <div>
-            <a class="read-more button" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-08-28-intro-to-spring-cloud-gateway-slide&#x2F;">More →</a>
         </div>
-        </div>
-    <div class="post on-list">
-        <h1 class="post-title">
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-07-21-ffmpeg-vsync-explained&#x2F;">Ffmpeg -vsync 使用场景辨析</a>
-        </h1>
-        
-        
-        
-    <div class="post-meta">
-        <span class="post-date">2019.07.21
-                </span>
+    </header>
 
-        <span class="post-author"></span>
+                                    <div class="post__summary">
+                                        <p>本文基于在部门内的一次分享修改而成，主要介绍 <a href="https://spring.io/projects/spring-cloud-gateway">Spring Cloud Gateway</a> 的请求处理流程和装配流程。</p>
+<p>演示文档是从 markdown 格式文本通过格式转换工具 <a href="https://pandoc.org/">Pandoc</a> 引用
+<a href="https://revealjs.com">Reveal.js</a> 转换得到，可供下载。</p>
+<p>| Downloads            |
+| ---                  |
+| <a href="https://www.wangbo.im/posts/2019-08-28-intro-to-spring-cloud-gateway-slide/slide.md">Markdown</a> |
+| <a href="https://www.wangbo.im/posts/2019-08-28-intro-to-spring-cloud-gateway-slide/slide.html">Slide</a>  |</p>
 
-        
-
-    
-    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;streaming&#x2F;">Streaming</a>} 
-
-            
-    ::
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;ffmpeg&#x2F;">ffmpeg</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;vsync&#x2F;">vsync</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;fps&#x2F;">fps</a>
-        
-    
-            
-        
-    </div>
-
-        
-        
-        
-        
-
-        <div class="post-content">
-            在使用 Ffmpeg 进行视频抽帧时，发现 &#96;-vsync&#96; 参数的意思理解的不是很清楚。本文通过不同的场景使用结果对比来辨析 &#96;-vsync&#96; 选项的枚举参数值的区别。
-            
-            </div>
-        <div>
-            <a class="read-more button" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-07-21-ffmpeg-vsync-explained&#x2F;">More →</a>
-        </div>
-        </div>
-    
-</div>
-</div>
-            
-    <div class="pagination">
-        <div class="pagination__buttons">
-            
-                <span class="button next">
-                    <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;page&#x2F;2&#x2F;">
-                        <span class="button__text">older</span>
-                        <span class="button__icon">→</span>
-                    </a>
-                </span>
-            </div>
-    </div>
-<footer class="footer">
-                    <div class="footer__inner"><div class="copyright copyright--user"><span>© 2019 <a href="https://www.wangbo.im">wangbo&apos; blog</a> :: <a href="https://github.wangbo.im">Github</a> :: Powered by <a href="https://www.getzola.org/">Zola</a></span></div>
-    <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;assets&#x2F;js&#x2F;main.js"></script>
-</div>
+                                    </div>
+                                    <div class="read-more">
+                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-08-28-intro-to-spring-cloud-gateway-slide&#x2F;">Read more...</a>
+                                    </div>
+                                </article>
+                            
+                        </div>
+                        <nav class="pagination">
+                            
+                            
+                                <a class="next" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;page&#x2F;2&#x2F;">Next ›</a>
+                            
+                        </nav>
                     
+                </div>
+            </main>
 
-                </footer></div>
+            
+            
+        </div>
+
+      
+          <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
+      
     </body>
+
 </html>

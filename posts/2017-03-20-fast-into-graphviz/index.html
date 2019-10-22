@@ -1,103 +1,129 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
-    <title>Fast into Graphviz - Elvis Wang</title>
-    
-    
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <meta name="description" content="wangbo’s home &amp; blog"/>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
-    <meta property="og:title" content="
-    wangbo’s blog -&nbsp;Fast into Graphviz" />
-    <meta property="og:type" content="website"/>
-    <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2017-03-20-fast-into-graphviz&#x2F;"/>
-    <meta property="og:description" content="&lt;p&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.graphviz.org&quot;&gt;Graphviz - Graph Visualization Software&lt;&#x2F;a&gt; 由 AT&amp;amp;T 出品， 是一种结构化信息的可视化方式，也是一套开放源代码软件，可以被广泛地使用于网络拓扑、软件工程、数据库设计、机器学习等…"/>
-    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
-    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;red.css">
-<link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>wangbo’s blog - Fast into Graphviz</title>
+
+      
+
+      
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
+          
+      
+
+      
+          <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
+          
+      
+
+      
+      
+    </head>
+
     <body>
-        <div class="container full">
-<header class="header">
-    <div class="header__inner">
-        <div class="header__logo">
-            <a href="&#x2F;">
-    <div class="logo">
-        WB Prime
-    </div>
-</a>
-        </div>
-        <div class="menu-trigger">menu</div>
-    </div>
+        <div class="container">
+
+            <div id="mobile-navbar" class="mobile-navbar">
+              <div class="mobile-header-logo">
+                <a href="/" class="logo">WB Prime</a>
+              </div>
+              <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+
+            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
+              <ul class="mobile-menu-list">
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im&#x2F;categories">
+                            Categories
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im&#x2F;tags">
+                            Tags
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im&#x2F;about">
+                            About
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https:&#x2F;&#x2F;github.wangbo.im">
+                            Github
+                        </a>
+                    </li>
+                
+              </ul>
+            </nav>
+
+            <header id="header">
+                <div class="logo"><a href="https:&#x2F;&#x2F;www.wangbo.im">WB Prime</a></div>
+                <nav class="menu">
+                    <ul>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im&#x2F;categories">
+                                    Categories
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im&#x2F;tags">
+                                    Tags
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im&#x2F;about">
+                                    About
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https:&#x2F;&#x2F;github.wangbo.im">
+                                    Github
+                                </a>
+                            </li>
+                        
+                    </ul>
+                </nav>
+            </header>
+
+            <main>
+                <div class="content" id="mobile-panel">
+                    
+
+
+
+<article class="post">
     
-    <nav class="menu">
-        <ul class="menu__inner menu__inner--desktop">
-            
-            
-                    <li>
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
-                    </li>
-                
-                    <li>
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
-                    </li>
-                
-                    <li>
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
-                    </li>
-                
-            </ul>
-
-        <ul class="menu__inner menu__inner--mobile">
-            
-        <li>
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
-        </li>
-        <li>
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
-        </li>
-        <li>
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
-        </li>
-        </ul>
-    </nav>
-
-    </header>
-<div class="content"><div class="post">
-        <h1 class="post-title">
+    <header class="post__header">
+        <h1 class="post__title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2017-03-20-fast-into-graphviz&#x2F;">Fast into Graphviz</a>
         </h1>
-        
-    <div class="post-meta">
-        <span class="post-date">2017.03.20
-                </span>
-
-        <span class="post-author"></span>
-
-        
-
-    
-    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;utils&#x2F;">Utils</a>} 
-
+        <div class="post__meta">
+            <span class="post__time">2017-03-20</span>
             
-    ::
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;graphviz&#x2F;">graphviz</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;dot&#x2F;">dot</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;note&#x2F;">note</a>
-        
-    
-            
-        
-    </div>
+        </div>
+    </header>
 
-
-
-        
-
-        <div class="post-content">
-            <p><a href="http://www.graphviz.org">Graphviz - Graph Visualization Software</a> 由 AT&amp;T 出品， 是一种结构化信息的可视化方式，也是一套开放源代码软件，可以被广泛地使用于网络拓扑、软件工程、数据库设计、机器学习等方向的图表展示。</p>
+    <div class="post-content">
+      <p><a href="http://www.graphviz.org">Graphviz - Graph Visualization Software</a> 由 AT&amp;T 出品， 是一种结构化信息的可视化方式，也是一套开放源代码软件，可以被广泛地使用于网络拓扑、软件工程、数据库设计、机器学习等方向的图表展示。</p>
 <p>Graphviz 1.2D 及之前的版本使用了 AT&amp;T 代码许可证 (the AT&amp;T Source Code Agreement)，之后的版本使用了EPL (The Eclipse Public License) 。</p>
 <p>Graphviz 是一款面向程序员的绘图软件，不仅体现在其设计和使用方式上，还体现在其文档上 :)</p>
 <p><a name="continue-reading"></a></p>
@@ -381,21 +407,56 @@ attrs</a> 。</p>
 <li><a href="http://www.cnblogs.com/sld666666/archive/2010/06/25/1765510.html">http://www.cnblogs.com/sld666666/archive/2010/06/25/1765510.html</a></li>
 </ul>
 
-        </div>
-        
-    
-</div></div>
-            
-    <div class="pagination">
-        <div class="pagination__buttons">
-            </div>
     </div>
-<footer class="footer">
-                    <div class="footer__inner"><div class="copyright copyright--user"><span>© 2019 <a href="https://www.wangbo.im">wangbo&apos; blog</a> :: <a href="https://github.wangbo.im">Github</a> :: Powered by <a href="https://www.getzola.org/">Zola</a></span></div>
-    <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;assets&#x2F;js&#x2F;main.js"></script>
-</div>
-                    
 
-                </footer></div>
+    
+    
+
+    <div class="post-footer">
+        
+            
+                <div class="post-tags">
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;graphviz&#x2F;">#graphviz</a>
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;dot&#x2F;">#dot</a>
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;note&#x2F;">#note</a>
+                    
+                </div>
+            
+            
+                <div class="post-nav">
+                    
+                        <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;learning-java-concurrency-executors-1-executorservice&#x2F;">‹ Learning Java Concurrency - Executors(1) ExecutorService</a>
+                    
+                    
+                        <a class="next" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;huangyi-memory&#x2F;">当时明月在 曾照彩云归 ›</a>
+                    
+                    
+                    
+                </div>
+            
+
+        
+
+    </div>
+
+    
+    
+</article>
+
+
+                </div>
+            </main>
+
+            
+            
+        </div>
+
+      
+          <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
+      
     </body>
+
 </html>

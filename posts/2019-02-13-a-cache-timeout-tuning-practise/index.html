@@ -1,108 +1,129 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
-    <title>一次 Cache 问题排查实践 - Elvis Wang</title>
-    
-    
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <meta name="description" content="wangbo’s home &amp; blog"/>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
-    <meta property="og:title" content="
-    wangbo’s blog -&nbsp;一次 Cache 问题排查实践" />
-    <meta property="og:type" content="website"/>
-    <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-02-13-a-cache-timeout-tuning-practise&#x2F;"/>
-    <meta property="og:description" content="&lt;p&gt;负责的服务在线上环境出现了丢弃请求的现象。经排查是由于请求队列中的若干请求处理时间过长，导致队列之后的请求等待以致超时，而在队列中超时的请求会被框架直接抛弃掉。&lt;&#x2F;p&gt;
-&lt;p&gt;排查服务日志，发现访问 Cache 超时的量有明显增加；较多的 Cache 超时导致更多的不必要 DB 访问，以致请求的响应时间变长；同时，更多的 DB 访问压力也会对 D…"/>
-    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
-    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;red.css">
-<link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>wangbo’s blog - 一次 Cache 问题排查实践</title>
+
+      
+
+      
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
+          
+      
+
+      
+          <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
+          
+      
+
+      
+      
+    </head>
+
     <body>
-        <div class="container full">
-<header class="header">
-    <div class="header__inner">
-        <div class="header__logo">
-            <a href="&#x2F;">
-    <div class="logo">
-        WB Prime
-    </div>
-</a>
-        </div>
-        <div class="menu-trigger">menu</div>
-    </div>
+        <div class="container">
+
+            <div id="mobile-navbar" class="mobile-navbar">
+              <div class="mobile-header-logo">
+                <a href="/" class="logo">WB Prime</a>
+              </div>
+              <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+
+            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
+              <ul class="mobile-menu-list">
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im&#x2F;categories">
+                            Categories
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im&#x2F;tags">
+                            Tags
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im&#x2F;about">
+                            About
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https:&#x2F;&#x2F;github.wangbo.im">
+                            Github
+                        </a>
+                    </li>
+                
+              </ul>
+            </nav>
+
+            <header id="header">
+                <div class="logo"><a href="https:&#x2F;&#x2F;www.wangbo.im">WB Prime</a></div>
+                <nav class="menu">
+                    <ul>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im&#x2F;categories">
+                                    Categories
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im&#x2F;tags">
+                                    Tags
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im&#x2F;about">
+                                    About
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https:&#x2F;&#x2F;github.wangbo.im">
+                                    Github
+                                </a>
+                            </li>
+                        
+                    </ul>
+                </nav>
+            </header>
+
+            <main>
+                <div class="content" id="mobile-panel">
+                    
+
+
+
+<article class="post">
     
-    <nav class="menu">
-        <ul class="menu__inner menu__inner--desktop">
-            
-            
-                    <li>
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
-                    </li>
-                
-                    <li>
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
-                    </li>
-                
-                    <li>
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
-                    </li>
-                
-            </ul>
-
-        <ul class="menu__inner menu__inner--mobile">
-            
-        <li>
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
-        </li>
-        <li>
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
-        </li>
-        <li>
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
-        </li>
-        </ul>
-    </nav>
-
-    </header>
-<div class="content"><div class="post">
-        <h1 class="post-title">
+    <header class="post__header">
+        <h1 class="post__title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-02-13-a-cache-timeout-tuning-practise&#x2F;">一次 Cache 问题排查实践</a>
         </h1>
-        
-    <div class="post-meta">
-        <span class="post-date">2019.02.13
-                </span>
-
-        <span class="post-author"></span>
-
-        
-
-    
-    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;practise&#x2F;">Practise</a>} 
-
+        <div class="post__meta">
+            <span class="post__time">2019-02-13</span>
             
-    ::
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;java&#x2F;">java</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;cache&#x2F;">cache</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;tcp&#x2F;">tcp</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;fast-retransmit&#x2F;">fast-retransmit</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;congistion&#x2F;">congistion</a>
-        
-    
-            
-        
-    </div>
+        </div>
+    </header>
 
-
-
-        
-
-        <div class="post-content">
-            <p>负责的服务在线上环境出现了丢弃请求的现象。经排查是由于请求队列中的若干请求处理时间过长，导致队列之后的请求等待以致超时，而在队列中超时的请求会被框架直接抛弃掉。</p>
+    <div class="post-content">
+      <p>负责的服务在线上环境出现了丢弃请求的现象。经排查是由于请求队列中的若干请求处理时间过长，导致队列之后的请求等待以致超时，而在队列中超时的请求会被框架直接抛弃掉。</p>
 <p>排查服务日志，发现访问 Cache 超时的量有明显增加；较多的 Cache 超时导致更多的不必要 DB 访问，以致请求的响应时间变长；同时，更多的 DB 访问压力也会对 DB 的平均响应时间有影响；Cache 访问和 DB 访问超时导致请求响应超时，从而导致抛弃量。</p>
 <p>问题在于 Cache 访问为什么会出现大量超时？一路排查下去发现有可能是 TCP 丢包导致的快速重传(fast retransmission)引起的。</p>
 <p><a name="continue-reading"></a></p>
@@ -242,21 +263,60 @@ Client & Server & Router 全路径抓包</h2>
 快速定位问题，此需引以为戒。</p>
 <p>后续继续跟进。</p>
 
-        </div>
-        
-    
-</div></div>
-            
-    <div class="pagination">
-        <div class="pagination__buttons">
-            </div>
     </div>
-<footer class="footer">
-                    <div class="footer__inner"><div class="copyright copyright--user"><span>© 2019 <a href="https://www.wangbo.im">wangbo&apos; blog</a> :: <a href="https://github.wangbo.im">Github</a> :: Powered by <a href="https://www.getzola.org/">Zola</a></span></div>
-    <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;assets&#x2F;js&#x2F;main.js"></script>
-</div>
-                    
 
-                </footer></div>
+    
+    
+
+    <div class="post-footer">
+        
+            
+                <div class="post-tags">
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;java&#x2F;">#java</a>
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;cache&#x2F;">#cache</a>
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;tcp&#x2F;">#tcp</a>
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;fast-retransmit&#x2F;">#fast-retransmit</a>
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;congistion&#x2F;">#congistion</a>
+                    
+                </div>
+            
+            
+                <div class="post-nav">
+                    
+                        <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-02-01-a-gc-tuning-practise-involving-mysql&#x2F;">‹ JAVA 服务从物理机迁移到 Docker 私有云背景下的 GC 调优实践</a>
+                    
+                    
+                        <a class="next" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-03-11-a-online-issue-caused-by-dns-unavailability&#x2F;">一次由 DNS 解析服务失效引发的线上 DB 连接打满的事故经历 ›</a>
+                    
+                    
+                    
+                </div>
+            
+
+        
+
+    </div>
+
+    
+    
+</article>
+
+
+                </div>
+            </main>
+
+            
+            
+        </div>
+
+      
+          <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
+      
     </body>
+
 </html>

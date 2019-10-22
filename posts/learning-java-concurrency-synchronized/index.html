@@ -1,102 +1,129 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
-    <title>Learning Java Concurrency - synchronized - Elvis Wang</title>
-    
-    
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <meta name="description" content="wangbo’s home &amp; blog"/>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
-    <meta property="og:title" content="
-    wangbo’s blog -&nbsp;Learning Java Concurrency - synchronized" />
-    <meta property="og:type" content="website"/>
-    <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;learning-java-concurrency-synchronized&#x2F;"/>
-    <meta property="og:description" content="&lt;p&gt;synchronized，同步控制器，是Java原生提供的多线程同步控制的工具，是Java语法的一部分。&lt;&#x2F;p&gt;
-&lt;p&gt;synchronized在语义上等同于一个独占锁。synchronized可以用来修饰一个方法，标识该方法是可同步的；也可以用来修饰语句块，标识该语句块是同步的。在代码经过编译之后，JVM会在方法或者语句块的前后插入&lt;co…"/>
-    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
-    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;red.css">
-<link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>wangbo’s blog - Learning Java Concurrency - synchronized</title>
+
+      
+
+      
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
+          
+      
+
+      
+          <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
+          
+      
+
+      
+      
+    </head>
+
     <body>
-        <div class="container full">
-<header class="header">
-    <div class="header__inner">
-        <div class="header__logo">
-            <a href="&#x2F;">
-    <div class="logo">
-        WB Prime
-    </div>
-</a>
-        </div>
-        <div class="menu-trigger">menu</div>
-    </div>
+        <div class="container">
+
+            <div id="mobile-navbar" class="mobile-navbar">
+              <div class="mobile-header-logo">
+                <a href="/" class="logo">WB Prime</a>
+              </div>
+              <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+
+            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
+              <ul class="mobile-menu-list">
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im&#x2F;categories">
+                            Categories
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im&#x2F;tags">
+                            Tags
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im&#x2F;about">
+                            About
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https:&#x2F;&#x2F;github.wangbo.im">
+                            Github
+                        </a>
+                    </li>
+                
+              </ul>
+            </nav>
+
+            <header id="header">
+                <div class="logo"><a href="https:&#x2F;&#x2F;www.wangbo.im">WB Prime</a></div>
+                <nav class="menu">
+                    <ul>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im&#x2F;categories">
+                                    Categories
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im&#x2F;tags">
+                                    Tags
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im&#x2F;about">
+                                    About
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https:&#x2F;&#x2F;github.wangbo.im">
+                                    Github
+                                </a>
+                            </li>
+                        
+                    </ul>
+                </nav>
+            </header>
+
+            <main>
+                <div class="content" id="mobile-panel">
+                    
+
+
+
+<article class="post">
     
-    <nav class="menu">
-        <ul class="menu__inner menu__inner--desktop">
-            
-            
-                    <li>
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
-                    </li>
-                
-                    <li>
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
-                    </li>
-                
-                    <li>
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
-                    </li>
-                
-            </ul>
-
-        <ul class="menu__inner menu__inner--mobile">
-            
-        <li>
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
-        </li>
-        <li>
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
-        </li>
-        <li>
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
-        </li>
-        </ul>
-    </nav>
-
-    </header>
-<div class="content"><div class="post">
-        <h1 class="post-title">
+    <header class="post__header">
+        <h1 class="post__title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;learning-java-concurrency-synchronized&#x2F;">Learning Java Concurrency - synchronized</a>
         </h1>
-        
-    <div class="post-meta">
-        <span class="post-date">2016.04.01
-                </span>
-
-        <span class="post-author"></span>
-
-        
-
-    
-    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;learning-java-concurrency&#x2F;">Learning Java Concurrency</a>} 
-
+        <div class="post__meta">
+            <span class="post__time">2016-04-01</span>
             
-    ::
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;java&#x2F;">java</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;concurrency&#x2F;">concurrency</a>
-        
-    
-            
-        
-    </div>
+        </div>
+    </header>
 
-
-
-        
-
-        <div class="post-content">
-            <p>synchronized，同步控制器，是Java原生提供的多线程同步控制的工具，是Java语法的一部分。</p>
+    <div class="post-content">
+      <p>synchronized，同步控制器，是Java原生提供的多线程同步控制的工具，是Java语法的一部分。</p>
 <p>synchronized在语义上等同于一个独占锁。synchronized可以用来修饰一个方法，标识该方法是可同步的；也可以用来修饰语句块，标识该语句块是同步的。在代码经过编译之后，JVM会在方法或者语句块的前后插入<code>monitorenter</code>和<code>monitorexit</code>的虚拟机指令，这两条指令又会隐式地调用<code>lock</code>原语。</p>
 <p>synchronized可以使用在普通方法里，也可以使用在静态方法里。</p>
 <pre style="background-color:#282828;">
@@ -333,21 +360,54 @@ Other versions</h2>
 <p>从性能上讲，synchronized是Java锁，ReentrantLock是使用的底层系统实现，所以ReentrantLock会比synchronized具有更高的性能。根据《深入理解Java虚拟机》（周志明 著）的实验，JDK 1.6以后，JVM实现对synchronized的编译进行了大幅度的优化，两者的性能差别不大；在可以遇见到的未来，JVM的实现团队们肯定会逐步地优化作为Java语法的synchronized的编译和执行，而ReentrantLock作为Java附带的API库，优化的空间不是很大，所以二者的性能差异不应该成为进行选择的主要依据。</p>
 <p>synchronized具有比ReentrantLock更底层的语法和更简单的使用；ReentrantLock具有比synchronized更优秀的性能和更复杂的功能。在实际的使用中，主要应根据使用场景来选择使用的工具；在synchronized可以解决问题的场合，不必要为了追求所谓的一点点性能就去使用ReentrantLock或者其他JUC的API。</p>
 
-        </div>
-        
-    
-</div></div>
-            
-    <div class="pagination">
-        <div class="pagination__buttons">
-            </div>
     </div>
-<footer class="footer">
-                    <div class="footer__inner"><div class="copyright copyright--user"><span>© 2019 <a href="https://www.wangbo.im">wangbo&apos; blog</a> :: <a href="https://github.wangbo.im">Github</a> :: Powered by <a href="https://www.getzola.org/">Zola</a></span></div>
-    <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;assets&#x2F;js&#x2F;main.js"></script>
-</div>
-                    
 
-                </footer></div>
+    
+    
+
+    <div class="post-footer">
+        
+            
+                <div class="post-tags">
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;java&#x2F;">#java</a>
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;concurrency&#x2F;">#concurrency</a>
+                    
+                </div>
+            
+            
+                <div class="post-nav">
+                    
+                        <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;learning-java-concurrency-content&#x2F;">‹ Learning Java Concurrency - Content&#x2F;目录</a>
+                    
+                    
+                        <a class="next" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2016-04-06-learning-java-concurrency-wait-notify&#x2F;">Learning Java Concurrency - wait &amp; notify ›</a>
+                    
+                    
+                    
+                </div>
+            
+
+        
+
+    </div>
+
+    
+    
+</article>
+
+
+                </div>
+            </main>
+
+            
+            
+        </div>
+
+      
+          <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
+      
     </body>
+
 </html>

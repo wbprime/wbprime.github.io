@@ -1,103 +1,129 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
-    <title>在 Vert.x 项目中集成使用 Guice 依赖注入 - Elvis Wang</title>
-    
-    
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <meta name="description" content="wangbo’s home &amp; blog"/>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
-    <meta property="og:title" content="
-    wangbo’s blog -&nbsp;在 Vert.x 项目中集成使用 Guice 依赖注入" />
-    <meta property="og:type" content="website"/>
-    <meta property="og:url" content="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-03-12-combine-vertx-and-guice-dependency-injection&#x2F;"/>
-    <meta property="og:description" content="&lt;p&gt;本文介绍了项目中在基于 &lt;a href=&quot;https:&#x2F;&#x2F;vertx.io&quot; title=&quot;Eclipse Vert.x&quot;&gt;Eclipse Vert.x&lt;&#x2F;a&gt; 的 Verticle 中使用 &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x…"/>
-    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;style.css">
-    <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;color&#x2F;red.css">
-<link rel="shortcut icon" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;favicon.ico" type="image/x-icon" /></head>
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>wangbo’s blog - 在 Vert.x 项目中集成使用 Guice 依赖注入</title>
+
+      
+
+      
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
+          
+      
+
+      
+          <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
+          
+      
+
+      
+      
+    </head>
+
     <body>
-        <div class="container full">
-<header class="header">
-    <div class="header__inner">
-        <div class="header__logo">
-            <a href="&#x2F;">
-    <div class="logo">
-        WB Prime
-    </div>
-</a>
-        </div>
-        <div class="menu-trigger">menu</div>
-    </div>
+        <div class="container">
+
+            <div id="mobile-navbar" class="mobile-navbar">
+              <div class="mobile-header-logo">
+                <a href="/" class="logo">WB Prime</a>
+              </div>
+              <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+
+            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
+              <ul class="mobile-menu-list">
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im&#x2F;categories">
+                            Categories
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im&#x2F;tags">
+                            Tags
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im&#x2F;about">
+                            About
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https:&#x2F;&#x2F;github.wangbo.im">
+                            Github
+                        </a>
+                    </li>
+                
+              </ul>
+            </nav>
+
+            <header id="header">
+                <div class="logo"><a href="https:&#x2F;&#x2F;www.wangbo.im">WB Prime</a></div>
+                <nav class="menu">
+                    <ul>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im&#x2F;categories">
+                                    Categories
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im&#x2F;tags">
+                                    Tags
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im&#x2F;about">
+                                    About
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https:&#x2F;&#x2F;github.wangbo.im">
+                                    Github
+                                </a>
+                            </li>
+                        
+                    </ul>
+                </nav>
+            </header>
+
+            <main>
+                <div class="content" id="mobile-panel">
+                    
+
+
+
+<article class="post">
     
-    <nav class="menu">
-        <ul class="menu__inner menu__inner--desktop">
-            
-            
-                    <li>
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
-                    </li>
-                
-                    <li>
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
-                    </li>
-                
-                    <li>
-                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
-                    </li>
-                
-            </ul>
-
-        <ul class="menu__inner menu__inner--mobile">
-            
-        <li>
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">About</a>
-        </li>
-        <li>
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">Categories</a>
-        </li>
-        <li>
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">Tags</a>
-        </li>
-        </ul>
-    </nav>
-
-    </header>
-<div class="content"><div class="post">
-        <h1 class="post-title">
+    <header class="post__header">
+        <h1 class="post__title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-03-12-combine-vertx-and-guice-dependency-injection&#x2F;">在 Vert.x 项目中集成使用 Guice 依赖注入</a>
         </h1>
-        
-    <div class="post-meta">
-        <span class="post-date">2019.03.31
-                </span>
-
-        <span class="post-author"></span>
-
-        
-
-    
-    :: {<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories&#x2F;vertx&#x2F;">Vertx</a>} 
-
+        <div class="post__meta">
+            <span class="post__time">2019-03-31</span>
             
-    ::
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;vert-x&#x2F;">vert.x</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;guice&#x2F;">guice</a>
-        
-    #<a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;jsr303&#x2F;">jsr303</a>
-        
-    
-            
-        
-    </div>
+        </div>
+    </header>
 
-
-
-        
-
-        <div class="post-content">
-            <p>本文介绍了项目中在基于 <a href="https://vertx.io" title="Eclipse Vert.x">Eclipse Vert.x</a> 的 Verticle 中使用 <a href="https://github.com/google/guice" title="Google Guice">Google Guice</a> 进行依赖注入的实践，主要的思路是在 <code>io.vertx.core.Verticle#start</code> 方法中主动创建 <code>com.google.inject.Injector</code> 注入器实例并实行注入操作，在注入操作成功结束之后再进行后续的操作。</p>
+    <div class="post-content">
+      <p>本文介绍了项目中在基于 <a href="https://vertx.io" title="Eclipse Vert.x">Eclipse Vert.x</a> 的 Verticle 中使用 <a href="https://github.com/google/guice" title="Google Guice">Google Guice</a> 进行依赖注入的实践，主要的思路是在 <code>io.vertx.core.Verticle#start</code> 方法中主动创建 <code>com.google.inject.Injector</code> 注入器实例并实行注入操作，在注入操作成功结束之后再进行后续的操作。</p>
 <p>在开发结束后的某一天，通过万能的搜索发现已经有人提供了基于 <a href="https://github.com/google/guice" title="Google Guice">Google Guice</a> 的 <a href="https://vertx.io" title="Eclipse Vert.x">Eclipse Vert.x</a> 扩展: <a href="https://github.com/ef-labs/vertx-guice" title="Google Guice">Vert.x Guice Extension</a>。<a href="https://github.com/ef-labs/vertx-guice" title="Google Guice">Vert.x Guice Extension</a> 扩展了 <a href="https://vertx.io" title="Eclipse Vert.x">Vert.x</a> 内置的 <code>io.vertx.core.spi.VerticleFactory</code> 机制，能够使用 SPI 的方式加载需要的
 Guice 依赖。</p>
 <p>本文总结一下自己的实现思路，然后分析 <a href="https://github.com/ef-labs/vertx-guice" title="Google Guice">Vert.x Guice Extension</a> 的实现细节，希望能提高自己的代码水平。</p>
@@ -434,21 +460,56 @@ GuiceVerticleFactory</h2>
 <p><a href="https://github.com/ef-labs/vertx-guice" title="Google Guice">Vert.x Guice Extension</a> 的实现充分利用了 Vert.x 的扩展机制，解耦合了 Verticle 的实现和依赖注入，思路非常漂亮。对于功能的添加又很克制，没有尝试去实现其他没有必要的 auto-wired、package scanning 等功能（如果需要这些功能，为什么不直接使用 <a href="https://spring.io">Spring Framework</a> 呢？）。</p>
 <p>以上</p>
 
-        </div>
-        
-    
-</div></div>
-            
-    <div class="pagination">
-        <div class="pagination__buttons">
-            </div>
     </div>
-<footer class="footer">
-                    <div class="footer__inner"><div class="copyright copyright--user"><span>© 2019 <a href="https://www.wangbo.im">wangbo&apos; blog</a> :: <a href="https://github.wangbo.im">Github</a> :: Powered by <a href="https://www.getzola.org/">Zola</a></span></div>
-    <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;assets&#x2F;js&#x2F;main.js"></script>
-</div>
-                    
 
-                </footer></div>
+    
+    
+
+    <div class="post-footer">
+        
+            
+                <div class="post-tags">
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;vert-x&#x2F;">#vert.x</a>
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;guice&#x2F;">#guice</a>
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;jsr303&#x2F;">#jsr303</a>
+                    
+                </div>
+            
+            
+                <div class="post-nav">
+                    
+                        <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-03-21-a-product-env-bug-misused-hashmap-nullability&#x2F;">‹ 一次由于误用 HashMap 值的 null 特性的 BUG</a>
+                    
+                    
+                        <a class="next" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-03-31-a-bug-introduced-by-optionallong-abuse&#x2F;">一次由于滥用 OptionalLong.orElse 引发的 BUG ›</a>
+                    
+                    
+                    
+                </div>
+            
+
+        
+
+    </div>
+
+    
+    
+</article>
+
+
+                </div>
+            </main>
+
+            
+            
+        </div>
+
+      
+          <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
+      
     </body>
+
 </html>
