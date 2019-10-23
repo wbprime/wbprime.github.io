@@ -9,7 +9,7 @@
       <!-- Enable responsiveness on mobile devices-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
-      <title>wangbo’s blog - JOOQ 的使用 - 执行 SQL 命令语句</title>
+      <title>wangbo’s blog - JOOQ 的使用 - 执行 SQL 语句 (SQL Executor)</title>
 
       
 
@@ -114,7 +114,7 @@
     
     <header class="post__header">
         <h1 class="post__title">
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-10-17-jooq-usecases-sql-executor&#x2F;">JOOQ 的使用 - 执行 SQL 命令语句</a>
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-10-17-jooq-usecases-sql-executor&#x2F;">JOOQ 的使用 - 执行 SQL 语句 (SQL Executor)</a>
         </h1>
         <div class="post__meta">
             <span class="post__time">2019-10-17</span>
@@ -124,7 +124,7 @@
 
     <div class="post-content">
       <p><a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 是基于 JDBC 之上的一个抽象层，提供了多种多样的模型来与关系型数据库进行互操作；其使用与 <a href="https://mybatis.org/mybatis-3/">mybatis</a> 和 <a href="http://hibernate.org/orm/">Hibernate ORM</a> 不同的思路来实现 <a href="https://en.wikipedia.org/wiki/Object-relational_mapping">对象关系映射 ORM</a> 。</p>
-<p>本篇主要介绍基于 <a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 的 SQL 命令语句执行。</p>
+<p>本篇主要介绍基于 <a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 的 SQL 命令执行 (SQL Executor) 。</p>
 <p><a name="continue-reading"></a></p>
 <p><a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 可以用来执行裸 SQL 命令语句，也可以用来执行带参数绑定的 SQL 命令语句（只要你的 SQL 正确的话）。</p>
 <p>在 <a href="https://maven.apache.org/">Maven</a> 中使用 <a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a>，需要在 <code>pom.xml</code> 文件中添加以下依赖：</p>
@@ -206,7 +206,7 @@ delete</h1>
             
                 <div class="post-nav">
                     
-                        <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-10-17-jooq-usecases-sql-builder&#x2F;">‹ JOOQ 的使用 - 生成 SQL 命令语句</a>
+                        <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-10-17-jooq-usecases-sql-builder&#x2F;">‹ JOOQ 的使用 - 拼接 SQL 语句 (SQL Builder)</a>
                     
                     
                         <a class="next" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-10-21-jooq-usecases-code-generating&#x2F;">JOOQ 的使用 - 代码生成配置 (PostgreSQL &amp; DDL Driven) ›</a>
