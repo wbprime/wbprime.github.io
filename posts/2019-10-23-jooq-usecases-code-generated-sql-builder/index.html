@@ -124,7 +124,7 @@
 
     <div class="post-content">
       <p><a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 是基于 JDBC 之上的一个抽象层，提供了多种多样的模型来与关系型数据库进行互操作；其使用与 <a href="https://mybatis.org/mybatis-3/">mybatis</a> 和 <a href="http://hibernate.org/orm/">Hibernate ORM</a> 不同的思路来实现 <a href="https://en.wikipedia.org/wiki/Object-relational_mapping">对象关系映射 ORM</a> 。</p>
-<p><a href="@/posts/2019-10-21-jooq-usecases-code-generating/index.md">JOOQ 的使用 - 代码生成配置 (PostgreSQL &amp; DDL Driven)</a> 介绍了使用 <a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 为数据库表生成实体类代码；<a href="@/posts/2019-10-17-jooq-usecases-sql-builder/index.md">JOOQ 的使用 - 拼接 SQL 语句 (SQL Builder)</a> 介绍了基于 <a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 的 SQL 命令语句拼接；作为对比，本篇主要介绍基于生成代码的 SQL 语句拼接 (SQL Builder) 。</p>
+<p><a href="@/posts/2019-10-21-jooq-usecases-code-generating/index.md">JOOQ 的使用 - 代码生成配置 (PostgreSQL &amp; DDL Driven)</a> 介绍了使用 <a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 为数据库表生成实体类代码；<a href="@/posts/2019-10-17-jooq-usecases-sql-builder/index.md">JOOQ 的使用 - 拼接 SQL 语句 (SQL Builder)</a> 介绍了基于 <a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 的 SQL 语句拼接；作为对比，本篇主要介绍基于生成代码的 SQL 语句拼接 (SQL Builder) 。</p>
 <p><a name="continue-reading"></a></p>
 <h1 id="generated-classes"><a class="zola-anchor" href="#generated-classes" aria-label="Anchor link for: generated-classes">🔗</a>
 Generated Classes</h1>
@@ -424,7 +424,7 @@ delete</h2>
 <p>完整的示例代码可以参见 <a href="https://github.com/wbprime/java-mods/tree/master/jooq-usecases">jOOQ Usecases</a> 。</p>
 <p>想了解更多的 <a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 用法，可以阅读 <a href="https://www.jooq.org/learn/" title="jOOQ Documentation">官方文档</a> 。</p>
 <hr />
-<p>可以明显感觉到，使用 <a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 生成的代码可以为 SQL 拼接提供类型安全的保证。</p>
+<p>可以明显感觉到，使用 <a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 生成的代码为 SQL 拼接提供了更强的类型安全保证。</p>
 <p>以上。</p>
 
     </div>
@@ -450,6 +450,8 @@ delete</h2>
                     
                         <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-10-21-jooq-usecases-code-generating&#x2F;">‹ JOOQ 的使用 - 代码生成配置 (PostgreSQL &amp; DDL Driven)</a>
                     
+                    
+                        <a class="next" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-10-23-jooq-usecases-code-generated-sql-executor&#x2F;">JOOQ 的使用 - 从生成代码执行 SQL 命令 (SQL Executor) ›</a>
                     
                     
                     

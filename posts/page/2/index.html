@@ -113,6 +113,30 @@
                                     
     <header class="post__header">
         <h1 class="post__title">
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-08-31-slow-mysql-query-on-too-many-cas-updating-failure&#x2F;">一次由于线上 MySQL 并发抢占更新冲突引发的 BUG</a>
+        </h1>
+        <div class="post__meta">
+            <span class="post__time">2019-08-31</span>
+            
+        </div>
+    </header>
+
+                                    <div class="post__summary">
+                                        <p>前几天在处理线上问题的时候，发现了一个由于多客户端并发使用 CAS 去更新相同记录而导致的锁冲突，引发了数据库管理系统的慢查询累积报警。慢查询导致连接数增加，并引起插入和更新操作被堵塞，引起少量的业务堆积。</p>
+<p>一图胜千言。</p>
+<p><img src="https://www.wangbo.im/posts/2019-08-31-slow-mysql-query-on-too-many-cas-updating-failure/mysql.all.png" alt="mysql_stats.all" /></p>
+<p>虽然定位并解决了问题，但还是需要事后总结一下，以资后鉴。</p>
+
+                                    </div>
+                                    <div class="read-more">
+                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-08-31-slow-mysql-query-on-too-many-cas-updating-failure&#x2F;">Read more...</a>
+                                    </div>
+                                </article>
+                            
+                                <article class="post">
+                                    
+    <header class="post__header">
+        <h1 class="post__title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-08-28-intro-to-spring-cloud-gateway-slide&#x2F;">Intro to Spring Cloud Gateway</a>
         </h1>
         <div class="post__meta">
@@ -481,29 +505,6 @@ ID 与内部用户 ID 的对应关系；在登录请求时，根据外部项目 
                                     </div>
                                     <div class="read-more">
                                         <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-03-11-a-online-issue-caused-by-dns-unavailability&#x2F;">Read more...</a>
-                                    </div>
-                                </article>
-                            
-                                <article class="post">
-                                    
-    <header class="post__header">
-        <h1 class="post__title">
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-02-13-a-cache-timeout-tuning-practise&#x2F;">一次 Cache 问题排查实践</a>
-        </h1>
-        <div class="post__meta">
-            <span class="post__time">2019-02-13</span>
-            
-        </div>
-    </header>
-
-                                    <div class="post__summary">
-                                        <p>负责的服务在线上环境出现了丢弃请求的现象。经排查是由于请求队列中的若干请求处理时间过长，导致队列之后的请求等待以致超时，而在队列中超时的请求会被框架直接抛弃掉。</p>
-<p>排查服务日志，发现访问 Cache 超时的量有明显增加；较多的 Cache 超时导致更多的不必要 DB 访问，以致请求的响应时间变长；同时，更多的 DB 访问压力也会对 DB 的平均响应时间有影响；Cache 访问和 DB 访问超时导致请求响应超时，从而导致抛弃量。</p>
-<p>问题在于 Cache 访问为什么会出现大量超时？一路排查下去发现有可能是 TCP 丢包导致的快速重传(fast retransmission)引起的。</p>
-
-                                    </div>
-                                    <div class="read-more">
-                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-02-13-a-cache-timeout-tuning-practise&#x2F;">Read more...</a>
                                     </div>
                                 </article>
                             
