@@ -57,14 +57,14 @@
                     </li>
                 
                     <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;about">
-                            About
+                        <a href="https:&#x2F;&#x2F;github.wangbo.im">
+                            Github
                         </a>
                     </li>
                 
                     <li class="mobile-menu-item">
-                        <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                            Github
+                        <a href="https://www.wangbo.im&#x2F;about">
+                            About
                         </a>
                     </li>
                 
@@ -89,14 +89,14 @@
                             </li>
                         
                             <li>
-                                <a href="https://www.wangbo.im&#x2F;about">
-                                    About
+                                <a href="https:&#x2F;&#x2F;github.wangbo.im">
+                                    Github
                                 </a>
                             </li>
                         
                             <li>
-                                <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                                    Github
+                                <a href="https://www.wangbo.im&#x2F;about">
+                                    About
                                 </a>
                             </li>
                         
@@ -166,15 +166,15 @@ Common</h2>
 </span></pre><h2 id="select"><a class="zola-anchor" href="#select" aria-label="Anchor link for: select">🔗</a>
 select</h2>
 <pre style="background-color:#282828;">
-<span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Result</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Record4</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Long</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">&gt;&gt; fetched </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> dsl
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">select(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.ID, </span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.FIRST_NAME,
-</span><span style="color:#fdf4c1;">        </span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.LAST_NAME, </span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.BOOK.TITLE)
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">from(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.as(</span><span style="color:#b8bb26;">&quot;u&quot;</span><span style="color:#fdf4c1;">))
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">join(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.BOOK.as(</span><span style="color:#b8bb26;">&quot;b&quot;</span><span style="color:#fdf4c1;">))
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">on(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.ID.eq(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.BOOK.AUTHOR_ID))
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">where(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.FIRST_NAME.eq(</span><span style="color:#b8bb26;">&quot;Elvis&quot;</span><span style="color:#fdf4c1;">))
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">and(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.LAST_NAME.eq(</span><span style="color:#b8bb26;">&quot;Wang&quot;</span><span style="color:#fdf4c1;">))
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">fetch()</span><span style="color:#fdf4c1aa;">;
+<span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Result</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Record4</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Long</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">&gt;&gt; fetched </span><span style="color:#fe8019;">=
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">dsl.</span><span style="color:#fdf4c1;">select(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.ID, </span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.FIRST_NAME,
+</span><span style="color:#fdf4c1;">            </span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.LAST_NAME, </span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.BOOK.TITLE)
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">from(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.as(</span><span style="color:#b8bb26;">&quot;u&quot;</span><span style="color:#fdf4c1;">))
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">join(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.BOOK.as(</span><span style="color:#b8bb26;">&quot;b&quot;</span><span style="color:#fdf4c1;">))
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">on(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.ID.eq(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.BOOK.AUTHOR_ID))
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">where(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.FIRST_NAME.eq(</span><span style="color:#b8bb26;">&quot;Elvis&quot;</span><span style="color:#fdf4c1;">))
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">and(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.LAST_NAME.eq(</span><span style="color:#b8bb26;">&quot;Wang&quot;</span><span style="color:#fdf4c1;">))
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">fetch()</span><span style="color:#fdf4c1aa;">;
 </span><span style="color:#fdf4c1aa;">
 </span><span style="color:#fdf4c1aa;">fetched.</span><span style="color:#fdf4c1;">forEach(
 </span><span style="color:#fdf4c1;">    </span><span style="color:#fdf4c1;">r </span><span style="color:#fa5c4b;">-&gt; </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1;">.out.println(
@@ -242,6 +242,8 @@ delete</h2>
                     
                         <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-10-23-jooq-usecases-code-generated-sql-builder&#x2F;">‹ JOOQ 的使用 - 从生成代码拼接 SQL 语句 (SQL Builder)</a>
                     
+                    
+                        <a class="next" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-10-23-jooq-usecases-code-generated-basic-orm&#x2F;">JOOQ 的使用 - 基于代码生成的 ORM (CRUD &amp; DAO) ›</a>
                     
                     
                     

@@ -1,0 +1,280 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>wangbo’s blog - JOOQ 的使用 - 基于代码生成的 ORM (CRUD &amp; DAO)</title>
+
+      
+
+      
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
+          
+      
+
+      
+          <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
+          
+      
+
+      
+      
+    </head>
+
+    <body>
+        <div class="container">
+
+            <div id="mobile-navbar" class="mobile-navbar">
+              <div class="mobile-header-logo">
+                <a href="/" class="logo">WB Prime</a>
+              </div>
+              <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+
+            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
+              <ul class="mobile-menu-list">
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im&#x2F;categories">
+                            Categories
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im&#x2F;tags">
+                            Tags
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https:&#x2F;&#x2F;github.wangbo.im">
+                            Github
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im&#x2F;about">
+                            About
+                        </a>
+                    </li>
+                
+              </ul>
+            </nav>
+
+            <header id="header">
+                <div class="logo"><a href="https:&#x2F;&#x2F;www.wangbo.im">WB Prime</a></div>
+                <nav class="menu">
+                    <ul>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im&#x2F;categories">
+                                    Categories
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im&#x2F;tags">
+                                    Tags
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https:&#x2F;&#x2F;github.wangbo.im">
+                                    Github
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im&#x2F;about">
+                                    About
+                                </a>
+                            </li>
+                        
+                    </ul>
+                </nav>
+            </header>
+
+            <main>
+                <div class="content" id="mobile-panel">
+                    
+
+
+
+<article class="post">
+    
+    <header class="post__header">
+        <h1 class="post__title">
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-10-23-jooq-usecases-code-generated-basic-orm&#x2F;">JOOQ 的使用 - 基于代码生成的 ORM (CRUD &amp; DAO)</a>
+        </h1>
+        <div class="post__meta">
+            <span class="post__time">2019-10-23</span>
+            
+        </div>
+    </header>
+
+    <div class="post-content">
+      <p><a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 是基于 JDBC 之上的一个抽象层，提供了多种多样的模型来与关系型数据库进行互操作；其使用与 <a href="https://mybatis.org/mybatis-3/">mybatis</a> 和 <a href="http://hibernate.org/orm/">Hibernate ORM</a> 不同的思路来实现 <a href="https://en.wikipedia.org/wiki/Object-relational_mapping">对象关系映射 ORM</a> 。</p>
+<p><a href="@/posts/2019-10-21-jooq-usecases-code-generating/index.md">JOOQ 的使用 - 代码生成配置 (PostgreSQL &amp; DDL Driven)</a> 介绍了使用 <a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 为数据库表生成实体类代码；本篇主要介绍基于生成的关系型实体的 CRUD 和 DAO 实践。</p>
+<p><a name="continue-reading"></a></p>
+<h1 id="generated-classes"><a class="zola-anchor" href="#generated-classes" aria-label="Anchor link for: generated-classes">🔗</a>
+Generated Classes</h1>
+<p>本文使用 <a href="@/posts/2019-10-21-jooq-usecases-code-generating/index.md">代码生成</a> 里面的基于 <a href="https://www.postgresql.org" title="PostgreSQL: The World's Most Advanced Open Source Relational Database">PostgreSQL</a> 实例驱动生成的代码，代码结构如下：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">├── tables
+</span><span style="color:#fdf4c1aa;">│   ├── daos
+</span><span style="color:#fdf4c1aa;">│   │   ├── AuthorDao.java
+</span><span style="color:#fdf4c1aa;">│   │   └── BookDao.java
+</span><span style="color:#fdf4c1aa;">│   ├── interfaces
+</span><span style="color:#fdf4c1aa;">│   │   ├── IAuthor.java
+</span><span style="color:#fdf4c1aa;">│   │   └── IBook.java
+</span><span style="color:#fdf4c1aa;">│   ├── pojos
+</span><span style="color:#fdf4c1aa;">│   │   ├── Author.java
+</span><span style="color:#fdf4c1aa;">│   │   └── Book.java
+</span><span style="color:#fdf4c1aa;">│   ├── records
+</span><span style="color:#fdf4c1aa;">│   │   ├── AuthorRecord.java
+</span><span style="color:#fdf4c1aa;">│   │   └── BookRecord.java
+</span><span style="color:#fdf4c1aa;">│   ├── Author.java
+</span><span style="color:#fdf4c1aa;">│   └── Book.java
+</span><span style="color:#fdf4c1aa;">├── DefaultCatalog.java
+</span><span style="color:#fdf4c1aa;">├── Indexes.java
+</span><span style="color:#fdf4c1aa;">├── Keys.java
+</span><span style="color:#fdf4c1aa;">├── Public.java
+</span><span style="color:#fdf4c1aa;">├── Sequences.java
+</span><span style="color:#fdf4c1aa;">└── Tables.java
+</span></pre><h1 id="crud"><a class="zola-anchor" href="#crud" aria-label="Anchor link for: crud">🔗</a>
+CRUD</h1>
+<p>对于设置了主键 (Primary Key) 的数据表，<a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 代码生成插件会为其生成一个 <code>org.jooq.UpdatableRecord</code> 类的子类，如为数据表 <code>author</code> 生成类 <code>AuthorRecord</code> 。对该类可以直接执行 CRUD 的操作。</p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">DSLContext</span><span style="color:#fdf4c1aa;"> dsl </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">DSL</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">using(</span><span style="color:#8ec07c;">SQLDialect</span><span style="color:#fdf4c1;">.POSTGRES)</span><span style="color:#fdf4c1aa;">; </span><span style="font-style:italic;color:#928374;">// Only for show case
+</span><span style="color:#fdf4c1aa;">
+</span><span style="font-style:italic;color:#928374;">// READ
+</span><span style="color:#8ec07c;">AuthorRecord</span><span style="color:#fdf4c1aa;"> fetched </span><span style="color:#fe8019;">=
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">dsl.</span><span style="color:#fdf4c1;">fetchOne(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR, </span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.ID.eq(</span><span style="color:#d3869b;">1993</span><span style="color:#fa5c4b;">L</span><span style="color:#fdf4c1;">))</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">(</span><span style="color:#d3869b;">null </span><span style="color:#fe8019;">==</span><span style="color:#fdf4c1aa;"> fetched) {
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">fetched </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> dsl.</span><span style="color:#fdf4c1;">newRecord(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">fetched.</span><span style="color:#fdf4c1;">setId(</span><span style="color:#d3869b;">1993</span><span style="color:#fa5c4b;">L</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">fetched.</span><span style="color:#fdf4c1;">setFirstName(</span><span style="color:#b8bb26;">&quot;Elvis&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">fetched.</span><span style="color:#fdf4c1;">setLastName(</span><span style="color:#b8bb26;">&quot;Wang&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">fetched.</span><span style="color:#fdf4c1;">setDateOfBirth(</span><span style="color:#8ec07c;">LocalDate</span><span style="color:#fdf4c1;">.of(</span><span style="color:#d3869b;">1993</span><span style="color:#fdf4c1;">, </span><span style="color:#d3869b;">5</span><span style="color:#fdf4c1;">, </span><span style="color:#d3869b;">25</span><span style="color:#fdf4c1;">))</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">fetched.</span><span style="color:#fdf4c1;">setYearOfBirth(</span><span style="color:#d3869b;">1993</span><span style="color:#fa5c4b;">L</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="font-style:italic;color:#928374;">// CREATE on not-existed, otherwise UPDATE
+</span><span style="color:#fdf4c1aa;">fetched.</span><span style="color:#fdf4c1;">store()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="font-style:italic;color:#928374;">// DELETE
+</span><span style="color:#fdf4c1aa;">fetched.</span><span style="color:#fdf4c1;">delete()</span><span style="color:#fdf4c1aa;">;
+</span></pre>
+<p>如果数据表没有设置主键，则生成的类是 <code>org.jooq.TableRecord</code> 的子类而非 <code>org.jooq.UpdatableRecord</code> 的子类，也就没有对 CRUD 的支持。</p>
+<h1 id="dao"><a class="zola-anchor" href="#dao" aria-label="Anchor link for: dao">🔗</a>
+DAO</h1>
+<p><a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 为数据表生成的 DAO 实现类实现了 <code>org.jooq.DAO</code> 接口，如为数据表 <code>author</code> 生成类 <code>AuthorDao</code>，可以支持以下方法：</p>
+<pre style="background-color:#282828;">
+<span style="font-style:italic;color:#928374;">// &lt;R&gt; corresponds to the DAO&#39;s related table
+</span><span style="font-style:italic;color:#928374;">// &lt;P&gt; corresponds to the DAO&#39;s related generated POJO type
+</span><span style="font-style:italic;color:#928374;">// &lt;T&gt; corresponds to the DAO&#39;s related table&#39;s primary key type.
+</span><span style="font-style:italic;color:#928374;">// Note that multi-column primary keys are not yet supported by DAOs
+</span><span style="color:#fa5c4b;">public interface </span><span style="color:#8ec07c;">DAO</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fdf4c1;">R </span><span style="color:#fa5c4b;">extends </span><span style="color:#8ec07c;">TableRecord</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">R</span><span style="color:#fdf4c1aa;">&gt;, </span><span style="color:#fdf4c1;">P</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fdf4c1;">T</span><span style="color:#fdf4c1aa;">&gt; {
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="font-style:italic;color:#928374;">// These methods allow for inserting POJOs
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">void </span><span style="color:#8ec07c;">insert</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">P </span><span style="color:#fdf4c1;">object</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">DataAccessException</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">void </span><span style="color:#8ec07c;">insert</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">P</span><span style="color:#fe8019;">... </span><span style="color:#fdf4c1;">objects</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">DataAccessException</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">void </span><span style="color:#8ec07c;">insert</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">Collection</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">P</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">objects</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">DataAccessException</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="font-style:italic;color:#928374;">// These methods allow for updating POJOs based on their primary key
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">void </span><span style="color:#8ec07c;">update</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">P </span><span style="color:#fdf4c1;">object</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">DataAccessException</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">void </span><span style="color:#8ec07c;">update</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">P</span><span style="color:#fe8019;">... </span><span style="color:#fdf4c1;">objects</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">DataAccessException</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">void </span><span style="color:#8ec07c;">update</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">Collection</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">P</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">objects</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">DataAccessException</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="font-style:italic;color:#928374;">// These methods allow for deleting POJOs based on their primary key
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">void </span><span style="color:#8ec07c;">delete</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">P</span><span style="color:#fe8019;">... </span><span style="color:#fdf4c1;">objects</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">DataAccessException</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">void </span><span style="color:#8ec07c;">delete</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">Collection</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">P</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">objects</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">DataAccessException</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">void </span><span style="color:#8ec07c;">deleteById</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">T</span><span style="color:#fe8019;">... </span><span style="color:#fdf4c1;">ids</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">DataAccessException</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">void </span><span style="color:#8ec07c;">deleteById</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">Collection</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">T</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">ids</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">DataAccessException</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="font-style:italic;color:#928374;">// These methods allow for checking record existence
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">boolean </span><span style="color:#8ec07c;">exists</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">P </span><span style="color:#fdf4c1;">object</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">DataAccessException</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">boolean </span><span style="color:#8ec07c;">existsById</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">T </span><span style="color:#fdf4c1;">id</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">DataAccessException</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">long </span><span style="color:#8ec07c;">count</span><span style="color:#fdf4c1aa;">() </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">DataAccessException</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="font-style:italic;color:#928374;">// These methods allow for retrieving POJOs by primary key or by some other field
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">List</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">P</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">findAll</span><span style="color:#fdf4c1aa;">() </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">DataAccessException</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">P findById</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">T </span><span style="color:#fdf4c1;">id</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">DataAccessException</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fdf4c1;">Z</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">List</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">P</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">fetch</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">Field</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Z</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">field</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">Z</span><span style="color:#fe8019;">... </span><span style="color:#fdf4c1;">values</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">DataAccessException</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fdf4c1;">Z</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">P fetchOne</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">Field</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Z</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">field</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">Z </span><span style="color:#fdf4c1;">value</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">DataAccessException</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="font-style:italic;color:#928374;">// These methods provide DAO meta-information
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">Table</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">R</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">getTable</span><span style="color:#fdf4c1aa;">();
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">Class</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">P</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">getType</span><span style="color:#fdf4c1aa;">();
+</span><span style="color:#fdf4c1aa;">}
+</span></pre>
+<p>DAO 的用法不言自明。</p>
+<hr />
+<p>完整的示例代码可以参见 <a href="https://github.com/wbprime/java-mods/tree/master/jooq-usecases">jOOQ Usecases</a> 。</p>
+<p>想了解更多的 <a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 用法，可以阅读 <a href="https://www.jooq.org/learn/" title="jOOQ Documentation">官方文档</a> 。</p>
+<hr />
+<p>以上。</p>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+            
+                <div class="post-tags">
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;jdbc&#x2F;">#jdbc</a>
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;sql&#x2F;">#sql</a>
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;jooq&#x2F;">#jooq</a>
+                    
+                </div>
+            
+            
+                <div class="post-nav">
+                    
+                        <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-10-23-jooq-usecases-code-generated-sql-executor&#x2F;">‹ JOOQ 的使用 - 从生成代码执行 SQL 命令 (SQL Executor)</a>
+                    
+                    
+                    
+                    
+                </div>
+            
+
+        
+
+    </div>
+
+    
+    
+</article>
+
+
+                </div>
+            </main>
+
+            
+            
+        </div>
+
+      
+          <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
+      
+    </body>
+
+</html>

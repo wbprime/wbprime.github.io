@@ -57,14 +57,14 @@
                     </li>
                 
                     <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;about">
-                            About
+                        <a href="https:&#x2F;&#x2F;github.wangbo.im">
+                            Github
                         </a>
                     </li>
                 
                     <li class="mobile-menu-item">
-                        <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                            Github
+                        <a href="https://www.wangbo.im&#x2F;about">
+                            About
                         </a>
                     </li>
                 
@@ -89,14 +89,14 @@
                             </li>
                         
                             <li>
-                                <a href="https://www.wangbo.im&#x2F;about">
-                                    About
+                                <a href="https:&#x2F;&#x2F;github.wangbo.im">
+                                    Github
                                 </a>
                             </li>
                         
                             <li>
-                                <a href="https:&#x2F;&#x2F;github.wangbo.im">
-                                    Github
+                                <a href="https://www.wangbo.im&#x2F;about">
+                                    About
                                 </a>
                             </li>
                         
@@ -108,6 +108,32 @@
                 <div class="content" id="mobile-panel">
                     
                         <div class="posts">
+                            
+                                <article class="post">
+                                    
+    <header class="post__header">
+        <h1 class="post__title">
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-09-ffmpeg-note-record-xorg-video&#x2F;">Record video from Xorg using FFmpeg</a>
+        </h1>
+        <div class="post__meta">
+            <span class="post__time">2019-09-09</span>
+            
+        </div>
+    </header>
+
+                                    <div class="post__summary">
+                                        <p>使用 <a href="https://ffmpeg.org/ffmpeg.html">ffmpeg</a> 在 X 下进行录屏，可以使用如下命令：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1;">ffmpeg -f x11grab -video_size 1366x768 -framerate 24 -i :0.0+0,0 $(date +%Y%m%dT%H%M%S.%</span><span style="color:#d3869b;">3</span><span style="color:#fdf4c1;">N.avi)
+</span></pre>
+<p>使用了 <a href="https://ffmpeg.org/ffmpeg-devices.html#x11grab">x11grap</a> 解码器。</p>
+<p>参见 <a href="https://trac.ffmpeg.org/wiki/Capture/Desktop">Capturing your Desktop / Screen Recording</a></p>
+
+                                    </div>
+                                    <div class="read-more">
+                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-09-ffmpeg-note-record-xorg-video&#x2F;">Read more...</a>
+                                    </div>
+                                </article>
                             
                                 <article class="post">
                                     
@@ -483,28 +509,6 @@ ID 与内部用户 ID 的对应关系；在登录请求时，根据外部项目 
                                     </div>
                                     <div class="read-more">
                                         <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-03-11-graphviz-note&#x2F;">Read more...</a>
-                                    </div>
-                                </article>
-                            
-                                <article class="post">
-                                    
-    <header class="post__header">
-        <h1 class="post__title">
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-03-11-a-online-issue-caused-by-dns-unavailability&#x2F;">一次由 DNS 解析服务失效引发的线上 DB 连接打满的事故经历</a>
-        </h1>
-        <div class="post__meta">
-            <span class="post__time">2019-03-11</span>
-            
-        </div>
-    </header>
-
-                                    <div class="post__summary">
-                                        <p>最近经历了一次由于线上 DNS 解析大范围失效引发的问题排查，并且由于应对不当导致的 MySQL 连接数打满。由于问题发上在周末，网络访问和内部沟通都不方便，整个问题的处理大概花费了 14 个小时（上午 10：00 左右到晚上 03：00）。</p>
-<p>事故的起因是由于网络 DNS 解析失效，导致服务里面的一段发送 UDP 消息的代码超时，导致接口访问时长增加，导致后续请求在任务队列中排队并超时。排查发现问题之后紧急上线，导致所有服务节点重启之后连接 MySQL 出现域名解析问题，在处理请求的过程中不断创建连接，在域名解析恢复之后把 MySQL 的服务器的连接打满导致部分请求超时。连接打满之后再创建新连接就会失败，触发了一个连接池的 BUG，导致连接池会不断地创建连接，重启也不能解决问题。</p>
-
-                                    </div>
-                                    <div class="read-more">
-                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-03-11-a-online-issue-caused-by-dns-unavailability&#x2F;">Read more...</a>
                                     </div>
                                 </article>
                             
