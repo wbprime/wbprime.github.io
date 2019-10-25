@@ -1,0 +1,412 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>wangbo’s blog - JOOQ 的使用 - 使用事务 (Transaction)</title>
+
+      
+
+      
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
+          
+      
+
+      
+          <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
+          
+      
+
+      
+      
+    </head>
+
+    <body>
+        <div class="container">
+
+            <div id="mobile-navbar" class="mobile-navbar">
+              <div class="mobile-header-logo">
+                <a href="/" class="logo">WB Prime</a>
+              </div>
+              <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+
+            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
+              <ul class="mobile-menu-list">
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im&#x2F;categories">
+                            Categories
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im&#x2F;tags">
+                            Tags
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https:&#x2F;&#x2F;github.wangbo.im">
+                            Github
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im&#x2F;about">
+                            About
+                        </a>
+                    </li>
+                
+              </ul>
+            </nav>
+
+            <header id="header">
+                <div class="logo"><a href="https:&#x2F;&#x2F;www.wangbo.im">WB Prime</a></div>
+                <nav class="menu">
+                    <ul>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im&#x2F;categories">
+                                    Categories
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im&#x2F;tags">
+                                    Tags
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https:&#x2F;&#x2F;github.wangbo.im">
+                                    Github
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im&#x2F;about">
+                                    About
+                                </a>
+                            </li>
+                        
+                    </ul>
+                </nav>
+            </header>
+
+            <main>
+                <div class="content" id="mobile-panel">
+                    
+
+
+
+<article class="post">
+    
+    <header class="post__header">
+        <h1 class="post__title">
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-10-24-jooq-usecases-transaction-management&#x2F;">JOOQ 的使用 - 使用事务 (Transaction)</a>
+        </h1>
+        <div class="post__meta">
+            <span class="post__time">2019-10-25</span>
+            
+        </div>
+    </header>
+
+    <div class="post-content">
+      <p><a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 是基于 JDBC 之上的一个抽象层，提供了多种多样的模型来与关系型数据库进行互操作；其使用与 <a href="https://mybatis.org/mybatis-3/">mybatis</a> 和 <a href="http://hibernate.org/orm/">Hibernate ORM</a> 不同的思路来实现 <a href="https://en.wikipedia.org/wiki/Object-relational_mapping">对象关系映射 ORM</a> 。</p>
+<p>本篇主要介绍 <a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 的事务支持。</p>
+<p><a name="continue-reading"></a></p>
+<h1 id="common"><a class="zola-anchor" href="#common" aria-label="Anchor link for: common">🔗</a>
+Common</h1>
+<p>本文使用了 <a href="@/posts/2019-10-21-jooq-usecases-code-generating/index.md">代码生成</a> 里面的基于 <a href="https://www.postgresql.org" title="PostgreSQL: The World's Most Advanced Open Source Relational Database">PostgreSQL</a> 实例驱动生成的代码，代码结构如下：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">├── tables
+</span><span style="color:#fdf4c1aa;">│   ├── daos
+</span><span style="color:#fdf4c1aa;">│   │   ├── AuthorDao.java
+</span><span style="color:#fdf4c1aa;">│   │   └── BookDao.java
+</span><span style="color:#fdf4c1aa;">│   ├── interfaces
+</span><span style="color:#fdf4c1aa;">│   │   ├── IAuthor.java
+</span><span style="color:#fdf4c1aa;">│   │   └── IBook.java
+</span><span style="color:#fdf4c1aa;">│   ├── pojos
+</span><span style="color:#fdf4c1aa;">│   │   ├── Author.java
+</span><span style="color:#fdf4c1aa;">│   │   └── Book.java
+</span><span style="color:#fdf4c1aa;">│   ├── records
+</span><span style="color:#fdf4c1aa;">│   │   ├── AuthorRecord.java
+</span><span style="color:#fdf4c1aa;">│   │   └── BookRecord.java
+</span><span style="color:#fdf4c1aa;">│   ├── Author.java
+</span><span style="color:#fdf4c1aa;">│   └── Book.java
+</span><span style="color:#fdf4c1aa;">├── DefaultCatalog.java
+</span><span style="color:#fdf4c1aa;">├── Indexes.java
+</span><span style="color:#fdf4c1aa;">├── Keys.java
+</span><span style="color:#fdf4c1aa;">├── Public.java
+</span><span style="color:#fdf4c1aa;">├── Sequences.java
+</span><span style="color:#fdf4c1aa;">└── Tables.java
+</span></pre>
+<p>所有的用例都基于 <a href="https://junit.org/junit5/">JUnit 5</a> 框架，测试用的数据库提供方为 <a href="http://www.h2database.com/html/main.html" title="H2 Database Engine">H2</a> ；测试代码中使用了参数化测试功能。</p>
+<p>预准备阶段需要准备数据库：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">DSLContext</span><span style="color:#fdf4c1aa;"> dsl;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">BeforeEach
+</span><span style="color:#fdf4c1aa;">void </span><span style="color:#fdf4c1;">setUp(@</span><span style="color:#8ec07c;">TempDir</span><span style="color:#fdf4c1;"> final </span><span style="color:#8ec07c;">Path</span><span style="color:#fdf4c1;"> dir)</span><span style="color:#fdf4c1aa;"> throws </span><span style="color:#8ec07c;">Exception </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;"> url </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&quot;jdbc:h2:&quot; </span><span style="color:#fe8019;">+</span><span style="color:#fdf4c1aa;"> dir.</span><span style="color:#fdf4c1;">toString() </span><span style="color:#fe8019;">+ </span><span style="color:#b8bb26;">&quot;/test.db&quot;</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Connection</span><span style="color:#fdf4c1aa;"> connection </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">DriverManager</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">getConnection(url, </span><span style="color:#b8bb26;">&quot;sa&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#b8bb26;">&quot;&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">dsl </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">DSL</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">using(connection, </span><span style="color:#8ec07c;">SQLDialect</span><span style="color:#fdf4c1;">.H2)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="font-style:italic;color:#928374;">// Create table
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">dsl.</span><span style="color:#fdf4c1;">createTableIfNotExists(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR)
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">columns(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.ID, </span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.FIRST_NAME, </span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.LAST_NAME,
+</span><span style="color:#fdf4c1;">            </span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.DATE_OF_BIRTH, </span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.YEAR_OF_BIRTH)
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">constraint(DSL.primaryKey(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.ID))
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">execute()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">AfterEach
+</span><span style="color:#fdf4c1aa;">void </span><span style="color:#fdf4c1;">tearDown() </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">dsl.</span><span style="color:#fdf4c1;">close()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">}
+</span></pre>
+<p>同时，为了简化测试代码，新建了 2 个接口类用于辅助模拟抛出不同异常的情况。</p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">interface </span><span style="color:#8ec07c;">ThrowingConsumer </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">void </span><span style="color:#8ec07c;">run</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">AuthorRecord </span><span style="color:#fdf4c1;">r</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">Exception</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fa5c4b;">interface </span><span style="color:#8ec07c;">ThrowingFunction</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fdf4c1;">T</span><span style="color:#fdf4c1aa;">&gt; {
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">T call</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">AuthorRecord </span><span style="color:#fdf4c1;">r</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">Exception</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">}
+</span></pre><h1 id="transactionalrunnable"><a class="zola-anchor" href="#transactionalrunnable" aria-label="Anchor link for: transactionalrunnable">🔗</a>
+TransactionalRunnable</h1>
+<p>可以使用 <code>org.jooq.TransactionalRunnable</code> 接口封装需要在事务中执行的代码；封装好的代码需要提交给 <code>org.jooq.DSLContext#transaction(org.jooq.TransactionalRunnable)</code> 方法执行。</p>
+<p>示例代码如下：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">ParameterizedTest
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">MethodSource</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;runnables&quot;</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fdf4c1aa;">void </span><span style="color:#fdf4c1;">test_transactionRun(final </span><span style="color:#8ec07c;">ThrowingConsumer</span><span style="color:#fdf4c1;"> runnable) </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">final int</span><span style="color:#fdf4c1aa;"> created </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> dsl.</span><span style="color:#fdf4c1;">createTableIfNotExists(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR)
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">columns(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.ID, </span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.FIRST_NAME, </span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.LAST_NAME,
+</span><span style="color:#fdf4c1;">            </span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.DATE_OF_BIRTH, </span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.YEAR_OF_BIRTH)
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">constraint(DSL.primaryKey(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.ID))
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">execute()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">Assertions</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">assertThat(created)</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">isEqualTo(</span><span style="color:#d3869b;">0</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">try </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">dsl.</span><span style="color:#fdf4c1;">transaction(c </span><span style="color:#fa5c4b;">-&gt; </span><span style="color:#fdf4c1;">{
+</span><span style="color:#fdf4c1;">            </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">DSLContext</span><span style="color:#fdf4c1;"> inner </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">DSL.using(c);
+</span><span style="color:#fdf4c1;">
+</span><span style="color:#fdf4c1;">            </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">AuthorRecord</span><span style="color:#fdf4c1;"> inserted </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1;"> inner.insertInto(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR)
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">.columns(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.FIRST_NAME, </span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.LAST_NAME)
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">.values(</span><span style="color:#b8bb26;">&quot;Elvis&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#b8bb26;">&quot;Wang&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">.returning(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.ID)
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">.fetchOne();
+</span><span style="color:#fdf4c1;">
+</span><span style="color:#fdf4c1;">            </span><span style="font-style:italic;color:#928374;">// assertj
+</span><span style="color:#fdf4c1;">            </span><span style="color:#8ec07c;">Assertions</span><span style="color:#fdf4c1;">.assertThat(inserted).isNotNull();
+</span><span style="color:#fdf4c1;">
+</span><span style="color:#fdf4c1;">            </span><span style="color:#fdf4c1;">runnable.run(inserted);
+</span><span style="color:#fdf4c1;">
+</span><span style="color:#fdf4c1;">            </span><span style="color:#fa5c4b;">final int</span><span style="color:#fdf4c1;"> n </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1;"> inner.update(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR)
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">.set(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.FIRST_NAME, </span><span style="color:#b8bb26;">&quot;James&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">.set(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.LAST_NAME, </span><span style="color:#b8bb26;">&quot;Zhang&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">.where(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.ID.eq(inserted.getId()))
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">.execute();
+</span><span style="color:#fdf4c1;">
+</span><span style="color:#fdf4c1;">            </span><span style="font-style:italic;color:#928374;">// assertj
+</span><span style="color:#fdf4c1;">            </span><span style="color:#8ec07c;">Assertions</span><span style="color:#fdf4c1;">.assertThat(n).isEqualTo(</span><span style="color:#d3869b;">1</span><span style="color:#fdf4c1;">);
+</span><span style="color:#fdf4c1;">        </span><span style="color:#fdf4c1;">})</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">} </span><span style="color:#fa5c4b;">catch </span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">DataAccessException </span><span style="color:#fdf4c1;">ex</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">ex.</span><span style="color:#fdf4c1;">printStackTrace()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(</span><span style="color:#b8bb26;">&quot;Failed due to checked exception thrown in transaction&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">} </span><span style="color:#fa5c4b;">catch </span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">RuntimeException </span><span style="color:#fdf4c1;">ex</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">ex.</span><span style="color:#fdf4c1;">printStackTrace()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(</span><span style="color:#b8bb26;">&quot;Failed due to unchecked exception thrown in transaction&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1;">dump(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.getName())</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">}
+</span></pre>
+<p>在封装好的事务代码中，如果正常运行无异常，则事务被顺利提交；如果抛出受检异常 (Checked Exception) 则事务回滚，且 <code>org.jooq.DSLContext#transaction(org.jooq.TransactionalRunnable)</code> 方法抛出 <code>org.jooq.exception.DataAccessException</code>；如果抛出非受检异常 (Unchecked Exception) 则事务回滚，且该异常被 <code>org.jooq.DSLContext#transaction(org.jooq.TransactionalRunnable)</code> 方法原样抛出。</p>
+<p>如果在事务代码中需要使用 <code>org.jooq.DSLContext</code> 实例执行 <a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 代码，需要重新构造一个实例而不能使用外部的实例 (示例代码中使用了 <code>inner</code> 而不是 <code>dsl</code>) 。</p>
+<p>测试使用的参数化数据从静态方法 <code>runnables</code> 的返回值中获取，如下：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">private static </span><span style="color:#8ec07c;">Long </span><span style="color:#fdf4c1;">throwsNothing(final </span><span style="color:#8ec07c;">AuthorRecord</span><span style="color:#fdf4c1;"> inserted)</span><span style="color:#fdf4c1aa;"> throws </span><span style="color:#8ec07c;">Exception </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(</span><span style="color:#b8bb26;">&quot;Throws Nothing when processing &quot; </span><span style="color:#fe8019;">+</span><span style="color:#fdf4c1;"> inserted.getId())</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> inserted.</span><span style="color:#fdf4c1;">getId()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fa5c4b;">private static </span><span style="color:#8ec07c;">Long </span><span style="color:#fdf4c1;">throwsCheckedException(final </span><span style="color:#8ec07c;">AuthorRecord</span><span style="color:#fdf4c1;"> inserted)</span><span style="color:#fdf4c1aa;"> throws </span><span style="color:#8ec07c;">Exception </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(</span><span style="color:#b8bb26;">&quot;Throws CheckedException when processing &quot; </span><span style="color:#fe8019;">+</span><span style="color:#fdf4c1;"> inserted.getId())</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">throw new </span><span style="color:#8ec07c;">Exception</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;Failed in processing &quot; </span><span style="color:#fe8019;">+</span><span style="color:#fdf4c1aa;"> inserted.</span><span style="color:#fdf4c1;">getId()</span><span style="color:#fdf4c1aa;">);
+</span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fa5c4b;">private static </span><span style="color:#8ec07c;">Long </span><span style="color:#fdf4c1;">throwsUncheckedException(final </span><span style="color:#8ec07c;">AuthorRecord</span><span style="color:#fdf4c1;"> inserted)</span><span style="color:#fdf4c1aa;"> throws </span><span style="color:#8ec07c;">Exception </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(</span><span style="color:#b8bb26;">&quot;Throws UncheckedException when processing &quot; </span><span style="color:#fe8019;">+</span><span style="color:#fdf4c1;"> inserted.getId())</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">throw new </span><span style="color:#8ec07c;">RuntimeException</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;Failed in processing &quot; </span><span style="color:#fe8019;">+</span><span style="color:#fdf4c1aa;"> inserted.</span><span style="color:#fdf4c1;">getId()</span><span style="color:#fdf4c1aa;">);
+</span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fa5c4b;">static </span><span style="color:#8ec07c;">Stream</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Arguments</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">runnables() </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">return </span><span style="color:#8ec07c;">Stream</span><span style="color:#fdf4c1aa;">.&lt;</span><span style="color:#8ec07c;">ThrowingConsumer</span><span style="color:#fdf4c1aa;">&gt;</span><span style="color:#fdf4c1;">of(
+</span><span style="color:#fdf4c1;">        </span><span style="color:#8ec07c;">TransactionIT</span><span style="color:#fdf4c1;">::throwsNothing,
+</span><span style="color:#fdf4c1;">        </span><span style="color:#8ec07c;">TransactionIT</span><span style="color:#fdf4c1;">::throwsCheckedException,
+</span><span style="color:#fdf4c1;">        </span><span style="color:#8ec07c;">TransactionIT</span><span style="color:#fdf4c1;">::throwsUncheckedException
+</span><span style="color:#fdf4c1;">    </span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">map(</span><span style="color:#8ec07c;">Arguments</span><span style="color:#fdf4c1;">::of)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">}
+</span></pre><h1 id="transactionalcallable"><a class="zola-anchor" href="#transactionalcallable" aria-label="Anchor link for: transactionalcallable">🔗</a>
+TransactionalCallable</h1>
+<p>如果封装的事务代码需要返回值，可以使用 <code>org.jooq.TransactionalCallable&lt;T&gt;</code> 接口封装需要在事务中执行的代码；封装好的代码需要提交给 <code>org.jooq.DSLContext#transactionResult(org.jooq.TransactionalCallable&lt;T&gt;)</code> 方法执行。</p>
+<p>示例代码如下：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">ParameterizedTest
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">MethodSource</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;callables&quot;</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fdf4c1aa;">void </span><span style="color:#fdf4c1;">test_transactionCall(final </span><span style="color:#8ec07c;">ThrowingFunction</span><span style="color:#fdf4c1;">&lt;</span><span style="color:#8ec07c;">Long</span><span style="color:#fdf4c1;">&gt; callable) </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">try </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Long</span><span style="color:#fdf4c1aa;"> result </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> dsl.</span><span style="color:#fdf4c1;">transactionResult(c </span><span style="color:#fa5c4b;">-&gt; </span><span style="color:#fdf4c1;">{
+</span><span style="color:#fdf4c1;">            </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">DSLContext</span><span style="color:#fdf4c1;"> inner </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">DSL.using(c);
+</span><span style="color:#fdf4c1;">
+</span><span style="color:#fdf4c1;">            </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">AuthorRecord</span><span style="color:#fdf4c1;"> inserted </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1;"> inner.insertInto(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR)
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">.columns(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.FIRST_NAME, </span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.LAST_NAME)
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">.values(</span><span style="color:#b8bb26;">&quot;Elvis&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#b8bb26;">&quot;Wang&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">.returning(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.ID)
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">.fetchOne();
+</span><span style="color:#fdf4c1;">
+</span><span style="color:#fdf4c1;">            </span><span style="font-style:italic;color:#928374;">// assertj
+</span><span style="color:#fdf4c1;">            </span><span style="color:#8ec07c;">Assertions</span><span style="color:#fdf4c1;">.assertThat(inserted).isNotNull();
+</span><span style="color:#fdf4c1;">
+</span><span style="color:#fdf4c1;">            </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Long</span><span style="color:#fdf4c1;"> val </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1;"> callable.call(inserted);
+</span><span style="color:#fdf4c1;">
+</span><span style="color:#fdf4c1;">            </span><span style="font-style:italic;color:#928374;">// assertj
+</span><span style="color:#fdf4c1;">            </span><span style="color:#8ec07c;">Assertions</span><span style="color:#fdf4c1;">.assertThat(val).isNotNull();
+</span><span style="color:#fdf4c1;">
+</span><span style="color:#fdf4c1;">            </span><span style="color:#fa5c4b;">final int</span><span style="color:#fdf4c1;"> n </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1;"> inner.update(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR)
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">.set(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.FIRST_NAME, </span><span style="color:#b8bb26;">&quot;James&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">.set(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.LAST_NAME, </span><span style="color:#b8bb26;">&quot;Zhang&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">.where(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.ID.eq(inserted.getId()))
+</span><span style="color:#fdf4c1;">                </span><span style="color:#fdf4c1;">.execute();
+</span><span style="color:#fdf4c1;">
+</span><span style="color:#fdf4c1;">            </span><span style="font-style:italic;color:#928374;">// assertj
+</span><span style="color:#fdf4c1;">            </span><span style="color:#8ec07c;">Assertions</span><span style="color:#fdf4c1;">.assertThat(n).isEqualTo(</span><span style="color:#d3869b;">1</span><span style="color:#fdf4c1;">);
+</span><span style="color:#fdf4c1;">
+</span><span style="color:#fdf4c1;">            </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1;"> val;
+</span><span style="color:#fdf4c1;">        </span><span style="color:#fdf4c1;">})</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="font-style:italic;color:#928374;">// assertj
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">Assertions</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">assertThat(result)</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">isNotNull()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">} </span><span style="color:#fa5c4b;">catch </span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">DataAccessException </span><span style="color:#fdf4c1;">ex</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">ex.</span><span style="color:#fdf4c1;">printStackTrace()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(</span><span style="color:#b8bb26;">&quot;Failed due to checked exception thrown in transaction&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">} </span><span style="color:#fa5c4b;">catch </span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">RuntimeException </span><span style="color:#fdf4c1;">ex</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">ex.</span><span style="color:#fdf4c1;">printStackTrace()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(</span><span style="color:#b8bb26;">&quot;Failed due to unchecked exception thrown in transaction&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1;">dump(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.getName())</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">}
+</span></pre>
+<p>在封装好的事务代码中，如果正常运行无异常，则事务被顺利提交；如果抛出受检异常 (Checked Exception) 则事务回滚，且 <code>org.jooq.DSLContext#transactionResult(org.jooq.TransactionalCallable&lt;T&gt;)</code> 方法抛出 <code>org.jooq.exception.DataAccessException</code>；如果抛出非受检异常 (Unchecked Exception) 则事务回滚，且该异常被 <code>org.jooq.DSLContext#transactionResult(org.jooq.TransactionalCallable&lt;T&gt;)</code> 方法原样抛出。</p>
+<p>如果在事务代码中需要使用 <code>org.jooq.DSLContext</code> 实例执行 <a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 代码，需要重新构造一个实例而不能使用外部的实例 (示例代码中使用了 <code>inner</code> 而不是 <code>dsl</code>) 。</p>
+<p>测试使用的参数化数据从静态方法 <code>runnables</code> 的返回值中获取，如下：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">private static </span><span style="color:#8ec07c;">Long </span><span style="color:#fdf4c1;">throwsNothing(final </span><span style="color:#8ec07c;">AuthorRecord</span><span style="color:#fdf4c1;"> inserted)</span><span style="color:#fdf4c1aa;"> throws </span><span style="color:#8ec07c;">Exception </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(</span><span style="color:#b8bb26;">&quot;Throws Nothing when processing &quot; </span><span style="color:#fe8019;">+</span><span style="color:#fdf4c1;"> inserted.getId())</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> inserted.</span><span style="color:#fdf4c1;">getId()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fa5c4b;">private static </span><span style="color:#8ec07c;">Long </span><span style="color:#fdf4c1;">throwsCheckedException(final </span><span style="color:#8ec07c;">AuthorRecord</span><span style="color:#fdf4c1;"> inserted)</span><span style="color:#fdf4c1aa;"> throws </span><span style="color:#8ec07c;">Exception </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(</span><span style="color:#b8bb26;">&quot;Throws CheckedException when processing &quot; </span><span style="color:#fe8019;">+</span><span style="color:#fdf4c1;"> inserted.getId())</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">throw new </span><span style="color:#8ec07c;">Exception</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;Failed in processing &quot; </span><span style="color:#fe8019;">+</span><span style="color:#fdf4c1aa;"> inserted.</span><span style="color:#fdf4c1;">getId()</span><span style="color:#fdf4c1aa;">);
+</span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fa5c4b;">private static </span><span style="color:#8ec07c;">Long </span><span style="color:#fdf4c1;">throwsUncheckedException(final </span><span style="color:#8ec07c;">AuthorRecord</span><span style="color:#fdf4c1;"> inserted)</span><span style="color:#fdf4c1aa;"> throws </span><span style="color:#8ec07c;">Exception </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(</span><span style="color:#b8bb26;">&quot;Throws UncheckedException when processing &quot; </span><span style="color:#fe8019;">+</span><span style="color:#fdf4c1;"> inserted.getId())</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">throw new </span><span style="color:#8ec07c;">RuntimeException</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;Failed in processing &quot; </span><span style="color:#fe8019;">+</span><span style="color:#fdf4c1aa;"> inserted.</span><span style="color:#fdf4c1;">getId()</span><span style="color:#fdf4c1aa;">);
+</span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fa5c4b;">static </span><span style="color:#8ec07c;">Stream</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Arguments</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">callables() </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">return </span><span style="color:#8ec07c;">Stream</span><span style="color:#fdf4c1aa;">.&lt;</span><span style="color:#8ec07c;">ThrowingFunction</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Long</span><span style="color:#fdf4c1aa;">&gt;&gt;</span><span style="color:#fdf4c1;">of(
+</span><span style="color:#fdf4c1;">        </span><span style="color:#8ec07c;">TransactionIT</span><span style="color:#fdf4c1;">::throwsNothing,
+</span><span style="color:#fdf4c1;">        </span><span style="color:#8ec07c;">TransactionIT</span><span style="color:#fdf4c1;">::throwsCheckedException,
+</span><span style="color:#fdf4c1;">        </span><span style="color:#8ec07c;">TransactionIT</span><span style="color:#fdf4c1;">::throwsUncheckedException
+</span><span style="color:#fdf4c1;">    </span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">map(</span><span style="color:#8ec07c;">Arguments</span><span style="color:#fdf4c1;">::of)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">}
+</span></pre><h1 id="transactionprovider"><a class="zola-anchor" href="#transactionprovider" aria-label="Anchor link for: transactionprovider">🔗</a>
+TransactionProvider</h1>
+<p><a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 通过 <code>org.jooq.TransactionProvider</code> 接口提供了事务实现的自定义支持：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public interface </span><span style="color:#8ec07c;">TransactionProvider </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">void </span><span style="color:#8ec07c;">begin</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">TransactionContext </span><span style="color:#fdf4c1;">ctx</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">DataAccessException</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">void </span><span style="color:#8ec07c;">commit</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">TransactionContext </span><span style="color:#fdf4c1;">ctx</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">DataAccessException</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">void </span><span style="color:#8ec07c;">rollback</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">TransactionContext </span><span style="color:#fdf4c1;">ctx</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">DataAccessException</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">}
+</span></pre>
+<p>自定义的 TransactionProvider 实现可以在构造 <code>org.jooq.DSLContext</code> 的时候指定；如果不指定的话，默认使用基于 <code>java.sql.Savepoint</code> 的实现。</p>
+<p><a href="https://www.jooq.org/doc/3.12/manual-single-page/#transaction-management">官方文档</a> 提供了一个使用 <a href="https://spring.io/projects/spring-framework">Spring</a> 的 <a href="https://docs.spring.io/spring-framework/docs/5.1.3.RELEASE/javadoc-api/org/springframework/jdbc/datasource/DataSourceTransactionManager.html"><code>DataSourceTransactionManager</code></a> 自定义实现 TransactionProvider 的例子。</p>
+<hr />
+<p>完整的示例代码可以参见 <a href="https://github.com/wbprime/java-mods/tree/master/jooq-usecases">jOOQ Usecases</a> 。</p>
+<hr />
+<p><a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 提供了非声明式的事务支持，详见 <a href="https://www.jooq.org/doc/3.12/manual-single-page/#transaction-management">官方文档</a> 。</p>
+<p>以上。</p>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+            
+                <div class="post-tags">
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;jdbc&#x2F;">#jdbc</a>
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;sql&#x2F;">#sql</a>
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;jooq&#x2F;">#jooq</a>
+                    
+                </div>
+            
+            
+                <div class="post-nav">
+                    
+                        <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-10-23-jooq-usecases-code-generated-basic-orm&#x2F;">‹ JOOQ 的使用 - 基于代码生成的 ORM (CRUD &amp; DAO)</a>
+                    
+                    
+                    
+                    
+                </div>
+            
+
+        
+
+    </div>
+
+    
+    
+</article>
+
+
+                </div>
+            </main>
+
+            
+            
+        </div>
+
+      
+          <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
+      
+    </body>
+
+</html>
