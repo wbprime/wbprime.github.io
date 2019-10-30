@@ -1,0 +1,834 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>wangbo’s blog - Dependency Injection - Guice VS Dagger 2</title>
+
+      
+
+      
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
+          
+      
+
+      
+          <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
+          
+      
+
+      
+      
+    </head>
+
+    <body>
+        <div class="container">
+
+            <div id="mobile-navbar" class="mobile-navbar">
+              <div class="mobile-header-logo">
+                <a href="/" class="logo">WB Prime</a>
+              </div>
+              <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+
+            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
+              <ul class="mobile-menu-list">
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im&#x2F;categories">
+                            Categories
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im&#x2F;tags">
+                            Tags
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https:&#x2F;&#x2F;github.wangbo.im">
+                            Github
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https://www.wangbo.im&#x2F;about">
+                            About
+                        </a>
+                    </li>
+                
+              </ul>
+            </nav>
+
+            <header id="header">
+                <div class="logo"><a href="https:&#x2F;&#x2F;www.wangbo.im">WB Prime</a></div>
+                <nav class="menu">
+                    <ul>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im&#x2F;categories">
+                                    Categories
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im&#x2F;tags">
+                                    Tags
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https:&#x2F;&#x2F;github.wangbo.im">
+                                    Github
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https://www.wangbo.im&#x2F;about">
+                                    About
+                                </a>
+                            </li>
+                        
+                    </ul>
+                </nav>
+            </header>
+
+            <main>
+                <div class="content" id="mobile-panel">
+                    
+
+
+
+<article class="post">
+    
+    <header class="post__header">
+        <h1 class="post__title">
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-10-29-dependency-injection-practise-guice-vs-dagger2&#x2F;">Dependency Injection - Guice VS Dagger 2</a>
+        </h1>
+        <div class="post__meta">
+            <span class="post__time">2019-10-30</span>
+            
+        </div>
+    </header>
+
+    <div class="post-content">
+      <p>做 Java 后台开发的同学，基本上都使用过 <a href="http://en.wikipedia.org/wiki/Dependency_injection" title="Dependency Injection">Dependency Injection</a> 依赖注入框架。大名鼎鼎的 <a href="https://spring.io/projects/spring-framework" title="Spring Framework">Spring
+Framework</a> 就是从依赖注入起家的，然后一路奔向了全家桶的不归路；<a href="https://github.com/google/guice" title="Guice (pronounced 'juice') is a lightweight dependency injection framework for Java 6 and above, brought to you by Google.">Guice</a> 是
+Google 公司的依赖注入解决方案，重视类型安全胜过于使用便利性，相比 <a href="https://spring.io/projects/spring-framework" title="Spring Framework">Spring Framework</a> 能提供
+更精准的控制和更翔实的注入失败错误信息；而由 Google 接盘 <a href="http://square.github.io/">Square</a> 的
+<a href="https://dagger.dev/" title="Dagger is a fully static, compile-time dependency injection framework for both Java and Android.">Dagger 2</a> 则比 <a href="https://github.com/google/guice" title="Guice (pronounced 'juice') is a lightweight dependency injection framework for Java 6 and above, brought to you by Google.">Guice</a> 更进一步，通过在编译时构建依赖注入关系，使得依赖错误在编译阶
+段尽量暴露出来，同时，原生类型安全的 Java 代码相较基于反射的注入代码也有或多或少的性能提升（尤其是在
+Android 上）。</p>
+<p>本文通过同时使用 <a href="https://github.com/google/guice" title="Guice (pronounced 'juice') is a lightweight dependency injection framework for Java 6 and above, brought to you by Google.">Guice</a> 和 <a href="https://dagger.dev/" title="Dagger is a fully static, compile-time dependency injection framework for both Java and Android.">Dagger 2</a> 来实现相同的功能，对比二者在实现依赖注入方法上
+的异同。</p>
+<p><a name="continue-reading"></a></p>
+<h1 id="overview"><a class="zola-anchor" href="#overview" aria-label="Anchor link for: overview">🔗</a>
+Overview</h1>
+<p>从 <a href="https://dagger.dev/tutorial/" title="Dagger Tutorial">Dagger Tutorial</a> 得到的灵感，分别使用 <a href="https://github.com/google/guice" title="Guice (pronounced 'juice') is a lightweight dependency injection framework for Java 6 and above, brought to you by Google.">Guice</a> 和 <a href="https://dagger.dev/" title="Dagger is a fully static, compile-time dependency injection framework for both Java and Android.">Dagger 2</a> 来实现一个实用工
+具模拟程序。程序的功能很简单：启动后读取输入并解析，执行能够识别的子命令；支持的子命令暂时包括
+<code>exit</code>/<code>set</code>/<code>echo</code>/<code>sql</code>。</p>
+<ul>
+<li>每一行的输入按空白符解析为一个字符串数组</li>
+<li>字符串数组中的第一个元素是子命令的类型</li>
+<li>字符串数组中的其他元素是子命令的参数</li>
+</ul>
+<p>其中，</p>
+<ul>
+<li><code>exit</code> 直接退出程序</li>
+<li><code>set</code> 可以设置指定名称变量的值</li>
+<li><code>echo</code> 回显所有输入的参数，能够解析以 <code>$</code> 开头的变量解析</li>
+<li><code>sql</code> 对固定的数据库实例执行 SQL，实践中使用了 H2 数据库</li>
+</ul>
+<h1 id="jsr-330"><a class="zola-anchor" href="#jsr-330" aria-label="Anchor link for: jsr-330">🔗</a>
+JSR 330</h1>
+<p><a href="http://javax-inject.github.io/javax-inject/" title="JSR-330: Dependency Injection for Java (javax.inject).">JSR 330 (javax.inject)</a> 是 Java EE (更名为 Jakarta EE) 开发的依赖注入规范，<a href="https://spring.io/projects/spring-framework" title="Spring Framework">Spring
+Framework</a>、<a href="https://github.com/google/guice" title="Guice (pronounced 'juice') is a lightweight dependency injection framework for Java 6 and above, brought to you by Google.">Google Guice</a> 和 <a href="https://dagger.dev/" title="Dagger is a fully static, compile-time dependency injection framework for both Java and Android.">Dagger 2</a> 都（部分）实现了 <a href="http://javax-inject.github.io/javax-inject/" title="JSR-330: Dependency Injection for Java (javax.inject).">JSR 330</a>
+规范。</p>
+<p>在 <code>pom.xml</code> 文件中添加以下依赖项：</p>
+<pre style="background-color:#282828;">
+<span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">javax.inject</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">javax.inject</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">1</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;
+</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
+</span></pre>
+<p><a href="http://javax-inject.github.io/javax-inject/" title="JSR-330: Dependency Injection for Java (javax.inject).">JSR 330</a> 引入了 5 个注解类和 1 个接口类：</p>
+<ol>
+<li><code>@javax.inject.Inject</code> 可以标记于构造函数、实例方法和属性字段，用于说明该构造函数、实例方法和属性字段是可注入的 (injectable)。“可注入的”说明依赖注入框架在处理该构造函数、实例方法和属性字段时需要自动解析依赖，这包含两层意思：一是构造函数、实例方法的参数、属性字段等变量赋值操作由依赖注入框架执行，二是这些依赖项实例的构造、维护和管理都应有依赖注入框架负责。“可注入的”构造函数同时也表明，如果该类被别的组件依赖时，依赖注入框架应该从这个构造函数构造和初始化该类的实例，这隐含了一个类中最多只能有一个“可注入的”构造函数。</li>
+<li><code>@javax.inject.Named</code> 用来给依赖项命名，是 <code>@javax.inject.Qualifier</code> 注解用法的一个特例。如果出现了两个或多个同类型的依赖项，依赖注入框架可以依据此注解根据不同的名称区分依赖。</li>
+<li><code>@javax.inject.Qualifier</code> 用来区分不同的依赖项。此注解主要用来设计新的注解；新的注解可以用于标识依赖的特征，不同新注解标记的相同类的实例是不同的依赖项。此注解派生出来的新注解与 <code>@javax.inject.Named</code> 注解的区别在于前者能提供类型安全的保证，后者只能通过字符串的相等性保证依赖的一致性。</li>
+<li><code>@javax.inject.Scope</code> 用来区分依赖项的不同的作用域和生命周期范围，其用法与 <code>@javax.inject.Qualifier</code> 相似，也是用来派生新的注解。</li>
+<li><code>@javax.inject.Singleton</code> 用来标识 <strong>单例</strong> 的作用域和生命周期范围，是 <code>@javax.inject.Scope</code> 注解用法的一个特例。</li>
+<li><code>javax.inject.Provider&lt;T&gt;</code> 是一个 <strong>Supplier</strong> 类型的接口，主要用于将依赖项实例的获取和类构造函数解耦。构造函数是 <code>javax.inject.Provider</code> 接口的一种特殊实现。</li>
+</ol>
+<p>使用 <a href="http://javax-inject.github.io/javax-inject/" title="JSR-330: Dependency Injection for Java (javax.inject).">JSR 330</a> 的注解和接口可以开发应用程序的主干逻辑，不同组件之间通过依赖项相互关联；依赖注入框架负责依赖项的构造、依赖图谱的维护和管理，以及向外（使用者）提供获取所管理实例对象的入口。</p>
+<h1 id="app-structure"><a class="zola-anchor" href="#app-structure" aria-label="Anchor link for: app-structure">🔗</a>
+App Structure</h1>
+<p>整个应用程序的结构设计如下：</p>
+<!-- ![command processor graph]() -->
+<p><code>MainApp</code> 类是应用程序的入口，其主要逻辑是构造一个 <code>CommandProcessor</code> 类型的实例，并用该实例处理输入行。</p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public class </span><span style="color:#8ec07c;">MainApp </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public static void </span><span style="color:#8ec07c;">main</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">String</span><span style="color:#fa5c4b;">[] </span><span style="color:#fdf4c1;">args</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="font-style:italic;color:#928374;">// TODO construct a valid CommandProcessor instance
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">CommandProcessor</span><span style="color:#fdf4c1aa;"> processor </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1aa;">; </span><span style="font-style:italic;color:#928374;">// fixme
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Scanner</span><span style="color:#fdf4c1aa;"> scanner </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">Scanner</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.in);
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">while </span><span style="color:#fdf4c1aa;">(scanner.</span><span style="color:#fdf4c1;">hasNextLine()</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Status</span><span style="color:#fdf4c1aa;"> status </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> processor.</span><span style="color:#fdf4c1;">process(scanner.nextLine())</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">(status.</span><span style="color:#fdf4c1;">equals(</span><span style="color:#8ec07c;">Status</span><span style="color:#fdf4c1;">.QUITING)</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fa5c4b;">break</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
+</span></pre>
+<p><code>CommandProcessor</code> 类解析一个字符串为空白字符分隔的子串组，根据子串组的元素查询到对应的 <code>Command</code> 实例并将子串组代理到该实例进行处理。</p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public class </span><span style="color:#8ec07c;">CommandProcessor </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private final </span><span style="color:#8ec07c;">Map</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">Command</span><span style="color:#fdf4c1aa;">&gt; map;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Inject
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">CommandProcessor</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Map</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">Command</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">map</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.map </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> map;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">Status process</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">line</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">List</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">&gt; args </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">splitByWhiteSpace(line)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">(args.</span><span style="color:#fdf4c1;">isEmpty()</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">return </span><span style="color:#8ec07c;">Status</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">INVALID</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;"> name </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> args.</span><span style="color:#fdf4c1;">get(</span><span style="color:#d3869b;">0</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Command</span><span style="color:#fdf4c1aa;"> cmd </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> map.</span><span style="color:#fdf4c1;">get(name)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">(cmd </span><span style="color:#fe8019;">== </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">return </span><span style="color:#8ec07c;">Status</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">INVALID</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> cmd.</span><span style="color:#fdf4c1;">handleInput(args.subList(</span><span style="color:#d3869b;">1</span><span style="color:#fdf4c1;">, args.size()))</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private static </span><span style="color:#8ec07c;">List</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">splitByWhiteSpace</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">str</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return </span><span style="color:#8ec07c;">Arrays</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">asList(str.split(</span><span style="color:#b8bb26;">&quot;\\s+&quot;</span><span style="color:#fdf4c1;">))</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
+</span></pre>
+<p><code>CommandProcessor</code> 类的构造函数被标记了 <code>@javax.inject.Inject</code> 注解，说明其需要一个 <code>java.util.Map&lt;String, Command&gt;</code> 类型的依赖性，该依赖项需要由依赖注入框架提供。</p>
+<p><code>Command</code> 接口类很简单，主要提供处理子串组的逻辑入口。</p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public interface </span><span style="color:#8ec07c;">Command </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">Status handleInput</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">List</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">args</span><span style="color:#fdf4c1aa;">);
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">enum </span><span style="color:#8ec07c;">Status </span><span style="color:#fdf4c1aa;">{ </span><span style="color:#8ec07c;">INVALID</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">SUCCEED</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">FAILED</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">QUITING </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
+</span></pre>
+<p><code>ExitCommand</code>/<code>SetCommand</code>/<code>EchoCommand</code>/<code>SqlCommand</code> 类都是 <code>Command</code> 接口的实现，分别实现 <code>exit</code>/<code>set</code>/<code>echo</code>/<code>sql</code> 命令。</p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">final class </span><span style="color:#8ec07c;">ExitCommand </span><span style="color:#fa5c4b;">implements </span><span style="color:#8ec07c;">Command </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Inject
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">ExitCommand</span><span style="color:#fdf4c1aa;">() {}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">Status handleInput</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">List</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">args</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return </span><span style="color:#8ec07c;">Status</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">QUITING</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
+</span></pre>
+<p><code>ExitCommand</code> 类不作任何具体处理，直接返回退出状态。</p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">final class </span><span style="color:#8ec07c;">SetCommand </span><span style="color:#fa5c4b;">implements </span><span style="color:#8ec07c;">Command </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private final </span><span style="color:#8ec07c;">Stderr </span><span style="color:#fdf4c1aa;">stderr;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private final </span><span style="color:#8ec07c;">GlobalContext </span><span style="color:#fdf4c1aa;">ctx;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Inject
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">SetCommand</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">GlobalContext </span><span style="color:#fdf4c1;">ctx</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Stderr </span><span style="color:#fdf4c1;">stderr</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.ctx </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> ctx;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.stderr </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> stderr;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">Status handleInput</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">List</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">args</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">final int</span><span style="color:#fdf4c1aa;"> n </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> args.</span><span style="color:#fdf4c1;">size()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">(n </span><span style="color:#fe8019;">!= </span><span style="color:#d3869b;">2</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">stderr.</span><span style="color:#fdf4c1;">println(</span><span style="color:#b8bb26;">&quot;Usage: set name value&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">return </span><span style="color:#8ec07c;">Status</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">FAILED</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">ctx.</span><span style="color:#fdf4c1;">set(args.get(</span><span style="color:#d3869b;">0</span><span style="color:#fdf4c1;">), args.get(</span><span style="color:#d3869b;">1</span><span style="color:#fdf4c1;">))</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return </span><span style="color:#8ec07c;">Status</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">SUCCEED</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
+</span></pre>
+<p><code>SetCommand</code> 类从输入参数中解析出键值对，并设置到一个注入的上下文对象中。</p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">final class </span><span style="color:#8ec07c;">EchoCommand </span><span style="color:#fa5c4b;">implements </span><span style="color:#8ec07c;">Command </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private final </span><span style="color:#8ec07c;">Stdout </span><span style="color:#fdf4c1aa;">stdout;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private final </span><span style="color:#8ec07c;">GlobalContext </span><span style="color:#fdf4c1aa;">ctx;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Inject
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">EchoCommand</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">GlobalContext </span><span style="color:#fdf4c1;">ctx</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Stdout </span><span style="color:#fdf4c1;">stdout</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.ctx </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> ctx;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.stdout </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> stdout;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">Status handleInput</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">List</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">args</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">final int</span><span style="color:#fdf4c1aa;"> n </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> args.</span><span style="color:#fdf4c1;">size()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">for </span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">int</span><span style="color:#fdf4c1aa;"> i </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">0</span><span style="color:#fdf4c1aa;">; i </span><span style="color:#fe8019;">&lt;</span><span style="color:#fdf4c1aa;"> n </span><span style="color:#fe8019;">- </span><span style="color:#d3869b;">1</span><span style="color:#fdf4c1aa;">; i</span><span style="color:#fe8019;">++</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">stdout.</span><span style="color:#fdf4c1;">print(ctx.resolve(args.get(i)))</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">print(</span><span style="color:#b8bb26;">&quot; &quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">(n </span><span style="color:#fe8019;">&gt; </span><span style="color:#d3869b;">0</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">stdout.</span><span style="color:#fdf4c1;">println(ctx.resolve(args.get(n </span><span style="color:#fe8019;">- </span><span style="color:#d3869b;">1</span><span style="color:#fdf4c1;">)))</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return </span><span style="color:#8ec07c;">Status</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">SUCCEED</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
+</span></pre>
+<p><code>EchoCommand</code> 类将输入参数原样输出，如果输入参数中有以 <code>$</code> 开头的则从注入的上下文对象中取出对应的值并输出。</p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">final class </span><span style="color:#8ec07c;">SqlCommand </span><span style="color:#fa5c4b;">implements </span><span style="color:#8ec07c;">Command </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private final </span><span style="color:#8ec07c;">Stdout </span><span style="color:#fdf4c1aa;">stdout;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private final </span><span style="color:#8ec07c;">Stderr </span><span style="color:#fdf4c1aa;">stderr;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private final </span><span style="color:#8ec07c;">SQLDialect </span><span style="color:#fdf4c1aa;">dialect;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private final </span><span style="color:#8ec07c;">DataSource </span><span style="color:#fdf4c1aa;">dataSource;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Inject
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">SqlCommand</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">DataSource </span><span style="color:#fdf4c1;">dataSource</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">SQLDialect </span><span style="color:#fdf4c1;">dialect</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Stdout </span><span style="color:#fdf4c1;">stdout</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Stderr </span><span style="color:#fdf4c1;">stderr</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.dataSource </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> dataSource;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.dialect </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> dialect;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.stdout </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> stdout;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.stderr </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> stderr;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">Status handleInput</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">List</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">args</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">final int</span><span style="color:#fdf4c1aa;"> n </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> args.</span><span style="color:#fdf4c1;">size()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">(n </span><span style="color:#fe8019;">&lt;= </span><span style="color:#d3869b;">1</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">stderr.</span><span style="color:#fdf4c1;">println(</span><span style="color:#b8bb26;">&quot;Usage: sql SQL-commands&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">return </span><span style="color:#8ec07c;">Status</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">FAILED</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">DSLContext</span><span style="color:#fdf4c1aa;"> dsl </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">DSL</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">using(dataSource, dialect)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">try </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">final int</span><span style="color:#fdf4c1aa;"> re </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> dsl.</span><span style="color:#fdf4c1;">execute(</span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1;">.join(</span><span style="color:#b8bb26;">&quot; &quot;</span><span style="color:#fdf4c1;">, args))</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">stdout.</span><span style="color:#fdf4c1;">println(</span><span style="color:#b8bb26;">&quot;Return code: &quot; </span><span style="color:#fe8019;">+</span><span style="color:#fdf4c1;"> re)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">return </span><span style="color:#8ec07c;">Status</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">SUCCEED</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">} </span><span style="color:#fa5c4b;">catch </span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">DataAccessException </span><span style="color:#fdf4c1;">ex</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">stderr.</span><span style="color:#fdf4c1;">println(ex.getMessage())</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">return </span><span style="color:#8ec07c;">Status</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">FAILED</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
+</span></pre>
+<p><code>SqlCommand</code> 类使用注入的 <code>javax.sql.DataSource</code> 对象实例执行输入的 SQL 语句。</p>
+<p>考虑到 JDBC 数据源的初始化需要 URL/用户名/密码 参数，使用 <code>SqlUtils</code> 类来存放辅助注入的代码。</p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public final class </span><span style="color:#8ec07c;">SqlUtils </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Qualifier
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Documented
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Retention</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">RetentionPolicy</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">RUNTIME</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Target</span><span style="color:#fdf4c1aa;">({</span><span style="color:#8ec07c;">ElementType</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">METHOD</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">ElementType</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">CONSTRUCTOR</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">ElementType</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">FIELD</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">ElementType</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">PARAMETER</span><span style="color:#fdf4c1aa;">})
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public @interface </span><span style="color:#8ec07c;">JdbcUrl </span><span style="color:#fdf4c1aa;">{}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public static final </span><span style="color:#8ec07c;">String NAMED_KEY_JDBC_USERNAME </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&quot;jdbc_username&quot;</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public static final </span><span style="color:#8ec07c;">String NAMED_KEY_JDBC_PASSWORD </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&quot;jdbc_password&quot;</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">}
+</span></pre>
+<p>其中，<code>@JdbcUrl</code> 注解使用 <code>@javax.inject.Qualifier</code> 注解标记，用来辅助 JDBC URL 的注入；变量 <code>NAMED_KEY_JDBC_USERNAME</code> 和 <code>NAMED_KEY_JDBC_PASSWORD</code> 被设计用来配合 <code>@javax.inject.Named</code> 注解辅助 JDBC 用户名/密码的注入。</p>
+<p>应用程序功能性文件组织结构如下：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">├── app
+</span><span style="color:#fdf4c1aa;">│   ├── Command.java
+</span><span style="color:#fdf4c1aa;">│   ├── CommandProcessor.java
+</span><span style="color:#fdf4c1aa;">│   ├── GlobalContext.java
+</span><span style="color:#fdf4c1aa;">│   ├── Stderr.java
+</span><span style="color:#fdf4c1aa;">│   └── Stdout.java
+</span><span style="color:#fdf4c1aa;">├── echo
+</span><span style="color:#fdf4c1aa;">│   └── EchoCommand.java
+</span><span style="color:#fdf4c1aa;">├── exit
+</span><span style="color:#fdf4c1aa;">│   └── ExitCommand.java
+</span><span style="color:#fdf4c1aa;">├── set
+</span><span style="color:#fdf4c1aa;">│   └── SetCommand.java
+</span><span style="color:#fdf4c1aa;">├── sql
+</span><span style="color:#fdf4c1aa;">│   ├── SqlCommand.java
+</span><span style="color:#fdf4c1aa;">│   └── SqlUtils.java
+</span><span style="color:#fdf4c1aa;">└── MainApp.java
+</span></pre>
+<p>完整的示例代码可以参见 <a href="https://github.com/wbprime/java-mods/tree/master/guice-usecases">Guice Usecases</a> 和 <a href="https://github.com/wbprime/java-mods/tree/master/dagger-usecases">Dagger Usecases</a>。</p>
+<p>应用程序的基本功能都已经实现了；接下来需要将所有的组件组装起来并向 <code>MainApp</code> 提供一个完整且可用的
+<code>CommandProcessor</code> 实例，而这是依赖注入框架需要解决，且能体现出各自特点的部分了。</p>
+<h1 id="di-via-guice"><a class="zola-anchor" href="#di-via-guice" aria-label="Anchor link for: di-via-guice">🔗</a>
+DI via Guice</h1>
+<p><a href="https://github.com/google/guice" title="Guice (pronounced 'juice') is a lightweight dependency injection framework for Java 6 and above, brought to you by Google.">Guice</a> 官方编写了一个糊弄人的<a href="https://github.com/google/guice/wiki/GettingStarted">入门手册</a>，如果对 <a href="https://github.com/google/guice" title="Guice (pronounced 'juice') is a lightweight dependency injection framework for Java 6 and above, brought to you by Google.">Guice</a> 不熟悉的读完之后还没有入门的需要继续阅读 <a href="https://github.com/google/guice/wiki">WIki</a> 上的其他文档。</p>
+<p>简言之，<a href="https://github.com/google/guice" title="Guice (pronounced 'juice') is a lightweight dependency injection framework for Java 6 and above, brought to you by Google.">Guice</a> 支持 <a href="http://javax-inject.github.io/javax-inject/" title="JSR-330: Dependency Injection for Java (javax.inject).">JSR 330</a> 依赖注入模型，使用反射技术在运行时构建依赖关系图谱并实施依赖注入；对于复杂依赖项或未使用 <code>@javax.inject.Inject</code> 注解标识的依赖项可以使用其令人印象深刻的 Binding DSL 或标记了 <code>@com.google.inject.Provides</code> 注解的方法来显式指定。</p>
+<p>本文中使用的 <a href="https://github.com/google/guice" title="Guice (pronounced 'juice') is a lightweight dependency injection framework for Java 6 and above, brought to you by Google.">Guice</a> 的版本为 <code>4.2.2</code>，在 <code>pom.xml</code> 文件中配置如下：</p>
+<pre style="background-color:#282828;">
+<span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">com.google.inject</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">guice</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">${google_guice_version}</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;
+</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
+</span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">com.google.inject.extensions</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">guice-multibindings</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">${google_guice_version}</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;
+</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
+</span></pre>
+<p>使用 <a href="https://github.com/google/guice" title="Guice (pronounced 'juice') is a lightweight dependency injection framework for Java 6 and above, brought to you by Google.">Guice</a> 之后的项目文件结构如下：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">├── app
+</span><span style="color:#fdf4c1aa;">│   ├── AppModule.java 		# 新增加
+</span><span style="color:#fdf4c1aa;">│   ├── Command.java
+</span><span style="color:#fdf4c1aa;">│   ├── CommandProcessor.java
+</span><span style="color:#fdf4c1aa;">│   ├── GlobalContext.java
+</span><span style="color:#fdf4c1aa;">│   ├── Stderr.java
+</span><span style="color:#fdf4c1aa;">│   └── Stdout.java
+</span><span style="color:#fdf4c1aa;">├── echo
+</span><span style="color:#fdf4c1aa;">│   ├── EchoCommand.java
+</span><span style="color:#fdf4c1aa;">│   └── EchoModule.java		# 新增加
+</span><span style="color:#fdf4c1aa;">├── exit
+</span><span style="color:#fdf4c1aa;">│   ├── ExitCommand.java
+</span><span style="color:#fdf4c1aa;">│   └── ExitModule.java		# 新增加
+</span><span style="color:#fdf4c1aa;">├── set
+</span><span style="color:#fdf4c1aa;">│   ├── SetCommand.java
+</span><span style="color:#fdf4c1aa;">│   └── SetModule.java		# 新增加
+</span><span style="color:#fdf4c1aa;">├── sql
+</span><span style="color:#fdf4c1aa;">│   ├── SqlCommand.java
+</span><span style="color:#fdf4c1aa;">│   ├── SqlModule.java 		# 新增加
+</span><span style="color:#fdf4c1aa;">│   └── SqlUtils.java
+</span><span style="color:#fdf4c1aa;">├── MainApp.java
+</span><span style="color:#fdf4c1aa;">└── MainModule.java 		# 新增加
+</span></pre>
+<p>一共需要增加六个类文件，和修改 <code>MainApp</code> 中生成 <code>CommandProcessor</code> 实例的代码。</p>
+<p>新增加的 <code>AppModule</code> 类的内容如下：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public final class </span><span style="color:#8ec07c;">AppModule </span><span style="color:#fa5c4b;">extends </span><span style="color:#8ec07c;">AbstractModule </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Provides
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">static </span><span style="color:#8ec07c;">Stdout providesStdout</span><span style="color:#fdf4c1aa;">() {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return new </span><span style="color:#8ec07c;">Stdout</span><span style="color:#fdf4c1aa;">() {
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">Stdout print</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">str</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.err.</span><span style="color:#fdf4c1;">print(str)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fa5c4b;">return </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">Stdout println</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">str</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.err.</span><span style="color:#fdf4c1;">println(str)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fa5c4b;">return </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">};
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Provides
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">static </span><span style="color:#8ec07c;">Stderr providesStderr</span><span style="color:#fdf4c1aa;">() {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return new </span><span style="color:#8ec07c;">Stderr</span><span style="color:#fdf4c1aa;">() {
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">Stderr print</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">str</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.err.</span><span style="color:#fdf4c1;">print(str)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fa5c4b;">return </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">Stderr println</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">str</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.err.</span><span style="color:#fdf4c1;">println(str)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fa5c4b;">return </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">};
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
+</span></pre>
+<p>可以看到 <code>AppModule</code> 类是一个普通类，里面的方法都是标记了 <code>@com.google.inject.Provides</code> 注解的静态方法，用于指示如何创建 <code>Stdout</code> 和 <code>Stderr</code> 接口的实现类实例；如果别的组件依赖了 <code>Stdout</code> 或 <code>Stderr</code> 接口实例，可以从 <code>AppModule</code> 中获取到如何生成对应实例的知识。</p>
+<p>按照 <a href="https://github.com/google/guice" title="Guice (pronounced 'juice') is a lightweight dependency injection framework for Java 6 and above, brought to you by Google.">Guice</a> 的规定，所有标记 <code>@com.google.inject.Provides</code> 注解的方法必须位于 <code>com.google.inject.Module</code> 接口的实现类中。所以 <code>AppModule</code> 类需要继承 <code>com.google.inject.AbstractModule</code> 类（类 <code>com.google.inject.AbstractModule</code> 是 <code>com.google.inject.Module</code> 接口的实现类）。</p>
+<p>新增加的 <code>EchoModule</code> 类的内容如下：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public final class </span><span style="color:#8ec07c;">EchoModule </span><span style="color:#fa5c4b;">extends </span><span style="color:#8ec07c;">AbstractModule </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">protected void </span><span style="color:#8ec07c;">configure</span><span style="color:#fdf4c1aa;">() {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">MapBinder</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">Command</span><span style="color:#fdf4c1aa;">&gt; binder </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">MapBinder</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">newMapBinder(
+</span><span style="color:#fdf4c1;">            </span><span style="color:#fdf4c1;">binder(), </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1;">.class, </span><span style="color:#8ec07c;">Command</span><span style="color:#fdf4c1;">.class
+</span><span style="color:#fdf4c1;">        </span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">binder.</span><span style="color:#fdf4c1;">addBinding(</span><span style="color:#b8bb26;">&quot;echo&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">to(</span><span style="color:#8ec07c;">EchoCommand</span><span style="color:#fdf4c1;">.class)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
+</span></pre>
+<p>类似于 <code>AppModule</code> 类，类 <code>EchoModule</code> 也继承了 <code>com.google.inject.AbstractModule</code> 类。同时 <code>EchoModule</code> 类还实现了 <code>configure</code> 方法，在方法实现中使用了 Binding DSL 来创建生成 <code>java.util.Map&lt;String, Command&gt;</code> 依赖项的规则。<a href="https://github.com/google/guice" title="Guice (pronounced 'juice') is a lightweight dependency injection framework for Java 6 and above, brought to you by Google.">Guice</a> 的 Binding DSL 非常灵活，而且强大。</p>
+<p>类似 <code>EchoModule</code> 类，新增加的 <code>ExitModule</code> 类和 <code>SetModule</code> 类的内容如下：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public final class </span><span style="color:#8ec07c;">ExitModule </span><span style="color:#fa5c4b;">extends </span><span style="color:#8ec07c;">AbstractModule </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">protected void </span><span style="color:#8ec07c;">configure</span><span style="color:#fdf4c1aa;">() {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">MapBinder</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">Command</span><span style="color:#fdf4c1aa;">&gt; binder </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">MapBinder</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">newMapBinder(
+</span><span style="color:#fdf4c1;">            </span><span style="color:#fdf4c1;">binder(), </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1;">.class, </span><span style="color:#8ec07c;">Command</span><span style="color:#fdf4c1;">.class
+</span><span style="color:#fdf4c1;">        </span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">binder.</span><span style="color:#fdf4c1;">addBinding(</span><span style="color:#b8bb26;">&quot;exit&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">to(</span><span style="color:#8ec07c;">ExitCommand</span><span style="color:#fdf4c1;">.class)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fa5c4b;">public class </span><span style="color:#8ec07c;">SetModule </span><span style="color:#fa5c4b;">extends </span><span style="color:#8ec07c;">AbstractModule </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">protected void </span><span style="color:#8ec07c;">configure</span><span style="color:#fdf4c1aa;">() {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">MapBinder</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">Command</span><span style="color:#fdf4c1aa;">&gt; binder </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">MapBinder</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">newMapBinder(
+</span><span style="color:#fdf4c1;">            </span><span style="color:#fdf4c1;">binder(), </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1;">.class, </span><span style="color:#8ec07c;">Command</span><span style="color:#fdf4c1;">.class
+</span><span style="color:#fdf4c1;">        </span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">binder.</span><span style="color:#fdf4c1;">addBinding(</span><span style="color:#b8bb26;">&quot;set&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">to(</span><span style="color:#8ec07c;">SetCommand</span><span style="color:#fdf4c1;">.class)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
+</span></pre>
+<p>新增加的 <code>SqlModule</code> 类的内容如下：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public final class </span><span style="color:#8ec07c;">SqlModule </span><span style="color:#fa5c4b;">extends </span><span style="color:#8ec07c;">AbstractModule </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">protected void </span><span style="color:#8ec07c;">configure</span><span style="color:#fdf4c1aa;">() {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">MapBinder</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">Command</span><span style="color:#fdf4c1aa;">&gt; binder </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">MapBinder</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">newMapBinder(
+</span><span style="color:#fdf4c1;">            </span><span style="color:#fdf4c1;">binder(), </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1;">.class, </span><span style="color:#8ec07c;">Command</span><span style="color:#fdf4c1;">.class
+</span><span style="color:#fdf4c1;">        </span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">binder.</span><span style="color:#fdf4c1;">addBinding(</span><span style="color:#b8bb26;">&quot;sql&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">to(</span><span style="color:#8ec07c;">SqlCommand</span><span style="color:#fdf4c1;">.class)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Provides
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">SQLDialect providesSqlDialect</span><span style="color:#fdf4c1aa;">(@</span><span style="color:#fdf4c1;">JdbcUrl </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">url</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return </span><span style="color:#8ec07c;">JDBCUtils</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">dialect(url)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Provides
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">DataSource providesDataSource</span><span style="color:#fdf4c1aa;">(
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">JdbcUrl </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">url</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Named</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">SqlUtils</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">NAMED_KEY_JDBC_USERNAME</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">username</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Named</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">SqlUtils</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">NAMED_KEY_JDBC_PASSWORD</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">pwd</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">HikariConfig</span><span style="color:#fdf4c1aa;"> config </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">HikariConfig</span><span style="color:#fdf4c1aa;">();
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">config.</span><span style="color:#fdf4c1;">setJdbcUrl(url)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">config.</span><span style="color:#fdf4c1;">setUsername(username)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">config.</span><span style="color:#fdf4c1;">setPassword(pwd)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">config.</span><span style="color:#fdf4c1;">addDataSourceProperty(</span><span style="color:#b8bb26;">&quot;cachePrepStmts&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#b8bb26;">&quot;true&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">config.</span><span style="color:#fdf4c1;">addDataSourceProperty(</span><span style="color:#b8bb26;">&quot;prepStmtCacheSize&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#b8bb26;">&quot;250&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">config.</span><span style="color:#fdf4c1;">addDataSourceProperty(</span><span style="color:#b8bb26;">&quot;prepStmtCacheSqlLimit&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#b8bb26;">&quot;2048&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return new </span><span style="color:#8ec07c;">HikariDataSource</span><span style="color:#fdf4c1aa;">(config);
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
+</span></pre>
+<p><code>SqlModule</code> 类中多了两个标记了 <code>@com.google.inject.Provides</code> 注解的方法。这两个方法可以有额外的参数，参数的值是由依赖注入框架管理的。<code>@JdbcUrl</code> 注解用于将锁标记的依赖项与其他同类型(<code>java.lang.String</code>)的依赖项做区分；<code>@javax.inject.Named</code> 注解也是类似的作用。</p>
+<p>新增加的 <code>MainModule</code> 类的内容如下：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">final class </span><span style="color:#8ec07c;">MainModule </span><span style="color:#fa5c4b;">extends </span><span style="color:#8ec07c;">AbstractModule </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private final </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1aa;">jdbcUrl;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private final </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1aa;">jdbcUsername;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private final </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1aa;">jdbcPwd;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">MainModule</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">url</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">username</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">pwd</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.jdbcUrl </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> url;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.jdbcUsername </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> username;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.jdbcPwd </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> pwd;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">protected void </span><span style="color:#8ec07c;">configure</span><span style="color:#fdf4c1aa;">() {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">bindConstant()</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">annotatedWith(</span><span style="color:#8ec07c;">JdbcUrl</span><span style="color:#fdf4c1;">.class)</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">to(jdbcUrl)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">bindConstant()</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">annotatedWith(</span><span style="color:#8ec07c;">Names</span><span style="color:#fdf4c1;">.named(</span><span style="color:#8ec07c;">SqlUtils</span><span style="color:#fdf4c1;">.NAMED_KEY_JDBC_USERNAME))
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">to(jdbcUsername)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">bindConstant()</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">annotatedWith(</span><span style="color:#8ec07c;">Names</span><span style="color:#fdf4c1;">.named(</span><span style="color:#8ec07c;">SqlUtils</span><span style="color:#fdf4c1;">.NAMED_KEY_JDBC_PASSWORD))
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">to(jdbcPwd)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">install(</span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">AppModule</span><span style="color:#fdf4c1;">())</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">install(</span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">EchoModule</span><span style="color:#fdf4c1;">())</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">install(</span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">SetModule</span><span style="color:#fdf4c1;">())</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">install(</span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">ExitModule</span><span style="color:#fdf4c1;">())</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">install(</span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">SqlModule</span><span style="color:#fdf4c1;">())</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
+</span></pre>
+<p><code>MainModule</code> 类中有一个带三参数的构造函数，用于获取 JDBC 相关设置的值。在 <code>configure</code> 方法体中，首先将 JDBC 相关配置添加为依赖项，然后安装了(install)了以上的 <code>AppModule</code>/<code>EchoModule</code>/<code>SetModule</code>/<code>ExitModule</code>/<code>SqlModule</code> 类。这样从 <code>MainModule</code> 类就能获取所有所需的依赖项和依赖关系了。</p>
+<p>在 <code>MainApp</code> 中需要从 <code>MainModule</code> 类构建 <code>com.google.inject.Injector</code> 实例并从中获取 <code>CommandProcessor</code> 实例，相关代码修改为：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Injector</span><span style="color:#fdf4c1aa;"> injector </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">Guice</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">createInjector(</span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">MainModule</span><span style="color:#fdf4c1;">(
+</span><span style="color:#fdf4c1;">    </span><span style="color:#b8bb26;">&quot;jdbc:h2:mem:test&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#b8bb26;">&quot;h2&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#b8bb26;">&quot;user@H2&quot;
+</span><span style="color:#fdf4c1;">))</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">CommandProcessor</span><span style="color:#fdf4c1aa;"> processor </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> injector.</span><span style="color:#fdf4c1;">getInstance(</span><span style="color:#8ec07c;">CommandProcessor</span><span style="color:#fdf4c1;">.class)</span><span style="color:#fdf4c1aa;">;
+</span></pre>
+<p>这样就完成了应用程序的组装。完整的示例代码可以参见 <a href="https://github.com/wbprime/java-mods/tree/master/guice-usecases">Guice Usecases</a> 。</p>
+<p>说明：方案中为了保持部分实现类内容的包级别可用性，使用了多个 Module 类文件；如果不介意实现类的可见性，可以整个应用程序使用一个完整的 Module 类文件。</p>
+<h1 id="di-via-dagger"><a class="zola-anchor" href="#di-via-dagger" aria-label="Anchor link for: di-via-dagger">🔗</a>
+DI via Dagger</h1>
+<p><a href="https://dagger.dev/" title="Dagger is a fully static, compile-time dependency injection framework for both Java and Android.">Dagger 2</a> 官方编写了一个非常棒的<a href="https://dagger.dev/tutorial/" title="Dagger Tutorial">入门手册</a>，如果对 <a href="https://dagger.dev/" title="Dagger is a fully static, compile-time dependency injection framework for both Java and Android.">Dagger 2</a> 不熟悉的可以先阅读该文档。</p>
+<p>简言之，<a href="https://dagger.dev/" title="Dagger is a fully static, compile-time dependency injection framework for both Java and Android.">Dagger 2</a> 支持 <a href="http://javax-inject.github.io/javax-inject/" title="JSR-330: Dependency Injection for Java (javax.inject).">JSR 330</a> 依赖注入模型，使用 <a href="https://docs.oracle.com/javase/7/docs/technotes/guides/apt/" title="Annotation Processing Tool (apt)">Java 注解处理器 (Annotation Processing Tool, APT)</a> 技术在编译时生成代码构建依赖注入模型；对于复杂依赖项或未使用 <code>@javax.inject.Inject</code> 注解标识的依赖项可以使用 Module 来显式指定；组件的组装和对外暴露需要使用 Component 来进行。</p>
+<p>Module 是对负责提供依赖项的一组类的统称。根据 <a href="https://dagger.dev/" title="Dagger is a fully static, compile-time dependency injection framework for both Java and Android.">Dagger 2</a> 的规范，一个 Module 类需要由 <code>@dagger.Module</code> 注解标记，类中包含返回值为非 <code>void</code> 的方法来指定依赖项的生成规则；这些方法可以是常规的、静态的或抽象的，可以有零个、一个或多个参数；这些方法需要按使用场景分别用 <code>@dagger.Provides</code> 注解、<code>@dagger.Binds</code> 注解或其他注解来标记。</p>
+<p>Component 是对通过依赖项组装构造所需对象实例的一组类的统称。根据 <a href="https://dagger.dev/" title="Dagger is a fully static, compile-time dependency injection framework for both Java and Android.">Dagger 2</a> 的规范，一个 Component 类需要由 <code>@dagger.Component</code> 注解标记，类中包含一个或多个注入方法；这些方法都必须是抽象方法，且要么是无参且返回一个非 <code>void</code> 值，要么是接受一个待注入的对象实例作为参数且无返回值。Component 类必须是接口类或抽象类，其实现由 <a href="https://dagger.dev/" title="Dagger is a fully static, compile-time dependency injection framework for both Java and Android.">Dagger 2</a> 在编译器生成。</p>
+<p>本文中使用的 <a href="https://dagger.dev/" title="Dagger is a fully static, compile-time dependency injection framework for both Java and Android.">Dagger 2</a> 的版本为 <code>2.24</code>，在 <code>pom.xml</code> 文件中配置如下：</p>
+<pre style="background-color:#282828;">
+<span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">com.google.dagger</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">dagger</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">${google_dagger2_version}</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;
+</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">plugin</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">org.apache.maven.plugins</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">maven-compiler-plugin</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">${maven_plugin_compiler_version}</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">configuration</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">source</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">${compiler_source_version}</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">source</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">target</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">${compiler_target_version}</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">target</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">testSource</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">${compiler_testSource_version}</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">testSource</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">testTarget</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">${compiler_testTarget_version}</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">testTarget</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">encoding</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">${project_source_encoding}</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">encoding</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">optimize</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">true</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">optimize</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="font-style:italic;color:#928374;">&lt;!-- Slightly faster builds, see https://issues.apache.org/jira/browse/MCOMPILER-209 --&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">useIncrementalCompilation</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">false</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">useIncrementalCompilation</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">annotationProcessorPaths</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">path</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">com.google.dagger</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">dagger-compiler</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">${google_dagger2_version}</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">path</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">annotationProcessorPaths</span><span style="color:#83a598;">&gt;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">configuration</span><span style="color:#83a598;">&gt;
+</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">plugin</span><span style="color:#83a598;">&gt;
+</span></pre>
+<p>使用 <a href="https://dagger.dev/" title="Dagger is a fully static, compile-time dependency injection framework for both Java and Android.">Dagger 2</a> 之后的项目文件结构如下：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">├── app
+</span><span style="color:#fdf4c1aa;">│   ├── AppModule.java 			# 新添加
+</span><span style="color:#fdf4c1aa;">│   ├── Command.java
+</span><span style="color:#fdf4c1aa;">│   ├── CommandProcessor.java
+</span><span style="color:#fdf4c1aa;">│   ├── GlobalContext.java
+</span><span style="color:#fdf4c1aa;">│   ├── Stderr.java
+</span><span style="color:#fdf4c1aa;">│   └── Stdout.java
+</span><span style="color:#fdf4c1aa;">├── echo
+</span><span style="color:#fdf4c1aa;">│   ├── EchoCommand.java
+</span><span style="color:#fdf4c1aa;">│   └── EchoModule.java 		# 新添加
+</span><span style="color:#fdf4c1aa;">├── exit
+</span><span style="color:#fdf4c1aa;">│   ├── ExitCommand.java
+</span><span style="color:#fdf4c1aa;">│   └── ExitModule.java 		# 新添加
+</span><span style="color:#fdf4c1aa;">├── set
+</span><span style="color:#fdf4c1aa;">│   ├── SetCommand.java
+</span><span style="color:#fdf4c1aa;">│   └── SetModule.java 			# 新添加
+</span><span style="color:#fdf4c1aa;">├── sql
+</span><span style="color:#fdf4c1aa;">│   ├── SqlCommand.java
+</span><span style="color:#fdf4c1aa;">│   ├── SqlModule.java 			# 新添加
+</span><span style="color:#fdf4c1aa;">│   └── SqlUtils.java
+</span><span style="color:#fdf4c1aa;">├── MainApp.java       			# 修改
+</span><span style="color:#fdf4c1aa;">└── MainComponent.java 			# 新添加
+</span></pre>
+<p>一共需要增加五个 Module 类文件和一个 Component 类文件，并修改 <code>MainApp</code> 中生成 <code>CommandProcessor</code> 类实例的代码。</p>
+<p>新增加的 <code>AppModule</code> 类的内容如下：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Module
+</span><span style="color:#fa5c4b;">public class </span><span style="color:#8ec07c;">AppModule </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Provides
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">static </span><span style="color:#8ec07c;">Stdout providesStdout</span><span style="color:#fdf4c1aa;">() {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return new </span><span style="color:#8ec07c;">Stdout</span><span style="color:#fdf4c1aa;">() {
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">Stdout print</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">str</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.err.</span><span style="color:#fdf4c1;">print(str)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fa5c4b;">return </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">Stdout println</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">str</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.err.</span><span style="color:#fdf4c1;">println(str)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fa5c4b;">return </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">};
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Provides
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">static </span><span style="color:#8ec07c;">Stderr providesStderr</span><span style="color:#fdf4c1aa;">() {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return new </span><span style="color:#8ec07c;">Stderr</span><span style="color:#fdf4c1aa;">() {
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">Stderr print</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">str</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.err.</span><span style="color:#fdf4c1;">print(str)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fa5c4b;">return </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">Stderr println</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">str</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.err.</span><span style="color:#fdf4c1;">println(str)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">                </span><span style="color:#fa5c4b;">return </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">};
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
+</span></pre>
+<p>可以看到 <code>AppModule</code> 类是一个普通类，里面的方法都是标记了 <code>@dagger.Provides</code> 注解的静态方法，用于指示如何创建 <code>Stdout</code> 和 <code>Stderr</code> 接口的实现类实例；如果别的组件依赖了 <code>Stdout</code> 或 <code>Stderr</code> 接口实例，可以从 <code>AppModule</code> 中获取到如何生成对应实例的知识。</p>
+<p>新增加的 <code>EchoModule</code> 类的内容如下：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Module
+</span><span style="color:#fa5c4b;">public abstract class </span><span style="color:#8ec07c;">EchoModule </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Binds
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">IntoMap
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">StringKey</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;echo&quot;</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">abstract </span><span style="color:#8ec07c;">Command bindsCommand</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">EchoCommand </span><span style="color:#fdf4c1;">c</span><span style="color:#fdf4c1aa;">);
+</span><span style="color:#fdf4c1aa;">}
+</span></pre>
+<p>可以看到 <code>EchoModule</code> 类是一个抽象类，里面包含了一个标记了 <code>@dagger.Binds</code> 注解的抽象方法，用于指示如何找到接口类对应的实现类；该方法需要一个参数且有一个返回值，且参数类型需要是返回值类型的子类型。<a href="https://dagger.dev/" title="Dagger is a fully static, compile-time dependency injection framework for both Java and Android.">Dagger 2</a> 会从方法注解和签名上收集到创建所需依赖项的知识。注意该方法同时还有 <code>@dagger.multibindings.IntoMap</code> 注解和 <code>@dagger.multibindings.StringKey</code> 注解，这两个注解配合使用使得 <a href="https://dagger.dev/" title="Dagger is a fully static, compile-time dependency injection framework for both Java and Android.">Dagger 2</a> 能够创建一个 <code>java.util.Map&lt;String, Command&gt;</code> 类型的依赖项。<code>EchoCommand</code> 类由于有一个标记 <code>@javax.inject.Inject</code> 注解的构造函数，所有不需要通过提供标记了 <code>@dagger.Provides</code> 注解或 <code>@dagger.Binds</code> 注解标注的方法来指示如何创建实例。</p>
+<p>类似 <code>EchoModule</code> 类，新增加的 <code>ExitModule</code> 类和 <code>SetModule</code> 类的内容如下：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Module
+</span><span style="color:#fa5c4b;">public abstract class </span><span style="color:#8ec07c;">ExitModule </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Binds
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">IntoMap
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">StringKey</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;exit&quot;</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">abstract </span><span style="color:#8ec07c;">Command bindsCommand</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">ExitCommand </span><span style="color:#fdf4c1;">c</span><span style="color:#fdf4c1aa;">);
+</span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Module
+</span><span style="color:#fa5c4b;">public abstract class </span><span style="color:#8ec07c;">SetModule </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Binds
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">IntoMap
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">StringKey</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;set&quot;</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">abstract </span><span style="color:#8ec07c;">Command bindsCommand</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">SetCommand </span><span style="color:#fdf4c1;">c</span><span style="color:#fdf4c1aa;">);
+</span><span style="color:#fdf4c1aa;">}
+</span></pre>
+<p>新增的 <code>SqlModule</code> 类内容如下：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Module
+</span><span style="color:#fa5c4b;">public abstract class </span><span style="color:#8ec07c;">SqlModule </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Binds
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">IntoMap
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">StringKey</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;sql&quot;</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">abstract </span><span style="color:#8ec07c;">Command bindsCommand</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">SqlCommand </span><span style="color:#fdf4c1;">c</span><span style="color:#fdf4c1aa;">);
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Provides
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">static </span><span style="color:#8ec07c;">SQLDialect providesSqlDialect</span><span style="color:#fdf4c1aa;">(@</span><span style="color:#fdf4c1;">JdbcUrl </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">url</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return </span><span style="color:#8ec07c;">JDBCUtils</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">dialect(url)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Provides
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">static </span><span style="color:#8ec07c;">DataSource providesDataSource</span><span style="color:#fdf4c1aa;">(
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">JdbcUrl </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">url</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Named</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">SqlUtils</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">NAMED_KEY_JDBC_USERNAME</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">username</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Named</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">SqlUtils</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">NAMED_KEY_JDBC_PASSWORD</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">pwd</span><span style="color:#fdf4c1aa;">) {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">HikariConfig</span><span style="color:#fdf4c1aa;"> config </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">HikariConfig</span><span style="color:#fdf4c1aa;">();
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">config.</span><span style="color:#fdf4c1;">setJdbcUrl(url)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">config.</span><span style="color:#fdf4c1;">setUsername(username)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">config.</span><span style="color:#fdf4c1;">setPassword(pwd)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">config.</span><span style="color:#fdf4c1;">addDataSourceProperty(</span><span style="color:#b8bb26;">&quot;cachePrepStmts&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#b8bb26;">&quot;true&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">config.</span><span style="color:#fdf4c1;">addDataSourceProperty(</span><span style="color:#b8bb26;">&quot;prepStmtCacheSize&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#b8bb26;">&quot;250&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">config.</span><span style="color:#fdf4c1;">addDataSourceProperty(</span><span style="color:#b8bb26;">&quot;prepStmtCacheSqlLimit&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#b8bb26;">&quot;2048&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return new </span><span style="color:#8ec07c;">HikariDataSource</span><span style="color:#fdf4c1aa;">(config);
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
+</span></pre>
+<p><code>SqlModule</code> 类中多了两个标记了 <code>@dagger.Provides</code> 注解的静态方法。这两个方法可以有额外的参数，参数的值是由依赖注入框架管理的。<code>@JdbcUrl</code> 注解用于将锁标记的依赖项与其他同类型(<code>java.lang.String</code>)的依赖项做区分；<code>@javax.inject.Named</code> 注解也是类似的作用。</p>
+<p>新增的最后一个类是 <code>MainComponent</code> 类：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Component</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">modules </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1aa;">{ </span><span style="color:#8ec07c;">AppModule</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">class</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">ExitModule</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">class</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">EchoModule</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">class</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">SetModule</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">class</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">SqlModule</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">class </span><span style="color:#fdf4c1aa;">})
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Singleton
+</span><span style="color:#fa5c4b;">interface </span><span style="color:#8ec07c;">MainComponent </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">static </span><span style="color:#8ec07c;">Builder builder</span><span style="color:#fdf4c1aa;">() {
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">return </span><span style="color:#8ec07c;">DaggerMainComponent</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">builder()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">CommandProcessor commandProcessor</span><span style="color:#fdf4c1aa;">();
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Component</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">Builder
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">interface </span><span style="color:#8ec07c;">Builder </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">Builder setJdbcUrl</span><span style="color:#fdf4c1aa;">(@</span><span style="color:#fdf4c1;">BindsInstance </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">JdbcUrl </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">url</span><span style="color:#fdf4c1aa;">);
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">Builder setJdbcUsername</span><span style="color:#fdf4c1aa;">(
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">BindsInstance </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Named</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">SqlUtils</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">NAMED_KEY_JDBC_USERNAME</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">username</span><span style="color:#fdf4c1aa;">);
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">Builder setJdbcPassword</span><span style="color:#fdf4c1aa;">(
+</span><span style="color:#fdf4c1aa;">            </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">BindsInstance </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Named</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">SqlUtils</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">NAMED_KEY_JDBC_PASSWORD</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String </span><span style="color:#fdf4c1;">pwd</span><span style="color:#fdf4c1aa;">);
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">MainComponent build</span><span style="color:#fdf4c1aa;">();
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fdf4c1aa;">}
+</span></pre>
+<p><code>MainComponent</code> 类是一个接口类，其中除了一个名为 <code>Builder</code> 接口和名为 <code>builder</code> 的静态 Builder 类创建方法之外，还有一个名为 <code>commandProcessor</code> 的方法。该方法用来构造合法可用的 <code>CommandProcessor</code> 类实例。<a href="https://dagger.dev/" title="Dagger is a fully static, compile-time dependency injection framework for both Java and Android.">Dagger 2</a> 会在编译时生成一个 <code>MainComponent</code> 接口的实现类 <code>DaggerMainComponent</code>，以及 <code>Builder</code> 接口的实现类 <code>DaggerMainComponent$Builder</code>。<code>DaggerMainComponent</code> 类中包含了 <code>commandProcessor</code> 方法的实现，暴露构造好的 <code>CommandProcessor</code> 实例。</p>
+<p>在 <code>MainApp</code> 中需要构建 <code>MainComponent</code> 实例并从中获取 <code>CommandProcessor</code> 实例，相关代码修改为：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">MainComponent</span><span style="color:#fdf4c1aa;"> mainComponent </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">MainComponent</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">builder()
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">setJdbcUrl(</span><span style="color:#b8bb26;">&quot;jdbc:h2:mem:test&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">setJdbcUsername(</span><span style="color:#b8bb26;">&quot;h2&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">setJdbcPassword(</span><span style="color:#b8bb26;">&quot;user@H2&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">build()</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">CommandProcessor</span><span style="color:#fdf4c1aa;"> processor </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> mainComponent.</span><span style="color:#fdf4c1;">commandProcessor()</span><span style="color:#fdf4c1aa;">;
+</span></pre>
+<p>这样就完成了应用程序的组装。完整的示例代码可以参见 <a href="https://github.com/wbprime/java-mods/tree/master/dagger-usecases">Dagger Usecases</a>。</p>
+<p>说明：方案中为了保持部分实现类内容的包级别可用性，使用了多个 Module 类文件；如果不介意实现类的可见性，可以整个应用程序使用一个完整的 Module 类文件。</p>
+<h1 id="conculsion"><a class="zola-anchor" href="#conculsion" aria-label="Anchor link for: conculsion">🔗</a>
+Conculsion</h1>
+<p>对比分别使用 <a href="https://github.com/google/guice" title="Guice (pronounced 'juice') is a lightweight dependency injection framework for Java 6 and above, brought to you by Google.">Guice</a> 和 <a href="https://dagger.dev/" title="Dagger is a fully static, compile-time dependency injection framework for both Java and Android.">Dagger 2</a> 实现的 CASE，可以发现依赖注入框架的引入可以帮助实现应用程序核心逻辑和组装代码的解耦合，使得不仅对测试更友好，而且封装性更好。而且，只要做好逻辑代码与组装代码的解耦合，实际项目选择将依赖注入框架从 <a href="https://github.com/google/guice" title="Guice (pronounced 'juice') is a lightweight dependency injection framework for Java 6 and above, brought to you by Google.">Guice</a> 迁移到 <a href="https://dagger.dev/" title="Dagger is a fully static, compile-time dependency injection framework for both Java and Android.">Dagger 2</a>，或者反过来，都是一种很简单的事情。</p>
+<hr />
+<p>以上。</p>
+<p>完整的示例代码可以参见 <a href="https://github.com/wbprime/java-mods/tree/master/guice-usecases">Guice Usecases</a> 和 <a href="https://github.com/wbprime/java-mods/tree/master/dagger-usecases">Dagger Usecases</a>。</p>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+            
+                <div class="post-tags">
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;jsr330&#x2F;">#jsr330</a>
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;inject&#x2F;">#inject</a>
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;guice&#x2F;">#guice</a>
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;dagger2&#x2F;">#dagger2</a>
+                    
+                </div>
+            
+            
+                <div class="post-nav">
+                    
+                        <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-10-24-jooq-usecases-transaction-management&#x2F;">‹ JOOQ 的使用 - 使用事务 (Transaction)</a>
+                    
+                    
+                    
+                    
+                </div>
+            
+
+        
+
+    </div>
+
+    
+    
+</article>
+
+
+                </div>
+            </main>
+
+            
+            
+        </div>
+
+      
+          <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
+      
+    </body>
+
+</html>

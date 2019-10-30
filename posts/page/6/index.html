@@ -113,6 +113,32 @@
                                     
     <header class="post__header">
         <h1 class="post__title">
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2016-03-30-learning-java-concurrency-countdownlatch&#x2F;">Learning Java Concurrency - CountDownLatch</a>
+        </h1>
+        <div class="post__meta">
+            <span class="post__time">2016-03-30</span>
+            
+        </div>
+    </header>
+
+                                    <div class="post__summary">
+                                        <p>CountDownLatch 是一种比较有意思的线程同步方法，主要用于需要同步启动的环境中。</p>
+<p>举个栗子，部门进行聚餐要等到大家都到齐了才能开动。这个时候CountDownLatch可以理解为“还有多少人没有到”这个东西，来了一个，这个东西的值就会减1。一直到人都到齐了，这个东西的值变为了0,也就是可以开吃了。</p>
+<p>举个栗子，通用的make进行多工程代码编译，必须所有工程编译完了才能结束。</p>
+<p>举个栗子，项目上线，各个模块都上线完了，leader说一句OK，大家才能走。</p>
+<p>要注意以上几个栗子都是每个线程减1，但是实际中具体减多少不做限制。</p>
+<p>比如，猫有9条命，两个人你一下我一下一刀一刀砍上去，然后它就死了。这个也可用CountDownLatch来描述。</p>
+
+                                    </div>
+                                    <div class="read-more">
+                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2016-03-30-learning-java-concurrency-countdownlatch&#x2F;">Read more...</a>
+                                    </div>
+                                </article>
+                            
+                                <article class="post">
+                                    
+    <header class="post__header">
+        <h1 class="post__title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2016-03-30-learning-java-concurrent-semaphore&#x2F;">Learning Java Concurrency - Semaphore</a>
         </h1>
         <div class="post__meta">
@@ -389,26 +415,6 @@
                                     </div>
                                     <div class="read-more">
                                         <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;qusuodui&#x2F;">Read more...</a>
-                                    </div>
-                                </article>
-                            
-                                <article class="post">
-                                    
-    <header class="post__header">
-        <h1 class="post__title">
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;suoban-qushi&#x2F;">所办趣事</a>
-        </h1>
-        <div class="post__meta">
-            <span class="post__time">2015-05-16</span>
-            
-        </div>
-    </header>
-
-                                    <div class="post__summary">
-                                        
-                                    </div>
-                                    <div class="read-more">
-                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;suoban-qushi&#x2F;">Read more...</a>
                                     </div>
                                 </article>
                             

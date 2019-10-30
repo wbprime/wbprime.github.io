@@ -113,6 +113,35 @@
                                     
     <header class="post__header">
         <h1 class="post__title">
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-09-ffprobe-note-query-video-rotation-info&#x2F;">Query Video Rotation Info using FFprobe</a>
+        </h1>
+        <div class="post__meta">
+            <span class="post__time">2019-09-09</span>
+            
+        </div>
+    </header>
+
+                                    <div class="post__summary">
+                                        <p>有一些通过手持设备录制的视频会把视频的旋转信息作为一个额外的字段放入视频的元数据中（比如 iOS）；在对
+这些视频进行处理的时候，其元数据中的宽高信息就需要使用旋转信息进行修正。</p>
+<p>使用 <a href="https://ffmpeg.org/ffprobe.html">ffprobe</a> 获取原视频中的旋转信息的命令如下：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1;">ffprobe -loglevel error -hide_banner -select_streams v -show_entries stream_tags=rotate -of json=compact=1 input.avi
+</span></pre>
+<p>查询得到的视频旋转信息是一个整型的旋转角度值（而不是弧度）；取值范围为 [0, 360]，常见的取值有
+90/180/270 。</p>
+<p>假定一个原视频通过 <a href="https://ffmpeg.org/ffprobe.html">ffprobe</a> 提取的宽高信息为 800x600，若旋转信息为 90，则实际的视频宽高为 600x800。</p>
+
+                                    </div>
+                                    <div class="read-more">
+                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-09-ffprobe-note-query-video-rotation-info&#x2F;">Read more...</a>
+                                    </div>
+                                </article>
+                            
+                                <article class="post">
+                                    
+    <header class="post__header">
+        <h1 class="post__title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-09-ffprobe-note-query-key-frame-info&#x2F;">Query Key-Frame Info from Video Stream using FFprobe</a>
         </h1>
         <div class="post__meta">
@@ -479,42 +508,6 @@ Guice 依赖。</p>
                                     </div>
                                     <div class="read-more">
                                         <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-03-21-a-product-env-bug-misused-hashmap-nullability&#x2F;">Read more...</a>
-                                    </div>
-                                </article>
-                            
-                                <article class="post">
-                                    
-    <header class="post__header">
-        <h1 class="post__title">
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-03-12-multiple-jwt-auth-handler-in-vertx&#x2F;">Multiple JWT Auth Handlers in Vert.x</a>
-        </h1>
-        <div class="post__meta">
-            <span class="post__time">2019-03-12</span>
-            
-        </div>
-    </header>
-
-                                    <div class="post__summary">
-                                        <p><a href="https://vertx.io">Vert.x</a> 的官方 Web 开发包 <a href="https://vertx.io/docs/vertx-web/java/">Vert.x-Web</a> 中
-提供了内置的 Authentication&amp;Authorisation 支持；通过扩展的
-<a href="https://vertx.io/docs/vertx-auth-common/java/">Auth Common</a> 模块和 <a href="https://vertx.io/docs/vertx-auth-jdbc/java/">JDBC
-auth</a> <a href="https://vertx.io/docs/vertx-auth-mongo/java/">MongoDB
-auth</a> <a href="https://vertx.io/docs/vertx-auth-shiro/java/">Shiro
-auth</a> <a href="https://vertx.io/docs/vertx-auth-jwt/java/">JWT
-auth</a> <a href="https://vertx.io/docs/vertx-auth-oauth2/java/">OAuth 2</a> 等模块，可以覆盖大部分的用户认证与验权的支持。</p>
-<p>在实际的项目中，遇到了一个支持多用户提供方的需求：项目的用户是从多个其他项目导入的；项目的逻辑比较简
-单，不想维护自己的用户信息数据和外部映射。</p>
-<p>比如，项目需要支持主站用户、视频网站等入口登录访问。正常情况下，只需要项目维护一套内部用户表、一个外
-部项目表以及内部用户和外部用户的映射表；在用户导入或用户绑定请求时，建立外部项目 ID 和外部项目用户
-ID 与内部用户 ID 的对应关系；在登录请求时，根据外部项目 ID 和外部项目用户 ID 调用用户认证回调，通过
-后再寻找到内部用户的 ID 即可。</p>
-<p>实际在项目的设计和实现过程中，采用了一个比较好玩的方法：在内部用户表的基础上，对用户使用
-<a href="https://jwt.io">JWT</a> 的认证模型；用户登录时，根据外部项目 ID 和外部项目用户 ID 调用用户认证回调，发
-放 JWT token，在 token 中限定用户的访问权限。</p>
-
-                                    </div>
-                                    <div class="read-more">
-                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-03-12-multiple-jwt-auth-handler-in-vertx&#x2F;">Read more...</a>
                                     </div>
                                 </article>
                             

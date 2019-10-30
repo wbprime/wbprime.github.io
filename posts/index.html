@@ -113,6 +113,35 @@
                                     
     <header class="post__header">
         <h1 class="post__title">
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-10-29-dependency-injection-practise-guice-vs-dagger2&#x2F;">Dependency Injection - Guice VS Dagger 2</a>
+        </h1>
+        <div class="post__meta">
+            <span class="post__time">2019-10-30</span>
+            
+        </div>
+    </header>
+
+                                    <div class="post__summary">
+                                        <p>做 Java 后台开发的同学，基本上都使用过 <a href="http://en.wikipedia.org/wiki/Dependency_injection" title="Dependency Injection">Dependency Injection</a> 依赖注入框架。大名鼎鼎的 <a href="https://spring.io/projects/spring-framework" title="Spring Framework">Spring
+Framework</a> 就是从依赖注入起家的，然后一路奔向了全家桶的不归路；<a href="https://github.com/google/guice" title="Guice (pronounced 'juice') is a lightweight dependency injection framework for Java 6 and above, brought to you by Google.">Guice</a> 是
+Google 公司的依赖注入解决方案，重视类型安全胜过于使用便利性，相比 <a href="https://spring.io/projects/spring-framework" title="Spring Framework">Spring Framework</a> 能提供
+更精准的控制和更翔实的注入失败错误信息；而由 Google 接盘 <a href="http://square.github.io/">Square</a> 的
+<a href="https://dagger.dev/" title="Dagger is a fully static, compile-time dependency injection framework for both Java and Android.">Dagger 2</a> 则比 <a href="https://github.com/google/guice" title="Guice (pronounced 'juice') is a lightweight dependency injection framework for Java 6 and above, brought to you by Google.">Guice</a> 更进一步，通过在编译时构建依赖注入关系，使得依赖错误在编译阶
+段尽量暴露出来，同时，原生类型安全的 Java 代码相较基于反射的注入代码也有或多或少的性能提升（尤其是在
+Android 上）。</p>
+<p>本文通过同时使用 <a href="https://github.com/google/guice" title="Guice (pronounced 'juice') is a lightweight dependency injection framework for Java 6 and above, brought to you by Google.">Guice</a> 和 <a href="https://dagger.dev/" title="Dagger is a fully static, compile-time dependency injection framework for both Java and Android.">Dagger 2</a> 来实现相同的功能，对比二者在实现依赖注入方法上
+的异同。</p>
+
+                                    </div>
+                                    <div class="read-more">
+                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-10-29-dependency-injection-practise-guice-vs-dagger2&#x2F;">Read more...</a>
+                                    </div>
+                                </article>
+                            
+                                <article class="post">
+                                    
+    <header class="post__header">
+        <h1 class="post__title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-10-24-jooq-usecases-transaction-management&#x2F;">JOOQ 的使用 - 使用事务 (Transaction)</a>
         </h1>
         <div class="post__meta">
@@ -337,7 +366,7 @@
     </header>
 
                                     <div class="post__summary">
-                                        <p>Java 中有很多基于 <a href="https://docs.oracle.com/javase/7/docs/technotes/guides/apt/" title="Annotation Processing Tool (apt)">注解处理器 APT (Annotation Processing Tool)</a> 技术的类库，如 <a href="https://github.com/google/auto/tree/master/value" title="AutoValue - Immutable value-type code generation for Java 1.6+.">AutoValue</a> 和 <a href="https://freebuilder.inferred.org/" title="Automatic generation of the Builder pattern for Java">FreeBuilder</a> 等。</p>
+                                        <p>Java 中有很多基于 <a href="https://docs.oracle.com/javase/7/docs/technotes/guides/apt/" title="Annotation Processing Tool (apt)">注解处理器 (Annotation Processing Tool, APT)</a> 技术的类库，如 <a href="https://github.com/google/auto/tree/master/value" title="AutoValue - Immutable value-type code generation for Java 1.6+.">AutoValue</a> 和 <a href="https://freebuilder.inferred.org/" title="Automatic generation of the Builder pattern for Java">FreeBuilder</a> 等。</p>
 <p>在 <a href="https://maven.apache.org/">Maven</a> 中支持 <a href="https://www.wangbo.im/posts/2019-09-30-add-supports-for-apt-in-maven/apt">APT</a> ，需要在 <a href="https://maven.apache.org/plugins/maven-compiler-plugin/">Apache Maven Compiler Plugin</a> 的配置部分添加 <a href="https://maven.apache.org/plugins/maven-compiler-plugin/compile-mojo.html#annotationProcessorPaths">annotationProcessorPaths</a> 的配置，如下：</p>
 <pre style="background-color:#282828;">
 <span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">plugin</span><span style="color:#83a598;">&gt;
@@ -552,35 +581,6 @@ systems</a>
                                     </div>
                                     <div class="read-more">
                                         <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-12-vboxmanage-note-change-host-key-for-vboxsdl&#x2F;">Read more...</a>
-                                    </div>
-                                </article>
-                            
-                                <article class="post">
-                                    
-    <header class="post__header">
-        <h1 class="post__title">
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-09-ffprobe-note-query-video-rotation-info&#x2F;">Query Video Rotation Info using FFprobe</a>
-        </h1>
-        <div class="post__meta">
-            <span class="post__time">2019-09-09</span>
-            
-        </div>
-    </header>
-
-                                    <div class="post__summary">
-                                        <p>有一些通过手持设备录制的视频会把视频的旋转信息作为一个额外的字段放入视频的元数据中（比如 iOS）；在对
-这些视频进行处理的时候，其元数据中的宽高信息就需要使用旋转信息进行修正。</p>
-<p>使用 <a href="https://ffmpeg.org/ffprobe.html">ffprobe</a> 获取原视频中的旋转信息的命令如下：</p>
-<pre style="background-color:#282828;">
-<span style="color:#fdf4c1;">ffprobe -loglevel error -hide_banner -select_streams v -show_entries stream_tags=rotate -of json=compact=1 input.avi
-</span></pre>
-<p>查询得到的视频旋转信息是一个整型的旋转角度值（而不是弧度）；取值范围为 [0, 360]，常见的取值有
-90/180/270 。</p>
-<p>假定一个原视频通过 <a href="https://ffmpeg.org/ffprobe.html">ffprobe</a> 提取的宽高信息为 800x600，若旋转信息为 90，则实际的视频宽高为 600x800。</p>
-
-                                    </div>
-                                    <div class="read-more">
-                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2019-09-09-ffprobe-note-query-video-rotation-info&#x2F;">Read more...</a>
                                     </div>
                                 </article>
                             

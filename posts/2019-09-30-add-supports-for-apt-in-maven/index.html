@@ -123,7 +123,7 @@
     </header>
 
     <div class="post-content">
-      <p>Java 中有很多基于 <a href="https://docs.oracle.com/javase/7/docs/technotes/guides/apt/" title="Annotation Processing Tool (apt)">注解处理器 APT (Annotation Processing Tool)</a> 技术的类库，如 <a href="https://github.com/google/auto/tree/master/value" title="AutoValue - Immutable value-type code generation for Java 1.6+.">AutoValue</a> 和 <a href="https://freebuilder.inferred.org/" title="Automatic generation of the Builder pattern for Java">FreeBuilder</a> 等。</p>
+      <p>Java 中有很多基于 <a href="https://docs.oracle.com/javase/7/docs/technotes/guides/apt/" title="Annotation Processing Tool (apt)">注解处理器 (Annotation Processing Tool, APT)</a> 技术的类库，如 <a href="https://github.com/google/auto/tree/master/value" title="AutoValue - Immutable value-type code generation for Java 1.6+.">AutoValue</a> 和 <a href="https://freebuilder.inferred.org/" title="Automatic generation of the Builder pattern for Java">FreeBuilder</a> 等。</p>
 <p>在 <a href="https://maven.apache.org/">Maven</a> 中支持 <a href="https://www.wangbo.im/posts/2019-09-30-add-supports-for-apt-in-maven/apt">APT</a> ，需要在 <a href="https://maven.apache.org/plugins/maven-compiler-plugin/">Apache Maven Compiler Plugin</a> 的配置部分添加 <a href="https://maven.apache.org/plugins/maven-compiler-plugin/compile-mojo.html#annotationProcessorPaths">annotationProcessorPaths</a> 的配置，如下：</p>
 <pre style="background-color:#282828;">
 <span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">plugin</span><span style="color:#83a598;">&gt;
