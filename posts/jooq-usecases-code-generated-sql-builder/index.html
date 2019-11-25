@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>wangbo’s blog - JOOQ 的使用 - 从生成代码拼接 SQL 语句 (SQL Builder)</title>
+
+      
+
+      
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
+          
+      
+
+      
+          <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
+          
+      
+
+      
+      
+    </head>
+
+    <body>
+        <div class="container">
+
+            <div id="mobile-navbar" class="mobile-navbar">
+              <div class="mobile-header-logo">
+                <a href="/" class="logo">WB Prime</a>
+              </div>
+              <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+
+            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
+              <ul class="mobile-menu-list">
+                
+                    <li class="mobile-menu-item">
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">
+                            Categories
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">
+                            Tags
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https:&#x2F;&#x2F;github.wangbo.im">
+                            Github
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">
+                            About
+                        </a>
+                    </li>
+                
+              </ul>
+            </nav>
+
+            <header id="header">
+                <div class="logo"><a href="https:&#x2F;&#x2F;www.wangbo.im">WB Prime</a></div>
+                <nav class="menu">
+                    <ul>
+                        
+                            <li>
+                                <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">
+                                    Categories
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">
+                                    Tags
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https:&#x2F;&#x2F;github.wangbo.im">
+                                    Github
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">
+                                    About
+                                </a>
+                            </li>
+                        
+                    </ul>
+                </nav>
+            </header>
+
+            <main>
+                <div class="content" id="mobile-panel">
+                    
+
+
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="https://www.wangbo.im/posts/jooq-usecases-code-generated-sql-builder/#generated-classes" class="toc-link">Generated Classes</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://www.wangbo.im/posts/jooq-usecases-code-generated-sql-builder/#sql-building" class="toc-link">SQL Building</a>
+                    
+                    <ul>
+                        
+                        <li>
+                            <a href="https://www.wangbo.im/posts/jooq-usecases-code-generated-sql-builder/#common" class="toc-link">Common</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://www.wangbo.im/posts/jooq-usecases-code-generated-sql-builder/#select" class="toc-link">select</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://www.wangbo.im/posts/jooq-usecases-code-generated-sql-builder/#insert" class="toc-link">insert</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://www.wangbo.im/posts/jooq-usecases-code-generated-sql-builder/#update" class="toc-link">update</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://www.wangbo.im/posts/jooq-usecases-code-generated-sql-builder/#delete" class="toc-link">delete</a>
+                        </li>
+                        
+                    </ul>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article class="post">
+    
+    <header class="post__header">
+        <h1 class="post__title">
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;jooq-usecases-code-generated-sql-builder&#x2F;">JOOQ 的使用 - 从生成代码拼接 SQL 语句 (SQL Builder)</a>
+        </h1>
+        <div class="post__meta">
+            <span class="post__time">2019-10-23</span>
+            
+        </div>
+    </header>
+
+    <div class="post-content">
+      <p><a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 是基于 JDBC 之上的一个抽象层，提供了多种多样的模型来与关系型数据库进行互操作；其使用与 <a href="https://mybatis.org/mybatis-3/">mybatis</a> 和 <a href="http://hibernate.org/orm/">Hibernate ORM</a> 不同的思路来实现 <a href="https://en.wikipedia.org/wiki/Object-relational_mapping">对象关系映射 ORM</a> 。</p>
+<p><a href="https://www.wangbo.im/posts/jooq-usecases-code-generating/">JOOQ 的使用 - 代码生成配置 (PostgreSQL &amp; DDL Driven)</a> 介绍了使用 <a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 为数据库表生成实体类代码；<a href="https://www.wangbo.im/posts/jooq-usecases-sql-builder/">JOOQ 的使用 - 拼接 SQL 语句 (SQL Builder)</a> 介绍了基于 <a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 的 SQL 语句拼接；作为对比，本篇主要介绍基于生成代码的 SQL 语句拼接 (SQL Builder) 。</p>
+<p id="zola-continue-reading"><a name="continue-reading"></a></p>
+<h1 id="generated-classes"><a class="zola-anchor" href="#generated-classes" aria-label="Anchor link for: generated-classes">🔗</a>Generated Classes</h1>
+<p>本文使用了 <a href="https://www.wangbo.im/posts/jooq-usecases-code-generating/">代码生成</a> 里面的基于 <a href="https://www.postgresql.org" title="PostgreSQL: The World's Most Advanced Open Source Relational Database">PostgreSQL</a> 实例驱动生成的代码，代码结构如下：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">├── tables
+│   ├── daos
+│   │   ├── AuthorDao.java
+│   │   └── BookDao.java
+│   ├── interfaces
+│   │   ├── IAuthor.java
+│   │   └── IBook.java
+│   ├── pojos
+│   │   ├── Author.java
+│   │   └── Book.java
+│   ├── records
+│   │   ├── AuthorRecord.java
+│   │   └── BookRecord.java
+│   ├── Author.java
+│   └── Book.java
+├── DefaultCatalog.java
+├── Indexes.java
+├── Keys.java
+├── Public.java
+├── Sequences.java
+└── Tables.java
+</span></pre><h1 id="sql-building"><a class="zola-anchor" href="#sql-building" aria-label="Anchor link for: sql-building">🔗</a>SQL Building</h1>
+<h2 id="common"><a class="zola-anchor" href="#common" aria-label="Anchor link for: common">🔗</a>Common</h2>
+<p>所有的 SQL 生成用例都使用了 <a href="https://junit.org/junit5/">JUnit 5</a> 的参数化测试能力，参数化的数据为 6 种不同的关系型数据库方言。</p>
+<p>公共代码：</p>
+<pre style="background-color:#282828;">
+<span style="font-style:italic;color:#928374;">// junit 5 parameterized test data source
+</span><span style="color:#fa5c4b;">static </span><span style="color:#8ec07c;">Stream</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Arguments</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">dslContexts() </span><span style="color:#fdf4c1aa;">{
+    </span><span style="color:#fa5c4b;">return </span><span style="color:#8ec07c;">Stream</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">of(
+        </span><span style="color:#8ec07c;">Arguments</span><span style="color:#fdf4c1;">.of(</span><span style="color:#8ec07c;">SQLDialect</span><span style="color:#fdf4c1;">.DEFAULT),
+        </span><span style="color:#8ec07c;">Arguments</span><span style="color:#fdf4c1;">.of(</span><span style="color:#8ec07c;">SQLDialect</span><span style="color:#fdf4c1;">.H2),
+        </span><span style="color:#8ec07c;">Arguments</span><span style="color:#fdf4c1;">.of(</span><span style="color:#8ec07c;">SQLDialect</span><span style="color:#fdf4c1;">.HSQLDB),
+        </span><span style="color:#8ec07c;">Arguments</span><span style="color:#fdf4c1;">.of(</span><span style="color:#8ec07c;">SQLDialect</span><span style="color:#fdf4c1;">.POSTGRES),
+        </span><span style="color:#8ec07c;">Arguments</span><span style="color:#fdf4c1;">.of(</span><span style="color:#8ec07c;">SQLDialect</span><span style="color:#fdf4c1;">.MYSQL)
+    )</span><span style="color:#fdf4c1aa;">;
+}
+</span></pre><h2 id="select"><a class="zola-anchor" href="#select" aria-label="Anchor link for: select">🔗</a>select</h2>
+<p>使用生成类来生成 <code>select</code> 的 SQL：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">ParameterizedTest
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">MethodSource</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;dslContexts&quot;</span><span style="color:#fdf4c1aa;">)
+void </span><span style="color:#fdf4c1;">test_buildSelect(final </span><span style="color:#8ec07c;">SQLDialect</span><span style="color:#fdf4c1;"> dialect) </span><span style="color:#fdf4c1aa;">{
+    </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">DSLContext</span><span style="color:#fdf4c1aa;"> dsl </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">DSL</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">using(dialect)</span><span style="color:#fdf4c1aa;">;
+
+    </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;"> sql </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> dsl
+        .</span><span style="color:#fdf4c1;">select(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.ID, </span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.FIRST_NAME,
+                </span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.LAST_NAME, </span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.BOOK.TITLE)
+        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">from(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.as(</span><span style="color:#b8bb26;">&quot;u&quot;</span><span style="color:#fdf4c1;">))
+        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">join(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.BOOK.as(</span><span style="color:#b8bb26;">&quot;b&quot;</span><span style="color:#fdf4c1;">))
+        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">on(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.ID.eq(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.BOOK.AUTHOR_ID))
+        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">where(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.FIRST_NAME.eq(</span><span style="color:#b8bb26;">&quot;Elvis&quot;</span><span style="color:#fdf4c1;">))
+        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">and(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.LAST_NAME.eq(</span><span style="color:#b8bb26;">&quot;Wang&quot;</span><span style="color:#fdf4c1;">))
+        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">getSQL(</span><span style="color:#8ec07c;">ParamType</span><span style="color:#fdf4c1;">.INLINED)</span><span style="color:#fdf4c1aa;">;
+    </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(dialect.getName() </span><span style="color:#fe8019;">+ </span><span style="color:#b8bb26;">&quot; =&gt; &quot; </span><span style="color:#fe8019;">+</span><span style="color:#fdf4c1;"> sql)</span><span style="color:#fdf4c1aa;">;
+}
+</span></pre>
+<p>生成的 <code>select</code> 语句简单对比如下：</p>
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/SQL:1999" title="SQL:1999">SQL:1999</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">select </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;ID&quot;</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;FIRST_NAME&quot;</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;LAST_NAME&quot;</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;BOOK&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;TITLE&quot;
+</span><span style="color:#fa5c4b;">from </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot; &quot;u&quot;
+</span><span style="color:#fa5c4b;">join </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;BOOK&quot; &quot;b&quot;
+</span><span style="color:#fa5c4b;">on </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;ID&quot; </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;BOOK&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR_ID&quot;
+</span><span style="color:#fa5c4b;">where</span><span style="color:#fdf4c1aa;"> (</span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;FIRST_NAME&quot; </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&#39;Elvis&#39;
+</span><span style="color:#fa5c4b;">and </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;LAST_NAME&quot; </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&#39;Wang&#39;</span><span style="color:#fdf4c1aa;">)
+</span></pre></li>
+<li>
+<p><a href="http://www.h2database.com/html/main.html" title="H2 Database Engine">H2</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">select </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;ID&quot;</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;FIRST_NAME&quot;</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;LAST_NAME&quot;</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;BOOK&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;TITLE&quot; </span><span style="color:#fa5c4b;">from </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot; &quot;u&quot;
+</span><span style="color:#fa5c4b;">join </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;BOOK&quot; &quot;b&quot;
+</span><span style="color:#fa5c4b;">on </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;ID&quot; </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;BOOK&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR_ID&quot;
+</span><span style="color:#fa5c4b;">where</span><span style="color:#fdf4c1aa;"> (</span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;FIRST_NAME&quot; </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&#39;Elvis&#39;
+</span><span style="color:#fa5c4b;">and </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;LAST_NAME&quot; </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&#39;Wang&#39;</span><span style="color:#fdf4c1aa;">)
+</span></pre></li>
+<li>
+<p><a href="http://hsqldb.org" title="HSQLDB - 100% Java Database">HSQLDB</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">select </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;ID&quot;</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;FIRST_NAME&quot;</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;LAST_NAME&quot;</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;BOOK&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;TITLE&quot; </span><span style="color:#fa5c4b;">from </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot; </span><span style="color:#fa5c4b;">as </span><span style="color:#b8bb26;">&quot;u&quot;
+</span><span style="color:#fa5c4b;">join </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;BOOK&quot; </span><span style="color:#fa5c4b;">as </span><span style="color:#b8bb26;">&quot;b&quot;
+</span><span style="color:#fa5c4b;">on </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;ID&quot; </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;BOOK&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR_ID&quot;
+</span><span style="color:#fa5c4b;">where</span><span style="color:#fdf4c1aa;"> (</span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;FIRST_NAME&quot; </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&#39;Elvis&#39;
+</span><span style="color:#fa5c4b;">and </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;LAST_NAME&quot; </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&#39;Wang&#39;</span><span style="color:#fdf4c1aa;">)
+</span></pre></li>
+<li>
+<p><a href="http://www.mysql.com" title="The world's most popular open source database">MySQL</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">select </span><span style="color:#b8bb26;">`PUBLIC`</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">`AUTHOR`</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">`ID`</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#b8bb26;">`PUBLIC`</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">`AUTHOR`</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">`FIRST_NAME`</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#b8bb26;">`PUBLIC`</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">`AUTHOR`</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">`LAST_NAME`</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#b8bb26;">`PUBLIC`</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">`BOOK`</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">`TITLE`
+</span><span style="color:#fa5c4b;">from </span><span style="color:#b8bb26;">`PUBLIC`</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">`AUTHOR` </span><span style="color:#fa5c4b;">as </span><span style="color:#b8bb26;">`u`
+</span><span style="color:#fa5c4b;">join </span><span style="color:#b8bb26;">`PUBLIC`</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">`BOOK` </span><span style="color:#fa5c4b;">as </span><span style="color:#b8bb26;">`b`
+</span><span style="color:#fa5c4b;">on </span><span style="color:#b8bb26;">`PUBLIC`</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">`AUTHOR`</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">`ID` </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">`PUBLIC`</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">`BOOK`</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">`AUTHOR_ID`
+</span><span style="color:#fa5c4b;">where</span><span style="color:#fdf4c1aa;"> (</span><span style="color:#b8bb26;">`PUBLIC`</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">`AUTHOR`</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">`FIRST_NAME` </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&#39;Elvis&#39;
+</span><span style="color:#fa5c4b;">and </span><span style="color:#b8bb26;">`PUBLIC`</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">`AUTHOR`</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">`LAST_NAME` </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&#39;Wang&#39;</span><span style="color:#fdf4c1aa;">)
+</span></pre></li>
+<li>
+<p><a href="https://www.postgresql.org" title="PostgreSQL: The World's Most Advanced Open Source Relational Database">Postgres</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">select </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;ID&quot;</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;FIRST_NAME&quot;</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;LAST_NAME&quot;</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;BOOK&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;TITLE&quot;
+</span><span style="color:#fa5c4b;">from </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot; </span><span style="color:#fa5c4b;">as </span><span style="color:#b8bb26;">&quot;u&quot;
+</span><span style="color:#fa5c4b;">join </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;BOOK&quot; </span><span style="color:#fa5c4b;">as </span><span style="color:#b8bb26;">&quot;b&quot;
+</span><span style="color:#fa5c4b;">on </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;ID&quot; </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;BOOK&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR_ID&quot;
+</span><span style="color:#fa5c4b;">where</span><span style="color:#fdf4c1aa;"> (</span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;FIRST_NAME&quot; </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&#39;Elvis&#39;
+</span><span style="color:#fa5c4b;">and </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;LAST_NAME&quot; </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&#39;Wang&#39;</span><span style="color:#fdf4c1aa;">)
+</span></pre></li>
+</ul>
+<h2 id="insert"><a class="zola-anchor" href="#insert" aria-label="Anchor link for: insert">🔗</a>insert</h2>
+<p>使用生成类来生成 <code>insert</code> 的 SQL：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">ParameterizedTest
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">MethodSource</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;dslContexts&quot;</span><span style="color:#fdf4c1aa;">)
+void </span><span style="color:#fdf4c1;">test_buildInsert(final </span><span style="color:#8ec07c;">SQLDialect</span><span style="color:#fdf4c1;"> dialect) </span><span style="color:#fdf4c1aa;">{
+    </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">DSLContext</span><span style="color:#fdf4c1aa;"> dsl </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">DSL</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">using(dialect)</span><span style="color:#fdf4c1aa;">;
+
+    </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;"> sql </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> dsl
+        .</span><span style="color:#fdf4c1;">insertInto(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR)
+        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">columns(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.FIRST_NAME, </span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.LAST_NAME)
+        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">values(</span><span style="color:#b8bb26;">&quot;Elvis&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#b8bb26;">&quot;Wang&quot;</span><span style="color:#fdf4c1;">)
+        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">getSQL(</span><span style="color:#8ec07c;">ParamType</span><span style="color:#fdf4c1;">.INLINED)</span><span style="color:#fdf4c1aa;">;
+    </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(dialect.getName() </span><span style="color:#fe8019;">+ </span><span style="color:#b8bb26;">&quot; =&gt; &quot; </span><span style="color:#fe8019;">+</span><span style="color:#fdf4c1;"> sql)</span><span style="color:#fdf4c1aa;">;
+}
+</span></pre>
+<p>生成的 <code>insert</code> 语句简单对比如下：</p>
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/SQL:1999" title="SQL:1999">SQL:1999</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">insert into </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;
+</span><span style="color:#fdf4c1aa;">    (</span><span style="color:#b8bb26;">&quot;FIRST_NAME&quot;</span><span style="color:#fdf4c1aa;">, </span><span style="color:#b8bb26;">&quot;LAST_NAME&quot;</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fa5c4b;">values</span><span style="color:#fdf4c1aa;"> (</span><span style="color:#b8bb26;">&#39;Elvis&#39;</span><span style="color:#fdf4c1aa;">, </span><span style="color:#b8bb26;">&#39;Wang&#39;</span><span style="color:#fdf4c1aa;">)
+</span></pre></li>
+<li>
+<p><a href="http://www.h2database.com/html/main.html" title="H2 Database Engine">H2</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">insert into </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;
+</span><span style="color:#fdf4c1aa;">    (</span><span style="color:#b8bb26;">&quot;FIRST_NAME&quot;</span><span style="color:#fdf4c1aa;">, </span><span style="color:#b8bb26;">&quot;LAST_NAME&quot;</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fa5c4b;">values</span><span style="color:#fdf4c1aa;"> (</span><span style="color:#b8bb26;">&#39;Elvis&#39;</span><span style="color:#fdf4c1aa;">, </span><span style="color:#b8bb26;">&#39;Wang&#39;</span><span style="color:#fdf4c1aa;">)
+</span></pre></li>
+<li>
+<p><a href="http://hsqldb.org" title="HSQLDB - 100% Java Database">HSQLDB</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">insert into </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;
+</span><span style="color:#fdf4c1aa;">    (</span><span style="color:#b8bb26;">&quot;FIRST_NAME&quot;</span><span style="color:#fdf4c1aa;">, </span><span style="color:#b8bb26;">&quot;LAST_NAME&quot;</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fa5c4b;">values</span><span style="color:#fdf4c1aa;"> (</span><span style="color:#b8bb26;">&#39;Elvis&#39;</span><span style="color:#fdf4c1aa;">, </span><span style="color:#b8bb26;">&#39;Wang&#39;</span><span style="color:#fdf4c1aa;">)
+</span></pre></li>
+<li>
+<p><a href="http://www.mysql.com" title="The world's most popular open source database">MySQL</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">insert into </span><span style="color:#b8bb26;">`PUBLIC`</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">`AUTHOR`
+</span><span style="color:#fdf4c1aa;">    (</span><span style="color:#b8bb26;">`FIRST_NAME`</span><span style="color:#fdf4c1aa;">, </span><span style="color:#b8bb26;">`LAST_NAME`</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fa5c4b;">values</span><span style="color:#fdf4c1aa;"> (</span><span style="color:#b8bb26;">&#39;Elvis&#39;</span><span style="color:#fdf4c1aa;">, </span><span style="color:#b8bb26;">&#39;Wang&#39;</span><span style="color:#fdf4c1aa;">)
+</span></pre></li>
+<li>
+<p><a href="https://www.postgresql.org" title="PostgreSQL: The World's Most Advanced Open Source Relational Database">Postgres</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">insert into </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;
+</span><span style="color:#fdf4c1aa;">    (</span><span style="color:#b8bb26;">&quot;FIRST_NAME&quot;</span><span style="color:#fdf4c1aa;">, </span><span style="color:#b8bb26;">&quot;LAST_NAME&quot;</span><span style="color:#fdf4c1aa;">)
+</span><span style="color:#fa5c4b;">values</span><span style="color:#fdf4c1aa;"> (</span><span style="color:#b8bb26;">&#39;Elvis&#39;</span><span style="color:#fdf4c1aa;">, </span><span style="color:#b8bb26;">&#39;Wang&#39;</span><span style="color:#fdf4c1aa;">)
+</span></pre></li>
+</ul>
+<h2 id="update"><a class="zola-anchor" href="#update" aria-label="Anchor link for: update">🔗</a>update</h2>
+<p>使用生成类来生成 <code>update</code> 的 SQL：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">ParameterizedTest
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">MethodSource</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;dslContexts&quot;</span><span style="color:#fdf4c1aa;">)
+void </span><span style="color:#fdf4c1;">test_buildUpdate(final </span><span style="color:#8ec07c;">SQLDialect</span><span style="color:#fdf4c1;"> dialect) </span><span style="color:#fdf4c1aa;">{
+    </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">DSLContext</span><span style="color:#fdf4c1aa;"> dsl </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">DSL</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">using(dialect)</span><span style="color:#fdf4c1aa;">;
+
+    </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;"> sql </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> dsl
+        .</span><span style="color:#fdf4c1;">update(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR)
+        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">set(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.FIRST_NAME, </span><span style="color:#b8bb26;">&quot;Elvis&quot;</span><span style="color:#fdf4c1;">)
+        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">set(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.LAST_NAME, </span><span style="color:#b8bb26;">&quot;Wang&quot;</span><span style="color:#fdf4c1;">)
+        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">where(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.ID.eq(</span><span style="color:#d3869b;">1993</span><span style="color:#fa5c4b;">L</span><span style="color:#fdf4c1;">))
+        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">getSQL(</span><span style="color:#8ec07c;">ParamType</span><span style="color:#fdf4c1;">.INLINED)</span><span style="color:#fdf4c1aa;">;
+    </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(dialect.getName() </span><span style="color:#fe8019;">+ </span><span style="color:#b8bb26;">&quot; =&gt; &quot; </span><span style="color:#fe8019;">+</span><span style="color:#fdf4c1;"> sql)</span><span style="color:#fdf4c1aa;">;
+}
+</span></pre>
+<p>生成的 <code>update</code> 语句简单对比如下：</p>
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/SQL:1999" title="SQL:1999">SQL:1999</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">update </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;
+</span><span style="color:#fa5c4b;">set </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;FIRST_NAME&quot; </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&#39;Elvis&#39;</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;LAST_NAME&quot; </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&#39;Wang&#39;
+</span><span style="color:#fa5c4b;">where </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;ID&quot; </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">1993
+</span></pre></li>
+<li>
+<p><a href="http://www.h2database.com/html/main.html" title="H2 Database Engine">H2</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">update </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;
+</span><span style="color:#fa5c4b;">set </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;FIRST_NAME&quot; </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&#39;Elvis&#39;</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;LAST_NAME&quot; </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&#39;Wang&#39;
+</span><span style="color:#fa5c4b;">where </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;ID&quot; </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">1993
+</span></pre></li>
+<li>
+<p><a href="http://hsqldb.org" title="HSQLDB - 100% Java Database">HSQLDB</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">update </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;
+</span><span style="color:#fa5c4b;">set </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;FIRST_NAME&quot; </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&#39;Elvis&#39;</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;LAST_NAME&quot; </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&#39;Wang&#39;
+</span><span style="color:#fa5c4b;">where </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;ID&quot; </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">1993
+</span></pre></li>
+<li>
+<p><a href="http://www.mysql.com" title="The world's most popular open source database">MySQL</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">update </span><span style="color:#b8bb26;">`PUBLIC`</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">`AUTHOR`
+</span><span style="color:#fa5c4b;">set </span><span style="color:#b8bb26;">`PUBLIC`</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">`AUTHOR`</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">`FIRST_NAME` </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&#39;Elvis&#39;</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#b8bb26;">`PUBLIC`</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">`AUTHOR`</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">`LAST_NAME` </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&#39;Wang&#39;
+</span><span style="color:#fa5c4b;">where </span><span style="color:#b8bb26;">`PUBLIC`</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">`AUTHOR`</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">`ID` </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">1993
+</span></pre></li>
+<li>
+<p><a href="https://www.postgresql.org" title="PostgreSQL: The World's Most Advanced Open Source Relational Database">Postgres</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">update </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;
+</span><span style="color:#fa5c4b;">set </span><span style="color:#b8bb26;">&quot;FIRST_NAME&quot; </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&#39;Elvis&#39;</span><span style="color:#fdf4c1aa;">,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#b8bb26;">&quot;LAST_NAME&quot; </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&#39;Wang&#39;
+</span><span style="color:#fa5c4b;">where </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;ID&quot; </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">1993
+</span></pre></li>
+</ul>
+<h2 id="delete"><a class="zola-anchor" href="#delete" aria-label="Anchor link for: delete">🔗</a>delete</h2>
+<p>使用生成类来生成 <code>delete</code> 的 SQL：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">ParameterizedTest
+</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">MethodSource</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;dslContexts&quot;</span><span style="color:#fdf4c1aa;">)
+void </span><span style="color:#fdf4c1;">test_buildDelete(final </span><span style="color:#8ec07c;">SQLDialect</span><span style="color:#fdf4c1;"> dialect) </span><span style="color:#fdf4c1aa;">{
+    </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">DSLContext</span><span style="color:#fdf4c1aa;"> dsl </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">DSL</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">using(dialect)</span><span style="color:#fdf4c1aa;">;
+
+    </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;"> sql </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> dsl
+        .</span><span style="color:#fdf4c1;">delete(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR)
+        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">where(</span><span style="color:#8ec07c;">Tables</span><span style="color:#fdf4c1;">.AUTHOR.ID.eq(</span><span style="color:#d3869b;">1993</span><span style="color:#fa5c4b;">L</span><span style="color:#fdf4c1;">))
+        </span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">getSQL(</span><span style="color:#8ec07c;">ParamType</span><span style="color:#fdf4c1;">.INLINED)</span><span style="color:#fdf4c1aa;">;
+    </span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(dialect.getName() </span><span style="color:#fe8019;">+ </span><span style="color:#b8bb26;">&quot; =&gt; &quot; </span><span style="color:#fe8019;">+</span><span style="color:#fdf4c1;"> sql)</span><span style="color:#fdf4c1aa;">;
+}
+</span></pre>
+<p>生成的 <code>delete</code> 语句简单对比如下：</p>
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/SQL:1999" title="SQL:1999">SQL:1999</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">delete from </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;
+</span><span style="color:#fa5c4b;">where </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;ID&quot; </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">1993
+</span></pre></li>
+<li>
+<p><a href="http://www.h2database.com/html/main.html" title="H2 Database Engine">H2</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">delete from </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;
+</span><span style="color:#fa5c4b;">where </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;ID&quot; </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">1993
+</span></pre></li>
+<li>
+<p><a href="http://hsqldb.org" title="HSQLDB - 100% Java Database">HSQLDB</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">delete from </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;
+</span><span style="color:#fa5c4b;">where </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;ID&quot; </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">1993
+</span></pre></li>
+<li>
+<p><a href="http://www.mysql.com" title="The world's most popular open source database">MySQL</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">delete from </span><span style="color:#b8bb26;">`PUBLIC`</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">`AUTHOR`
+</span><span style="color:#fa5c4b;">where </span><span style="color:#b8bb26;">`PUBLIC`</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">`AUTHOR`</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">`ID` </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">1993
+</span></pre></li>
+<li>
+<p><a href="https://www.postgresql.org" title="PostgreSQL: The World's Most Advanced Open Source Relational Database">Postgres</a></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">delete from </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;
+</span><span style="color:#fa5c4b;">where </span><span style="color:#b8bb26;">&quot;PUBLIC&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;AUTHOR&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#b8bb26;">&quot;ID&quot; </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">1993
+</span></pre></li>
+</ul>
+<hr />
+<p>完整的示例代码可以参见 <a href="https://github.com/wbprime/java-mods/tree/master/jooq-usecases">jOOQ Usecases</a> 。</p>
+<p>想了解更多的 <a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 用法，可以阅读 <a href="https://www.jooq.org/learn/" title="jOOQ Documentation">官方文档</a> 。</p>
+<hr />
+<p>可以明显感觉到，使用 <a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 生成的代码为 SQL 拼接提供了更强的类型安全保证。</p>
+<p>以上。</p>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+            
+                <div class="post-tags">
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;jdbc&#x2F;">#jdbc</a>
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;sql&#x2F;">#sql</a>
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;jooq&#x2F;">#jooq</a>
+                    
+                </div>
+            
+            
+                <div class="post-nav">
+                    
+                        <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;jooq-usecases-code-generating&#x2F;">‹ JOOQ 的使用 - 代码生成配置 (PostgreSQL &amp; DDL Driven)</a>
+                    
+                    
+                        <a class="next" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;jooq-usecases-code-generated-sql-executor&#x2F;">JOOQ 的使用 - 从生成代码执行 SQL 命令 (SQL Executor) ›</a>
+                    
+                    
+                    
+                </div>
+            
+
+        
+
+    </div>
+
+    
+    
+</article>
+
+
+                </div>
+            </main>
+
+            
+            
+        </div>
+
+      
+          <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
+      
+    </body>
+
+</html>

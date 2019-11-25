@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>wangbo’s blog - Learning Java Concurrency - wait &amp; notify</title>
+
+      
+
+      
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
+          
+      
+
+      
+          <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
+          
+      
+
+      
+      
+    </head>
+
+    <body>
+        <div class="container">
+
+            <div id="mobile-navbar" class="mobile-navbar">
+              <div class="mobile-header-logo">
+                <a href="/" class="logo">WB Prime</a>
+              </div>
+              <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+
+            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
+              <ul class="mobile-menu-list">
+                
+                    <li class="mobile-menu-item">
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">
+                            Categories
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">
+                            Tags
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https:&#x2F;&#x2F;github.wangbo.im">
+                            Github
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">
+                            About
+                        </a>
+                    </li>
+                
+              </ul>
+            </nav>
+
+            <header id="header">
+                <div class="logo"><a href="https:&#x2F;&#x2F;www.wangbo.im">WB Prime</a></div>
+                <nav class="menu">
+                    <ul>
+                        
+                            <li>
+                                <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">
+                                    Categories
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">
+                                    Tags
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https:&#x2F;&#x2F;github.wangbo.im">
+                                    Github
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">
+                                    About
+                                </a>
+                            </li>
+                        
+                    </ul>
+                </nav>
+            </header>
+
+            <main>
+                <div class="content" id="mobile-panel">
+                    
+
+
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="https://www.wangbo.im/posts/learning-java-concurrency-wait-notify/#yin-xing-qu-qian" class="toc-link">银行取钱</a>
+                    
+                    <ul>
+                        
+                        <li>
+                            <a href="https://www.wangbo.im/posts/learning-java-concurrency-wait-notify/#dai-ma" class="toc-link">代码</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://www.wangbo.im/posts/learning-java-concurrency-wait-notify/#dai-ma-shuo-ming" class="toc-link">代码说明</a>
+                        </li>
+                        
+                    </ul>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://www.wangbo.im/posts/learning-java-concurrency-wait-notify/#ling-hu-chong-bei-kun-xi-hu-di" class="toc-link">令狐冲被困西湖底</a>
+                    
+                    <ul>
+                        
+                        <li>
+                            <a href="https://www.wangbo.im/posts/learning-java-concurrency-wait-notify/#dai-ma-1" class="toc-link">代码</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://www.wangbo.im/posts/learning-java-concurrency-wait-notify/#dai-ma-shuo-ming-1" class="toc-link">代码说明</a>
+                        </li>
+                        
+                    </ul>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://www.wangbo.im/posts/learning-java-concurrency-wait-notify/#dai-ma-xia-zai" class="toc-link">代码下载</a>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article class="post">
+    
+    <header class="post__header">
+        <h1 class="post__title">
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;learning-java-concurrency-wait-notify&#x2F;">Learning Java Concurrency - wait &amp; notify</a>
+        </h1>
+        <div class="post__meta">
+            <span class="post__time">2016-04-06</span>
+            
+        </div>
+    </header>
+
+    <div class="post-content">
+      <p>在synchronized关键字之外，Java提供了另外的<code>wait</code>和<code>notify</code>函数族用于支援多线程通信，使用上类似于JUC的Condition类。</p>
+<p><code>wait()</code>、<code>notify()</code>和<code>notifyAll()</code>是Object类的方法，与synchronized配套使用。</p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public class </span><span style="color:#8ec07c;">Object </span><span style="color:#fdf4c1aa;">{
+    ...
+
+    </span><span style="color:#fa5c4b;">public final native void </span><span style="color:#8ec07c;">wait</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">long </span><span style="color:#fdf4c1;">timeout</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">InterruptedException</span><span style="color:#fdf4c1aa;">;
+    </span><span style="color:#fa5c4b;">public final void </span><span style="color:#8ec07c;">wait</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">long </span><span style="color:#fdf4c1;">timeout</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fa5c4b;">int </span><span style="color:#fdf4c1;">nanos</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">InterruptedException</span><span style="color:#fdf4c1aa;">;
+    </span><span style="color:#fa5c4b;">public final void </span><span style="color:#8ec07c;">wait</span><span style="color:#fdf4c1aa;">() </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">InterruptedException</span><span style="color:#fdf4c1aa;">;
+
+    </span><span style="color:#fa5c4b;">public final native void </span><span style="color:#8ec07c;">notify</span><span style="color:#fdf4c1aa;">();
+    </span><span style="color:#fa5c4b;">public final native void </span><span style="color:#8ec07c;">notifyAll</span><span style="color:#fdf4c1aa;">();
+
+    ...
+}
+</span></pre>
+<p><code>wait</code>一共有三个函数。调用<code>wait</code>的线程必须已经持有了同一个对象的同步器（使用synchronized）。调用<code>wait</code>的线程会进入等待状态，直到另外的线程调用了同一个对象的<code>notify</code>函数，或者指定的等待时间过期，或者被中断（引发InterruptedException）。调用<code>wait</code>函数之后，当前线程会放弃已经持有的同步器。</p>
+<p><code>notify</code>一共是有两个函数。<code>notify()</code>函数会唤醒当前的由于执行<code>wait</code>而进入等待的某个线程；注意，被唤醒的线程是不可预料的，也就是说不同的JVM实现可以用不同的规则算法来决定被唤醒的是哪一个线程。<code>notifyAll()</code>函数会唤醒所有的等待线程，但是只会有一个线程最终进入执行。</p>
+<p id="zola-continue-reading"><a name="continue-reading"></a></p>
+<p>下面用两个例子来说明<code>wait &amp; notify</code>的使用场景和使用方式。</p>
+<h1 id="yin-xing-qu-qian"><a class="zola-anchor" href="#yin-xing-qu-qian" aria-label="Anchor link for: yin-xing-qu-qian">🔗</a>银行取钱</h1>
+<p>银行取钱是传统的生产者和消费者模型的一个简化版本。</p>
+<p>假设有一个银行账户，两个用户分别要往里面存钱和取钱（可以想象为一个通知汇款，儿子在上大学要花钱，打电话让父亲给打钱；两个ATM机，父亲手哆嗦地五百五百地存，儿子不耐烦地刷，有钱就取出来）。</p>
+<h2 id="dai-ma"><a class="zola-anchor" href="#dai-ma" aria-label="Anchor link for: dai-ma">🔗</a>代码</h2>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">package </span><span style="color:#8ec07c;">me.wbprime.showcase.concurrent</span><span style="color:#fdf4c1aa;">;
+
+
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">java</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">util</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">concurrent</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">ExecutorService</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">java</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">util</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">concurrent</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Executors</span><span style="color:#fdf4c1aa;">;
+
+</span><span style="font-style:italic;color:#928374;">/**
+ * Class: DepositCase
+ * Date: 2016/04/05 14:42
+ */
+public class DepositCase {
+    private static class DepositAccount {
+        private int money;
+
+        public DepositAccount() {
+            this.money = 0;
+        }
+
+        public synchronized void withdraw(final int val) {
+            while (money &lt; val) {
+                try {
+                    this.wait(); // 钱不够，等一会儿
+                } catch (InterruptedException e) {
+                    // do nothing here
+                }
+            }
+
+            money -= val;
+        }
+
+        public synchronized void deposite(final int val) {
+            money += val;
+            this.notifyAll(); // 存完钱周知一下
+        }
+    }
+
+    private static class OldFather implements Runnable {
+        private DepositAccount account;
+        private final int totalMoney;
+        private int depositedMoney;
+
+        public OldFather(final DepositAccount account, final int val) {
+            this.account = account;
+
+            this.totalMoney = val;
+            this.depositedMoney = 0;
+        }
+
+        public void run() {
+            final int MAX_MONEY_EACH_TIME = 5000; // 每次最多存这么多钱
+            while (depositedMoney &lt; totalMoney) {
+                final int moneyEachTime =
+                    (totalMoney - depositedMoney) &lt; MAX_MONEY_EACH_TIME ? (totalMoney - depositedMoney) : MAX_MONEY_EACH_TIME;
+
+                account.deposite(moneyEachTime);
+                depositedMoney += moneyEachTime;
+
+                System.out.println(&quot;父亲 sent &quot; + moneyEachTime + &quot; RMB to his son&quot;);
+
+                try {
+                    Thread.sleep(5000); // 缓口气
+                } catch (InterruptedException e) {
+                    // do nothing
+                }
+            }
+        }
+    }
+
+    private static class Son implements Runnable {
+        private final String name;
+        private DepositAccount account;
+        private final int neededMoney;
+        private int availMoney;
+
+        public Son(final String name, final DepositAccount account, final int money) {
+            this.name = name;
+
+            this.account = account;
+
+            this.neededMoney = money;
+            this.availMoney = 0;
+        }
+
+        public void run() {
+            final int MAX_MONEY_EACH_TIME = 1000; // 每次最多取这么多钱
+            while (availMoney &lt; neededMoney) {
+                final int moneyEachTime =
+                    (neededMoney - availMoney) &lt; MAX_MONEY_EACH_TIME ? (neededMoney - availMoney) : MAX_MONEY_EACH_TIME;
+
+                account.withdraw(moneyEachTime);
+                availMoney += moneyEachTime;
+
+                System.out.println(name + &quot; get &quot; + moneyEachTime + &quot; RMB from his father&quot;);
+
+                try {
+                    Thread.sleep(1000); // 抽根烟
+                } catch (InterruptedException e) {
+                    // do nothing
+                }
+            }
+        }
+    }
+
+    public static void main(final String[] args) {
+        final DepositAccount account = new DepositAccount();
+
+        final ExecutorService executorService = Executors.newCachedThreadPool();
+
+        final int moneyToSon1 = 10000;
+        final int moneyToSon2 = 18600;
+        final int moneyToSon3 = 10240;
+
+        executorService.execute(
+            new OldFather(account, moneyToSon1 + moneyToSon2 + moneyToSon3)
+        );
+        executorService.execute(
+            new Son(&quot;胡大&quot;, account, moneyToSon1)
+        );
+        executorService.execute(
+            new Son(&quot;胡二&quot;, account, moneyToSon2)
+        );
+        executorService.execute(
+            new Son(&quot;胡三&quot;, account, moneyToSon3)
+        );
+
+        executorService.shutdown();
+    }
+}
+</span></pre><h2 id="dai-ma-shuo-ming"><a class="zola-anchor" href="#dai-ma-shuo-ming" aria-label="Anchor link for: dai-ma-shuo-ming">🔗</a>代码说明</h2>
+<ol>
+<li><code>DepositAccount</code>类表征银行存款帐号，主要记录当前有多少钱，并提供同步的存款、取款的方法。取钱的钱不够了就没法取，只能等着；存钱的就没关系，可以一直往里面存，每存一笔钱就通知一遍要取钱的人。</li>
+<li><code>OldFather</code>类表征存钱的父亲，连续往账户里面存钱，每次存钱都有一个限额。父亲每存一笔钱，要叹一口气。</li>
+<li><code>Son</code>类表征在外的儿子（们），缺钱了去取钱，每次取钱有限额。如果账户里面没有钱了，只能抽一根烟等着了。</li>
+<li><code>main()</code>函数，首先构造帐号，然后构造父亲和儿子（胡大、胡二和胡三），然后用一个线程池跑起来。</li>
+</ol>
+<p>代码很简单。</p>
+<h1 id="ling-hu-chong-bei-kun-xi-hu-di"><a class="zola-anchor" href="#ling-hu-chong-bei-kun-xi-hu-di" aria-label="Anchor link for: ling-hu-chong-bei-kun-xi-hu-di">🔗</a>令狐冲被困西湖底</h1>
+<p>另外一个例子可以考虑令狐冲被困在西湖底下面的情形。</p>
+<p>冲哥被困在了西湖底的地牢里面，不见天日。梅庄四友发善心，每天都让人送饭给他吃。</p>
+<p>现在来看，冲哥要吃饭，只能等人送饭过来；送饭的人是个聋哑人，到点了过来看一下，发现饭被吃了，就给一份新的饭。也就是，一个人送一个人吃；吃完了才送，没吃完不送；送来了才有得吃，没送就没得吃。</p>
+<p>代码说话。</p>
+<h2 id="dai-ma-1"><a class="zola-anchor" href="#dai-ma-1" aria-label="Anchor link for: dai-ma-1">🔗</a>代码</h2>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">package </span><span style="color:#8ec07c;">me.wbprime.showcase.concurrent</span><span style="color:#fdf4c1aa;">;
+
+
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">java</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">util</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">concurrent</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">ExecutorService</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fabd2f;">java</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">util</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">concurrent</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Executors</span><span style="color:#fdf4c1aa;">;
+
+</span><span style="font-style:italic;color:#928374;">/**
+ * Class: LinghuChongCase
+ * Date: 2016/04/06 12:38
+ */
+public class LinghuChongCase {
+    private static class Bowl {
+        private boolean isFull;
+
+        public synchronized void eat() {
+            while (! isFull) {
+                try {
+                    this.wait();
+                } catch (InterruptedException e) {
+                    // do nothing
+                }
+            }
+
+            isFull = false;
+            this.notifyAll();
+        }
+
+        public synchronized void provide() {
+            while (isFull) {
+                try {
+                    this.wait();
+                } catch (InterruptedException e) {
+                    // do nothing
+                }
+            }
+
+            isFull = true;
+            this.notifyAll();
+        }
+    }
+
+    private static class LinghuChong implements Runnable{
+        private final Bowl bowl;
+        private final int days;
+
+        public LinghuChong(final Bowl bowl, final int days) {
+            this.bowl = bowl;
+            this.days = days;
+        }
+
+        public void run() {
+            int existingDays = 0;
+            while (existingDays &lt; days) {
+                bowl.eat();
+                System.out.println(&quot;Linghu Chong enjoys eating，&quot;);
+
+                try {
+                    Thread.sleep(1000); // 练吸心大法
+                } catch (InterruptedException e) {
+                    // do nothing
+                }
+
+                existingDays ++;
+            }
+        }
+    }
+
+    private static class SomeBody implements Runnable{
+        private final Bowl bowl;
+        private final int days;
+
+        public SomeBody(final Bowl bowl, final int days) {
+            this.bowl = bowl;
+            this.days = days;
+        }
+
+        public void run() {
+            int existingDays = 0;
+            while (existingDays &lt; days) {
+                bowl.provide();
+                System.out.println(&quot;Prepared a bowl for a prisoner to eat&quot;);
+
+                try {
+                    Thread.sleep(2000); // 不知道干嘛
+                } catch (InterruptedException e) {
+                    // do nothing
+                }
+                existingDays++;
+            }
+        }
+    }
+
+    public static void main(final String[] args) {
+        final Bowl bowl = new Bowl();
+
+        final ExecutorService executorService = Executors.newCachedThreadPool();
+
+        final int daysLostFreedom = 15;
+
+        executorService.execute(
+            new LinghuChong(bowl, daysLostFreedom)
+        );
+        executorService.execute(
+            new SomeBody(bowl, daysLostFreedom)
+        );
+
+        executorService.shutdown();
+    }
+}
+</span></pre><h2 id="dai-ma-shuo-ming-1"><a class="zola-anchor" href="#dai-ma-shuo-ming-1" aria-label="Anchor link for: dai-ma-shuo-ming-1">🔗</a>代码说明</h2>
+<ol>
+<li><code>Bowl</code>类表征饭碗，里面还有饭令狐冲才可以吃，送饭人就不会送；里面没饭了，令狐冲就没得吃，送饭人才会送。</li>
+<li><code>LinghuChong</code>类表征令狐冲，吃饭，没饭吃的时候就练吸心大法。</li>
+<li><code>SomeBody</code>类表征送饭的人，不知道干嘛的。定时送饭。</li>
+<li><code>main()</code>函数，构造饭碗，构造令狐冲和送饭人，然后设定冲哥被关了半个月。</li>
+</ol>
+<h1 id="dai-ma-xia-zai"><a class="zola-anchor" href="#dai-ma-xia-zai" aria-label="Anchor link for: dai-ma-xia-zai">🔗</a>代码下载</h1>
+<p><a href="https://www.wangbo.im/posts/learning-java-concurrency-wait-notify/DepositCase.java">DepositCase.java</a>
+<a href="https://www.wangbo.im/posts/learning-java-concurrency-wait-notify/LinghuChongCase.java">LinghuChongCase.java</a></p>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+            
+                <div class="post-tags">
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;java&#x2F;">#java</a>
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;concurrency&#x2F;">#concurrency</a>
+                    
+                </div>
+            
+            
+                <div class="post-nav">
+                    
+                        <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;learning-java-concurrency-synchronized&#x2F;">‹ Learning Java Concurrency - synchronized</a>
+                    
+                    
+                        <a class="next" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;learning-java-concurrency-reentrantlock-condition&#x2F;">Learning Java Concurrency - ReentrantLock &amp; Condition ›</a>
+                    
+                    
+                    
+                </div>
+            
+
+        
+
+    </div>
+
+    
+    
+</article>
+
+
+                </div>
+            </main>
+
+            
+            
+        </div>
+
+      
+          <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
+      
+    </body>
+
+</html>

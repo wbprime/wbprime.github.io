@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>wangbo’s blog - JOOQ 的使用 - 执行 SQL 语句 (SQL Executor)</title>
+
+      
+
+      
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
+          
+      
+
+      
+          <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
+          
+      
+
+      
+      
+    </head>
+
+    <body>
+        <div class="container">
+
+            <div id="mobile-navbar" class="mobile-navbar">
+              <div class="mobile-header-logo">
+                <a href="/" class="logo">WB Prime</a>
+              </div>
+              <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+
+            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
+              <ul class="mobile-menu-list">
+                
+                    <li class="mobile-menu-item">
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">
+                            Categories
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">
+                            Tags
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https:&#x2F;&#x2F;github.wangbo.im">
+                            Github
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">
+                            About
+                        </a>
+                    </li>
+                
+              </ul>
+            </nav>
+
+            <header id="header">
+                <div class="logo"><a href="https:&#x2F;&#x2F;www.wangbo.im">WB Prime</a></div>
+                <nav class="menu">
+                    <ul>
+                        
+                            <li>
+                                <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">
+                                    Categories
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">
+                                    Tags
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https:&#x2F;&#x2F;github.wangbo.im">
+                                    Github
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">
+                                    About
+                                </a>
+                            </li>
+                        
+                    </ul>
+                </nav>
+            </header>
+
+            <main>
+                <div class="content" id="mobile-panel">
+                    
+
+
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="https://www.wangbo.im/posts/jooq-usecases-sql-executor/#create-table" class="toc-link">create table</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://www.wangbo.im/posts/jooq-usecases-sql-executor/#select" class="toc-link">select</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://www.wangbo.im/posts/jooq-usecases-sql-executor/#insert" class="toc-link">insert</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://www.wangbo.im/posts/jooq-usecases-sql-executor/#update" class="toc-link">update</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://www.wangbo.im/posts/jooq-usecases-sql-executor/#delete" class="toc-link">delete</a>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article class="post">
+    
+    <header class="post__header">
+        <h1 class="post__title">
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;jooq-usecases-sql-executor&#x2F;">JOOQ 的使用 - 执行 SQL 语句 (SQL Executor)</a>
+        </h1>
+        <div class="post__meta">
+            <span class="post__time">2019-10-17</span>
+            
+        </div>
+    </header>
+
+    <div class="post-content">
+      <p><a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 是基于 JDBC 之上的一个抽象层，提供了多种多样的模型来与关系型数据库进行互操作；其使用与 <a href="https://mybatis.org/mybatis-3/">mybatis</a> 和 <a href="http://hibernate.org/orm/">Hibernate ORM</a> 不同的思路来实现 <a href="https://en.wikipedia.org/wiki/Object-relational_mapping">对象关系映射 ORM</a> 。</p>
+<p>本篇主要介绍基于 <a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 的 SQL 命令执行 (SQL Executor) 。</p>
+<p id="zola-continue-reading"><a name="continue-reading"></a></p>
+<p><a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 可以用来执行裸 SQL 命令语句，也可以用来执行带参数绑定的 SQL 命令语句（只要你的 SQL 正确的话）。</p>
+<p>在 <a href="https://maven.apache.org/">Maven</a> 中使用 <a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a>，需要在 <code>pom.xml</code> 文件中添加以下依赖：</p>
+<pre style="background-color:#282828;">
+<span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
+    &lt;</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">org.jooq</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;
+    &lt;</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">jooq</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;
+    &lt;</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">${jooq_version}</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;
+&lt;/</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
+</span></pre>
+<p>截至 2019-10-21，<a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 的最新版本是 <code>3.12.1</code> 。</p>
+<p>以下所有的用例都基于 <a href="https://junit.org/junit5/">JUnit 5</a> 框架，测试用的数据库提供方为 <a href="http://www.h2database.com/html/main.html" title="H2 Database Engine">H2</a> 。</p>
+<p>公共代码：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">DSLContext</span><span style="color:#fdf4c1aa;"> dsl;
+
+@</span><span style="color:#fdf4c1;">BeforeEach
+</span><span style="color:#fdf4c1aa;">void </span><span style="color:#fdf4c1;">setUp(@</span><span style="color:#8ec07c;">TempDir</span><span style="color:#fdf4c1;"> final </span><span style="color:#8ec07c;">Path</span><span style="color:#fdf4c1;"> dir)</span><span style="color:#fdf4c1aa;"> throws </span><span style="color:#8ec07c;">Exception </span><span style="color:#fdf4c1aa;">{
+    </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;"> url </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&quot;jdbc:h2:&quot; </span><span style="color:#fe8019;">+</span><span style="color:#fdf4c1aa;"> dir.</span><span style="color:#fdf4c1;">toString() </span><span style="color:#fe8019;">+ </span><span style="color:#b8bb26;">&quot;/test.db&quot;</span><span style="color:#fdf4c1aa;">;
+    </span><span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Connection</span><span style="color:#fdf4c1aa;"> connection </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">DriverManager</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">getConnection(url, </span><span style="color:#b8bb26;">&quot;sa&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#b8bb26;">&quot;&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+
+    dsl </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">DSL</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">using(connection, </span><span style="color:#8ec07c;">SQLDialect</span><span style="color:#fdf4c1;">.H2)</span><span style="color:#fdf4c1aa;">;
+}
+</span></pre><h1 id="create-table"><a class="zola-anchor" href="#create-table" aria-label="Anchor link for: create-table">🔗</a>create table</h1>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">dsl.</span><span style="color:#fdf4c1;">execute(</span><span style="color:#b8bb26;">&quot;create table \&quot;user\&quot;(\n&quot;
+            </span><span style="color:#fe8019;">+ </span><span style="color:#b8bb26;">&quot;\&quot;id\&quot; bigint not null auto_increment, &quot;
+            </span><span style="color:#fe8019;">+ </span><span style="color:#b8bb26;">&quot;\&quot;name\&quot; varchar(100) not null, &quot;
+            </span><span style="color:#fe8019;">+ </span><span style="color:#b8bb26;">&quot;\&quot;created_at\&quot; timestamp not null, &quot;
+            </span><span style="color:#fe8019;">+ </span><span style="color:#b8bb26;">&quot;primary key (\&quot;id\&quot;)&quot;
+            </span><span style="color:#fe8019;">+ </span><span style="color:#b8bb26;">&quot;);&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span></pre><h1 id="select"><a class="zola-anchor" href="#select" aria-label="Anchor link for: select">🔗</a>select</h1>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">final </span><span style="color:#8ec07c;">Result</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Record</span><span style="color:#fdf4c1aa;">&gt; fetch </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> dsl.</span><span style="color:#fdf4c1;">fetch(</span><span style="color:#b8bb26;">&quot;select * from \&quot;user\&quot;&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span></pre><h1 id="insert"><a class="zola-anchor" href="#insert" aria-label="Anchor link for: insert">🔗</a>insert</h1>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">dsl.</span><span style="color:#fdf4c1;">execute(</span><span style="color:#b8bb26;">&quot;insert into \&quot;user\&quot; (\&quot;name\&quot;, \&quot;created_at\&quot;) &quot;
+            </span><span style="color:#fe8019;">+ </span><span style="color:#b8bb26;">&quot;values (cast(? as varchar), cast(? as timestamp))&quot;</span><span style="color:#fdf4c1;">,
+        n, </span><span style="color:#8ec07c;">OffsetDateTime</span><span style="color:#fdf4c1;">.now())
+</span></pre><h1 id="update"><a class="zola-anchor" href="#update" aria-label="Anchor link for: update">🔗</a>update</h1>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">dsl.</span><span style="color:#fdf4c1;">execute(</span><span style="color:#b8bb26;">&quot;update \&quot;user\&quot; &quot;
+            </span><span style="color:#fe8019;">+ </span><span style="color:#b8bb26;">&quot;set \&quot;name\&quot; = &#39;Elvis Wang&#39;, &quot;
+            </span><span style="color:#fe8019;">+ </span><span style="color:#b8bb26;">&quot;    \&quot;created_at\&quot; = timestamp &#39;2019-10-17 19:46:58.456&#39; &quot;
+            </span><span style="color:#fe8019;">+ </span><span style="color:#b8bb26;">&quot;where \&quot;id\&quot; = ?&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#d3869b;">2</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span></pre><h1 id="delete"><a class="zola-anchor" href="#delete" aria-label="Anchor link for: delete">🔗</a>delete</h1>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">dsl.</span><span style="color:#fdf4c1;">execute(</span><span style="color:#b8bb26;">&quot;delete from \&quot;user\&quot; where \&quot;id\&quot; = ?&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#d3869b;">2</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+</span></pre>
+<hr />
+<p>完整的示例代码可以参见 <a href="https://github.com/wbprime/java-mods/tree/master/jooq-usecases">jOOQ Usecases</a> 。</p>
+<p>想了解更多的 <a href="https://www.jooq.org/" title="jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.">jOOQ</a> 用法，可以阅读 <a href="https://www.jooq.org/learn/" title="jOOQ Documentation">官方文档</a> 。</p>
+<hr />
+<p>以上。</p>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+            
+                <div class="post-tags">
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;jdbc&#x2F;">#jdbc</a>
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;sql&#x2F;">#sql</a>
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;jooq&#x2F;">#jooq</a>
+                    
+                </div>
+            
+            
+                <div class="post-nav">
+                    
+                        <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;jooq-usecases-sql-builder&#x2F;">‹ JOOQ 的使用 - 拼接 SQL 语句 (SQL Builder)</a>
+                    
+                    
+                        <a class="next" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;jooq-usecases-code-generating&#x2F;">JOOQ 的使用 - 代码生成配置 (PostgreSQL &amp; DDL Driven) ›</a>
+                    
+                    
+                    
+                </div>
+            
+
+        
+
+    </div>
+
+    
+    
+</article>
+
+
+                </div>
+            </main>
+
+            
+            
+        </div>
+
+      
+          <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
+      
+    </body>
+
+</html>

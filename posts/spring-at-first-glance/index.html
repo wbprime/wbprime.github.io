@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -45,13 +43,13 @@
               <ul class="mobile-menu-list">
                 
                     <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;categories">
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">
                             Categories
                         </a>
                     </li>
                 
                     <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;tags">
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">
                             Tags
                         </a>
                     </li>
@@ -63,7 +61,7 @@
                     </li>
                 
                     <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;about">
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">
                             About
                         </a>
                     </li>
@@ -77,13 +75,13 @@
                     <ul>
                         
                             <li>
-                                <a href="https://www.wangbo.im&#x2F;categories">
+                                <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">
                                     Categories
                                 </a>
                             </li>
                         
                             <li>
-                                <a href="https://www.wangbo.im&#x2F;tags">
+                                <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">
                                     Tags
                                 </a>
                             </li>
@@ -95,7 +93,7 @@
                             </li>
                         
                             <li>
-                                <a href="https://www.wangbo.im&#x2F;about">
+                                <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">
                                     About
                                 </a>
                             </li>
@@ -108,6 +106,32 @@
                 <div class="content" id="mobile-panel">
                     
 
+
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="https://www.wangbo.im/posts/spring-at-first-glance/#getting-start-with-spring" class="toc-link">Getting start with Spring</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://www.wangbo.im/posts/spring-at-first-glance/#installation-and-usage" class="toc-link">Installation and usage</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://www.wangbo.im/posts/spring-at-first-glance/#make-it-run" class="toc-link">Make it run</a>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
 
 
 <article class="post">
@@ -129,51 +153,48 @@
 <p>Spring is designed to be non-intrusive, meaning that your domain logic code generally has no dependencies on the framework itself. In your integration layer (such as the data access layer), some dependencies on the data access technology and the Spring libraries will exist. However, it should be easy to isolate these dependencies from the rest of your code base.</p>
 </blockquote>
 <p>Now I would like to dive into Spring, starting from the most beginning.</p>
-<h1 id="getting-start-with-spring"><a class="zola-anchor" href="#getting-start-with-spring" aria-label="Anchor link for: getting-start-with-spring">🔗</a>
-Getting start with Spring</h1>
+<h1 id="getting-start-with-spring"><a class="zola-anchor" href="#getting-start-with-spring" aria-label="Anchor link for: getting-start-with-spring">🔗</a>Getting start with Spring</h1>
 <p>Spring framework provides a tool to help start your application using <a href="http://projects.spring.io/spring-boot">Spring Boot</a> as soon as possible. <a href="http://start.spring.io">Spring Initializr</a> is a new feature in Spring framwork 4.x.</p>
 <blockquote>
 <p>You can use start.spring.io to generate a basic project or follow one of the &quot;Getting Started&quot; guides like the Getting Started Building a RESTful Web Service one. As well as being easier to digest, these guides are very task focused, and most of them are based on Spring Boot. They also cover other projects from the Spring portfolio that you might want to consider when solving a particular problem.</p>
 </blockquote>
-<h1 id="installation-and-usage"><a class="zola-anchor" href="#installation-and-usage" aria-label="Anchor link for: installation-and-usage">🔗</a>
-Installation and usage</h1>
+<h1 id="installation-and-usage"><a class="zola-anchor" href="#installation-and-usage" aria-label="Anchor link for: installation-and-usage">🔗</a>Installation and usage</h1>
 <ol>
 <li>
 <p>For <a href="http://maven.apache.org">maven</a>, add Spring modules needed in your pom.xml.</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">&lt;dependencies&gt;
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">&lt;dependency&gt;
-</span><span style="color:#fdf4c1aa;">         </span><span style="color:#fdf4c1aa;">&lt;groupId&gt;org.springframework&lt;/groupId&gt;
-</span><span style="color:#fdf4c1aa;">         </span><span style="color:#fdf4c1aa;">&lt;artifactId&gt;spring-context&lt;/artifactId&gt;
-</span><span style="color:#fdf4c1aa;">         </span><span style="color:#fdf4c1aa;">&lt;version&gt;4.1.6.RELEASE&lt;/version&gt;
-</span><span style="color:#fdf4c1aa;">         </span><span style="color:#fdf4c1aa;">&lt;scope&gt;runtime&lt;/scope&gt;
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">&lt;/dependency&gt;
-</span><span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">&lt;/dependencies&gt;
+<span style="color:#fdf4c1aa;"> &lt;dependencies&gt;
+</span><span style="color:#fdf4c1aa;">     &lt;dependency&gt;
+</span><span style="color:#fdf4c1aa;">         &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+</span><span style="color:#fdf4c1aa;">         &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+</span><span style="color:#fdf4c1aa;">         &lt;version&gt;4.1.6.RELEASE&lt;/version&gt;
+</span><span style="color:#fdf4c1aa;">         &lt;scope&gt;runtime&lt;/scope&gt;
+</span><span style="color:#fdf4c1aa;">     &lt;/dependency&gt;
+</span><span style="color:#fdf4c1aa;"> &lt;/dependencies&gt;
 </span></pre></li>
 <li>
 <p>For <a href="http://www.gradle.org">Gradle</a>, include the appropriate URL in the repositories section.</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">repositories {
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">mavenCentral()
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">// and optionally...
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">maven { url &quot;http://repo.spring.io/release&quot; }
-</span><span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">}
+<span style="color:#fdf4c1aa;"> repositories {
+</span><span style="color:#fdf4c1aa;">     mavenCentral()
+</span><span style="color:#fdf4c1aa;">     // and optionally...
+</span><span style="color:#fdf4c1aa;">     maven { url &quot;http://repo.spring.io/release&quot; }
+</span><span style="color:#fdf4c1aa;"> }
 </span></pre></li>
 <li>
 <p>For <a href="http://ant.apache.org/ivy">Ivy</a>, the following resolver to your ivysettings.xml.</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">&lt;resolvers&gt;
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">&lt;ibiblio name=&quot;io.spring.repo.maven.release&quot;
-</span><span style="color:#fdf4c1aa;">         </span><span style="color:#fdf4c1aa;">m2compatible=&quot;true&quot;
-</span><span style="color:#fdf4c1aa;">         </span><span style="color:#fdf4c1aa;">root=&quot;http://repo.spring.io/release/&quot;/&gt;
-</span><span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">&lt;/resolvers&gt;
+<span style="color:#fdf4c1aa;"> &lt;resolvers&gt;
+</span><span style="color:#fdf4c1aa;">     &lt;ibiblio name=&quot;io.spring.repo.maven.release&quot;
+</span><span style="color:#fdf4c1aa;">         m2compatible=&quot;true&quot;
+</span><span style="color:#fdf4c1aa;">         root=&quot;http://repo.spring.io/release/&quot;/&gt;
+</span><span style="color:#fdf4c1aa;"> &lt;/resolvers&gt;
 </span></pre></li>
 <li>
 <p>Last but most important, for regular use without each of the three, you can download Spring distribution zip file from <a href="http://repo.spring.io/release/org/springframework/spring">http://repo.spring.io/release/org/springframework/spring</a>, and add separated jar files into you CLASSPATH.</p>
 </li>
 </ol>
-<h1 id="make-it-run"><a class="zola-anchor" href="#make-it-run" aria-label="Anchor link for: make-it-run">🔗</a>
-Make it run</h1>
+<h1 id="make-it-run"><a class="zola-anchor" href="#make-it-run" aria-label="Anchor link for: make-it-run">🔗</a>Make it run</h1>
 <p>At the very first, I would like to direct into spring without any dependency handling apps.  Maven and its counterparts are useful and convienent for development, but may not be helpful for studying at the very beginning.</p>
 <p>To make it clear, I will start my Spring journey in a special directory <code>/home/wb/projects/</code>.  Now you can guess my user name is wb, hahaha.</p>
 <p>To handle dependency manually, I need to download <a href="http://repo.spring.io/release/org/springframework/spring">Spring libraries</a>.</p>
@@ -190,120 +211,120 @@ Make it run</h1>
 <p>Open <code>Project structure</code> setting dialog by clicking <code>File|Project Structure...</code>.  Then add library in <code>Library</code> tab.</p>
 <p>Following jar files need be added:</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">spring-core-4.1.6.RELEASE.jar
-</span><span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">spring-beans-4.1.6.RELEASE.jar
-</span><span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">spring-context-4.1.6.RELEASE.jar
+<span style="color:#fdf4c1aa;"> spring-core-4.1.6.RELEASE.jar
+</span><span style="color:#fdf4c1aa;"> spring-beans-4.1.6.RELEASE.jar
+</span><span style="color:#fdf4c1aa;"> spring-context-4.1.6.RELEASE.jar
 </span></pre></li>
 <li>
 <p>Create a test class named <code>First</code></p>
 <p>Now the filesystem hierachy may look like (produced by <code>tree -F</code>):</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">/home/wb/projects/Spring/
-</span><span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">├── Spring.iml
-</span><span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">└── src/
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">└── First.java
+<span style="color:#fdf4c1aa;"> /home/wb/projects/Spring/
+</span><span style="color:#fdf4c1aa;"> ├── Spring.iml
+</span><span style="color:#fdf4c1aa;"> └── src/
+</span><span style="color:#fdf4c1aa;">     └── First.java
 </span></pre></li>
 <li>
 <p>Add a private field named <code>prop</code> in <code>First</code>, and add setter and getter.</p>
 <p>Here is what <code>First.java</code> contains:</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">public class First {
-</span><span style="color:#fdf4c1aa;">
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">private String prop;
-</span><span style="color:#fdf4c1aa;">
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">public First() {}
-</span><span style="color:#fdf4c1aa;">
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">public String getProp() {
-</span><span style="color:#fdf4c1aa;">         </span><span style="color:#fdf4c1aa;">return prop;
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">}
-</span><span style="color:#fdf4c1aa;">
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">public void setProp(String prop) {
-</span><span style="color:#fdf4c1aa;">         </span><span style="color:#fdf4c1aa;">this.prop = prop;
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">}
-</span><span style="color:#fdf4c1aa;">
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">public void print() {
-</span><span style="color:#fdf4c1aa;">         </span><span style="color:#fdf4c1aa;">System.out.println(prop);
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">}
-</span><span style="color:#fdf4c1aa;">
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">public static void main(String [] _args) {
-</span><span style="color:#fdf4c1aa;">         </span><span style="color:#fdf4c1aa;">First aFirst = new First();
-</span><span style="color:#fdf4c1aa;">
-</span><span style="color:#fdf4c1aa;">         </span><span style="color:#fdf4c1aa;">aFirst.setProp(&quot;Hello world&quot;);
-</span><span style="color:#fdf4c1aa;">         </span><span style="color:#fdf4c1aa;">aFirst.print();
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">}
-</span><span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">}
+<span style="color:#fdf4c1aa;"> public class First {
+
+</span><span style="color:#fdf4c1aa;">     private String prop;
+
+</span><span style="color:#fdf4c1aa;">     public First() {}
+
+</span><span style="color:#fdf4c1aa;">     public String getProp() {
+</span><span style="color:#fdf4c1aa;">         return prop;
+</span><span style="color:#fdf4c1aa;">     }
+
+</span><span style="color:#fdf4c1aa;">     public void setProp(String prop) {
+</span><span style="color:#fdf4c1aa;">         this.prop = prop;
+</span><span style="color:#fdf4c1aa;">     }
+
+</span><span style="color:#fdf4c1aa;">     public void print() {
+</span><span style="color:#fdf4c1aa;">         System.out.println(prop);
+</span><span style="color:#fdf4c1aa;">     }
+
+</span><span style="color:#fdf4c1aa;">     public static void main(String [] _args) {
+</span><span style="color:#fdf4c1aa;">         First aFirst = new First();
+
+</span><span style="color:#fdf4c1aa;">         aFirst.setProp(&quot;Hello world&quot;);
+</span><span style="color:#fdf4c1aa;">         aFirst.print();
+</span><span style="color:#fdf4c1aa;">     }
+</span><span style="color:#fdf4c1aa;"> }
 </span></pre>
 <p>Run it.</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">Hello world
+<span style="color:#fdf4c1aa;"> Hello world
 </span></pre></li>
 <li>
 <p>Now create a new file named <code>first.xml</code>.</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">/home/wb/projects/Spring/
-</span><span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">├── Spring.iml
-</span><span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">└── src/
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">├── First.java
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">└── first.xml
+<span style="color:#fdf4c1aa;"> /home/wb/projects/Spring/
+</span><span style="color:#fdf4c1aa;"> ├── Spring.iml
+</span><span style="color:#fdf4c1aa;"> └── src/
+</span><span style="color:#fdf4c1aa;">     ├── First.java
+</span><span style="color:#fdf4c1aa;">     └── first.xml
 </span></pre>
 <p>In <code>first.xml</code>:</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-</span><span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
-</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
-</span><span style="color:#fdf4c1aa;">         </span><span style="color:#fdf4c1aa;">http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;
-</span><span style="color:#fdf4c1aa;">
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">&lt;bean id=&quot;aFirst&quot; class=&quot;First&quot;&gt;
-</span><span style="color:#fdf4c1aa;">         </span><span style="color:#fdf4c1aa;">&lt;property name=&quot;prop&quot; value=&quot;I&#39;m first&quot; /&gt;
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">&lt;/bean&gt;
-</span><span style="color:#fdf4c1aa;">
-</span><span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">&lt;/beans&gt;
+<span style="color:#fdf4c1aa;"> &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+</span><span style="color:#fdf4c1aa;"> &lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+</span><span style="color:#fdf4c1aa;">        xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+</span><span style="color:#fdf4c1aa;">        xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+</span><span style="color:#fdf4c1aa;">         http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;
+
+</span><span style="color:#fdf4c1aa;">     &lt;bean id=&quot;aFirst&quot; class=&quot;First&quot;&gt;
+</span><span style="color:#fdf4c1aa;">         &lt;property name=&quot;prop&quot; value=&quot;I&#39;m first&quot; /&gt;
+</span><span style="color:#fdf4c1aa;">     &lt;/bean&gt;
+
+</span><span style="color:#fdf4c1aa;"> &lt;/beans&gt;
 </span></pre></li>
 <li>
 <p>Add Spring specific code in <code>First.java</code>.</p>
 <p>In <code>First.java</code>:</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">import org.springframework.context.ApplicationContext;
-</span><span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">import org.springframework.context.support.ClassPathXmlApplicationContext;
-</span><span style="color:#fdf4c1aa;">
-</span><span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">public class First {
-</span><span style="color:#fdf4c1aa;">
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">private String prop;
-</span><span style="color:#fdf4c1aa;">
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">public First() {}
-</span><span style="color:#fdf4c1aa;">
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">public String getProp() {
-</span><span style="color:#fdf4c1aa;">         </span><span style="color:#fdf4c1aa;">return prop;
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">}
-</span><span style="color:#fdf4c1aa;">
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">public void setProp(String prop) {
-</span><span style="color:#fdf4c1aa;">         </span><span style="color:#fdf4c1aa;">this.prop = prop;
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">}
-</span><span style="color:#fdf4c1aa;">
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">public void print() {
-</span><span style="color:#fdf4c1aa;">         </span><span style="color:#fdf4c1aa;">System.out.println(prop);
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">}
-</span><span style="color:#fdf4c1aa;">
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">public static void main(String [] _args) {
-</span><span style="color:#fdf4c1aa;">         </span><span style="color:#fdf4c1aa;">ApplicationContext con = new ClassPathXmlApplicationContext(new String [] {&quot;first.xml&quot;});
-</span><span style="color:#fdf4c1aa;">
-</span><span style="color:#fdf4c1aa;">         </span><span style="color:#fdf4c1aa;">First aFirst = con.getBean(&quot;aFirst&quot;, First.class);
-</span><span style="color:#fdf4c1aa;">         </span><span style="color:#fdf4c1aa;">aFirst.print();
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">}
-</span><span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">}
+<span style="color:#fdf4c1aa;"> import org.springframework.context.ApplicationContext;
+</span><span style="color:#fdf4c1aa;"> import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+</span><span style="color:#fdf4c1aa;"> public class First {
+
+</span><span style="color:#fdf4c1aa;">     private String prop;
+
+</span><span style="color:#fdf4c1aa;">     public First() {}
+
+</span><span style="color:#fdf4c1aa;">     public String getProp() {
+</span><span style="color:#fdf4c1aa;">         return prop;
+</span><span style="color:#fdf4c1aa;">     }
+
+</span><span style="color:#fdf4c1aa;">     public void setProp(String prop) {
+</span><span style="color:#fdf4c1aa;">         this.prop = prop;
+</span><span style="color:#fdf4c1aa;">     }
+
+</span><span style="color:#fdf4c1aa;">     public void print() {
+</span><span style="color:#fdf4c1aa;">         System.out.println(prop);
+</span><span style="color:#fdf4c1aa;">     }
+
+</span><span style="color:#fdf4c1aa;">     public static void main(String [] _args) {
+</span><span style="color:#fdf4c1aa;">         ApplicationContext con = new ClassPathXmlApplicationContext(new String [] {&quot;first.xml&quot;});
+
+</span><span style="color:#fdf4c1aa;">         First aFirst = con.getBean(&quot;aFirst&quot;, First.class);
+</span><span style="color:#fdf4c1aa;">         aFirst.print();
+</span><span style="color:#fdf4c1aa;">     }
+</span><span style="color:#fdf4c1aa;"> }
 </span></pre>
 <p>Run it:</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">Exception in thread &quot;main&quot; java.lang.NoClassDefFoundError: org/apache/commons/logging/LogFactory
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">at org.springframework.context.support.AbstractApplicationContext.&lt;init&gt;(AbstractApplicationContext.java:154)
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">at org.springframework.context.support.AbstractApplicationContext.&lt;init&gt;(AbstractApplicationContext.java:215)
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">at org.springframework.context.support.AbstractRefreshableApplicationContext.&lt;init&gt;(AbstractRefreshableApplicationContext.java:88)
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">at org.springframework.context.support.AbstractRefreshableConfigApplicationContext.&lt;init&gt;(AbstractRefreshableConfigApplicationContext.java:58)
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">at org.springframework.context.support.AbstractXmlApplicationContext.&lt;init&gt;(AbstractXmlApplicationContext.java:61)
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">at org.springframework.context.support.ClassPathXmlApplicationContext.&lt;init&gt;(ClassPathXmlApplicationContext.java:136)
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">at org.springframework.context.support.ClassPathXmlApplicationContext.&lt;init&gt;(ClassPathXmlApplicationContext.java:93)
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">...
+<span style="color:#fdf4c1aa;"> Exception in thread &quot;main&quot; java.lang.NoClassDefFoundError: org/apache/commons/logging/LogFactory
+</span><span style="color:#fdf4c1aa;">     at org.springframework.context.support.AbstractApplicationContext.&lt;init&gt;(AbstractApplicationContext.java:154)
+</span><span style="color:#fdf4c1aa;">     at org.springframework.context.support.AbstractApplicationContext.&lt;init&gt;(AbstractApplicationContext.java:215)
+</span><span style="color:#fdf4c1aa;">     at org.springframework.context.support.AbstractRefreshableApplicationContext.&lt;init&gt;(AbstractRefreshableApplicationContext.java:88)
+</span><span style="color:#fdf4c1aa;">     at org.springframework.context.support.AbstractRefreshableConfigApplicationContext.&lt;init&gt;(AbstractRefreshableConfigApplicationContext.java:58)
+</span><span style="color:#fdf4c1aa;">     at org.springframework.context.support.AbstractXmlApplicationContext.&lt;init&gt;(AbstractXmlApplicationContext.java:61)
+</span><span style="color:#fdf4c1aa;">     at org.springframework.context.support.ClassPathXmlApplicationContext.&lt;init&gt;(ClassPathXmlApplicationContext.java:136)
+</span><span style="color:#fdf4c1aa;">     at org.springframework.context.support.ClassPathXmlApplicationContext.&lt;init&gt;(ClassPathXmlApplicationContext.java:93)
+</span><span style="color:#fdf4c1aa;">     ...
 </span></pre>
 <p>Oh, exceptions!</p>
 </li>
@@ -312,30 +333,30 @@ Make it run</h1>
 <p>According to <a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/index.html#overview-logging">Spring guide</a>, Spring (explicitly spring-core) depends on <a href="http://commons.apache.org/proper/commons-logging/">Apache Commons Logging</a>.  So I need to download <a href="http://commons.apache.org/proper/commons-logging/download_logging.cgi">it</a> and add it to project library path.</p>
 <p>Now run it:</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">Jun 01, 2015 7:27:19 PM org.springframework.context.support.ClassPathXmlApplicationContext prepareRefresh
-</span><span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">INFO: Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@71933d6c: startup date [Mon Jun 01 19:27:19 CST 2015]; root of context hierarchy
-</span><span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">Jun 01, 2015 7:27:19 PM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
-</span><span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">INFO: Loading XML bean definitions from class path resource [first.xml]
-</span><span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">Exception in thread &quot;main&quot; java.lang.NoClassDefFoundError: org/springframework/expression/ParserContext
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">at org.springframework.context.support.AbstractApplicationContext.prepareBeanFactory(AbstractApplicationContext.java:553)
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:455)
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">at org.springframework.context.support.ClassPathXmlApplicationContext.&lt;init&gt;(ClassPathXmlApplicationContext.java:139)
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">at org.springframework.context.support.ClassPathXmlApplicationContext.&lt;init&gt;(ClassPathXmlApplicationContext.java:93)
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">at First.main(First.java:23)
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">at java.lang.reflect.Method.invoke(Method.java:606)
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">at com.intellij.rt.execution.application.AppMain.main(AppMain.java:140)
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">Caused by: java.lang.ClassNotFoundException: org.springframework.expression.ParserContext
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">at java.net.URLClassLoader$1.run(URLClassLoader.java:366)
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">at java.net.URLClassLoader$1.run(URLClassLoader.java:355)
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">at java.security.AccessController.doPrivileged(Native Method)
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">at java.net.URLClassLoader.findClass(URLClassLoader.java:354)
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">at java.lang.ClassLoader.loadClass(ClassLoader.java:425)
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:308)
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">at java.lang.ClassLoader.loadClass(ClassLoader.java:358)
-</span><span style="color:#fdf4c1aa;">     </span><span style="color:#fdf4c1aa;">... 10 more
+<span style="color:#fdf4c1aa;"> Jun 01, 2015 7:27:19 PM org.springframework.context.support.ClassPathXmlApplicationContext prepareRefresh
+</span><span style="color:#fdf4c1aa;"> INFO: Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@71933d6c: startup date [Mon Jun 01 19:27:19 CST 2015]; root of context hierarchy
+</span><span style="color:#fdf4c1aa;"> Jun 01, 2015 7:27:19 PM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+</span><span style="color:#fdf4c1aa;"> INFO: Loading XML bean definitions from class path resource [first.xml]
+</span><span style="color:#fdf4c1aa;"> Exception in thread &quot;main&quot; java.lang.NoClassDefFoundError: org/springframework/expression/ParserContext
+</span><span style="color:#fdf4c1aa;">     at org.springframework.context.support.AbstractApplicationContext.prepareBeanFactory(AbstractApplicationContext.java:553)
+</span><span style="color:#fdf4c1aa;">     at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:455)
+</span><span style="color:#fdf4c1aa;">     at org.springframework.context.support.ClassPathXmlApplicationContext.&lt;init&gt;(ClassPathXmlApplicationContext.java:139)
+</span><span style="color:#fdf4c1aa;">     at org.springframework.context.support.ClassPathXmlApplicationContext.&lt;init&gt;(ClassPathXmlApplicationContext.java:93)
+</span><span style="color:#fdf4c1aa;">     at First.main(First.java:23)
+</span><span style="color:#fdf4c1aa;">     at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+</span><span style="color:#fdf4c1aa;">     at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+</span><span style="color:#fdf4c1aa;">     at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+</span><span style="color:#fdf4c1aa;">     at java.lang.reflect.Method.invoke(Method.java:606)
+</span><span style="color:#fdf4c1aa;">     at com.intellij.rt.execution.application.AppMain.main(AppMain.java:140)
+</span><span style="color:#fdf4c1aa;">     Caused by: java.lang.ClassNotFoundException: org.springframework.expression.ParserContext
+</span><span style="color:#fdf4c1aa;">     at java.net.URLClassLoader$1.run(URLClassLoader.java:366)
+</span><span style="color:#fdf4c1aa;">     at java.net.URLClassLoader$1.run(URLClassLoader.java:355)
+</span><span style="color:#fdf4c1aa;">     at java.security.AccessController.doPrivileged(Native Method)
+</span><span style="color:#fdf4c1aa;">     at java.net.URLClassLoader.findClass(URLClassLoader.java:354)
+</span><span style="color:#fdf4c1aa;">     at java.lang.ClassLoader.loadClass(ClassLoader.java:425)
+</span><span style="color:#fdf4c1aa;">     at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:308)
+</span><span style="color:#fdf4c1aa;">     at java.lang.ClassLoader.loadClass(ClassLoader.java:358)
+</span><span style="color:#fdf4c1aa;">     ... 10 more
 </span></pre>
 <p>Wow, another exception!</p>
 </li>
@@ -343,11 +364,11 @@ Make it run</h1>
 <p>Indeed, I surpress this exception by adding another dependency <code>spring-expression-4.1.6.RELEASE.jar</code>.  I dont know why, it just works.</p>
 <p>Run it:</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">Jun 01, 2015 7:30:16 PM org.springframework.context.support.ClassPathXmlApplicationContext prepareRefresh
-</span><span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">INFO: Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@6ebfc8d0: startup date [Mon Jun 01 19:30:16 CST 2015]; root of context hierarchy
-</span><span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">Jun 01, 2015 7:30:16 PM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
-</span><span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">INFO: Loading XML bean definitions from class path resource [first.xml]
-</span><span style="color:#fdf4c1aa;"> </span><span style="color:#fdf4c1aa;">I&#39;m first
+<span style="color:#fdf4c1aa;"> Jun 01, 2015 7:30:16 PM org.springframework.context.support.ClassPathXmlApplicationContext prepareRefresh
+</span><span style="color:#fdf4c1aa;"> INFO: Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@6ebfc8d0: startup date [Mon Jun 01 19:30:16 CST 2015]; root of context hierarchy
+</span><span style="color:#fdf4c1aa;"> Jun 01, 2015 7:30:16 PM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+</span><span style="color:#fdf4c1aa;"> INFO: Loading XML bean definitions from class path resource [first.xml]
+</span><span style="color:#fdf4c1aa;"> I&#39;m first
 </span></pre></li>
 <li>
 <p>Finally it works.</p>

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>wangbo’s blog - 一次由于线上 MySQL 并发抢占更新冲突引发的 BUG</title>
+
+      
+
+      
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
+          
+      
+
+      
+          <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
+          
+      
+
+      
+      
+    </head>
+
+    <body>
+        <div class="container">
+
+            <div id="mobile-navbar" class="mobile-navbar">
+              <div class="mobile-header-logo">
+                <a href="/" class="logo">WB Prime</a>
+              </div>
+              <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+
+            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
+              <ul class="mobile-menu-list">
+                
+                    <li class="mobile-menu-item">
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">
+                            Categories
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">
+                            Tags
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https:&#x2F;&#x2F;github.wangbo.im">
+                            Github
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">
+                            About
+                        </a>
+                    </li>
+                
+              </ul>
+            </nav>
+
+            <header id="header">
+                <div class="logo"><a href="https:&#x2F;&#x2F;www.wangbo.im">WB Prime</a></div>
+                <nav class="menu">
+                    <ul>
+                        
+                            <li>
+                                <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">
+                                    Categories
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">
+                                    Tags
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https:&#x2F;&#x2F;github.wangbo.im">
+                                    Github
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">
+                                    About
+                                </a>
+                            </li>
+                        
+                    </ul>
+                </nav>
+            </header>
+
+            <main>
+                <div class="content" id="mobile-panel">
+                    
+
+
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="https://www.wangbo.im/posts/slow-mysql-query-on-too-many-cas-updating-failure/#xi-tong-gai-lan" class="toc-link">系统概览</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://www.wangbo.im/posts/slow-mysql-query-on-too-many-cas-updating-failure/#shi-jian-hui-gu" class="toc-link">事件回顾</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://www.wangbo.im/posts/slow-mysql-query-on-too-many-cas-updating-failure/#wen-ti-pai-cha-yu-fen-xi" class="toc-link">问题排查与分析</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://www.wangbo.im/posts/slow-mysql-query-on-too-many-cas-updating-failure/#tuo-zhan" class="toc-link">拓展</a>
+                    
+                    <ul>
+                        
+                        <li>
+                            <a href="https://www.wangbo.im/posts/slow-mysql-query-on-too-many-cas-updating-failure/#atomiclong" class="toc-link">AtomicLong</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://www.wangbo.im/posts/slow-mysql-query-on-too-many-cas-updating-failure/#le-guan-bian-bei-guan" class="toc-link">乐观变悲观</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://www.wangbo.im/posts/slow-mysql-query-on-too-many-cas-updating-failure/#zhu-dong-ting-zhi-jing-zheng" class="toc-link">主动停止竞争</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://www.wangbo.im/posts/slow-mysql-query-on-too-many-cas-updating-failure/#gai-bian-mu-biao-dui-xiang" class="toc-link">改变目标对象</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://www.wangbo.im/posts/slow-mysql-query-on-too-many-cas-updating-failure/#la-mo-shi-yu-tui-mo-shi" class="toc-link">拉模式与推模式</a>
+                        </li>
+                        
+                    </ul>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://www.wangbo.im/posts/slow-mysql-query-on-too-many-cas-updating-failure/#zong-jie" class="toc-link">总结</a>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article class="post">
+    
+    <header class="post__header">
+        <h1 class="post__title">
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;slow-mysql-query-on-too-many-cas-updating-failure&#x2F;">一次由于线上 MySQL 并发抢占更新冲突引发的 BUG</a>
+        </h1>
+        <div class="post__meta">
+            <span class="post__time">2019-08-31</span>
+            
+        </div>
+    </header>
+
+    <div class="post-content">
+      <p>前几天在处理线上问题的时候，发现了一个由于多客户端并发使用 CAS 去更新相同记录而导致的锁冲突，引发了数据库管理系统的慢查询累积报警。慢查询导致连接数增加，并引起插入和更新操作被堵塞，引起少量的业务堆积。</p>
+<p>一图胜千言。</p>
+<p><img src="https://www.wangbo.im/posts/slow-mysql-query-on-too-many-cas-updating-failure/mysql.all.png" alt="mysql_stats.all" /></p>
+<p>虽然定位并解决了问题，但还是需要事后总结一下，以资后鉴。</p>
+<p id="zola-continue-reading"><a name="continue-reading"></a></p>
+<h1 id="xi-tong-gai-lan"><a class="zola-anchor" href="#xi-tong-gai-lan" aria-label="Anchor link for: xi-tong-gai-lan">🔗</a>系统概览</h1>
+<p>目标系统是一个离线的准实时任务处理系统。专门的一个服务收集任务并写入到 MySQL 中，多台服务器通过轮循的方式从 MySQL 中接受任务并处理。</p>
+<p>任务表结构类似于：</p>
+<table><thead><tr><th>Field Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td>task_id</td><td>bigint</td><td>任务 ID</td></tr>
+<tr><td>task_state</td><td>int</td><td>任务状态：NEW PROCESSING SUCCESSFUL FAILED</td></tr>
+<tr><td>task_priority</td><td>int</td><td>任务优先级：NORMAL HIGH LOW</td></tr>
+<tr><td>insert_time</td><td>bigint</td><td>插入时间戳</td></tr>
+<tr><td>last_update_time</td><td>bigint</td><td>最近更新时间戳</td></tr>
+</tbody></table>
+<p>任务插入的时候状态(task_state)会被置为 &quot;NEW&quot;；任务处理的服务器会根据一些策略选择未处理的任务进行处理；正在处理的任务状态被更新为 &quot;PROCESSING&quot;；处理完任务的状态为 &quot;SUCCESSFUL&quot; 或 &quot;FAILED&quot;。</p>
+<p><img src="https://www.wangbo.im/posts/slow-mysql-query-on-too-many-cas-updating-failure/task_state_loop.svg" alt="task_states" /></p>
+<p>客户端会优先处理优先级高的任务，然后处理优先级低的任务。</p>
+<h1 id="shi-jian-hui-gu"><a class="zola-anchor" href="#shi-jian-hui-gu" aria-label="Anchor link for: shi-jian-hui-gu">🔗</a>事件回顾</h1>
+<p>根据业务线的需求，系统需要批量导入数万的任务进行处理。</p>
+<p>通过服务接口将需导入的任务插入 MySQL 之后，任务处理服务器按照预期地拉去任务进行处理。</p>
+<p>大约 15 分钟以后，收到第一条数据库管理系统的慢查询累积报警。数据库管理系统所称的慢查询是指执行时间超过 100 ms 的 SQL 执行语句。</p>
+<p>通过在管理系统上查看，发现确实出现了处理时间最大 7 s 的操作；耗时超过 100 ms 的 SQL 中有 SELECT 语句，也有 UPDATE 语句。</p>
+<p><img src="https://www.wangbo.im/posts/slow-mysql-query-on-too-many-cas-updating-failure/mysql.slow_queries.png" alt="mysql_slow_queries" /></p>
+<p>慢查询数量快速上涨，并在高位波动。</p>
+<p>大量的慢查询累积，导致客户端的请求无法快速被响应，使得新的请求需要创建新的连接，最终表现为服务器的连接数上升。</p>
+<p><img src="https://www.wangbo.im/posts/slow-mysql-query-on-too-many-cas-updating-failure/mysql.connections.png" alt="mysql_connections" /></p>
+<p>总的连接数也是快速上涨，但是波动不明显。总连接数 700 左右，按照总共 100 个客户端来计算的话，每个客户端需要 7 个连接。</p>
+<p>于此同时，图表显示数据库的请求量都异常增长，而且数量随着慢查询的波动而变化。</p>
+<p><img src="https://www.wangbo.im/posts/slow-mysql-query-on-too-many-cas-updating-failure/mysql.requests.png" alt="mysql_requests" /></p>
+<p>但是完成的事务量增长较小，没有异常变化。</p>
+<p><img src="https://www.wangbo.im/posts/slow-mysql-query-on-too-many-cas-updating-failure/mysql.qps.png" alt="mysql_qps" /></p>
+<h1 id="wen-ti-pai-cha-yu-fen-xi"><a class="zola-anchor" href="#wen-ti-pai-cha-yu-fen-xi" aria-label="Anchor link for: wen-ti-pai-cha-yu-fen-xi">🔗</a>问题排查与分析</h1>
+<p>从请求量的变化上可以看到，变化明显的是 SELECT 和 UPDATE 的请求量。观察 MySQL 的日志，发现慢查询最多的两条 SQL 分别是用来查询当前需要处理的任务 ID 和尝试更新任务状态为 &quot;PROCESSING&quot; 。</p>
+<ol>
+<li><code>SELECT task_id FROM task WHERE task_state = NEW AND task_priority = HIGH limit 1;</code></li>
+<li><code>UPDATE task SET task_state = PROCESSING WHERE task_id = ID AND task_state = NEW;</code></li>
+</ol>
+<p>考虑当前的任务获取的逻辑：</p>
+<p><img src="https://www.wangbo.im/posts/slow-mysql-query-on-too-many-cas-updating-failure/fetch_task.svg" alt="task_fetching" /></p>
+<p>可以很快发现问题出在了客户端试图去更新任务状态为 &quot;PROCESSING&quot; 这一步：如果同时有多个客户端试图更新同
+一个任务的状态，则其他的所有后续的客户端都必须等待第一个加锁的客户端处理完成之后才能继续处理；由于第
+一个客户端成功地将状态修改为了 &quot;PROCESSING&quot;，则所有后续的客户端都会无法完成自己的目标，导致全部进入
+了对下一个任务的相同操作逻辑里；这就产生了 CAS 冲突，如果任务数很大，而且客户端比较多的场景下，就会
+导致频繁的锁冲突。</p>
+<p>临时的解决方案是：每个客户端在更新状态失败以后，随机地等待一段时间。每个客户端随机等待的时间错开之后
+，冲突的客户端连续多次 CAS 冲突的概率极低。</p>
+<p>根据临时方案修改上线之后，服务恢复了正常。</p>
+<h1 id="tuo-zhan"><a class="zola-anchor" href="#tuo-zhan" aria-label="Anchor link for: tuo-zhan">🔗</a>拓展</h1>
+<h2 id="atomiclong"><a class="zola-anchor" href="#atomiclong" aria-label="Anchor link for: atomiclong">🔗</a>AtomicLong</h2>
+<p>JDK 的 <code>AtomicLong</code> 类里面大量使用了 CAS 的技巧，如：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">public final long </span><span style="color:#fdf4c1;">getAndUpdate(</span><span style="color:#8ec07c;">LongUnaryOperator</span><span style="color:#fdf4c1;"> updateFunction) </span><span style="color:#fdf4c1aa;">{
+	</span><span style="color:#fa5c4b;">long</span><span style="color:#fdf4c1aa;"> prev, next;
+	</span><span style="color:#fa5c4b;">do </span><span style="color:#fdf4c1aa;">{
+		prev </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">get()</span><span style="color:#fdf4c1aa;">;
+		next </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> updateFunction.</span><span style="color:#fdf4c1;">applyAsLong(prev)</span><span style="color:#fdf4c1aa;">;
+	} </span><span style="color:#fa5c4b;">while </span><span style="color:#fdf4c1aa;">(</span><span style="color:#fe8019;">!</span><span style="color:#fdf4c1;">compareAndSet(prev, next)</span><span style="color:#fdf4c1aa;">);
+	</span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> prev;
+}
+</span></pre>
+<p>在多线程环境中使用该方法，也会遇到类似的 CAS 冲突的问题：多个线程自旋地竞争同一个资源，都无法顺利地实现自己的更新逻辑。</p>
+<p>一个比较好的替代是 JDK 1.8 以后的 <code>LongAdded</code> 类，其使用了空间换时间的思路，使用一个额外的数组空间来存储附加值，使得在多线程竞争发生时把不同线程的修改分散到不同的数组元素上，从而避免空自旋。</p>
+<h2 id="le-guan-bian-bei-guan"><a class="zola-anchor" href="#le-guan-bian-bei-guan" aria-label="Anchor link for: le-guan-bian-bei-guan">🔗</a>乐观变悲观</h2>
+<p>HotSpot JDK 对锁的优化里面有一项是重量级锁优化为轻量级锁，在轻量级锁加锁失败一定次数之后再升级到重量级锁，可以避免在高并发时大量无效的空自旋，同时能保证在低并发时的性能。</p>
+<p>如果检测到竞争发生，可以在一定次数的失败之后，尝试使用悲观锁进行资源的获取。</p>
+<h2 id="zhu-dong-ting-zhi-jing-zheng"><a class="zola-anchor" href="#zhu-dong-ting-zhi-jing-zheng" aria-label="Anchor link for: zhu-dong-ting-zhi-jing-zheng">🔗</a>主动停止竞争</h2>
+<p>如果检测到竞争发生，可以主动暂停操作让出资源，等待一段时间之后再进行自己的操作。等待的时间需要特别留意避免后续冲突，可以使用随机的等待时间尽量降低冲突概率。</p>
+<h2 id="gai-bian-mu-biao-dui-xiang"><a class="zola-anchor" href="#gai-bian-mu-biao-dui-xiang" aria-label="Anchor link for: gai-bian-mu-biao-dui-xiang">🔗</a>改变目标对象</h2>
+<p>另外一种思路是，当冲突出现，竞争的客户端可以下一步去尝试更新距离目标任务最近的若干个任务里面的随机的一个。这样也能降低冲突的概率。</p>
+<h2 id="la-mo-shi-yu-tui-mo-shi"><a class="zola-anchor" href="#la-mo-shi-yu-tui-mo-shi" aria-label="Anchor link for: la-mo-shi-yu-tui-mo-shi">🔗</a>拉模式与推模式</h2>
+<p>在特定的场景下，可以考虑重构业务模型，不使用客户端定时轮循的方式，而使用生产者主动发布任务的模式。如果生产者能够获得所有的客户端的列表，可以自由选择任务的目标客户端；这样带来的附加收益是生产者可以使用灵活的负载均衡策略和任务调度策略。</p>
+<h1 id="zong-jie"><a class="zola-anchor" href="#zong-jie" aria-label="Anchor link for: zong-jie">🔗</a>总结</h1>
+<p>目前的临时解决方式是主动睡眠一个随机的时间，到期之后再去尝试接收任务。</p>
+<p>一个比较合适的长期解决方案是使用推模式来进行任务的消费：客户端不需要主动轮循 MySQL，而是建立到一个任务分派者的连接；任务分派者轮循 MySQL，取出任务分发给其中的一个客户端；客户端的选择策略可以使用通用的随机算法或 Round-Robin 算法，也可以根据各客户端的处理能力和负载情况来动态确定。</p>
+<hr />
+<p>以上。</p>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+            
+                <div class="post-tags">
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;mysql&#x2F;">#mysql</a>
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;cas&#x2F;">#cas</a>
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;lock&#x2F;">#lock</a>
+                    
+                </div>
+            
+            
+                <div class="post-nav">
+                    
+                        <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;intro-to-spring-cloud-gateway-slide&#x2F;">‹ Intro to Spring Cloud Gateway</a>
+                    
+                    
+                        <a class="next" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;ffmpeg-note-record-xorg-video&#x2F;">Record video from Xorg using FFmpeg ›</a>
+                    
+                    
+                    
+                </div>
+            
+
+        
+
+    </div>
+
+    
+    
+</article>
+
+
+                </div>
+            </main>
+
+            
+            
+        </div>
+
+      
+          <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
+      
+    </body>
+
+</html>

@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -45,13 +43,13 @@
               <ul class="mobile-menu-list">
                 
                     <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;categories">
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">
                             Categories
                         </a>
                     </li>
                 
                     <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;tags">
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">
                             Tags
                         </a>
                     </li>
@@ -63,7 +61,7 @@
                     </li>
                 
                     <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;about">
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">
                             About
                         </a>
                     </li>
@@ -77,13 +75,13 @@
                     <ul>
                         
                             <li>
-                                <a href="https://www.wangbo.im&#x2F;categories">
+                                <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">
                                     Categories
                                 </a>
                             </li>
                         
                             <li>
-                                <a href="https://www.wangbo.im&#x2F;tags">
+                                <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">
                                     Tags
                                 </a>
                             </li>
@@ -95,7 +93,7 @@
                             </li>
                         
                             <li>
-                                <a href="https://www.wangbo.im&#x2F;about">
+                                <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">
                                     About
                                 </a>
                             </li>
@@ -108,6 +106,48 @@
                 <div class="content" id="mobile-panel">
                     
 
+
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="https://www.wangbo.im/posts/posix-make-note/#compile" class="toc-link">Compile</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://www.wangbo.im/posts/posix-make-note/#link" class="toc-link">Link</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://www.wangbo.im/posts/posix-make-note/#makefile" class="toc-link">makefile</a>
+                    
+                    <ul>
+                        
+                        <li>
+                            <a href="https://www.wangbo.im/posts/posix-make-note/#rules" class="toc-link">Rules</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://www.wangbo.im/posts/posix-make-note/#variables" class="toc-link">Variables</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://www.wangbo.im/posts/posix-make-note/#variables-used-by-built-in-rules" class="toc-link">Variables Used by Built-in Rules</a>
+                        </li>
+                        
+                    </ul>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
 
 
 <article class="post">
@@ -123,22 +163,18 @@
     </header>
 
     <div class="post-content">
-      <h2 id="compile"><a class="zola-anchor" href="#compile" aria-label="Anchor link for: compile">🔗</a>
-Compile</h2>
+      <h2 id="compile"><a class="zola-anchor" href="#compile" aria-label="Anchor link for: compile">🔗</a>Compile</h2>
 <p>Source code -&gt; object file: &quot;*.c -&gt; *.o&quot;</p>
-<h2 id="link"><a class="zola-anchor" href="#link" aria-label="Anchor link for: link">🔗</a>
-Link</h2>
+<h2 id="link"><a class="zola-anchor" href="#link" aria-label="Anchor link for: link">🔗</a>Link</h2>
 <p>Object files -&gt; executable: &quot;*.o -&gt; a.out&quot;</p>
-<h1 id="makefile"><a class="zola-anchor" href="#makefile" aria-label="Anchor link for: makefile">🔗</a>
-makefile</h1>
-<h2 id="rules"><a class="zola-anchor" href="#rules" aria-label="Anchor link for: rules">🔗</a>
-Rules</h2>
+<h1 id="makefile"><a class="zola-anchor" href="#makefile" aria-label="Anchor link for: makefile">🔗</a>makefile</h1>
+<h2 id="rules"><a class="zola-anchor" href="#rules" aria-label="Anchor link for: rules">🔗</a>Rules</h2>
 <pre style="background-color:#282828;">
 <span style="color:#fdf4c1aa;">target : prerequisites
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">command1
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">command2
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">...
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">commandn
+    command1
+    command2
+    ...
+    commandn
 </span></pre>
 <ul>
 <li><code>target</code> is a target to be generated.  It can be a object file, or a executable file or a label.</li>
@@ -155,12 +191,10 @@ If any of <code>prerequisites</code> is not existed, then make will call <code>c
 <li>如果edit所依赖的.o文件也存在，那么make会在当前文件中找目标为.o文件的依赖性，如果找到则再根据那一个规则生成.o文件。（这有点像一个堆栈的过程）</li>
 <li>当然，你的C文件和H文件是存在的啦，于是make会生成 .o 文件，然后再用 .o 文件生命make的终极任务，也就是执行文件edit了。</li>
 </ol>
-<h2 id="variables"><a class="zola-anchor" href="#variables" aria-label="Anchor link for: variables">🔗</a>
-Variables</h2>
+<h2 id="variables"><a class="zola-anchor" href="#variables" aria-label="Anchor link for: variables">🔗</a>Variables</h2>
 <p><code>$&lt;</code> : 所有的依赖目标集
 <code>$@</code> : 目标集</p>
-<h2 id="variables-used-by-built-in-rules"><a class="zola-anchor" href="#variables-used-by-built-in-rules" aria-label="Anchor link for: variables-used-by-built-in-rules">🔗</a>
-Variables Used by Built-in Rules</h2>
+<h2 id="variables-used-by-built-in-rules"><a class="zola-anchor" href="#variables-used-by-built-in-rules" aria-label="Anchor link for: variables-used-by-built-in-rules">🔗</a>Variables Used by Built-in Rules</h2>
 <ul>
 <li><code>CC</code> -- the c compiler to use</li>
 <li><code>CXX</code> -- the c++ compiler to use</li>

@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -45,13 +43,13 @@
               <ul class="mobile-menu-list">
                 
                     <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;categories">
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">
                             Categories
                         </a>
                     </li>
                 
                     <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;tags">
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">
                             Tags
                         </a>
                     </li>
@@ -63,7 +61,7 @@
                     </li>
                 
                     <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;about">
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">
                             About
                         </a>
                     </li>
@@ -77,13 +75,13 @@
                     <ul>
                         
                             <li>
-                                <a href="https://www.wangbo.im&#x2F;categories">
+                                <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">
                                     Categories
                                 </a>
                             </li>
                         
                             <li>
-                                <a href="https://www.wangbo.im&#x2F;tags">
+                                <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">
                                     Tags
                                 </a>
                             </li>
@@ -95,7 +93,7 @@
                             </li>
                         
                             <li>
-                                <a href="https://www.wangbo.im&#x2F;about">
+                                <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">
                                     About
                                 </a>
                             </li>
@@ -108,6 +106,49 @@
                 <div class="content" id="mobile-panel">
                     
 
+
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="https://www.wangbo.im/posts/spring-mvc-testing-integration-testing-configuration/#tong-guo-mavenhuo-qu-yi-lai" class="toc-link">通过Maven获取依赖</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://www.wangbo.im/posts/spring-mvc-testing-integration-testing-configuration/#mockmvc-pei-zhi" class="toc-link">MockMvc 配置</a>
+                    
+                    <ul>
+                        
+                        <li>
+                            <a href="https://www.wangbo.im/posts/spring-mvc-testing-integration-testing-configuration/#standalonesetup" class="toc-link">standaloneSetup</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://www.wangbo.im/posts/spring-mvc-testing-integration-testing-configuration/#webappcontextsetup" class="toc-link">webAppContextSetup</a>
+                        </li>
+                        
+                    </ul>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://www.wangbo.im/posts/spring-mvc-testing-integration-testing-configuration/#ce-shi-yong-li-lei-de-pei-zhi" class="toc-link">测试用例类的配置</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://www.wangbo.im/posts/spring-mvc-testing-integration-testing-configuration/#zong-jie" class="toc-link">总结</a>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
 
 
 <article class="post">
@@ -123,7 +164,7 @@
     </header>
 
     <div class="post-content">
-      <p>本文是 <a href="@/posts/2016-04-09-spring-mvc-testing-content.md">Spring MVC Testing</a> 集成测试系列的第1篇，原文链接：<a href="http://www.petrikainulainen.net/programming/spring-framework/integration-testing-of-spring-mvc-applications-configuration/">Integration Testing of Spring MVC Applications: Configuration</a>。</p>
+      <p>本文是 <a href="https://www.wangbo.im/posts/spring-mvc-testing-content/">Spring MVC Testing</a> 集成测试系列的第1篇，原文链接：<a href="http://www.petrikainulainen.net/programming/spring-framework/integration-testing-of-spring-mvc-applications-configuration/">Integration Testing of Spring MVC Applications: Configuration</a>。</p>
 <p>没有人会否认集成测试的重要性，它是验证我们开发的组件能够正常协同工作的重要手段。不幸的是，对使用Spring MVC开发的web应用程序作集成测试有一点麻烦。</p>
 <p>过去我们一直用 <a href="http://docs.seleniumhq.org">Selenium</a> 和 <a href="https://jwebunit.github.io/jwebunit/">JWebUnit</a> 来对web应用接口作集成测试，然后效果不是很好。这种方法有以下三个缺点：</p>
 <ul>
@@ -139,39 +180,34 @@
 <li>Maven 3.0.3</li>
 </ul>
 <p>我们一起来开始进入Spring MVC Test的世界吧！</p>
-<p><a name="continue-reading"></a></p>
-<h1 id="tong-guo-mavenhuo-qu-yi-lai"><a class="zola-anchor" href="#tong-guo-mavenhuo-qu-yi-lai" aria-label="Anchor link for: tong-guo-mavenhuo-qu-yi-lai">🔗</a>
-通过Maven获取依赖</h1>
+<p id="zola-continue-reading"><a name="continue-reading"></a></p>
+<h1 id="tong-guo-mavenhuo-qu-yi-lai"><a class="zola-anchor" href="#tong-guo-mavenhuo-qu-yi-lai" aria-label="Anchor link for: tong-guo-mavenhuo-qu-yi-lai">🔗</a>通过Maven获取依赖</h1>
 <p>译者注：原文写作的时候是基于Spring Framework 3.1.2，当时Spring-test-mvc还是作为一个独立的项目进行开发和发布。在Spring Framework 3.2以后，该项目被合并到Spring Framework中去了。现在Spring Framework已经发布了4.X系列，很少有人在使用3.2以下的版本，为了减少混淆，直接将原文的pom文件加以修改。特此说明。</p>
 <p>生成的pom.xml文件如下：</p>
 <pre style="background-color:#282828;">
 <span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">org.springframework</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">spring-test</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">3.2</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">scope</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">test</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">scope</span><span style="color:#83a598;">&gt;
-</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
-</span></pre><h1 id="mockmvc-pei-zhi"><a class="zola-anchor" href="#mockmvc-pei-zhi" aria-label="Anchor link for: mockmvc-pei-zhi">🔗</a>
-MockMvc 配置</h1>
+    &lt;</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">org.springframework</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">groupId</span><span style="color:#83a598;">&gt;
+    &lt;</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">spring-test</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">artifactId</span><span style="color:#83a598;">&gt;
+    &lt;</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">3.2</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">version</span><span style="color:#83a598;">&gt;
+    &lt;</span><span style="font-weight:bold;color:#8ec07c;">scope</span><span style="color:#83a598;">&gt;</span><span style="color:#fdf4c1aa;">test</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">scope</span><span style="color:#83a598;">&gt;
+&lt;/</span><span style="font-weight:bold;color:#8ec07c;">dependency</span><span style="color:#83a598;">&gt;
+</span></pre><h1 id="mockmvc-pei-zhi"><a class="zola-anchor" href="#mockmvc-pei-zhi" aria-label="Anchor link for: mockmvc-pei-zhi">🔗</a>MockMvc 配置</h1>
 <p>Spring MVC Test框架提供了<code>MockMvc</code>类体系来辅助编写基于Spring MVC开发的web应用的测试代码。我们需要做的就是使用<code>MockMvcBuilder</code>接口的实际实现来生成<code>MockMvc</code>实例。<code>MockMvcBuilders</code>工厂类提供了两个工厂方法创建<code>MockMvcBuilder</code>实例：</p>
 <ul>
 <li><code>StandaloneMockMvcBuilder standaloneSetup(Object… controllers)</code> 主要用来对单个Controller进行测试，需要手动地配置各种Bean</li>
 <li><code>DefaultMockMvcBuilder webAppContextSetup(WebApplicationContext context)</code> 主要使用配置好的Spring上下文来配置Bean</li>
 </ul>
 <p>下面来详细看一下这两种方式分别如何使用。</p>
-<h2 id="standalonesetup"><a class="zola-anchor" href="#standalonesetup" aria-label="Anchor link for: standalonesetup">🔗</a>
-standaloneSetup</h2>
+<h2 id="standalonesetup"><a class="zola-anchor" href="#standalonesetup" aria-label="Anchor link for: standalonesetup">🔗</a>standaloneSetup</h2>
 <p>如果要测试的类是<code>HomeController</code>，我们可以用如下的方式创建一个<code>MockMvc</code>实例：</p>
 <pre style="background-color:#282828;">
 <span style="color:#8ec07c;">MockMvc</span><span style="color:#fdf4c1aa;"> mockMvc </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">MockMvcBuilders</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">standaloneSetup(</span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">HomeController</span><span style="color:#fdf4c1;">())</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">build()</span><span style="color:#fdf4c1aa;">;
-</span></pre><h2 id="webappcontextsetup"><a class="zola-anchor" href="#webappcontextsetup" aria-label="Anchor link for: webappcontextsetup">🔗</a>
-webAppContextSetup</h2>
+</span></pre><h2 id="webappcontextsetup"><a class="zola-anchor" href="#webappcontextsetup" aria-label="Anchor link for: webappcontextsetup">🔗</a>webAppContextSetup</h2>
 <p>这种方式我们要先初始化一个配置好的<code>WebApplicationContext</code>实例，然后通过如下代码创建一个<code>MockMvc</code>实例：</p>
 <pre style="background-color:#282828;">
 <span style="color:#8ec07c;">WebApplicationContext</span><span style="color:#fdf4c1aa;"> wac ;
 </span><span style="color:#8ec07c;">MockMvc</span><span style="color:#fdf4c1aa;"> mockMvc </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">MockMvcBuilders</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">webAppContextSetup(wac)</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">build()</span><span style="color:#fdf4c1aa;">;
-</span></pre><h1 id="ce-shi-yong-li-lei-de-pei-zhi"><a class="zola-anchor" href="#ce-shi-yong-li-lei-de-pei-zhi" aria-label="Anchor link for: ce-shi-yong-li-lei-de-pei-zhi">🔗</a>
-测试用例类的配置</h1>
+</span></pre><h1 id="ce-shi-yong-li-lei-de-pei-zhi"><a class="zola-anchor" href="#ce-shi-yong-li-lei-de-pei-zhi" aria-label="Anchor link for: ce-shi-yong-li-lei-de-pei-zhi">🔗</a>测试用例类的配置</h1>
 <p>在集成测试中我们应该使用webAppContextSetup方式的<code>MockMvc</code>配置方式，这样可以最大化地共用Spring配置代码。</p>
 <p>我们可以按照如下的步骤来配置集成测试用例类：</p>
 <ol>
@@ -184,35 +220,34 @@ webAppContextSetup</h2>
 <p>完成后的测试用例类大概长成这个样子：</p>
 <pre style="background-color:#282828;">
 <span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">RunWith</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">SpringJUnit4ClassRunner</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">class</span><span style="color:#fdf4c1aa;">)
-</span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">ContextConfiguration</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">locations </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1aa;">{</span><span style="color:#b8bb26;">&quot;classpath:testContext.xml&quot;</span><span style="color:#fdf4c1aa;">, </span><span style="color:#b8bb26;">&quot;classpath:webMvcContext.xml&quot;</span><span style="color:#fdf4c1aa;">})
+@</span><span style="color:#fdf4c1;">ContextConfiguration</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">locations </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1aa;">{</span><span style="color:#b8bb26;">&quot;classpath:testContext.xml&quot;</span><span style="color:#fdf4c1aa;">, </span><span style="color:#b8bb26;">&quot;classpath:webMvcContext.xml&quot;</span><span style="color:#fdf4c1aa;">})
 </span><span style="font-style:italic;color:#928374;">//@ContextConfiguration(classes = {TestContext.class, WebMvcContext.class})
 </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">WebAppConfiguration
 </span><span style="color:#fa5c4b;">public class </span><span style="color:#8ec07c;">TodoControllerTest_WebAppContext </span><span style="color:#fdf4c1aa;">{
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">MockMvc </span><span style="color:#fdf4c1aa;">mockMvc;
-</span><span style="color:#fdf4c1aa;">
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Autowired
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">WebApplicationContext </span><span style="color:#fdf4c1aa;">webApplicationContext;
-</span><span style="color:#fdf4c1aa;">
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Before
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public void </span><span style="color:#8ec07c;">setUp</span><span style="color:#fdf4c1aa;">() </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">Exception </span><span style="color:#fdf4c1aa;">{
-</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">Mockito</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">reset(mockedTodoService)</span><span style="color:#fdf4c1aa;">;
-</span><span style="color:#fdf4c1aa;">
-</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1aa;">mockMvc </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">MockMvcBuilders</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">webAppContextSetup(webApplicationContext)</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">build()</span><span style="color:#fdf4c1aa;">;
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">}
-</span><span style="color:#fdf4c1aa;">
-</span><span style="color:#fdf4c1aa;">    </span><span style="font-style:italic;color:#928374;">// Add tests here
+    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">MockMvc </span><span style="color:#fdf4c1aa;">mockMvc;
+
+    @</span><span style="color:#fdf4c1;">Autowired
+    </span><span style="color:#fa5c4b;">private </span><span style="color:#8ec07c;">WebApplicationContext </span><span style="color:#fdf4c1aa;">webApplicationContext;
+
+    @</span><span style="color:#fdf4c1;">Before
+    </span><span style="color:#fa5c4b;">public void </span><span style="color:#8ec07c;">setUp</span><span style="color:#fdf4c1aa;">() </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">Exception </span><span style="color:#fdf4c1aa;">{
+        </span><span style="color:#8ec07c;">Mockito</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">reset(mockedTodoService)</span><span style="color:#fdf4c1aa;">;
+
+        mockMvc </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">MockMvcBuilders</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">webAppContextSetup(webApplicationContext)</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">build()</span><span style="color:#fdf4c1aa;">;
+    }
+
+    </span><span style="font-style:italic;color:#928374;">// Add tests here
 </span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>本文使用的代码被放在了 <a href="https://github.com/pkainulainen/spring-mvc-test-examples/tree/master/configuration">Github</a> 上。使用Maven进行集成测试的方法可以参见我的另外一篇文章 <a href="http://www.petrikainulainen.net/programming/maven/integration-testing-with-maven/">Integration Testing with Maven</a>。</p>
-<h1 id="zong-jie"><a class="zola-anchor" href="#zong-jie" aria-label="Anchor link for: zong-jie">🔗</a>
-总结</h1>
+<h1 id="zong-jie"><a class="zola-anchor" href="#zong-jie" aria-label="Anchor link for: zong-jie">🔗</a>总结</h1>
 <p>本文主要介绍了如何来配置基于Spring MVC Test的集成测试，主要内容有：</p>
 <ul>
 <li>如何使用不同的Spring配置方式（XML/Java）来配置测试用例</li>
 <li>应该使用<code>webAppContextSetup</code>的方式而不是<code>standaloneSetup</code>方式</li>
 <li>如何使用<code>WebApplicationContext</code>注入来完成Spring配置的加载</li>
 </ul>
-<p>下一篇是 <a href="@/posts/2016-04-09-spring-mvc-testing-integration-testing-controllers.md">Spring MVC Integration Testing - Controllers</a>。</p>
+<p>下一篇是 <a href="https://www.wangbo.im/posts/spring-mvc-testing-integration-testing-controllers/">Spring MVC Integration Testing - Controllers</a>。</p>
 
     </div>
 

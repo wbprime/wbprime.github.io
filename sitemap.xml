@@ -1,9 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    
+        <url>
+            <loc>https://www.wangbo.im/</loc>
+            
+        </url>
     
         <url>
             <loc>https://www.wangbo.im/about/</loc>
             
                 <lastmod>2019-09-06T19:20:50+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/categories/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/categories/causerie/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/categories/java/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/categories/learning-java-concurrency/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/categories/mayday/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/categories/nginx/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/categories/notes/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/categories/practise/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/categories/spring-mvc-testing/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/categories/spring/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/categories/streaming/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/categories/utils/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/categories/vertx/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/</loc>
             
         </url>
     
@@ -15,359 +91,37 @@
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/2016-03-30-learning-java-concurrency-countdownlatch/</loc>
-            
-                <lastmod>2016-03-30T21:06:08+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2016-03-30-learning-java-concurrency-cyclicbarrier/</loc>
-            
-                <lastmod>2016-03-30T21:06:26+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2016-03-30-learning-java-concurrent-semaphore/</loc>
-            
-                <lastmod>2016-03-30T20:33:17+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2016-04-06-learning-java-concurrency-wait-notify/</loc>
-            
-                <lastmod>2016-04-06T10:00:56+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2016-04-07-learning-java-concurrency-reentrantlock-condition/</loc>
-            
-                <lastmod>2016-04-07T09:47:10+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2016-04-07-learning-java-concurrency-reentrantreadwritelock/</loc>
-            
-                <lastmod>2016-04-07T21:54:38+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2016-04-11-learning-java-concurrency-thread-runnable/</loc>
-            
-                <lastmod>2016-04-11T10:04:31+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2016-04-13-learning-java-concurrency-futuretask-callable/</loc>
-            
-                <lastmod>2016-04-13T10:17:57+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2017-03-20-fast-into-graphviz/</loc>
-            
-                <lastmod>2017-03-20T11:55:45+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2017-06-01-awk-tips-md5/</loc>
-            
-                <lastmod>2017-06-01T09:43:06+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2018-01-08-ansi-colors/</loc>
-            
-                <lastmod>2018-01-08T10:45:11+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2018-02-05-jdk-vs-jre/</loc>
-            
-                <lastmod>2018-02-05T15:54:01+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2018-02-05-jvm-gc-options/</loc>
-            
-                <lastmod>2018-02-05T16:16:53+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2018-02-05-jvm-memory-model/</loc>
-            
-                <lastmod>2018-02-05T16:47:59+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2018-02-06-ip-tcp-udp-frames/</loc>
-            
-                <lastmod>2018-02-06T13:08:22+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2018-02-06-thrift-note/</loc>
-            
-                <lastmod>2018-02-06T13:22:50+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2019-02-01-a-gc-tuning-practise-involving-mysql/</loc>
-            
-                <lastmod>2019-02-11T13:08:22+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2019-02-13-a-cache-timeout-tuning-practise/</loc>
-            
-                <lastmod>2019-02-13T12:03:25+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2019-03-11-a-online-issue-caused-by-dns-unavailability/</loc>
-            
-                <lastmod>2019-03-11T09:07:30+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2019-03-11-graphviz-note/</loc>
-            
-                <lastmod>2019-03-11T21:27:50+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2019-03-12-combine-vertx-and-guice-dependency-injection/</loc>
-            
-                <lastmod>2019-03-31T11:19:14+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2019-03-12-multiple-jwt-auth-handler-in-vertx/</loc>
-            
-                <lastmod>2019-03-12T21:19:30+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2019-03-21-a-product-env-bug-misused-hashmap-nullability/</loc>
-            
-                <lastmod>2019-03-21T10:04:03+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2019-03-31-a-bug-introduced-by-optionallong-abuse/</loc>
+            <loc>https://www.wangbo.im/posts/a-bug-introduced-by-optionallong-abuse/</loc>
             
                 <lastmod>2019-03-31T15:31:07+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/2019-04-12-java-catch-all-and-assertionerror/</loc>
+            <loc>https://www.wangbo.im/posts/a-cache-timeout-tuning-practise/</loc>
             
-                <lastmod>2019-04-12T10:10:44+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2019-04-19-communication-bridge-between-webrtc-and-wechat-rtmp/</loc>
-            
-                <lastmod>2019-04-19T15:35:56+08:00</lastmod>
+                <lastmod>2019-02-13T12:03:25+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/2019-07-06-generating-hls-m3u8-using-ffmpeg/</loc>
+            <loc>https://www.wangbo.im/posts/a-gc-tuning-practise-involving-mysql/</loc>
             
-                <lastmod>2019-07-06T15:18:04+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2019-07-06-understanding-rate-control-modes-x264-x265-vpx/</loc>
-            
-                <lastmod>2019-07-06T10:50:16+08:00</lastmod>
+                <lastmod>2019-02-11T13:08:22+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/2019-07-08-general-video-bitrate-recommendation/</loc>
+            <loc>https://www.wangbo.im/posts/a-online-issue-caused-by-dns-unavailability/</loc>
             
-                <lastmod>2019-07-08T10:48:41+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2019-07-21-ffmpeg-snapshot-kuaizhao-thumbnail-concluded/</loc>
-            
-                <lastmod>2019-07-21T15:37:14+08:00</lastmod>
+                <lastmod>2019-03-11T09:07:30+08:00</lastmod>
             
         </url>
     
         <url>
-            <loc>https://www.wangbo.im/posts/2019-07-21-ffmpeg-vsync-explained/</loc>
+            <loc>https://www.wangbo.im/posts/a-product-env-bug-misused-hashmap-nullability/</loc>
             
-                <lastmod>2019-07-21T18:18:28+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2019-08-28-intro-to-spring-cloud-gateway-slide/</loc>
-            
-                <lastmod>2019-08-28T09:36:32+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2019-08-31-slow-mysql-query-on-too-many-cas-updating-failure/</loc>
-            
-                <lastmod>2019-08-31T11:30:40+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2019-09-09-ffmpeg-note-record-xorg-video/</loc>
-            
-                <lastmod>2019-09-09T09:43:41+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2019-09-09-ffprobe-note-query-key-frame-info/</loc>
-            
-                <lastmod>2019-09-09T09:52:45+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2019-09-09-ffprobe-note-query-video-rotation-info/</loc>
-            
-                <lastmod>2019-09-09T09:53:05+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2019-09-12-vboxmanage-note-change-host-key-for-vboxsdl/</loc>
-            
-                <lastmod>2019-09-12T17:39:15+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2019-09-17-spring-cloud-gateway-load-testing-using-wrk/</loc>
-            
-                <lastmod>2019-09-17T16:20:48+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2019-09-17-usage-of-benchmarking-tool-wrk-and-wrk2/</loc>
-            
-                <lastmod>2019-09-17T09:27:06+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2019-09-28-google-autovalue-usecases/</loc>
-            
-                <lastmod>2019-09-28T11:29:53+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2019-09-30-add-supports-for-apt-in-maven/</loc>
-            
-                <lastmod>2019-09-30T12:36:55+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2019-09-30-freebuilder-usecases/</loc>
-            
-                <lastmod>2019-09-30T09:38:54+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2019-10-16-mapstruct-usecases/</loc>
-            
-                <lastmod>2019-10-16T17:23:07+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2019-10-17-jooq-usecases-sql-builder/</loc>
-            
-                <lastmod>2019-10-17T14:17:46+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2019-10-17-jooq-usecases-sql-executor/</loc>
-            
-                <lastmod>2019-10-17T19:09:40+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2019-10-21-jooq-usecases-code-generating/</loc>
-            
-                <lastmod>2019-10-21T11:04:07+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2019-10-23-jooq-usecases-code-generated-basic-orm/</loc>
-            
-                <lastmod>2019-10-23T18:07:45+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2019-10-23-jooq-usecases-code-generated-sql-builder/</loc>
-            
-                <lastmod>2019-10-23T10:28:13+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2019-10-23-jooq-usecases-code-generated-sql-executor/</loc>
-            
-                <lastmod>2019-10-23T16:27:38+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2019-10-24-jooq-usecases-transaction-management/</loc>
-            
-                <lastmod>2019-10-25T18:00:41+08:00</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/2019-10-29-dependency-injection-practise-guice-vs-dagger2/</loc>
-            
-                <lastmod>2019-10-30T15:49:49+08:00</lastmod>
+                <lastmod>2019-03-21T10:04:03+08:00</lastmod>
             
         </url>
     
@@ -375,6 +129,27 @@
             <loc>https://www.wangbo.im/posts/acl-note/</loc>
             
                 <lastmod>2018-02-05T17:46:28+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/add-supports-for-apt-in-maven/</loc>
+            
+                <lastmod>2019-09-30T12:36:55+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/ansi-colors/</loc>
+            
+                <lastmod>2018-01-08T10:45:11+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/awk-tips-md5/</loc>
+            
+                <lastmod>2017-06-01T09:43:06+08:00</lastmod>
             
         </url>
     
@@ -407,9 +182,37 @@
         </url>
     
         <url>
+            <loc>https://www.wangbo.im/posts/combine-vertx-and-guice-dependency-injection/</loc>
+            
+                <lastmod>2019-03-31T11:19:14+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/communication-bridge-between-webrtc-and-wechat-rtmp/</loc>
+            
+                <lastmod>2019-04-19T15:35:56+08:00</lastmod>
+            
+        </url>
+    
+        <url>
             <loc>https://www.wangbo.im/posts/danan/</loc>
             
                 <lastmod>2015-05-16T19:14:49+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/dependency-injection-practise-guice-vs-dagger2/</loc>
+            
+                <lastmod>2019-10-30T15:49:49+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/fast-into-graphviz/</loc>
+            
+                <lastmod>2017-03-20T11:55:45+08:00</lastmod>
             
         </url>
     
@@ -424,6 +227,76 @@
             <loc>https://www.wangbo.im/posts/fengkuangshijie/</loc>
             
                 <lastmod>2013-05-16T21:01:44+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/ffmpeg-note-record-xorg-video/</loc>
+            
+                <lastmod>2019-09-09T09:43:41+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/ffmpeg-snapshot-kuaizhao-thumbnail-concluded/</loc>
+            
+                <lastmod>2019-07-21T15:37:14+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/ffmpeg-vsync-explained/</loc>
+            
+                <lastmod>2019-07-21T18:18:28+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/ffprobe-note-query-key-frame-info/</loc>
+            
+                <lastmod>2019-09-09T09:52:45+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/ffprobe-note-query-video-rotation-info/</loc>
+            
+                <lastmod>2019-09-09T09:53:05+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/freebuilder-usecases/</loc>
+            
+                <lastmod>2019-09-30T09:38:54+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/general-video-bitrate-recommendation/</loc>
+            
+                <lastmod>2019-07-08T10:48:41+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/generating-hls-m3u8-using-ffmpeg/</loc>
+            
+                <lastmod>2019-07-06T15:18:04+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/google-autovalue-usecases/</loc>
+            
+                <lastmod>2019-09-28T11:29:53+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/graphviz-note/</loc>
+            
+                <lastmod>2019-03-11T21:27:50+08:00</lastmod>
             
         </url>
     
@@ -456,9 +329,37 @@
         </url>
     
         <url>
+            <loc>https://www.wangbo.im/posts/intro-to-spring-cloud-gateway-slide/</loc>
+            
+                <lastmod>2019-08-28T09:36:32+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/ip-tcp-udp-frames/</loc>
+            
+                <lastmod>2018-02-06T13:08:22+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/java-catch-all-and-assertionerror/</loc>
+            
+                <lastmod>2019-04-12T10:10:44+08:00</lastmod>
+            
+        </url>
+    
+        <url>
             <loc>https://www.wangbo.im/posts/jdk-installation-on-archlinux/</loc>
             
                 <lastmod>2015-05-25T11:07:13+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/jdk-vs-jre/</loc>
+            
+                <lastmod>2018-02-05T15:54:01+08:00</lastmod>
             
         </url>
     
@@ -484,6 +385,69 @@
         </url>
     
         <url>
+            <loc>https://www.wangbo.im/posts/jooq-usecases-code-generated-basic-orm/</loc>
+            
+                <lastmod>2019-10-23T18:07:45+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/jooq-usecases-code-generated-sql-builder/</loc>
+            
+                <lastmod>2019-10-23T10:28:13+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/jooq-usecases-code-generated-sql-executor/</loc>
+            
+                <lastmod>2019-10-23T16:27:38+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/jooq-usecases-code-generating/</loc>
+            
+                <lastmod>2019-10-21T11:04:07+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/jooq-usecases-sql-builder/</loc>
+            
+                <lastmod>2019-10-17T14:17:46+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/jooq-usecases-sql-executor/</loc>
+            
+                <lastmod>2019-10-17T19:09:40+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/jooq-usecases-transaction-management/</loc>
+            
+                <lastmod>2019-10-25T18:00:41+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/jvm-gc-options/</loc>
+            
+                <lastmod>2018-02-05T16:16:53+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/jvm-memory-model/</loc>
+            
+                <lastmod>2018-02-05T16:47:59+08:00</lastmod>
+            
+        </url>
+    
+        <url>
             <loc>https://www.wangbo.im/posts/kan-dianying/</loc>
             
                 <lastmod>2015-05-16T19:15:55+08:00</lastmod>
@@ -498,6 +462,20 @@
         </url>
     
         <url>
+            <loc>https://www.wangbo.im/posts/learning-java-concurrency-countdownlatch/</loc>
+            
+                <lastmod>2016-03-30T21:06:08+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/learning-java-concurrency-cyclicbarrier/</loc>
+            
+                <lastmod>2016-03-30T21:06:26+08:00</lastmod>
+            
+        </url>
+    
+        <url>
             <loc>https://www.wangbo.im/posts/learning-java-concurrency-executors-1-executorservice/</loc>
             
                 <lastmod>2016-04-15T16:34:20+08:00</lastmod>
@@ -505,9 +483,51 @@
         </url>
     
         <url>
+            <loc>https://www.wangbo.im/posts/learning-java-concurrency-futuretask-callable/</loc>
+            
+                <lastmod>2016-04-13T10:17:57+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/learning-java-concurrency-reentrantlock-condition/</loc>
+            
+                <lastmod>2016-04-07T09:47:10+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/learning-java-concurrency-reentrantreadwritelock/</loc>
+            
+                <lastmod>2016-04-07T21:54:38+08:00</lastmod>
+            
+        </url>
+    
+        <url>
             <loc>https://www.wangbo.im/posts/learning-java-concurrency-synchronized/</loc>
             
                 <lastmod>2016-04-01T16:39:24+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/learning-java-concurrency-thread-runnable/</loc>
+            
+                <lastmod>2016-04-11T10:04:31+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/learning-java-concurrency-wait-notify/</loc>
+            
+                <lastmod>2016-04-06T10:00:56+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/learning-java-concurrent-semaphore/</loc>
+            
+                <lastmod>2016-03-30T20:33:17+08:00</lastmod>
             
         </url>
     
@@ -526,6 +546,13 @@
         </url>
     
         <url>
+            <loc>https://www.wangbo.im/posts/mapstruct-usecases/</loc>
+            
+                <lastmod>2019-10-16T17:23:07+08:00</lastmod>
+            
+        </url>
+    
+        <url>
             <loc>https://www.wangbo.im/posts/maven-note/</loc>
             
                 <lastmod>2018-02-06T10:50:17+08:00</lastmod>
@@ -536,6 +563,13 @@
             <loc>https://www.wangbo.im/posts/milaoshu/</loc>
             
                 <lastmod>2013-05-16T20:53:27+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/multiple-jwt-auth-handler-in-vertx/</loc>
+            
+                <lastmod>2019-03-12T21:19:30+08:00</lastmod>
             
         </url>
     
@@ -578,6 +612,46 @@
             <loc>https://www.wangbo.im/posts/nuoya-fangzhou/</loc>
             
                 <lastmod>2013-05-16T20:20:46+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/page/1/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/page/2/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/page/3/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/page/4/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/page/5/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/page/6/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/page/7/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/page/8/</loc>
             
         </url>
     
@@ -631,6 +705,13 @@
         </url>
     
         <url>
+            <loc>https://www.wangbo.im/posts/slow-mysql-query-on-too-many-cas-updating-failure/</loc>
+            
+                <lastmod>2019-08-31T11:30:40+08:00</lastmod>
+            
+        </url>
+    
+        <url>
             <loc>https://www.wangbo.im/posts/spring-annotation-based-configuration/</loc>
             
                 <lastmod>2015-06-08T10:45:49+08:00</lastmod>
@@ -641,6 +722,13 @@
             <loc>https://www.wangbo.im/posts/spring-at-first-glance/</loc>
             
                 <lastmod>2015-05-28T19:11:56+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/spring-cloud-gateway-load-testing-using-wrk/</loc>
+            
+                <lastmod>2019-09-17T16:20:48+08:00</lastmod>
             
         </url>
     
@@ -736,6 +824,13 @@
         </url>
     
         <url>
+            <loc>https://www.wangbo.im/posts/thrift-note/</loc>
+            
+                <lastmod>2018-02-06T13:22:50+08:00</lastmod>
+            
+        </url>
+    
+        <url>
             <loc>https://www.wangbo.im/posts/tomcat-note/</loc>
             
                 <lastmod>2018-02-06T15:28:53+08:00</lastmod>
@@ -753,6 +848,27 @@
             <loc>https://www.wangbo.im/posts/turan-xiangqi-zhushi-lai/</loc>
             
                 <lastmod>2014-05-16T20:03:36+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/understanding-rate-control-modes-x264-x265-vpx/</loc>
+            
+                <lastmod>2019-07-06T10:50:16+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/usage-of-benchmarking-tool-wrk-and-wrk2/</loc>
+            
+                <lastmod>2019-09-17T09:27:06+08:00</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/posts/vboxmanage-note-change-host-key-for-vboxsdl/</loc>
+            
+                <lastmod>2019-09-12T17:39:15+08:00</lastmod>
             
         </url>
     
@@ -812,554 +928,594 @@
             
         </url>
     
-    
-        <url>
-            <loc>https://www.wangbo.im/</loc>
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/pages/</loc>
-        </url>
-    
-        <url>
-            <loc>https://www.wangbo.im/posts/</loc>
-        </url>
-    
-    
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/causerie/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/java/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/learning-java-concurrency/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/mayday/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/nginx/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/notes/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/practise/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/spring-mvc-testing/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/spring/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/streaming/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/utils/</loc>
-        </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/categories/vertx/</loc>
-        </url>
-        
-    
-        
         <url>
             <loc>https://www.wangbo.im/tags/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/abr/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/acl/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/annotationprocessorpaths/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/ansi-color/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/apple/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/apt/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/archlinux/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/assertionerror/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/auth/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/auto-value/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/autovalue/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/awk/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/benchmark/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/bitrate/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/bug/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/c/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/cache/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/calm/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/cas/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/cbr/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/cms/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/concurrency/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/congistion/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/connection-leak/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/crf/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/dagger2/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/dns/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/dot/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/fast-retransmit/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/ffmpeg/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/ffprobe/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/fps/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/freebuilder/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/gateway/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/gc/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/getacl/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/gif/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/google/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/graphviz/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/guice/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/h264/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/happy/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/hashmap/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/hexo/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/hls/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/host-key/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/http/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/huangyi/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/inject/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/ip/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/java/</loc>
+            
         </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/tags/java/</loc>
-        </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/jdbc/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/jdk/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/jooq/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/jre/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/jsr303/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/jsr330/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/jvm/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/jwt/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/key-frame/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/libevent/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/linux/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/live-player/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/live-pusher/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/load-test/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/lock/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/m3u8/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/make/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/makefile/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/mapstruct/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/maven/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/mayday/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/md5/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/memory-model/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/mybatis/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/mysql/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/nginx/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/note/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/null/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/nullability/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/optional/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/optionallong/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/rate-control/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/rotation/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/route/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/rtmp/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/select/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/setacl/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/snapshoting/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/spring-cloud-gateway/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/spring-cloud/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/spring-mvc/</loc>
+            
         </url>
-        
-        <url>
-            <loc>https://www.wangbo.im/tags/spring-mvc/</loc>
-        </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/spring/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/sql/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/status-code/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/tcp/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/tech/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/testing/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/thrift/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/tomcat-dbcp/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/tomcat/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/trip/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/try-catch/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/udp/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/upset/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/vboxsdl/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/vbr/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/vbv/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/vert-x/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/virtualbox/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/vsync/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/webp/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/webrtc/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/wechat/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/wrk/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/wrk2/</loc>
+            
         </url>
-        
+    
         <url>
             <loc>https://www.wangbo.im/tags/youtube/</loc>
+            
         </url>
-        
     
 </urlset>

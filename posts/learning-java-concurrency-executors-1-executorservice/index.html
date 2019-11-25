@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -45,13 +43,13 @@
               <ul class="mobile-menu-list">
                 
                     <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;categories">
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">
                             Categories
                         </a>
                     </li>
                 
                     <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;tags">
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">
                             Tags
                         </a>
                     </li>
@@ -63,7 +61,7 @@
                     </li>
                 
                     <li class="mobile-menu-item">
-                        <a href="https://www.wangbo.im&#x2F;about">
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">
                             About
                         </a>
                     </li>
@@ -77,13 +75,13 @@
                     <ul>
                         
                             <li>
-                                <a href="https://www.wangbo.im&#x2F;categories">
+                                <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">
                                     Categories
                                 </a>
                             </li>
                         
                             <li>
-                                <a href="https://www.wangbo.im&#x2F;tags">
+                                <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">
                                     Tags
                                 </a>
                             </li>
@@ -95,7 +93,7 @@
                             </li>
                         
                             <li>
-                                <a href="https://www.wangbo.im&#x2F;about">
+                                <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">
                                     About
                                 </a>
                             </li>
@@ -108,6 +106,48 @@
                 <div class="content" id="mobile-panel">
                     
 
+
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="https://www.wangbo.im/posts/learning-java-concurrency-executors-1-executorservice/#executor" class="toc-link">Executor</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://www.wangbo.im/posts/learning-java-concurrency-executors-1-executorservice/#executorservice" class="toc-link">ExecutorService</a>
+                    
+                    <ul>
+                        
+                        <li>
+                            <a href="https://www.wangbo.im/posts/learning-java-concurrency-executors-1-executorservice/#xian-cheng-chi-de-guan-bi" class="toc-link">线程池的关闭</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://www.wangbo.im/posts/learning-java-concurrency-executors-1-executorservice/#you-fan-hui-zhi-de-ren-wu-submit" class="toc-link">有返回值的任务 submit()</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://www.wangbo.im/posts/learning-java-concurrency-executors-1-executorservice/#pi-liang-ren-wu-invokeall-invokeany" class="toc-link">批量任务 invokeAll &amp; invokeAny()</a>
+                        </li>
+                        
+                    </ul>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://www.wangbo.im/posts/learning-java-concurrency-executors-1-executorservice/#scheduledexecutorservice" class="toc-link">ScheduledExecutorService</a>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
 
 
 <article class="post">
@@ -126,51 +166,49 @@
       <p>回过头来看<code>Thread</code>类，其实可以发现该类是对一件任务的抽象。通过将要完成的任务抽象出来用<code>Thread</code>或者<code>Runnable</code>来表示，然后委托给另外的线程来处理。<code>Thread</code>类在这里充当的是任务执行者的角色，表示一个执行任务的线程。</p>
 <p>有时候，任务是不是由另一个线程执行并不重要，甚至于由几个线程共同完成我们也并不在意，我们只关心任务被完成了。任务这个概念已经被抽象的很好了：<code>Runnable</code>；接下来要抽象出任务执行者这个概念了。</p>
 <p>Java提供了另一个接口<code>Executor</code>来真正地抽象任务执行者这个概念：线程池。怎么理解呢，看一下<code>Executor</code>接口的代码就好了。</p>
-<p><a name="continue-reading"></a></p>
-<h1 id="executor"><a class="zola-anchor" href="#executor" aria-label="Anchor link for: executor">🔗</a>
-Executor</h1>
+<p id="zola-continue-reading"><a name="continue-reading"></a></p>
+<h1 id="executor"><a class="zola-anchor" href="#executor" aria-label="Anchor link for: executor">🔗</a>Executor</h1>
 <pre style="background-color:#282828;">
 <span style="color:#fa5c4b;">public interface </span><span style="color:#8ec07c;">Executor </span><span style="color:#fdf4c1aa;">{
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">void </span><span style="color:#8ec07c;">execute</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">Runnable </span><span style="color:#fdf4c1;">command</span><span style="color:#fdf4c1aa;">);
-</span><span style="color:#fdf4c1aa;">}
+    </span><span style="color:#fa5c4b;">void </span><span style="color:#8ec07c;">execute</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">Runnable </span><span style="color:#fdf4c1;">command</span><span style="color:#fdf4c1aa;">);
+}
 </span></pre>
 <p>是不是很简单？</p>
 <p>任务执行者的角色有了，但是还是不够，我们还需要控制任务执行者的行为。</p>
-<h1 id="executorservice"><a class="zola-anchor" href="#executorservice" aria-label="Anchor link for: executorservice">🔗</a>
-ExecutorService</h1>
+<h1 id="executorservice"><a class="zola-anchor" href="#executorservice" aria-label="Anchor link for: executorservice">🔗</a>ExecutorService</h1>
 <pre style="background-color:#282828;">
 <span style="color:#fa5c4b;">public interface </span><span style="color:#8ec07c;">ExecutorService </span><span style="color:#fa5c4b;">extends </span><span style="color:#8ec07c;">Executor </span><span style="color:#fdf4c1aa;">{
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">void </span><span style="color:#8ec07c;">shutdown</span><span style="color:#fdf4c1aa;">();
-</span><span style="color:#fdf4c1aa;">
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">List</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Runnable</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">shutdownNow</span><span style="color:#fdf4c1aa;">();
-</span><span style="color:#fdf4c1aa;">
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">boolean </span><span style="color:#8ec07c;">isShutdown</span><span style="color:#fdf4c1aa;">();
-</span><span style="color:#fdf4c1aa;">
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">boolean </span><span style="color:#8ec07c;">isTerminated</span><span style="color:#fdf4c1aa;">();
-</span><span style="color:#fdf4c1aa;">
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">boolean </span><span style="color:#8ec07c;">awaitTermination</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">long </span><span style="color:#fdf4c1;">timeout</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">TimeUnit </span><span style="color:#fdf4c1;">unit</span><span style="color:#fdf4c1aa;">)
-</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">InterruptedException</span><span style="color:#fdf4c1aa;">;
-</span><span style="color:#fdf4c1aa;">
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fdf4c1;">T</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">Future</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">T</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">submit</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">Callable</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">T</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">task</span><span style="color:#fdf4c1aa;">);
-</span><span style="color:#fdf4c1aa;">
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fdf4c1;">T</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">Future</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">T</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">submit</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">Runnable </span><span style="color:#fdf4c1;">task</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">T </span><span style="color:#fdf4c1;">result</span><span style="color:#fdf4c1aa;">);
-</span><span style="color:#fdf4c1aa;">
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#8ec07c;">Future</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fe8019;">?</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">submit</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">Runnable </span><span style="color:#fdf4c1;">task</span><span style="color:#fdf4c1aa;">);
-</span><span style="color:#fdf4c1aa;">
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fdf4c1;">T</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">List</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Future</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">T</span><span style="color:#fdf4c1aa;">&gt;&gt; </span><span style="color:#8ec07c;">invokeAll</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">Collection</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fe8019;">? </span><span style="color:#fa5c4b;">extends </span><span style="color:#8ec07c;">Callable</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">T</span><span style="color:#fdf4c1aa;">&gt;&gt; </span><span style="color:#fdf4c1;">tasks</span><span style="color:#fdf4c1aa;">)
-</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">InterruptedException</span><span style="color:#fdf4c1aa;">;
-</span><span style="color:#fdf4c1aa;">
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fdf4c1;">T</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">List</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Future</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">T</span><span style="color:#fdf4c1aa;">&gt;&gt; </span><span style="color:#8ec07c;">invokeAll</span><span style="color:#fdf4c1aa;">(
-</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">Collection</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fe8019;">? </span><span style="color:#fa5c4b;">extends </span><span style="color:#8ec07c;">Callable</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">T</span><span style="color:#fdf4c1aa;">&gt;&gt; </span><span style="color:#fdf4c1;">tasks</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fa5c4b;">long </span><span style="color:#fdf4c1;">timeout</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">TimeUnit </span><span style="color:#fdf4c1;">unit
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">InterruptedException</span><span style="color:#fdf4c1aa;">;
-</span><span style="color:#fdf4c1aa;">
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fdf4c1;">T</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">T invokeAny</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">Collection</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fe8019;">? </span><span style="color:#fa5c4b;">extends </span><span style="color:#8ec07c;">Callable</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">T</span><span style="color:#fdf4c1aa;">&gt;&gt; </span><span style="color:#fdf4c1;">tasks</span><span style="color:#fdf4c1aa;">)
-</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">InterruptedException</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">ExecutionException</span><span style="color:#fdf4c1aa;">;
-</span><span style="color:#fdf4c1aa;">
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fdf4c1;">T</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">T invokeAny</span><span style="color:#fdf4c1aa;">(
-</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">Collection</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fe8019;">? </span><span style="color:#fa5c4b;">extends </span><span style="color:#8ec07c;">Callable</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">T</span><span style="color:#fdf4c1aa;">&gt;&gt; </span><span style="color:#fdf4c1;">tasks</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fa5c4b;">long </span><span style="color:#fdf4c1;">timeout</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">TimeUnit </span><span style="color:#fdf4c1;">unit
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">InterruptedException</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">ExecutionException</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">TimeoutException</span><span style="color:#fdf4c1aa;">;
-</span><span style="color:#fdf4c1aa;">}
+    </span><span style="color:#fa5c4b;">void </span><span style="color:#8ec07c;">shutdown</span><span style="color:#fdf4c1aa;">();
+
+    </span><span style="color:#8ec07c;">List</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Runnable</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">shutdownNow</span><span style="color:#fdf4c1aa;">();
+
+    </span><span style="color:#fa5c4b;">boolean </span><span style="color:#8ec07c;">isShutdown</span><span style="color:#fdf4c1aa;">();
+
+    </span><span style="color:#fa5c4b;">boolean </span><span style="color:#8ec07c;">isTerminated</span><span style="color:#fdf4c1aa;">();
+
+    </span><span style="color:#fa5c4b;">boolean </span><span style="color:#8ec07c;">awaitTermination</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">long </span><span style="color:#fdf4c1;">timeout</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">TimeUnit </span><span style="color:#fdf4c1;">unit</span><span style="color:#fdf4c1aa;">)
+        </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">InterruptedException</span><span style="color:#fdf4c1aa;">;
+
+    &lt;</span><span style="color:#fdf4c1;">T</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">Future</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">T</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">submit</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">Callable</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">T</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">task</span><span style="color:#fdf4c1aa;">);
+
+    &lt;</span><span style="color:#fdf4c1;">T</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">Future</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">T</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">submit</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">Runnable </span><span style="color:#fdf4c1;">task</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">T </span><span style="color:#fdf4c1;">result</span><span style="color:#fdf4c1aa;">);
+
+    </span><span style="color:#8ec07c;">Future</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fe8019;">?</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">submit</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">Runnable </span><span style="color:#fdf4c1;">task</span><span style="color:#fdf4c1aa;">);
+
+    &lt;</span><span style="color:#fdf4c1;">T</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">List</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Future</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">T</span><span style="color:#fdf4c1aa;">&gt;&gt; </span><span style="color:#8ec07c;">invokeAll</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">Collection</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fe8019;">? </span><span style="color:#fa5c4b;">extends </span><span style="color:#8ec07c;">Callable</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">T</span><span style="color:#fdf4c1aa;">&gt;&gt; </span><span style="color:#fdf4c1;">tasks</span><span style="color:#fdf4c1aa;">)
+        </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">InterruptedException</span><span style="color:#fdf4c1aa;">;
+
+    &lt;</span><span style="color:#fdf4c1;">T</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">List</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Future</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">T</span><span style="color:#fdf4c1aa;">&gt;&gt; </span><span style="color:#8ec07c;">invokeAll</span><span style="color:#fdf4c1aa;">(
+        </span><span style="color:#8ec07c;">Collection</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fe8019;">? </span><span style="color:#fa5c4b;">extends </span><span style="color:#8ec07c;">Callable</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">T</span><span style="color:#fdf4c1aa;">&gt;&gt; </span><span style="color:#fdf4c1;">tasks</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fa5c4b;">long </span><span style="color:#fdf4c1;">timeout</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">TimeUnit </span><span style="color:#fdf4c1;">unit
+    </span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">InterruptedException</span><span style="color:#fdf4c1aa;">;
+
+    &lt;</span><span style="color:#fdf4c1;">T</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">T invokeAny</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">Collection</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fe8019;">? </span><span style="color:#fa5c4b;">extends </span><span style="color:#8ec07c;">Callable</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">T</span><span style="color:#fdf4c1aa;">&gt;&gt; </span><span style="color:#fdf4c1;">tasks</span><span style="color:#fdf4c1aa;">)
+        </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">InterruptedException</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">ExecutionException</span><span style="color:#fdf4c1aa;">;
+
+    &lt;</span><span style="color:#fdf4c1;">T</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">T invokeAny</span><span style="color:#fdf4c1aa;">(
+        </span><span style="color:#8ec07c;">Collection</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fe8019;">? </span><span style="color:#fa5c4b;">extends </span><span style="color:#8ec07c;">Callable</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">T</span><span style="color:#fdf4c1aa;">&gt;&gt; </span><span style="color:#fdf4c1;">tasks</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fa5c4b;">long </span><span style="color:#fdf4c1;">timeout</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">TimeUnit </span><span style="color:#fdf4c1;">unit
+    </span><span style="color:#fdf4c1aa;">) </span><span style="color:#fa5c4b;">throws </span><span style="color:#8ec07c;">InterruptedException</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">ExecutionException</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">TimeoutException</span><span style="color:#fdf4c1aa;">;
+}
 </span></pre>
 <p>添加的<code>ExecutorService</code>接口扩展了<code>Executor</code>接口的功能，提供了对任务执行的更多的控制。<code>ExecutorService</code>从功能上才能真正称为线程池。</p>
 <ul>
@@ -179,8 +217,7 @@ ExecutorService</h1>
 <li>可以提交执行有返回值的任务</li>
 <li>增加了对批量任务的支持</li>
 </ul>
-<h2 id="xian-cheng-chi-de-guan-bi"><a class="zola-anchor" href="#xian-cheng-chi-de-guan-bi" aria-label="Anchor link for: xian-cheng-chi-de-guan-bi">🔗</a>
-线程池的关闭</h2>
+<h2 id="xian-cheng-chi-de-guan-bi"><a class="zola-anchor" href="#xian-cheng-chi-de-guan-bi" aria-label="Anchor link for: xian-cheng-chi-de-guan-bi">🔗</a>线程池的关闭</h2>
 <p>线程池被创建之后，就可以向其提交任务了，直到该线程池被关闭。</p>
 <p><code>shutdown()</code>方法和<code>shutdownNow()</code>方法被用来关闭线程池。区别在于<code>shutdown()</code>方法只是让线程池停止接受新的任务；而<code>shutdownNow()</code>方法除了设置停止接受新任务之外，还将线程池的等待队列中的任务也取消掉。</p>
 <p>具体地说，就是<code>shutdown()</code>方法会设置线程池为关闭状态，不再接受新的任务；原有的已经提交的任务不受影响，会继续执行直到结束；<code>shutdown()</code>方法调用后立即返回，并不会阻塞等待已提交任务的执行结束。<code>shutdownNow()</code>方法会设置线程池为关闭状态，不再接受新的任务；已经提交的任务但是未开始的任务会被取消；已经执行的任务会尝试去取消，但是不保证能取消成功；<code>shutdownNow()</code>方法的调用也是立即返回。</p>
@@ -189,50 +226,47 @@ ExecutorService</h1>
 <span style="color:#fdf4c1aa;">executorService.</span><span style="color:#fdf4c1;">shutdownNow()</span><span style="color:#fdf4c1aa;">;
 </span><span style="color:#fa5c4b;">boolean</span><span style="color:#fdf4c1aa;"> re </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> executorService.</span><span style="color:#fdf4c1;">awaitTermination(</span><span style="color:#d3869b;">10</span><span style="color:#fdf4c1;">, </span><span style="color:#8ec07c;">TimeUnit</span><span style="color:#fdf4c1;">.SECONDS)</span><span style="color:#fdf4c1aa;">;
 </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">(</span><span style="color:#fe8019;">!</span><span style="color:#fdf4c1aa;">re) {
-</span><span style="color:#fdf4c1aa;">    </span><span style="font-style:italic;color:#928374;">// handle error
+    </span><span style="font-style:italic;color:#928374;">// handle error
 </span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p><code>isShutdown()</code>方法和<code>isTerminated()</code>方法用来判断线程池是否已关闭和已结束。可以看出，线程池总是先关闭再结束。</p>
-<h2 id="you-fan-hui-zhi-de-ren-wu-submit"><a class="zola-anchor" href="#you-fan-hui-zhi-de-ren-wu-submit" aria-label="Anchor link for: you-fan-hui-zhi-de-ren-wu-submit">🔗</a>
-有返回值的任务 submit()</h2>
+<h2 id="you-fan-hui-zhi-de-ren-wu-submit"><a class="zola-anchor" href="#you-fan-hui-zhi-de-ren-wu-submit" aria-label="Anchor link for: you-fan-hui-zhi-de-ren-wu-submit">🔗</a>有返回值的任务 submit()</h2>
 <p>除了可以向线程池提交<code>Runnable</code>类实例外，还可以提交<code>Callable</code>类实例。线程池也提供了用<code>Callable</code>类实例包装<code>Runnable</code>类实例的方法。</p>
-<p><code>Callable</code>类和<code>Future</code>类的使用参见 <a href="@/posts/2016-04-13-learning-java-concurrency-futuretask-callable/index.md">FutureTask &amp;
+<p><code>Callable</code>类和<code>Future</code>类的使用参见 <a href="https://www.wangbo.im/posts/learning-java-concurrency-futuretask-callable/">FutureTask &amp;
 Callable</a> 。</p>
-<h2 id="pi-liang-ren-wu-invokeall-invokeany"><a class="zola-anchor" href="#pi-liang-ren-wu-invokeall-invokeany" aria-label="Anchor link for: pi-liang-ren-wu-invokeall-invokeany">🔗</a>
-批量任务 invokeAll & invokeAny()</h2>
+<h2 id="pi-liang-ren-wu-invokeall-invokeany"><a class="zola-anchor" href="#pi-liang-ren-wu-invokeall-invokeany" aria-label="Anchor link for: pi-liang-ren-wu-invokeall-invokeany">🔗</a>批量任务 invokeAll &amp; invokeAny()</h2>
 <p>线程池当然页提供了提交批量任务的方法。</p>
 <p><code>invokeAll()</code>方法用于向线程池提交多个异步任务，返回任务的对应<code>Future</code>类实例。</p>
 <p><code>invokeAny()</code>方法用于向线程池提交多个任务。与<code>invokeAll()</code>方法不同的是，该方法会阻塞直到批量任务的任一个执行结束；只要有一个任务结束，该方法就会返回该任务的结果，其他任务会被结束。</p>
-<h1 id="scheduledexecutorservice"><a class="zola-anchor" href="#scheduledexecutorservice" aria-label="Anchor link for: scheduledexecutorservice">🔗</a>
-ScheduledExecutorService</h1>
+<h1 id="scheduledexecutorservice"><a class="zola-anchor" href="#scheduledexecutorservice" aria-label="Anchor link for: scheduledexecutorservice">🔗</a>ScheduledExecutorService</h1>
 <p>Java通过<code>ScheduledExecutorService</code>接口扩展了<code>ExecutorService</code>接口的功能，增加了延迟执行任务的功能。</p>
 <pre style="background-color:#282828;">
 <span style="color:#fa5c4b;">public interface </span><span style="color:#8ec07c;">ScheduledExecutorService </span><span style="color:#fa5c4b;">extends </span><span style="color:#8ec07c;">ExecutorService </span><span style="color:#fdf4c1aa;">{
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">ScheduledFuture</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fe8019;">?</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">schedule</span><span style="color:#fdf4c1aa;">(
-</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">Runnable </span><span style="color:#fdf4c1;">command</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fa5c4b;">long </span><span style="color:#fdf4c1;">delay</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">TimeUnit </span><span style="color:#fdf4c1;">unit
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">);
-</span><span style="color:#fdf4c1aa;">
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public </span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fdf4c1;">V</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">ScheduledFuture</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">V</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">schedule</span><span style="color:#fdf4c1aa;">(
-</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">Callable</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">V</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">callable</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fa5c4b;">long </span><span style="color:#fdf4c1;">delay</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">TimeUnit </span><span style="color:#fdf4c1;">unit
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">);
-</span><span style="color:#fdf4c1aa;">
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">ScheduledFuture</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fe8019;">?</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">scheduleAtFixedRate</span><span style="color:#fdf4c1aa;">(
-</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">Runnable </span><span style="color:#fdf4c1;">command</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fa5c4b;">long </span><span style="color:#fdf4c1;">initialDelay</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fa5c4b;">long </span><span style="color:#fdf4c1;">period</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">TimeUnit </span><span style="color:#fdf4c1;">unit
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">);
-</span><span style="color:#fdf4c1aa;">
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">ScheduledFuture</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fe8019;">?</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">scheduleWithFixedDelay</span><span style="color:#fdf4c1aa;">(
-</span><span style="color:#fdf4c1aa;">        </span><span style="color:#8ec07c;">Runnable </span><span style="color:#fdf4c1;">command</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fa5c4b;">long </span><span style="color:#fdf4c1;">initialDelay</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fa5c4b;">long </span><span style="color:#fdf4c1;">delay</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">TimeUnit </span><span style="color:#fdf4c1;">unit
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1aa;">);
-</span><span style="color:#fdf4c1aa;">}
+    </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">ScheduledFuture</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fe8019;">?</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">schedule</span><span style="color:#fdf4c1aa;">(
+        </span><span style="color:#8ec07c;">Runnable </span><span style="color:#fdf4c1;">command</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fa5c4b;">long </span><span style="color:#fdf4c1;">delay</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">TimeUnit </span><span style="color:#fdf4c1;">unit
+    </span><span style="color:#fdf4c1aa;">);
+
+    </span><span style="color:#fa5c4b;">public </span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fdf4c1;">V</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">ScheduledFuture</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">V</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">schedule</span><span style="color:#fdf4c1aa;">(
+        </span><span style="color:#8ec07c;">Callable</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">V</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fdf4c1;">callable</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fa5c4b;">long </span><span style="color:#fdf4c1;">delay</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">TimeUnit </span><span style="color:#fdf4c1;">unit
+    </span><span style="color:#fdf4c1aa;">);
+
+    </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">ScheduledFuture</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fe8019;">?</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">scheduleAtFixedRate</span><span style="color:#fdf4c1aa;">(
+        </span><span style="color:#8ec07c;">Runnable </span><span style="color:#fdf4c1;">command</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fa5c4b;">long </span><span style="color:#fdf4c1;">initialDelay</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fa5c4b;">long </span><span style="color:#fdf4c1;">period</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">TimeUnit </span><span style="color:#fdf4c1;">unit
+    </span><span style="color:#fdf4c1aa;">);
+
+    </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">ScheduledFuture</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fe8019;">?</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">scheduleWithFixedDelay</span><span style="color:#fdf4c1aa;">(
+        </span><span style="color:#8ec07c;">Runnable </span><span style="color:#fdf4c1;">command</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fa5c4b;">long </span><span style="color:#fdf4c1;">initialDelay</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fa5c4b;">long </span><span style="color:#fdf4c1;">delay</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">TimeUnit </span><span style="color:#fdf4c1;">unit
+    </span><span style="color:#fdf4c1aa;">);
+}
 </span></pre>
 <p><code>ScheduledExecutorService</code>接口内各方法的含义不言自明。需要注意的是<code>ScheduledFuture</code>接口。</p>
 <pre style="background-color:#282828;">
 <span style="color:#fa5c4b;">public interface </span><span style="color:#8ec07c;">ScheduledFuture</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fdf4c1;">V</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#fa5c4b;">extends </span><span style="color:#8ec07c;">Delayed</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">Future</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">V</span><span style="color:#fdf4c1aa;">&gt; {
-</span><span style="color:#fdf4c1aa;">}
-</span><span style="color:#fdf4c1aa;">
+}
+
 </span><span style="color:#fa5c4b;">public interface </span><span style="color:#8ec07c;">Delayed </span><span style="color:#fa5c4b;">extends </span><span style="color:#8ec07c;">Comparable</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">Delayed</span><span style="color:#fdf4c1aa;">&gt; {
-</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">long </span><span style="color:#8ec07c;">getDelay</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">TimeUnit </span><span style="color:#fdf4c1;">unit</span><span style="color:#fdf4c1aa;">);
-</span><span style="color:#fdf4c1aa;">}
+    </span><span style="color:#fa5c4b;">long </span><span style="color:#8ec07c;">getDelay</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">TimeUnit </span><span style="color:#fdf4c1;">unit</span><span style="color:#fdf4c1aa;">);
+}
 </span></pre>
 <p>可以发现<code>ScheduledFuture</code>接口是<code>Future</code>接口的扩展，增加了一个返回延迟时间的参数。</p>
 <p>Java线程池的几个重要接口就介绍到这里，具体的实现下次再说吧！</p>
@@ -256,10 +290,10 @@ ScheduledExecutorService</h1>
             
                 <div class="post-nav">
                     
-                        <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2016-04-13-learning-java-concurrency-futuretask-callable&#x2F;">‹ Learning Java Concurrency - FutureTask &amp; Callable</a>
+                        <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;learning-java-concurrency-futuretask-callable&#x2F;">‹ Learning Java Concurrency - FutureTask &amp; Callable</a>
                     
                     
-                        <a class="next" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;2017-03-20-fast-into-graphviz&#x2F;">Fast into Graphviz ›</a>
+                        <a class="next" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;fast-into-graphviz&#x2F;">Fast into Graphviz ›</a>
                     
                     
                     
