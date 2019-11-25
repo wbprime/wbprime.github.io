@@ -492,7 +492,7 @@
 <p>锁就有条件变量<code>Condition</code>。</p>
 <p>读锁是共享锁，条件变量没有意义，所以获取条件变量的方法会抛出<code>UnsupportedOperationException</code>异常。</p>
 <p>写锁的条件变量的用法同
-<a href="https://www.wangbo.im/posts/2016-04-07-learning-java-concurrency-reentrantlock-condition/"><code>ReentrantLock</code></a> 。</p>
+<a href="@/posts/2016-04-07-learning-java-concurrency-reentrantlock-condition/index.md"><code>ReentrantLock</code></a> 。</p>
 <h1 id="zong-jie"><a class="zola-anchor" href="#zong-jie" aria-label="Anchor link for: zong-jie">🔗</a>
 总结</h1>
 <p><code>ReentrantReadWriteLock</code>本身并不是锁，它通过一个内部锁来实现读锁、写锁以及二者的同步。读锁是一种共享锁，写锁是一种互斥锁。</p>
