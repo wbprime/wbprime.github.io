@@ -111,6 +111,45 @@
                                     
     <header class="post__header">
         <h1 class="post__title">
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;vboxmanage-note-change-host-key-for-vboxsdl&#x2F;">Change Host Key for VBOXSDL</a>
+        </h1>
+        <div class="post__meta">
+            <span class="post__time">2019-09-12</span>
+            
+        </div>
+    </header>
+
+                                    <div class="post__summary">
+                                        <p>如果平时使用 Linux，偶尔会有使用 Windows 软件（如 WPS/QQ 等）的需求场景时，最好的解决方案就是使用虚拟机了。如果使用了 <a href="https://www.virtualbox.org/">Virtual Box</a> 的话，那么可以了解一下其除了基于 <a href="https://www.qt.io/">Qt</a> 的虚拟机运行界面之外还额外提供了一个基于 <a href="https://www.libsdl.org/">SDL</a> 的虚拟机运行界面。</p>
+<p>我在使用 virtualbox 的管理界面创建配置好一个基于 Windows 7 的虚拟机 &quot;se7en&quot; 之后，可以直接在终端运行：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1;">${VBOXSDL} --startvm se7en
+</span></pre>
+<p>界面非常简洁，不依赖 <a href="https://www.qt.io/">Qt</a> 。</p>
+<p><code>${VBOXSDL}</code> 是 vboxsdl 的可执行文件名；根据 VirtualBox 的安装方式不同，可能会是 &quot;VBoxSDL&quot; 或 &quot;vboxsdl&quot;。</p>
+<p>如果需要修改 SDL 界面下的 host 键，可以使用参数 &quot;--hostkey&quot;。</p>
+<pre style="background-color:#282828;">
+<span style="font-style:italic;color:#928374;"># Set Host key for vboxsdl
+# LSHIFT = 304 1
+# RSHIFT = 303 2
+# LCTRL = 301 8192
+# RCTRL = 305 128
+# LALT = 308 256
+# RALT = 27 0
+</span><span style="color:#fdf4c1;">${VBOXSDL} --hostkey 308 256 --startvm se7en
+</span></pre>
+<p>该命令会设置 host 键为 左-Alt 键并启动虚拟机。</p>
+
+                                    </div>
+                                    <div class="read-more">
+                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;vboxmanage-note-change-host-key-for-vboxsdl&#x2F;">Read more...</a>
+                                    </div>
+                                </article>
+                            
+                                <article class="post">
+                                    
+    <header class="post__header">
+        <h1 class="post__title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;ffprobe-note-query-video-rotation-info&#x2F;">Query Video Rotation Info using FFprobe</a>
         </h1>
         <div class="post__meta">
@@ -484,28 +523,6 @@ Guice 依赖。</p>
                                     </div>
                                     <div class="read-more">
                                         <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;combine-vertx-and-guice-dependency-injection&#x2F;">Read more...</a>
-                                    </div>
-                                </article>
-                            
-                                <article class="post">
-                                    
-    <header class="post__header">
-        <h1 class="post__title">
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;a-product-env-bug-misused-hashmap-nullability&#x2F;">一次由于误用 HashMap 值的 null 特性的 BUG</a>
-        </h1>
-        <div class="post__meta">
-            <span class="post__time">2019-03-21</span>
-            
-        </div>
-    </header>
-
-                                    <div class="post__summary">
-                                        <p>最近又经历了一次线上服务的 BUG，原因是服务内部的代码逻辑问题，比较简单。</p>
-<p>在此记录下来是为了提醒不要再犯。</p>
-
-                                    </div>
-                                    <div class="read-more">
-                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;a-product-env-bug-misused-hashmap-nullability&#x2F;">Read more...</a>
                                     </div>
                                 </article>
                             

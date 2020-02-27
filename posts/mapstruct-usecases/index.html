@@ -107,57 +107,6 @@
                     
 
 
-<div class="post-toc" id="post-toc">
-    <h2 class="post-toc-title">Contents</h2>
-    <div class="post-toc-content always-active">
-        <nav id="TableOfContents">
-            <ul>
-                
-                <li>
-                    <a href="https://www.wangbo.im/posts/mapstruct-usecases/#maven-pei-zhi" class="toc-link">Maven 配置</a>
-                    
-                </li>
-                
-                <li>
-                    <a href="https://www.wangbo.im/posts/mapstruct-usecases/#pojo-mo-shi-shi-ti-dui-xiang-yu-dai-ma-sheng-cheng" class="toc-link">POJO 模式实体对象与代码生成</a>
-                    
-                    <ul>
-                        
-                        <li>
-                            <a href="https://www.wangbo.im/posts/mapstruct-usecases/#ji-ben-cao-zuo" class="toc-link">基本操作</a>
-                        </li>
-                        
-                        <li>
-                            <a href="https://www.wangbo.im/posts/mapstruct-usecases/#zi-duan-ming-bu-yi-yang" class="toc-link">字段名不一样</a>
-                        </li>
-                        
-                        <li>
-                            <a href="https://www.wangbo.im/posts/mapstruct-usecases/#zi-duan-lei-xing-bu-yi-zhi" class="toc-link">字段类型不一致</a>
-                        </li>
-                        
-                        <li>
-                            <a href="https://www.wangbo.im/posts/mapstruct-usecases/#duo-ge-yuan-lei-xing" class="toc-link">多个源类型</a>
-                        </li>
-                        
-                    </ul>
-                    
-                </li>
-                
-                <li>
-                    <a href="https://www.wangbo.im/posts/mapstruct-usecases/#builder-mo-shi-shi-ti-dui-xiang-yu-dai-ma-sheng-cheng" class="toc-link">Builder 模式实体对象与代码生成</a>
-                    
-                </li>
-                
-                <li>
-                    <a href="https://www.wangbo.im/posts/mapstruct-usecases/#mapper-shi-xian-lei-shi-li-de-huo-qu" class="toc-link">Mapper 实现类实例的获取</a>
-                    
-                </li>
-                
-            </ul>
-        </nav>
-    </div>
-</div>
-
 
 <article class="post">
     
@@ -193,22 +142,22 @@
         &lt;/dependency&gt;
 &lt;/dependencies&gt;
 &lt;build&gt;
-	&lt;plugins&gt;
-		&lt;plugin&gt;
-			&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-			&lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
-			&lt;version&gt;${maven_plugin_compiler_version}&lt;/version&gt;
-			&lt;configuration&gt;
-				&lt;annotationProcessorPaths&gt;
-					&lt;path&gt;
-						&lt;groupId&gt;org.mapstruct&lt;/groupId&gt;
-						&lt;artifactId&gt;mapstruct-processor&lt;/artifactId&gt;
-						&lt;version&gt;${mapstruct.version}&lt;/version&gt;
-					&lt;/path&gt;
-				&lt;/annotationProcessorPaths&gt;
-			&lt;/configuration&gt;
-		&lt;/plugin&gt;
-	&lt;/plugins&gt;
+    &lt;plugins&gt;
+        &lt;plugin&gt;
+            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+            &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+            &lt;version&gt;${maven_plugin_compiler_version}&lt;/version&gt;
+            &lt;configuration&gt;
+                &lt;annotationProcessorPaths&gt;
+                    &lt;path&gt;
+                        &lt;groupId&gt;org.mapstruct&lt;/groupId&gt;
+                        &lt;artifactId&gt;mapstruct-processor&lt;/artifactId&gt;
+                        &lt;version&gt;${mapstruct.version}&lt;/version&gt;
+                    &lt;/path&gt;
+                &lt;/annotationProcessorPaths&gt;
+            &lt;/configuration&gt;
+        &lt;/plugin&gt;
+    &lt;/plugins&gt;
 &lt;/build&gt;
 </span></pre>
 <p>如欲详细了解如何在 <a href="http://maven.apache.org/" title="Apache Maven is a software project management and comprehension tool.">Maven</a> 中配置使用注解处理器类实现，请参见 <a href="https://www.wangbo.im/posts/add-supports-for-apt-in-maven/">在 Maven 中支持 Java 的注解处理器 APT</a>。</p>
@@ -251,52 +200,52 @@
 <pre style="background-color:#282828;">
 <span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
 </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">TargetDto </span><span style="color:#fdf4c1;">convert(</span><span style="color:#8ec07c;">SourceEntity</span><span style="color:#fdf4c1;"> from) </span><span style="color:#fdf4c1aa;">{
-	</span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">( from </span><span style="color:#fe8019;">== </span><span style="color:#d3869b;">null </span><span style="color:#fdf4c1aa;">) {
-		</span><span style="color:#fa5c4b;">return </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1aa;">;
-	}
+    </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">( from </span><span style="color:#fe8019;">== </span><span style="color:#d3869b;">null </span><span style="color:#fdf4c1aa;">) {
+        </span><span style="color:#fa5c4b;">return </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1aa;">;
+    }
 
-	</span><span style="color:#8ec07c;">TargetDto</span><span style="color:#fdf4c1aa;"> targetDto </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">TargetDto</span><span style="color:#fdf4c1aa;">();
+    </span><span style="color:#8ec07c;">TargetDto</span><span style="color:#fdf4c1aa;"> targetDto </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">TargetDto</span><span style="color:#fdf4c1aa;">();
 
-	targetDto.</span><span style="color:#fdf4c1;">setIntProperty( from.getIntProperty() )</span><span style="color:#fdf4c1aa;">;
-	targetDto.</span><span style="color:#fdf4c1;">setBoolProperty( from.isBoolProperty() )</span><span style="color:#fdf4c1aa;">;
-	targetDto.</span><span style="color:#fdf4c1;">setLongProperty( from.getLongProperty() )</span><span style="color:#fdf4c1aa;">;
-	targetDto.</span><span style="color:#fdf4c1;">setSrtProperty( from.getSrtProperty() )</span><span style="color:#fdf4c1aa;">;
-	targetDto.</span><span style="color:#fdf4c1;">setDateTime( from.getDateTime() )</span><span style="color:#fdf4c1aa;">;
-	</span><span style="color:#8ec07c;">List</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">BigDecimal</span><span style="color:#fdf4c1aa;">&gt; list </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> from.</span><span style="color:#fdf4c1;">getNumbers()</span><span style="color:#fdf4c1aa;">;
-	</span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">( list </span><span style="color:#fe8019;">!= </span><span style="color:#d3869b;">null </span><span style="color:#fdf4c1aa;">) {
-		targetDto.</span><span style="color:#fdf4c1;">setNumbers( </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">ArrayList</span><span style="color:#fdf4c1;">&lt;</span><span style="color:#8ec07c;">BigDecimal</span><span style="color:#fdf4c1;">&gt;( list ) )</span><span style="color:#fdf4c1aa;">;
-	}
-	</span><span style="color:#8ec07c;">Map</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">&gt; map </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> from.</span><span style="color:#fdf4c1;">getTypes()</span><span style="color:#fdf4c1aa;">;
-	</span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">( map </span><span style="color:#fe8019;">!= </span><span style="color:#d3869b;">null </span><span style="color:#fdf4c1aa;">) {
-		targetDto.</span><span style="color:#fdf4c1;">setTypes( </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">HashMap</span><span style="color:#fdf4c1;">&lt;</span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1;">, </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1;">&gt;( map ) )</span><span style="color:#fdf4c1aa;">;
-	}
+    targetDto.</span><span style="color:#fdf4c1;">setIntProperty( from.getIntProperty() )</span><span style="color:#fdf4c1aa;">;
+    targetDto.</span><span style="color:#fdf4c1;">setBoolProperty( from.isBoolProperty() )</span><span style="color:#fdf4c1aa;">;
+    targetDto.</span><span style="color:#fdf4c1;">setLongProperty( from.getLongProperty() )</span><span style="color:#fdf4c1aa;">;
+    targetDto.</span><span style="color:#fdf4c1;">setSrtProperty( from.getSrtProperty() )</span><span style="color:#fdf4c1aa;">;
+    targetDto.</span><span style="color:#fdf4c1;">setDateTime( from.getDateTime() )</span><span style="color:#fdf4c1aa;">;
+    </span><span style="color:#8ec07c;">List</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">BigDecimal</span><span style="color:#fdf4c1aa;">&gt; list </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> from.</span><span style="color:#fdf4c1;">getNumbers()</span><span style="color:#fdf4c1aa;">;
+    </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">( list </span><span style="color:#fe8019;">!= </span><span style="color:#d3869b;">null </span><span style="color:#fdf4c1aa;">) {
+        targetDto.</span><span style="color:#fdf4c1;">setNumbers( </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">ArrayList</span><span style="color:#fdf4c1;">&lt;</span><span style="color:#8ec07c;">BigDecimal</span><span style="color:#fdf4c1;">&gt;( list ) )</span><span style="color:#fdf4c1aa;">;
+    }
+    </span><span style="color:#8ec07c;">Map</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">&gt; map </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> from.</span><span style="color:#fdf4c1;">getTypes()</span><span style="color:#fdf4c1aa;">;
+    </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">( map </span><span style="color:#fe8019;">!= </span><span style="color:#d3869b;">null </span><span style="color:#fdf4c1aa;">) {
+        targetDto.</span><span style="color:#fdf4c1;">setTypes( </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">HashMap</span><span style="color:#fdf4c1;">&lt;</span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1;">, </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1;">&gt;( map ) )</span><span style="color:#fdf4c1aa;">;
+    }
 
-	</span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> targetDto;
+    </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> targetDto;
 }
 
 @</span><span style="color:#fdf4c1;">Override
 </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">SourceEntity </span><span style="color:#fdf4c1;">convert(</span><span style="color:#8ec07c;">TargetDto</span><span style="color:#fdf4c1;"> from) </span><span style="color:#fdf4c1aa;">{
-	</span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">( from </span><span style="color:#fe8019;">== </span><span style="color:#d3869b;">null </span><span style="color:#fdf4c1aa;">) {
-		</span><span style="color:#fa5c4b;">return </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1aa;">;
-	}
+    </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">( from </span><span style="color:#fe8019;">== </span><span style="color:#d3869b;">null </span><span style="color:#fdf4c1aa;">) {
+        </span><span style="color:#fa5c4b;">return </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1aa;">;
+    }
 
-	</span><span style="color:#8ec07c;">SourceEntity</span><span style="color:#fdf4c1aa;"> sourceEntity </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">SourceEntity</span><span style="color:#fdf4c1aa;">();
+    </span><span style="color:#8ec07c;">SourceEntity</span><span style="color:#fdf4c1aa;"> sourceEntity </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">SourceEntity</span><span style="color:#fdf4c1aa;">();
 
-	sourceEntity.</span><span style="color:#fdf4c1;">setIntProperty( from.getIntProperty() )</span><span style="color:#fdf4c1aa;">;
-	sourceEntity.</span><span style="color:#fdf4c1;">setBoolProperty( from.isBoolProperty() )</span><span style="color:#fdf4c1aa;">;
-	sourceEntity.</span><span style="color:#fdf4c1;">setLongProperty( from.getLongProperty() )</span><span style="color:#fdf4c1aa;">;
-	sourceEntity.</span><span style="color:#fdf4c1;">setSrtProperty( from.getSrtProperty() )</span><span style="color:#fdf4c1aa;">;
-	sourceEntity.</span><span style="color:#fdf4c1;">setDateTime( from.getDateTime() )</span><span style="color:#fdf4c1aa;">;
-	</span><span style="color:#8ec07c;">List</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">BigDecimal</span><span style="color:#fdf4c1aa;">&gt; list </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> from.</span><span style="color:#fdf4c1;">getNumbers()</span><span style="color:#fdf4c1aa;">;
-	</span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">( list </span><span style="color:#fe8019;">!= </span><span style="color:#d3869b;">null </span><span style="color:#fdf4c1aa;">) {
-		sourceEntity.</span><span style="color:#fdf4c1;">setNumbers( </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">ArrayList</span><span style="color:#fdf4c1;">&lt;</span><span style="color:#8ec07c;">BigDecimal</span><span style="color:#fdf4c1;">&gt;( list ) )</span><span style="color:#fdf4c1aa;">;
-	}
-	</span><span style="color:#8ec07c;">Map</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">&gt; map </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> from.</span><span style="color:#fdf4c1;">getTypes()</span><span style="color:#fdf4c1aa;">;
-	</span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">( map </span><span style="color:#fe8019;">!= </span><span style="color:#d3869b;">null </span><span style="color:#fdf4c1aa;">) {
-		sourceEntity.</span><span style="color:#fdf4c1;">setTypes( </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">HashMap</span><span style="color:#fdf4c1;">&lt;</span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1;">, </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1;">&gt;( map ) )</span><span style="color:#fdf4c1aa;">;
-	}
+    sourceEntity.</span><span style="color:#fdf4c1;">setIntProperty( from.getIntProperty() )</span><span style="color:#fdf4c1aa;">;
+    sourceEntity.</span><span style="color:#fdf4c1;">setBoolProperty( from.isBoolProperty() )</span><span style="color:#fdf4c1aa;">;
+    sourceEntity.</span><span style="color:#fdf4c1;">setLongProperty( from.getLongProperty() )</span><span style="color:#fdf4c1aa;">;
+    sourceEntity.</span><span style="color:#fdf4c1;">setSrtProperty( from.getSrtProperty() )</span><span style="color:#fdf4c1aa;">;
+    sourceEntity.</span><span style="color:#fdf4c1;">setDateTime( from.getDateTime() )</span><span style="color:#fdf4c1aa;">;
+    </span><span style="color:#8ec07c;">List</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">BigDecimal</span><span style="color:#fdf4c1aa;">&gt; list </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> from.</span><span style="color:#fdf4c1;">getNumbers()</span><span style="color:#fdf4c1aa;">;
+    </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">( list </span><span style="color:#fe8019;">!= </span><span style="color:#d3869b;">null </span><span style="color:#fdf4c1aa;">) {
+        sourceEntity.</span><span style="color:#fdf4c1;">setNumbers( </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">ArrayList</span><span style="color:#fdf4c1;">&lt;</span><span style="color:#8ec07c;">BigDecimal</span><span style="color:#fdf4c1;">&gt;( list ) )</span><span style="color:#fdf4c1aa;">;
+    }
+    </span><span style="color:#8ec07c;">Map</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1aa;">&gt; map </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> from.</span><span style="color:#fdf4c1;">getTypes()</span><span style="color:#fdf4c1aa;">;
+    </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">( map </span><span style="color:#fe8019;">!= </span><span style="color:#d3869b;">null </span><span style="color:#fdf4c1aa;">) {
+        sourceEntity.</span><span style="color:#fdf4c1;">setTypes( </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">HashMap</span><span style="color:#fdf4c1;">&lt;</span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1;">, </span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1;">&gt;( map ) )</span><span style="color:#fdf4c1aa;">;
+    }
 
-	</span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> sourceEntity;
+    </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> sourceEntity;
 }
 </span></pre>
 <p>注意到生成的代码中对 <code>List</code> 和 <code>Map</code> 类型做了特殊处理，在转换时进行了 <strong>深度拷贝</strong> 以避免不必要的数据共享。</p>
@@ -321,37 +270,37 @@
 <pre style="background-color:#282828;">
 <span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
 </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">TargetDto </span><span style="color:#fdf4c1;">convert(</span><span style="color:#8ec07c;">SourceEntity</span><span style="color:#fdf4c1;"> from) </span><span style="color:#fdf4c1aa;">{
-	</span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">( from </span><span style="color:#fe8019;">== </span><span style="color:#d3869b;">null </span><span style="color:#fdf4c1aa;">) {
-		</span><span style="color:#fa5c4b;">return </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1aa;">;
-	}
+    </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">( from </span><span style="color:#fe8019;">== </span><span style="color:#d3869b;">null </span><span style="color:#fdf4c1aa;">) {
+        </span><span style="color:#fa5c4b;">return </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1aa;">;
+    }
 
-	</span><span style="color:#8ec07c;">TargetDto</span><span style="color:#fdf4c1aa;"> targetDto </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">TargetDto</span><span style="color:#fdf4c1aa;">();
+    </span><span style="color:#8ec07c;">TargetDto</span><span style="color:#fdf4c1aa;"> targetDto </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">TargetDto</span><span style="color:#fdf4c1aa;">();
 
-	targetDto.</span><span style="color:#fdf4c1;">setIntProperty( from.getIntProperty() )</span><span style="color:#fdf4c1aa;">;
-	targetDto.</span><span style="color:#fdf4c1;">setStrProperty( from.getStrProperty() )</span><span style="color:#fdf4c1aa;">;
+    targetDto.</span><span style="color:#fdf4c1;">setIntProperty( from.getIntProperty() )</span><span style="color:#fdf4c1aa;">;
+    targetDto.</span><span style="color:#fdf4c1;">setStrProperty( from.getStrProperty() )</span><span style="color:#fdf4c1aa;">;
 
-	</span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> targetDto;
+    </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> targetDto;
 }
 
 @</span><span style="color:#fdf4c1;">Override
 </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">SourceEntity </span><span style="color:#fdf4c1;">convert(</span><span style="color:#8ec07c;">TargetDto</span><span style="color:#fdf4c1;"> from) </span><span style="color:#fdf4c1aa;">{
-	</span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">( from </span><span style="color:#fe8019;">== </span><span style="color:#d3869b;">null </span><span style="color:#fdf4c1aa;">) {
-		</span><span style="color:#fa5c4b;">return </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1aa;">;
-	}
+    </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">( from </span><span style="color:#fe8019;">== </span><span style="color:#d3869b;">null </span><span style="color:#fdf4c1aa;">) {
+        </span><span style="color:#fa5c4b;">return </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1aa;">;
+    }
 
-	</span><span style="color:#8ec07c;">SourceEntity</span><span style="color:#fdf4c1aa;"> sourceEntity </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">SourceEntity</span><span style="color:#fdf4c1aa;">();
+    </span><span style="color:#8ec07c;">SourceEntity</span><span style="color:#fdf4c1aa;"> sourceEntity </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">SourceEntity</span><span style="color:#fdf4c1aa;">();
 
-	sourceEntity.</span><span style="color:#fdf4c1;">setIntProperty( from.getIntProperty() )</span><span style="color:#fdf4c1aa;">;
-	sourceEntity.</span><span style="color:#fdf4c1;">setStrProperty( from.getStrProperty() )</span><span style="color:#fdf4c1aa;">;
+    sourceEntity.</span><span style="color:#fdf4c1;">setIntProperty( from.getIntProperty() )</span><span style="color:#fdf4c1aa;">;
+    sourceEntity.</span><span style="color:#fdf4c1;">setStrProperty( from.getStrProperty() )</span><span style="color:#fdf4c1aa;">;
 
-	</span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> sourceEntity;
+    </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> sourceEntity;
 }
 </span></pre>
 <p>为了避免这种情况，可以设置 <code>@Mapper</code> 注解的属性，如下：</p>
 <pre style="background-color:#282828;">
 <span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Mapper</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">unmappedSourcePolicy </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">ReportingPolicy</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">WARN</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fdf4c1;">unmappedTargetPolicy </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">ReportingPolicy</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">ERROR</span><span style="color:#fdf4c1aa;">)
 </span><span style="color:#fa5c4b;">public interface </span><span style="color:#8ec07c;">TypeMapper </span><span style="color:#fdf4c1aa;">{
-	</span><span style="font-style:italic;color:#928374;">// Omitted
+    </span><span style="font-style:italic;color:#928374;">// Omitted
 </span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p>此时，编译器就会报错，并提示未匹配属性的错误: <code>Unmapped target property: &quot;createTime&quot;</code> 。</p>
@@ -373,32 +322,32 @@
 <pre style="background-color:#282828;">
 <span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
 </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">TargetDto </span><span style="color:#fdf4c1;">convert(</span><span style="color:#8ec07c;">SourceEntity</span><span style="color:#fdf4c1;"> from) </span><span style="color:#fdf4c1aa;">{
-	</span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">( from </span><span style="color:#fe8019;">== </span><span style="color:#d3869b;">null </span><span style="color:#fdf4c1aa;">) {
-		</span><span style="color:#fa5c4b;">return </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1aa;">;
-	}
+    </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">( from </span><span style="color:#fe8019;">== </span><span style="color:#d3869b;">null </span><span style="color:#fdf4c1aa;">) {
+        </span><span style="color:#fa5c4b;">return </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1aa;">;
+    }
 
-	</span><span style="color:#8ec07c;">TargetDto</span><span style="color:#fdf4c1aa;"> targetDto </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">TargetDto</span><span style="color:#fdf4c1aa;">();
+    </span><span style="color:#8ec07c;">TargetDto</span><span style="color:#fdf4c1aa;"> targetDto </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">TargetDto</span><span style="color:#fdf4c1aa;">();
 
-	targetDto.</span><span style="color:#fdf4c1;">setCreateTime( from.getCreatedAt() )</span><span style="color:#fdf4c1aa;">;
-	targetDto.</span><span style="color:#fdf4c1;">setIntProperty( from.getIntProperty() )</span><span style="color:#fdf4c1aa;">;
-	targetDto.</span><span style="color:#fdf4c1;">setStrProperty( from.getStrProperty() )</span><span style="color:#fdf4c1aa;">;
+    targetDto.</span><span style="color:#fdf4c1;">setCreateTime( from.getCreatedAt() )</span><span style="color:#fdf4c1aa;">;
+    targetDto.</span><span style="color:#fdf4c1;">setIntProperty( from.getIntProperty() )</span><span style="color:#fdf4c1aa;">;
+    targetDto.</span><span style="color:#fdf4c1;">setStrProperty( from.getStrProperty() )</span><span style="color:#fdf4c1aa;">;
 
-	</span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> targetDto;
+    </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> targetDto;
 }
 
 @</span><span style="color:#fdf4c1;">Override
 </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">SourceEntity </span><span style="color:#fdf4c1;">convert(</span><span style="color:#8ec07c;">TargetDto</span><span style="color:#fdf4c1;"> from) </span><span style="color:#fdf4c1aa;">{
-	</span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">( from </span><span style="color:#fe8019;">== </span><span style="color:#d3869b;">null </span><span style="color:#fdf4c1aa;">) {
-		</span><span style="color:#fa5c4b;">return </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1aa;">;
-	}
+    </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">( from </span><span style="color:#fe8019;">== </span><span style="color:#d3869b;">null </span><span style="color:#fdf4c1aa;">) {
+        </span><span style="color:#fa5c4b;">return </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1aa;">;
+    }
 
-	</span><span style="color:#8ec07c;">SourceEntity</span><span style="color:#fdf4c1aa;"> sourceEntity </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">SourceEntity</span><span style="color:#fdf4c1aa;">();
+    </span><span style="color:#8ec07c;">SourceEntity</span><span style="color:#fdf4c1aa;"> sourceEntity </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">SourceEntity</span><span style="color:#fdf4c1aa;">();
 
-	sourceEntity.</span><span style="color:#fdf4c1;">setCreatedAt( from.getCreateTime() )</span><span style="color:#fdf4c1aa;">;
-	sourceEntity.</span><span style="color:#fdf4c1;">setIntProperty( from.getIntProperty() )</span><span style="color:#fdf4c1aa;">;
-	sourceEntity.</span><span style="color:#fdf4c1;">setStrProperty( from.getStrProperty() )</span><span style="color:#fdf4c1aa;">;
+    sourceEntity.</span><span style="color:#fdf4c1;">setCreatedAt( from.getCreateTime() )</span><span style="color:#fdf4c1aa;">;
+    sourceEntity.</span><span style="color:#fdf4c1;">setIntProperty( from.getIntProperty() )</span><span style="color:#fdf4c1aa;">;
+    sourceEntity.</span><span style="color:#fdf4c1;">setStrProperty( from.getStrProperty() )</span><span style="color:#fdf4c1aa;">;
 
-	</span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> sourceEntity;
+    </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> sourceEntity;
 }
 </span></pre><h2 id="zi-duan-lei-xing-bu-yi-zhi"><a class="zola-anchor" href="#zi-duan-lei-xing-bu-yi-zhi" aria-label="Anchor link for: zi-duan-lei-xing-bu-yi-zhi">🔗</a>字段类型不一致</h2>
 <p>如果有属性的类型不匹配（但是可以转换）怎么办呢？</p>
@@ -455,32 +404,32 @@
 <pre style="background-color:#282828;">
 <span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
 </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">TargetDto </span><span style="color:#fdf4c1;">convert(</span><span style="color:#8ec07c;">SourceEntity</span><span style="color:#fdf4c1;"> from) </span><span style="color:#fdf4c1aa;">{
-	</span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">( from </span><span style="color:#fe8019;">== </span><span style="color:#d3869b;">null </span><span style="color:#fdf4c1aa;">) {
-		</span><span style="color:#fa5c4b;">return </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1aa;">;
-	}
+    </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">( from </span><span style="color:#fe8019;">== </span><span style="color:#d3869b;">null </span><span style="color:#fdf4c1aa;">) {
+        </span><span style="color:#fa5c4b;">return </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1aa;">;
+    }
 
-	</span><span style="color:#8ec07c;">TargetDto</span><span style="color:#fdf4c1aa;"> targetDto </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">TargetDto</span><span style="color:#fdf4c1aa;">();
+    </span><span style="color:#8ec07c;">TargetDto</span><span style="color:#fdf4c1aa;"> targetDto </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">TargetDto</span><span style="color:#fdf4c1aa;">();
 
-	targetDto.</span><span style="color:#fdf4c1;">setEnumType( </span><span style="color:#8ec07c;">TypeMapper</span><span style="color:#fdf4c1;">.mapType( from.getIntType() ) )</span><span style="color:#fdf4c1aa;">;
-	targetDto.</span><span style="color:#fdf4c1;">setCreateTime( from.getCreatedAt() )</span><span style="color:#fdf4c1aa;">;
-	targetDto.</span><span style="color:#fdf4c1;">setStrProperty( from.getStrProperty() )</span><span style="color:#fdf4c1aa;">;
+    targetDto.</span><span style="color:#fdf4c1;">setEnumType( </span><span style="color:#8ec07c;">TypeMapper</span><span style="color:#fdf4c1;">.mapType( from.getIntType() ) )</span><span style="color:#fdf4c1aa;">;
+    targetDto.</span><span style="color:#fdf4c1;">setCreateTime( from.getCreatedAt() )</span><span style="color:#fdf4c1aa;">;
+    targetDto.</span><span style="color:#fdf4c1;">setStrProperty( from.getStrProperty() )</span><span style="color:#fdf4c1aa;">;
 
-	</span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> targetDto;
+    </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> targetDto;
 }
 
 @</span><span style="color:#fdf4c1;">Override
 </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">SourceEntity </span><span style="color:#fdf4c1;">convert(</span><span style="color:#8ec07c;">TargetDto</span><span style="color:#fdf4c1;"> from) </span><span style="color:#fdf4c1aa;">{
-	</span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">( from </span><span style="color:#fe8019;">== </span><span style="color:#d3869b;">null </span><span style="color:#fdf4c1aa;">) {
-		</span><span style="color:#fa5c4b;">return </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1aa;">;
-	}
+    </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">( from </span><span style="color:#fe8019;">== </span><span style="color:#d3869b;">null </span><span style="color:#fdf4c1aa;">) {
+        </span><span style="color:#fa5c4b;">return </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1aa;">;
+    }
 
-	</span><span style="color:#8ec07c;">SourceEntity</span><span style="color:#fdf4c1aa;"> sourceEntity </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">SourceEntity</span><span style="color:#fdf4c1aa;">();
+    </span><span style="color:#8ec07c;">SourceEntity</span><span style="color:#fdf4c1aa;"> sourceEntity </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">SourceEntity</span><span style="color:#fdf4c1aa;">();
 
-	sourceEntity.</span><span style="color:#fdf4c1;">setCreatedAt( from.getCreateTime() )</span><span style="color:#fdf4c1aa;">;
-	sourceEntity.</span><span style="color:#fdf4c1;">setIntType( mapType( from.getEnumType() ) )</span><span style="color:#fdf4c1aa;">;
-	sourceEntity.</span><span style="color:#fdf4c1;">setStrProperty( from.getStrProperty() )</span><span style="color:#fdf4c1aa;">;
+    sourceEntity.</span><span style="color:#fdf4c1;">setCreatedAt( from.getCreateTime() )</span><span style="color:#fdf4c1aa;">;
+    sourceEntity.</span><span style="color:#fdf4c1;">setIntType( mapType( from.getEnumType() ) )</span><span style="color:#fdf4c1aa;">;
+    sourceEntity.</span><span style="color:#fdf4c1;">setStrProperty( from.getStrProperty() )</span><span style="color:#fdf4c1aa;">;
 
-	</span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> sourceEntity;
+    </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> sourceEntity;
 }
 </span></pre><h2 id="duo-ge-yuan-lei-xing"><a class="zola-anchor" href="#duo-ge-yuan-lei-xing" aria-label="Anchor link for: duo-ge-yuan-lei-xing">🔗</a>多个源类型</h2>
 <p>如果遇到以下的这种情况：源数据有两个或多个类型，比如一个用户的数据被存储于两个数据表中，使用 <a href="https://mapstruct.org/" title="Java bean mappings, the easy way!">MapStruct</a> 也可以实现多个源和一个目标类型映射的自动代码生成（像你想的那样实现）。</p>
@@ -544,53 +493,53 @@ public class TargetDto {
 <pre style="background-color:#282828;">
 <span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
 </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">TargetDto </span><span style="color:#fdf4c1;">convert(</span><span style="color:#8ec07c;">SourceEntity</span><span style="color:#fdf4c1;"> from, </span><span style="color:#8ec07c;">AdditionalEntity</span><span style="color:#fdf4c1;"> additional) </span><span style="color:#fdf4c1aa;">{
-	</span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">( from </span><span style="color:#fe8019;">== </span><span style="color:#d3869b;">null </span><span style="color:#fe8019;">&amp;&amp;</span><span style="color:#fdf4c1aa;"> additional </span><span style="color:#fe8019;">== </span><span style="color:#d3869b;">null </span><span style="color:#fdf4c1aa;">) {
-		</span><span style="color:#fa5c4b;">return </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1aa;">;
-	}
+    </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">( from </span><span style="color:#fe8019;">== </span><span style="color:#d3869b;">null </span><span style="color:#fe8019;">&amp;&amp;</span><span style="color:#fdf4c1aa;"> additional </span><span style="color:#fe8019;">== </span><span style="color:#d3869b;">null </span><span style="color:#fdf4c1aa;">) {
+        </span><span style="color:#fa5c4b;">return </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1aa;">;
+    }
 
-	</span><span style="color:#8ec07c;">TargetDto</span><span style="color:#fdf4c1aa;"> targetDto </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">TargetDto</span><span style="color:#fdf4c1aa;">();
+    </span><span style="color:#8ec07c;">TargetDto</span><span style="color:#fdf4c1aa;"> targetDto </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">TargetDto</span><span style="color:#fdf4c1aa;">();
 
-	</span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">( from </span><span style="color:#fe8019;">!= </span><span style="color:#d3869b;">null </span><span style="color:#fdf4c1aa;">) {
-		targetDto.</span><span style="color:#fdf4c1;">setEnumType( </span><span style="color:#8ec07c;">TypeMapper</span><span style="color:#fdf4c1;">.mapType( from.getIntType() ) )</span><span style="color:#fdf4c1aa;">;
-		targetDto.</span><span style="color:#fdf4c1;">setCreateTime( from.getCreatedAt() )</span><span style="color:#fdf4c1aa;">;
-		targetDto.</span><span style="color:#fdf4c1;">setStrProperty( from.getStrProperty() )</span><span style="color:#fdf4c1aa;">;
-	}
-	</span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">( additional </span><span style="color:#fe8019;">!= </span><span style="color:#d3869b;">null </span><span style="color:#fdf4c1aa;">) {
-		targetDto.</span><span style="color:#fdf4c1;">setLastUpdateTime( additional.getUpdatedAt() )</span><span style="color:#fdf4c1aa;">;
-	}
+    </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">( from </span><span style="color:#fe8019;">!= </span><span style="color:#d3869b;">null </span><span style="color:#fdf4c1aa;">) {
+        targetDto.</span><span style="color:#fdf4c1;">setEnumType( </span><span style="color:#8ec07c;">TypeMapper</span><span style="color:#fdf4c1;">.mapType( from.getIntType() ) )</span><span style="color:#fdf4c1aa;">;
+        targetDto.</span><span style="color:#fdf4c1;">setCreateTime( from.getCreatedAt() )</span><span style="color:#fdf4c1aa;">;
+        targetDto.</span><span style="color:#fdf4c1;">setStrProperty( from.getStrProperty() )</span><span style="color:#fdf4c1aa;">;
+    }
+    </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">( additional </span><span style="color:#fe8019;">!= </span><span style="color:#d3869b;">null </span><span style="color:#fdf4c1aa;">) {
+        targetDto.</span><span style="color:#fdf4c1;">setLastUpdateTime( additional.getUpdatedAt() )</span><span style="color:#fdf4c1aa;">;
+    }
 
-	</span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> targetDto;
+    </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> targetDto;
 }
 
 @</span><span style="color:#fdf4c1;">Override
 </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">SourceEntity </span><span style="color:#fdf4c1;">convertToSource(</span><span style="color:#8ec07c;">TargetDto</span><span style="color:#fdf4c1;"> from) </span><span style="color:#fdf4c1aa;">{
-	</span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">( from </span><span style="color:#fe8019;">== </span><span style="color:#d3869b;">null </span><span style="color:#fdf4c1aa;">) {
-		</span><span style="color:#fa5c4b;">return </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1aa;">;
-	}
+    </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">( from </span><span style="color:#fe8019;">== </span><span style="color:#d3869b;">null </span><span style="color:#fdf4c1aa;">) {
+        </span><span style="color:#fa5c4b;">return </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1aa;">;
+    }
 
-	</span><span style="color:#8ec07c;">SourceEntity</span><span style="color:#fdf4c1aa;"> sourceEntity </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">SourceEntity</span><span style="color:#fdf4c1aa;">();
+    </span><span style="color:#8ec07c;">SourceEntity</span><span style="color:#fdf4c1aa;"> sourceEntity </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">SourceEntity</span><span style="color:#fdf4c1aa;">();
 
-	sourceEntity.</span><span style="color:#fdf4c1;">setCreatedAt( from.getCreateTime() )</span><span style="color:#fdf4c1aa;">;
-	sourceEntity.</span><span style="color:#fdf4c1;">setIntType( mapType( from.getEnumType() ) )</span><span style="color:#fdf4c1aa;">;
-	sourceEntity.</span><span style="color:#fdf4c1;">setStrProperty( from.getStrProperty() )</span><span style="color:#fdf4c1aa;">;
+    sourceEntity.</span><span style="color:#fdf4c1;">setCreatedAt( from.getCreateTime() )</span><span style="color:#fdf4c1aa;">;
+    sourceEntity.</span><span style="color:#fdf4c1;">setIntType( mapType( from.getEnumType() ) )</span><span style="color:#fdf4c1aa;">;
+    sourceEntity.</span><span style="color:#fdf4c1;">setStrProperty( from.getStrProperty() )</span><span style="color:#fdf4c1aa;">;
 
-	</span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> sourceEntity;
+    </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> sourceEntity;
 }
 
 @</span><span style="color:#fdf4c1;">Override
 </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">AdditionalEntity </span><span style="color:#fdf4c1;">convertToAdditional(</span><span style="color:#8ec07c;">TargetDto</span><span style="color:#fdf4c1;"> from) </span><span style="color:#fdf4c1aa;">{
-	</span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">( from </span><span style="color:#fe8019;">== </span><span style="color:#d3869b;">null </span><span style="color:#fdf4c1aa;">) {
-		</span><span style="color:#fa5c4b;">return </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1aa;">;
-	}
+    </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">( from </span><span style="color:#fe8019;">== </span><span style="color:#d3869b;">null </span><span style="color:#fdf4c1aa;">) {
+        </span><span style="color:#fa5c4b;">return </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1aa;">;
+    }
 
-	</span><span style="color:#8ec07c;">AdditionalEntity</span><span style="color:#fdf4c1aa;"> additionalEntity </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">AdditionalEntity</span><span style="color:#fdf4c1aa;">();
+    </span><span style="color:#8ec07c;">AdditionalEntity</span><span style="color:#fdf4c1aa;"> additionalEntity </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">AdditionalEntity</span><span style="color:#fdf4c1aa;">();
 
-	additionalEntity.</span><span style="color:#fdf4c1;">setUpdatedAt( from.getLastUpdateTime() )</span><span style="color:#fdf4c1aa;">;
+    additionalEntity.</span><span style="color:#fdf4c1;">setUpdatedAt( from.getLastUpdateTime() )</span><span style="color:#fdf4c1aa;">;
 
-	additionalEntity.</span><span style="color:#fdf4c1;">setUpdatedBy( </span><span style="color:#b8bb26;">&quot;System&quot; </span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
-	additionalEntity.</span><span style="color:#fdf4c1;">setContent( </span><span style="color:#b8bb26;">&quot;Created at &quot; </span><span style="color:#fe8019;">+ </span><span style="color:#fabd2f;">java</span><span style="color:#fdf4c1;">.</span><span style="color:#fabd2f;">time</span><span style="color:#fdf4c1;">.</span><span style="color:#8ec07c;">OffsetDateTime</span><span style="color:#fdf4c1;">.now() )</span><span style="color:#fdf4c1aa;">;
+    additionalEntity.</span><span style="color:#fdf4c1;">setUpdatedBy( </span><span style="color:#b8bb26;">&quot;System&quot; </span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+    additionalEntity.</span><span style="color:#fdf4c1;">setContent( </span><span style="color:#b8bb26;">&quot;Created at &quot; </span><span style="color:#fe8019;">+ </span><span style="color:#fabd2f;">java</span><span style="color:#fdf4c1;">.</span><span style="color:#fabd2f;">time</span><span style="color:#fdf4c1;">.</span><span style="color:#8ec07c;">OffsetDateTime</span><span style="color:#fdf4c1;">.now() )</span><span style="color:#fdf4c1aa;">;
 
-	</span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> additionalEntity;
+    </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> additionalEntity;
 }
 </span></pre><h1 id="builder-mo-shi-shi-ti-dui-xiang-yu-dai-ma-sheng-cheng"><a class="zola-anchor" href="#builder-mo-shi-shi-ti-dui-xiang-yu-dai-ma-sheng-cheng" aria-label="Anchor link for: builder-mo-shi-shi-ti-dui-xiang-yu-dai-ma-sheng-cheng">🔗</a>Builder 模式实体对象与代码生成</h1>
 <p><a href="https://mapstruct.org/" title="Java bean mappings, the easy way!">MapStruct</a> 除了对 POJO 的支持外，还提供对基于 Builder 模式的不可变对象的支持，只要满足以下条件：</p>
@@ -669,32 +618,32 @@ public class TargetDto {
 <pre style="background-color:#282828;">
 <span style="color:#fdf4c1aa;">@</span><span style="color:#fdf4c1;">Override
 </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">TargetDto </span><span style="color:#fdf4c1;">convert(</span><span style="color:#8ec07c;">SourceEntity</span><span style="color:#fdf4c1;"> from) </span><span style="color:#fdf4c1aa;">{
-	</span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">( from </span><span style="color:#fe8019;">== </span><span style="color:#d3869b;">null </span><span style="color:#fdf4c1aa;">) {
-		</span><span style="color:#fa5c4b;">return </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1aa;">;
-	}
+    </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">( from </span><span style="color:#fe8019;">== </span><span style="color:#d3869b;">null </span><span style="color:#fdf4c1aa;">) {
+        </span><span style="color:#fa5c4b;">return </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1aa;">;
+    }
 
-	</span><span style="color:#8ec07c;">TargetDto</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Builder</span><span style="color:#fdf4c1aa;"> targetDto </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">TargetDto</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">builder()</span><span style="color:#fdf4c1aa;">;
+    </span><span style="color:#8ec07c;">TargetDto</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Builder</span><span style="color:#fdf4c1aa;"> targetDto </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">TargetDto</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">builder()</span><span style="color:#fdf4c1aa;">;
 
-	targetDto.</span><span style="color:#fdf4c1;">setEnumType( </span><span style="color:#8ec07c;">TypeMapper</span><span style="color:#fdf4c1;">.mapType( from.getIntType() ) )</span><span style="color:#fdf4c1aa;">;
-	targetDto.</span><span style="color:#fdf4c1;">setCreateTime( from.getCreatedAt() )</span><span style="color:#fdf4c1aa;">;
-	targetDto.</span><span style="color:#fdf4c1;">setStrProperty( from.getStrProperty() )</span><span style="color:#fdf4c1aa;">;
+    targetDto.</span><span style="color:#fdf4c1;">setEnumType( </span><span style="color:#8ec07c;">TypeMapper</span><span style="color:#fdf4c1;">.mapType( from.getIntType() ) )</span><span style="color:#fdf4c1aa;">;
+    targetDto.</span><span style="color:#fdf4c1;">setCreateTime( from.getCreatedAt() )</span><span style="color:#fdf4c1aa;">;
+    targetDto.</span><span style="color:#fdf4c1;">setStrProperty( from.getStrProperty() )</span><span style="color:#fdf4c1aa;">;
 
-	</span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> targetDto.</span><span style="color:#fdf4c1;">build()</span><span style="color:#fdf4c1aa;">;
+    </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> targetDto.</span><span style="color:#fdf4c1;">build()</span><span style="color:#fdf4c1aa;">;
 }
 
 @</span><span style="color:#fdf4c1;">Override
 </span><span style="color:#fa5c4b;">public </span><span style="color:#8ec07c;">SourceEntity </span><span style="color:#fdf4c1;">convert(</span><span style="color:#8ec07c;">TargetDto</span><span style="color:#fdf4c1;"> from) </span><span style="color:#fdf4c1aa;">{
-	</span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">( from </span><span style="color:#fe8019;">== </span><span style="color:#d3869b;">null </span><span style="color:#fdf4c1aa;">) {
-		</span><span style="color:#fa5c4b;">return </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1aa;">;
-	}
+    </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">( from </span><span style="color:#fe8019;">== </span><span style="color:#d3869b;">null </span><span style="color:#fdf4c1aa;">) {
+        </span><span style="color:#fa5c4b;">return </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1aa;">;
+    }
 
-	</span><span style="color:#8ec07c;">SourceEntity</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Builder</span><span style="color:#fdf4c1aa;"> sourceEntity </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">SourceEntity</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">builder()</span><span style="color:#fdf4c1aa;">;
+    </span><span style="color:#8ec07c;">SourceEntity</span><span style="color:#fdf4c1aa;">.</span><span style="color:#8ec07c;">Builder</span><span style="color:#fdf4c1aa;"> sourceEntity </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">SourceEntity</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">builder()</span><span style="color:#fdf4c1aa;">;
 
-	sourceEntity.</span><span style="color:#fdf4c1;">setCreatedAt( from.getCreateTime() )</span><span style="color:#fdf4c1aa;">;
-	sourceEntity.</span><span style="color:#fdf4c1;">setIntType( mapType( from.getEnumType() ) )</span><span style="color:#fdf4c1aa;">;
-	sourceEntity.</span><span style="color:#fdf4c1;">setStrProperty( from.getStrProperty() )</span><span style="color:#fdf4c1aa;">;
+    sourceEntity.</span><span style="color:#fdf4c1;">setCreatedAt( from.getCreateTime() )</span><span style="color:#fdf4c1aa;">;
+    sourceEntity.</span><span style="color:#fdf4c1;">setIntType( mapType( from.getEnumType() ) )</span><span style="color:#fdf4c1aa;">;
+    sourceEntity.</span><span style="color:#fdf4c1;">setStrProperty( from.getStrProperty() )</span><span style="color:#fdf4c1aa;">;
 
-	</span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> sourceEntity.</span><span style="color:#fdf4c1;">build()</span><span style="color:#fdf4c1aa;">;
+    </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> sourceEntity.</span><span style="color:#fdf4c1;">build()</span><span style="color:#fdf4c1aa;">;
 }
 </span></pre><h1 id="mapper-shi-xian-lei-shi-li-de-huo-qu"><a class="zola-anchor" href="#mapper-shi-xian-lei-shi-li-de-huo-qu" aria-label="Anchor link for: mapper-shi-xian-lei-shi-li-de-huo-qu">🔗</a>Mapper 实现类实例的获取</h1>
 <p><a href="https://mapstruct.org/" title="Java bean mappings, the easy way!">MapStruct</a> 自动生成的 Mapper 接口的实现类的类名默认是接口名后面加上 <code>Impl</code> 后缀，如果有需要也可以自定义。</p>

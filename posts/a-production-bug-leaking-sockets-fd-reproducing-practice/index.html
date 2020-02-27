@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>wangbo’s blog - 一次由于网络套接字文件描述符泄露导致线上服务事故原因的排查经历</title>
+
+      
+
+      
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
+          
+      
+
+      
+          <link rel="stylesheet" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;site.css">
+          
+      
+
+      
+      
+    </head>
+
+    <body>
+        <div class="container">
+
+            <div id="mobile-navbar" class="mobile-navbar">
+              <div class="mobile-header-logo">
+                <a href="/" class="logo">WB Prime</a>
+              </div>
+              <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+
+            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
+              <ul class="mobile-menu-list">
+                
+                    <li class="mobile-menu-item">
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">
+                            Categories
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">
+                            Tags
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https:&#x2F;&#x2F;github.wangbo.im">
+                            Github
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">
+                            About
+                        </a>
+                    </li>
+                
+              </ul>
+            </nav>
+
+            <header id="header">
+                <div class="logo"><a href="https:&#x2F;&#x2F;www.wangbo.im">WB Prime</a></div>
+                <nav class="menu">
+                    <ul>
+                        
+                            <li>
+                                <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;categories">
+                                    Categories
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags">
+                                    Tags
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https:&#x2F;&#x2F;github.wangbo.im">
+                                    Github
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;about">
+                                    About
+                                </a>
+                            </li>
+                        
+                    </ul>
+                </nav>
+            </header>
+
+            <main>
+                <div class="content" id="mobile-panel">
+                    
+
+
+
+<article class="post">
+    
+    <header class="post__header">
+        <h1 class="post__title">
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;a-production-bug-leaking-sockets-fd-reproducing-practice&#x2F;">一次由于网络套接字文件描述符泄露导致线上服务事故原因的排查经历</a>
+        </h1>
+        <div class="post__meta">
+            <span class="post__time">2020-02-23</span>
+            
+        </div>
+    </header>
+
+    <div class="post-content">
+      <p>最近，线上服务遭遇了一次事故。该服务（记为 A 服务）是一个 Java 的网络服务，间接使用了 <a href="https://ignite.apache.org/" title="Apache Ignite: In-Memory Computing Platform">Ignite</a> 作为内存数
+据库和 RPC 基础件；服务对 <a href="https://ignite.apache.org/" title="Apache Ignite: In-Memory Computing Platform">Ignite</a> 的访问操作通过公司另外部门维护的一个二次封装接口（公共 JAR 包形式）进行。</p>
+<p>在生产环境中，运维按计划下线 <a href="https://ignite.apache.org/" title="Apache Ignite: In-Memory Computing Platform">Ignite</a> 服务之后，A 服务的正常业务流程未受到影响；按计划继续下线
+<a href="https://ignite.apache.org/" title="Apache Ignite: In-Memory Computing Platform">Ignite</a> 服务所在的服务器之后，A 服务很快开始报 <code>java.net.SocketException: Too many open files</code> 错误，导致 A 服务很快不可用。</p>
+<p>我在测试环境部署模拟复现了该现象，并排查到此次事故是由 <a href="https://ignite.apache.org/" title="Apache Ignite: In-Memory Computing Platform">Ignite</a> 的一个 <a href="https://github.com/apache/ignite/commit/6c3a486f0d7f0dd55c377af233d7c525d86f600a" title="Fixed socket leak in TcpDiscoverySpi">BUG</a> 导
+致的。事实上，该 <a href="https://github.com/apache/ignite/commit/6c3a486f0d7f0dd55c377af233d7c525d86f600a" title="Fixed socket leak in TcpDiscoverySpi">BUG</a> 已经在 <a href="https://ignite.apache.org/" title="Apache Ignite: In-Memory Computing Platform">Ignite</a> 的主线版本中被修复，但由于隔壁部门自己 FORK 了 <a href="https://ignite.apache.org/" title="Apache Ignite: In-Memory Computing Platform">Ignite</a> 的较低版本并且没有及时地同步主线更新，使得 A 服务在生产环境出现了该事故。</p>
+<p>现记录下事故原因排查的经历，以鉴后事。</p>
+<p id="zola-continue-reading"><a name="continue-reading"></a></p>
+<h1 id="background"><a class="zola-anchor" href="#background" aria-label="Anchor link for: background">🔗</a>Background</h1>
+<p><a href="https://ignite.apache.org/" title="Apache Ignite: In-Memory Computing Platform">Ignite</a> 是一个多功能的网络中间件，可以提供分布式的内存缓存、内存数据网格（K-V）、内存数据库（SQL）、网格计算、RPC 基础支持和消息中间件等功能。</p>
+<p><a href="https://ignite.apache.org/" title="Apache Ignite: In-Memory Computing Platform">Ignite</a> 提供嵌入式的开发包，将每一个包含了开发包的服务进程扩展为一个 <a href="https://ignite.apache.org/" title="Apache Ignite: In-Memory Computing Platform">Ignite</a> 节点；同一个服务的不同实
+例或不同服务的不同实例，只要包含相同的 <a href="https://ignite.apache.org/" title="Apache Ignite: In-Memory Computing Platform">Ignite</a> 集群配置，就会相互发现成为同一个集群的子节点；这样就不需要额外部署 <a href="https://ignite.apache.org/" title="Apache Ignite: In-Memory Computing Platform">Ignite</a> 服务实例，只需要部署服务实例。</p>
+<p>A 服务通过包含隔壁部门二次封装的 <a href="https://ignite.apache.org/" title="Apache Ignite: In-Memory Computing Platform">Ignite</a> 开发包访问 <a href="https://ignite.apache.org/" title="Apache Ignite: In-Memory Computing Platform">Ignite</a> 集群，主要是服务 B。</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">-------------     -------------
+| Service A | ==&gt; | Service B |
+-------------     -------------
+</span></pre>
+<p>值得一提的是，服务 A 和服务 B 不是部署在同一台服务器上。</p>
+<h1 id="crash-report"><a class="zola-anchor" href="#crash-report" aria-label="Anchor link for: crash-report">🔗</a>Crash Report</h1>
+<p>线上运维一共进行了两次操作：</p>
+<ol>
+<li>将服务 B 实例关停。</li>
+<li>将服务 B 实例所在的服务器下线。</li>
+</ol>
+<p><a href="https://ignite.apache.org/" title="Apache Ignite: In-Memory Computing Platform">Ignite</a> 集群的各节点之间会保持心跳连接以实现集群拓扑的动态变化。</p>
+<p>当服务 B 实例被关停之后，服务 A 中 <a href="https://ignite.apache.org/" title="Apache Ignite: In-Memory Computing Platform">Ignite</a> 相关的线程会不停地重试连接服务 B 的监听端口，但不出意外地会失败；服务 A 中的其他业务逻辑理论上不会受到影响。事实也是如此，此时服务 A 的运行正常。</p>
+<p>当服务 B 实例的服务器被下线之后，理论上对服务 A 的影响同服务 B 被关停。但是，在等待一段时间后（5分
+钟级别），服务 A 开始出现 <code>java.net.SocketException: Too many open files</code> 异常。
+从异常说明可以猜测：此时服务 A 中存在一个或多个不停地创建 Socket 但不释放的线程，导致网络套接字文件
+描述符被耗尽。一个合理的猜测是本次的网络套接字泄露是由于 <a href="https://ignite.apache.org/" title="Apache Ignite: In-Memory Computing Platform">Ignite</a> 的心跳线程导致的：在不查看具体代码的逻辑下，可以猜测出该线程的主体逻辑是一个 <code>while</code> 无限循环，循环体中尝试连接目标节点并发送心跳消息，如果检测心跳成功，则休眠给定时间间隔以等待下一次心跳检测；如果失败，则立即重试给定次数以确定目标节点是否已下线。</p>
+<p>这个过程基本上是轮询的套路，<strong>我最开始认为</strong> 基本上不会出现网络套接字泄露的问题（<a href="https://ignite.apache.org/" title="Apache Ignite: In-Memory Computing Platform">Ignite</a> 可是高大上的大厂产品 <strong>^-^</strong>），而且心跳重试过程如果有问题的话，服务被关停和服务器被下线时的表现不会不一样（<strong>^-^</strong>）。</p>
+<p>所以，开始尝试从底层定位问题。</p>
+<h1 id="steps"><a class="zola-anchor" href="#steps" aria-label="Anchor link for: steps">🔗</a>Steps</h1>
+<h2 id="reproduce-bug"><a class="zola-anchor" href="#reproduce-bug" aria-label="Anchor link for: reproduce-bug">🔗</a>Reproduce BUG</h2>
+<p>首先尝试在测试环境复现该 BUG 。修改配置文件之后再重启即可。</p>
+<p>此时可以通过 <code>jps -lmv</code> 命令查看到服务运行实例的进程号。</p>
+<p>然后简单地查看 CPU/Memory/IO 的状态，基本与正常情况没有差别。</p>
+<p>然后查看进程使用文件描述符的情况，运行 <code>lsof -p $pid</code> 。<a href="https://linux.die.net/man/8/lsof">lsof</a> 是
+Linux 下查看打开的文件描述符的工具，<code>-p</code> 选项指定只列出给定进程号的进程所打开的文件描述符。</p>
+<p>在等待大约 5 分钟之后，开始出现下述输出：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">$ lsof -p 16404
+...omit...
+java    16404 fo_dev 1885u     sock                0,7       0t0  18695292 protocol: TCPv6
+java    16404 fo_dev 1886u     sock                0,7       0t0  18695293 protocol: TCPv6
+java    16404 fo_dev 1887u     sock                0,7       0t0  18695294 protocol: TCPv6
+java    16404 fo_dev 1888u     sock                0,7       0t0  18695295 protocol: TCPv6
+java    16404 fo_dev 1889u     sock                0,7       0t0  18695298 protocol: TCPv6
+...omit...
+</span></pre>
+<p>可以看到服务 A 的实例在不断地创建 <code>TCPv6</code> 类型的套接字。该类型套接字的个数在几分钟之内达到 1000 以上。</p>
+<p>查看 <code>ulimit</code> 的输出，没有异常。</p>
+<p>这个 <code>TCPv6</code> 看的我一头雾水，怎么好像跟 IPv6 还有关系？</p>
+<p>使用关键字上网搜寻，只找到这一篇 <a href="https://blog.csdn.net/define_us/article/details/84950934">Tomcat服务故障排查：打开文件过多</a> 有点相关，但是其也没有提到原因和解决办法。</p>
+<h2 id="disable-jdk-ipv6-stack"><a class="zola-anchor" href="#disable-jdk-ipv6-stack" aria-label="Anchor link for: disable-jdk-ipv6-stack">🔗</a>Disable JDK IPv6 Stack</h2>
+<p>由于当前的现象是服务不断创建 <code>TCPv6</code> 类型的套接字，所以开始怀疑是 IPv6 相关的问题。</p>
+<p>参考 <a href="https://docs.oracle.com/javase/7/docs/technotes/guides/net/ipv6_guide/index.html">Networking IPv6 User Guide for JDK/JRE</a> 的说明，修改服务启动参数，添加 <code>-Djava.net.preferIPv4Stack=true</code> 选项禁用 IPv6。</p>
+<p>重新运行 <code>lsof</code> 得到以下输出（类似）：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">$ lsof -p 16404
+...omit...
+java    16404 fo_dev 1885u     sock                0,7       0t0  18695292 protocol: TCP
+java    16404 fo_dev 1886u     sock                0,7       0t0  18695293 protocol: TCP
+java    16404 fo_dev 1887u     sock                0,7       0t0  18695294 protocol: TCP
+java    16404 fo_dev 1888u     sock                0,7       0t0  18695295 protocol: TCP
+java    16404 fo_dev 1889u     sock                0,7       0t0  18695298 protocol: TCP
+...omit...
+</span></pre>
+<p>这说明服务套接字泄露的问题与 IPv6 无关。</p>
+<h2 id="lsof-per-thread"><a class="zola-anchor" href="#lsof-per-thread" aria-label="Anchor link for: lsof-per-thread">🔗</a><code>lsof</code> Per Thread</h2>
+<p>回过头去看看 <code>lsof</code> 的手册，发现有一个选项 <code>-K</code>：</p>
+<blockquote>
+<p><strong>-K</strong>       selects the listing of tasks (threads) of processes, on dialects  where  task  (thread) reporting  is supported.  (If help output - i.e., the output of the -h or -?  options - shows this option, then task (thread) reporting is supported by the dialect.)
+When -K and -a are both specified on Linux,  and  the  tasks  of  a  main  process  are selected  by  other  options,  the main process will also be listed as though it were a task, but without a task ID.  (See the description of the TID column in the OUTPUT sec‐
+tion.)</p>
+</blockquote>
+<blockquote>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">           Where the FreeBSD version supports threads, all threads will be listed with their IDs.
+</span><span style="color:#fdf4c1aa;">           In  general  threads  and tasks inherit the files of the caller, but may close some and open others, so lsof always reports all the open files of threads and tasks.
+</span></pre></blockquote>
+<p>这个选项的意思是在输出的结果中显示文件描述符对应的线程号，棒极了。</p>
+<p>输出如下：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">$ lsof -p 16404 -K
+...omit...
+java      16404 17818    fo_dev 1314u     sock                0,7        0t0  18703132 protocol: TCPv6
+java      16404 17818    fo_dev 1315u     sock                0,7        0t0  18703133 protocol: TCPv6
+java      16404 17818    fo_dev 1316u     sock                0,7        0t0  18703134 protocol: TCPv6
+java      16404 17818    fo_dev 1317u     sock                0,7        0t0  18703135 protocol: TCPv6
+java      16404 17818    fo_dev 1318u     sock                0,7        0t0  18703138 protocol: TCPv6
+...omit...
+</span></pre>
+<p>结果输出很长，主要表现为同一个文件描述符在所有的线程上都有显示。很明显，Linux (Red Hat Enterprise Linux Server x86_64 7.4) 下面不支持这个选项，所以 <code>all threads will be listed with their IDs</code>。</p>
+<h2 id="strace"><a class="zola-anchor" href="#strace" aria-label="Anchor link for: strace">🔗</a><code>strace</code></h2>
+<p>套接字泄露确实在发生，但是却没有办法能明确定位到问题在哪里。如果能直接看到进程调用 <code>socket</code> 和 <code>close</code> 系统调用的记录，就可以知道在哪里发生了套接字泄露。</p>
+<p>于是找到了 <a href="https://linux.die.net/man/1/strace">strace</a> 工具，该工具可以跟踪进程的系统调用记录。</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">$ strace -t -T -f -p 23345 -e trace=network,close -o strace.out
+...omit...
+904   16:52:35 socket(AF_INET6, SOCK_STREAM, IPPROTO_IP) = 2379 &lt;0.000105&gt;
+904   16:52:35 socket(AF_INET6, SOCK_STREAM, IPPROTO_IP) = 2380 &lt;0.000061&gt;
+904   16:52:35 socket(AF_INET6, SOCK_STREAM, IPPROTO_IP) = 2381 &lt;0.000070&gt;
+904   16:52:35 socket(AF_INET6, SOCK_STREAM, IPPROTO_IP) = 2382 &lt;0.000062&gt;
+904   16:52:37 socket(AF_INET6, SOCK_STREAM, IPPROTO_IP) = 2383 &lt;0.000170&gt;
+904   16:52:37 socket(AF_INET6, SOCK_STREAM, IPPROTO_IP) = 2384 &lt;0.000188&gt;
+904   16:52:37 socket(AF_INET6, SOCK_STREAM, IPPROTO_IP) = 2385 &lt;0.000161&gt;
+904   16:52:37 socket(AF_INET6, SOCK_STREAM, IPPROTO_IP) = 2386 &lt;0.000075&gt;
+904   16:52:39 close(2387)              = 0 &lt;0.000190&gt;
+904   16:52:39 socket(AF_INET, SOCK_DGRAM|SOCK_NONBLOCK, IPPROTO_IP) = 2387 &lt;0.000106&gt;
+904   16:52:39 close(2387)              = 0 &lt;0.000059&gt;
+904   16:52:39 socket(AF_INET, SOCK_DGRAM|SOCK_NONBLOCK, IPPROTO_IP) = 2387 &lt;0.000104&gt;
+904   16:52:39 close(2387)              = 0 &lt;0.000053&gt;
+904   16:52:39 socket(AF_INET6, SOCK_STREAM, IPPROTO_IP) = 2387 &lt;0.000111&gt;
+...omit...
+32663 16:52:40 socket(AF_INET6, SOCK_STREAM, IPPROTO_IP) = 2391 &lt;0.000115&gt;
+32663 16:52:41 close(2391)              = 0 &lt;0.000045&gt;
+32663 16:52:51 socket(AF_INET6, SOCK_STREAM, IPPROTO_IP) = 2415 &lt;0.000113&gt;
+32663 16:52:52 close(2415)              = 0 &lt;0.000061&gt;
+32663 16:53:02 socket(AF_INET6, SOCK_STREAM, IPPROTO_IP) = 2435 &lt;0.000124&gt;
+32663 16:53:03 close(2435)              = 0 &lt;0.000050&gt;
+32663 16:53:13 socket(AF_INET6, SOCK_STREAM, IPPROTO_IP) = 2459 &lt;0.000210&gt;
+32663 16:53:14 close(2459)              = 0 &lt;0.000061&gt;
+32663 16:53:24 socket(AF_INET6, SOCK_STREAM, IPPROTO_IP) = 2479 &lt;0.000111&gt;
+32663 16:53:25 close(2479)              = 0 &lt;0.000053&gt;
+...omit...
+</span></pre>
+<p>选项 <code>-t</code> 表明在输出结果中加上时间戳信息，<code>-T</code> 表示在输出结果中加上系统调用的耗时信息，<code>-f</code> 表示在输出结果中加上关联的线程号信息 (Trace child processes as they are created by currently traced processes as a result of the <code>fork(2)</code>, <code>vfork(2)</code> and <code>clone(2)</code> system calls.  Note that <code>-p</code> PID <code>-f</code> will attach all threads of process PID if it is multi-threaded, not only thread with thread_id = PID.)，<code>-p</code> 输出指定进程的结果，<code>-e</code> 表示只输出网络相关和 <code>close()</code> 系统调用的日志，<code>-o</code> 表示将输出结果存储到指定文件中。</p>
+<p>说明，上述输出经过了整理，过滤了无关的输出并按照线程分组按时间排序。</p>
+<p>可以直接从输出结果中发现未成对的 <code>socket()/close()</code> 调用，这表明出现了套接字泄露。同时也可以看到发生泄露的线程号 (904)。</p>
+<h2 id="jstack"><a class="zola-anchor" href="#jstack" aria-label="Anchor link for: jstack">🔗</a><code>jstack</code></h2>
+<p>通过 <code>jstack</code> 可以得到指定 Jvm 进程的线程堆栈信息（包含线程号）。</p>
+<p>但是 <code>jstack</code> 输出的线程号是 16 进制的结果，可以通过 <code>printf</code> 来进行 10/16 进制的线程号之间的转换。</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">$ printf %x 904
+388
+$ printf %d 0x388
+904
+</span></pre>
+<p>现在就定位到了有问题的线程的堆栈了。</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">&quot;tcp-client-disco-msg-worker-#7%XXXXXXX%&quot; #182 prio=5 os_prio=0 tid=0x00007f4e1c42b000 nid=0x388 waiting on condition [0x00007f4e14dcf000]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+        at java.lang.Thread.sleep(Native Method)
+        at org.apache.ignite.spi.discovery.tcp.ClientImpl.joinTopology(ClientImpl.java:575)
+        at org.apache.ignite.spi.discovery.tcp.ClientImpl.access$900(ClientImpl.java:124)
+        at org.apache.ignite.spi.discovery.tcp.ClientImpl$MessageWorker.tryJoin(ClientImpl.java:1825)
+        at org.apache.ignite.spi.discovery.tcp.ClientImpl$MessageWorker.body(ClientImpl.java:1541)
+        at org.apache.ignite.spi.IgniteSpiThread.run(IgniteSpiThread.java:62)
+</span></pre>
+<p>说明，上述输出经过了整理，修改了线程名中不影响结论的部分。</p>
+<p>这样就定位到了有问题的线程。</p>
+<p>现在必须要去查看 <a href="https://ignite.apache.org/" title="Apache Ignite: In-Memory Computing Platform">Ignite</a> 的实际代码了。</p>
+<h2 id="review-ignite-code"><a class="zola-anchor" href="#review-ignite-code" aria-label="Anchor link for: review-ignite-code">🔗</a>Review Ignite Code</h2>
+<p>按照堆栈提示定位到问题代码，具体过程不赘述了。</p>
+<p>代码片段摘抄如下：</p>
+<pre style="background-color:#282828;">
+<span style="font-style:italic;color:#928374;">// [[[3]]]
+</span><span style="color:#fa5c4b;">protected </span><span style="color:#8ec07c;">Socket </span><span style="color:#fdf4c1;">openSocket(</span><span style="color:#8ec07c;">InetSocketAddress</span><span style="color:#fdf4c1;"> sockAddr, </span><span style="color:#8ec07c;">IgniteSpiOperationTimeoutHelper</span><span style="color:#fdf4c1;"> timeoutHelper)</span><span style="color:#fdf4c1aa;"> throws </span><span style="color:#8ec07c;">IOException</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">IgniteSpiOperationTimeoutException </span><span style="color:#fdf4c1aa;">{
+    </span><span style="color:#fa5c4b;">return </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">openSocket(this.createSocket(), sockAddr, timeoutHelper)</span><span style="color:#fdf4c1aa;">;
+}
+
+</span><span style="font-style:italic;color:#928374;">// [[[5]]]
+</span><span style="color:#fa5c4b;">protected </span><span style="color:#8ec07c;">Socket </span><span style="color:#fdf4c1;">openSocket(</span><span style="color:#8ec07c;">Socket</span><span style="color:#fdf4c1;"> sock, </span><span style="color:#8ec07c;">InetSocketAddress</span><span style="color:#fdf4c1;"> remAddr, </span><span style="color:#8ec07c;">IgniteSpiOperationTimeoutHelper</span><span style="color:#fdf4c1;"> timeoutHelper)</span><span style="color:#fdf4c1aa;"> throws </span><span style="color:#8ec07c;">IOException</span><span style="color:#fdf4c1aa;">, </span><span style="color:#8ec07c;">IgniteSpiOperationTimeoutException </span><span style="color:#fdf4c1aa;">{
+    </span><span style="color:#fa5c4b;">assert</span><span style="color:#fdf4c1aa;"> remAddr </span><span style="color:#fe8019;">!= </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1aa;">;
+
+    </span><span style="font-style:italic;color:#928374;">// [[[6]]]
+    </span><span style="color:#8ec07c;">InetSocketAddress</span><span style="color:#fdf4c1aa;"> resolved </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> remAddr.</span><span style="color:#fdf4c1;">isUnresolved() </span><span style="color:#fe8019;">? </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">InetSocketAddress</span><span style="color:#fdf4c1aa;">(</span><span style="color:#8ec07c;">InetAddress</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">getByName(remAddr.getHostName())</span><span style="color:#fdf4c1aa;">, remAddr.</span><span style="color:#fdf4c1;">getPort()</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fe8019;">:</span><span style="color:#fdf4c1aa;"> remAddr;
+    </span><span style="color:#8ec07c;">InetAddress</span><span style="color:#fdf4c1aa;"> addr </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> resolved.</span><span style="color:#fdf4c1;">getAddress()</span><span style="color:#fdf4c1aa;">;
+
+    </span><span style="color:#fa5c4b;">assert</span><span style="color:#fdf4c1aa;"> addr </span><span style="color:#fe8019;">!= </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1aa;">;
+
+    sock.</span><span style="color:#fdf4c1;">connect(resolved, (</span><span style="color:#fa5c4b;">int</span><span style="color:#fdf4c1;">)timeoutHelper.nextTimeoutChunk(this.sockTimeout))</span><span style="color:#fdf4c1aa;">;
+    </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">writeToSocket(sock, (</span><span style="color:#8ec07c;">TcpDiscoveryAbstractMessage</span><span style="color:#fdf4c1;">)</span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1;">, (</span><span style="color:#fa5c4b;">byte[]</span><span style="color:#fdf4c1;">)</span><span style="color:#8ec07c;">U</span><span style="color:#fdf4c1;">.IGNITE_HEADER, timeoutHelper.nextTimeoutChunk(this.sockTimeout))</span><span style="color:#fdf4c1aa;">;
+    </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> sock;
+}
+
+</span><span style="font-style:italic;color:#928374;">// [[[4]]]
+</span><span style="color:#8ec07c;">Socket </span><span style="color:#fdf4c1;">createSocket()</span><span style="color:#fdf4c1aa;"> throws </span><span style="color:#8ec07c;">IOException </span><span style="color:#fdf4c1aa;">{
+    </span><span style="color:#8ec07c;">Socket</span><span style="color:#fdf4c1aa;"> sock;
+    </span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">isSslEnabled()</span><span style="color:#fdf4c1aa;">) {
+        sock </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">this</span><span style="color:#fdf4c1aa;">.sslSockFactory.</span><span style="color:#fdf4c1;">createSocket()</span><span style="color:#fdf4c1aa;">;
+    } </span><span style="color:#fa5c4b;">else </span><span style="color:#fdf4c1aa;">{
+        sock </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">Socket</span><span style="color:#fdf4c1aa;">();
+    }
+
+    sock.</span><span style="color:#fdf4c1;">bind(</span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">InetSocketAddress</span><span style="color:#fdf4c1;">(this.locHost, </span><span style="color:#d3869b;">0</span><span style="color:#fdf4c1;">))</span><span style="color:#fdf4c1aa;">;
+    sock.</span><span style="color:#fdf4c1;">setTcpNoDelay(</span><span style="color:#d3869b;">true</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">;
+    </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> sock;
+}
+
+</span><span style="font-style:italic;color:#928374;">// [[[0]]]
+// ...omit...
+</span><span style="color:#8ec07c;">Socket</span><span style="color:#fdf4c1aa;"> sock </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">null</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">try </span><span style="color:#fdf4c1aa;">{
+    </span><span style="font-style:italic;color:#928374;">// ...omit...
+</span><span style="color:#fdf4c1aa;">    sock </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">openSocket(addr, timeoutHelper)</span><span style="color:#fdf4c1aa;">; </span><span style="font-style:italic;color:#928374;">// [[[1]]]
+    // ...omit...
+</span><span style="color:#fdf4c1aa;">} </span><span style="color:#fdf4c1;">catch (</span><span style="color:#8ec07c;">IgniteCheckedException </span><span style="color:#fe8019;">| </span><span style="color:#8ec07c;">IOException</span><span style="color:#fdf4c1;"> e) </span><span style="color:#fdf4c1aa;">{
+    </span><span style="color:#8ec07c;">U</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">closeQuiet(sock)</span><span style="color:#fdf4c1aa;">; </span><span style="font-style:italic;color:#928374;">// close socket // [[[2]]]
+    // ...omit...
+</span><span style="color:#fdf4c1aa;">}
+</span><span style="font-style:italic;color:#928374;">// ...omit...
+</span></pre>
+<p><a href="https://ignite.apache.org/" title="Apache Ignite: In-Memory Computing Platform">Ignite</a> 内部会重试连接节点，连接节点的逻辑简略如 <code>[[[0]]]</code> 处的代码所示：在 <code>try</code> 块中创建连接处理套接字 (<code>[[[1]]]</code> 处)，在 <code>catch</code> 块中关闭套接字 (<code>[[[2]]]</code> 处)。</p>
+<p>创建并连接套接字的操作在 <code>[[[3]]]</code> 中：首先创建套接字 (<code>[[[4]]]</code> 处)，然后连接到目标服务器地址 (<code>[[[5]]]</code> 处)，最后返回创建的套接字。</p>
+<p>问题在于连接目标服务器地址的过程中有可能会抛出异常 (<code>[[[6]]]</code> 处)，导致已创建的套接字并不能被返回到最外层以关闭。连接目标服务器之前需要获取目标服务器的地址 (<code>[[[6]]]</code> 处)，此处调用了 <code>InetAddress.getByName()</code> 方法试图将一个主机名解析为合法的IP 地址，如果无法解析则会抛出 <code>java.net.UnknownHostException</code> 异常，导致 <code>[[[5]]]</code> 方法半途退出，从而导致套接字泄露。</p>
+<h2 id="verify-using-plain-ip"><a class="zola-anchor" href="#verify-using-plain-ip" aria-label="Anchor link for: verify-using-plain-ip">🔗</a>Verify using Plain IP</h2>
+<p><a href="https://ignite.apache.org/" title="Apache Ignite: In-Memory Computing Platform">Ignite</a> 在解析主机名时抛出异常导致套接字泄露，可以通过配置目标地址为显式 IP 地址来验证，而之前配置的服务 B 的地址是主机名（通过内网 DNS 解析定位到服务器地址）。</p>
+<p>修改配置之后重启服务并观察 <code>lsof</code> 的输出，发现不存在套接字泄露现象。</p>
+<p>果然！</p>
+<h2 id="ignite-on-github"><a class="zola-anchor" href="#ignite-on-github" aria-label="Anchor link for: ignite-on-github">🔗</a>Ignite on Github</h2>
+<p>还有一个问题是，作为这么牛的开源项目，应该不能存在这么低级的 BUG 吧。</p>
+<p>上 <a href="https://github.com/apache/ignite">Github</a> 看了一下，发现这个 BUG 已经被 <a href="https://github.com/apache/ignite/commit/6c3a486f0d7f0dd55c377af233d7c525d86f600a" title="Fixed socket leak in TcpDiscoverySpi">发现并 FIX</a> 了，时间是 <strong>2018-09-21</strong>，呃。</p>
+<p>看样子是隔壁部门的锅，其维护了一个较低版本的 <a href="https://ignite.apache.org/" title="Apache Ignite: In-Memory Computing Platform">Ignite</a>，没有及时跟踪官方的主线修复。</p>
+<h1 id="conclusion"><a class="zola-anchor" href="#conclusion" aria-label="Anchor link for: conclusion">🔗</a>Conclusion</h1>
+<p>在网络服务出现 <code>Too many open files</code> 类似的异常之后，可以考虑排查服务是否存在网络套接字文件描述符泄露
+的 BUG。</p>
+<ol>
+<li>首先使用 <code>jps</code> 工具获取到目标服务的进程号</li>
+<li>使用 <code>lsof</code> 工具查看目标进程打开的文件描述符的类型和特征</li>
+<li>使用 <code>jstack</code> 工具查看目标进程的线程堆栈是否有异常</li>
+<li>使用 <code>strace</code> 工具查看目标进程的系统调用，考虑添加 <code>-f</code> 参数显示对应的线程号</li>
+<li>使用 <code>jstack</code> 工具找到目标进程中对应线程号的堆栈信息</li>
+<li>查看对应代码，最终定位问题</li>
+</ol>
+<hr />
+<p>以上。</p>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+            
+                <div class="post-tags">
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;ignite&#x2F;">#ignite</a>
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;lsof&#x2F;">#lsof</a>
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;strace&#x2F;">#strace</a>
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;jstack&#x2F;">#jstack</a>
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;tcpv6&#x2F;">#TCPv6</a>
+                    
+                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;tags&#x2F;fd-leaking&#x2F;">#fd leaking</a>
+                    
+                </div>
+            
+            
+                <div class="post-nav">
+                    
+                        <a class="previous" href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;dependency-injection-practise-guice-vs-dagger2&#x2F;">‹ Dependency Injection - Guice VS Dagger 2</a>
+                    
+                    
+                    
+                    
+                </div>
+            
+
+        
+
+    </div>
+
+    
+    
+</article>
+
+
+                </div>
+            </main>
+
+            
+            
+        </div>
+
+      
+          <script type="text/javascript" src="https:&#x2F;&#x2F;www.wangbo.im&#x2F;even.js" ></script>
+      
+    </body>
+
+</html>

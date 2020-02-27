@@ -111,6 +111,33 @@
                                     
     <header class="post__header">
         <h1 class="post__title">
+            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;a-production-bug-leaking-sockets-fd-reproducing-practice&#x2F;">一次由于网络套接字文件描述符泄露导致线上服务事故原因的排查经历</a>
+        </h1>
+        <div class="post__meta">
+            <span class="post__time">2020-02-23</span>
+            
+        </div>
+    </header>
+
+                                    <div class="post__summary">
+                                        <p>最近，线上服务遭遇了一次事故。该服务（记为 A 服务）是一个 Java 的网络服务，间接使用了 <a href="https://ignite.apache.org/" title="Apache Ignite: In-Memory Computing Platform">Ignite</a> 作为内存数
+据库和 RPC 基础件；服务对 <a href="https://ignite.apache.org/" title="Apache Ignite: In-Memory Computing Platform">Ignite</a> 的访问操作通过公司另外部门维护的一个二次封装接口（公共 JAR 包形式）进行。</p>
+<p>在生产环境中，运维按计划下线 <a href="https://ignite.apache.org/" title="Apache Ignite: In-Memory Computing Platform">Ignite</a> 服务之后，A 服务的正常业务流程未受到影响；按计划继续下线
+<a href="https://ignite.apache.org/" title="Apache Ignite: In-Memory Computing Platform">Ignite</a> 服务所在的服务器之后，A 服务很快开始报 <code>java.net.SocketException: Too many open files</code> 错误，导致 A 服务很快不可用。</p>
+<p>我在测试环境部署模拟复现了该现象，并排查到此次事故是由 <a href="https://ignite.apache.org/" title="Apache Ignite: In-Memory Computing Platform">Ignite</a> 的一个 <a href="https://github.com/apache/ignite/commit/6c3a486f0d7f0dd55c377af233d7c525d86f600a" title="Fixed socket leak in TcpDiscoverySpi">BUG</a> 导
+致的。事实上，该 <a href="https://github.com/apache/ignite/commit/6c3a486f0d7f0dd55c377af233d7c525d86f600a" title="Fixed socket leak in TcpDiscoverySpi">BUG</a> 已经在 <a href="https://ignite.apache.org/" title="Apache Ignite: In-Memory Computing Platform">Ignite</a> 的主线版本中被修复，但由于隔壁部门自己 FORK 了 <a href="https://ignite.apache.org/" title="Apache Ignite: In-Memory Computing Platform">Ignite</a> 的较低版本并且没有及时地同步主线更新，使得 A 服务在生产环境出现了该事故。</p>
+<p>现记录下事故原因排查的经历，以鉴后事。</p>
+
+                                    </div>
+                                    <div class="read-more">
+                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;a-production-bug-leaking-sockets-fd-reproducing-practice&#x2F;">Read more...</a>
+                                    </div>
+                                </article>
+                            
+                                <article class="post">
+                                    
+    <header class="post__header">
+        <h1 class="post__title">
             <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;dependency-injection-practise-guice-vs-dagger2&#x2F;">Dependency Injection - Guice VS Dagger 2</a>
         </h1>
         <div class="post__meta">
@@ -540,45 +567,6 @@ systems</a>
                                     </div>
                                     <div class="read-more">
                                         <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;usage-of-benchmarking-tool-wrk-and-wrk2&#x2F;">Read more...</a>
-                                    </div>
-                                </article>
-                            
-                                <article class="post">
-                                    
-    <header class="post__header">
-        <h1 class="post__title">
-            <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;vboxmanage-note-change-host-key-for-vboxsdl&#x2F;">Change Host Key for VBOXSDL</a>
-        </h1>
-        <div class="post__meta">
-            <span class="post__time">2019-09-12</span>
-            
-        </div>
-    </header>
-
-                                    <div class="post__summary">
-                                        <p>如果平时使用 Linux，偶尔会有使用 Windows 软件（如 WPS/QQ 等）的需求场景时，最好的解决方案就是使用虚拟机了。如果使用了 <a href="https://www.virtualbox.org/">Virtual Box</a> 的话，那么可以了解一下其除了基于 <a href="https://www.qt.io/">Qt</a> 的虚拟机运行界面之外还额外提供了一个基于 <a href="https://www.libsdl.org/">SDL</a> 的虚拟机运行界面。</p>
-<p>我在使用 virtualbox 的管理界面创建配置好一个基于 Windows 7 的虚拟机 &quot;se7en&quot; 之后，可以直接在终端运行：</p>
-<pre style="background-color:#282828;">
-<span style="color:#fdf4c1;">${VBOXSDL} --startvm se7en
-</span></pre>
-<p>界面非常简洁，不依赖 <a href="https://www.qt.io/">Qt</a> 。</p>
-<p><code>${VBOXSDL}</code> 是 vboxsdl 的可执行文件名；根据 VirtualBox 的安装方式不同，可能会是 &quot;VBoxSDL&quot; 或 &quot;vboxsdl&quot;。</p>
-<p>如果需要修改 SDL 界面下的 host 键，可以使用参数 &quot;--hostkey&quot;。</p>
-<pre style="background-color:#282828;">
-<span style="font-style:italic;color:#928374;"># Set Host key for vboxsdl
-# LSHIFT = 304 1
-# RSHIFT = 303 2
-# LCTRL = 301 8192
-# RCTRL = 305 128
-# LALT = 308 256
-# RALT = 27 0
-</span><span style="color:#fdf4c1;">${VBOXSDL} --hostkey 308 256 --startvm se7en
-</span></pre>
-<p>该命令会设置 host 键为 左-Alt 键并启动虚拟机。</p>
-
-                                    </div>
-                                    <div class="read-more">
-                                        <a href="https:&#x2F;&#x2F;www.wangbo.im&#x2F;posts&#x2F;vboxmanage-note-change-host-key-for-vboxsdl&#x2F;">Read more...</a>
                                     </div>
                                 </article>
                             

@@ -126,6 +126,13 @@
         </url>
     
         <url>
+            <loc>https://www.wangbo.im/posts/a-production-bug-leaking-sockets-fd-reproducing-practice/</loc>
+            
+                <lastmod>2020-02-23T22:51:55+08:00</lastmod>
+            
+        </url>
+    
+        <url>
             <loc>https://www.wangbo.im/posts/acl-note/</loc>
             
                 <lastmod>2018-02-05T17:46:28+08:00</lastmod>
@@ -1079,6 +1086,11 @@
         </url>
     
         <url>
+            <loc>https://www.wangbo.im/tags/fd-leaking/</loc>
+            
+        </url>
+    
+        <url>
             <loc>https://www.wangbo.im/tags/ffmpeg/</loc>
             
         </url>
@@ -1174,6 +1186,11 @@
         </url>
     
         <url>
+            <loc>https://www.wangbo.im/tags/ignite/</loc>
+            
+        </url>
+    
+        <url>
             <loc>https://www.wangbo.im/tags/inject/</loc>
             
         </url>
@@ -1219,6 +1236,11 @@
         </url>
     
         <url>
+            <loc>https://www.wangbo.im/tags/jstack/</loc>
+            
+        </url>
+    
+        <url>
             <loc>https://www.wangbo.im/tags/jvm/</loc>
             
         </url>
@@ -1260,6 +1282,11 @@
     
         <url>
             <loc>https://www.wangbo.im/tags/lock/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/tags/lsof/</loc>
             
         </url>
     
@@ -1409,7 +1436,17 @@
         </url>
     
         <url>
+            <loc>https://www.wangbo.im/tags/strace/</loc>
+            
+        </url>
+    
+        <url>
             <loc>https://www.wangbo.im/tags/tcp/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>https://www.wangbo.im/tags/tcpv6/</loc>
             
         </url>
     
